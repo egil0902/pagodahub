@@ -14,25 +14,7 @@
         </div>
     </div>
 </div>
-<div class="container p-0  mx-auto">
-    <div class="row m-0 p-0">
-        <div class="mx-auto col-lg-12 col-md-12 d-flex">
-            <div class="form-group">
-                <label for="cars">Seleccione una sucursal</label>
-                <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
-                    <option value="0">*</option>
-                    @if (isset($orgs))
-                    @if ($orgs->{'records-size'} > 0)
-                    @foreach($orgs->records as $org)
-                    <option value="{{$org->id}}">{{$org->Name}}</option>
-                    @endforeach
-                    @endif
-                    @endif
-                </select>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="container p-0  mx-auto">
     
     <div class="row m-0">
@@ -42,7 +24,7 @@
                     <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
                         <form name="close_cash" id="close_cash" method="post" action="{{ route('close.cash') }}"> @csrf <button type="submit" class="btn ">
                                 <div class="card h-75 m-0 p-0">
-                                    <div class="card-header"> 1. Cuentas</div>
+                                    <div class="card-header">Cuentas</div>
                                     <div class="card-body">
                                         <h4>Cierre diario de cuentas</h4>
                                         <p>Permite el cierre diario de las cuentas para auditoría</p>
@@ -54,7 +36,7 @@
                     <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
                         <form name="valepagoda" id="valepagoda" method="get" action="{{ route('valepagoda') }}"> @csrf <button type="submit" class="btn ">
                                 <div class="card m-0 p-0">
-                                    <div class="card-header"> 2. Vale pagoda</div>
+                                    <div class="card-header">Vale pagoda</div>
                                     <div class="card-body">
                                         <h4>Control de los Vales de la Pagoda</h4>
                                         <p>Administración de la numeración de los vales, registro y adjunto</p>
@@ -66,7 +48,7 @@
                     <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
                         <form name="valespagodarange" id="valespagodarange" method="post" action="{{ route('valespagodarange') }}"> @csrf <button type="submit" class="btn ">
                                 <div class="card m-0 p-0">
-                                    <div class="card-header"> 3. Generación de Vales Pagoda</div>
+                                    <div class="card-header">Generación de Vales Pagoda</div>
                                     <div class="card-body">
                                         <h4>Registro de vales con sus montos</h4>
                                         <p>Administración de registros de generacion de vales</p>
@@ -78,7 +60,7 @@
                     <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
                         <form name="loans" id="loans" method="post" action="{{ route('loans') }}"> @csrf <button type="submit" class="btn ">
                                 <div class="card m-0 p-0">
-                                    <div class="card-header"> 4s. Prestamos</div>
+                                    <div class="card-header">Prestamos</div>
                                     <div class="card-body">
                                         <h4>Control de los Prestamos</h4>
                                         <p>Administración de prestamos, registro de terceros y adjuntos</p>

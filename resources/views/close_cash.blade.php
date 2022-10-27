@@ -1,7 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<form name="closecashform" id="closecashform" method="post" action="{{ route('closecashform.store') }}" enctype="multipart/form-data"> @csrf
+<form name="closecashform" id="closecashform" method="post" action="{{ route('closecash.store') }}" enctype="multipart/form-data">
+    @csrf
+    <div class="container p-0  mx-auto">
+        <div class="row m-0 p-0">
+            <div class="mx-auto col-lg-12 col-md-12 d-flex">
+                <div class="form-group">
+                    <label for="cars">Seleccione una sucursal</label>
+                    <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                        <option value="0">*</option>
+                        @if (isset($orgs))
+                        @if ($orgs->{'records-size'} > 0)
+                        @foreach($orgs->records as $org)
+                        <option value="{{$org->id}}">{{$org->Name}}</option>
+                        @endforeach
+                        @endif
+                        @endif
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card m-5">
         <div class="card-header">
             <div class="container">

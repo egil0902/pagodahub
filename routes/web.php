@@ -31,7 +31,7 @@ require __DIR__.'/auth.php';
 
 Route::post('/close_cash',[App\Http\Controllers\CloseCashController::class, 'show'])->name('close.cash');
 
-//Route::post('/closecashform',[App\Http\Controllers\CloseCashFormsController::class, 'store'])->name('closecashform.store');
+Route::post('/closecash_store',[App\Http\Controllers\CloseCashController::class, 'store'])->name('closecash.store');
 
 Route::get('/valepagoda',[App\Http\Controllers\ValePagodaController::class, 'index'])->name('valepagoda');
 Route::get('/valepagodacancel',[App\Http\Controllers\ValePagodaController::class, 'index'])->name('valepagodacancel');

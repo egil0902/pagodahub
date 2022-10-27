@@ -18,4 +18,10 @@ class CloseCashController extends Controller
         //dd($AD_Org_ID);
         return view('close_cash', ['AD_Org_ID' => $AD_Org_ID]);
     }
+    public function store(Request $request)
+    {
+        $AD_Org_ID = $request->AD_Org_ID;
+        //dd($AD_Org_ID);
+        return view('close_cash', ['AD_Org_ID' => $AD_Org_ID]);
+    }
 }
