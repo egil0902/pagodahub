@@ -50,8 +50,20 @@
                                 <div class="card m-0 p-0">
                                     <div class="card-header">Generación de Vales Pagoda</div>
                                     <div class="card-body">
-                                        <h4>Registro de vales con sus montos</h4>
+                                        <h4>Registro de rangos de vales con sus montos</h4>
                                         <p>Administración de registros de generacion de vales</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
+                        <form name="valepagoda_list" id="valepagoda_list" method="GET" action="{{ route('valepagoda.list') }}"> @csrf <button type="submit" class="btn ">
+                                <div class="card m-0 p-0">
+                                    <div class="card-header">Listado Vales pagoda consumidos</div>
+                                    <div class="card-body">
+                                        <h4>Listado Vales pagoda consumidos</h4>
+                                        <p>Muestra la lista de los vales consumidos</p>
                                     </div>
                                 </div>
                             </button>

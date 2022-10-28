@@ -82,6 +82,6 @@ class ValePagodaController extends Controller
     public function list(Request $request)
     {
         $list = ValesPagoda::all();
-        return view('valepagoda', ['list' => $list, 'request' => $request]);
+        return view('valepagodalist', ['list' => $list, 'request' => $request]);
     }
 }
