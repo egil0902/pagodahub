@@ -122,7 +122,7 @@
                             <input name="taxid" value="" type="text" class=" form-control text-left  w-100 " placeholder="">
                         </div>
                         <div class="col-5 col-sm-5 col-md-3 col-lg-3">
-                            <label>Nombre:</label>
+                            <label>Nombre</label>
                             <input name="name" value="" type="text" class=" form-control text-left  w-100 " placeholder="">
                             <input name="CreatedBy" value="{{ auth()->user()->name }}" type="hidden" class=" form-control text-left  w-100 ">
                         </div>
