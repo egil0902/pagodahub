@@ -19,13 +19,15 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('home');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+//require __DIR__.'/auth.php';
 
 //Route::view('/close_cash','close_cash', [CloseCashController::class, 'show']);
 
@@ -52,8 +54,6 @@ Route::post('/loans_search',[App\Http\Controllers\LoansController::class, 'searc
 Route::post('/loans_store',[App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
 Route::post('/loans_list',[App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 
-//Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');
 
