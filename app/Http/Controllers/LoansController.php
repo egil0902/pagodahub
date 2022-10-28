@@ -25,4 +25,16 @@ class LoansController extends Controller
     {
         return view('loan');
     }
+    public function search()
+    {
+        return view('loan');
+    }
+    public function store()
+    {
+        return view('loan');
+    }
+    public function list()
+    {
+        return view('loan');
+    }
 }
