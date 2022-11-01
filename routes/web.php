@@ -34,6 +34,7 @@ Route::get('/dashboard', function () {
 Route::post('/close_cash',[App\Http\Controllers\CloseCashController::class, 'show'])->name('close.cash');
 
 Route::post('/closecash_store',[App\Http\Controllers\CloseCashController::class, 'store'])->name('closecash.store');
+Route::post('/closecash_import',[App\Http\Controllers\CloseCashController::class, 'import'])->name('closecash.import');
 
 Route::get('/valepagoda',[App\Http\Controllers\ValePagodaController::class, 'index'])->name('valepagoda');
 Route::get('/valepagodacancel',[App\Http\Controllers\ValePagodaController::class, 'index'])->name('valepagodacancel');
