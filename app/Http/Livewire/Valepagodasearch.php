@@ -15,16 +15,11 @@ class Valepagodasearch extends Component
     
     public function render()
     {
+        
         $searchTerm = $this->searchTerm;
-        $vales = ValesPagoda::select('*');
-        if(!empty($searchTerm) && is_numeric($searchTerm))    
-            $vales->where('value','=', $searchTerm);
-        
         return view('livewire.valepagodasearch',[
-            'vales' => $vales->paginate(10)
+            'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
         ]);
-        
-
 
 
     }
