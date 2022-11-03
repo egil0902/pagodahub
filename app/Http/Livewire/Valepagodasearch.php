@@ -17,6 +17,8 @@ class Valepagodasearch extends Component
     {
         
         $searchTerm = $this->searchTerm;
+        if($searchTerm=='')
+            $searchTerm=0;
         return view('livewire.valepagodasearch',[
             'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
         ]);
