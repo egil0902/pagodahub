@@ -25,14 +25,10 @@ class Valepagodasearch extends Component
         if(!empty($searchTerm))   { 
             $vales->orWhere('name','like', '%'.$searchTerm.'%');
         }
-        return view('livewire.Valepagodasearch',[
+        return view('livewire.valepagodasearch',[
             'vales' => $vales->paginate(10)
         ]);
-        /*$searchTerm = '%'.$this->searchTerm.'%';
- 
-        return view('livewire.Valepagodasearch',[
-            'vales' => ValesPagoda::where('name','like', $searchTerm)->paginate(10),
-        ]);?*/
+        
 
 
 
