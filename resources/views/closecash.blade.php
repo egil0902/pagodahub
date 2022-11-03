@@ -189,22 +189,71 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_oneamt }}" type="text" class="text-left  w-25 " placeholder="" readonly="">&nbsp;={{ $data->x_oneamt*1 }}</div>
+                                <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="num1" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
+                                    &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
+                                    <input type="hidden" name="num11" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res1" value="0" readonly="readonly" />
+                                    <p id="demo1" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_fiveamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiveamt*5 }}</div>
+                                <div class="col-9 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="num5" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
+                                    <input type="hidden" name="num55" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res5" value="0" readonly="readonly" />
+                                    <p id="demo5" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$10x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_tenamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_tenamt*10 }}</div>
+                                <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
+                                    <input name="num10" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;={{ $data->x_tenamt*10 }}
+                                    <input type="hidden" name="num1010" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style="">
+                                    <input type="hidden" name="res10" value="0" readonly="readonly" />
+                                    <p id="demo10" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$20x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_twentyamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_twentyamt*20 }}</div>
+                                <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
+                                    <input name="num20" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()" >
+                                    &nbsp;={{ $data->x_twentyamt*20 }}
+                                    <input type="hidden" name="num2020" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res20" value="0" readonly="readonly" />
+                                    <p id="demo20" class="text-success" >0</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
+                                    <input name="num50" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()" >
+                                    &nbsp;={{ $data->x_fiftyamt*50 }}
+                                    <input type="hidden" name="num5050" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                 <input type="hidden" name="res50" value="0" readonly="readonly" />
+                                    <p id="demo50" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$50x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_fiftyamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiftyamt*50 }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 my-1 col-md-12">$100x&nbsp;<input name="" value="{{ $data->x_hundredamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_hundredamt*100 }}</div>
+                                <div class="col-9 my-1">$100x&nbsp;
+                                    <input name="num100" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()" >
+                                    &nbsp;={{ $data->x_hundredamt*100 }}
+                                    <input type="hidden" name="num100100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res100" value="0" readonly="readonly" />
+                                    <p id="demo100" class="text-success" >0</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,22 +346,71 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_oneamt }}" type="text" class="text-left  w-25 " placeholder="" readonly="">&nbsp;={{ $data->x_oneamt*1 }}</div>
+                                <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="num1g" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
+                                    &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
+                                    <input type="hidden" name="num11g" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res1g" value="0" readonly="readonly" />
+                                    <p id="demo1g" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_fiveamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiveamt*5 }}</div>
+                                <div class="col-9 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="num5g" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
+                                    <input type="hidden" name="num55g" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res5g" value="0" readonly="readonly" />
+                                    <p id="demo5g" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$10x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_tenamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_tenamt*10 }}</div>
+                                <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
+                                    <input name="num10g" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;={{ $data->x_tenamt*10 }}
+                                    <input type="hidden" name="num1010g" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style="">
+                                    <input type="hidden" name="res10g" value="0" readonly="readonly" />
+                                    <p id="demo10g" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$20x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_twentyamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_twentyamt*20 }}</div>
+                                <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
+                                    <input name="num20g" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()" >
+                                    &nbsp;={{ $data->x_twentyamt*20 }}
+                                    <input type="hidden" name="num2020g" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res20g" value="0" readonly="readonly" />
+                                    <p id="demo20g" class="text-success" >0</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
+                                    <input name="num50g" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()" >
+                                    &nbsp;={{ $data->x_fiftyamt*50 }}
+                                    <input type="hidden" name="num5050g" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                 <input type="hidden" name="res50g" value="0" readonly="readonly" />
+                                    <p id="demo50g" class="text-success" >0</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$50x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_fiftyamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiftyamt*50 }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 my-1 col-md-12">$100x&nbsp;<input name="" value="{{ $data->x_hundredamt }}" type="text" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_hundredamt*100 }}</div>
+                                <div class="col-9 my-1">$100x&nbsp;
+                                    <input name="num100g" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()" >
+                                    &nbsp;={{ $data->x_hundredamt*100 }}
+                                    <input type="hidden" name="num100100g" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
+                                </div>
+                                <div class="col-3 my-1" style=""> 
+                                    <input type="hidden" name="res100g" value="0" readonly="readonly" />
+                                    <p id="demo100g" class="text-success" >0</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -394,8 +492,7 @@
                 </div>
             </div>
         </div>
-
-    </div>
+    </div>  
     @endforeach
     @endif
     <div class="container">
@@ -408,3 +505,89 @@
     </div>
     @endif
     @endsection
+    <script>
+    function cal()
+    {
+        try
+        {
+            var r1 = parseInt(document.closecash_store.num1.value),r11 = parseInt(document.closecash_store.num11.value);
+            var r5 = parseInt(document.closecash_store.num5.value),r55 = parseInt(document.closecash_store.num55.value);
+            var r10 = parseInt(document.closecash_store.num10.value),r1010 = parseInt(document.closecash_store.num1010.value);
+            var r20 = parseInt(document.closecash_store.num20.value),r2020 = parseInt(document.closecash_store.num2020.value);
+            var r50 = parseInt(document.closecash_store.num50.value),r5050 = parseInt(document.closecash_store.num5050.value);
+            var r100 = parseInt(document.closecash_store.num100.value),r100100 = parseInt(document.closecash_store.num100100.value);
+
+            document.getElementById("demo1").innerHTML = document.closecash_store.res1.value = r1 - r11;
+            document.getElementById("demo5").innerHTML = document.closecash_store.res5.value = r5 - r55;
+            document.getElementById("demo10").innerHTML = document.closecash_store.res10.value = r10 - r1010;
+            document.getElementById("demo20").innerHTML = document.closecash_store.res20.value = r20 - r2020;
+            document.getElementById("demo50").innerHTML = document.closecash_store.res50.value = r50 - r5050;
+            document.getElementById("demo100").innerHTML = document.closecash_store.res100.value = r100 - r100100;
+
+            const cambio1 = document.getElementById("demo1");
+            const cambio5 = document.getElementById("demo5");
+            const cambio10 = document.getElementById("demo10");
+            const cambio20 = document.getElementById("demo20");
+            const cambio50 = document.getElementById("demo50");
+            const cambio100 = document.getElementById("demo100");
+
+            if (document.getElementById("demo1").innerHTML<=-1) {cambio1.classList.replace("text-success","text-danger");} 
+            else{cambio1.classList.replace("text-success","text-success");cambio1.classList.replace("text-danger","text-success");}
+            
+            if (document.getElementById("demo5").innerHTML<=-1){cambio5.classList.replace("text-success","text-danger");} 
+            else{cambio5.classList.replace("text-success","text-success");cambio5.classList.replace("text-danger","text-success");}
+            
+            if (document.getElementById("demo10").innerHTML<=-1){cambio10.classList.replace("text-success","text-danger");} 
+            else{cambio10.classList.replace("text-success","text-success");cambio10.classList.replace("text-danger","text-success");}
+            
+            if (document.getElementById("demo20").innerHTML<=-1){cambio20.classList.replace("text-success","text-danger");} 
+            else{cambio20.classList.replace("text-success","text-success");cambio20.classList.replace("text-danger","text-success");}
+         
+            if (document.getElementById("demo50").innerHTML<=-1){cambio50.classList.replace("text-success","text-danger");} 
+            else{cambio50.classList.replace("text-success","text-success");cambio50.classList.replace("text-danger","text-success");}
+
+            if (document.getElementById("demo100").innerHTML<=-1){cambio100.classList.replace("text-success","text-danger");} 
+            else{cambio100.classList.replace("text-success","text-success");cambio100.classList.replace("text-danger","text-success");}
+
+            var r1g = parseInt(document.closecash_store.num1g.value),r11g = parseInt(document.closecash_store.num11g.value);
+            var r5g = parseInt(document.closecash_store.num5g.value),r55g = parseInt(document.closecash_store.num55g.value);
+            var r10g = parseInt(document.closecash_store.num10g.value),r1010g = parseInt(document.closecash_store.num1010g.value);
+            var r20g = parseInt(document.closecash_store.num20g.value),r2020g = parseInt(document.closecash_store.num2020g.value);
+            var r50g = parseInt(document.closecash_store.num50g.value),r5050g = parseInt(document.closecash_store.num5050g.value);
+            var r100g = parseInt(document.closecash_store.num100g.value),r100100g = parseInt(document.closecash_store.num100100g.value);
+
+            document.getElementById("demo1g").innerHTML = document.closecash_store.res1g.value = r1g - r11g;
+            document.getElementById("demo5g").innerHTML = document.closecash_store.res5g.value = r5g - r55g;
+            document.getElementById("demo10g").innerHTML = document.closecash_store.res10g.value = r10g - r1010g;
+            document.getElementById("demo20g").innerHTML = document.closecash_store.res20g.value = r20g - r2020g;
+            document.getElementById("demo50g").innerHTML = document.closecash_store.res50g.value = r50g - r5050g;
+            document.getElementById("demo100g").innerHTML = document.closecash_store.res100g.value = r100g - r100100g;
+
+            const cambio1g = document.getElementById("demo1g");
+            const cambio5g = document.getElementById("demo5g");
+            const cambio10g = document.getElementById("demo10g");
+            const cambio20g = document.getElementById("demo20g");
+            const cambio50g = document.getElementById("demo50g");
+            const cambio100g = document.getElementById("demo100g");
+
+            if (document.getElementById("demo1g").innerHTML<=-1) {cambio1g.classList.replace("text-success","text-danger");} 
+            else{cambio1g.classList.replace("text-success","text-success");cambio1g.classList.replace("text-danger","text-success");}
+            
+            if (document.getElementById("demo5g").innerHTML<=-1){cambio5g.classList.replace("text-success","text-danger");} 
+            else{cambio5g.classList.replace("text-success","text-success");cambio5g.classList.replace("text-danger","text-success");}
+            
+            if (document.getElementById("demo10g").innerHTML<=-1){cambio10g.classList.replace("text-success","text-danger");} 
+            else{cambio10g.classList.replace("text-success","text-success");cambio10g.classList.replace("text-danger","text-success");}
+            
+            if (document.getElementById("demo20g").innerHTML<=-1){cambio20g.classList.replace("text-success","text-danger");} 
+            else{cambio20g.classList.replace("text-success","text-success");cambio20g.classList.replace("text-danger","text-success");}
+         
+            if (document.getElementById("demo50g").innerHTML<=-1){cambio50g.classList.replace("text-success","text-danger");} 
+            else{cambio50g.classList.replace("text-success","text-success");cambio50g.classList.replace("text-danger","text-success");}
+
+            if (document.getElementById("demo100g").innerHTML<=-1){cambio100g.classList.replace("text-success","text-danger");} 
+            else{cambio100g.classList.replace("text-success","text-success");cambio100g.classList.replace("text-danger","text-success");}
+        } 
+        catch (e) {}
+        }
+        </script>
