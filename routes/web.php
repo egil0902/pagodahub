@@ -42,6 +42,7 @@ Route::get('/valepagodacancel',[App\Http\Controllers\ValePagodaController::class
 Route::get('/valepagoda_search',[App\Http\Controllers\ValePagodaController::class, 'search'])->name('valepagoda.search');
 Route::get('/valepagoda_store',[App\Http\Controllers\ValePagodaController::class, 'store'])->name('valepagoda.store');
 Route::get('/valepagoda_list',[App\Http\Controllers\ValePagodaController::class, 'list'])->name('valepagoda.list');
+Route::post('/valepagoda_destroy',[App\Http\Controllers\ValePagodaController::class, 'destroy'])->name('valepagoda.destroy');
 
 
 Route::post('/valespagodarange',[App\Http\Controllers\ValesPagodaRangeController::class, 'index'])->name('valespagodarange');
