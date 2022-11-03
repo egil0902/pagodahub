@@ -19,9 +19,7 @@ class Valepagodasearch extends Component
         $vales = ValesPagoda::select('*');
         if(!empty($searchTerm) && is_numeric($searchTerm))    
             $vales->where('value','=', $searchTerm);
-        if(!empty($searchTerm))   { 
-            $vales->Where('name','like', '%'.$searchTerm.'%');
-        }
+        
         return view('livewire.valepagodasearch',[
             'vales' => $vales->paginate(10)
         ]);
