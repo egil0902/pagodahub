@@ -81,22 +81,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_oneamt }}" type="number" class="text-left  w-25 " placeholder="" readonly="">&nbsp;={{ $data->x_oneamt*1 }}</div>
+                                <div class="col-12 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="x_oneamtSistema" value="{{ $data->x_oneamt }}" type="number" class="text-left  w-25 " placeholder="" readonly="">&nbsp;={{ $data->x_oneamt*1 }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_fiveamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiveamt*5 }}</div>
+                                <div class="col-12 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiveamt*5 }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$10x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_tenamt*10 }}</div>
+                                <div class="col-12 my-1">$10x&nbsp;&nbsp;&nbsp;<input name="x_tenamtSistema" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_tenamt*10 }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$20x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_twentyamt*20 }}</div>
+                                <div class="col-12 my-1 col-md-12">$20x&nbsp;&nbsp;&nbsp;<input name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_twentyamt*20 }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$50x&nbsp;&nbsp;&nbsp;<input name="" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiftyamt*50 }}</div>
+                                <div class="col-12 my-1 col-md-12">$50x&nbsp;&nbsp;&nbsp;<input name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiftyamt*50 }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$100x&nbsp;<input name="" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_hundredamt*100 }}</div>
+                                <div class="col-12 my-1 col-md-12">$100x&nbsp;<input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_hundredamt*100 }}</div>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="num1" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_oneamtFiscalizadora" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
                                     &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
                                     <input type="hidden" name="num11" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="num5" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_fiveamtFiscalizadora" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
                                     <input type="hidden" name="num55" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -209,7 +209,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
-                                    <input name="num10" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_tenamtFiscalizadora" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_tenamt*10 }}
                                     <input type="hidden" name="num1010" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -220,7 +220,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
-                                    <input name="num20" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_twentyamtFiscalizadora" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_twentyamt*20 }}
                                     <input type="hidden" name="num2020" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -232,7 +232,7 @@
 
                             <div class="row">
                                 <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
-                                    <input name="num50" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_fiftyamtFiscalizadora" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_fiftyamt*50 }}
                                     <input type="hidden" name="num5050" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -243,7 +243,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$100x&nbsp;
-                                    <input name="num100" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_hundredamtFiscalizadora" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_hundredamt*100 }}
                                     <input type="hidden" name="num100100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -401,7 +401,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="num1g" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_oneamtGerente" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
                                     &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
                                     <input type="hidden" name="num11g" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -412,7 +412,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="num5g" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_fiveamtGerente" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
                                     <input type="hidden" name="num55g" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -423,7 +423,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
-                                    <input name="num10g" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_tenamtGerente" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_tenamt*10 }}
                                     <input type="hidden" name="num1010g" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -434,7 +434,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
-                                    <input name="num20g" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_twentyamtGerente" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_twentyamt*20 }}
                                     <input type="hidden" name="num2020g" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -446,7 +446,7 @@
 
                             <div class="row">
                                 <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
-                                    <input name="num50g" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_fiftyamtGerente" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_fiftyamt*50 }}
                                     <input type="hidden" name="num5050g" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
@@ -457,7 +457,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$100x&nbsp;
-                                    <input name="num100g" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_hundredamtGerente" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_hundredamt*100 }}
                                     <input type="hidden" name="num100100g" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
