@@ -286,19 +286,19 @@
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardValeFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardValeFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardVisaFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardVisaFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardMasterFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardMasterFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardAEFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardAEFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
@@ -341,7 +341,7 @@
                                     <h4 class="mb-0">Total Panaderia</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -349,7 +349,7 @@
                                     <h4 class="mb-0">Total Pagatodo</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -357,7 +357,7 @@
                                     <h4 class="mb-0">Total Super</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -365,7 +365,7 @@
                                     <h4 class="mb-0">Dinero de Taxi</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -373,7 +373,7 @@
                                     <h4 class="mb-0">Vuelto de mercado</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -381,7 +381,7 @@
                                     <h4 class="mb-0">Comentarios</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <textarea name="comentariosFiscalizadora"  class="w-100 text-right" placeholder=""> </textarea></h5>
+                                    <h5 class="mb-0"> <textarea name="comentariosFiscalizadora"  value="0" class="w-100 text-right" placeholder="Comentarios">texto</textarea></h5>
                                 </div>
                             </div>
                         </div>
@@ -500,19 +500,19 @@
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardValeGerente" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardValeGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardVisaGerente" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardVisaGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardMasterGerente" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardMasterGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardAEGerente" value="" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardAEGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
                                 <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -554,7 +554,7 @@
                                     <h4 class="mb-0">Total Panaderia</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPanaderiaGerente" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPanaderiaGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -562,7 +562,7 @@
                                     <h4 class="mb-0">Total Pagatodo</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPagatodoGerente" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPagatodoGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -570,7 +570,7 @@
                                     <h4 class="mb-0">Total Super</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalsuperGerente" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalsuperGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -578,7 +578,7 @@
                                     <h4 class="mb-0">Dinero de Taxi</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="dineroTaxiGerente" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="dineroTaxiGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -586,7 +586,7 @@
                                     <h4 class="mb-0">Vuelto de mercado</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="vueltoMercadoGerente" value="" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="vueltoMercadoGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -594,7 +594,7 @@
                                     <h4 class="mb-0">Comentarios</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <textarea name="comentariosGerente"  class="w-100 text-right" placeholder=""> </textarea></h5>
+                                    <h5 class="mb-0"> <textarea name="comentariosGerente"  value="0" class="w-100 text-right" placeholder="Comentarios">texto</textarea></h5>
                                 </div>
                             </div>
                         </div>
@@ -613,6 +613,13 @@
             </div>
         </div>
         
+    </div>
+    <div class="container">
+        <div style="height: 100px;" class="row ">
+            <div class="h-100 col-md-12 d-flex align-items-center p-1 text-center">
+                <button type="submit" class="btn btn-primary mh-100" style="width: 200px; height: 100px;">Guardar</button>
+            </div>
+        </div>
     </div>
     @endif
     @endsection
