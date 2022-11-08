@@ -93,8 +93,10 @@ class CloseCashController extends Controller
         $todo->	  vueltoMercadoGerente	        =	$request->	vueltoMercadoGerente;
         $todo->	  comentariosGerente	        =	$request->	comentariosGerente;
         $todo-> save();
-        return "Guardado, preguntar donde direccionar";
-        
+        $APIController = new APIController();
+        $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
+        $orgs =  $response;
+        return view('closecash', ['orgs' => $orgs]);
     }
     public function import(Request $request){
         $APIController = new APIController();

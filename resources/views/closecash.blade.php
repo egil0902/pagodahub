@@ -68,35 +68,71 @@
                 </div>
             </div>
             <div class="row p-0 m-0">
-                <div class="p-0 col-4 col-sm-4 col-md-4 col-lg-4 m-0" style="">
+                <div class="p-0 col-4 col-sm-4 col-md-4 col-lg-4 m-0">
                     <div class="card bg-light w-100">
                         <div class="card-header">Monto sistema</div>
                         <div class="card-body p-1">
                             <div class="row m-0 p-0">
-                                <div class="col-8 col-md-6 m-0 p-0" style="">
+                                <div class="col-8 col-md-6 m-0 p-0">
                                     <h4 class="mb-0">Efectivo</h4>
                                 </div>
-                                <div class="col-4 text-right col-md-5 m-0 p-0" style="">
+                                <div class="col-4 text-right col-md-5 m-0 p-0">
                                     <h5 class="mb-0"> <b>{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</b> </h5>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-12 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="x_oneamtSistema" value="{{ $data->x_oneamt }}" type="number" class="text-left  w-25 " placeholder="" readonly="">&nbsp;={{ $data->x_oneamt*1 }}</div>
+                                <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input  name="x_oneamtSistema"      value="{{ $data->x_oneamt }}" type="number" style="width:40%;"readonly class="text-left"  placeholder="">
+                                    &nbsp;= {{ $data->x_oneamt*1 }}</div>
+                                <div class="col-3 my-1">
+                                    <p class="text-success"><br></p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiveamt*5 }}</div>
+                                <div class="col-9 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input  name="x_fiveamtSistema"     value="{{ $data->x_fiveamt }}"  type="number" style="width:40%;" readonly class="text-left"  placeholder="">
+                                    &nbsp;= {{ $data->x_fiveamt*5 }}
+                                </div>
+                                <div class="col-3 my-1">
+                                    <p class="text-success"><br></p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1">$10x&nbsp;&nbsp;&nbsp;<input name="x_tenamtSistema" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_tenamt*10 }}</div>
+                                <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
+                                    <input  name="x_tenamtSistema"      value="{{ $data->x_tenamt }}"  type="number" style="width:40%;" readonly class="text-left"  placeholder="">
+                                    &nbsp;= {{ $data->x_tenamt*10 }}
+                                </div>
+                                <div class="col-3 my-1">
+                                    <p class="text-success"><br></p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$20x&nbsp;&nbsp;&nbsp;<input name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_twentyamt*20 }}</div>
+                                <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
+                                    <input  name="x_twentyamtSistema"   value="{{ $data->x_twentyamt }}"  type="number" style="width:40%;" readonly class="text-left"  placeholder="">
+                                    &nbsp;= {{ $data->x_twentyamt*20 }}
+                                </div>
+                                <div class="col-3 my-1">
+                                    <p class="text-success"><br></p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$50x&nbsp;&nbsp;&nbsp;<input name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_fiftyamt*50 }}</div>
+                                <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
+                                    <input  name="x_fiftyamtSistema"    value="{{ $data->x_fiftyamt }}"  type="number" style="width:40%;" readonly class="text-left"  placeholder="">
+                                    &nbsp;= {{ $data->x_fiftyamt*50 }}
+                                </div>
+                                <div class="col-3 my-1">
+                                    <p class="text-success"><br></p>
+                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 my-1 col-md-12">$100x&nbsp;<input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="">&nbsp;={{ $data->x_hundredamt*100 }}</div>
+                                 <div class="col-9 my-1">$100x&nbsp;
+                                    <input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}"  type="number" style="width:40%;" readonly class="text-left"  placeholder="">
+                                    &nbsp;= {{ $data->x_hundredamt*100 }}
+                                </div>
+                                <div class="col-3 my-1">
+                                    <p class="text-success"><br></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -111,49 +147,71 @@
                                 </div>
                             </div>
                             <div class="row p-0 my-1 m-0">
-                                <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0" style="">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7" style=""><input name="yappySistema" value="{{ $data->yappy }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7">
+                                    <input name="yappySistema" value="{{ $data->yappy }}"  type="number"   step="0.01" readonly class="w-100 text-right" placeholder="">
+                                </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="otrosSistema" value="{{ $data->otros }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7">
+                                    <input name="otrosSistema" value="{{ $data->otros }}"  type="number"   step="0.01" readonly class="w-100 text-right" placeholder="">
+                                </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="valespagodaSistema" value="{{ $data->valespagoda }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7">
+                                    <input name="valespagodaSistema" value="{{ $data->valespagoda }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="">
+                                </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Monto cheques&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="CheckAmtSistema" value="{{ $data->CheckAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Monto cheques&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7">
+                                    <input name="CheckAmtSistema" value="{{ $data->CheckAmt }}"type="number" step="0.01" readonly class="w-100 text-right" placeholder="">
+                                </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="LotoAmtSistema" value="{{ $data->LotoAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0">
+                                    <input name="LotoAmtSistema" value="{{ $data->LotoAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="">
+                                </div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Tarjetas&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 col-7 col-sm-7 col-md-7 col-lg-7 p-0" style=""><input name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Tarjetas&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 col-7 col-sm-7 col-md-7 col-lg-7 p-0">
+                                    <input name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="">
+                            </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-sm-7 col-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-sm-7 col-7 col-md-7 col-lg-7 m-0 p-0">
+                                    <input name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="">
+                            </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 p-0 col-7 col-sm-7 col-md-7 col-lg-7" style=""><input name="CoinRollSistema" value="{{ $data->CoinRoll }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 p-0 col-7 col-sm-7 col-md-7 col-lg-7">
+                                    <input name="CoinRollSistema" value="{{ $data->CoinRoll }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="">
+                            </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Facturas&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-md-7 col-sm-7 col-lg-7 m-0 p-0" style=""><input name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Facturas&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-md-7 col-sm-7 col-lg-7 m-0 p-0">
+                                    <input name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" readonly class="w-100 text-right" placeholder="">
+                            </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0">
+                                    <input name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" readonly class="w-100 text-right" placeholder="">
+                            </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Beca Digital&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="GrantAmtSistema" value="{{ $data->GrantAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Beca Digital&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0">
+                                    <input name="GrantAmtSistema" value="{{ $data->GrantAmt }}" type="number"   step="0.01" readonly class="w-100 text-right" placeholder="">
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -167,89 +225,85 @@
                                     <h5 class="mb-0"> <b>{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</b> </h5>
                                 </div>
                             </div>
-                            <h6 class="mb-0 text-right">Subtotal = {{ $data->BeginningBalance+$data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</b></h6>
-                            <h6 class="mb-0 text-right">Monto X = <b>{{ $data->XAmt }}</b></h6>
+                            <h6 class="mb-0 text-right">Subtotal &nbsp;&nbsp;&nbsp;= {{ $data->BeginningBalance+$data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</b></h6>
+                            <h6 class="mb-0 text-right">Monto X &nbsp;&nbsp;&nbsp;= <b>{{ $data->XAmt }}</b></h6>
                             <h6 class="mb-0 text-right">Diferencia = <b>{{ $data->DifferenceAmt }}</b></h6>
                         </div>
                     </div>
                 </div>
-                <div class="p-0 col-4 col-sm-4 col-md-4 col-lg-4 m-0" style="">
+                <div class="p-0 col-4 col-sm-4 col-md-4 col-lg-4 m-0">
                     <div class="card bg-light w-100">
                         <div class="card-header">Fiscalizadora</div>
                         <div class="card-body p-1">
                             <div class="row m-0 p-0">
-                                <div class="col-8 col-md-6 m-0 p-0" style="">
+                                <div class="col-8 col-md-6 m-0 p-0">
                                     <h4 class="mb-0">Efectivo</h4>
                                 </div>
-                                <div class="col-4 text-right col-md-5 m-0 p-0" style="">
+                                <div class="col-4 text-right col-md-5 m-0 p-0">
                                     <h5 class="mb-0"> <b>{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</b> </h5>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="x_oneamtFiscalizadora" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
-                                    &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
-                                    <input type="hidden" name="num11" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
+                                <div class="col-4">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="x_oneamtFiscalizadora" value="{{ $data->x_oneamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()"/>
+                                    <input type="hidden" name="fis1" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res1" value="0" readonly="readonly" />
-                                    <p id="demo1" class="text-success">0</p>
+                                <div class="col">
+                                    <p id="x_oneamtFiscalizadora_t" class="text-success">{{ $data->x_oneamt*1 }}</p> 
+                                </div>
+                                <div class="col">
+                                    <p id="x_oneamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="x_fiveamtFiscalizadora" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
-                                    <input type="hidden" name="num55" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
+                                <div class="col-9 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="x_fiveamtFiscalizadora" value="{{ $data->x_fiveamt}}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;= {{ $data->x_fiveamt*5}}&nbsp;
+                                    <input type="hidden" name="fis5" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res5" value="0" readonly="readonly" />
-                                    <p id="demo5" class="text-success">0</p>
+                                <div class="col-3 my-1">
+                                    <p id="x_fiveamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
-                                    <input name="x_tenamtFiscalizadora" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_tenamt*10 }}
-                                    <input type="hidden" name="num1010" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_tenamtFiscalizadora" value="{{ $data->x_tenamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;= {{ $data->x_tenamt*10 }}
+                                    <input type="hidden" name="fis10" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res10" value="0" readonly="readonly" />
-                                    <p id="demo10" class="text-success">0</p>
+                                <div class="col-3 my-1">
+                                    <p id="x_tenamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
-                                    <input name="x_twentyamtFiscalizadora" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_twentyamt*20 }}
-                                    <input type="hidden" name="num2020" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_twentyamtFiscalizadora" value="{{ $data->x_twentyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;= {{ $data->x_twentyamt*20 }}
+                                    <input type="hidden" name="fis20" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res20" value="0" readonly="readonly" />
-                                    <p id="demo20" class="text-success">0</p>
+                                <div class="col-3 my-1">
+                                    <p id="x_twentyamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
-                                    <input name="x_fiftyamtFiscalizadora" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_fiftyamt*50 }}
-                                    <input type="hidden" name="num5050" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_fiftyamtFiscalizadora" value="{{ $data->x_fiftyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;= {{ $data->x_fiftyamt*50 }}
+                                    <input type="hidden" name="fis50" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res50" value="0" readonly="readonly" />
-                                    <p id="demo50" class="text-success">0</p>
+                                <div class="col-3 my-1">
+                                    <p id="x_fiftyamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$100x&nbsp;
-                                    <input name="x_hundredamtFiscalizadora" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_hundredamt*100 }}
-                                    <input type="hidden" name="num100100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_hundredamtFiscalizadora" value="{{ $data->x_hundredamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
+                                    &nbsp;= {{ $data->x_hundredamt*100 }}
+                                    <input type="hidden" name="fis100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res100" value="0" readonly="readonly" />
-                                    <p id="demo100" class="text-success">0</p>
+                                <div class="col-3 my-1">
+                                    <p id="x_hundredamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                         </div>
@@ -265,61 +319,61 @@
                                 </div>
                             </div>
                             <div class="row p-0 my-1 m-0">
-                                <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0" style="">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7" style=""><input name="yappyFiscalizadora" value="{{ $data->yappy }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7"><input name="yappyFiscalizadora" value="{{ $data->yappy }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="otrosFiscalizadora" value="{{ $data->otros }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7"><input name="otrosFiscalizadora" value="{{ $data->otros }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="valespagodaFiscalizadora" value="{{ $data->valespagoda }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7"><input name="valespagodaFiscalizadora" value="{{ $data->valespagoda }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Monto cheques&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="CheckAmtFiscalizadora" value="{{ $data->CheckAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Monto cheques&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7"><input name="CheckAmtFiscalizadora" value="{{ $data->CheckAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="LotoAmtFiscalizadora" value="{{ $data->LotoAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="LotoAmtFiscalizadora" value="{{ $data->LotoAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardValeFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="CardValeFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardVisaFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="CardVisaFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardMasterFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="CardMasterFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardAEFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="CardAEFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-sm-7 col-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CashAmtFiscalizadora" value="{{ $data->CashAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-sm-7 col-7 col-md-7 col-lg-7 m-0 p-0"><input name="CashAmtFiscalizadora" value="{{ $data->CashAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 p-0 col-7 col-sm-7 col-md-7 col-lg-7" style=""><input name="CoinRollFiscalizadora" value="{{ $data->CoinRoll }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 p-0 col-7 col-sm-7 col-md-7 col-lg-7"><input name="CoinRollFiscalizadora" value="{{ $data->CoinRoll }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Facturas&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-md-7 col-sm-7 col-lg-7 m-0 p-0" style=""><input name="InvoiceAmtFiscalizadora" value="{{ $data->InvoiceAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Facturas&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-md-7 col-sm-7 col-lg-7 m-0 p-0"><input name="InvoiceAmtFiscalizadora" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="VoucherAmtFiscalizadora" value="{{ $data->VoucherAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="VoucherAmtFiscalizadora" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Beca Digital&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="GrantAmtFiscalizadora" value="{{ $data->GrantAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0">Beca Digital&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0"><input name="GrantAmtFiscalizadora" value="{{ $data->GrantAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                         </div>
                     </div>
@@ -341,7 +395,7 @@
                                     <h4 class="mb-0">Total Panaderia</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -349,7 +403,7 @@
                                     <h4 class="mb-0">Total Pagatodo</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -357,7 +411,7 @@
                                     <h4 class="mb-0">Total Super</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -365,7 +419,7 @@
                                     <h4 class="mb-0">Dinero de Taxi</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -373,7 +427,7 @@
                                     <h4 class="mb-0">Vuelto de mercado</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -381,89 +435,83 @@
                                     <h4 class="mb-0">Comentarios</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <textarea name="comentariosFiscalizadora"  value="0" class="w-100 text-right" placeholder="Comentarios">texto</textarea></h5>
+                                    <h5 class="mb-0"> <textarea name="comentariosFiscalizadora"  value="0" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="p-0 col-4 col-sm-4 col-md-4 col-lg-4 m-0" style="">
+                <div class="p-0 col-4 col-sm-4 col-md-4 col-lg-4 m-0">
                     <div class="card bg-light w-100">
                         <div class="card-header">Gerente</div>
                         <div class="card-body p-1">
                             <div class="row m-0 p-0">
-                                <div class="col-8 col-md-6 m-0 p-0" style="">
+                                <div class="col-8 col-md-6 m-0 p-0">
                                     <h4 class="mb-0">Efectivo</h4>
                                 </div>
-                                <div class="col-4 text-right col-md-5 m-0 p-0" style="">
+                                <div class="col-4 text-right col-md-5 m-0 p-0">
                                     <h5 class="mb-0"> <b>{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</b> </h5>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="x_oneamtGerente" value="{{ $data->x_oneamt }}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()" />
+                                    <input name="x_oneamtGerente" value="{{ $data->x_oneamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()" />
                                     &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
-                                    <input type="hidden" name="num11g" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
-                                    <input type="hidden" name="res1g" value="0" readonly="readonly" />
-                                    <p id="demo1g" class="text-success">0</p>
+                                <div class="col-3 my-1">
+                                    <p id="x_oneamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1" style="">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input name="x_fiveamtGerente" value="{{ $data->x_fiveamt}}" type="number" class="text-left w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                <div class="col-9 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input name="x_fiveamtGerente" value="{{ $data->x_fiveamt}}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
-                                    <input type="hidden" name="num55g" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
+                                    <p id="x_fiveamtGerente_t" class="text-success">0.00</p>
                                 </div>
-                                <div class="col-3 my-1" style="">
+                                <div class="col-3 my-1">
                                     <input type="hidden" name="res5g" value="0" readonly="readonly" />
-                                    <p id="demo5g" class="text-success">0</p>
+                                    <p id="x_fiveamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
-                                    <input name="x_tenamtGerente" value="{{ $data->x_tenamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_tenamtGerente" value="{{ $data->x_tenamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_tenamt*10 }}
-                                    <input type="hidden" name="num1010g" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
+                                <div class="col-3 my-1">
                                     <input type="hidden" name="res10g" value="0" readonly="readonly" />
-                                    <p id="demo10g" class="text-success">0</p>
+                                    <p id="x_tenamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
-                                    <input name="x_twentyamtGerente" value="{{ $data->x_twentyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_twentyamtGerente" value="{{ $data->x_twentyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_twentyamt*20 }}
-                                    <input type="hidden" name="num2020g" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
+                                <div class="col-3 my-1">
                                     <input type="hidden" name="res20g" value="0" readonly="readonly" />
-                                    <p id="demo20g" class="text-success">0</p>
+                                    <p id="x_twentyamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
-                                    <input name="x_fiftyamtGerente" value="{{ $data->x_fiftyamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_fiftyamtGerente" value="{{ $data->x_fiftyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_fiftyamt*50 }}
-                                    <input type="hidden" name="num5050g" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
+                                <div class="col-3 my-1">
                                     <input type="hidden" name="res50g" value="0" readonly="readonly" />
-                                    <p id="demo50g" class="text-success">0</p>
+                                    <p id="x_fiftyamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-9 my-1">$100x&nbsp;
-                                    <input name="x_hundredamtGerente" value="{{ $data->x_hundredamt }}" type="number" class="text-left  w-25 " placeholder="" onchange="cal()" onkeyup="cal()">
+                                    <input name="x_hundredamtGerente" value="{{ $data->x_hundredamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     &nbsp;={{ $data->x_hundredamt*100 }}
-                                    <input type="hidden" name="num100100g" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1" style="">
+                                <div class="col-3 my-1">
                                     <input type="hidden" name="res100g" value="0" readonly="readonly" />
-                                    <p id="demo100g" class="text-success">0</p>
+                                    <p id="x_hundredamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                         </div>
@@ -479,60 +527,60 @@
                                 </div>
                             </div>
                             <div class="row p-0 my-1 m-0">
-                                <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0" style="">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7" style=""><input name="yappyGerente" value="{{ $data->yappy }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7"><input name="yappyGerente" value="{{ $data->yappy }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="otrosGerente" value="{{ $data->otros }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7"><input name="otrosGerente" value="{{ $data->otros }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="valespagodaGerente" value="{{ $data->valespagoda }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" >Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" ><input name="valespagodaGerente" value="{{ $data->valespagoda }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" style="">Monto cheques&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" style=""><input name="CheckAmtGerente" value="{{ $data->CheckAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-12 m-0 p-0 col-sm-5 col-md-5 col-lg-5" >Monto cheques&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-12 m-0 p-0 col-sm-7 col-md-7 col-lg-7" ><input name="CheckAmtGerente" value="{{ $data->CheckAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="LotoAmtGerente" value="{{ $data->LotoAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="LotoAmtGerente" value="{{ $data->LotoAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardValeGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="CardValeGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardVisaGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="CardVisaGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardMasterGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="CardMasterGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CardAEGerente" value="0" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="CardAEGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-sm-7 col-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="CashAmtGerente" value="{{ $data->CashAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-sm-7 col-7 col-md-7 col-lg-7 m-0 p-0" ><input name="CashAmtGerente" value="{{ $data->CashAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="m-0 p-0 col-7 col-sm-7 col-md-7 col-lg-7" style=""><input name="CoinRollGerente" value="{{ $data->CoinRoll }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="m-0 p-0 col-7 col-sm-7 col-md-7 col-lg-7" ><input name="CoinRollGerente" value="{{ $data->CoinRoll }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Facturas&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-md-7 col-sm-7 col-lg-7 m-0 p-0" style=""><input name="InvoiceAmtGerente" value="{{ $data->InvoiceAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Facturas&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-md-7 col-sm-7 col-lg-7 m-0 p-0" ><input name="InvoiceAmtGerente" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="VoucherAmtGerente" value="{{ $data->VoucherAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="VoucherAmtGerente" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" style="">Beca Digital&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" style=""><input name="GrantAmtGerente" value="{{ $data->GrantAmt }}" type="number" class="w-100 text-right" placeholder=""></div>
+                                <div class="col-5 col-sm-5 col-md-5 col-lg-5 m-0 p-0" >Beca Digital&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col-7 col-sm-7 col-md-7 col-lg-7 m-0 p-0" ><input name="GrantAmtGerente" value="{{ $data->GrantAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""></div>
                             </div>
                         </div>
                     </div>
@@ -554,7 +602,7 @@
                                     <h4 class="mb-0">Total Panaderia</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPanaderiaGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPanaderiaGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -562,7 +610,7 @@
                                     <h4 class="mb-0">Total Pagatodo</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalPagatodoGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalPagatodoGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -570,7 +618,7 @@
                                     <h4 class="mb-0">Total Super</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="totalsuperGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="totalsuperGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -578,7 +626,7 @@
                                     <h4 class="mb-0">Dinero de Taxi</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="dineroTaxiGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="dineroTaxiGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -586,7 +634,7 @@
                                     <h4 class="mb-0">Vuelto de mercado</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <input name="vueltoMercadoGerente" value="0" type="number" class="w-100 text-right" placeholder=""> </h5>
+                                    <h5 class="mb-0"> <input name="vueltoMercadoGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder=""> </h5>
                                 </div>
                             </div>
                             <div class="row m-0 p-0">
@@ -594,7 +642,7 @@
                                     <h4 class="mb-0">Comentarios</h4>
                                 </div>
                                 <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0"> <textarea name="comentariosGerente"  value="0" class="w-100 text-right" placeholder="Comentarios">texto</textarea></h5>
+                                    <h5 class="mb-0"> <textarea name="comentariosGerente"  value="0" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
                                 </div>
                             </div>
                         </div>
@@ -607,7 +655,7 @@
     @endif
     <div class="container">
         <div class="row">
-            <div class="col-md-12 m-1" style="">
+            <div class="col-md-12 m-1">
                 <label for="formFileMultiple" class="form-label">Por favor adjunte los reportes z</label>
                 <input class="form-control" type="file" id="formFileMultiple" multiple="">
             </div>
@@ -626,143 +674,93 @@
     <script>
         function cal() {
             try {
-                var r1 = parseInt(document.closecash_store.num1.value),
-                    r11 = parseInt(document.closecash_store.num11.value);
-                var r5 = parseInt(document.closecash_store.num5.value),
-                    r55 = parseInt(document.closecash_store.num55.value);
-                var r10 = parseInt(document.closecash_store.num10.value),
-                    r1010 = parseInt(document.closecash_store.num1010.value);
-                var r20 = parseInt(document.closecash_store.num20.value),
-                    r2020 = parseInt(document.closecash_store.num2020.value);
-                var r50 = parseInt(document.closecash_store.num50.value),
-                    r5050 = parseInt(document.closecash_store.num5050.value);
-                var r100 = parseInt(document.closecash_store.num100.value),
-                    r100100 = parseInt(document.closecash_store.num100100.value);
+                var r1      = (document.closecash_store.x_oneamtFiscalizadora.value)    -(document.closecash_store.fis1.value);
+                var rg1     = (document.closecash_store.x_oneamtGerente.value)    -(document.closecash_store.x_oneamtFiscalizadora.value);
+                
+                var r5      = (document.closecash_store.x_fiveamtFiscalizadora.value)   -(document.closecash_store.fis5.value);
+                var rg5      = (document.closecash_store.x_fiveamtGerente.value)   -(document.closecash_store.x_fiveamtFiscalizadora.value);
+                
+                var r10     = (document.closecash_store.x_tenamtFiscalizadora.value)    -(document.closecash_store.fis10.value);
+                var rg10     = (document.closecash_store.x_tenamtGerente.value)    -(document.closecash_store.x_tenamtFiscalizadora.value);
+                
+                var r20     = (document.closecash_store.x_twentyamtFiscalizadora.value) -(document.closecash_store.fis20.value);
+                var rg20     = (document.closecash_store.x_twentyamtGerente.value) -(document.closecash_store.x_twentyamtFiscalizadora.value);
+                
+                var r50     = (document.closecash_store.x_fiftyamtFiscalizadora.value)  -(document.closecash_store.fis50.value);
+                var rg50     = (document.closecash_store.x_fiftyamtGerente.value)  -(document.closecash_store.x_fiftyamtFiscalizadora.value);
+                
+                var r100    = (document.closecash_store.x_hundredamtFiscalizadora.value)-(document.closecash_store.fis100.value);
+                var rg100    = (document.closecash_store.x_hundredamtGerente.value)-(document.closecash_store.x_hundredamtFiscalizadora.value);
 
-                document.getElementById("demo1").innerHTML = document.closecash_store.res1.value = r1 - r11;
-                document.getElementById("demo5").innerHTML = document.closecash_store.res5.value = r5 - r55;
-                document.getElementById("demo10").innerHTML = document.closecash_store.res10.value = r10 - r1010;
-                document.getElementById("demo20").innerHTML = document.closecash_store.res20.value = r20 - r2020;
-                document.getElementById("demo50").innerHTML = document.closecash_store.res50.value = r50 - r5050;
-                document.getElementById("demo100").innerHTML = document.closecash_store.res100.value = r100 - r100100;
+                document.getElementById("x_oneamtFiscalizadora_r").innerHTML = parseFloat(r1).toFixed(2);
+                document.getElementById("x_oneamtFiscalizadora_t").innerHTML = (document.closecash_store.x_oneamtFiscalizadora.value);
+                document.getElementById("x_oneamtGerente_r").innerHTML = parseFloat(rg1).toFixed(2);
 
-                const cambio1 = document.getElementById("demo1");
-                const cambio5 = document.getElementById("demo5");
-                const cambio10 = document.getElementById("demo10");
-                const cambio20 = document.getElementById("demo20");
-                const cambio50 = document.getElementById("demo50");
-                const cambio100 = document.getElementById("demo100");
+                document.getElementById("x_fiveamtFiscalizadora_r").innerHTML =  parseFloat(r5).toFixed(2);
+                document.getElementById("x_fiveamtGerente_r").innerHTML =  parseFloat(rg5).toFixed(2);
 
-                if (document.getElementById("demo1").innerHTML <= -1) {
-                    cambio1.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio1.classList.replace("text-success", "text-success");
-                    cambio1.classList.replace("text-danger", "text-success");
-                }
+                document.getElementById("x_tenamtFiscalizadora_r").innerHTML =  parseFloat(r10).toFixed(2);
+                document.getElementById("x_tenamtGerente_r").innerHTML =  parseFloat(rg10).toFixed(2);
 
-                if (document.getElementById("demo5").innerHTML <= -1) {
-                    cambio5.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio5.classList.replace("text-success", "text-success");
-                    cambio5.classList.replace("text-danger", "text-success");
-                }
+                document.getElementById("x_twentyamtFiscalizadora_r").innerHTML =  parseFloat(r20).toFixed(2);
+                document.getElementById("x_twentyamtGerente_r").innerHTML =  parseFloat(rg20).toFixed(2);
 
-                if (document.getElementById("demo10").innerHTML <= -1) {
-                    cambio10.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio10.classList.replace("text-success", "text-success");
-                    cambio10.classList.replace("text-danger", "text-success");
-                }
+                document.getElementById("x_fiftyamtFiscalizadora_r").innerHTML =  parseFloat(r50).toFixed(2);
+                document.getElementById("x_fiftyamtGerente_r").innerHTML =  parseFloat(rg50).toFixed(2);
 
-                if (document.getElementById("demo20").innerHTML <= -1) {
-                    cambio20.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio20.classList.replace("text-success", "text-success");
-                    cambio20.classList.replace("text-danger", "text-success");
-                }
+                document.getElementById("x_hundredamtFiscalizadora_r").innerHTML =  parseFloat(r100).toFixed(2);
+                document.getElementById("x_hundredamtGerente_r").innerHTML =  parseFloat(rg100).toFixed(2);
 
-                if (document.getElementById("demo50").innerHTML <= -1) {
-                    cambio50.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio50.classList.replace("text-success", "text-success");
-                    cambio50.classList.replace("text-danger", "text-success");
-                }
+                const cambio1   = document.getElementById("x_oneamtFiscalizadora_r");
+                const cambio5   = document.getElementById("x_fiveamtFiscalizadora_r");
+                const cambio10  = document.getElementById("x_tenamtFiscalizadora_r");
+                const cambio20  = document.getElementById("x_twentyamtFiscalizadora_r");
+                const cambio50  = document.getElementById("x_fiftyamtFiscalizadora_r");
+                const cambio100 = document.getElementById("x_hundredamtFiscalizadora_r");
 
-                if (document.getElementById("demo100").innerHTML <= -1) {
-                    cambio100.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio100.classList.replace("text-success", "text-success");
-                    cambio100.classList.replace("text-danger", "text-success");
-                }
+                const cambio1g   = document.getElementById("x_oneamtGerente_r");
+                const cambio5g   = document.getElementById("x_fiveamtGerente_r");
+                const cambio10g  = document.getElementById("x_tenamtGerente_r");
+                const cambio20g  = document.getElementById("x_twentyamtGerente_r");
+                const cambio50g  = document.getElementById("x_fiftyamtGerente_r");
+                const cambio100g = document.getElementById("x_hundredamtGerente_r");
 
-                var r1g = parseInt(document.closecash_store.num1g.value),
-                    r11g = parseInt(document.closecash_store.num11g.value);
-                var r5g = parseInt(document.closecash_store.num5g.value),
-                    r55g = parseInt(document.closecash_store.num55g.value);
-                var r10g = parseInt(document.closecash_store.num10g.value),
-                    r1010g = parseInt(document.closecash_store.num1010g.value);
-                var r20g = parseInt(document.closecash_store.num20g.value),
-                    r2020g = parseInt(document.closecash_store.num2020g.value);
-                var r50g = parseInt(document.closecash_store.num50g.value),
-                    r5050g = parseInt(document.closecash_store.num5050g.value);
-                var r100g = parseInt(document.closecash_store.num100g.value),
-                    r100100g = parseInt(document.closecash_store.num100100g.value);
+                if (document.getElementById("x_oneamtFiscalizadora_r").innerHTML <= -0.01) {cambio1.classList.replace("text-success", "text-danger");} 
+                else{cambio1.classList.replace("text-success", "text-success");cambio1.classList.replace("text-danger", "text-success");}
 
-                document.getElementById("demo1g").innerHTML = document.closecash_store.res1g.value = r1g - r11g;
-                document.getElementById("demo5g").innerHTML = document.closecash_store.res5g.value = r5g - r55g;
-                document.getElementById("demo10g").innerHTML = document.closecash_store.res10g.value = r10g - r1010g;
-                document.getElementById("demo20g").innerHTML = document.closecash_store.res20g.value = r20g - r2020g;
-                document.getElementById("demo50g").innerHTML = document.closecash_store.res50g.value = r50g - r5050g;
-                document.getElementById("demo100g").innerHTML = document.closecash_store.res100g.value = r100g - r100100g;
+                if (document.getElementById("x_fiveamtFiscalizadora_r").innerHTML <= -0.01){cambio5.classList.replace("text-success", "text-danger");}
+                else{cambio5.classList.replace("text-success", "text-success");cambio5.classList.replace("text-danger", "text-success");}
 
-                const cambio1g = document.getElementById("demo1g");
-                const cambio5g = document.getElementById("demo5g");
-                const cambio10g = document.getElementById("demo10g");
-                const cambio20g = document.getElementById("demo20g");
-                const cambio50g = document.getElementById("demo50g");
-                const cambio100g = document.getElementById("demo100g");
+                if (document.getElementById("x_tenamtFiscalizadora_r").innerHTML <= -0.01){cambio10.classList.replace("text-success", "text-danger");} 
+                else{cambio10.classList.replace("text-success", "text-success");cambio10.classList.replace("text-danger", "text-success");}
 
-                if (document.getElementById("demo1g").innerHTML <= -1) {
-                    cambio1g.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio1g.classList.replace("text-success", "text-success");
-                    cambio1g.classList.replace("text-danger", "text-success");
-                }
+                if (document.getElementById("x_twentyamtFiscalizadora_r").innerHTML <= -0.01){cambio20.classList.replace("text-success", "text-danger");} 
+                else{cambio20.classList.replace("text-success", "text-success");cambio20.classList.replace("text-danger", "text-success");}
 
-                if (document.getElementById("demo5g").innerHTML <= -1) {
-                    cambio5g.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio5g.classList.replace("text-success", "text-success");
-                    cambio5g.classList.replace("text-danger", "text-success");
-                }
+                if (document.getElementById("x_fiftyamtFiscalizadora_r").innerHTML <= -0.01) {cambio50.classList.replace("text-success", "text-danger");} 
+                else{cambio50.classList.replace("text-success", "text-success");cambio50.classList.replace("text-danger", "text-success");}
 
-                if (document.getElementById("demo10g").innerHTML <= -1) {
-                    cambio10g.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio10g.classList.replace("text-success", "text-success");
-                    cambio10g.classList.replace("text-danger", "text-success");
-                }
+                if (document.getElementById("x_hundredamtFiscalizadora_r").innerHTML <= -0.01) {cambio100.classList.replace("text-success", "text-danger");} 
+                else{cambio100.classList.replace("text-success", "text-success"); cambio100.classList.replace("text-danger", "text-success");}
 
-                if (document.getElementById("demo20g").innerHTML <= -1) {
-                    cambio20g.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio20g.classList.replace("text-success", "text-success");
-                    cambio20g.classList.replace("text-danger", "text-success");
-                }
+                if (document.getElementById("x_oneamtGerente_r").innerHTML <= -0.01) {cambio1g.classList.replace("text-success", "text-danger");} 
+                else{cambio1g.classList.replace("text-success", "text-success");cambio1g.classList.replace("text-danger", "text-success");}
 
-                if (document.getElementById("demo50g").innerHTML <= -1) {
-                    cambio50g.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio50g.classList.replace("text-success", "text-success");
-                    cambio50g.classList.replace("text-danger", "text-success");
-                }
+                if (document.getElementById("x_fiveamtGerente_r").innerHTML <= -0.01){cambio5g.classList.replace("text-success", "text-danger");}
+                else{cambio5g.classList.replace("text-success", "text-success");cambio5g.classList.replace("text-danger", "text-success");}
 
-                if (document.getElementById("demo100g").innerHTML <= -1) {
-                    cambio100g.classList.replace("text-success", "text-danger");
-                } else {
-                    cambio100g.classList.replace("text-success", "text-success");
-                    cambio100g.classList.replace("text-danger", "text-success");
-                }
+                if (document.getElementById("x_tenamtGerente_r").innerHTML <= -0.01){cambio10g.classList.replace("text-success", "text-danger");} 
+                else{cambio10g.classList.replace("text-success", "text-success");cambio10g.classList.replace("text-danger", "text-success");}
+
+                if (document.getElementById("x_twentyamtGerente_r").innerHTML <= -0.01){cambio20g.classList.replace("text-success", "text-danger");} 
+                else{cambio20g.classList.replace("text-success", "text-success");cambio20g.classList.replace("text-danger", "text-success");}
+
+                if (document.getElementById("x_fiftyamtGerente_r").innerHTML <= -0.01) {cambio50g.classList.replace("text-success", "text-danger");} 
+                else{cambio50g.classList.replace("text-success", "text-success");cambio50g.classList.replace("text-danger", "text-success");}
+
+                if (document.getElementById("x_hundredamtGerente_r").innerHTML <= -0.01) {cambio100g.classList.replace("text-success", "text-danger");} 
+                else{cambio100g.classList.replace("text-success", "text-success"); cambio100g.classList.replace("text-danger", "text-success");}
+
             } catch (e) {}
         }
     </script>
