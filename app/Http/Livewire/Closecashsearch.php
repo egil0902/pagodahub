@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Livewire;
-
-use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\ValesPagoda;
+use App\Models\closecash;
+use Livewire\Component;
 
-class Valepagodasearch extends Component
+class Closecashsearch extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -19,9 +18,9 @@ class Valepagodasearch extends Component
         $searchTerm = $this->searchTerm;
         if($searchTerm=='')
             $searchTerm=0;
-        return view('livewire.valepagodasearch',[
-            //'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
-            'vales' => ValesPagoda::paginate(10)
+        return view('livewire.closecashsearch',[
+            //'closecash' => closecash::where('datetrx','=', $searchTerm)->paginate(10)
+            'closecash' => closecash::paginate(10),
         ]);
 
 

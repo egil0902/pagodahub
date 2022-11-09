@@ -81,7 +81,18 @@
                             </button>
                         </form>
                     </div>
-
+                    <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
+                        <form name="closecash_list" id="closecash_list" method="post" action="{{ route('closecash.list') }}"> @csrf <button type="submit" class="btn ">
+                                <div class="card m-0 p-0">
+                                    <div class="card-header">Listado de cierres de caja</div>
+                                    <div class="card-body">
+                                        <h4>Listado de cierres de caja</h4>
+                                        <p>Cierres de caja realizados</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

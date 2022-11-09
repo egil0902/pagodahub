@@ -110,4 +110,19 @@ class CloseCashController extends Controller
             return view('closecash', ['orgs' => $orgs,'closecashsumlist' => $response]);
         }
     }
+    public function list(Request $request)
+    {
+        $list = closecash::all();
+        return view('closecashlist', ['list' => $list, 'request' => $request]);
+    }
+    public function destroy(Request $request)
+    {
+        
+        $vale=closecash::find($request->valeid);
+        
+
+        $vale->delete();
+        $list = closecash::all();
+        return view('closecashlist', ['list' => $list, 'request' => $request]);
+    }
 }
