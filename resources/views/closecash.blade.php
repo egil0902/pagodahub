@@ -240,69 +240,80 @@
                                     <h4 class="mb-0">Efectivo</h4>
                                 </div>
                                 <div class="col-4 text-right col-md-5 m-0 p-0">
-                                    <h5 class="mb-0"> <b>{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</b> </h5>
+                                    <p class="mb-0" id="Fiscalizadora_t">{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-4">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="col-6">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input name="x_oneamtFiscalizadora" value="{{ $data->x_oneamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()"/>
                                     <input type="hidden" name="fis1" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
                                 <div class="col">
-                                    <p id="x_oneamtFiscalizadora_t" class="text-success">{{ $data->x_oneamt*1 }}</p> 
+                                    <p id="x_oneamtFiscalizadora_t" >{{ $data->x_oneamt*1 }}</p> 
                                 </div>
                                 <div class="col">
                                     <p id="x_oneamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input name="x_fiveamtFiscalizadora" value="{{ $data->x_fiveamt}}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;= {{ $data->x_fiveamt*5}}&nbsp;
+                                    
                                     <input type="hidden" name="fis5" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1">
+                                <div class="col">
+                                    <p id="x_fiveamtFiscalizadora_t" >{{ $data->x_fiveamt*5}}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_fiveamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$10x&nbsp;&nbsp;&nbsp;
                                     <input name="x_tenamtFiscalizadora" value="{{ $data->x_tenamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;= {{ $data->x_tenamt*10 }}
                                     <input type="hidden" name="fis10" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1">
-                                    <p id="x_tenamtFiscalizadora_r" class="text-success">0.00</p>
+                                <div class="col">
+                                    <p id="x_tenamtFiscalizadora_t" >{{ $data->x_tenamt*10 }}</p> 
+                                </div>
+                                <div class="col">
+                                <p id="x_tenamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$20x&nbsp;&nbsp;&nbsp;
                                     <input name="x_twentyamtFiscalizadora" value="{{ $data->x_twentyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;= {{ $data->x_twentyamt*20 }}
                                     <input type="hidden" name="fis20" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1">
+                                <div class="col">
+                                    <p id="x_twentyamtFiscalizadora_t" >{{ $data->x_twentyamt*20 }}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_twentyamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$50x&nbsp;&nbsp;&nbsp;
                                     <input name="x_fiftyamtFiscalizadora" value="{{ $data->x_fiftyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;= {{ $data->x_fiftyamt*50 }}
                                     <input type="hidden" name="fis50" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1">
+                                <div class="col">
+                                    <p id="x_fiftyamtFiscalizadora_t" >{{ $data->x_fiftyamt*50 }}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_fiftyamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$100x&nbsp;
+                                <div class="col-6 my-1">$100x&nbsp;
                                     <input name="x_hundredamtFiscalizadora" value="{{ $data->x_hundredamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;= {{ $data->x_hundredamt*100 }}
                                     <input type="hidden" name="fis100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col-3 my-1">
+                                <div class="col">
+                                    <p id="x_hundredamtFiscalizadora_t" >{{ $data->x_hundredamt*100 }}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_hundredamtFiscalizadora_r" class="text-success">0.00</p>
                                 </div>
                             </div>
@@ -454,65 +465,81 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$1x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input name="x_oneamtGerente" value="{{ $data->x_oneamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()" />
-                                    &nbsp;={{ $data->x_oneamt*1 }}&nbsp;
                                 </div>
-                                <div class="col-3 my-1">
+                                <div class="col">
+                                    <p id="x_oneamtGerente_t" >{{ $data->x_oneamt*1 }}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_oneamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$5x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input name="x_fiveamtGerente" value="{{ $data->x_fiveamt}}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_fiveamt*5}}&nbsp;
-                                    <p id="x_fiveamtGerente_t" class="text-success">0.00</p>
-                                </div>
-                                <div class="col-3 my-1">
                                     <input type="hidden" name="res5g" value="0" readonly="readonly" />
+                                </div>
+                                <div class="col">
+                                    <p id="x_fiveamtGerente_t" >{{ $data->x_fiveamt*5}}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_fiveamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$10x&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$10x&nbsp;&nbsp;&nbsp;
                                     <input name="x_tenamtGerente" value="{{ $data->x_tenamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_tenamt*10 }}
-                                </div>
-                                <div class="col-3 my-1">
                                     <input type="hidden" name="res10g" value="0" readonly="readonly" />
+                                </div>
+                                <div class="col">
+                                    <p id="x_tenamtGerente_t" >{{ $data->x_tenamt*10 }}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_tenamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$20x&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$20x&nbsp;&nbsp;&nbsp;
                                     <input name="x_twentyamtGerente" value="{{ $data->x_twentyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_twentyamt*20 }}
-                                </div>
-                                <div class="col-3 my-1">
                                     <input type="hidden" name="res20g" value="0" readonly="readonly" />
+                                </div>
+                                <div class="col">
+                                    <p id="x_twentyamtGerente_t" >{{ $data->x_twentyamt*20 }}</p> 
+                                </div>
+                                <div class="col">
+                                    
                                     <p id="x_twentyamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-9 my-1">$50x&nbsp;&nbsp;&nbsp;
+                                <div class="col-6 my-1">$50x&nbsp;&nbsp;&nbsp;
                                     <input name="x_fiftyamtGerente" value="{{ $data->x_fiftyamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_fiftyamt*50 }}
-                                </div>
-                                <div class="col-3 my-1">
                                     <input type="hidden" name="res50g" value="0" readonly="readonly" />
+                                </div>
+                                <div class="col">
+                                    <p id="x_fiftyamtGerente_t" >{{ $data->x_fiftyamt*50 }}</p> 
+                                </div>
+                                <div class="col">
                                     <p id="x_fiftyamtGerente_r" class="text-success">0.00</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9 my-1">$100x&nbsp;
+                                <div class="col-6 my-1">$100x&nbsp;
                                     <input name="x_hundredamtGerente" value="{{ $data->x_hundredamt }}" type="number" style="width:40%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
-                                    &nbsp;={{ $data->x_hundredamt*100 }}
-                                </div>
-                                <div class="col-3 my-1">
                                     <input type="hidden" name="res100g" value="0" readonly="readonly" />
+                                </div>
+                                <div class="col">
+                                    <p id="x_hundredamtGerente_t" >{{ $data->x_hundredamt*100 }}</p> 
+                                </div>
+                                <div class="col">
+                                    
                                     <p id="x_hundredamtGerente_r" class="text-success">0.00</p>
                                 </div>
+
+
+                                
                             </div>
                         </div>
                     </div>
@@ -692,24 +719,37 @@
                 var r100    = (document.closecash_store.x_hundredamtFiscalizadora.value)-(document.closecash_store.fis100.value);
                 var rg100    = (document.closecash_store.x_hundredamtGerente.value)-(document.closecash_store.x_hundredamtFiscalizadora.value);
 
+                
+
                 document.getElementById("x_oneamtFiscalizadora_r").innerHTML = parseFloat(r1).toFixed(2);
                 document.getElementById("x_oneamtFiscalizadora_t").innerHTML = (document.closecash_store.x_oneamtFiscalizadora.value);
                 document.getElementById("x_oneamtGerente_r").innerHTML = parseFloat(rg1).toFixed(2);
+                document.getElementById("x_oneamtGerente_t").innerHTML = (document.closecash_store.x_oneamtGerente.value);
 
                 document.getElementById("x_fiveamtFiscalizadora_r").innerHTML =  parseFloat(r5).toFixed(2);
+                document.getElementById("x_fiveamtFiscalizadora_t").innerHTML=(document.closecash_store.x_fiveamtFiscalizadora.value)*5;
                 document.getElementById("x_fiveamtGerente_r").innerHTML =  parseFloat(rg5).toFixed(2);
+                document.getElementById("x_fiveamtGerente_t").innerHTML = (document.closecash_store.x_fiveamtGerente.value)*5;
 
                 document.getElementById("x_tenamtFiscalizadora_r").innerHTML =  parseFloat(r10).toFixed(2);
+                document.getElementById("x_tenamtFiscalizadora_t").innerHTML=(document.closecash_store.x_tenamtFiscalizadora.value)*10;
                 document.getElementById("x_tenamtGerente_r").innerHTML =  parseFloat(rg10).toFixed(2);
+                document.getElementById("x_tenamtGerente_t").innerHTML =(document.closecash_store.x_tenamtGerente.value)*10;
 
                 document.getElementById("x_twentyamtFiscalizadora_r").innerHTML =  parseFloat(r20).toFixed(2);
+                document.getElementById("x_twentyamtFiscalizadora_t").innerHTML =(document.closecash_store.x_twentyamtFiscalizadora.value)*20;
                 document.getElementById("x_twentyamtGerente_r").innerHTML =  parseFloat(rg20).toFixed(2);
+                document.getElementById("x_twentyamtGerente_t").innerHTML = (document.closecash_store.x_twentyamtGerente.value)*20;
 
                 document.getElementById("x_fiftyamtFiscalizadora_r").innerHTML =  parseFloat(r50).toFixed(2);
+                document.getElementById("x_fiftyamtFiscalizadora_t").innerHTML =(document.closecash_store.x_fiftyamtFiscalizadora.value)*50;
                 document.getElementById("x_fiftyamtGerente_r").innerHTML =  parseFloat(rg50).toFixed(2);
+                document.getElementById("x_fiftyamtGerente_t").innerHTML = (document.closecash_store.x_fiftyamtGerente.value)*50;
 
                 document.getElementById("x_hundredamtFiscalizadora_r").innerHTML =  parseFloat(r100).toFixed(2);
+                document.getElementById("x_hundredamtFiscalizadora_t").innerHTML =(document.closecash_store.x_hundredamtFiscalizadora.value)*100;
                 document.getElementById("x_hundredamtGerente_r").innerHTML =  parseFloat(rg100).toFixed(2);
+                document.getElementById("x_hundredamtGerente_t").innerHTML =(document.closecash_store.x_hundredamtGerente.value)*100;
 
                 const cambio1   = document.getElementById("x_oneamtFiscalizadora_r");
                 const cambio5   = document.getElementById("x_fiveamtFiscalizadora_r");
@@ -760,7 +800,9 @@
 
                 if (document.getElementById("x_hundredamtGerente_r").innerHTML <= -0.01) {cambio100g.classList.replace("text-success", "text-danger");} 
                 else{cambio100g.classList.replace("text-success", "text-success"); cambio100g.classList.replace("text-danger", "text-success");}
-
+                
+                document.getElementById("Fiscalizadora_t").innerHTML = parseFloat(document.getElementById("x_oneamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtFiscalizadora_t").innerHTML)+parseFloat(document.getElementById("x_tenamtFiscalizadora_t").innerHTML)+parseFloat(document.getElementById("x_twentyamtFiscalizadora_t").innerHTML)+parseFloat(document.getElementById("x_fiftyamtFiscalizadora_t").innerHTML)+parseFloat(document.getElementById("x_hundredamtFiscalizadora_t").innerHTML);
+            
             } catch (e) {}
         }
     </script>
