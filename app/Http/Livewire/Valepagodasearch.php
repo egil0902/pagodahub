@@ -12,7 +12,10 @@ class Valepagodasearch extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $searchTerm;
-    
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
     public function render()
     {
         
