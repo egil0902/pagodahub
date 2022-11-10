@@ -17,7 +17,7 @@ class CloseCashController extends Controller
         $APIController = new APIController();
         $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
         $orgs =  $response;
-        return view('closecash', ['orgs' => $orgs]);
+        return view('closecash', ['orgs' => $orgs,'request' => $request]);
         
     }
     public function store(Request $request)
@@ -109,7 +109,7 @@ class CloseCashController extends Controller
                             , 'datetrx eq '.$request->DateTrx.' and parent_id eq '.$request->AD_Org_ID);
 
         if (isset($response)) {
-            return view('closecash', ['orgs' => $orgs,'closecashsumlist' => $response]);
+            return view('closecash', ['orgs' => $orgs,'closecashsumlist' => $response, 'request' => $request]);
         }
     }
     public function list(Request $request)
