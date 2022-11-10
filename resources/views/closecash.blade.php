@@ -46,7 +46,8 @@
     @csrf
     @if ($closecashsumlist->{'records-size'} > 0)
     @foreach($closecashsumlist->records as $data)
-
+    <input  name="DateTrx"      value="{{ $request->DateTrx }}" type="hidden" >
+    <input  name="AD_Org_ID"      value="{{ $request->AD_Org_ID }}" type="hidden" >
     <div class="card-body ">
         <div class="container">
             <div class="row my-1">

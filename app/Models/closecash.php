@@ -78,6 +78,8 @@ class closecash extends Model
     'totalsuperGerente',
     'dineroTaxiGerente',
     'vueltoMercadoGerente',
-    'comentariosGerente'
+    'comentariosGerente',
+    'DateTrx',
+    'AD_Org_ID'
     ];
 }
