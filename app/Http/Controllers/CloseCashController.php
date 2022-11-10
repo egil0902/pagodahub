@@ -92,6 +92,8 @@ class CloseCashController extends Controller
         $todo->	  dineroTaxiGerente	            =	$request->	dineroTaxiGerente;
         $todo->	  vueltoMercadoGerente	        =	$request->	vueltoMercadoGerente;
         $todo->	  comentariosGerente	        =	$request->	comentariosGerente;
+        $todo->	  DateTrx	                    =	$request->	DateTrx;
+        $todo->	  AD_Org_ID	                    =	$request->	AD_Org_ID;
         $todo-> save();
         $APIController = new APIController();
         $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
