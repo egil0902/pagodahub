@@ -143,7 +143,7 @@
                             </div>
 
                             <div class="row">
-                                 <div class="col-6 border">$100x&nbsp;
+                                 <div class="col-6">$100x&nbsp;
                                     <input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}"  type="number" style="width:40%;" readonly class="text-left"  placeholder="">
                                 </div>
                                 <div class="col">
@@ -165,7 +165,7 @@
                                     <h5 class="mb-0" id="Otros">{{ $data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</h5>
                                 </div>
                             </div>
-                            <div class="row p-0 my-1 m-0 border">
+                            <div class="row p-0 my-1 m-0 ">
                                 <div class="p-0 col-sm-5 col-md-5 col-lg-5 col-5 m-0">Yappy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                 <div class="m-0 p-0 col-sm-7 col-md-7 col-lg-7 col-7">
                                     <input name="yappySistema" value="{{ $data->yappy }}"  type="number"   step="0.01" readonly class="w-100 text-right" placeholder="">
@@ -263,61 +263,61 @@
                                 </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$1x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$1x</div>
+                                <div class="col-3 borde">
                                     <input name="x_oneamtFiscalizadora" value="{{ $data->x_oneamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()"/>
                                     <input type="hidden" name="fis1" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col border" id="x_oneamtFiscalizadora_t">{{ $data->x_oneamt*1 }}</div>
-                                <div class="col border text-success" id="x_oneamtFiscalizadora_r">0.00</div>
+                                <div class="col borde" id="x_oneamtFiscalizadora_t">{{ $data->x_oneamt*1 }}</div>
+                                <div class="col borde text-success" id="x_oneamtFiscalizadora_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$5x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$5x</div>
+                                <div class="col-3 borde">
                                     <input name="x_fiveamtFiscalizadora" value="{{ $data->x_fiveamt}}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()"> 
                                     <input type="hidden" name="fis5" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
                                 </div>
                                 
-                                <div class="col border" id="x_fiveamtFiscalizadora_t"> {{ $data->x_fiveamt*5}}</div>
-                                <div class="col border text-success" id="x_fiveamtFiscalizadora_r">0.00</div>
+                                <div class="col borde" id="x_fiveamtFiscalizadora_t"> {{ $data->x_fiveamt*5}}</div>
+                                <div class="col borde text-success" id="x_fiveamtFiscalizadora_r">0.00</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$10x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$10x</div>
+                                <div class="col-3 borde">
                                     <input name="x_tenamtFiscalizadora" value="{{ $data->x_tenamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     <input type="hidden" name="fis10" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col border" id="x_tenamtFiscalizadora_t">{{ $data->x_tenamt*10 }}</div>
-                                <div class="col border text-success" id="x_tenamtFiscalizadora_r">0.00</div>
+                                <div class="col borde" id="x_tenamtFiscalizadora_t">{{ $data->x_tenamt*10 }}</div>
+                                <div class="col borde text-success" id="x_tenamtFiscalizadora_r">0.00</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$20x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$20x</div>
+                                <div class="col-3 borde">
                                     <input name="x_twentyamtFiscalizadora" value="{{ $data->x_twentyamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     <input type="hidden" name="fis20" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col border" id="x_twentyamtFiscalizadora_t">{{ $data->x_twentyamt*20 }}</div>
-                                <div class="col border text-success"  id="x_twentyamtFiscalizadora_r">0.00</div>
+                                <div class="col borde" id="x_twentyamtFiscalizadora_t">{{ $data->x_twentyamt*20 }}</div>
+                                <div class="col borde text-success"  id="x_twentyamtFiscalizadora_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$50x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$50x</div>
+                                <div class="col-3 borde">
                                     <input name="x_fiftyamtFiscalizadora" value="{{ $data->x_fiftyamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     <input type="hidden" name="fis50" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col border" id="x_fiftyamtFiscalizadora_t" >{{ $data->x_fiftyamt*50 }} </div>
-                                <div class="col border text-success" id="x_fiftyamtFiscalizadora_r">0.00</div>
+                                <div class="col borde" id="x_fiftyamtFiscalizadora_t" >{{ $data->x_fiftyamt*50 }} </div>
+                                <div class="col borde text-success" id="x_fiftyamtFiscalizadora_r">0.00</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$100x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$100x</div>
+                                <div class="col-3 borde">
                                     <input name="x_hundredamtFiscalizadora" value="{{ $data->x_hundredamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     <input type="hidden" name="fis100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                                 </div>
-                                <div class="col border" id="x_hundredamtFiscalizadora_t"> {{ $data->x_hundredamt*100 }} </div>
-                                <div class="col border text-success" id="x_hundredamtFiscalizadora_r">0.00</p>
+                                <div class="col borde" id="x_hundredamtFiscalizadora_t"> {{ $data->x_hundredamt*100 }} </div>
+                                <div class="col borde text-success" id="x_hundredamtFiscalizadora_r">0.00</p>
                                 </div>
                             </div>
                         </div>
@@ -334,76 +334,76 @@
                             </div>
                             
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Yappy</div>
-                                <div class="col border"><input name="yappyFiscalizadora" value="{{ $data->yappy }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="yappyFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Yappy</div>
+                                <div class="col borde"><input name="yappyFiscalizadora" value="{{ $data->yappy }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="yappyFiscalizadora_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="otrosFiscalizadora" value="{{ $data->otros }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="otrosFiscalizadora_r" >0.0</div>
+                                <div class="col-5 borde">Otros&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="otrosFiscalizadora" value="{{ $data->otros }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="otrosFiscalizadora_r" >0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="valespagodaFiscalizadora" value="{{ $data->valespagoda }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="valespagodaFiscalizadora_r" >0.0</div>
+                                <div class="col-5 borde">Vales Pagoda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="valespagodaFiscalizadora" value="{{ $data->valespagoda }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="valespagodaFiscalizadora_r" >0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Monto cheques&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CheckAmtFiscalizadora" value="{{ $data->CheckAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CheckAmtFiscalizadora_r" >0.0</div>
+                                <div class="col-5 borde">Monto cheques&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CheckAmtFiscalizadora" value="{{ $data->CheckAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CheckAmtFiscalizadora_r" >0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="LotoAmtFiscalizadora" value="{{ $data->LotoAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="LotoAmtFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Loteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="LotoAmtFiscalizadora" value="{{ $data->LotoAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="LotoAmtFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CardValeFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardValeFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Tarjeta Vale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CardValeFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardValeFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CardVisaFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardVisaFiscalizadora_r" >0.0</div>
+                                <div class="col-5 borde">Visa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CardVisaFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardVisaFiscalizadora_r" >0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CardMasterFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardMasterFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Master&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CardMasterFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardMasterFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CardAEFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardAEFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">American Express&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CardAEFiscalizadora" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardAEFiscalizadora_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CashAmtFiscalizadora" value="{{ $data->CashAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CashAmtFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Sencillo&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CashAmtFiscalizadora" value="{{ $data->CashAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CashAmtFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="CoinRollFiscalizadora" value="{{ $data->CoinRoll }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CoinRollFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Rollos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="CoinRollFiscalizadora" value="{{ $data->CoinRoll }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CoinRollFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Facturas&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="InvoiceAmtFiscalizadora" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="InvoiceAmtFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Facturas&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="InvoiceAmtFiscalizadora" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="InvoiceAmtFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="VoucherAmtFiscalizadora" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="VoucherAmtFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Vale digital&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="VoucherAmtFiscalizadora" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="VoucherAmtFiscalizadora_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Beca Digital&nbsp;&nbsp;&nbsp;</div>
-                                <div class="col border"><input name="GrantAmtFiscalizadora" value="{{ $data->GrantAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="GrantAmtFiscalizadora_r">0.0</div>
+                                <div class="col-5 borde">Beca Digital&nbsp;&nbsp;&nbsp;</div>
+                                <div class="col borde"><input name="GrantAmtFiscalizadora" value="{{ $data->GrantAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="GrantAmtFiscalizadora_r">0.0</div>
                             </div>
                         </div>
                     </div>
@@ -485,63 +485,63 @@
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$1x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$1x</div>
+                                <div class="col-3 borde">
                                 <input name="x_oneamtGerente" value="{{ $data->x_oneamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()" />
                                    
                                 </div>
-                                <div class="col border" id="x_oneamtGerente_t">{{ $data->x_oneamt*1 }}</div>
-                                <div class="col border text-success" id="x_oneamtGerente_r">0.00</div>
+                                <div class="col borde" id="x_oneamtGerente_t">{{ $data->x_oneamt*1 }}</div>
+                                <div class="col borde text-success" id="x_oneamtGerente_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$5x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$5x</div>
+                                <div class="col-3 borde">
                                     <input name="x_fiveamtGerente" value="{{ $data->x_fiveamt}}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                    
                                 </div>
-                                <div class="col border" id="x_fiveamtGerente_t">{{ $data->x_fiveamt*5}}</div>
-                                <div class="col border text-success" id="x_fiveamtGerente_r">0.00</div>
+                                <div class="col borde" id="x_fiveamtGerente_t">{{ $data->x_fiveamt*5}}</div>
+                                <div class="col borde text-success" id="x_fiveamtGerente_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$10x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$10x</div>
+                                <div class="col-3 borde">
                                     <input name="x_tenamtGerente" value="{{ $data->x_tenamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     
                                 </div>
-                                <div class="col border" id="x_tenamtGerente_t" >{{ $data->x_tenamt*10 }}</div>
-                                <div class="col border text-success" id="x_tenamtGerente_r">0.00</div>
+                                <div class="col borde" id="x_tenamtGerente_t" >{{ $data->x_tenamt*10 }}</div>
+                                <div class="col borde text-success" id="x_tenamtGerente_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$20x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$20x</div>
+                                <div class="col-3 borde">
                                     <input name="x_twentyamtGerente" value="{{ $data->x_twentyamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                    
                                 </div>
-                                <div class="col border" id="x_twentyamtGerente_t" >{{ $data->x_twentyamt*20 }}</div>
-                                <div class="col border text-success" id="x_twentyamtGerente_r">0.00</div>
+                                <div class="col borde" id="x_twentyamtGerente_t" >{{ $data->x_twentyamt*20 }}</div>
+                                <div class="col borde text-success" id="x_twentyamtGerente_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$50x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$50x</div>
+                                <div class="col-3 borde">
                                 <input name="x_fiftyamtGerente" value="{{ $data->x_fiftyamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                     
                                 </div>
-                                <div class="col border" id="x_fiftyamtGerente_t" >{{ $data->x_fiftyamt*50 }}</div>
-                                <div class="col border text-success" id="x_fiftyamtGerente_r">0.00</div>
+                                <div class="col borde" id="x_fiftyamtGerente_t" >{{ $data->x_fiftyamt*50 }}</div>
+                                <div class="col borde text-success" id="x_fiftyamtGerente_r">0.00</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-2 border">$100x</div>
-                                <div class="col-3 border">
+                                <div class="col-2 borde">$100x</div>
+                                <div class="col-3 borde">
                                 <input name="x_hundredamtGerente" value="{{ $data->x_hundredamt }}" type="number" style="width:100%;" class="text-left" placeholder="" onchange="cal()" onkeyup="cal()">
                                    
                                 </div>
-                                <div class="col border" id="x_hundredamtGerente_t" >{{ $data->x_hundredamt*100 }}</div>
-                                <div class="col border text-success" id="x_hundredamtGerente_r">0.00</div>
+                                <div class="col borde" id="x_hundredamtGerente_t" >{{ $data->x_hundredamt*100 }}</div>
+                                <div class="col borde text-success" id="x_hundredamtGerente_r">0.00</div>
                             </div>
                         </div>
                     </div>
@@ -556,82 +556,82 @@
                                 </div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Yappy</div>
-                                <div class="col border"><input name="yappyGerente" value="{{ $data->yappy }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="yappyGerente_r">0.0</div>
+                                <div class="col-5 borde">Yappy</div>
+                                <div class="col borde"><input name="yappyGerente" value="{{ $data->yappy }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="yappyGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Otros</div>
-                                <div class="col border"><input name="otrosGerente" value="{{ $data->otros }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="otrosGerente_r">0.0</div>
+                                <div class="col-5 borde">Otros</div>
+                                <div class="col borde"><input name="otrosGerente" value="{{ $data->otros }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="otrosGerente_r">0.0</div>
                             </div>
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Vales Pagoda</div>
-                                <div class="col border"><input name="valespagodaGerente" value="{{ $data->valespagoda }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="valespagodaGerente_r">0.0</div>
-                            </div>
-
-                            <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Monto cheques</div>
-                                <div class="col border"><input name="CheckAmtGerente" value="{{ $data->CheckAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CheckAmtGerente_r">0.0</div>
+                                <div class="col-5 borde">Vales Pagoda</div>
+                                <div class="col borde"><input name="valespagodaGerente" value="{{ $data->valespagoda }}" type="number"   step="0.01" class="w-100 text-right" placeholder=""onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="valespagodaGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Loteria</div>
-                                <div class="col border"><input name="LotoAmtGerente" value="{{ $data->LotoAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="LotoAmtGerente_r">0.0</div>
+                                <div class="col-5 borde">Monto cheques</div>
+                                <div class="col borde"><input name="CheckAmtGerente" value="{{ $data->CheckAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CheckAmtGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Tarjeta Vale</div>
-                                <div class="col border"><input name="CardValeGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardValeGerente_r">0.0</div>
+                                <div class="col-5 borde">Loteria</div>
+                                <div class="col borde"><input name="LotoAmtGerente" value="{{ $data->LotoAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="LotoAmtGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Visa</div>
-                                <div class="col border"><input name="CardVisaGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardVisaGerente_r">0.0</div>
+                                <div class="col-5 borde">Tarjeta Vale</div>
+                                <div class="col borde"><input name="CardValeGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardValeGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Master</div>
-                                <div class="col border"><input name="CardMasterGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardMasterGerente_r">0.0</div>
+                                <div class="col-5 borde">Visa</div>
+                                <div class="col borde"><input name="CardVisaGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardVisaGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">American Express</div>
-                                <div class="col border"><input name="CardAEGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CardAEGerente_r">0.0</div>
-                            </div>
-                            <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Sencillo</div>
-                                <div class="col border"><input name="CashAmtGerente" value="{{ $data->CashAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CashAmtGerente_r">0.0</div>
-                            </div>
-                            <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Rollos</div>
-                                <div class="col border"><input name="CoinRollGerente" value="{{ $data->CoinRoll }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="CoinRollGerente_r">0.0</div>
-                            </div>
-                            <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Facturas</div>
-                                <div class="col border"><input name="InvoiceAmtGerente" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="InvoiceAmtGerente_r">0.0</div>
-                            </div>
-                            <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Vale digital</div>
-                                <div class="col border"><input name="VoucherAmtGerente" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="VoucherAmtGerente_r">0.0</div>
+                                <div class="col-5 borde">Master</div>
+                                <div class="col borde"><input name="CardMasterGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardMasterGerente_r">0.0</div>
                             </div>
 
                             <div class="row p-0 m-0 my-1">
-                                <div class="col-5 border">Beca Digital</div>
-                                <div class="col border"><input name="GrantAmtGerente" value="{{ $data->GrantAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
-                                <div class="col border" id="GrantAmtGerente_r">0.0</div>
+                                <div class="col-5 borde">American Express</div>
+                                <div class="col borde"><input name="CardAEGerente" value="0" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CardAEGerente_r">0.0</div>
+                            </div>
+                            <div class="row p-0 m-0 my-1">
+                                <div class="col-5 borde">Sencillo</div>
+                                <div class="col borde"><input name="CashAmtGerente" value="{{ $data->CashAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CashAmtGerente_r">0.0</div>
+                            </div>
+                            <div class="row p-0 m-0 my-1">
+                                <div class="col-5 borde">Rollos</div>
+                                <div class="col borde"><input name="CoinRollGerente" value="{{ $data->CoinRoll }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="CoinRollGerente_r">0.0</div>
+                            </div>
+                            <div class="row p-0 m-0 my-1">
+                                <div class="col-5 borde">Facturas</div>
+                                <div class="col borde"><input name="InvoiceAmtGerente" value="{{ $data->InvoiceAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="InvoiceAmtGerente_r">0.0</div>
+                            </div>
+                            <div class="row p-0 m-0 my-1">
+                                <div class="col-5 borde">Vale digital</div>
+                                <div class="col borde"><input name="VoucherAmtGerente" value="{{ $data->VoucherAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="VoucherAmtGerente_r">0.0</div>
+                            </div>
+
+                            <div class="row p-0 m-0 my-1">
+                                <div class="col-5 borde">Beca Digital</div>
+                                <div class="col borde"><input name="GrantAmtGerente" value="{{ $data->GrantAmt }}" type="number"   step="0.01" class="w-100 text-right" placeholder="" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde" id="GrantAmtGerente_r">0.0</div>
                             </div>
 
 
@@ -789,11 +789,11 @@
                 document.getElementById("CardMasterGerente_r").innerHTML  =  parseFloat((document.closecash_store.CardMasterFiscalizadora.value)  -(document.closecash_store.CardAmtSistema.value)).toFixed(2);
                 document.getElementById("CardAEGerente_r").innerHTML      =  parseFloat((document.closecash_store.CardAEFiscalizadora.value)      -(document.closecash_store.CardAmtSistema.value)).toFixed(2);
                 //
-                document.getElementById("CashAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.CashAmtGerente.value)    -(document.closecash_store.CashAmtSistema.value)).toFixed(2);
-                document.getElementById("CoinRollGerente_r").innerHTML =  parseFloat((document.closecash_store.CoinRollGerente.value)    -(document.closecash_store.CoinRollSistema.value)).toFixed(2);
-                document.getElementById("InvoiceAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.InvoiceAmtGerente.value)    -(document.closecash_store.InvoiceAmtSistema.value)).toFixed(2);
-                document.getElementById("VoucherAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.VoucherAmtGerente.value)    -(document.closecash_store.VoucherAmtSistema.value)).toFixed(2);
-                document.getElementById("GrantAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.GrantAmtGerente.value)    -(document.closecash_store.GrantAmtSistema.value)).toFixed(2);
+                document.getElementById("CashAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.CashAmtGerente.value)    -(document.closecash_store.CashAmtFiscalizadora.value)).toFixed(2);
+                document.getElementById("CoinRollGerente_r").innerHTML =  parseFloat((document.closecash_store.CoinRollGerente.value)    -(document.closecash_store.CoinRollFiscalizadora.value)).toFixed(2);
+                document.getElementById("InvoiceAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.InvoiceAmtGerente.value)    -(document.closecash_store.InvoiceAmtFiscalizadora.value)).toFixed(2);
+                document.getElementById("VoucherAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.VoucherAmtGerente.value)    -(document.closecash_store.VoucherAmtFiscalizadora.value)).toFixed(2);
+                document.getElementById("GrantAmtGerente_r").innerHTML =  parseFloat((document.closecash_store.GrantAmtGerente.value)    -(document.closecash_store.GrantAmtFiscalizadora.value)).toFixed(2);
 
 
                 const cambio1   = document.getElementById("x_oneamtFiscalizadora_r");
@@ -850,13 +850,15 @@
                 document.getElementById("Gerente_t").innerHTML = parseFloat(document.getElementById("x_oneamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtGerente_t").innerHTML)+parseFloat(document.getElementById("x_tenamtGerente_t").innerHTML)+parseFloat(document.getElementById("x_twentyamtGerente_t").innerHTML)+parseFloat(document.getElementById("x_fiftyamtGerente_t").innerHTML)+parseFloat(document.getElementById("x_hundredamtGerente_t").innerHTML);
                 document.getElementById("Otros_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyFiscalizadora.value)+parseFloat(document.closecash_store.otrosFiscalizadora.value)+parseFloat(document.closecash_store.valespagodaFiscalizadora.value) +parseFloat(document.closecash_store.CheckAmtFiscalizadora.value)  +parseFloat(document.closecash_store.LotoAmtFiscalizadora.value)+parseFloat(document.closecash_store.CashAmtFiscalizadora.value)+parseFloat(document.closecash_store.CoinRollFiscalizadora.value)+parseFloat(document.closecash_store.InvoiceAmtFiscalizadora.value)+parseFloat(document.closecash_store.VoucherAmtFiscalizadora.value)+parseFloat(document.closecash_store.GrantAmtFiscalizadora.value)+ parseFloat(document.closecash_store.CardValeFiscalizadora.value) + parseFloat(document.closecash_store.CardVisaFiscalizadora.value)+parseFloat(document.closecash_store.CardMasterFiscalizadora.value)+ parseFloat(document.closecash_store.CardAEFiscalizadora.value) ).toFixed(2);
                 document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value)+parseFloat(document.closecash_store.otrosGerente.value)+parseFloat(document.closecash_store.valespagodaGerente.value) +parseFloat(document.closecash_store.CheckAmtGerente.value) +parseFloat(document.closecash_store.LotoAmtGerente.value)+parseFloat(document.closecash_store.CashAmtGerente.value)+parseFloat(document.closecash_store.CoinRollGerente.value)+parseFloat(document.closecash_store.InvoiceAmtGerente.value)+parseFloat(document.closecash_store.VoucherAmtGerente.value)+parseFloat(document.closecash_store.GrantAmtGerente.value)+ parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value)+parseFloat(document.closecash_store.CardMasterGerente.value)+ parseFloat(document.closecash_store.CardAEGerente.value) ).toFixed(2);
-                document.getElementById("Monto_Fiscalizadora_t").innerHTML = document.getElementById("Fiscalizadora_t").innerHTML + document.getElementById("Otros_Fiscalizadora_t").innerHTML;
+                //document.getElementById("Monto_Fiscalizadora_t").innerHTML = document.getElementById("Fiscalizadora_t").innerHTML + document.getElementById("Otros_Fiscalizadora_t").innerHTML;
 
                 const card = parseFloat(parseFloat(document.closecash_store.CardValeFiscalizadora.value) + parseFloat(document.closecash_store.CardVisaFiscalizadora.value)+parseFloat(document.closecash_store.CardMasterFiscalizadora.value)+ parseFloat(document.closecash_store.CardAEFiscalizadora.value) ).toFixed(2);
                 document.getElementById("CardValeFiscalizadora_r").innerHTML =parseFloat(card-document.closecash_store.CardAmtSistema.value).toFixed(2); 
                 document.getElementById("CardVisaFiscalizadora_r").innerHTML =parseFloat(card-document.closecash_store.CardAmtSistema.value).toFixed(2);
                 document.getElementById("CardMasterFiscalizadora_r").innerHTML =parseFloat(card-document.closecash_store.CardAmtSistema.value).toFixed(2);
                 document.getElementById("CardAEFiscalizadora_r").innerHTML = parseFloat(card-document.closecash_store.CardAmtSistema.value).toFixed(2);
+
+
 
                 const cambioFiscalizadora_t         = document.getElementById("Fiscalizadora_t");
                 const cambioGerente_t               = document.getElementById("Gerente_t");
