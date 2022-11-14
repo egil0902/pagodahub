@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use App\Models\closecash;
+
 
 class CloseCashController extends Controller
 {
@@ -94,11 +96,26 @@ class CloseCashController extends Controller
         $todo->	  comentariosGerente	        =	$request->	comentariosGerente;
         $todo->	  DateTrx	                    =	$request->	DateTrx;
         $todo->	  AD_Org_ID	                    =	$request->	AD_Org_ID;
-        $todo-> save();
+        $todo->	  Fileclosecash	                =	$request->  Fileclosecash;	 
+        $todo->	  CardClaveFiscalizadora	    =	$request->	CardClaveFiscalizadora;
+        $todo->	  CardClaveGerente 	            =	$request->	CardClaveGerente;
+        
+        $filename=$request-> Fileclosecash;	//$request->file('Fileclosecash');//->store('public/Fileclosecash');
         $APIController = new APIController();
-        $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
-        $orgs =  $response;
-        return view('closecash', ['orgs' => $orgs]);
+            $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
+            $orgs =  $response;
+        if($filename == null)
+        {
+            $todo-> save();
+            return view('closecash', ['orgs' => $orgs]);
+        }
+        else 
+        {
+            $filename=$request->file('Fileclosecash')->store('public/Fileclosecash');
+            $todo->	  Fileclosecash=$filename;
+            $todo-> save();
+            return view('closecash', ['orgs' => $orgs]);
+        }
     }
     public function import(Request $request){
         $APIController = new APIController();
