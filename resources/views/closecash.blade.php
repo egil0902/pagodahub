@@ -376,7 +376,6 @@
                             <td>
                                 <div class="col borde text-success" id="otrosFiscalizadora_r">0.0</div>
                             </td>
-
                         </tr>
                         <tr>
                             <td>Vales Pagoda </td>
@@ -384,7 +383,6 @@
                             <td>
                                 <div class="col borde text-success" id="valespagodaFiscalizadora_r">0.0</div>
                             </td>
-
                         </tr>
                         <tr>
                             <td> Monto cheques</td>
@@ -400,8 +398,6 @@
                                 <div class="col borde text-success" id="LotoAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
-
-
                         <tr>
                             <td>Clave</td>
                             <td><input name="CardClaveFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
@@ -444,7 +440,6 @@
                                 <div class="col borde text-success" id="CashAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
-
                         <tr>
                             <td>Rollos </td>
                             <td><input name="CoinRollFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
@@ -459,14 +454,12 @@
                                 <div class="col borde text-success" id="InvoiceAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
-
                         <tr>
                             <td>Vale digital </td>
                             <td><input name="VoucherAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
                             <td>
                                 <div class="col borde text-success" id="VoucherAmtFiscalizadora_r">0.0</div>
                             </td>
-
                         </tr>
                         <tr>
                             <td>Beca Digital </td>
@@ -477,9 +470,6 @@
                         </tr>
                     </tbody>
                 </table>
-
-
-
             </div>
             <div class="card bg-light">
                 <div class="card-body p-1">
@@ -1349,8 +1339,8 @@
 
             document.getElementById("Fiscalizadora_t").innerHTML = parseFloat(document.getElementById("x_oneamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_tenamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_twentyamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiftyamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_hundredamtFiscalizadora_t").innerHTML);
             document.getElementById("Gerente_t").innerHTML = parseFloat(document.getElementById("x_oneamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_tenamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_twentyamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiftyamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_hundredamtGerente_t").innerHTML);
-            document.getElementById("Otros_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyFiscalizadora.value) + parseFloat(document.closecash_store.otrosFiscalizadora.value) + parseFloat(document.closecash_store.valespagodaFiscalizadora.value) + parseFloat(document.closecash_store.CheckAmtFiscalizadora.value) + parseFloat(document.closecash_store.LotoAmtFiscalizadora.value) + parseFloat(document.closecash_store.CashAmtFiscalizadora.value) + parseFloat(document.closecash_store.CoinRollFiscalizadora.value) + parseFloat(document.closecash_store.InvoiceAmtFiscalizadora.value) + parseFloat(document.closecash_store.VoucherAmtFiscalizadora.value) + parseFloat(document.closecash_store.GrantAmtFiscalizadora.value) + parseFloat(document.closecash_store.CardValeFiscalizadora.value) + parseFloat(document.closecash_store.CardVisaFiscalizadora.value) + parseFloat(document.closecash_store.CardMasterFiscalizadora.value) + parseFloat(document.closecash_store.CardAEFiscalizadora.value)).toFixed(2);
-            document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
+            document.getElementById("Otros_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyFiscalizadora.value) + parseFloat(document.closecash_store.otrosFiscalizadora.value) + parseFloat(document.closecash_store.valespagodaFiscalizadora.value) + parseFloat(document.closecash_store.CheckAmtFiscalizadora.value) + parseFloat(document.closecash_store.LotoAmtFiscalizadora.value) + parseFloat(document.closecash_store.CashAmtFiscalizadora.value) + parseFloat(document.closecash_store.CoinRollFiscalizadora.value) + parseFloat(document.closecash_store.InvoiceAmtFiscalizadora.value) + parseFloat(document.closecash_store.VoucherAmtFiscalizadora.value) + parseFloat(document.closecash_store.GrantAmtFiscalizadora.value) + parseFloat(document.closecash_store.CardClaveFiscalizadora.value) + parseFloat(document.closecash_store.CardValeFiscalizadora.value) + parseFloat(document.closecash_store.CardVisaFiscalizadora.value) + parseFloat(document.closecash_store.CardMasterFiscalizadora.value) + parseFloat(document.closecash_store.CardAEFiscalizadora.value)).toFixed(2);
+            document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardClaveGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
             document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
             document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
