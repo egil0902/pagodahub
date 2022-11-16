@@ -13,7 +13,7 @@
                         @if (isset($orgs))
                         @if ($orgs->{'records-size'} > 0)
                         @foreach($orgs->records as $org)
-                        <option value="{{$org->id}}">{{$org->Name}}</option>
+                        <option {{ (isset($request->AD_Org_ID))?($request->AD_Org_ID==$org->id)? __('selected') : __('') : __('') }} value="{{$org->id}}">{{$org->Name}}</option>
                         @endforeach
                         @endif
                         @endif
@@ -26,7 +26,7 @@
                         <p class="card-text">Fecha</p>
 
                         <div class="">
-                            <input name="DateTrx" type="date" value={{ date("Y-m-d") }} class="form-control" placeholder="0.00">
+                            <input name="DateTrx" type="date" value={{ (isset($request->DateTrx))?date("Y-m-d",strtotime($request->DateTrx)):date("Y-m-d") }} class="form-control" placeholder="0.00">
                         </div>
                     </div>
                 </div>
@@ -186,6 +186,12 @@
 
                             </tr>
                             <tr>
+                                <td> Vale</td>
+                                <td> <input name="valeAmtSistema" value="{{ $data->CreditAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                </td>
+
+                            </tr>
+                            <tr>
                                 <td>Tarjetas </td>
                                 <td> <input name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
                                 </td>
@@ -241,10 +247,10 @@
                                     <h4 class="mb-0">Monto contado</h4>
                                 </div>
                                 <div class="text-right m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0" id="Monto_contado_Sistema">{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</h5>
+                                    <h5 class="mb-0" id="Monto_contado_Sistema">{{ $data->NetTotal }}</h5>
                                 </div>
                             </div>
-                            <h6 class="mb-0 text-right">Subtotal &nbsp;&nbsp;&nbsp;= {{ $data->BeginningBalance+$data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</b></h6>
+                            <h6 class="mb-0 text-right">Subtotal &nbsp;&nbsp;&nbsp;= {{ $data->SubTotal }}</b></h6>
                             <h6 class="mb-0 text-right">Monto X &nbsp;&nbsp;&nbsp;= <b>{{ $data->XAmt }}</b></h6>
                             <h6 class="mb-0 text-right">Diferencia = <b>{{ $data->DifferenceAmt }}</b></h6>
                         </div>
@@ -691,6 +697,7 @@
                                 <div class="col borde text-success" id="LotoAmtGerente_r">0.0</div>
                             </td>
                         </tr>
+                        
                         <tr>
                             <td>Clave</td>
                             <td><input name="CardClaveGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
