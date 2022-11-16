@@ -102,7 +102,7 @@
                         </tr>
                         <tr>
                             <td>$5x</td>
-                            <td><input name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00" ></td>
+                            <td><input name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00"></td>
                             <td>{{ $data->x_fiveamt*5 }}</td>
                             <td>
                                 <div class="col borde text-white">0.00</div>
@@ -111,7 +111,7 @@
                         </tr>
                         <tr>
                             <td>$10x</td>
-                            <td><input name="x_tenamtSistema" value="{{ $data->x_tenamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00" ></td>
+                            <td><input name="x_tenamtSistema" value="{{ $data->x_tenamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00"></td>
                             <td>{{ $data->x_tenamt*10 }}</td>
                             <td>
                                 <div class="col borde text-white">0.00</div>
@@ -120,7 +120,7 @@
                         </tr>
                         <tr>
                             <td>$20x</td>
-                            <td><input name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00" ></td>
+                            <td><input name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00"></td>
                             <td>{{ $data->x_twentyamt*20 }}</td>
                             <td>
                                 <div class="col borde text-white">0.00</div>
@@ -129,7 +129,7 @@
                         </tr>
                         <tr>
                             <td>$50x</td>
-                            <td><input name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00" ></td>
+                            <td><input name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder=""></td>
                             <td>{{ $data->x_fiftyamt*50 }}</td>
                             <td>
                                 <div class="col borde text-white">0.00</div>
@@ -138,7 +138,7 @@
                         </tr>
                         <tr>
                             <td>$100x</td>
-                            <td><input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00" ></td>
+                            <td><input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}" type="number" style="width:100%;" readonly class="text-left" placeholder="0.00"></td>
                             <td>{{ $data->x_hundredamt*100 }}</td>
                             <td>
                                 <div class="col borde text-white">0.00</div>
@@ -160,34 +160,34 @@
                         <tbody>
                             <tr>
                                 <td>Yappy</td>
-                                <td> <input name="yappySistema" value="{{ $data->yappy }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" ></td>
+                                <td> <input name="yappySistema" value="{{ $data->yappy }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00"></td>
 
                             </tr>
                             <tr>
                                 <td>Otros</td>
-                                <td><input name="otrosSistema" value="{{ $data->otros }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" ></td>
+                                <td><input name="otrosSistema" value="{{ $data->otros }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00"></td>
 
                             </tr>
                             <tr>
                                 <td>Vales Pagoda </td>
-                                <td><input name="valespagodaSistema" value="{{ $data->valespagoda }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" ></td>
+                                <td><input name="valespagodaSistema" value="{{ $data->valespagoda }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00"></td>
 
                             </tr>
                             <tr>
                                 <td> Monto cheques</td>
-                                <td> <input name="CheckAmtSistema" value="{{ $data->CheckAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="CheckAmtSistema" value="{{ $data->CheckAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td> Loteria</td>
-                                <td> <input name="LotoAmtSistema" value="{{ $data->LotoAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="LotoAmtSistema" value="{{ $data->LotoAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>Tarjetas </td>
-                                <td> <input name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
                             </tr>
                             <tr>
@@ -205,31 +205,31 @@
 
                             <tr>
                                 <td>Sencillo </td>
-                                <td><input name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td><input name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>Rollos </td>
-                                <td> <input name="CoinRollSistema" value="{{ $data->CoinRoll }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="CoinRollSistema" value="{{ $data->CoinRoll }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>Facturas </td>
-                                <td> <input name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>Vale digital </td>
-                                <td> <input name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
                             <tr>
                                 <td>Beca Digital </td>
-                                <td> <input name="GrantAmtSistema" value="{{ $data->GrantAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00" >
+                                <td> <input name="GrantAmtSistema" value="{{ $data->GrantAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
                             </tr>
                         </tbody>
@@ -271,7 +271,7 @@
                     <tbody>
                         <tr>
                             <td>$1x</td>
-                            <td><input name="x_oneamtFiscalizadora" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()" >
+                            <td><input name="x_oneamtFiscalizadora" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                                 <input type="hidden" name="fis1" value="{{ $data->x_oneamt }}" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
@@ -284,7 +284,7 @@
                         </tr>
                         <tr>
                             <td>$5x</td>
-                            <td><input name="x_fiveamtFiscalizadora" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td><input name="x_fiveamtFiscalizadora" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                                 <input type="hidden" name="fis5" value="{{ $data->x_fiveamt}}" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
@@ -296,7 +296,7 @@
                         </tr>
                         <tr>
                             <td>$10x</td>
-                            <td><input name="x_tenamtFiscalizadora" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td><input name="x_tenamtFiscalizadora" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                                 <input type="hidden" name="fis10" value="{{ $data->x_tenamt }}" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
@@ -309,7 +309,7 @@
                         </tr>
                         <tr>
                             <td>$20x</td>
-                            <td><input name="x_twentyamtFiscalizadora" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td><input name="x_twentyamtFiscalizadora" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                                 <input type="hidden" name="fis20" value="{{ $data->x_twentyamt }}" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
@@ -323,7 +323,7 @@
                         </tr>
                         <tr>
                             <td>$50x</td>
-                            <td> <input name="x_fiftyamtFiscalizadora" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input name="x_fiftyamtFiscalizadora" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                                 <input type="hidden" name="fis50" value="{{ $data->x_fiftyamt }}" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
@@ -336,7 +336,7 @@
                         </tr>
                         <tr>
                             <td>$100x</td>
-                            <td> <input name="x_hundredamtFiscalizadora" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input name="x_hundredamtFiscalizadora" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                                 <input type="hidden" name="fis100" value="{{ $data->x_hundredamt }}" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
@@ -364,7 +364,7 @@
                     <tbody>
                         <tr>
                             <td>Yappy</td>
-                            <td><input name="yappyFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td><input id="yappyFiscalizadora" name="yappyFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="yappyFiscalizadora_r">0.0</div>
@@ -372,98 +372,98 @@
                         </tr>
                         <tr>
                             <td>Otros</td>
-                            <td><input name="otrosFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="otrosFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="otrosFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Vales Pagoda </td>
-                            <td><input name="valespagodaFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="valespagodaFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="valespagodaFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td> Monto cheques</td>
-                            <td> <input name="CheckAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td> <input name="CheckAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="CheckAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Loteria</td>
-                            <td> <input name="LotoAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td> <input name="LotoAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="LotoAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Clave</td>
-                            <td><input name="CardClaveFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CardClaveFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardClaveFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Vale</td>
-                            <td><input name="CardValeFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CardValeFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardValeFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Visa</td>
-                            <td><input name="CardVisaFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CardVisaFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="CardVisaFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Master</td>
-                            <td><input name="CardMasterFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CardMasterFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardMasterFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>American</td>
-                            <td><input name="CardAEFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CardAEFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardAEFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Sencillo</td>
-                            <td><input name="CashAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CashAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="CashAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Rollos </td>
-                            <td><input name="CoinRollFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
+                            <td><input name="CoinRollFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
                             <td>
                                 <div class="col borde text-success" id="CoinRollFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Facturas </td>
-                            <td><input name="InvoiceAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
+                            <td><input name="InvoiceAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
                             <td>
                                 <div class="col borde text-success" id="InvoiceAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Vale digital </td>
-                            <td><input name="VoucherAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
+                            <td><input name="VoucherAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
                             <td>
                                 <div class="col borde text-success" id="VoucherAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
                             <td>Beca Digital </td>
-                            <td><input name="GrantAmtFiscalizadora" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
+                            <td><input name="GrantAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"> </td>
                             <td>
                                 <div class="col borde text-success" id="GrantAmtFiscalizadora_r">0.0</div>
                             </td>
@@ -489,7 +489,7 @@
                             <p class="mb-0">Total Panaderia</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -497,7 +497,7 @@
                             <p class="mb-0">Total Pagatodo</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -505,7 +505,7 @@
                             <p class="mb-0">Total Super</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -513,7 +513,7 @@
                             <p class="mb-0">Dinero de Taxi</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -521,7 +521,7 @@
                             <p class="mb-0">Vuelto de mercado</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -529,7 +529,7 @@
                             <p class="mb-0">Comentarios</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <textarea name="comentariosFiscalizadora" value="0" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
+                            <h5 class="mb-0"> <textarea name="comentariosFiscalizadora" value="" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
                         </div>
                     </div>
                 </div>
@@ -556,7 +556,7 @@
                         <tr>
                             <td>$1x</td>
                             <td>
-                                <input name="x_oneamtGerente" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()" />
+                                <input name="x_oneamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td>
                                 <div class="col borde" id="x_oneamtGerente_t">{{ $data->x_oneamt*1 }}</div>
@@ -567,7 +567,7 @@
                         </tr>
                         <tr>
                             <td>$5x</td>
-                            <td> <input name="x_fiveamtGerente" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input name="x_fiveamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde" id="x_fiveamtGerente_t">{{ $data->x_fiveamt*5}}</div>
@@ -578,7 +578,7 @@
                         </tr>
                         <tr>
                             <td>$10x</td>
-                            <td> <input name="x_tenamtGerente" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input name="x_tenamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde" id="x_tenamtGerente_t">{{ $data->x_tenamt*10 }}</div>
@@ -589,7 +589,7 @@
                         </tr>
                         <tr>
                             <td>$20x</td>
-                            <td> <input name="x_twentyamtGerente" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input name="x_twentyamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde" id="x_twentyamtGerente_t">{{ $data->x_twentyamt*20 }}</div>
@@ -600,7 +600,7 @@
                         </tr>
                         <tr>
                             <td>$50x</td>
-                            <td> <input name="x_fiftyamtGerente" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input name="x_fiftyamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde" id="x_fiftyamtGerente_t">{{ $data->x_fiftyamt*50 }}</div>
@@ -611,7 +611,7 @@
                         </tr>
                         <tr>
                             <td>$100x</td>
-                            <td><input name="x_hundredamtGerente" value="0.00" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td><input name="x_hundredamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde" id="x_hundredamtGerente_t">{{ $data->x_hundredamt*100 }}</div>
@@ -639,14 +639,14 @@
                     <tbody>
                         <tr>
                             <td>Yappy</td>
-                            <td><input name="yappyGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="yappyGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="yappyGerente_r">0.0</div>
                         </tr>
                         <tr>
                             <td>Otros</td>
                             <td>
-                                <div class="col borde"><input name="otrosGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="otrosGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="otrosGerente_r">0.0</div>
@@ -656,7 +656,7 @@
                         <tr>
                             <td>Vales Pagoda </td>
                             <td>
-                                <div class="col borde"><input name="valespagodaGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="valespagodaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="valespagodaGerente_r">0.0</div>
@@ -666,7 +666,7 @@
                         <tr>
                             <td> Monto cheques</td>
                             <td>
-                                <div class="col borde"><input name="CheckAmtGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CheckAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CheckAmtGerente_r">0.0</div>
@@ -675,7 +675,7 @@
                         <tr>
                             <td> Loteria</td>
                             <td>
-                                <div class="col borde"><input name="LotoAmtGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="LotoAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="LotoAmtGerente_r">0.0</div>
@@ -683,7 +683,7 @@
                         </tr>
                         <tr>
                             <td>Clave</td>
-                            <td><input name="CardClaveGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <td><input name="CardClaveGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardClaveGerente_r">0.0</div>
                             </td>
@@ -691,7 +691,7 @@
                         <tr>
                             <td>Vale</td>
                             <td>
-                                <div class="col borde"><input name="CardValeGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CardValeGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardValeGerente_r">0.0</div>
@@ -700,7 +700,7 @@
                         <tr>
                             <td>Visa</td>
                             <td>
-                                <div class="col borde"><input name="CardVisaGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CardVisaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CardVisaGerente_r">0.0</div>
@@ -709,7 +709,7 @@
                         <tr>
                             <td>Master</td>
                             <td>
-                                <div class="col borde"><input name="CardMasterGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CardMasterGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardMasterGerente_r">0.0</div>
@@ -718,7 +718,7 @@
                         <tr>
                             <td>American</td>
                             <td>
-                                <div class="col borde"><input name="CardAEGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CardAEGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardAEGerente_r">0.0</div>
@@ -727,7 +727,7 @@
                         <tr>
                             <td>Sencillo</td>
                             <td>
-                                <div class="col borde"><input name="CashAmtGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CashAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CashAmtGerente_r">0.0</div>
@@ -737,7 +737,7 @@
                         <tr>
                             <td>Rollos </td>
                             <td>
-                                <div class="col borde"><input name="CoinRollGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="CoinRollGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CoinRollGerente_r">0.0</div>
@@ -746,7 +746,7 @@
                         <tr>
                             <td>Facturas </td>
                             <td>
-                                <div class="col borde"><input name="InvoiceAmtGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="InvoiceAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="InvoiceAmtGerente_r">0.0</div>
@@ -755,7 +755,7 @@
                         <tr>
                             <td>Vale digital </td>
                             <td>
-                                <div class="col borde"><input name="VoucherAmtGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="VoucherAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="VoucherAmtGerente_r">0.0</div>
@@ -765,7 +765,7 @@
                         <tr>
                             <td>Beca Digital </td>
                             <td>
-                                <div class="col borde"><input name="GrantAmtGerente" value="0.00" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <div class="col borde"><input name="GrantAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
                             </td>
                             <td>
                                 <div class="col borde text-success" id="GrantAmtGerente_r">0.0</div>
@@ -793,7 +793,7 @@
                             <p class="mb-0">Total Panaderia</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalPanaderiaGerente" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="totalPanaderiaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -801,7 +801,7 @@
                             <p class="mb-0">Total Pagatodo</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalPagatodoGerente" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="totalPagatodoGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -809,7 +809,7 @@
                             <p class="mb-0">Total Super</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalsuperGerente" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="totalsuperGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -817,7 +817,7 @@
                             <p class="mb-0">Dinero de Taxi</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="dineroTaxiGerente" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="dineroTaxiGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -825,7 +825,7 @@
                             <p class="mb-0">Vuelto de mercado</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="vueltoMercadoGerente" value="0" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
+                            <h5 class="mb-0"> <input name="vueltoMercadoGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
                         </div>
                     </div>
                     <div class="row m-0 p-0">
@@ -833,7 +833,7 @@
                             <p class="mb-0">Comentarios</p>
                         </div>
                         <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <textarea name="comentariosGerente" value="0" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
+                            <h5 class="mb-0"> <textarea name="comentariosGerente" value="" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
                         </div>
                     </div>
                 </div>
@@ -874,8 +874,19 @@
     window.onload = function() {
         cal();
         zero();
+        if (isNaN(document.getElementById("Otros_Fiscalizadora_t").innerHTML)) {
+            document.getElementById("Otros_Fiscalizadora_t").innerHTML = 0;
+        }
+        if (isNaN(document.getElementById("Otros_Gerente_t").innerHTML)) {
+            document.getElementById("Otros_Gerente_t").innerHTML = 0;
+        }
+        if (isNaN(document.getElementById("CardVisaFiscalizadora_r").innerHTML)) {
+            document.getElementById("CardVisaFiscalizadora_r").innerHTML = 0;
+        }
+        if (isNaN(document.getElementById("CardVisaGerente_r").innerHTML)) {
+            document.getElementById("CardVisaGerente_r").innerHTML = 0;
+        }
     }
-
     function zero() {
         if (isNaN(parseInt(document.closecash_store.x_oneamtFiscalizadora.value))) {
             document.closecash_store.x_oneamtFiscalizadora.value = 0;
@@ -1005,10 +1016,8 @@
             document.closecash_store.GrantAmtGerente.value = 0;
         }
     }
-
     function cal() {
         try {
-
             if (isNaN(parseInt(document.closecash_store.x_oneamtFiscalizadora.value))) {
                 document.closecash_store.x_oneamtFiscalizadora.value = "";
             }
@@ -1136,6 +1145,7 @@
             if (isNaN(parseInt(document.closecash_store.GrantAmtGerente.value))) {
                 document.closecash_store.GrantAmtGerente.value = "";
             }
+
             ////
             document.getElementById("x_oneamtFiscalizadora_r").innerHTML = parseFloat((document.closecash_store.x_oneamtFiscalizadora.value) - (document.closecash_store.fis1.value)).toFixed(2);
             document.getElementById("x_oneamtFiscalizadora_t").innerHTML = (document.closecash_store.x_oneamtFiscalizadora.value) * 1;
@@ -1343,6 +1353,7 @@
             document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardClaveGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
             document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
             document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if (document.getElementById("yappyFiscalizadora_r").innerHTML <= -0.01) {
                 cambioyappyFiscalizadora.classList.replace("text-success", "text-danger");
@@ -1578,6 +1589,7 @@
                 cambioMonto_Gerente_t.classList.replace("text-success", "text-success");
                 cambioMonto_Gerente_t.classList.replace("text-danger", "text-success");
             }
+
         } catch (e) {}
     }
 </script>
