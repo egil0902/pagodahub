@@ -703,7 +703,7 @@
                         </tr>
                         <tr>
                             <td>Vale</td>
-                            <td><input name="valeAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
+                            <td><input name="valeAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div class="col borde text-success" id="valeAmtGerente_r">0.0</div>
                             </td>
@@ -744,7 +744,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>American</td>
+                            <td>Tarjeta American</td>
                             <td>
                                 <input name="CardAEGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
@@ -1357,7 +1357,7 @@
                 cambiovaleAmtFiscalizadora.classList.replace("text-success", "text-success");
                 cambiovaleAmtFiscalizadora.classList.replace("text-danger", "text-success");
             }
-            
+
             /////////////////////////////////////////////////////////////////////////////////
             if (document.getElementById("yappyGerente_r").innerHTML <= -0.01) {
                 cambioyappyGerente.classList.replace("text-success", "text-danger");
@@ -1468,7 +1468,21 @@
                 (document.getElementById("CardClaveFiscalizadora_r").innerHTML) -
                 (document.getElementById("valeAmtFiscalizadora_r").innerHTML) -
                 (document.getElementById("Otros").innerHTML)).toFixed(2));
-            document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardClaveGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
+            document.getElementById("Otros_Gerente_t").innerHTML = -1 * (parseFloat(-
+                (document.getElementById("yappyGerente_r").innerHTML) -
+                (document.getElementById("otrosGerente_r").innerHTML) -
+                (document.getElementById("valespagodaGerente_r").innerHTML) -
+                (document.getElementById("CheckAmtGerente_r").innerHTML) -
+                (document.getElementById("LotoAmtGerente_r").innerHTML) -
+                (document.getElementById("CashAmtGerente_r").innerHTML) -
+                (document.getElementById("CoinRollGerente_r").innerHTML) -
+                (document.getElementById("InvoiceAmtGerente_r").innerHTML) -
+                (document.getElementById("VoucherAmtGerente_r").innerHTML) -
+                (document.getElementById("GrantAmtGerente_r").innerHTML) -
+                (document.getElementById("CardClaveGerente_r").innerHTML) -
+                (document.getElementById("valeAmtGerente_r").innerHTML)
+            ).toFixed(2));
+            //parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardClaveGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
             document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
             document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
 
@@ -1533,6 +1547,9 @@
         document.closecash_store.valespagodaGerente.value = document.closecash_store.valespagodaFiscalizadora.value;
         document.closecash_store.CheckAmtGerente.value = document.closecash_store.CheckAmtFiscalizadora.value;
         document.closecash_store.LotoAmtGerente.value = document.closecash_store.LotoAmtFiscalizadora.value;
+        
+        document.closecash_store.valeAmtGerente.value =document.closecash_store.valeAmtFiscalizadora.value;
+        
         document.closecash_store.CardClaveGerente.value = document.closecash_store.CardClaveFiscalizadora.value;
         document.closecash_store.CardValeGerente.value = document.closecash_store.CardValeFiscalizadora.value;
         document.closecash_store.CardVisaGerente.value = document.closecash_store.CardVisaFiscalizadora.value;
