@@ -1086,17 +1086,15 @@
             document.getElementById("valespagodaGerente_r").innerHTML = document.getElementById("valespagodaFiscalizadora_r").innerHTML;
             document.getElementById("CheckAmtGerente_r").innerHTML = document.getElementById("CheckAmtFiscalizadora_r").innerHTML;
             document.getElementById("LotoAmtGerente_r").innerHTML =  document.getElementById("LotoAmtFiscalizadora_r").innerHTML;
-            document.getElementById("CardClaveGerente_r").innerHTML = document.getElementById("CardClaveFiscalizadora_r").innerHTML;
-            document.getElementById("CardValeGerente_r").innerHTML = document.getElementById("CardValeFiscalizadora_r").innerHTML
-            document.getElementById("CardVisaGerente_r").innerHTML = document.getElementById("CardVisaFiscalizadora_r").innerHTML ;
-            document.getElementById("CardMasterGerente_r").innerHTML = document.getElementById("CardMasterFiscalizadora_r").innerHTML;
-            document.getElementById("CardAEGerente_r").innerHTML = document.getElementById("CardAEFiscalizadora_r").innerHTML;
+
+            
+            
             document.getElementById("CashAmtGerente_r").innerHTML = document.getElementById("CashAmtFiscalizadora_r").innerHTML ;
             document.getElementById("CoinRollGerente_r").innerHTML =  document.getElementById("CoinRollFiscalizadora_r").innerHTML;
             document.getElementById("InvoiceAmtGerente_r").innerHTML = document.getElementById("InvoiceAmtFiscalizadora_r").innerHTML;
             document.getElementById("VoucherAmtGerente_r").innerHTML = document.getElementById("VoucherAmtFiscalizadora_r").innerHTML ;
             document.getElementById("GrantAmtGerente_r").innerHTML = document.getElementById("GrantAmtFiscalizadora_r").innerHTML ;
-            document.getElementById("valeAmtGerente_r").innerHTML = document.getElementById("valeAmtFiscalizadora_r").innerHTML
+            document.getElementById("valeAmtGerente_r").innerHTML = document.getElementById("valeAmtFiscalizadora_r").innerHTML;
 
 
             const card = parseFloat(parseFloat(document.closecash_store.CardClaveFiscalizadora.value) + parseFloat(document.closecash_store.CardValeFiscalizadora.value) + parseFloat(document.closecash_store.CardVisaFiscalizadora.value) + parseFloat(document.closecash_store.CardMasterFiscalizadora.value) + parseFloat(document.closecash_store.CardAEFiscalizadora.value)).toFixed(2);
@@ -1113,6 +1111,7 @@
             document.getElementById("CardVisaGerente_r").innerHTML = parseFloat(cardg - card).toFixed(2);
             document.getElementById("CardMasterGerente_r").innerHTML = parseFloat(cardg - card).toFixed(2);
             document.getElementById("CardAEGerente_r").innerHTML = parseFloat(cardg - card).toFixed(2);
+            document.getElementById("CardVisaGerente_r").innerHTML = document.getElementById("CardVisaFiscalizadora_r").innerHTML;
 
             const cambio1 = document.getElementById("x_oneamtFiscalizadora_r");
             const cambio5 = document.getElementById("x_fiveamtFiscalizadora_r");
