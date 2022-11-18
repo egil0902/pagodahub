@@ -107,7 +107,6 @@
                             <td>
                                 <div class="col borde text-white">0.00</div>
                             </td>
-
                         </tr>
                         <tr>
                             <td>$10x</td>
@@ -153,7 +152,7 @@
                             <tr>
                                 <th>Otros Sis</th>
                                 <th>
-                                    <h5 class="mb-0 fw-bold" id="Otros">{{ $data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</h5>
+                                    <h5 class="mb-0 fw-bold" id="Otros">{{ $data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+ $data->CreditAmt +$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</h5>
                                 </th>
                             </tr>
                         </thead>
@@ -186,8 +185,8 @@
 
                             </tr>
                             <tr>
-                                <td> Vale</td>
-                                <td> <input name="valeAmtSistema" value="{{ $data->CreditAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
+                                <td>Vale new S</td>
+                                <td> <input name="valeAmt" value="{{ $data->CreditAmt }}" type="number" step="0.01" readonly class="w-100 text-right" placeholder="0.00">
                                 </td>
 
                             </tr>
@@ -402,6 +401,12 @@
                             <td>
                                 <div class="col borde text-success" id="LotoAmtFiscalizadora_r">0.0</div>
                             </td>
+                        </tr>
+
+                        <tr>
+                            <td>Vale New F</td>
+                            <td><input name="valeAmtFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
+                            <td> <div class="col borde text-success" id="valeAmtFiscalizadora_r">0.0</div></td>
                         </tr>
                         <tr>
                             <td>Clave</td>
@@ -686,36 +691,41 @@
                                 <div class="col borde text-success" id="LotoAmtGerente_r">0.0</div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Vale New G</td>
+                            <td><input name="valeAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
+                            <td> <div class="col borde text-success" id="valeAmtGerente_r">0.0</div></td>
+                        </tr>
 
                         <tr>
-                            <td>Clave</td>
+                            <td>Tarjeta Clave</td>
                             <td><input name="CardClaveGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardClaveGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td>Vale</td>
+                            <td>Tarjeta Vale</td>
                             <td>
-                                <div class="col borde"><input name="CardValeGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="CardValeGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardValeGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td>Visa</td>
+                            <td>Tarjeta Visa</td>
                             <td>
-                                <div class="col borde"><input name="CardVisaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="CardVisaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CardVisaGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td>Master</td>
+                            <td>Tarjeta Master</td>
                             <td>
-                                <div class="col borde"><input name="CardMasterGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="CardMasterGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardMasterGerente_r">0.0</div>
@@ -724,7 +734,7 @@
                         <tr>
                             <td>American</td>
                             <td>
-                                <div class="col borde"><input name="CardAEGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="CardAEGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardAEGerente_r">0.0</div>
@@ -733,7 +743,7 @@
                         <tr>
                             <td>Sencillo</td>
                             <td>
-                                <div class="col borde"><input name="CashAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="CashAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CashAmtGerente_r">0.0</div>
@@ -743,7 +753,7 @@
                         <tr>
                             <td>Rollos </td>
                             <td>
-                                <div class="col borde"><input name="CoinRollGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="CoinRollGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="CoinRollGerente_r">0.0</div>
@@ -752,7 +762,7 @@
                         <tr>
                             <td>Facturas </td>
                             <td>
-                                <div class="col borde"><input name="InvoiceAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="InvoiceAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="InvoiceAmtGerente_r">0.0</div>
@@ -761,7 +771,7 @@
                         <tr>
                             <td>Vale digital </td>
                             <td>
-                                <div class="col borde"><input name="VoucherAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="VoucherAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="VoucherAmtGerente_r">0.0</div>
@@ -771,7 +781,7 @@
                         <tr>
                             <td>Beca Digital </td>
                             <td>
-                                <div class="col borde"><input name="GrantAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></div>
+                                <input name="GrantAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td>
                                 <div class="col borde text-success" id="GrantAmtGerente_r">0.0</div>
@@ -936,19 +946,19 @@
                 document.closecash_store.LotoAmtFiscalizadora.value = "";
             }
             if (isNaN(parseInt(document.closecash_store.CardClaveFiscalizadora.value))) {
-                document.closecash_store.CardClaveFiscalizadora.value = "";
+                document.closecash_store.CardClaveFiscalizadora.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardValeFiscalizadora.value))) {
-                document.closecash_store.CardValeFiscalizadora.value = "";
+                document.closecash_store.CardValeFiscalizadora.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardVisaFiscalizadora.value))) {
-                document.closecash_store.CardVisaFiscalizadora.value = "";
+                document.closecash_store.CardVisaFiscalizadora.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardMasterFiscalizadora.value))) {
-                document.closecash_store.CardMasterFiscalizadora.value = "";
+                document.closecash_store.CardMasterFiscalizadora.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardAEFiscalizadora.value))) {
-                document.closecash_store.CardAEFiscalizadora.value = "";
+                document.closecash_store.CardAEFiscalizadora.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CashAmtFiscalizadora.value))) {
                 document.closecash_store.CashAmtFiscalizadora.value = "";
@@ -981,19 +991,19 @@
                 document.closecash_store.LotoAmtGerente.value = "";
             }
             if (isNaN(parseInt(document.closecash_store.CardClaveGerente.value))) {
-                document.closecash_store.CardClaveGerente.value = "";
+                document.closecash_store.CardClaveGerente.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardValeGerente.value))) {
-                document.closecash_store.CardValeGerente.value = "";
+                document.closecash_store.CardValeGerente.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardVisaGerente.value))) {
-                document.closecash_store.CardVisaGerente.value = "";
+                document.closecash_store.CardVisaGerente.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardMasterGerente.value))) {
-                document.closecash_store.CardMasterGerente.value = "";
+                document.closecash_store.CardMasterGerente.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CardAEGerente.value))) {
-                document.closecash_store.CardAEGerente.value = "";
+                document.closecash_store.CardAEGerente.value = 0;
             }
             if (isNaN(parseInt(document.closecash_store.CashAmtGerente.value))) {
                 document.closecash_store.CashAmtGerente.value = "";
@@ -1209,12 +1219,6 @@
                 cambio100g.classList.replace("text-success", "text-success");
                 cambio100g.classList.replace("text-danger", "text-success");
             }
-            document.getElementById("Fiscalizadora_t").innerHTML = parseFloat(document.getElementById("x_oneamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_tenamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_twentyamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiftyamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_hundredamtFiscalizadora_t").innerHTML);
-            document.getElementById("Gerente_t").innerHTML = parseFloat(document.getElementById("x_oneamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_tenamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_twentyamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiftyamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_hundredamtGerente_t").innerHTML);
-            document.getElementById("Otros_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyFiscalizadora.value) + parseFloat(document.closecash_store.otrosFiscalizadora.value) + parseFloat(document.closecash_store.valespagodaFiscalizadora.value) + parseFloat(document.closecash_store.CheckAmtFiscalizadora.value) + parseFloat(document.closecash_store.LotoAmtFiscalizadora.value) + parseFloat(document.closecash_store.CashAmtFiscalizadora.value) + parseFloat(document.closecash_store.CoinRollFiscalizadora.value) + parseFloat(document.closecash_store.InvoiceAmtFiscalizadora.value) + parseFloat(document.closecash_store.VoucherAmtFiscalizadora.value) + parseFloat(document.closecash_store.GrantAmtFiscalizadora.value) + parseFloat(document.closecash_store.CardClaveFiscalizadora.value) + parseFloat(document.closecash_store.CardValeFiscalizadora.value) + parseFloat(document.closecash_store.CardVisaFiscalizadora.value) + parseFloat(document.closecash_store.CardMasterFiscalizadora.value) + parseFloat(document.closecash_store.CardAEFiscalizadora.value)).toFixed(2);
-            document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardClaveGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
-            document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
-            document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if (document.getElementById("yappyFiscalizadora_r").innerHTML <= -0.01) {
                 cambioyappyFiscalizadora.classList.replace("text-success", "text-danger");
@@ -1255,23 +1259,23 @@
 
             if (isNaN(document.getElementById("CardClaveFiscalizadora_r").innerHTML)) {
                 //cambioCardVisaFiscalizadora.classList.replace("text-success", "text-white");
-                document.getElementById("CardClaveFiscalizadora_r").innerHTML = 0;
+                document.getElementById("CardClaveFiscalizadora_r").innerHTML = -(document.closecash_store.CardAmtSistema.value);
             }
             if (isNaN(document.getElementById("CardValeFiscalizadora_r").innerHTML)) {
                 //cambioCardVisaFiscalizadora.classList.replace("text-success", "text-white");
-                document.getElementById("CardValeFiscalizadora_r").innerHTML = 0;
+                document.getElementById("CardValeFiscalizadora_r").innerHTML = -(document.closecash_store.CardAmtSistema.value);
             }
             if (isNaN(document.getElementById("CardVisaFiscalizadora_r").innerHTML)) {
                 //cambioCardVisaFiscalizadora.classList.replace("text-success", "text-white");
-                document.getElementById("CardVisaFiscalizadora_r").innerHTML = 0;
+                document.getElementById("CardVisaFiscalizadora_r").innerHTML = -(document.closecash_store.CardAmtSistema.value);
             }
             if (isNaN(document.getElementById("CardMasterFiscalizadora_r").innerHTML)) {
                 //cambioCardVisaFiscalizadora.classList.replace("text-success", "text-white");
-                document.getElementById("CardMasterFiscalizadora_r").innerHTML = 0;
+                document.getElementById("CardMasterFiscalizadora_r").innerHTML = -(document.closecash_store.CardAmtSistema.value);
             }
             if (isNaN(document.getElementById("CardAEFiscalizadora_r").innerHTML)) {
                 //cambioCardVisaFiscalizadora.classList.replace("text-success", "text-white");
-                document.getElementById("CardAEFiscalizadora_r").innerHTML = 0;
+                document.getElementById("CardAEFiscalizadora_r").innerHTML = -(document.closecash_store.CardAmtSistema.value);
             }
 
             if (document.getElementById("CardClaveFiscalizadora_r").innerHTML <= -0.01) {
@@ -1431,6 +1435,24 @@
                 cambioGrantAmtGerente.classList.replace("text-danger", "text-success");
             }
             ////////////////////////////////////////////////////////////////////////////////////////
+            document.getElementById("Fiscalizadora_t").innerHTML = parseFloat(document.getElementById("x_oneamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_tenamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_twentyamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_fiftyamtFiscalizadora_t").innerHTML) + parseFloat(document.getElementById("x_hundredamtFiscalizadora_t").innerHTML);
+            document.getElementById("Gerente_t").innerHTML = parseFloat(document.getElementById("x_oneamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiveamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_tenamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_twentyamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_fiftyamtGerente_t").innerHTML) + parseFloat(document.getElementById("x_hundredamtGerente_t").innerHTML);
+            document.getElementById("Otros_Fiscalizadora_t").innerHTML = -1 * (parseFloat(
+                -(document.getElementById("yappyFiscalizadora_r").innerHTML) -
+                (document.getElementById("otrosFiscalizadora_r").innerHTML) -
+                (document.getElementById("valespagodaFiscalizadora_r").innerHTML) -
+                (document.getElementById("CheckAmtFiscalizadora_r").innerHTML) -
+                (document.getElementById("LotoAmtFiscalizadora_r").innerHTML) -
+                (document.getElementById("CashAmtFiscalizadora_r").innerHTML) -
+                (document.getElementById("CoinRollFiscalizadora_r").innerHTML) -
+                (document.getElementById("InvoiceAmtFiscalizadora_r").innerHTML) -
+                (document.getElementById("VoucherAmtFiscalizadora_r").innerHTML) -
+                (document.getElementById("GrantAmtFiscalizadora_r").innerHTML) -
+                (document.getElementById("CardClaveFiscalizadora_r").innerHTML) - (document.getElementById("Otros").innerHTML)).toFixed(2));
+            document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(parseFloat(document.closecash_store.yappyGerente.value) + parseFloat(document.closecash_store.otrosGerente.value) + parseFloat(document.closecash_store.valespagodaGerente.value) + parseFloat(document.closecash_store.CheckAmtGerente.value) + parseFloat(document.closecash_store.LotoAmtGerente.value) + parseFloat(document.closecash_store.CashAmtGerente.value) + parseFloat(document.closecash_store.CoinRollGerente.value) + parseFloat(document.closecash_store.InvoiceAmtGerente.value) + parseFloat(document.closecash_store.VoucherAmtGerente.value) + parseFloat(document.closecash_store.GrantAmtGerente.value) + parseFloat(document.closecash_store.CardValeGerente.value) + parseFloat(document.closecash_store.CardClaveGerente.value) + parseFloat(document.closecash_store.CardVisaGerente.value) + parseFloat(document.closecash_store.CardMasterGerente.value) + parseFloat(document.closecash_store.CardAEGerente.value)).toFixed(2);
+            document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
+            document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
+
             const cambioFiscalizadora_t = document.getElementById("Fiscalizadora_t");
             const cambioGerente_t = document.getElementById("Gerente_t");
             const cambioOtros_Fiscalizadora_t = document.getElementById("Otros_Fiscalizadora_t");
@@ -1449,11 +1471,6 @@
             } else {
                 cambioGerente_t.classList.replace("text-success", "text-success");
                 cambioGerente_t.classList.replace("text-danger", "text-success");
-            }
-
-            // No se muestra el campo en NaN
-            if (isNaN(document.getElementById("Otros_Fiscalizadora_t").innerHTML)) {
-                cambioOtros_Fiscalizadora_t.classList.replace("text-success", "text-white");
             }
 
             if (document.getElementById("Otros_Fiscalizadora_t").innerHTML < document.getElementById("Otros").innerHTML) {
@@ -1482,7 +1499,6 @@
                 cambioMonto_Gerente_t.classList.replace("text-success", "text-success");
                 cambioMonto_Gerente_t.classList.replace("text-danger", "text-success");
             }
-
         } catch (e) {}
     }
 
@@ -1493,21 +1509,21 @@
         document.closecash_store.x_twentyamtGerente.value = document.closecash_store.x_twentyamtFiscalizadora.value;
         document.closecash_store.x_fiftyamtGerente.value = document.closecash_store.x_fiftyamtFiscalizadora.value;
         document.closecash_store.x_hundredamtGerente.value = document.closecash_store.x_hundredamtFiscalizadora.value;
-        document.closecash_store.yappyGerente.value = document.closecash_store.yappyFiscalizadora.value
-        document.closecash_store.otrosGerente.value = document.closecash_store.otrosFiscalizadora.value
-        document.closecash_store.valespagodaGerente.value = document.closecash_store.valespagodaFiscalizadora.value
-        document.closecash_store.CheckAmtGerente.value = document.closecash_store.CheckAmtFiscalizadora.value
-        document.closecash_store.LotoAmtGerente.value = document.closecash_store.LotoAmtFiscalizadora.value
-        document.closecash_store.CardClaveGerente.value = document.closecash_store.CardClaveFiscalizadora.value
-        document.closecash_store.CardValeGerente.value = document.closecash_store.CardValeFiscalizadora.value
-        document.closecash_store.CardVisaGerente.value = document.closecash_store.CardVisaFiscalizadora.value
-        document.closecash_store.CardMasterGerente.value = document.closecash_store.CardMasterFiscalizadora.value
-        document.closecash_store.CardAEGerente.value = document.closecash_store.CardAEFiscalizadora.value
-        document.closecash_store.CashAmtGerente.value = document.closecash_store.CashAmtFiscalizadora.value
-        document.closecash_store.CoinRollGerente.value = document.closecash_store.CoinRollFiscalizadora.value
-        document.closecash_store.InvoiceAmtGerente.value = document.closecash_store.InvoiceAmtFiscalizadora.value
-        document.closecash_store.VoucherAmtGerente.value = document.closecash_store.VoucherAmtFiscalizadora.value
-        document.closecash_store.GrantAmtGerente.value = document.closecash_store.GrantAmtFiscalizadora.value
+        document.closecash_store.yappyGerente.value = document.closecash_store.yappyFiscalizadora.value;
+        document.closecash_store.otrosGerente.value = document.closecash_store.otrosFiscalizadora.value;
+        document.closecash_store.valespagodaGerente.value = document.closecash_store.valespagodaFiscalizadora.value;
+        document.closecash_store.CheckAmtGerente.value = document.closecash_store.CheckAmtFiscalizadora.value;
+        document.closecash_store.LotoAmtGerente.value = document.closecash_store.LotoAmtFiscalizadora.value;
+        document.closecash_store.CardClaveGerente.value = document.closecash_store.CardClaveFiscalizadora.value;
+        document.closecash_store.CardValeGerente.value = document.closecash_store.CardValeFiscalizadora.value;
+        document.closecash_store.CardVisaGerente.value = document.closecash_store.CardVisaFiscalizadora.value;
+        document.closecash_store.CardMasterGerente.value = document.closecash_store.CardMasterFiscalizadora.value;
+        document.closecash_store.CardAEGerente.value = document.closecash_store.CardAEFiscalizadora.value;
+        document.closecash_store.CashAmtGerente.value = document.closecash_store.CashAmtFiscalizadora.value;
+        document.closecash_store.CoinRollGerente.value = document.closecash_store.CoinRollFiscalizadora.value;
+        document.closecash_store.InvoiceAmtGerente.value = document.closecash_store.InvoiceAmtFiscalizadora.value;
+        document.closecash_store.VoucherAmtGerente.value = document.closecash_store.VoucherAmtFiscalizadora.value;
+        document.closecash_store.GrantAmtGerente.value = document.closecash_store.GrantAmtFiscalizadora.value;
     }
 
     function zero() {

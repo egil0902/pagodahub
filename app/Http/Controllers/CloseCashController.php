@@ -99,7 +99,10 @@ class CloseCashController extends Controller
         $todo->	  Fileclosecash	                =	$request->  Fileclosecash;	 
         $todo->	  CardClaveFiscalizadora	    =	$request->	CardClaveFiscalizadora;
         $todo->	  CardClaveGerente 	            =	$request->	CardClaveGerente;
-        
+        $todo->	  valeAmt 	                    =	$request->	valeAmt;
+        $todo->	  valeAmtFiscalizadora 	        =	$request->	valeAmtFiscalizadora;
+        $todo->	  valeAmtGerente 	            =	$request->	valeAmtGerente;
+
         $filename=$request-> Fileclosecash;	//$request->file('Fileclosecash');//->store('public/Fileclosecash');
         $APIController = new APIController();
             $response = $APIController->getModel('AD_Org', '', 'issummary eq true');

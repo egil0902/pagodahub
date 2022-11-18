@@ -80,6 +80,9 @@ class closecash extends Model
     'vueltoMercadoGerente',
     'comentariosGerente',
     'DateTrx',
-    'AD_Org_ID'
+    'AD_Org_ID',
+    'valeAmt',
+    'valeAmtFiscalizadora',
+    'valeAmtGerente'
     ];
 }
