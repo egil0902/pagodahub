@@ -127,9 +127,12 @@ class CloseCashController extends Controller
 
         $response = $APIController->getModel('RV_GH_CloseCash_Sum', ''
                             , 'datetrx eq '.$request->DateTrx.' and parent_id eq '.$request->AD_Org_ID);
+        $closecashlist = $APIController->getModel('RV_GH_CloseCash', ''
+                            , 'datetrx eq '.$request->DateTrx.' and parent_id eq '.$request->AD_Org_ID);
+//dd($closecashlist);
 
         if (isset($response)) {
-            return view('closecash', ['orgs' => $orgs,'closecashsumlist' => $response, 'request' => $request]);
+            return view('closecash', ['orgs' => $orgs,'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist]);
         }
     }
     public function list(Request $request)

@@ -62,6 +62,17 @@
                     <h6>Inicio caja: {{ $data->BeginningBalance }}</h6>
                 </div>
             </div>
+            @if (isset($closecashlist))
+            @if ($closecashlist->{'records-size'} > 0)
+                    @foreach($closecashlist->records as $closecash)
+                        {{$closecash->u_name;}}
+                        {{$closecash->SubTotal;}}
+                        {{$closecash->NetTotal;}}
+                        {{$closecash->DifferenceAmt;}}
+                    @endforeach
+            @endif
+            @endif
+
         </div>
     </div>
     <style>
