@@ -1096,20 +1096,17 @@
             document.getElementById("GrantAmtFiscalizadora_r").innerHTML = parseFloat((document.closecash_store.GrantAmtFiscalizadora.value) - (document.closecash_store.GrantAmtSistema.value)).toFixed(2);
             document.getElementById("valeAmtFiscalizadora_r").innerHTML = parseFloat((document.closecash_store.valeAmtFiscalizadora.value) - (document.closecash_store.valeAmt.value)).toFixed(2);
             // Otros Gerente
-            document.getElementById("yappyGerente_r").innerHTML = document.getElementById("yappyFiscalizadora_r").innerHTML;
-            document.getElementById("otrosGerente_r").innerHTML = document.getElementById("otrosFiscalizadora_r").innerHTML;
-            document.getElementById("valespagodaGerente_r").innerHTML = document.getElementById("valespagodaFiscalizadora_r").innerHTML;
-            document.getElementById("CheckAmtGerente_r").innerHTML = document.getElementById("CheckAmtFiscalizadora_r").innerHTML;
-            document.getElementById("LotoAmtGerente_r").innerHTML = document.getElementById("LotoAmtFiscalizadora_r").innerHTML;
-
-
-
-            document.getElementById("CashAmtGerente_r").innerHTML = document.getElementById("CashAmtFiscalizadora_r").innerHTML;
-            document.getElementById("CoinRollGerente_r").innerHTML = document.getElementById("CoinRollFiscalizadora_r").innerHTML;
-            document.getElementById("InvoiceAmtGerente_r").innerHTML = document.getElementById("InvoiceAmtFiscalizadora_r").innerHTML;
-            document.getElementById("VoucherAmtGerente_r").innerHTML = document.getElementById("VoucherAmtFiscalizadora_r").innerHTML;
-            document.getElementById("GrantAmtGerente_r").innerHTML = document.getElementById("GrantAmtFiscalizadora_r").innerHTML;
-            document.getElementById("valeAmtGerente_r").innerHTML = document.getElementById("valeAmtFiscalizadora_r").innerHTML;
+            document.getElementById("yappyGerente_r").innerHTML = parseFloat(document.closecash_store.yappyGerente.value-document.closecash_store.yappyFiscalizadora.value).toFixed(2);
+            document.getElementById("otrosGerente_r").innerHTML = parseFloat(document.closecash_store.otrosGerente.value-document.closecash_store.otrosFiscalizadora.value).toFixed(2);
+            document.getElementById("valespagodaGerente_r").innerHTML = parseFloat(document.closecash_store.valespagodaGerente.value-document.closecash_store.valespagodaFiscalizadora.value).toFixed(2);
+            document.getElementById("CheckAmtGerente_r").innerHTML = parseFloat(document.closecash_store.CheckAmtGerente.value-document.closecash_store.CheckAmtFiscalizadora.value).toFixed(2);
+            document.getElementById("LotoAmtGerente_r").innerHTML = parseFloat(document.closecash_store.LotoAmtGerente.value-document.closecash_store.LotoAmtFiscalizadora.value).toFixed(2);
+            document.getElementById("CashAmtGerente_r").innerHTML = parseFloat(document.closecash_store.CashAmtGerente.value-document.closecash_store.CashAmtFiscalizadora.value).toFixed(2);
+            document.getElementById("CoinRollGerente_r").innerHTML = parseFloat(document.closecash_store.CoinRollGerente.value-document.closecash_store.CoinRollFiscalizadora.value).toFixed(2);
+            document.getElementById("InvoiceAmtGerente_r").innerHTML = parseFloat(document.closecash_store.InvoiceAmtGerente.value-document.closecash_store.InvoiceAmtFiscalizadora.value).toFixed(2);
+            document.getElementById("VoucherAmtGerente_r").innerHTML = parseFloat(document.closecash_store.VoucherAmtGerente.value-document.closecash_store.VoucherAmtFiscalizadora.value).toFixed(2);
+            document.getElementById("GrantAmtGerente_r").innerHTML = parseFloat(document.closecash_store.GrantAmtGerente.value-document.closecash_store.GrantAmtFiscalizadora.value).toFixed(2);
+            document.getElementById("valeAmtGerente_r").innerHTML = parseFloat(document.closecash_store.valeAmtGerente.value-document.closecash_store.valeAmtFiscalizadora.value).toFixed(2);
 
             let CardClaveFiscalizadora_suma =0;
             let CardValeFiscalizadora_suma=0;
@@ -1526,7 +1523,7 @@
                 (document.getElementById("valeAmtFiscalizadora_r").innerHTML) -
                 (document.getElementById("Otros").innerHTML)
             ).toFixed(2));
-            document.getElementById("CardVisaGerente_r").innerHTML = document.getElementById("CardVisaFiscalizadora_r").innerHTML;
+            document.getElementById("CardVisaGerente_r").innerHTML = parseFloat(document.closecash_store.CardVisaGerente.value-document.closecash_store.CardVisaFiscalizadora.value).toFixed(2);
             document.getElementById("Otros_Gerente_t").innerHTML = -1 * (parseFloat(-
                 (document.getElementById("yappyGerente_r").innerHTML) -
                 (document.getElementById("otrosGerente_r").innerHTML) -
@@ -1539,8 +1536,7 @@
                 (document.getElementById("VoucherAmtGerente_r").innerHTML) -
                 (document.getElementById("GrantAmtGerente_r").innerHTML) -
                 (document.getElementById("CardVisaGerente_r").innerHTML) -
-                (document.getElementById("valeAmtGerente_r").innerHTML) -
-                (document.getElementById("Otros").innerHTML)
+                (document.getElementById("valeAmtGerente_r").innerHTML) 
             ).toFixed(2));
             document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
             document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
