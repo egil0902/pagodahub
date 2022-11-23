@@ -4,7 +4,6 @@
             <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" />
         </div>
     </div>
-   
     <div class="row fw-bold">
         <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
             Fecha
@@ -12,7 +11,6 @@
         <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
             Sucursal
         </div>
-        
         <div class="col-md-1 col-1 col-sm-1 col-lg-1">
         </div>
     </div>
@@ -30,7 +28,10 @@
 
                 {{ $data->AD_Org_ID }}
             </div>
-            
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2">
+                {{ $data-> yappyGerente}}
+            </div>
+
             <div class="col-md-1 col-1 col-sm-1 col-lg-1 p-1">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#closecashModal">X</button>
 
