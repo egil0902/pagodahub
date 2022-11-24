@@ -132,11 +132,14 @@ class CloseCashController extends Controller
             '',
             'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
         );
+        $docstatus='CO';
+        //dd("datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '".$docstatus."'");
         $closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
             '',
-            'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
+            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '".$docstatus."'"
         );
+        //dd($closecashlist);
         ///closecash::where('id', 10)->update(['comentariosGerente' => 'sddasd']);
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
         if (isset($response)) {
