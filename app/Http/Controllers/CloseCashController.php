@@ -102,10 +102,15 @@ class CloseCashController extends Controller
         $todo->CardClaveFiscalizadora        =    $request->CardClaveFiscalizadora;
         $todo->CardClaveGerente                 =    $request->CardClaveGerente;
         $todo->valeAmt                         =    $request->valeAmt;
-        $todo->valeAmtFiscalizadora             =    $request->valeAmtFiscalizadora;
-        $todo->valeAmtGerente                 =    $request->valeAmtGerente;
+        $todo->valeAmtFiscalizadora             = $request->valeAmtFiscalizadora;
+        $todo->valeAmtGerente                   = $request->valeAmtGerente;
+        $todo->CardBACFiscalizadora             = $request->CardBACFiscalizadora;
+        $todo->CardBACGerente                   = $request->CardBACGerente;
+        $todo->InvoiceAmtPropiasFiscalizadora   = $request->InvoiceAmtPropiasFiscalizadora;
+        $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
+
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
-     
+
         $APIController = new APIController();
         $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
         $orgs =  $response;
@@ -132,11 +137,14 @@ class CloseCashController extends Controller
             '',
             'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
         );
+        $docstatus = 'CO';
+        //dd("datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '".$docstatus."'");
         $closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
             '',
-            'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
+            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'"
         );
+        //dd($closecashlist);
         ///closecash::where('id', 10)->update(['comentariosGerente' => 'sddasd']);
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
         if (isset($response)) {
@@ -240,8 +248,12 @@ class CloseCashController extends Controller
         $todo->valeAmt                         =    $request->valeAmt;
         $todo->valeAmtFiscalizadora             =    $request->valeAmtFiscalizadora;
         $todo->valeAmtGerente                 =    $request->valeAmtGerente;
+        $todo->CardBACFiscalizadora             = $request->CardBACFiscalizadora;
+        $todo->CardBACGerente                   = $request->CardBACGerente;
+        $todo->InvoiceAmtPropiasFiscalizadora   = $request->InvoiceAmtPropiasFiscalizadora;
+        $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
-     
+
         $APIController = new APIController();
         $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
         $orgs =  $response;
