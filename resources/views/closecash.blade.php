@@ -1117,7 +1117,7 @@ $opcion = 1;
 
                 <h5 class="card-title"><b>Monto Sistema</b></h5>
 
-                <table class="table table-bordered ">
+                <table class="table table-borderless ">
                     <thead>
                         <tr>
                             <th style="width: 100px;">
@@ -1164,7 +1164,7 @@ $opcion = 1;
                     </tbody>
                 </table>
 
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <thead>
                         <tr>
                             <th style="width: 100px;">Otros</th>
@@ -1304,7 +1304,7 @@ $opcion = 1;
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"> <b> Fiscalizadora </b></h5>
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <thead>
                         <tr>
                             <th style="width: 100px;">
@@ -1387,7 +1387,7 @@ $opcion = 1;
                         </tr>
                     </tbody>
                 </table>
-                <table class="table table table-bordered">
+                <table class="table table table-borderless">
                     <thead>
                         <tr>
                             <th style="width: 100px;"> Otros</th>
