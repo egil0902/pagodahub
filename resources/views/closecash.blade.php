@@ -1368,7 +1368,7 @@ $opcion = 1;
                             <td></td>
                         </tr>
                         <tr>
-                            <td>Monto X</td>
+                            <td>Monto X </td>
                             <td></td>
                             <td align="right">@php
                                 echo number_format($data->XAmt, 2, ',', ' ');
