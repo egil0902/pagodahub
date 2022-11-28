@@ -100,6 +100,9 @@ $opcion = 0;
                     <td style="width: 100px;" align="right">
                         <h5><b>Neto</b></h5>
                     </td>
+                    <td style="width: 100px;" align="right">
+                        <h5><b>Inicio caja</b></h5>
+                    </td>
                 </tr>
 
                 @if ($closecashlist->{'records-size'} > 0)
@@ -123,7 +126,11 @@ $opcion = 0;
                                 echo number_format($closecashl->NetTotal, 2, ',', ' ');
                                 @endphp
                             </label></td>
-
+                        <td style="width: 100px;" align="right"><label>
+                                @php
+                                echo number_format($closecashl->BeginningBalance, 2, ',', ' ');
+                                @endphp
+                            </label></td>
                     </tr>
                 </tbody>
                 @endforeach
@@ -1052,7 +1059,6 @@ $opcion = 1;
         <div class="row border m-1">
             @if (isset($closecashlist))
             <table class="table table-borderless">
-
                 <tr>
                     <td style="width: 100px;">
                         <h5><b>Identificador</b></h5>
@@ -1066,18 +1072,19 @@ $opcion = 1;
                     <td style="width: 100px;" align="right">
                         <h5><b>Neto</b></h5>
                     </td>
+                    <td style="width: 100px;" align="right">
+                        <h5><b>Inicio caja</b></h5>
+                    </td>
                 </tr>
-
                 @if ($closecashlist->{'records-size'} > 0)
                 @foreach($closecashlist->records as $closecashl)
                 <tbody>
-
                     <tr>
                         <td style="width: 100px;"><label>
                                 @php
                                 echo ($closecashl->ba_name);
                                 @endphp
-                            </label>
+                            </label></td>
                         <td style="width: 100px;"><label>{{$closecashl->u_name;}}</label></td>
                         <td style="width: 100px;" align="right"><label>
                                 @php
@@ -1089,9 +1096,11 @@ $opcion = 1;
                                 echo number_format($closecashl->NetTotal, 2, ',', ' ');
                                 @endphp
                             </label></td>
-
-                        </td>
-
+                        <td style="width: 100px;" align="right"><label>
+                                @php
+                                echo number_format($closecashl->BeginningBalance, 2, ',', ' ');
+                                @endphp
+                            </label></td>
                     </tr>
                 </tbody>
                 @endforeach
@@ -1110,13 +1119,10 @@ $opcion = 1;
             --bs-card-spacer-x: 0.2rem;
         }
     </style>
-
     <div class="card-group m-2">
         <div class="card">
             <div class="card-body">
-
                 <h5 class="card-title"><b>Monto Sistema</b></h5>
-
                 <table class="table table-borderless ">
                     <thead>
                         <tr>
@@ -1124,193 +1130,275 @@ $opcion = 1;
                                 <p class="card-text">Efectivo</p>
                             </th>
                             <th style="width: 100px;"></th>
-                            <th>
-                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t">{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</h5>
+                            <th style="width: 100px;">
+                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t">
+                                    @php
+                                    echo number_format($data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100, 2, ',', ' ');
+                                    @endphp
+                                </h5>
+                            </th>
+                            <th style="width: 100px;">
                             </th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <tr>
                             <td>$1x</td>
                             <td> <input style="width: 100px;" name="x_oneamtSistema" value="{{ $data->x_oneamt }}" type="number" readonly class="text-left" placeholder="0.00"></td>
-                            <td align="right">{{ $data->x_oneamt*1 }}</td>
+                            <td align="right">
+                                @php
+                                echo number_format($data->x_oneamt*1, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>$5x</td>
                             <td><input style="width: 100px;" name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}" type="number" readonly class="text-left" placeholder="0.00"></td>
-                            <td align="right">{{ $data->x_fiveamt*5 }}</td>
+                            <td align="right">
+                                @php
+                                echo number_format($data->x_fiveamt*5, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>$10x</td>
                             <td><input style="width: 100px;" name="x_tenamtSistema" value="{{ $data->x_tenamt }}" type="number" readonly class="text-left" placeholder="0.00"></td>
-                            <td align="right">{{ $data->x_tenamt*10 }}</td>
+                            <td align="right">
+                                @php
+                                echo number_format($data->x_tenamt*10, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>$20x</td>
                             <td><input style="width: 100px;" name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}" type="number" readonly class="text-left" placeholder="0.00"></td>
-                            <td align="right">{{ $data->x_twentyamt*20 }}</td>
+                            <td align="right">
+                                @php
+                                echo number_format($data->x_twentyamt*20, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>$50x</td>
                             <td><input style="width: 100px;" name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}" type="number" readonly class="text-left" placeholder="0.0"></td>
-                            <td align="right">{{ $data->x_fiftyamt*50 }}</td>
+                            <td align="right">
+                                @php
+                                echo number_format($data->x_fiftyamt*50, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>$100x</td>
                             <td><input style="width: 100px;" name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}" type="number" readonly class="text-left" placeholder="0.00"></td>
-                            <td align="right">{{ $data->x_hundredamt*100 }}</td>
+                            <td align="right">
+                                @php
+                                echo number_format($data->x_hundredamt*100, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
-
                 <table class="table table-borderless">
                     <thead>
                         <tr>
                             <th style="width: 100px;">Otros</th>
-                            <th style="width: 100px;">
+                            <th style="width: 100px;"></th>
+                            <th style="width: 100px;" align="right">
+                                <h5 align="right" class="mb-0 fw-bold" id="Otros">
+                                {{$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+ $data->CreditAmt +$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt}}
+                                </h5>
                             </th>
-                            <th align="right">
-                                <h5 align="right" class="mb-0 fw-bold" id="Otros">{{ $data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+ $data->CreditAmt +$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</h5>
-                            </th>
+                            <th style="width: 100px;"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="font-size:12px;">Yappy</td>
                             <td> <input style="width: 100px;" name="yappySistema" value="{{ $data->yappy }}" type="number" step="0.01" readonly placeholder="0.00"></td>
-                            <td align="right"> </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Otros</td>
                             <td><input style="width: 100px;" name="otrosSistema" value="{{ $data->otros }}" type="number" step="0.01" readonly placeholder="0.00"></td>
-                            <td align="right"> </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Vales Pagoda </td>
                             <td><input style="width: 100px;" name="valespagodaSistema" value="{{ $data->valespagoda }}" type="number" step="0.01" readonly placeholder="0.00"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;"> Monto cheques</td>
                             <td> <input style="width: 100px;" name="CheckAmtSistema" value="{{ $data->CheckAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"> </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;"> Loteria</td>
                             <td> <input style="width: 100px;" name="LotoAmtSistema" value="{{ $data->LotoAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Vale</td>
                             <td> <input style="width: 100px;" name="valeAmt" value="{{ $data->CreditAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Tarjetas </td>
                             <td> <input style="width: 100px;" name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input style="width: 100px;" disabled sstep="0.01"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input style="width: 100px;" disabled sstep="0.01"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input style="width: 100px;" disabled sstep="0.01"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input style="width: 100px;" disabled sstep="0.01"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input style="width: 100px;" disabled step="0.01"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;"> Sencillo </td>
                             <td><input style="width: 100px;" name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Rollos </td>
                             <td> <input style="width: 100px;" name="CoinRollSistema" value="{{ $data->CoinRoll }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Facturas </td>
                             <td> <input style="width: 100px;" name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><input style="width: 100px;" disabled step="0.01"></td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px; ">Vale digital </td>
                             <td> <input style="width: 100px;" name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"> </td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="font-size:12px;">Beca Digital </td>
                             <td> <input style="width: 100px;" name="GrantAmtSistema" value="{{ $data->GrantAmt }}" type="number" step="0.01" readonly placeholder="0.00">
                             </td>
-                            <td align="right"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px;">
+                                <h4 class="mb-0">Monto contado</h4>
+                            </th>
+                            <th style="width: 0px;">
 
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <div class="card bg-light">
-                        <div class="card-body p-1">
-                            <div class="row m-0 p-0">
-                                <div class="m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h4 class="mb-0">Monto contado</h4>
-                                </div>
-                                <div class="text-right m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                                    <h5 class="mb-0" id="Monto_contado_Sistema">{{ $data->NetTotal }}</h5>
-                                </div>
-                            </div>
-                            <h6 class="mb-0 text-right">Subtotal &nbsp;&nbsp;&nbsp;= {{ $data->SubTotal }}</b></h6>
-                            <h6 class="mb-0 text-right">Monto X &nbsp;&nbsp;&nbsp;= <b>{{ $data->XAmt }}</b></h6>
-                            <h6 class="mb-0 text-right">Diferencia = <b>{{ $data->DifferenceAmt }}</b></h6>
-                        </div>
-                    </div>
-                </div>
+                            </th>
+                            <th style="width: 100px;">
+                                <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema" align="right">
+                                    @php
+                                    echo number_format($data->NetTotal, 2, ',', ' ');
+                                    @endphp
+                                </h5>
+                            </th>
+                            <th style="width: 100px;">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td></td>
+                            <td align="right"> @php
+                                echo number_format($data->SubTotal, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Monto X </td>
+                            <td></td>
+                            <td align="right">@php
+                                echo number_format($data->XAmt, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Diferencia</td>
+                            <td></td>
+                            <td align="right">@php
+                                echo number_format($data->DifferenceAmt, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-
-
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"> <b> Fiscalizadora </b></h5>
                 <table class="table table-borderless">
                     <thead>
                         <tr>
-                            <th style="width: 100px;">
-                                <p style="width: 100px;" class="card-text">Efectivo</p>
+                            <th>
+                                <p class="card-text">Efectivo</p>
                             </th>
-                            <th style="width: 100px;"> </th>
+                            <th> </th>
                             <th align="right">
                                 <h5 align="right" class="mb-0 fw-bold text-success" id="Fiscalizadora_t">{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</h5>
                             </th>
@@ -1321,13 +1409,13 @@ $opcion = 1;
                     </thead>
                     <tbody>
                         <tr>
-                            <td>$1x</td>
-                            <td><input style="width: 100px;" value="" name="x_oneamtFiscalizadora" type="number" class="text-left" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()">
+                            <td style="width: 100px;">$1x</td>
+                            <td style="width: 100px;"><input style="width: 100px;" value="" name="x_oneamtFiscalizadora" type="number" class="text-left" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()">
                             </td>
-                            <td align="right">
+                            <td style="width: 100px;" align="right">
                                 <div class="col borde" id="x_oneamtFiscalizadora_t">{{ $data->x_oneamt*1 }}</div>
                             </td>
-                            <td align="right">
+                            <td style="width: 100px;" align="right">
                                 <div class="col borde text-success" id="x_oneamtFiscalizadora_r" style="padding-left: 10px;">0.00</div>
                             </td>
                         </tr>
@@ -1391,12 +1479,11 @@ $opcion = 1;
                     <thead>
                         <tr>
                             <th style="width: 100px;"> Otros</th>
-                            <th style="width: 100px;">
-                            </th>
-                            <th align="right">
+                            <th style="width: 100px;"></th>
+                            <th style="width: 100px;" align="right">
                                 <h5 align="right" class="mb-0 fw-bold text-success" id="Otros_Fiscalizadora_t">{{ $data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</h5>
                             </th>
-                            <th align="right">
+                            <th style="width: 100px;" align="right">
                                 <div align="right" style="font-size:12px;">Diferencia</div>
                             </th>
                         </tr>
@@ -1407,7 +1494,7 @@ $opcion = 1;
                             <td><input style="width: 100px;" value="" id="yappyFiscalizadora" name="yappyFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()">
                             </td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="yappyFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1415,7 +1502,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Otros</td>
                             <td><input style="width: 100px;" value="" name="otrosFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="otrosFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1423,7 +1510,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Vales Pagoda </td>
                             <td><input style="width: 100px;" value="" name="valespagodaFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="valespagodaFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1431,7 +1518,7 @@ $opcion = 1;
                             <td style="font-size:12px;"> Monto cheques</td>
                             <td> <input style="width: 100px;" value="" name="CheckAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="CheckAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1439,7 +1526,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Loteria</td>
                             <td> <input style="width: 100px;" value="" name="LotoAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="LotoAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1447,7 +1534,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Vale</td>
                             <td><input style="width: 100px;" value="" name="valeAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="valeAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1455,7 +1542,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Tarjeta Clave</td>
                             <td><input style="width: 100px;" value="" name="CardClaveFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardClaveFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1463,7 +1550,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Tarjeta Vale</td>
                             <td><input style="width: 100px;" value="" name="CardValeFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardValeFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1471,7 +1558,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Tarjeta Visa</td>
                             <td><input style="width: 100px;" value="" name="CardVisaFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="CardVisaFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1479,7 +1566,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Tarjeta Master</td>
                             <td><input style="width: 100px;" value="" name="CardMasterFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardMasterFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1487,7 +1574,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Tarjeta American</td>
                             <td><input style="width: 100px;" value="" name="CardAEFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardAEFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1495,7 +1582,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Tarjeta BAC</td>
                             <td><input style="width: 100px;" value="" name="CardBACFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div style="visibility: hidden;" class="col borde text-success" id="CardBACFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1503,7 +1590,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Sencillo</td>
                             <td><input style="width: 100px;" value="" name="CashAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"></td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="CashAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1511,7 +1598,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Rollos </td>
                             <td><input style="width: 100px;" value="" name="CoinRollFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"> </td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="CoinRollFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1519,7 +1606,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Facturas</td>
                             <td><input style="width: 100px;" value="" name="InvoiceAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"> </td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="InvoiceAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1527,7 +1614,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Facturas Propias</td>
                             <td><input style="width: 100px;" value="" name="InvoiceAmtPropiasFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"> </td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="InvoiceAmtPropiasFiscalizadora_r">0.00</div>
                             </td>
                         </tr>
@@ -1535,7 +1622,7 @@ $opcion = 1;
                             <td style="font-size:12px;">Vale digital </td>
                             <td><input style="width: 100px;" value="" name="VoucherAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"> </td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="VoucherAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
@@ -1543,81 +1630,112 @@ $opcion = 1;
                             <td style="font-size:12px;">Beca Digital </td>
                             <td><input style="width: 100px;" value="" name="GrantAmtFiscalizadora" value="" type="number" step="0.01" placeholder="0.00" onchange="cal();clon();cal()" onkeyup="cal();clon();cal()"> </td>
                             <td></td>
-                            <td align="right" style="font-size:12px;">
+                            <td align="right">
                                 <div class="col borde text-success" id="GrantAmtFiscalizadora_r">0.0</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px;">
+                                <h4 class="mb-0">Monto contado</h4>
+                            </th>
+                            <th style="width: 0px;">
 
-            <div class="card bg-light">
-                <div class="card-bodys p-1">
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h4 class="mb-0">Monto contado</h4>
-                        </div>
-                        <div class="text-right m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <!-- {{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}     -->
-                            <h5 class="mb-0 fw-bold ">{{ $data->NetTotal }}</h5>
-                        </div>
-                    </div>
-                    <!-- Subtotal = {{ $data->BeginningBalance+$data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }} -->
-                    <h6 class="mb-0 text-right">Subtotal=</h6>
-                    <h6 class="mb-0 text-success" id="Monto_Fiscalizadora_t"></h6>
-                    <h6 class="mb-0 text-right">Monto X = <b>{{ $data->XAmt }}</b></h6>
-                    <h6 class="mb-0 text-right">Diferencia = <b>{{ $data->DifferenceAmt }}</b></h6>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Total Panaderia</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalPanaderiaFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Total Pagatodo</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalPagatodoFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Total Super</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="totalsuperFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Dinero de Taxi</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="dineroTaxiFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Vuelto de mercado</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <input name="vueltoMercadoFiscalizadora" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Comentarios</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h5 class="mb-0"> <textarea name="comentariosFiscalizadora" value="" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
-                        </div>
-                    </div>
-                </div>
+                            </th>
+                            <th style="width: 100px;">
+                                <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema" align="right">
+                                    @php
+                                    echo number_format($data->NetTotal, 2, ',', ' ');
+                                    @endphp
+                                </h5>
+                            </th>
+                            <th style="width: 100px;">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td></td>
+                            <td align="right">
+                                <h6 class="mb-0 text-success" id="Monto_Fiscalizadora_t"></h6>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Monto X</td>
+                            <td></td>
+                            <td align="right">@php
+                                echo number_format($data->XAmt, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Diferencia</td>
+                            <td></td>
+                            <td align="right">@php
+                                echo number_format($data->DifferenceAmt, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-borderless">
+                    <thead>
+                        <th style="width: 100px;">
+                        </th>
+                        <th style="width: 100px;">
+                        </th>
+                        <th style="width: 100px;">
+                        </th>
+                        <th style="width: 100px;">
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-size:12px;">Total Panaderia</td>
+                            <td><input name="totalPanaderiaFiscalizadora" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Total Pagatodo</td>
+                            <td><input name="totalPagatodoFiscalizadora" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Total Super</td>
+                            <td> <input name="totalsuperFiscalizadora" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00"> </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Dinero de Taxi</td>
+                            <td><input name="dineroTaxiFiscalizadora" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00"> </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;"> Vuelto de mercado</td>
+                            <td><input name="vueltoMercadoFiscalizadora" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Comentarios</td>
+                            <td><textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios"></textarea></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
         </div>
         <div class="card">
             <div class="card-body">
@@ -1625,14 +1743,12 @@ $opcion = 1;
                 <table class="table table-borderless">
                     <thead>
                         <tr>
-                            <th>
-                                <p class="card-text">Efectivo</p>
+                            <th style="width: 100px;">Efectivo</th>
+                            <th style="width: 100px;"> </th>
+                            <th style="width: 100px;">
+                                <h5 align="right" class="mb-0 fw-bold text-success" id="Gerente_t">{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</h5>
                             </th>
-                            <th> </th>
-                            <th>
-                                <h5 class="mb-0 fw-bold text-success" id="Gerente_t">{{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100 }}</h5>
-                            </th>
-                            <th align="right">
+                            <th style="width: 100px;" align="right">
                                 <div align="right" style="font-size:12px;">Diferencia</div>
                             </th>
                         </tr>
@@ -1641,7 +1757,7 @@ $opcion = 1;
                         <tr>
                             <td>$1x</td>
                             <td>
-                                <input name="x_oneamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()" />
+                                <input style="width: 100px;" name="x_oneamtGerente" value="" type="number" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()" />
                             </td>
                             <td align="right">
                                 <div class="col borde" id="x_oneamtGerente_t">{{ $data->x_oneamt*1 }}</div>
@@ -1652,7 +1768,7 @@ $opcion = 1;
                         </tr>
                         <tr>
                             <td>$5x</td>
-                            <td> <input name="x_fiveamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input style="width: 100px;" name="x_fiveamtGerente" value="" type="number" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td align="right">
                                 <div class="col borde" id="x_fiveamtGerente_t">{{ $data->x_fiveamt*5}}</div>
@@ -1663,7 +1779,7 @@ $opcion = 1;
                         </tr>
                         <tr>
                             <td>$10x</td>
-                            <td> <input name="x_tenamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input style="width: 100px;" name="x_tenamtGerente" value="" type="number" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td align="right">
                                 <div class="col borde" id="x_tenamtGerente_t">{{ $data->x_tenamt*10 }}</div>
@@ -1674,7 +1790,7 @@ $opcion = 1;
                         </tr>
                         <tr>
                             <td>$20x</td>
-                            <td> <input name="x_twentyamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input style="width: 100px;" name="x_twentyamtGerente" value="" type="number" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td align="right">
                                 <div class="col borde" id="x_twentyamtGerente_t">{{ $data->x_twentyamt*20 }}</div>
@@ -1685,7 +1801,7 @@ $opcion = 1;
                         </tr>
                         <tr>
                             <td>$50x</td>
-                            <td> <input name="x_fiftyamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td> <input style="width: 100px;" name="x_fiftyamtGerente" value="" type="number" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td align="right">
                                 <div class="col borde" id="x_fiftyamtGerente_t">{{ $data->x_fiftyamt*50 }}</div>
@@ -1696,7 +1812,7 @@ $opcion = 1;
                         </tr>
                         <tr>
                             <td>$100x</td>
-                            <td><input name="x_hundredamtGerente" value="" type="number" style="width:100%;" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                            <td><input style="width: 100px;" name="x_hundredamtGerente" value="" type="number" class="text-left" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
                             <td align="right">
                                 <div class="col borde" id="x_hundredamtGerente_t">{{ $data->x_hundredamt*100 }}</div>
@@ -1707,249 +1823,295 @@ $opcion = 1;
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="card-body">
-                <h5 class="card-title"></h5>
                 <table class="table table-borderless">
-
                     <thead>
                         <tr>
-                            <th>Otros</th>
-                            <th>
-                                <!-- {{ $data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }} -->
-                                <h5 class="mb-0 fw-bold text-success" id="Otros_Gerente_total"> </h5>
+                            <th style="width: 100px;">Otros</th>
+                            <th style="width: 100px;">
                             </th>
-                            <th align="right">
+                            <th style="width: 100px;" align="right">
+                                <h5 align="right" class="mb-0 fw-bold text-success" id="Otros_Gerente_total"> </h5>
+                            </th>
+                            <th style="width: 100px;" align="right">
                                 <div align="right" style="font-size:12px;" id="Otros_Gerente_t"></div>
                             </th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="font-size:12px; width: 100px;">Yappy</td>
-                            <td><input name="yappyGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
-                            <td align="right" style="font-size:12px;">
+                            <td style="font-size:12px;">Yappy</td>
+                            <td><input name="yappyGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="yappyGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px; width: 100px;">Otros</td>
+                            <td style="font-size:12px;">Otros</td>
                             <td>
-                                <input name="otrosGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="otrosGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="otrosGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Vales Pagoda </td>
+                            <td style="font-size:12px;">Vales Pagoda </td>
                             <td>
-                                <input name="valespagodaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="valespagodaGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="valespagodaGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;"> Monto cheques</td>
+                            <td style="font-size:12px;"> Monto cheques</td>
                             <td>
-                                <input name="CheckAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CheckAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="CheckAmtGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;"> Loteria</td>
+                            <td style="font-size:12px;"> Loteria</td>
                             <td>
-                                <input name="LotoAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="LotoAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="LotoAmtGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Vale</td>
-                            <td><input name="valeAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
-                            <td align="right" style="font-size:12px;">
+                            <td style="font-size:12px;">Vale</td>
+                            <td><input name="valeAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde" id="valeAmtGerente_r">0.00</div>
                             </td>
                         </tr>
-
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Tarjeta Clave</td>
-                            <td><input name="CardClaveGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
-                            <td align="right" style="font-size:12px;">
+                            <td style="font-size:12px;">Tarjeta Clave</td>
+                            <td><input name="CardClaveGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <th></th>
+                            <td align="right">
                                 <div style="visibility: hidde;" class="col borde text-success" id="CardClaveGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Tarjeta Vale</td>
+                            <td style="font-size:12px;">Tarjeta Vale</td>
                             <td>
-                                <input name="CardValeGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CardValeGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div style="visibility: hidde;" class="col borde text-success" id="CardValeGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Tarjeta Visa</td>
+                            <td style="font-size:12px;">Tarjeta Visa</td>
                             <td>
-                                <input name="CardVisaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CardVisaGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="CardVisaGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Tarjeta Master</td>
+                            <td style="font-size:12px;">Tarjeta Master</td>
                             <td>
-                                <input name="CardMasterGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CardMasterGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div style="visibility: hidde;" class="col borde text-success" id="CardMasterGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Tarjeta American</td>
+                            <td style="font-size:12px;">Tarjeta American</td>
                             <td>
-                                <input name="CardAEGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CardAEGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div style="visibility: hidde;" class="col borde text-success" id="CardAEGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Tarjeta BAC</td>
-                            <td><input name="CardBACGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
-                            <td align="right" style="font-size:12px;">
+                            <td style="font-size:12px;">Tarjeta BAC</td>
+                            <td><input name="CardBACGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()"></td>
+                            <th></th>
+                            <td align="right">
                                 <div style="visibility: hidde;" class="col borde text-success" id="CardBACGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Sencillo</td>
+                            <td style="font-size:12px;">Sencillo</td>
                             <td>
-                                <input name="CashAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CashAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="CashAmtGerente_r">0.0</div>
                             </td>
                         </tr>
-
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Rollos </td>
+                            <td style="font-size:12px;">Rollos </td>
                             <td>
-                                <input name="CoinRollGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="CoinRollGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="CoinRollGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Facturas </td>
+                            <td style="font-size:12px;">Facturas </td>
                             <td>
-                                <input name="InvoiceAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="InvoiceAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="InvoiceAmtGerente_r">0.0</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Facturas Propias</td>
+                            <td style="font-size:12px;">Facturas Propias</td>
                             <td>
-                                <input name="InvoiceAmtPropiasGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="InvoiceAmtPropiasGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="InvoiceAmtPropiasGerente_r">0.00</div>
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Vale digital </td>
+                            <td style="font-size:12px;">Vale digital </td>
                             <td>
-                                <input name="VoucherAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="VoucherAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="VoucherAmtGerente_r">0.0</div>
                             </td>
-
                         </tr>
                         <tr>
-                            <td style="font-size:12px;width: 100px;">Beca Digital </td>
+                            <td style="font-size:12px;">Beca Digital </td>
                             <td>
-                                <input name="GrantAmtGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00" onchange="cal()" onkeyup="cal()">
+                                <input name="GrantAmtGerente" value="" type="number" step="0.01" style="width: 100px;" placeholder="0.00" onchange="cal()" onkeyup="cal()">
                             </td>
-                            <td align="right" style="font-size:12px;">
+                            <th></th>
+                            <td align="right">
                                 <div class="col borde text-success" id="GrantAmtGerente_r">0.0</div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="card bg-light">
-                <div class="card-body p-1">
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <h4 class="mb-0">Monto contado</h4>
-                        </div>
-                        <div class="text-right m-0 p-0 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <!-- {{ $data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }} -->
-                            <!-- <h5 class="mb-0 fw-bold text-success" id="Monto_Gerente_t"> </h5> -->
-                            <h5 class="mb-0 fw-bold ">{{ $data->NetTotal }}</h5>
-                        </div>
-                    </div>
-                    <h6 class="mb-0 text-right" id="Monto_Gerente_t">Subtotal = {{ $data->BeginningBalance+$data->x_oneamt*1+$data->x_fiveamt*5+$data->x_tenamt*10+$data->x_twentyamt*20+$data->x_fiftyamt*50+$data->x_hundredamt*100+$data->yappy+$data->otros+$data->valespagoda+$data->CheckAmt+$data->LotoAmt+$data->CardAmt+$data->CashAmt+$data->CoinRoll+$data->InvoiceAmt+$data->VoucherAmt+$data->GrantAmt }}</b></h6>
-                    <h6 class="mb-0 text-right">Monto X = <b>{{ $data->XAmt }}</b></h6>
-                    <h6 class="mb-0 text-right">Diferencia = <b>{{ $data->DifferenceAmt }}</b></h6>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Total Panaderia</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <input name="totalPanaderiaGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Total Pagatodo</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <input name="totalPagatodoGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Total Super</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <input name="totalsuperGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Dinero de Taxi</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <input name="dineroTaxiGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Vuelto de mercado</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <input name="vueltoMercadoGerente" value="" type="number" step="0.01" class="w-100 text-right" placeholder="0.00"> </h5>
-                        </div>
-                    </div>
-                    <div class="row m-0 p-0">
-                        <div class="m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <p class="mb-0">Comentarios</p>
-                        </div>
-                        <div class="text-right m-0 p-1 col-6 col-sm-6 col-md-6 col-lg-6">
-                            <textarea name="comentariosGerente" value="" class="w-100 text-right" placeholder="Comentarios"></textarea></h5>
-                        </div>
-                    </div>
-                </div>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px;">
+                                <h4 class="mb-0">Monto contado</h4>
+                            </th>
+                            <th style="width: 0px;">
+
+                            </th>
+                            <th style="width: 100px;">
+                                <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema" align="right">
+                                    @php
+                                    echo number_format($data->NetTotal, 2, ',', ' ');
+                                    @endphp
+                                </h5>
+                            </th>
+                            <th style="width: 100px;">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td></td>
+                            <td align="right">
+                                <h6 class="mb-0 text-success" id="Monto_Gerente_t"></h6>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Monto X</td>
+                            <td></td>
+                            <td align="right">@php
+                                echo number_format($data->XAmt, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Diferencia</td>
+                            <td></td>
+                            <td align="right">@php
+                                echo number_format($data->DifferenceAmt, 2, ',', ' ');
+                                @endphp
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-borderless">
+                    <thead>
+                        <th style="width: 100px;">
+                        </th>
+                        <th style="width: 100px;">
+                        </th>
+                        <th style="width: 100px;">
+                        </th>
+                        <th style="width: 100px;">
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-size:12px;">Total Panaderia</td>
+                            <td><input name="totalPanaderiaGerente" value="" style="width: 100px;" type="number" step="0.01" placeholder="0.00"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Total Pagatodo</td>
+                            <td><input name="totalPagatodoGerente" value="" style="width: 100px;" type="number" step="0.01" placeholder="0.00"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Total Super</td>
+                            <td> <input name="totalsuperGerente" value="" style="width: 100px;" type="number" step="0.01" placeholder="0.00"> </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Dinero de Taxi</td>
+                            <td><input name="dineroTaxiGerente" value="" style="width: 100px;" type="number" step="0.01" placeholder="0.00"> </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;"> Vuelto de mercado</td>
+                            <td><input name="vueltoMercadoGerente" value="" style="width: 100px;" type="number" step="0.01" placeholder="0.00"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12px;">Comentarios</td>
+                            <td><textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"></textarea></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
