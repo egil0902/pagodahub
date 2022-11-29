@@ -145,8 +145,8 @@ class CloseCashController extends Controller
             "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'"
         );
         //dd($closecashlist);
-        ///closecash::where('id', 10)->update(['comentariosGerente' => 'sddasd']);
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
+        //dd($list);
         if (isset($response)) {
             return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list]);
         }
