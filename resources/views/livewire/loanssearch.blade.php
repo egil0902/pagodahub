@@ -9,7 +9,7 @@
             Sucursal
         </div>
         <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
-            Beneficiario
+            Deudor
         </div>
         <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
             Contacto

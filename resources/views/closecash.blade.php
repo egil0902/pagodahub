@@ -84,28 +84,32 @@ $opcion = 0;
         <div class="row border m-1">
             @if (isset($closecashlist))
             <table class="table table-borderless">
-
                 <tr>
                     <td style="width: 100px;">
                         <h5><b>Identificador</b></h5>
                     </td>
                     <td style="width: 100px;">
-                        <h5><b>Nombre Responsable</b></h5>
-                    </td>
-                    <td style="width: 100px;" align="right">
-                        <h5><b>SubTotal</b></h5>
-                    </td>
-                    <td style="width: 100px;" align="right">
-                        <h5><b>Neto</b></h5>
+                        <h5><b>Cajera</b></h5>
                     </td>
                     <td style="width: 100px;" align="right">
                         <h5><b>Inicio caja</b></h5>
+                    </td>
+                    <td style="width: 100px;" align="right">
+                        <h5><b>Subtotal</b></h5>
+                    </td>
+                    <td style="width: 100px;" align="right">
+                        <h5><b>Monto Contado</b></h5>
+                    </td>
+                    <td style="width: 100px;" align="right">
+                        <h5><b>Monto X</b></h5>
+                    </td>
+                    <td style="width: 100px;" align="right">
+                        <h5><b>Diferencia</b></h5>
                     </td>
                 </tr>
                 @if ($closecashlist->{'records-size'} > 0)
                 @foreach($closecashlist->records as $closecashl)
                 <tbody>
-
                     <tr>
                         <td style="width: 100px;"><label>
                                 @php
@@ -113,6 +117,11 @@ $opcion = 0;
                                 @endphp
                             </label></td>
                         <td style="width: 100px;"><label>{{$closecashl->u_name;}}</label></td>
+                        <td style="width: 100px;" align="right"><label>
+                                @php
+                                echo number_format($closecashl->BeginningBalance, 2, ',', ' ');
+                                @endphp
+                            </label></td>
                         <td style="width: 100px;" align="right"><label>
                                 @php
                                 echo number_format($closecashl->SubTotal, 2, ',', ' ');
@@ -123,9 +132,15 @@ $opcion = 0;
                                 echo number_format($closecashl->NetTotal, 2, ',', ' ');
                                 @endphp
                             </label></td>
+
                         <td style="width: 100px;" align="right"><label>
                                 @php
-                                echo number_format($closecashl->BeginningBalance, 2, ',', ' ');
+                                echo number_format($closecashl->XAmt, 2, ',', ' ');
+                                @endphp
+                            </label></td>
+                        <td style="width: 100px;" align="right"><label>
+                                @php
+                                echo number_format($closecashl-> DifferenceAmt, 2, ',', ' ');
                                 @endphp
                             </label></td>
                     </tr>
@@ -1024,6 +1039,7 @@ $opcion = 1;
 @endif
 @endforeach
 @endif
+
 @if (isset($closecashsumlist))
 @if ($opcion==0)
 <form name="closecash_store" id="closecash_store" method="POST" action="{{ route('closecash.store') }}" enctype="multipart/form-data">
@@ -1116,8 +1132,6 @@ $opcion = 1;
                                 echo number_format($closecashl-> DifferenceAmt, 2, ',', ' ');
                                 @endphp
                             </label></td>
-
-
                     </tr>
                 </tbody>
                 @endforeach
@@ -1378,9 +1392,8 @@ $opcion = 1;
                         <tr>
                             <td>Monto X </td>
                             <td></td>
-                            <td align="right">@php
-                                echo number_format($data->XAmt, 2, ',', ' ');
-                                @endphp
+                            <td align="right">
+                                <h6 id="Monto_X_Sistema">{{$data->XAmt}}</h6>
                             </td>
                             <td></td>
                         </tr>
@@ -1676,18 +1689,16 @@ $opcion = 1;
                         <tr>
                             <td>Monto X</td>
                             <td></td>
-                            <td align="right">@php
-                                echo number_format($data->XAmt, 2, ',', ' ');
-                                @endphp
+                            <td align="right">
+                                <h6 class="mb-0" id="Monto_X_Fiscalizadora">{{$data->XAmt}}</h6>
                             </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Diferencia</td>
                             <td></td>
-                            <td align="right">@php
-                                echo number_format($data->DifferenceAmt, 2, ',', ' ');
-                                @endphp
+                            <td align="right">
+                                <h6 class="mb-0" id="Diferencia_Fiscalizadora">{{$data->DifferenceAmt}}</h6>
                             </td>
                             <td></td>
                         </tr>
@@ -2088,18 +2099,17 @@ $opcion = 1;
                         <tr>
                             <td>Monto X</td>
                             <td></td>
-                            <td align="right">@php
-                                echo number_format($data->XAmt, 2, ',', ' ');
-                                @endphp
+                            <td align="right">
+                                <h6 class="mb-0" id="Monto_X_t">{{$data->XAmt}}</h6>
                             </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Diferencia</td>
                             <td></td>
-                            <td align="right">@php
-                                echo number_format($data->DifferenceAmt, 2, ',', ' ');
-                                @endphp
+                            <td align="right">
+                                <h6 class="mb-0" id="Monto_Diferencia_t">{{$data->DifferenceAmt}}</h6>
+
                             </td>
                             <td></td>
                         </tr>
@@ -2369,7 +2379,7 @@ $opcion = 1;
             document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
             const cambioOtros_Gerente_t = document.getElementById("Otros_Gerente_t");
             const cambioMonto_Gerente_t = document.getElementById("Monto_Gerente_t");
-            
+
             if (document.getElementById("Otros_Gerente_t").innerHTML < document.getElementById("Otros_Fiscalizadora_t").innerHTML) {
                 cambioOtros_Gerente_t.classList.replace("text-success", "text-danger");
             } else {
@@ -2552,6 +2562,8 @@ $opcion = 1;
         ).toFixed(2));
         document.getElementById("Monto_Fiscalizadora_t").innerHTML = parseFloat(parseFloat(document.getElementById("Fiscalizadora_t").innerHTML) + parseFloat(document.getElementById("Otros_Fiscalizadora_t").innerHTML)).toFixed(2);
         document.getElementById("Monto_contado_Fiscalizadora").innerHTML = parseFloat(document.getElementById("Monto_Fiscalizadora_t").innerHTML - document.getElementById("InicioCaja").innerHTML).toFixed(2);
+        document.getElementById("Diferencia_Fiscalizadora").innerHTML = parseFloat(parseFloat(document.getElementById("Monto_contado_Fiscalizadora").innerHTML) - parseFloat(document.getElementById("Monto_X_Fiscalizadora").innerHTML)).toFixed(2);
+
 
         document.getElementById("Otros_Gerente_t").innerHTML = parseFloat(
             parseFloat((document.getElementById("yappyGerente_t").innerHTML)) +
@@ -2574,6 +2586,7 @@ $opcion = 1;
             parseFloat((document.getElementById("CardBACGerente_t").innerHTML))).toFixed(2);;
         document.getElementById("Monto_Gerente_t").innerHTML = parseFloat(parseFloat(document.getElementById("Gerente_t").innerHTML) + parseFloat(document.getElementById("Otros_Gerente_t").innerHTML)).toFixed(2);
         document.getElementById("Monto_contado_Gerente").innerHTML = parseFloat(document.getElementById("Monto_Gerente_t").innerHTML - document.getElementById("InicioCaja").innerHTML).toFixed(2);
+        document.getElementById("Monto_Diferencia_t").innerHTML = parseFloat(parseFloat(document.getElementById("Monto_contado_Gerente").innerHTML) - parseFloat(document.getElementById("Monto_X_t").innerHTML)).toFixed(2);
     }
 
     function colores() {
@@ -2940,7 +2953,7 @@ $opcion = 1;
             cambioInvoiceAmtPropiasGerente.classList.replace("text-success", "text-success");
             cambioInvoiceAmtPropiasGerente.classList.replace("text-danger", "text-success");
         }
-        if (parseFloat(document.getElementById("Monto_contado_Gerente").innerHTML) < parseFloat(document.getElementById("Monto_contado_Fiscalizadora").innerHTML) ) {
+        if (parseFloat(document.getElementById("Monto_contado_Gerente").innerHTML) < parseFloat(document.getElementById("Monto_contado_Fiscalizadora").innerHTML)) {
             cambioMonto_contado_Gerente.classList.replace("text-success", "text-danger");
         } else {
             cambioMonto_contado_Gerente.classList.replace("text-success", "text-success");
