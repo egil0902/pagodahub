@@ -70,7 +70,7 @@
                         </form>
                     </div>
                     <div class="col-12 col-md-6 col-sm-6 m-0 p-0 col-lg-3" style="">
-                        <form name="loans" id="loans" method="post" action="{{ route('loans') }}"> @csrf <button type="submit" class="btn ">
+                        <form name="loans" id="loans" method="get" action="{{ route('loans') }}"> @csrf <button type="submit" class="btn ">
                                 <div class="card m-0 p-0">
                                     <div class="card-header">Prestamos</div>
                                     <div class="card-body">
