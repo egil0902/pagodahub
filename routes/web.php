@@ -62,5 +62,15 @@ Route::post('/loans_bpartnerstore',[App\Http\Controllers\LoansController::class,
 Route::post('/loans_list',[App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 
 
+Route::get('/firma1', function () {
+    return view('canvas/tablero3');
+});
+Route::get('/firma2', function () {
+    return view('canvas/tablero4');
+});
+Route::get('/firma3', function () {
+    return view('canvas/tablero5');
+});
+
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');
 

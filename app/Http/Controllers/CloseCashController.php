@@ -138,6 +138,7 @@ class CloseCashController extends Controller
             'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
         );
         $docstatus = 'CO';
+        //dd($response);
         //dd("datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '".$docstatus."'");
         $closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
