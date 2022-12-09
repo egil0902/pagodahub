@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('AD_Org_ID');
             $table->double('LoanAmt');
             $table->integer('CreatedBy');
-
         });
     }
 

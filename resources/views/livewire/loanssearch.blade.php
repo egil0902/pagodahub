@@ -4,60 +4,102 @@
             <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" />
         </div>
     </div>
-    <div class="row fw-bold">
-        <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
+    <div class="row">
+        {{-- <div class="col">
             Sucursal
         </div>
-        <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
+        <div class="col">
             Deudor
         </div>
-        <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
+        <div class="col">
             Contacto
         </div>
-        <div class="col-md-3 col-3 col-sm-3 col-lg-3 fw-bold">
+        <div class="col">
             Monto
         </div>
-        <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
+        <div class="col">
             Fecha de Consumo
         </div>
-        <div class="col-md-2 col-2 col-sm-2 col-lg-2 fw-bold">
+        <div class="col">
             Validado Por
+        </div> --}}
+        <div class="col">
+            Fecha Nuevo Prestamo
         </div>
-        <div class="col-md-1 col-1 col-sm-1 col-lg-1">
+        <div class="col">
+            Monto
+        </div>
+        <div class="col">
+            Cuota
+        </div>
+        <div class="col">
+            Frecuencia
+        </div>
+        <div class="col">
+            File cedula
+        </div>
+        <div class="col">
+            Firma Nuevo Prestamo
+        </div>
+        <div class="col">
+            X
         </div>
     </div>
-    @foreach($loans as $data)
-    <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST" action="{{ route('valepagoda.destroy') }}">
-        @csrf
-        <input name="valeid" type="hidden" value="{{ $data->id }}">
-        <div class="row">
-            <div class="col-2 col-sm-2 col-md-2 col-lg-2">
-                {{ $data->AD_Org_ID }}
+    @foreach ($loans as $data)
+        <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST"
+            action="{{ route('valepagoda.destroy') }}">
+            @csrf
+            <input name="valeid" type="hidden" value="{{ $data->id }}">
+            <div class="row">
+                {{-- <div class="col">
+                    {{ $data->AD_Org_ID }}
+                </div>
+                <div class="col">
+                    {{ $data->C_BPartner_ID }}
+                </div>
+                <div class="col">
+                    {{ $data->AD_User_ID }}
+                </div>
+                <div class="col">
+                    {{ $data->LoanAmt }}
+                </div>
+                <div class="col">
+                    {{ date('d-m-Y', strtotime($data->created_at)) }}
+                </div>
+                <div class="col">
+                    {{ $data->CreatedBy }}
+                </div> --}}
+                <div class="col">
+                    {{ $data->FechaNuevoPrestamo }}
+                </div>
+                <div class="col">
+                    {{ $data->Monto }}
+                </div>
+                <div class="col">
+                    {{ $data->Cuota }}
+                </div>
+                <div class="col">
+                    {{ $data->Frecuencia }}
+                </div>
+                <div class="col">
+                    {{ $data->Filecedula }}
+                </div>
+                <div class="col">
+                    {{ $data->FirmaNuevoPrestamo }}
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">X</button>
+                </div>
             </div>
-            <div class="col-2 col-sm-2 col-md-2 col-lg-2">
-                {{ $data->C_BPartner_ID }}
-            </div>
-            <div class="col-2 col-sm-2 col-md-2 col-lg-2">
-                {{ $data->AD_User_ID }}
-            </div>
-            <div class="col-md-3 col-3 col-sm-3 col-lg-3">
-                {{ $data->LoanAmt }}
-            </div>
-            <div class="col-md-2 col-2 col-sm-2 col-lg-2">
-                {{ date('d-m-Y',strtotime($data->created_at)) }}
-            </div>
-            <div class="col-md-2 col-2 col-sm-2 col-lg-2">
-                {{ $data->CreatedBy }}
-            </div>
-            <div class="col-md-1 col-1 col-sm-1 col-lg-1 p-1">
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">X</button>
-            </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             Seguro desea eliminar este registro?
@@ -69,8 +111,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+
+        </form>
     @endforeach
     <div class="row">
         <div class="col-md-12 col-12 col-sm-12 col-lg-12">
