@@ -25,8 +25,6 @@ class Loanssearch extends Component
         return view('livewire.loanssearch',[
             'loans' => loans::paginate(10),
         ]);
-
-
     }
     
 }

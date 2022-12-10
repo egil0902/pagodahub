@@ -8,6 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class loans extends Model
 {
     use HasFactory;
-    protected $fillable = ['C_BPartner_ID', 'AD_Org_ID', 'AD_User_ID','LoanAmt','CreatedBy'];
-
+    protected $fillable =
+    [
+        'C_BPartner_ID',
+        'AD_Org_ID',
+        'AD_User_ID',
+        'LoanAmt',
+        'CreatedBy',
+        'FechaNuevoPrestamo',
+        'Monto',
+        'Cuota',
+        'Frecuencia',
+        'Filecedula',
+        'FirmaNuevoPrestamo'
+    ];
 }
