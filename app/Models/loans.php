@@ -10,11 +10,12 @@ class loans extends Model
     use HasFactory;
     protected $fillable =
     [
-        'C_BPartner_ID',
-        'AD_Org_ID',
-        'AD_User_ID',
-        'LoanAmt',
-        'CreatedBy',
+        'Nombre',
+        'Cedula',
+        'Telefono',
+        'Solicitante',
+        'Direccion',
+        'FotoCedula',
         'FechaNuevoPrestamo',
         'Monto',
         'Cuota',
