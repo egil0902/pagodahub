@@ -82,10 +82,10 @@
                     {{ $data->Frecuencia }}
                 </div>
                 <div class="col">
-                    {{ $data->Filecedula }}
+                    <img width="100" height="50" src="data:image/png;base64,{{ $data->Filecedula }}" border="1"> 
                 </div>
                 <div class="col">
-                    {{ $data->FirmaNuevoPrestamo }}
+                    <img width="100" height="50" src="{{ $data->FirmaNuevoPrestamo }}" border="1">   
                 </div>
                 <div class="col">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"

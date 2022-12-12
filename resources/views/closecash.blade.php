@@ -2,12 +2,11 @@
 
 @section('content')
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,200" />
-
     <form name="closecash_import" id="closecash_import" method="post" action="{{ route('closecash.import') }}"
         enctype="multipart/form-data">
         @csrf
@@ -59,13 +58,13 @@
             @foreach ($list as $dataday)
                 <form name="closecash_edit" id="closecash_edit" method="POST" action="{{ route('closecash.edit') }}"
                     enctype="multipart/form-data">
-                    <label for="">edit</label>
+                    <center><label for="">Editar</label></center>
             @endforeach
         @endif
         @if ($list->isEmpty())
             <form name="closecash_store" id="closecash_store" method="POST" action="{{ route('closecash.store') }}"
                 enctype="multipart/form-data">
-                <label for="">new</label>
+                <center><label for="">Nuevo</label></center>
         @endif
         @csrf
         @if ($closecashsumlist->{'records-size'} > 0)
@@ -135,12 +134,12 @@
                                     @foreach ($closecashlist->records as $closecashl)
                                         <tbody>
                                             <tr>
-                                                <td style="width: 100px;"><label>
+                                                <td style="width: 100px;" align="left"><label>
                                                         @php
                                                             echo $closecashl->ba_name;
                                                         @endphp
                                                     </label></td>
-                                                <td style="width: 100px;">
+                                                <td style="width: 100px;" align="left">
                                                     <label>{{ $closecashl->u_name }}</label>
                                                 </td>
                                                 <td style="width: 100px;" align="right"><label>
@@ -534,13 +533,14 @@
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
-                                                        value="{{ $dataday->x_oneamtFiscalizadora }}" name="x_oneamtFiscalizadora"
-                                                        type="number" class="text-left"placeholder="0.00"
+                                                        value="{{ $dataday->x_oneamtFiscalizadora }}"
+                                                        name="x_oneamtFiscalizadora" type="number"
+                                                        class="text-left"placeholder="0.00"
                                                         onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
-                                                <input style="width: 100px;" value="0" name="x_oneamtFiscalizadora"
+                                                <input style="width: 100px;" value="" name="x_oneamtFiscalizadora"
                                                     type="number" class="text-left"placeholder="0.00"
                                                     onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
@@ -1299,13 +1299,13 @@
                                     <tr>
                                         <td style="font-size:12px;">Comentarios</td>
                                         <td>
-                                            <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios">
-                                                @if ($list->isNotEmpty())
-@foreach ($list as $dataday)
-{{ $dataday->comentariosFiscalizadora }}
-@endforeach
-@endif
-                                                </textarea>
+                                            @if ($list->isNotEmpty())
+                                                @foreach ($list as $dataday)
+                                                    <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios">{{ $dataday->comentariosFiscalizadora }}</textarea>
+                                                @endforeach
+                                            @else
+                                                <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios"></textarea>
+                                            @endif
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -1514,8 +1514,8 @@
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input id="yappyGerente" name="yappyGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input id="yappyGerente" name="yappyGerente" type="number"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->yappyGerente }}">
                                                 @endforeach
@@ -2109,27 +2109,34 @@
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px;"> Vuelto de mercado</td>
-                                        <td><input name="vueltoMercadoGerente"
-                                                @if ($list->isNotEmpty()) @foreach ($list as $dataday)
-                                                value="{{ $dataday->vueltoMercadoGerente }}"
+                                        <td>
+                                            @if ($list->isNotEmpty())
+                                                @foreach ($list as $dataday)
+                                                    <input name="vueltoMercadoGerente"
+                                                        value="{{ $dataday->vueltoMercadoGerente }}"style="width: 100px;"
+                                                        type="number" step="0.01" placeholder="0.00">
                                                 @endforeach
-                                                @else
-                                                value="" @endif
-                                                style="width: 100px;" type="number" step="0.01"
-                                                placeholder="0.00"></td>
+                                            @else
+                                                <input name="vueltoMercadoGerente" value=""
+                                                    style="width: 100px;" type="number" step="0.01"
+                                                    placeholder="0.00">
+                                            @endif
+                                        </td>
+
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px;">Comentarios</td>
                                         <td>
-                                            <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios">
-                                                @if ($list->isNotEmpty())
-@foreach ($list as $dataday)
-{{ $dataday->comentariosGerente }}
-@endforeach
-@endif
-                                                </textarea>
+
+                                            @if ($list->isNotEmpty())
+                                                @foreach ($list as $dataday)
+                                                    <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"> {{ $dataday->comentariosGerente }}</textarea>
+                                                @endforeach
+                                            @else
+                                                <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"></textarea>
+                                            @endif
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -2167,10 +2174,15 @@
                         </div>
                     </div>
                 </div>
+                @if ($list->isNotEmpty())
+                    @foreach ($list as $dataday)
+                        <script src="js/calculo_edit.js" defer></script>
+                    @endforeach
+                @else
+                    <script src="js/calculo_new.js" defer></script>
+                @endif
             @endforeach
         @endif
         </form>
     @endif
 @endsection
-
-<script src="js/calculo.js" defer></script>

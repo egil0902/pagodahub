@@ -1,7 +1,7 @@
 
-    /*window.onload = function() {
+    window.onload = function() {
         cal();
-    }*/
+    }
 
     function cal() {
         try {

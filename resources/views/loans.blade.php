@@ -76,34 +76,27 @@
                                 <div class="col">
                                     <label>Nombre del Deudor</label>
                                     <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="">
-                                    <input name="CreatedBy" value="{{ auth()->user()->name }}" type="hidden"
-                                        class=" form-control text-left  w-100 ">
+                                        class=" form-control text-left  w-100 " placeholder="" required>
                                     <label>Telefono</label>
                                     <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="">
+                                        class=" form-control text-left  w-100 " placeholder="" required>
                                     <label>Direccion</label>
                                     <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder=""><br>
+                                        class=" form-control text-left  w-100 " placeholder="" required><br>
                                 </div>
                                 <div class="col">
 
                                     <label>Cédula o RUC</label>
-                                    <input name="AD_Org_ID" value="{{ isset($request) ? $request->AD_Org_ID : '' }}"
-                                        type="hidden" class="form-control text-left w-100 m-1" placeholder="">
-
-                                    <input name="value" value="{{ isset($request) ? $request->value : '' }}"
-                                        type="hidden" class="form-control text-left w-100 m-1" placeholder="">
                                     <input name="taxid" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="">
+                                        class=" form-control text-left  w-100 " placeholder="" required>
 
                                     <label>Solicitante</label>
                                     <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="">
+                                        class=" form-control text-left  w-100 " placeholder="" required>
 
                                     <label>Adjuntar Foto Cedula</label>
                                     <input class="form-control" type="file" id="Filecedula" name="FileCedula"
-                                        value="0"><br>
+                                        value="0" required><br>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success my-auto active ">Guardar</button>
@@ -154,7 +147,8 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <label>Fecha</label>
-                                                    <input name="FechaNuevoPrestamo" type="date" class="form-control">
+                                                    <input name="FechaNuevoPrestamo" type="date" class="form-control"
+                                                        required>
 
                                                     <br>
 
@@ -162,7 +156,7 @@
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text">$</span>
                                                         <input name="Monto" type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)">
+                                                            aria-label="Amount (to the nearest dollar)" required>
                                                     </div>
 
                                                     <br>
@@ -170,14 +164,14 @@
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text">$</span>
                                                         <input name="Cuota" type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)">
+                                                            aria-label="Amount (to the nearest dollar)" required>
                                                     </div>
 
                                                     <br>
                                                     <label>Frecuencia</label>
-                                                    <select name="Frecuencia" class="form-select"
-                                                        aria-label="Default select example">
-                                                        <option selected>Seleccione</option>
+                                                    <select class="form-select" name="Frecuencia" required="">
+                                                        <option selected="" disabled="" value="">Seleccione
+                                                        </option>
                                                         <option value="Diario">Diario</option>
                                                         <option value="Semanal">Semanal</option>
                                                         <option value="Quincenal">Quincenal</option>
@@ -186,19 +180,22 @@
 
                                                     <br>
                                                     <label>Adjuntar Foto Recibo</label>
-                                                    <input name="Filecedula" class="form-control" type="file"
-                                                        id="Filecedula" placeholder="Recibo" name="FileCedula"
-                                                        value="0" accept=".png, .jpg, .jpeg">
+                                                    <input class="form-control" type="file" id="filePicker"
+                                                        placeholder="Recibo" name="FileCedula" value="0"
+                                                        accept=".png, .jpg, .jpeg" required>
+                                                    <textarea style="display:none;" name="Filecedula" id="base64textarea" placeholder="Base64 will appear here"
+                                                        cols="50" rows="15"></textarea>
                                                     <br> <br>
                                                     <label>Firma</label>
                                                     <div>
                                                         <center>
                                                             @include('canvas/tablero3')
                                                             <input type="hidden" id="myText3"
-                                                                name="FirmaNuevoPrestamo" value="Firma No File">
+                                                                name="FirmaNuevoPrestamo" value="Firma No File" required>
+                                                            <button class="btn btn-primary mh-100" type='button'
+                                                                onclick='LimpiarTrazado3()'>Borrar</button>
                                                         </center>
                                                     </div>
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="row">
@@ -207,9 +204,14 @@
                                                                 data-bs-dismiss="modal">Cerrar</button>
                                                         </div>
                                                         <div class="col">
-                                                            <button type="submit"
+                                                            <button onclick="allfuncion()" type="submit"
                                                                 class="btn btn-primary">Guardar</button>
                                                         </div>
+                                                        <script type="text/javascript">
+                                                            function allfuncion() {
+                                                                b64img3();
+                                                            }
+                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,11 +233,11 @@
                                                 <div class="modal-body">
                                                     <label>Fecha</label>
                                                     <input name="DateTrx" type="date" value=""
-                                                        class="form-control">
+                                                        class="form-control" required>
                                                     <br>
 
                                                     <label>Seleccionar un prestamo</label>
-                                                    <select class="form-select" aria-label="Default select example">
+                                                    <select class="form-select" aria-label="Default select example" required>
                                                         <option selected>Seleccione</option>
                                                         <option value="1">Abono Global</option>
                                                         <option value="2">Pretamo XX</option>
@@ -255,15 +257,18 @@
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text">$</span>
                                                         <input type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)">
+                                                            aria-label="Amount (to the nearest dollar)" >
                                                     </div>
                                                     <br>
                                                     <label>Firma</label>
                                                     <div>
                                                         <center>
                                                             @include('canvas/tablero4')
-                                                            <input type="hidden" id="myText4" name="v12"
+                                                            <button class="btn btn-primary mh-100" type='button'
+                                                                onclick='LimpiarTrazado4()'>Borrar</button>
+                                                            <input type="hidden" id="myText4" name="v224"
                                                                 value="Firma No File">
+
                                                         </center>
                                                     </div>
                                                 </div>
@@ -271,11 +276,13 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cerrar</button>
+                                                                data-bs-dismiss="modal">Cerrar</button>
                                                         </div>
                                                         <div class="col">
-                                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Guardar</button>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -305,4 +312,29 @@
         </div>
 
     </div>
+    </div>
+    <script>
+        var handleFileSelect = function(evt) {
+            var files = evt.target.files;
+            var file = files[0];
+
+            if (files && file) {
+                var reader = new FileReader();
+
+                reader.onload = function(readerEvt) {
+                    var binaryString = readerEvt.target.result;
+                    document.getElementById("base64textarea").value = btoa(binaryString);
+                };
+
+                reader.readAsBinaryString(file);
+            }
+        };
+
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            document.getElementById('filePicker')
+                .addEventListener('change', handleFileSelect, false);
+        } else {
+            alert('The File APIs are not fully supported in this browser.');
+        }
+    </script>
 @endsection
