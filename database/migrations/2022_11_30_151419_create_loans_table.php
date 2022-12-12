@@ -16,10 +16,18 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('C_BPartner_ID');
-            $table->integer('AD_Org_ID');
-            $table->double('LoanAmt');
-            $table->integer('CreatedBy');
+            $table->string('Nombre')->nullable();
+            $table->string('Cedula')->nullable();
+            $table->string('Telefono')->nullable();
+            $table->string('Solicitante')->nullable();
+            $table->string('Direccion')->nullable();
+            $table->longText('FotoCedula')->nullable();
+            $table->date('FechaNuevoPrestamo')->nullable();
+            $table->double('Monto', 8, 2)->nullable();
+            $table->double('Cuota', 8, 2)->nullable();
+            $table->text('Frecuencia')->nullable();
+            $table->longText('Filecedula')->nullable();
+            $table->longText('FirmaNuevoPrestamo')->nullable();
         });
     }
 

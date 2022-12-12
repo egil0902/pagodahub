@@ -5,13 +5,13 @@
         </div>
     </div>
     <div class="row">
-        {{-- <div class="col">
-            Sucursal
+       <div class="col">
+            Nombre
         </div>
         <div class="col">
-            Deudor
+            Cedula
         </div>
-        <div class="col">
+        {{--  <div class="col">
             Contacto
         </div>
         <div class="col">
@@ -51,13 +51,13 @@
             @csrf
             <input name="valeid" type="hidden" value="{{ $data->id }}">
             <div class="row">
-                {{-- <div class="col">
-                    {{ $data->AD_Org_ID }}
+                 {{-- <div class="col">
+                    {{ $data->Nombre }}
                 </div>
                 <div class="col">
-                    {{ $data->C_BPartner_ID }}
+                    {{ $data->Cedula}} --}}
                 </div>
-                <div class="col">
+                {{--<div class="col">
                     {{ $data->AD_User_ID }}
                 </div>
                 <div class="col">
@@ -69,7 +69,7 @@
                 <div class="col">
                     {{ $data->CreatedBy }}
                 </div> --}}
-                <div class="col">
+                {{-- <div class="col">
                     {{ $data->FechaNuevoPrestamo }}
                 </div>
                 <div class="col">
@@ -90,7 +90,7 @@
                 <div class="col">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">X</button>
-                </div>
+                </div> --}}
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">

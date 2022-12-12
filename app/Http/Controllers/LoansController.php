@@ -36,25 +36,16 @@ class LoansController extends Controller
     }
     public function search(Request $request)
     {
-        $validate = $request->validate([
-            'TaxID' => 'required|max:255'
-        ]);
-        //$datas = ValesPagoda::where('value', '=', $request->value)->get();
-        //$range = ValesPagodaRange::where('valueFrom', '<=', $request->value)
-        //    ->where('valueTo', '>=', $request->value)
-        //    ->get();
         $user = auth()->user();
         $APIController = new APIController();
-        $datas = $APIController->getModel('C_BPartner', '', "TaxID eq '" . $request->TaxID . "'", '', '', '', '');
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        //dd($APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess'));
-        //dd($response->records[0]->AD_Org_ID->id);
-        //$list = loans::where('FechaNuevoPrestamo', )->where('TaxID', $request->TaxID)->get();
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
 
-        //dd($datas, $request, $orgs);
-        return view('loans', ['datas' => $datas, 'request' => $request, 'orgs' => $orgs]);
+
+        $usuario = loans::where('Cedula', $request->Cedula)->orwhere('Nombre', $request->Nombre)->get();
+
+        return view('loans', ['usuario' => $usuario, 'orgs' => $orgs]);
     }
 
     public function store(Request $request)
@@ -62,8 +53,8 @@ class LoansController extends Controller
         $todo = new loans;
         $todo->C_BPartner_ID = 0;
         $todo->AD_Org_ID = 0;
-        $todo->LoanAmt= 0;
-        $todo->CreatedBy= 0;
+        $todo->LoanAmt = 0;
+        $todo->CreatedBy = 0;
         $todo->FechaNuevoPrestamo = $request->FechaNuevoPrestamo;
         $todo->Monto = $request->Monto;
         $todo->Cuota = $request->Cuota;
@@ -73,6 +64,25 @@ class LoansController extends Controller
         $todo->save();
         return view('loans');
     }
+
+    public function bpartnerstore(Request $request)
+    {
+        $todo = new loans;
+        $todo->Nombre = $request->Nombre;
+        $todo->Cedula = $request->Cedula;
+        $todo->Telefono = $request->Telefono;
+        $todo->Solicitante = $request->Solicitante;
+        $todo->Direccion = $request->Direccion;
+        $todo->FotoCedula = $request->FotoCedula;
+        $todo->save();
+        $user = auth()->user();
+        $APIController = new APIController();
+        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+        $orgs =  $response;
+        return view('loans', ['orgs' => $orgs]);
+    }
+
     public function list()
     {
         return view('loans');

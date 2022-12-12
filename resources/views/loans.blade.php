@@ -44,14 +44,14 @@
                         <div class="row align-items-end">
                             <div class="col-md-3 col-3 col-sm-3 col-lg-3 ">
                                 <label>Nro Identificación </label>
-                                <input name="TaxID" value="{{ isset($request) ? $request->TaxId : '' }}" type="text"
-                                    class="form-control text-left   " placeholder="">
+                                <input name="Cedula" value="" type="text" class="form-control text-left   "
+                                    placeholder="">
                             </div>
 
                             <div class="col-md-4 col-4 col-sm-4  ">
                                 <label>Nombre</label>
-                                <input name="Name" value="{{ isset($request) ? $request->Name : '' }}" type="text"
-                                    class="form-control text-left   " placeholder="">
+                                <input name="Nombre" value="" type="text" class="form-control text-left   "
+                                    placeholder="">
                             </div>
                             <div class="col-md-5 col-5 col-sm-5 d-flex" style="">
                                 <button type="submit" class="btn btn-primary my-auto">Buscar</button>
@@ -61,67 +61,18 @@
                 </form>
             </div>
 
-            <br><br>
-            @if (isset($datas))
 
-                @if ($datas->{'array-count'} == 0)
-                    <br><br><br>
-
-                    <form name="loans_bpartnerstore" id="loans_bpartnerstore" method="GET"
-                        action="{{ route('loans.bpartnerstore') }}">
-                        @csrf
-                        <div class="container text-justify">
-                            <h2> Creacion de nuevo cliente </h2>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Nombre del Deudor</label>
-                                    <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="" required>
-                                    <label>Telefono</label>
-                                    <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="" required>
-                                    <label>Direccion</label>
-                                    <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="" required><br>
-                                </div>
-                                <div class="col">
-
-                                    <label>Cédula o RUC</label>
-                                    <input name="taxid" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="" required>
-
-                                    <label>Solicitante</label>
-                                    <input name="name" value="" type="text"
-                                        class=" form-control text-left  w-100 " placeholder="" required>
-
-                                    <label>Adjuntar Foto Cedula</label>
-                                    <input class="form-control" type="file" id="Filecedula" name="FileCedula"
-                                        value="0" required><br>
-                                </div>
-                                <br>
-                                <button type="submit" class="btn btn-success my-auto active ">Guardar</button>
-                                <br><br>
-                                <a href="{{ url('loanscancel') }}" class="btn btn-secondary active my-auto" role="button"
-                                    aria-pressed="true">Cancelar</a>
-                            </div>
-                        </div>
-
-                    </form>
-                    <br>
-                @endif
-
-                @if ($datas->{'array-count'} == 1)
-                    @foreach ($datas->records as $data)
-                        <div class="card">
-                            <div class="card-body">
+            @if (isset($usuario))
+                @if ($usuario->isNotEmpty())
+                    @foreach ($usuario as $data)
                                 <form name="loans_store" id="loans_store" method="POST"
                                     action="{{ route('loans.store') }}">
                                     <div class="container text-justify">
                                         <div class="row">
                                             <div class="col">
                                                 <br>
-                                                <p> Cédula: {{ $data->TaxID }} </p>
-                                                <p> Nombre: {{ $data->Name }} </p>
+                                                <p> Nombre del Deudor: {{ $data->Nombre }} </p>
+                                                <p> Cédula o RUC: {{ $data->Cedula }} </p>
                                                 <p> Monto Gobal total pendiente: 00.00</p>
                                             </div>
                                             <div class="col">
@@ -135,6 +86,8 @@
                                         </div>
                                     </div>
 
+
+
                                     <div class="modal fade" id="bpartnerModal" tabindex="-1"
                                         aria-labelledby="bpartnerModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -146,6 +99,7 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
+
                                                     <label>Fecha</label>
                                                     <input name="FechaNuevoPrestamo" type="date" class="form-control"
                                                         required>
@@ -197,6 +151,7 @@
                                                         </center>
                                                     </div>
                                                 </div>
+
                                                 <div class="modal-footer">
                                                     <div class="row">
                                                         <div class="col">
@@ -237,7 +192,8 @@
                                                     <br>
 
                                                     <label>Seleccionar un prestamo</label>
-                                                    <select class="form-select" aria-label="Default select example" required>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        required>
                                                         <option selected>Seleccione</option>
                                                         <option value="1">Abono Global</option>
                                                         <option value="2">Pretamo XX</option>
@@ -257,20 +213,10 @@
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text">$</span>
                                                         <input type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)" >
+                                                            aria-label="Amount (to the nearest dollar)">
                                                     </div>
                                                     <br>
-                                                    <label>Firma</label>
-                                                    <div>
-                                                        <center>
-                                                            @include('canvas/tablero4')
-                                                            <button class="btn btn-primary mh-100" type='button'
-                                                                onclick='LimpiarTrazado4()'>Borrar</button>
-                                                            <input type="hidden" id="myText4" name="v224"
-                                                                value="Firma No File">
 
-                                                        </center>
-                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="row">
@@ -290,15 +236,53 @@
                                     </div>
 
                                 </form>
+                          
+                    @endforeach
+                @else
+                    <br>
+                    <form name="loans_bpartnerstore" id="loans_bpartnerstore" method="POST"
+                        action="{{ route('loans.bpartnerstore') }}">
+                        @csrf
+                        <div class="container text-justify">
+                            <h2> Creacion de nuevo cliente </h2>
+                            <div class="row">
+                                <div class="col">
+
+                                    <label>Nombre del Deudor</label>
+                                    <input name="Nombre" value="" type="text"
+                                        class=" form-control text-left  w-100 " placeholder="" required>
+                                    <label>Telefono</label>
+                                    <input name="Telefono" value="" type="text"
+                                        class=" form-control text-left  w-100 " placeholder="" required>
+                                    <label>Direccion</label>
+                                    <input name="Direccion" value="" type="text"
+                                        class=" form-control text-left  w-100 " placeholder="" required><br>
+                                </div>
+                                <div class="col">
+
+                                    <label>Cédula o RUC</label>
+                                    <input name="Cedula" value="" type="text"
+                                        class=" form-control text-left  w-100 " placeholder="" required>
+                                    <label>Solicitante</label>
+                                    <input name="Solicitante" value="" type="text"
+                                        class=" form-control text-left  w-100 " placeholder="" required>
+                                    <label>Adjuntar Foto Cedula</label>
+                                    <input name="FotoCedula" class="form-control" type="file" id="Filecedula"
+                                        value="0" required><br>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-success my-auto active ">Guardar</button>
+                                <br><br>
+                                <a href="{{ url('loanscancel') }}" class="btn btn-secondary active my-auto"
+                                    role="button" aria-pressed="true">Cancelar</a>
                             </div>
                         </div>
-                    @endforeach
+                    </form>
                 @endif
             @endif
 
 
         </div>
-    </div>
     </div>
     <div class="container">
 
@@ -311,7 +295,6 @@
             </div>
         </div>
 
-    </div>
     </div>
     <script>
         var handleFileSelect = function(evt) {
