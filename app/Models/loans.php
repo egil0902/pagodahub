@@ -10,17 +10,13 @@ class loans extends Model
     use HasFactory;
     protected $fillable =
     [
-        'Nombre',
-        'Cedula',
-        'Telefono',
-        'Solicitante',
-        'Direccion',
-        'FotoCedula',
-        'FechaNuevoPrestamo',
-        'Monto',
-        'Cuota',
-        'Frecuencia',
-        'Filecedula',
-        'FirmaNuevoPrestamo'
+        'fechanuevoprestamo',
+        'monto',
+        'cuota',
+        'frecuencia',
+        'filecedula',
+        'firmanuevoprestamo',
+        'estado',
+        'cedula_user'
     ];
 }
