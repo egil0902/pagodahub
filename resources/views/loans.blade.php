@@ -44,13 +44,12 @@
                         <div class="row align-items-end">
                             <div class="col-md-3 col-3 col-sm-3 col-lg-3 ">
                                 <label>Nro Identificación </label>
-                                <input name="Cedula" value="" type="text" class="form-control text-left   "
+                                <input name="cedula" value="" type="text" class="form-control text-left"
                                     placeholder="">
                             </div>
-
                             <div class="col-md-4 col-4 col-sm-4  ">
                                 <label>Nombre</label>
-                                <input name="Nombre" value="" type="text" class="form-control text-left   "
+                                <input name="nombre" value="" type="text" class="form-control text-left "
                                     placeholder="">
                             </div>
                             <div class="col-md-5 col-5 col-sm-5 d-flex" style="">
@@ -60,215 +59,215 @@
                     </div>
                 </form>
             </div>
-
-
             @if (isset($usuario))
                 @if ($usuario->isNotEmpty())
                     @foreach ($usuario as $data)
-                                <form name="loans_store" id="loans_store" method="POST"
-                                    action="{{ route('loans.store') }}">
-                                    <div class="container text-justify">
+                        <div class="container text-justify">
+                            <div class="row">
+                                <div class="col">
+                                    <br>
+                                    <p> Nombre del Deudor:</p>
+                                    <p> Cédula o RUC:</p>
+                                    <p> Monto Gobal total pendiente:</p>
+                                </div>
+                                <div class="col">
+                                    <br>
+                                    <p> {{ $data->nombre }} </p>
+                                    <p> {{ $data->cedula }} </p>
+                                    <p>
+                                        @if (isset($usuario_monto))
+                                            @foreach ($usuario_monto as $info)
+                                            {{$info->sum}}
+                                            @endforeach
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <br>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#bpartnerModal">Nuevo prestamo</button><br>
+                                    <br>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#bpartnerModalPago">Pago Prestamo</button>
+                                </div>
+                            </div>
+                        </div>
+                        <form name="loans_store_new" id="loans_store_new" method="POST"
+                            action="{{ route('loans.store_new') }}">
+                            <div class="modal fade" id="bpartnerModal" tabindex="-1" aria-labelledby="bpartnerModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <input type="hidden" name="cedula_user" value="{{ $data->cedula }}" type="text"
+                                            class=" form-control text-left  w-100 " placeholder="" required>
+
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="bpartnerModalLabel">Nuevo
+                                                prestamo</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label>Fecha</label>
+                                            <input name="fechanuevoprestamo" type="date" class="form-control" required>
+                                            <br>
+                                            <label>Monto</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input name="monto" type="number" class="form-control"
+                                                    aria-label="Amount (to the nearest dollar)" required>
+                                            </div>
+                                            <br>
+                                            <label>Monto cuota</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input name="cuota" type="number" class="form-control"
+                                                    aria-label="Amount (to the nearest dollar)" required>
+                                            </div>
+                                            <br>
+                                            <label>Frecuencia</label>
+                                            <select class="form-select" name="frecuencia" required="">
+                                                <option selected="" disabled="" value="">Seleccione
+                                                </option>
+                                                <option value="Diario">Diario</option>
+                                                <option value="Semanal">Semanal</option>
+                                                <option value="Quincenal">Quincenal</option>
+                                                <option value="Mensual">Mensual</option>
+                                            </select>
+                                            <br>
+                                            <label>Adjuntar Foto Recibo</label>
+                                            <input class="form-control" type="file" id="filePicker"
+                                                placeholder="Recibo" name="FileCedula" value="0"
+                                                accept=".png, .jpg, .jpeg" required>
+                                            <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
+                                                cols="50" rows="15"></textarea>
+                                            <br> <br>
+                                            <label>Firma</label>
+                                            <div>
+                                                <center>
+                                                    @include('canvas/tablero3')
+                                                    <input type="hidden" id="myText3" name="firmanuevoprestamo"
+                                                        value="Firma No File" required>
+                                                    <button class="btn btn-primary mh-100" type='button'
+                                                        onclick='LimpiarTrazado3()'>Borrar</button>
+                                                </center>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                </div>
+                                                <div class="col">
+                                                    <button onclick="allfuncion()" type="submit"
+                                                        class="btn btn-primary">Guardar</button>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    function allfuncion() {
+                                                        b64img3();
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </form>
+
+                        <div class="modal fade" id="bpartnerModalPago" tabindex="-1"
+                            aria-labelledby="bpartnerModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="bpartnerModalLabel">Pago Prestamo
+                                        </h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label>Fecha</label>
+                                        <input name="DateTrx" type="date" value="" class="form-control"
+                                            required>
+                                        <br>
+
+                                        <label>Seleccionar un prestamo</label>
+                                        <select class="form-select" aria-label="Default select example" required>
+                                            <option selected>Seleccione</option>
+                                            <option value="1">Abono Global</option>
+                                            <option value="2">Pretamo XX</option>
+                                            <option value="3">Pretamo YY</option>
+                                            <option value="4">Pretamo ZZ</option>
+                                        </select>
+                                        <br>
+                                        <label>Deuda</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control"
+                                                aria-label="Amount (to the nearest dollar)" readonly value="0.00">
+                                        </div>
+
+                                        <label>Monto a Pagar</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control"
+                                                aria-label="Amount (to the nearest dollar)">
+                                        </div>
+                                        <br>
+
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="row">
                                             <div class="col">
-                                                <br>
-                                                <p> Nombre del Deudor: {{ $data->Nombre }} </p>
-                                                <p> Cédula o RUC: {{ $data->Cedula }} </p>
-                                                <p> Monto Gobal total pendiente: 00.00</p>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cerrar</button>
                                             </div>
                                             <div class="col">
-                                                <br>
-                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                    data-bs-target="#bpartnerModal">Nuevo prestamo</button><br>
-                                                <br>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#bpartnerModalPago">Pago Prestamo</button>
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
                                             </div>
+
                                         </div>
                                     </div>
-
-
-
-                                    <div class="modal fade" id="bpartnerModal" tabindex="-1"
-                                        aria-labelledby="bpartnerModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="bpartnerModalLabel">Nuevo
-                                                        prestamo</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <label>Fecha</label>
-                                                    <input name="FechaNuevoPrestamo" type="date" class="form-control"
-                                                        required>
-
-                                                    <br>
-
-                                                    <label>Monto</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text">$</span>
-                                                        <input name="Monto" type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)" required>
-                                                    </div>
-
-                                                    <br>
-                                                    <label>Monto cuota</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text">$</span>
-                                                        <input name="Cuota" type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)" required>
-                                                    </div>
-
-                                                    <br>
-                                                    <label>Frecuencia</label>
-                                                    <select class="form-select" name="Frecuencia" required="">
-                                                        <option selected="" disabled="" value="">Seleccione
-                                                        </option>
-                                                        <option value="Diario">Diario</option>
-                                                        <option value="Semanal">Semanal</option>
-                                                        <option value="Quincenal">Quincenal</option>
-                                                        <option value="Mensual">Mensual</option>
-                                                    </select>
-
-                                                    <br>
-                                                    <label>Adjuntar Foto Recibo</label>
-                                                    <input class="form-control" type="file" id="filePicker"
-                                                        placeholder="Recibo" name="FileCedula" value="0"
-                                                        accept=".png, .jpg, .jpeg" required>
-                                                    <textarea style="display:none;" name="Filecedula" id="base64textarea" placeholder="Base64 will appear here"
-                                                        cols="50" rows="15"></textarea>
-                                                    <br> <br>
-                                                    <label>Firma</label>
-                                                    <div>
-                                                        <center>
-                                                            @include('canvas/tablero3')
-                                                            <input type="hidden" id="myText3"
-                                                                name="FirmaNuevoPrestamo" value="Firma No File" required>
-                                                            <button class="btn btn-primary mh-100" type='button'
-                                                                onclick='LimpiarTrazado3()'>Borrar</button>
-                                                        </center>
-                                                    </div>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cerrar</button>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button onclick="allfuncion()" type="submit"
-                                                                class="btn btn-primary">Guardar</button>
-                                                        </div>
-                                                        <script type="text/javascript">
-                                                            function allfuncion() {
-                                                                b64img3();
-                                                            }
-                                                        </script>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br>
-
-
-                                    <div class="modal fade" id="bpartnerModalPago" tabindex="-1"
-                                        aria-labelledby="bpartnerModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="bpartnerModalLabel">Pago Prestamo
-                                                    </h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <label>Fecha</label>
-                                                    <input name="DateTrx" type="date" value=""
-                                                        class="form-control" required>
-                                                    <br>
-
-                                                    <label>Seleccionar un prestamo</label>
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        required>
-                                                        <option selected>Seleccione</option>
-                                                        <option value="1">Abono Global</option>
-                                                        <option value="2">Pretamo XX</option>
-                                                        <option value="3">Pretamo YY</option>
-                                                        <option value="4">Pretamo ZZ</option>
-                                                    </select>
-                                                    <br>
-                                                    <label>Deuda</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)" readonly
-                                                            value="0.00">
-                                                    </div>
-
-                                                    <label>Monto a Pagar</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text">$</span>
-                                                        <input type="number" class="form-control"
-                                                            aria-label="Amount (to the nearest dollar)">
-                                                    </div>
-                                                    <br>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cerrar</button>
-                                                        </div>
-                                                        <div class="col">
-                                                            <button type="submit"
-                                                                class="btn btn-primary">Guardar</button>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-                          
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 @else
                     <br>
-                    <form name="loans_bpartnerstore" id="loans_bpartnerstore" method="POST"
-                        action="{{ route('loans.bpartnerstore') }}">
+                    <form name="loans_newuser" id="loans_newuser" method="POST" action="{{ route('loans.newuser') }}">
                         @csrf
+                        <br>
                         <div class="container text-justify">
                             <h2> Creacion de nuevo cliente </h2>
                             <div class="row">
                                 <div class="col">
 
                                     <label>Nombre del Deudor</label>
-                                    <input name="Nombre" value="" type="text"
+                                    <input name="nombre" value="{{ $nombre }}" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required>
+
                                     <label>Telefono</label>
-                                    <input name="Telefono" value="" type="text"
+                                    <input name="telefono" value="" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required>
                                     <label>Direccion</label>
-                                    <input name="Direccion" value="" type="text"
+                                    <input name="direccion" value="" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required><br>
                                 </div>
                                 <div class="col">
-
                                     <label>Cédula o RUC</label>
-                                    <input name="Cedula" value="" type="text"
+                                    <input name="cedula" value="{{ $cedula }}" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required>
                                     <label>Solicitante</label>
-                                    <input name="Solicitante" value="" type="text"
+                                    <input name="solicitante" value="" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required>
                                     <label>Adjuntar Foto Cedula</label>
-                                    <input name="FotoCedula" class="form-control" type="file" id="Filecedula"
-                                        value="0" required><br>
+                                    <input class="form-control" type="file" id="filePicker" placeholder="Cedula"
+                                        name="" value="0" accept=".png, .jpg, .jpeg" required>
+                                    <textarea style="display:none;" name="fotocedula" id="base64textarea" placeholder="Base64 will appear here"
+                                        cols="50" rows="15"></textarea>
+                                    <br>
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-success my-auto active ">Guardar</button>
@@ -284,6 +283,7 @@
 
         </div>
     </div>
+    <br>
     <div class="container">
 
         <div class="card">
@@ -300,19 +300,15 @@
         var handleFileSelect = function(evt) {
             var files = evt.target.files;
             var file = files[0];
-
             if (files && file) {
                 var reader = new FileReader();
-
                 reader.onload = function(readerEvt) {
                     var binaryString = readerEvt.target.result;
                     document.getElementById("base64textarea").value = btoa(binaryString);
                 };
-
                 reader.readAsBinaryString(file);
             }
         };
-
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             document.getElementById('filePicker')
                 .addEventListener('change', handleFileSelect, false);
