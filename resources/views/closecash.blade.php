@@ -108,10 +108,10 @@
                         @if (isset($closecashlist))
                             <table class="table table-borderless">
                                 <tr>
-                                    <td style="width: 100px;">
-                                        <h5><b>Identificador</b></h5>
+                                    <td style="width: 100px;" align="left">
+                                        <h5><b>Caja</b></h5>
                                     </td>
-                                    <td style="width: 100px;">
+                                    <td style="width: 100px;" align="left">
                                         <h5><b>Cajera</b></h5>
                                     </td>
                                     <td style="width: 100px;" align="right">
