@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\loans;
+use App\Models\loans_user;
 use Illuminate\Http\Request;
 
 class LoansController extends Controller
@@ -41,11 +42,9 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
-
-
-        $usuario = loans::where('Cedula', $request->Cedula)->orwhere('Nombre', $request->Nombre)->get();
-
-        return view('loans', ['usuario' => $usuario, 'orgs' => $orgs]);
+        $usuario = loans_user::where('cedula',$request->cedula)->orwhere('nombre','%'. $request->nombre.'%')->get();
+        //dd($usuario);
+        return view('loans', ['usuario' => $usuario, 'orgs' => $orgs,'cedula' => $request->cedula,'nombre'=>$request->nombre]);
     }
 
     public function store(Request $request)
@@ -65,15 +64,15 @@ class LoansController extends Controller
         return view('loans');
     }
 
-    public function bpartnerstore(Request $request)
+    public function newuser(Request $request)
     {
-        $todo = new loans;
-        $todo->Nombre = $request->Nombre;
-        $todo->Cedula = $request->Cedula;
-        $todo->Telefono = $request->Telefono;
-        $todo->Solicitante = $request->Solicitante;
-        $todo->Direccion = $request->Direccion;
-        $todo->FotoCedula = $request->FotoCedula;
+        $todo = new loans_user;
+        $todo->nombre = $request->nombre;
+        $todo->cedula = $request->cedula;
+        $todo->telefono = $request->telefono;
+        $todo->solicitante = $request->solicitante;
+        $todo->direccion = $request->direccion;
+        $todo->fotocedula = $request->fotocedula;
         $todo->save();
         $user = auth()->user();
         $APIController = new APIController();
