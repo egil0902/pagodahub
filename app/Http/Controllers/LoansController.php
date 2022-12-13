@@ -44,9 +44,20 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
         $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
-        $usuario_monto = loans_new::select(loans_new::raw("SUM(monto)"))->where('cedula_user',$request->cedula)->get();
-        //dd($usuario_monto);
-        return view('loans', ['usuario' => $usuario,'usuario_monto' => $usuario_monto, 'orgs' => $orgs, 'cedula' => $request->cedula, 'nombre' => $request->nombre]);
+        $usuario_loans = loans_new::where('cedula_user', $request->cedula)->get();
+        $usuario_monto = loans_new::select(loans_new::raw("SUM(monto)"))->where('cedula_user', $request->cedula)->get();
+        //dd($usuario_loans);
+        return view(
+            'loans',
+            [
+                'usuario' => $usuario,
+                'usuario_monto' => $usuario_monto,
+                'usuario_loans' => $usuario_loans,
+                'orgs' => $orgs,
+                'cedula' => $request->cedula,
+                'nombre' => $request->nombre
+            ]
+        );
     }
 
     public function store(Request $request)

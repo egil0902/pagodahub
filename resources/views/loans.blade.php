@@ -77,17 +77,17 @@
                                     <p>
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
-                                            {{$info->sum}}
+                                                {{ $info->sum }}
                                             @endforeach
                                         @endif
                                     </p>
                                 </div>
                                 <div class="col">
                                     <br>
-                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal"
                                         data-bs-target="#bpartnerModal">Nuevo prestamo</button><br>
                                     <br>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal"
                                         data-bs-target="#bpartnerModalPago">Pago Prestamo</button>
                                 </div>
                             </div>
@@ -98,7 +98,6 @@
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-
                                         <input type="hidden" name="cedula_user" value="{{ $data->cedula }}" type="text"
                                             class=" form-control text-left  w-100 " placeholder="" required>
 
@@ -194,21 +193,28 @@
                                         <br>
 
                                         <label>Seleccionar un prestamo</label>
-                                        <select class="form-select" aria-label="Default select example" required>
-                                            <option selected>Seleccione</option>
-                                            <option value="1">Abono Global</option>
-                                            <option value="2">Pretamo XX</option>
-                                            <option value="3">Pretamo YY</option>
-                                            <option value="4">Pretamo ZZ</option>
+                                        <select id="cc" class="form-select" aria-label="Default select example"
+                                            required onchange="deuda()" onkeyup="deuda()">
+                                            @if (isset($usuario_monto))
+                                                @foreach ($usuario_monto as $info)
+                                                    <option selected value="{{ $info->sum }}">Abono Global</option>
+                                                @endforeach
+                                            @endif
+                                            @if (isset($usuario_loans))
+                                                @foreach ($usuario_loans as $info)
+                                                    <option value="{{ $info->monto }}"> Fecha:
+                                                        {{ $info->fechanuevoprestamo }} ----- Monto: {{ $info->monto }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         <br>
                                         <label>Deuda</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">$</span>
-                                            <input type="number" class="form-control"
-                                                aria-label="Amount (to the nearest dollar)" readonly value="0.00">
+                                            {{-- <input type="number" class="form-control" id="xyz" aria-label="Amount (to the nearest dollar)" readonly value="0.00"> --}}
+                                            <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled" disabled id="xyz">
                                         </div>
-
                                         <label>Monto a Pagar</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text">$</span>
@@ -216,7 +222,6 @@
                                                 aria-label="Amount (to the nearest dollar)">
                                         </div>
                                         <br>
-
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row">
@@ -243,11 +248,9 @@
                             <h2> Creacion de nuevo cliente </h2>
                             <div class="row">
                                 <div class="col">
-
                                     <label>Nombre del Deudor</label>
                                     <input name="nombre" value="{{ $nombre }}" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required>
-
                                     <label>Telefono</label>
                                     <input name="telefono" value="" type="text"
                                         class=" form-control text-left  w-100 " placeholder="" required>
@@ -279,24 +282,27 @@
                     </form>
                 @endif
             @endif
-
-
         </div>
     </div>
     <br>
     <div class="container">
-
         <div class="card">
             <div class="card-header">
                 Lista de prestamos Solicitados
             </div>
             <div class="card-body">
-                @livewire('loanssearch')
+                {{-- @livewire('loanssearch') --}}
             </div>
         </div>
-
     </div>
     <script>
+        window.onload = function() {
+            deuda();
+        }
+
+        function deuda() {
+            document.getElementById("xyz").value = document.getElementById("cc").value;
+        }
         var handleFileSelect = function(evt) {
             var files = evt.target.files;
             var file = files[0];
