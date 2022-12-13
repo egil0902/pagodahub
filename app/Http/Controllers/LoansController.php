@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\loans;
 use App\Models\loans_user;
+use App\Models\loans_new;
 use Illuminate\Http\Request;
 
 class LoansController extends Controller
@@ -42,27 +43,39 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
-        $usuario = loans_user::where('cedula',$request->cedula)->orwhere('nombre','%'. $request->nombre.'%')->get();
-        //dd($usuario);
-        return view('loans', ['usuario' => $usuario, 'orgs' => $orgs,'cedula' => $request->cedula,'nombre'=>$request->nombre]);
+        $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
+        $usuario_monto = loans_new::select(loans_new::raw("SUM(monto)"))->where('cedula_user',$request->cedula)->get();
+        //dd($usuario_monto);
+        return view('loans', ['usuario' => $usuario,'usuario_monto' => $usuario_monto, 'orgs' => $orgs, 'cedula' => $request->cedula, 'nombre' => $request->nombre]);
     }
 
     public function store(Request $request)
     {
-        $todo = new loans;
-        $todo->C_BPartner_ID = 0;
-        $todo->AD_Org_ID = 0;
-        $todo->LoanAmt = 0;
-        $todo->CreatedBy = 0;
-        $todo->FechaNuevoPrestamo = $request->FechaNuevoPrestamo;
-        $todo->Monto = $request->Monto;
-        $todo->Cuota = $request->Cuota;
-        $todo->Frecuencia = $request->Frecuencia;
-        $todo->Filecedula = $request->Filecedula;
-        $todo->FirmaNuevoPrestamo = $request->FirmaNuevoPrestamo;
-        $todo->save();
         return view('loans');
     }
+
+    public function store_new(Request $request)
+    {
+        $todo = new loans_new;
+        $todo->fechanuevoprestamo   = $request->fechanuevoprestamo;
+        $todo->monto                = $request->monto;
+        $todo->cuota                = $request->cuota;
+        $todo->frecuencia           = $request->frecuencia;
+        $todo->filecedula           = $request->filecedula;
+        $todo->firmanuevoprestamo   = $request->firmanuevoprestamo;
+        $todo->estado =               "Nuevo";
+        $todo->cedula_user          = $request->cedula_user;
+        //dd($todo);
+        $todo->save();
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $user = auth()->user();
+        $APIController = new APIController();
+        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+        $orgs =  $response;
+        return view('loans', ['orgs' => $orgs]);
+    }
+
 
     public function newuser(Request $request)
     {
@@ -74,6 +87,7 @@ class LoansController extends Controller
         $todo->direccion = $request->direccion;
         $todo->fotocedula = $request->fotocedula;
         $todo->save();
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $user = auth()->user();
         $APIController = new APIController();
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');

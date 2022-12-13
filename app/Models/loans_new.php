@@ -10,7 +10,13 @@ class loans_new extends Model
     use HasFactory;
     protected $fillable =
     [
-
-        
+        'fechanuevoprestamo',
+        'monto',
+        'cuota',
+        'frecuencia',
+        'filecedula',
+        'firmanuevoprestamo',
+        'estado',
+        'cedula_user'
     ];
 }

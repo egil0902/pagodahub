@@ -21,6 +21,7 @@ return new class extends Migration
             $table->double('cuota', 8, 2)->nullable();
             $table->text('frecuencia')->nullable();
             $table->longText('filecedula')->nullable();
+            $table->longText('firmanuevoprestamo')->nullable();
             $table->string('estado')->nullable();
             $table->string('cedula_user')->nullable();
         });
