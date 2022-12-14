@@ -54,11 +54,12 @@ Route::post('/valespagodarange_store',[App\Http\Controllers\ValesPagodaRangeCont
 Route::post('/valespagodarange_list',[App\Http\Controllers\ValesPagodaRangeController::class, 'list'])->name('valespagodarange.list');
 
 
-Route::get('/loans',[App\Http\Controllers\LoansController::class, 'index'])->name('loans');
-Route::get('/loans_search',[App\Http\Controllers\LoansController::class, 'search'])->name('loans.search');
-Route::post('/loans_store',[App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
-Route::post('/loans_store_new',[App\Http\Controllers\LoansController::class, 'store_new'])->name('loans.store_new');
-Route::post('/loans_newuser',[App\Http\Controllers\LoansController::class, 'newuser'])->name('loans.newuser');
+Route::get('/loans',[App\Http\Controllers\LoansController::class,'index'])->name('loans');
+Route::get('/loans_search',[App\Http\Controllers\LoansController::class,'search'])->name('loans.search');
+Route::post('/loans_store',[App\Http\Controllers\LoansController::class,'store'])->name('loans.store');
+Route::post('/loans_store_new',[App\Http\Controllers\LoansController::class,'store_new'])->name('loans.store_new');
+Route::post('/loans_newuser',[App\Http\Controllers\LoansController::class,'newuser'])->name('loans.newuser');
+Route::post('/loans_update',[App\Http\Controllers\LoansController::class,'update'])->name('loans.update');
 
 Route::post('/loans_list',[App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 

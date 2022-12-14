@@ -4,45 +4,22 @@
             <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" />
         </div>
     </div>
+    <br>
     <div class="row">
-       <div class="col">
-            Nombre
+        <div class="col border" align="justify">
+            Cedula Deudor
         </div>
-        <div class="col">
-            Cedula
+        <div class="col border" align="justify">
+            Fecha del Prestamo
         </div>
-        {{--  <div class="col">
-            Contacto
+        <div class="col border" align="justify">
+            Monto pedido
         </div>
-        <div class="col">
-            Monto
-        </div>
-        <div class="col">
-            Fecha de Consumo
-        </div>
-        <div class="col">
-            Validado Por
-        </div> --}}
-        <div class="col">
-            Fecha Nuevo Prestamo
-        </div>
-        <div class="col">
-            Monto
-        </div>
-        <div class="col">
+        <div class="col border" align="justify">
             Cuota
         </div>
-        <div class="col">
+        <div class="col border" align="justify">
             Frecuencia
-        </div>
-        <div class="col">
-            File cedula
-        </div>
-        <div class="col">
-            Firma Nuevo Prestamo
-        </div>
-        <div class="col">
-            X
         </div>
     </div>
     @foreach ($loans as $data)
@@ -51,46 +28,22 @@
             @csrf
             <input name="valeid" type="hidden" value="{{ $data->id }}">
             <div class="row">
-                 {{-- <div class="col">
-                    {{ $data->Nombre }}
+                <div class="col border" align="justify">
+                    {{ $data->cedula_user }}
                 </div>
-                <div class="col">
-                    {{ $data->Cedula}} --}}
+                <div class="col border" align="justify">
+                    {{ $data->fechanuevoprestamo }}
                 </div>
-                {{--<div class="col">
-                    {{ $data->AD_User_ID }}
+                <div class="col border" align="justify">
+                    {{ $data->monto }}
                 </div>
-                <div class="col">
-                    {{ $data->LoanAmt }}
+                <div class="col border" align="justify">
+                    {{ $data->cuota }}
                 </div>
-                <div class="col">
-                    {{ date('d-m-Y', strtotime($data->created_at)) }}
+                <div class="col border" align="justify">
+                    {{ $data->frecuencia }}
                 </div>
-                <div class="col">
-                    {{ $data->CreatedBy }}
-                </div> --}}
-                {{-- <div class="col">
-                    {{ $data->FechaNuevoPrestamo }}
-                </div>
-                <div class="col">
-                    {{ $data->Monto }}
-                </div>
-                <div class="col">
-                    {{ $data->Cuota }}
-                </div>
-                <div class="col">
-                    {{ $data->Frecuencia }}
-                </div>
-                <div class="col">
-                    <img width="100" height="50" src="data:image/png;base64,{{ $data->Filecedula }}" border="1"> 
-                </div>
-                <div class="col">
-                    <img width="100" height="50" src="{{ $data->FirmaNuevoPrestamo }}" border="1">   
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">X</button>
-                </div> --}}
+                <br>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">

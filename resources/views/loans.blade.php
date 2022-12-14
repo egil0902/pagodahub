@@ -110,38 +110,44 @@
                                         <div class="modal-body">
                                             <label>Fecha</label>
                                             <input name="fechanuevoprestamo" type="date" class="form-control" required>
-                                            <br>
+
                                             <label>Monto</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text">$</span>
                                                 <input name="monto" type="number" class="form-control"
                                                     aria-label="Amount (to the nearest dollar)" required>
                                             </div>
-                                            <br>
-                                            <label>Monto cuota</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">$</span>
-                                                <input name="cuota" type="number" class="form-control"
-                                                    aria-label="Amount (to the nearest dollar)" required>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label>Frecuencia</label>
+                                                    <select id="fre" class="form-select" name="frecuencia"
+                                                        onchange="deuda()" onkeyup="deuda()">
+                                                        <option selected="" value="---">No</option>
+                                                        <option value="Diario">Diario</option>
+                                                        <option value="Semanal">Semanal</option>
+                                                        <option value="Quincenal">Quincenal</option>
+                                                        <option value="Mensual">Mensual</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Monto cuota</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">$</span>
+                                                        <input id="cuo" name="cuota" type="number"
+                                                            class="form-control"
+                                                            aria-label="Amount (to the nearest dollar)" value="0">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <br>
-                                            <label>Frecuencia</label>
-                                            <select class="form-select" name="frecuencia" required="">
-                                                <option selected="" disabled="" value="">Seleccione
-                                                </option>
-                                                <option value="Diario">Diario</option>
-                                                <option value="Semanal">Semanal</option>
-                                                <option value="Quincenal">Quincenal</option>
-                                                <option value="Mensual">Mensual</option>
-                                            </select>
-                                            <br>
+
                                             <label>Adjuntar Foto Recibo</label>
                                             <input class="form-control" type="file" id="filePicker"
                                                 placeholder="Recibo" name="FileCedula" value="0"
                                                 accept=".png, .jpg, .jpeg" required>
                                             <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
                                                 cols="50" rows="15"></textarea>
-                                            <br> <br>
+                                            <br>
                                             <label>Firma</label>
                                             <div>
                                                 <center>
@@ -176,68 +182,72 @@
                             <br>
                         </form>
 
-                        <div class="modal fade" id="bpartnerModalPago" tabindex="-1"
-                            aria-labelledby="bpartnerModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="bpartnerModalLabel">Pago Prestamo
-                                        </h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label>Fecha</label>
-                                        <input name="DateTrx" type="date" value="" class="form-control"
-                                            required>
-                                        <br>
-
-                                        <label>Seleccionar un prestamo</label>
-                                        <select id="cc" class="form-select" aria-label="Default select example"
-                                            required onchange="deuda()" onkeyup="deuda()">
-                                            @if (isset($usuario_monto))
-                                                @foreach ($usuario_monto as $info)
-                                                    <option selected value="{{ $info->sum }}">Abono Global</option>
-                                                @endforeach
-                                            @endif
-                                            @if (isset($usuario_loans))
-                                                @foreach ($usuario_loans as $info)
-                                                    <option value="{{ $info->monto }}"> Fecha:
-                                                        {{ $info->fechanuevoprestamo }} ----- Monto: {{ $info->monto }}
-                                                    </option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                        <br>
-                                        <label>Deuda</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">$</span>
-                                            {{-- <input type="number" class="form-control" id="xyz" aria-label="Amount (to the nearest dollar)" readonly value="0.00"> --}}
-                                            <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled" disabled id="xyz">
+                        <form name="loans_update" id="loans_update" method="POST"
+                            action="{{ route('loans.update') }}">
+                            <div class="modal fade" id="bpartnerModalPago" tabindex="-1"
+                                aria-labelledby="bpartnerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="bpartnerModalLabel">Pago Prestamo
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
-                                        <label>Monto a Pagar</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text">$</span>
-                                            <input type="number" class="form-control"
-                                                aria-label="Amount (to the nearest dollar)">
-                                        </div>
-                                        <br>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="row">
-                                            <div class="col">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cerrar</button>
-                                            </div>
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                            </div>
+                                        <div class="modal-body">
+                                            <label>Fecha</label>
+                                            <input name="DateTrx" type="date" value="" class="form-control"
+                                                required>
+                                            <br>
 
+                                            <label>Seleccionar un prestamo</label>
+                                            <select id="cc" class="form-select"
+                                                aria-label="Default select example" required onchange="deuda()"
+                                                onkeyup="deuda()">
+                                                @if (isset($usuario_monto))
+                                                    @foreach ($usuario_monto as $info)
+                                                        <option selected value="{{ $info->sum }}">Abono Global</option>
+                                                    @endforeach
+                                                @endif
+                                                @if (isset($usuario_loans))
+                                                    @foreach ($usuario_loans as $info)
+                                                        <option value="{{ $info->monto }}"> Fecha:
+                                                            {{ $info->fechanuevoprestamo }} ----- Monto:
+                                                            {{ $info->monto }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            <br>
+                                            <label>Deuda</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input class="form-control" type="text" placeholder="Disabled input"
+                                                    aria-label="Disabled" disabled id="xyz">
+                                            </div>
+                                            <label>Monto a Pagar</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input type="number" class="form-control"
+                                                    aria-label="Amount (to the nearest dollar)">
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                </div>
+                                                <div class="col">
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     @endforeach
                 @else
                     <br>
@@ -291,7 +301,7 @@
                 Lista de prestamos Solicitados
             </div>
             <div class="card-body">
-                {{-- @livewire('loanssearch') --}}
+                @livewire('loanssearch')
             </div>
         </div>
     </div>
@@ -302,6 +312,16 @@
 
         function deuda() {
             document.getElementById("xyz").value = document.getElementById("cc").value;
+            const cambio = document.getElementById("cuo");
+            if ('---' == document.getElementById("fre").value) {
+                console.log("Entro");
+                cambio.setAttribute('disabled');
+                //cambio.classList.replace("text-success", "text-danger");
+            } else {
+                cambio.removeAttribute('disabled');
+                cambio.setAttribute('enable');
+            }
+
         }
         var handleFileSelect = function(evt) {
             var files = evt.target.files;
