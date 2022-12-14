@@ -184,6 +184,7 @@
 
                         <form name="loans_update" id="loans_update" method="POST"
                             action="{{ route('loans.update') }}">
+                            @csrf
                             <div class="modal fade" id="bpartnerModalPago" tabindex="-1"
                                 aria-labelledby="bpartnerModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -196,7 +197,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <label>Fecha</label>
-                                            <input name="DateTrx" type="date" value="" class="form-control"
+                                            <input name="datepayment" type="date" value="" class="form-control"
                                                 required>
                                             <br>
 
@@ -206,29 +207,29 @@
                                                 onkeyup="deuda()">
                                                 @if (isset($usuario_monto))
                                                     @foreach ($usuario_monto as $info)
-                                                        <option selected value="{{ $info->sum }}">Abono Global</option>
+                                                        <option selected value="{{ $info->sum }}">Abono
+                                                            Global</option>
                                                     @endforeach
                                                 @endif
                                                 @if (isset($usuario_loans))
                                                     @foreach ($usuario_loans as $info)
-                                                        <option value="{{ $info->monto }}"> Fecha:
-                                                            {{ $info->fechanuevoprestamo }} ----- Monto:
-                                                            {{ $info->monto }}
+                                                        <option value="{{ $info->monto }} {{ $info->id }}">
+                                                            Fecha: {{ $info->fechanuevoprestamo }} -----
+                                                            Monto: {{ $info->monto }}
                                                         </option>
                                                     @endforeach
                                                 @endif
                                             </select>
                                             <br>
-                                            <label>Deuda</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">$</span>
-                                                <input class="form-control" type="text" placeholder="Disabled input"
-                                                    aria-label="Disabled" disabled id="xyz">
+                                            <div  hidden class="input-group mb-3">
+                                                <span hidden class="input-group-text">$</span>
+                                                <input  hidden name="loans_id" class="form-control" type="text"
+                                                    placeholder="Disabled input" id="xyz">
                                             </div>
                                             <label>Monto a Pagar</label>
                                             <div class="input-group mb-3">
-                                                <span class="input-group-text">$</span>
-                                                <input type="number" class="form-control"
+                                                <span  class="input-group-text">$</span>
+                                                <input name="amount" type="number" class="form-control"
                                                     aria-label="Amount (to the nearest dollar)">
                                             </div>
                                             <br>
@@ -314,7 +315,7 @@
             document.getElementById("xyz").value = document.getElementById("cc").value;
             const cambio = document.getElementById("cuo");
             if ('---' == document.getElementById("fre").value) {
-                console.log("Entro");
+
                 cambio.setAttribute('disabled');
                 //cambio.classList.replace("text-success", "text-danger");
             } else {

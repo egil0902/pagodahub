@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\loans;
 use App\Models\loans_user;
 use App\Models\loans_new;
+use App\Models\loans_payments;
 use Illuminate\Http\Request;
 
 class LoansController extends Controller
@@ -124,12 +125,13 @@ class LoansController extends Controller
 
     public function update(Request $request)
     {
-        $todo = new loans;
-        $todo->fechanuevoprestamo   = $request->fechanuevoprestamo;
-        $todo->monto                = $request->monto;
-        $todo->cuota                = $request->cuota;
+        $todo       =   new loans_payments;
+        $todo->datepayment  = $request->datepayment;
+        $todo->amount       = $request->amount;
+        $todo->loans_id     = $request->loans_id;
+        //dd($request->loans_id);
+        $todo->save();
         return view('loans');
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     public function list()

@@ -13,7 +13,7 @@
             Fecha del Prestamo
         </div>
         <div class="col border" align="justify">
-            Monto pedido
+            Monto
         </div>
         <div class="col border" align="justify">
             Cuota
