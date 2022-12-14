@@ -20,10 +20,11 @@ class Loanssearch extends Component
     {
         
         $searchTerm = $this->searchTerm;
+        //dd(loans::paginate(10));
         if($searchTerm=='')
             $searchTerm=0;
         return view('livewire.loanssearch',[
-            'loans' => loans::paginate(10),
+            'loans' => loans::paginate(25),
         ]);
     }
     

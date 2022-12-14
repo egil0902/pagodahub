@@ -97,6 +97,7 @@ class LoansController extends Controller
         $todo->solicitante = $request->solicitante;
         $todo->direccion = $request->direccion;
         $todo->fotocedula = $request->fotocedula;
+        $todo->montototal = 0;
         $todo->save();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $user = auth()->user();
@@ -104,7 +105,31 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
-        return view('loans', ['orgs' => $orgs]);
+        $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
+        $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
+        $usuario_monto = loans::select(loans_new::raw("SUM(monto)"))->where('cedula_user', $request->cedula)->get();
+        //dd($usuario_loans);
+        return view(
+            'loans',
+            [
+                'usuario' => $usuario,
+                'usuario_monto' => $usuario_monto,
+                'usuario_loans' => $usuario_loans,
+                'orgs' => $orgs,
+                'cedula' => $request->cedula,
+                'nombre' => $request->nombre
+            ]
+        );
+    }
+
+    public function update(Request $request)
+    {
+        $todo = new loans;
+        $todo->fechanuevoprestamo   = $request->fechanuevoprestamo;
+        $todo->monto                = $request->monto;
+        $todo->cuota                = $request->cuota;
+        return view('loans');
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     public function list()
