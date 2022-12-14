@@ -77,7 +77,7 @@
                                     <p>
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
-                                                {{ $info->sum }}
+                                                {{ $info->sum - $usuario_payment[0]->sum}}
                                             @endforeach
                                         @endif
                                     </p>
@@ -123,7 +123,7 @@
                                                     <label>Frecuencia</label>
                                                     <select id="fre" class="form-select" name="frecuencia"
                                                         onchange="deuda()" onkeyup="deuda()">
-                                                        <option selected="" value="---">No</option>
+                                                        <option selected="" value="---">No Aplica</option>
                                                         <option value="Diario">Diario</option>
                                                         <option value="Semanal">Semanal</option>
                                                         <option value="Quincenal">Quincenal</option>
@@ -199,6 +199,9 @@
                                             <label>Fecha</label>
                                             <input name="datepayment" type="date" value="" class="form-control"
                                                 required>
+                                            <br>
+
+                                            <input  name="loans_users_id" type="hidden" value="{{$usuario[0]->id}}" class="form-control">
                                             <br>
 
                                             <label>Seleccionar un prestamo</label>
