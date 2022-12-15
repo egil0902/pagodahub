@@ -7,19 +7,16 @@
     <br>
     <div class="row">
         <div class="col border" align="justify">
-            Cedula Deudor
+            Fecha
         </div>
         <div class="col border" align="justify">
-            Fecha del Prestamo
+            Cedula
+        </div>
+        <div class="col border" align="justify">
+            Nombre
         </div>
         <div class="col border" align="justify">
             Monto
-        </div>
-        <div class="col border" align="justify">
-            Cuota
-        </div>
-        <div class="col border" align="justify">
-            Frecuencia
         </div>
     </div>
     @foreach ($loans as $data)
@@ -29,20 +26,18 @@
             <input name="valeid" type="hidden" value="{{ $data->id }}">
             <div class="row">
                 <div class="col border" align="justify">
+                    {{ $data->fechanuevoprestamo }}
+                </div>
+                <div class="col border" align="justify">
                     {{ $data->cedula_user }}
                 </div>
                 <div class="col border" align="justify">
-                    {{ $data->fechanuevoprestamo }}
+                    {{ $data->nombre_user }}
                 </div>
                 <div class="col border" align="justify">
                     {{ $data->monto }}
                 </div>
-                <div class="col border" align="justify">
-                    {{ $data->cuota }}
-                </div>
-                <div class="col border" align="justify">
-                    {{ $data->frecuencia }}
-                </div>
+               
                 <br>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

@@ -17,6 +17,8 @@ class loans extends Model
         'filecedula',
         'firmanuevoprestamo',
         'estado',
-        'cedula_user'
+        'cedula_user',
+        'nombre_user',
+        'loans_users_id'
     ];
 }
