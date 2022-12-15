@@ -47,12 +47,14 @@ class LoansController extends Controller
         $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
         $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
         $usuario_monto = loans::select(loans_new::raw("SUM(monto)"))->where('cedula_user', $request->cedula)->get();
-        //dd($usuario[0]->id);
-        $usuario_payment = loans_payments::select(loans_payments::raw("SUM(amount)"))->where('loans_users_id', $usuario[0]->id)->get();
-        //dd($usuario_monto,$usuario_payment);
-        //$total = $usuario_monto  - $usuario_payment; 
-        
-        //dd($usuario_loans);
+
+        if (isset($usuario[0]->id)) {
+            $usuario_payment = loans_payments::select(loans_payments::raw("SUM(amount)"))->where('loans_users_id', $usuario[0]->id)->get();
+
+        } else {
+            $usuario_payment= 0;
+        }
+
         return view(
             'loans',
             [
@@ -83,6 +85,8 @@ class LoansController extends Controller
         $todo->firmanuevoprestamo   = $request->firmanuevoprestamo;
         $todo->estado =               "Nuevo";
         $todo->cedula_user          = $request->cedula_user;
+        $todo->nombre_user          = $request->nombre_user;
+        $todo->loans_users_id       = $request->loans_users_id;
         //dd($todo);
         $todo->save();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +142,7 @@ class LoansController extends Controller
         $todo->amount       = $request->amount;
         $todo->loans_users_id = $request->loans_users_id;
         $todo->loans_id     = $request->loans_id;
-        
+
         //dd($request->loans_id);
         $todo->save();
         return view('loans');

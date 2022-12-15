@@ -66,21 +66,25 @@
                             <div class="row">
                                 <div class="col">
                                     <br>
-                                    <p> Nombre del Deudor:</p>
+                                    <p> Nombre del deudor:</p>
                                     <p> Cédula o RUC:</p>
-                                    <p> Monto Gobal total pendiente:</p>
+                                    <p> Monto gobal total pendiente:</p>
                                 </div>
                                 <div class="col">
                                     <br>
                                     <p> {{ $data->nombre }} </p>
                                     <p> {{ $data->cedula }} </p>
-                                    <p>
-                                        @if (isset($usuario_monto))
-                                            @foreach ($usuario_monto as $info)
-                                                {{ $info->sum - $usuario_payment[0]->sum}}
-                                            @endforeach
-                                        @endif
-                                    </p>
+
+                                    @if (isset($usuario_monto))
+                                        @foreach ($usuario_monto as $info)
+                                            @if (isset($usuario_payment[0]->sum))
+                                                <p>{{ $info->sum - $usuario_payment[0]->sum }} </p>
+                                            @else
+                                                <p>{{ $info->sum - 0 }}</p>
+                                            @endif
+                                        @endforeach
+                                    @endif
+
                                 </div>
                                 <div class="col">
                                     <br>
@@ -94,11 +98,17 @@
                         </div>
                         <form name="loans_store_new" id="loans_store_new" method="POST"
                             action="{{ route('loans.store_new') }}">
+                            @csrf
                             <div class="modal fade" id="bpartnerModal" tabindex="-1" aria-labelledby="bpartnerModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
+
                                         <input type="hidden" name="cedula_user" value="{{ $data->cedula }}" type="text"
+                                            class=" form-control text-left  w-100 " placeholder="" required>
+                                        <input type="hidden" name="nombre_user" value="{{ $data->nombre }}" type="text"
+                                            class=" form-control text-left  w-100 " placeholder="" required>
+                                        <input type="hidden" name="loans_users_id" value="{{ $data->id }}" type="text"
                                             class=" form-control text-left  w-100 " placeholder="" required>
 
                                         <div class="modal-header">
@@ -154,8 +164,7 @@
                                                     @include('canvas/tablero3')
                                                     <input type="hidden" id="myText3" name="firmanuevoprestamo"
                                                         value="Firma No File" required>
-                                                    <button class="btn btn-primary mh-100" type='button'
-                                                        onclick='LimpiarTrazado3()'>Borrar</button>
+
                                                 </center>
                                             </div>
                                         </div>
@@ -200,9 +209,8 @@
                                             <input name="datepayment" type="date" value="" class="form-control"
                                                 required>
                                             <br>
-
-                                            <input  name="loans_users_id" type="hidden" value="{{$usuario[0]->id}}" class="form-control">
-                                            <br>
+                                            <input name="loans_users_id" type="hidden" value="{{ $usuario[0]->id }}"
+                                                class="form-control">
 
                                             <label>Seleccionar un prestamo</label>
                                             <select id="cc" class="form-select"
@@ -210,13 +218,13 @@
                                                 onkeyup="deuda()">
                                                 @if (isset($usuario_monto))
                                                     @foreach ($usuario_monto as $info)
-                                                        <option selected value="{{ $info->sum }}">Abono
+                                                        <option selected value="all">Abono
                                                             Global</option>
                                                     @endforeach
                                                 @endif
                                                 @if (isset($usuario_loans))
                                                     @foreach ($usuario_loans as $info)
-                                                        <option value="{{ $info->monto }} {{ $info->id }}">
+                                                        <option value="{{ $info->id }}">
                                                             Fecha: {{ $info->fechanuevoprestamo }} -----
                                                             Monto: {{ $info->monto }}
                                                         </option>
@@ -224,14 +232,14 @@
                                                 @endif
                                             </select>
                                             <br>
-                                            <div  hidden class="input-group mb-3">
+                                            <div hidden class="input-group mb-3">
                                                 <span hidden class="input-group-text">$</span>
-                                                <input  hidden name="loans_id" class="form-control" type="text"
+                                                <input hidden name="loans_id" class="form-control" type="text"
                                                     placeholder="Disabled input" id="xyz">
                                             </div>
                                             <label>Monto a Pagar</label>
                                             <div class="input-group mb-3">
-                                                <span  class="input-group-text">$</span>
+                                                <span class="input-group-text">$</span>
                                                 <input name="amount" type="number" class="form-control"
                                                     aria-label="Amount (to the nearest dollar)">
                                             </div>
