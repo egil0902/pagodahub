@@ -46,13 +46,12 @@ class LoansController extends Controller
         $orgs =  $response;
         $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
         $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
-        $usuario_monto = loans::select(loans_new::raw("SUM(monto)"))->where('cedula_user', $request->cedula)->get();
-
         if (isset($usuario[0]->id)) {
-            $usuario_payment = loans_payments::select(loans_payments::raw("SUM(amount)"))->where('loans_users_id', $usuario[0]->id)->get();
-
+            $usuario_monto = loans::select(loans_new::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->get();
+            $usuario_payment = loans_payments::select(loans_payments::raw("SUM(COALESCE(amount,0))"))->where('loans_users_id', $usuario[0]->id)->get();
         } else {
             $usuario_payment= 0;
+            $usuario_monto=0;
         }
 
         return view(
