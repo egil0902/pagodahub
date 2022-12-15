@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\loans;
+use App\Models\loans_statement_of_account;
 
 class Loanssearch extends Component
 {
@@ -24,7 +24,7 @@ class Loanssearch extends Component
         if($searchTerm=='')
             $searchTerm=0;
         return view('livewire.loanssearch',[
-            'loans' => loans::paginate(25),
+            'loans' => loans_statement_of_account::paginate(25),
         ]);
     }
     

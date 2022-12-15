@@ -26,17 +26,18 @@
             <input name="valeid" type="hidden" value="{{ $data->id }}">
             <div class="row">
                 <div class="col border" align="justify">
-                    {{ $data->fechanuevoprestamo }}
+                    {{ $data->datetrx }}
                 </div>
                 <div class="col border" align="justify">
-                    {{ $data->cedula_user }}
+                    {{ $data->cedula }}
                 </div>
                 <div class="col border" align="justify">
-                    {{ $data->nombre_user }}
+                    {{ $data->nombre }}
                 </div>
                 <div class="col border" align="justify">
                     {{ $data->monto }}
                 </div>
+             
                
                 <br>
             </div>
