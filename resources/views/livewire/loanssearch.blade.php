@@ -1,10 +1,7 @@
 <div class="container">
-    <div class="row ">
-        <div class="col-md-12 col-12 col-sm-12 col-lg-12">
-            <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" />
-        </div>
-    </div>
-    <br>
+   
+    <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm"
+        value="" id="wirewire"/>
     <div class="row">
         <div class="col border" align="justify">
             Fecha
@@ -37,8 +34,6 @@
                 <div class="col border" align="justify">
                     {{ $data->monto }}
                 </div>
-             
-               
                 <br>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

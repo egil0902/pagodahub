@@ -44,14 +44,14 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
-        $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
+        $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', $request->nombre)->get();
         $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
         if (isset($usuario[0]->id)) {
             $usuario_monto = loans::select(loans_new::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->get();
             $usuario_payment = loans_payments::select(loans_payments::raw("SUM(COALESCE(amount,0))"))->where('loans_users_id', $usuario[0]->id)->get();
         } else {
-            $usuario_payment= 0;
-            $usuario_monto=0;
+            $usuario_payment = 0;
+            $usuario_monto = 0;
         }
 
         return view(
@@ -115,11 +115,9 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
-        $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', '%' . $request->nombre . '%')->get();
+        $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', $request->nombre)->get();
         $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
         $usuario_monto = loans::select(loans_new::raw("SUM(monto)"))->where('cedula_user', $request->cedula)->get();
-
-
         //dd($usuario_loans);
         return view(
             'loans',
@@ -141,10 +139,16 @@ class LoansController extends Controller
         $todo->amount       = $request->amount;
         $todo->loans_users_id = $request->loans_users_id;
         $todo->loans_id     = $request->loans_id;
-
+        $todo->file         = $request->file;
+        $todo->signature     = $request->signature;
         //dd($request->loans_id);
         $todo->save();
-        return view('loans');
+        $user = auth()->user();
+        $APIController = new APIController();
+        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+        $orgs =  $response;
+        return view('loans', ['orgs' => $orgs]);
     }
 
     public function list()

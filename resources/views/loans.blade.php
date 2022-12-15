@@ -74,7 +74,6 @@
                                     <br>
                                     <p> {{ $data->nombre }} </p>
                                     <p> {{ $data->cedula }} </p>
-
                                     @if (isset($usuario_monto))
                                         @foreach ($usuario_monto as $info)
                                             @if (isset($usuario_payment[0]->sum))
@@ -108,8 +107,8 @@
                                             class=" form-control text-left  w-100 " placeholder="" required>
                                         <input type="hidden" name="nombre_user" value="{{ $data->nombre }}" type="text"
                                             class=" form-control text-left  w-100 " placeholder="" required>
-                                        <input type="hidden" name="loans_users_id" value="{{ $data->id }}" type="text"
-                                            class=" form-control text-left  w-100 " placeholder="" required>
+                                        <input type="hidden" name="loans_users_id" value="{{ $data->id }}"
+                                            type="text" class=" form-control text-left  w-100 " placeholder="" required>
 
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="bpartnerModalLabel">Nuevo
@@ -244,6 +243,22 @@
                                                     aria-label="Amount (to the nearest dollar)">
                                             </div>
                                             <br>
+                                            <label>Adjuntar Foto *Pago*</label>
+                                            <input class="form-control" type="file" id="filePicker"
+                                                placeholder="Recibo" name="FileCedula" value="0"
+                                                accept=".png, .jpg, .jpeg" required>
+                                            <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
+                                                cols="50" rows="15"></textarea>
+                                            <br>
+                                            <br>
+                                            <label>Firma *Pago*</label>
+                                            <div>
+                                                <center>
+                                                    @include('canvas/tablero4')
+                                                    <input type="hidden" id="myText4" name="firmanuevoprestamo"
+                                                        value="Firma No File" required>
+                                                </center>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <div class="row">
@@ -310,7 +325,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Lista de prestamos Solicitados
+                Estado de cuenta de prestamos
             </div>
             <div class="card-body">
                 @livewire('loanssearch')
@@ -320,6 +335,7 @@
     <script>
         window.onload = function() {
             deuda();
+        
         }
 
         function deuda() {
