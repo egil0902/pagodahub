@@ -61,9 +61,9 @@
                 <div class="card-body">
                     @if ($usuario->isNotEmpty())
                         @foreach ($usuario as $data)
-                            <div class="container text-center">
+                            <div class="container bg-primary p-2 text-dark bg-opacity-10">
+                                <h2> Datos Deudor </h2>
                                 <div class="row row-cols-2 row-cols-sm-2  row-cols-md-4 text-start">
-
                                     <div class="col">
                                         <p class="fw-bold"> Nombre del deudor:</p>
                                         <p class="fw-bold"> Cédula o RUC:</p>
@@ -299,44 +299,50 @@
                             </form>
                         @endforeach
                     @else
-                        <br>
                         <form name="loans_newuser" id="loans_newuser" method="POST"
                             action="{{ route('loans.newuser') }}">
                             @csrf
-                            <div class="container text-justify">
-                                <h2> Creacion de nuevo cliente </h2>
-                                <div class="row">
-                                    <div class="col">
+
+                            <div class="container bg-success p-2 text-dark bg-opacity-10">
+                                <h2> Creacion Deudor </h2>
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+                                    <div class="co-md">
                                         <label>Nombre del Deudor</label>
                                         <input name="nombre" value="{{ $nombre }}" type="text"
                                             class=" form-control text-left  w-100 " placeholder="" required>
+                                    </div>
+                                    <div class="col-md">
+                                        <label>Cédula o RUC</label>
+                                        <input name="cedula" value="{{ $cedula }}" type="text"
+                                            class=" form-control text-left  w-100 " placeholder="" required>
+                                    </div>
+                                    <div class="col-md">
                                         <label>Telefono</label>
                                         <input name="telefono" value="" type="text"
                                             class=" form-control text-left  w-100 " placeholder="" required>
+                                    </div>
+                                    <div class="col-md">
+                                        <label>Solicitante</label>
+                                        <input name="solicitante" value="" type="text"
+                                            class=" form-control text-left  w-100 " placeholder="" required>
+                                    </div>
+                                    <div class="col-md">
                                         <label>Direccion</label>
                                         <input name="direccion" value="" type="text"
                                             class=" form-control text-left  w-100 " placeholder="" required><br>
                                     </div>
-                                    <div class="col">
-                                        <label>Cédula o RUC</label>
-                                        <input name="cedula" value="{{ $cedula }}" type="text"
-                                            class=" form-control text-left  w-100 " placeholder="" required>
-                                        <label>Solicitante</label>
-                                        <input name="solicitante" value="" type="text"
-                                            class=" form-control text-left  w-100 " placeholder="" required>
+                                    <div class="col-md">
                                         <label>Adjuntar Foto Cedula</label>
                                         <input class="form-control" type="file" id="filePicker" placeholder="Cedula"
                                             name="" value="0" accept=".png, .jpg, .jpeg" required>
                                         <textarea style="display:none;" name="fotocedula" id="base64textarea" placeholder="Base64 will appear here"
                                             cols="50" rows="15"></textarea>
-                                        <br>
                                     </div>
-                                    <br>
-                                    <button type="submit" class="btn btn-success my-auto active ">Guardar</button>
-                                    <br><br>
-                                    <a href="{{ url('loans_search') }}" class="btn btn-secondary active my-auto"
-                                        role="button" aria-pressed="true">Cancelar</a>
                                 </div>
+
+                                <button type="submit" class="btn btn-success my-auto active w-100 mb-1">Guardar</button>
+                                <a href="{{ url('loans_search') }}" class="btn btn-secondary active my-auto w-100 mb-1"
+                                    role="button" aria-pressed="true">Cancelar</a>
                             </div>
                         </form>
                     @endif
@@ -346,16 +352,16 @@
         @endif
 
         <br>
-        
-            <div class="card w-auto">
-                <div class="card-header">
-                    Estado de cuenta de prestamos
-                </div>
-                <div class="card-body">
-                    @livewire('loanssearch')
-                </div>
+
+        <div class="card w-auto">
+            <div class="card-header">
+                Estado de cuenta de prestamos
             </div>
-        
+            <div class="card-body">
+                @livewire('loanssearch')
+            </div>
+        </div>
+
         <script>
             window.onload = function() {
                 deuda();
