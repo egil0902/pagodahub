@@ -99,10 +99,10 @@
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
                                                 @if (isset($usuario_payment[0]->sum))
-                                                    <p class="">{{ $info->sum - $usuario_payment[0]->sum }}
+                                                    <p class="">$ {{ $info->sum - $usuario_payment[0]->sum }}
                                                     </p>
                                                 @else
-                                                    <p class="">{{ $info->sum - 0 }}</p>
+                                                    <p class="">$ {{ $info->sum - 0 }}</p>
                                                 @endif
                                             @endforeach
                                         @endif
