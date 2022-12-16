@@ -1,4 +1,4 @@
-<input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value="" id="wirewire" />
+<input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value=""/>
 <div class="row">
     <div class="col border" align="justify">
         Tipo
@@ -22,7 +22,7 @@
         <input name="valeid" type="hidden" value="{{ $data->id }}">
         <div class="row">
             <div class="col border" align="justify">
-                ---
+                {{ $data->loan_type }}
             </div>
             <div class="col border" align="justify">
                 {{ $data->datetrx }}

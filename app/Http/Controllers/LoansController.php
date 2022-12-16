@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\loans;
 use App\Models\loans_user;
 use App\Models\loans_new;
+use App\Models\loans_statement_of_account;
 use App\Models\loans_payments;
 use Illuminate\Http\Request;
 
@@ -49,9 +50,14 @@ class LoansController extends Controller
         if (isset($usuario[0]->id)) {
             $usuario_monto = loans::select(loans_new::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->get();
             $usuario_payment = loans_payments::select(loans_payments::raw("SUM(COALESCE(amount,0))"))->where('loans_users_id', $usuario[0]->id)->get();
+            $loan_view = loans_statement_of_account::select(loans_payments::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->where('loan_type', 'Prestamo')->get();
+            $payment_view = loans_statement_of_account::select(loans_payments::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->where('loan_type', 'Pago')->get();
+            //dd($payment_view);
         } else {
             $usuario_payment = 0;
             $usuario_monto = 0;
+            $loan_view=0;
+            $payment_view=0;
         }
 
         return view(
@@ -61,6 +67,8 @@ class LoansController extends Controller
                 'usuario_monto' => $usuario_monto,
                 'usuario_payment' => $usuario_payment,
                 'usuario_loans' => $usuario_loans,
+                'loan_view' => $loan_view,
+                'payment_view' => $payment_view,
                 'orgs' => $orgs,
                 'cedula' => $request->cedula,
                 'nombre' => $request->nombre
