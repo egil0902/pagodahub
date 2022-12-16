@@ -244,10 +244,10 @@
                                             </div>
                                             <br>
                                             <label>Adjuntar Foto *Pago*</label>
-                                            <input class="form-control" type="file" id="filePicker"
-                                                placeholder="Recibo" name="FileCedula" value="0"
+                                            <input class="form-control" type="file" id="filePicker2"
+                                                placeholder="Recibo" name="filee" value="0"
                                                 accept=".png, .jpg, .jpeg" required>
-                                            <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
+                                            <textarea style="display:none;" name="file" id="base64textarea2" placeholder="Base64 will appear here"
                                                 cols="50" rows="15"></textarea>
                                             <br>
                                             <br>
@@ -255,7 +255,7 @@
                                             <div>
                                                 <center>
                                                     @include('canvas/tablero4')
-                                                    <input type="hidden" id="myText4" name="firmanuevoprestamo"
+                                                    <input type="hidden" id="myText4" name="signature"
                                                         value="Firma No File" required>
                                                 </center>
                                             </div>
@@ -267,8 +267,13 @@
                                                         data-bs-dismiss="modal">Cerrar</button>
                                                 </div>
                                                 <div class="col">
-                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                    <button  onclick="allfuncion()" type="submit" class="btn btn-primary">Guardar</button>
                                                 </div>
+                                                <script type="text/javascript">
+                                                    function allfuncion() {
+                                                        b64img4();
+                                                    }
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -359,13 +364,14 @@
                 reader.onload = function(readerEvt) {
                     var binaryString = readerEvt.target.result;
                     document.getElementById("base64textarea").value = btoa(binaryString);
+                    document.getElementById("base64textarea2").value = btoa(binaryString);
                 };
                 reader.readAsBinaryString(file);
             }
         };
         if (window.File && window.FileReader && window.FileList && window.Blob) {
-            document.getElementById('filePicker')
-                .addEventListener('change', handleFileSelect, false);
+            document.getElementById('filePicker').addEventListener('change', handleFileSelect, false);
+            document.getElementById('filePicker2').addEventListener('change', handleFileSelect, false);
         } else {
             alert('The File APIs are not fully supported in this browser.');
         }
