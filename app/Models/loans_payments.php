@@ -14,5 +14,7 @@ class loans_payments extends Model
         'amount',
         'loans_id',
         'loans_users_id',
+        'file',
+        'signature'
     ];
 }
