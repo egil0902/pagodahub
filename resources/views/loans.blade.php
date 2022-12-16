@@ -81,13 +81,13 @@
                                         @if (isset($loan_view[0]->sum))
                                             <p class="">$ {{ $loan_view[0]->sum }} </p>
                                         @else
-                                            <p class="">$ 0 </p>
+                                            <p class="">$ 0</p>
                                         @endif
 
                                         @if (isset($payment_view[0]->sum))
                                             <p class="">$ {{ $payment_view[0]->sum }} </p>
                                         @else
-                                            <p class="">$ 0 </p>
+                                            <p class="">$ 0</p>
                                         @endif
                                     </div>
                                 </div>
