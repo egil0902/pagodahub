@@ -65,35 +65,44 @@
                                 <h2> Datos Deudor </h2>
                                 <div class="row row-cols-2 row-cols-sm-2  row-cols-md-4 text-start">
                                     <div class="col">
-                                        <p class="fw-bold"> Nombre del deudor:</p>
-                                        <p class="fw-bold"> Cédula o RUC:</p>
+                                        <p class=""> Nombre del deudor:</p>
+                                        <p class=""> Cédula o RUC:</p>
 
                                     </div>
                                     <div class="col">
-                                        <p class="fw-bold"> {{ $data->nombre }} </p>
-                                        <p class="fw-bold"> {{ $data->cedula }} </p>
+                                        <p class=""> {{ $data->nombre }} </p>
+                                        <p class=""> {{ $data->cedula }} </p>
                                     </div>
                                     <div class="col">
-                                        <p class="fw-bold"> Total de presetamos:</p>
-                                        <p class="fw-bold"> Total de pagos:</p>
+                                        <p class=""> Total de presetamos:</p>
+                                        <p class=""> Total de pagos:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fw-bold"> --- </p>
-                                        <p class="fw-bold"> --- </p>
+                                        @if (isset($loan_view[0]->sum))
+                                            <p class="">$ {{ $loan_view[0]->sum }} </p>
+                                        @else
+                                            <p class="">$ 0 </p>
+                                        @endif
+
+                                        @if (isset($payment_view[0]->sum))
+                                            <p class="">$ {{ $payment_view[0]->sum }} </p>
+                                        @else
+                                            <p class="">$ 0 </p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row row-cols-2 row-cols-sm-2 ">
                                     <div class="col text-end">
-                                        <p class="fs-5 fw-bold "> Saldo pendiente:</p>
+                                        <p class=""> Saldo pendiente:</p>
                                     </div>
                                     <div class="col text-start ">
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
                                                 @if (isset($usuario_payment[0]->sum))
-                                                    <p class=" fs-5 fw-bold ">{{ $info->sum - $usuario_payment[0]->sum }}
+                                                    <p class="">{{ $info->sum - $usuario_payment[0]->sum }}
                                                     </p>
                                                 @else
-                                                    <p class=" fs-5 fw-bold ">{{ $info->sum - 0 }}</p>
+                                                    <p class="">{{ $info->sum - 0 }}</p>
                                                 @endif
                                             @endforeach
                                         @endif
