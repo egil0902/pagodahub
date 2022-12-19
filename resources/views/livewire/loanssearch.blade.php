@@ -1,18 +1,18 @@
 <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value=""/>
-<div class="row">
-    <div class="col border" align="justify">
+<div class="row row-cols-5 row-cols-sm-5 row-cols-md-5">
+    <div class="col-md border" align="justify">
         Tipo
     </div>
-    <div class="col border" align="justify">
+    <div class="col-md border" align="justify">
         Fecha
     </div>
-    <div class="col border" align="justify">
+    <div class="col-md border" align="justify">
         Cedula
     </div>
-    <div class="col border" align="justify">
+    <div class="col-md border" align="justify">
         Nombre
     </div>
-    <div class="col border" align="justify">
+    <div class="col-md border" align="justify">
         Monto
     </div>
 </div>
@@ -20,20 +20,20 @@
     <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST" action="{{ route('valepagoda.destroy') }}">
         @csrf
         <input name="valeid" type="hidden" value="{{ $data->id }}">
-        <div class="row">
-            <div class="col border" align="justify">
+        <div class="row row-cols-5 row-cols-sm-5 row-cols-md-5">
+            <div class="col-md border" align="justify">
                 {{ $data->loan_type }}
             </div>
-            <div class="col border" align="justify">
+            <div class="col-md border" align="justify">
                 {{ $data->datetrx }}
             </div>
-            <div class="col border" align="justify">
+            <div class="col-md border" align="justify">
                 {{ $data->cedula }}
             </div>
-            <div class="col border" align="justify">
+            <div class="col-md border" align="justify">
                 {{ $data->nombre }}
             </div>
-            <div class="col border" align="justify">
+            <div class="col-md border" align="justify">
                 {{ $data->monto }}
             </div>
             <br>
