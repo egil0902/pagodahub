@@ -13,7 +13,6 @@
 
     <body class="p-3 m-0 border-0 bd-example">
         <div class="card w-auto">
-
             <div class="card-header">
                 Consultar Deudor
             </div>
@@ -67,7 +66,6 @@
                                     <div class="col">
                                         <p class=""> Nombre del deudor:</p>
                                         <p class=""> Cédula o RUC:</p>
-
                                     </div>
                                     <div class="col">
                                         <p class=""> {{ $data->nombre }} </p>
@@ -99,16 +97,15 @@
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
                                                 @if (isset($usuario_payment[0]->sum))
-                                                    <p >$ {{ $info->sum - $usuario_payment[0]->sum }}
+                                                    <p>$ {{ $info->sum - $usuario_payment[0]->sum }}
                                                     </p>
                                                 @else
-                                                    <p >$ {{ $info->sum - 0 }}</p>
+                                                    <p>$ {{ $info->sum - 0 }}</p>
                                                 @endif
                                             @endforeach
                                         @endif
                                     </div>
                                 </div>
-
                                 <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="modal"
                                     data-bs-target="#bpartnerModal">Nuevo prestamo</button><br>
                                 <button type="button" class="btn btn-primary w-100 mb-1" data-bs-toggle="modal"
@@ -142,7 +139,7 @@
                                             <div class="modal-body">
                                                 <label>Fecha</label>
                                                 <input name="fechanuevoprestamo" type="date" class="form-control"
-                                                    required>
+                                                    min="2022-01-01" max="2100-12-31" required>
 
                                                 <label>Monto</label>
                                                 <div class="input-group mb-3">
@@ -176,9 +173,10 @@
                                                 </div>
 
                                                 <label>Adjuntar Foto Recibo</label>
-                                                <input class="form-control" type="file" id="filePicker"
+                                                <input class=" subirimagen form-control" type="file" id="filePicker"
                                                     placeholder="Recibo" name="FileCedula" value="0"
-                                                    accept=".png, .jpg, .jpeg" required>
+                                                    onchange="imgsize()" onkeyup="imgsize()" accept=".png, .jpg, .jpeg"
+                                                    required>
                                                 <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
                                                     cols="50" rows="15"></textarea>
                                                 <br>
@@ -269,9 +267,10 @@
                                                 </div>
                                                 <br>
                                                 <label>Adjuntar Foto *Pago*</label>
-                                                <input class="form-control" type="file" id="filePicker2"
+                                                <input class=" subirimagen2 form-control" type="file" id="filePicker2"
                                                     placeholder="Recibo" name="filee" value="0"
-                                                    accept=".png, .jpg, .jpeg" required>
+                                                    onchange="imgsize2()" onkeyup="imgsize2()" accept=".png, .jpg, .jpeg"
+                                                    required>
                                                 <textarea style="display:none;" name="file" id="base64textarea2" placeholder="Base64 will appear here"
                                                     cols="50" rows="15"></textarea>
                                                 <br>
@@ -342,8 +341,9 @@
                                     </div>
                                     <div class="col-md">
                                         <label>Adjuntar Foto Cedula</label>
-                                        <input class="form-control" type="file" id="filePicker" placeholder="Cedula"
-                                            name="" value="0" accept=".png, .jpg, .jpeg" required>
+                                        <input class=" subirimagen form-control" type="file" id="filePicker"
+                                            placeholder="Cedula" name="" value="0" onchange="imgsize()"
+                                            onkeyup="imgsize()" accept=".png, .jpg, .jpeg" required>
                                         <textarea style="display:none;" name="fotocedula" id="base64textarea" placeholder="Base64 will appear here"
                                             cols="50" rows="15"></textarea>
                                     </div>
@@ -374,8 +374,30 @@
         <script>
             window.onload = function() {
                 deuda();
+                var today = new Date();
 
+                var day = today.getDate();
+                var month = today.getMonth() + 1;
+                var year = today.getFullYear();
+                console.log(`${year}-${month}-${day}`);
             }
+
+            function imgsize() {
+                var imgsize = document.getElementsByClassName("subirimagen")[0].files[0].size;
+                if (imgsize > 5000000) {
+                    alert('El archivo supera los 5Mb.');
+                    document.getElementsByClassName("subirimagen").filePicker.value = "";
+                }
+            }
+            function imgsize2() {
+                var imgsize2 = document.getElementsByClassName("subirimagen2")[0].files[0].size;
+                if (imgsize2 > 5000000) {
+                    alert('El archivo supera los 5Mb.');
+                    document.getElementsByClassName("subirimagen2").filePicker2.value = "";
+                }
+            }
+
+
 
             function deuda() {
                 document.getElementById("xyz").value = document.getElementById("cc").value;
