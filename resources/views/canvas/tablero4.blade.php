@@ -1,4 +1,4 @@
-<canvas id='canvas4' width="400" height="75" style='border: 1px solid #CCC;'>
+<canvas id='canvas4' width="250" height="100" style='border: 1px solid #CCC;'>
     <p>Tu navegador no soporta canvas</p>
 </canvas>
 <!-- creamos el form para el envio -->
