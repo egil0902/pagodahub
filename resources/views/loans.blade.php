@@ -128,12 +128,12 @@
                                 <div class="row row-cols-2 row-cols-sm-2 ">
 
                                 </div>
+                                <br>
                                 <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="collapse"
                                     data-bs-target="#collapseExample1" aria-expanded="false"
-                                    aria-controls="collapseExample1" id="opt1">Nuevo prestamo</button><br>
-                                <button type="button" class="btn btn-primary w-100 mb-1" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseExample" aria-expanded="false"
-                                    aria-controls="collapseExample">Pago Prestamo</button>
+                                    aria-controls="collapseExample1" id="opt1" onclick="ocultar">Nuevo
+                                    prestamo</button><br>
+
                                 <div class="collapse" id="collapseExample1">
                                     <div class="card card-body">
                                         <form name="loans_store_new" id="loans_store_new" method="POST"
@@ -195,10 +195,10 @@
                                             <label>Firma</label>
                                             <div>
                                                 <center>
-                                                    @include('canvas/tablero3')
+                                                    @include('/canvas/tablero3')
                                                     <input type="hidden" id="myText3" name="firmanuevoprestamo"
                                                         value="Firma No File" required>
-                                                    
+
                                                 </center>
                                             </div>
                                             <div class="row">
@@ -210,15 +210,15 @@
                                                     <button onclick="allfuncion()" type="submit"
                                                         class="btn btn-primary w-100">Guardar</button>
                                                 </div>
-                                                <script type="text/javascript">
-                                                    function allfuncion() {
-                                                        b64img3();
-                                                    }
-                                                </script>
+
                                             </div>
                                         </form>
                                     </div>
                                 </div>
+                                <br>
+                                <button type="button" class="btn btn-primary w-100 mb-1" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">Pago Prestamo</button>
                                 <div class="collapse" id="collapseExample">
                                     <div class="card card-body">
                                         <form name="loans_update" id="loans_update" method="POST"
@@ -290,11 +290,7 @@
                                                     <button onclick="allfuncion()" type="submit"
                                                         class="btn btn-primary w-100">Guardar</button>
                                                 </div>
-                                                <script type="text/javascript">
-                                                    function allfuncion() {
-                                                        b64img4();
-                                                    }
-                                                </script>
+
                                             </div>
                                         </form>
                                     </div>
@@ -375,6 +371,15 @@
                 var month = today.getMonth() + 1;
                 var year = today.getFullYear();
                 console.log(`${year}-${month}-${day}`);
+            }
+
+            function allfuncion() {
+                b64img3();
+                b64img4();
+            }
+
+            function ocultar() {
+
             }
 
             function busqueda() {
