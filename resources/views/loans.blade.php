@@ -40,11 +40,13 @@
                     <div class="row gy-2 gx-3 align-items-center">
                         <div class="col-md">
                             <label>Nro. Identificación</label>
-                            <input name="cedula" value="" type="text" class="form-control" placeholder="">
+                            <input name="cedula" id="cedula" value="" type="text" class="form-control"
+                                placeholder="" onchange="busqueda()" onkeyup="busqueda()">
                         </div>
                         <div class="col-md">
                             <label>Nombre</label>
-                            <input name="nombre" value="" type="text" class="form-control" placeholder="">
+                            <input name="nombre" id="nombre" value="" type="text" class="form-control"
+                                placeholder="" onchange="busqueda()" onkeyup="busqueda()">
                         </div>
                         <div class="col-md">
                             <label> </label>
@@ -72,39 +74,59 @@
                                         <p class=""> {{ $data->cedula }} </p>
                                     </div>
                                     <div class="col">
-                                        <p class=""> Total de presetamos:</p>
+                                        <p class=""> Total de prestamos:</p>
                                         <p class=""> Total de pagos:</p>
+                                        <p class=""> Saldo pendiente:</p>
                                     </div>
                                     <div class="col">
                                         @if (isset($loan_view[0]->sum))
-                                            <p class="">$ {{ $loan_view[0]->sum }} </p>
+                                            <p class="text-end" style="padding-right: 50%;">$
+                                                @php
+                                                    echo number_format($loan_view[0]->sum, 2, ',', ' ');
+                                                @endphp
+                                            </p>
                                         @else
-                                            <p class="">$ 0</p>
+                                            <p class="text-end" style="padding-right: 50%;">$ 0,00</p>
                                         @endif
 
                                         @if (isset($payment_view[0]->sum))
-                                            <p class="">$ {{ $payment_view[0]->sum }} </p>
+                                            <p class="text-end" style="padding-right: 50%;">$
+                                                @php
+                                                    echo number_format($payment_view[0]->sum, 2, ',', ' ');
+                                                @endphp
+                                            </p>
                                         @else
-                                            <p class="">$ 0</p>
+                                            <p class="text-end" style="padding-right: 50%;">$ 0,00</p>
                                         @endif
-                                    </div>
-                                </div>
-                                <div class="row row-cols-2 row-cols-sm-2 ">
-                                    <div class="col text-end">
-                                        <p class=""> Saldo pendiente:</p>
-                                    </div>
-                                    <div class="col text-start ">
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
                                                 @if (isset($usuario_payment[0]->sum))
-                                                    <p>$ {{ $info->sum - $usuario_payment[0]->sum }}
+                                                    <p class="text-end" style="padding-right: 50%;">$
+
+                                                        @php
+                                                            echo number_format($info->sum - $usuario_payment[0]->sum, 2, ',', ' ');
+                                                        @endphp
+
                                                     </p>
                                                 @else
-                                                    <p>$ {{ $info->sum - 0 }}</p>
+                                                    <p class="text-end" style="padding-right: 50%;">$
+                                                        @php
+                                                            echo number_format($info->sum - 0, 2, ',', ' ');
+                                                        @endphp
+                                                    </p>
                                                 @endif
                                             @endforeach
                                         @endif
                                     </div>
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
+                                <div class="row row-cols-2 row-cols-sm-2 ">
+
                                 </div>
                                 <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="modal"
                                     data-bs-target="#bpartnerModal">Nuevo prestamo</button><br>
@@ -144,7 +166,8 @@
                                                 <label>Monto</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text">$</span>
-                                                    <input name="monto" type="number" class="form-control"
+                                                    <input name="monto" type="number" placeholder="0.00"
+                                                        step="0.01" class="form-control"
                                                         aria-label="Amount (to the nearest dollar)" required>
                                                 </div>
 
@@ -165,7 +188,7 @@
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text">$</span>
                                                             <input id="cuo" name="cuota" type="number"
-                                                                class="form-control"
+                                                                placeholder="0.00" step="0.01" class="form-control"
                                                                 aria-label="Amount (to the nearest dollar)"
                                                                 value="0">
                                                         </div>
@@ -262,7 +285,8 @@
                                                 <label>Monto a Pagar</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text">$</span>
-                                                    <input name="amount" type="number" class="form-control"
+                                                    <input name="amount" type="number" placeholder="0.00"
+                                                        step="0.01" class="form-control"
                                                         aria-label="Amount (to the nearest dollar)">
                                                 </div>
                                                 <br>
@@ -382,6 +406,28 @@
                 console.log(`${year}-${month}-${day}`);
             }
 
+            function busqueda() {
+
+
+                if (document.getElementById("cedula").value == "") {
+                    //alert("blanco");
+                    document.getElementById("nombre").removeAttribute("disabled", "")
+                } else {
+                    //alert("lleno");
+                    document.getElementById("nombre").value = "";
+                    document.getElementById("nombre").setAttribute("disabled", "");
+                }
+
+                if (document.getElementById("nombre").value == "") {
+                    //alert("blanco");
+                    document.getElementById("cedula").removeAttribute("disabled", "")
+                } else {
+                    //alert("lleno");
+                    document.getElementById("cedula").value = "";
+                    document.getElementById("cedula").setAttribute("disabled", "");
+                }
+            }
+
             function imgsize() {
                 var imgsize = document.getElementsByClassName("subirimagen")[0].files[0].size;
                 if (imgsize > 5000000) {
@@ -389,6 +435,7 @@
                     document.getElementsByClassName("subirimagen").filePicker.value = "";
                 }
             }
+
             function imgsize2() {
                 var imgsize2 = document.getElementsByClassName("subirimagen2")[0].files[0].size;
                 if (imgsize2 > 5000000) {
