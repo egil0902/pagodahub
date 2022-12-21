@@ -1,17 +1,17 @@
-<input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value=""/>
-<div class="row row-cols-5 row-cols-sm-5 row-cols-md-5">
+<input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value="" />
+<div class="row row-cols-3 row-cols-sm-3 row-cols-md-3">
     <div class="col-md border" align="justify">
         Tipo
     </div>
     <div class="col-md border" align="justify">
         Fecha
     </div>
-    <div class="col-md border" align="justify">
+    {{-- <div class="col-md border" align="justify">
         Cedula
     </div>
     <div class="col-md border" align="justify">
         Nombre
-    </div>
+    </div> --}}
     <div class="col-md border" align="justify">
         Monto
     </div>
@@ -20,21 +20,23 @@
     <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST" action="{{ route('valepagoda.destroy') }}">
         @csrf
         <input name="valeid" type="hidden" value="{{ $data->id }}">
-        <div class="row row-cols-5 row-cols-sm-5 row-cols-md-5">
+        <div class="row row-cols-3 row-cols-sm-3 row-cols-md-3">
             <div class="col-md border" align="justify">
                 {{ $data->loan_type }}
             </div>
             <div class="col-md border" align="justify">
                 {{ $data->datetrx }}
             </div>
-            <div class="col-md border" align="justify">
+            {{-- <div class="col-md border" align="justify">
                 {{ $data->cedula }}
             </div>
             <div class="col-md border" align="justify">
                 {{ $data->nombre }}
-            </div>
-            <div class="col-md border" align="justify">
-                {{ $data->monto }}
+            </div> --}}
+            <div class="col-md border" align="right">$
+                @php
+                    echo number_format($data->monto, 2, ',', ' ');
+                @endphp
             </div>
             <br>
         </div>
