@@ -19,7 +19,7 @@ var pizarracanvas4=document.getElementById(idcanvas4);
 var imgreal=""
 /* Esperamos el evento load */
 window.addEventListener('load',IniciarDibujo4,false);
-window.addEventListener('load',LimpiarTrazado4,false);
+//window.addEventListener('load',LimpiarTrazado4,false);
 
 
 function IniciarDibujo4(){
@@ -102,7 +102,7 @@ function LimpiarTrazado4(){
   contexto4=document.getElementById(idcanvas4).getContext('2d');
   contexto4.fillStyle=colorDeFondo;
   contexto4.fillRect(0,0,anchocanvas4,altocanvas4);
-  contexto4.drawImage(colorDeFondo, 0, 0);
+  //contexto4.drawImage(colorDeFondo, 0, 0);
 }
 function imp4(){   
  return document.getElementById(idcanvas4).toDataURL('image/png');

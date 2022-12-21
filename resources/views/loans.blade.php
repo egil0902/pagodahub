@@ -86,22 +86,22 @@
                                                 @endphp
                                             </p>
                                         @else
-                                            <p class="lh-1" >$ 0,00</p>
+                                            <p class="lh-1">$ 0,00</p>
                                         @endif
 
                                         @if (isset($payment_view[0]->sum))
-                                            <p class="lh-1" >$
+                                            <p class="lh-1">$
                                                 @php
                                                     echo number_format($payment_view[0]->sum, 2, ',', ' ');
                                                 @endphp
                                             </p>
                                         @else
-                                            <p class="lh-1" >$ 0,00</p>
+                                            <p class="lh-1">$ 0,00</p>
                                         @endif
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
                                                 @if (isset($usuario_payment[0]->sum))
-                                                    <p class="lh-1" >$
+                                                    <p class="lh-1">$
 
                                                         @php
                                                             echo number_format($info->sum - $usuario_payment[0]->sum, 2, ',', ' ');
@@ -109,7 +109,7 @@
 
                                                     </p>
                                                 @else
-                                                    <p class="lh-1" >$
+                                                    <p class="lh-1">$
                                                         @php
                                                             echo number_format($info->sum - 0, 2, ',', ' ');
                                                         @endphp
@@ -128,20 +128,17 @@
                                 <div class="row row-cols-2 row-cols-sm-2 ">
 
                                 </div>
-                                <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="modal"
-                                    data-bs-target="#bpartnerModal">Nuevo prestamo</button><br>
-                                <button type="button" class="btn btn-primary w-100 mb-1" data-bs-toggle="modal"
-                                    data-bs-target="#bpartnerModalPago">Pago Prestamo</button>
-                            </div>
-
-                            <form name="loans_store_new" id="loans_store_new" method="POST"
-                                action="{{ route('loans.store_new') }}">
-                                @csrf
-                                <div class="modal fade" id="bpartnerModal" tabindex="-1"
-                                    aria-labelledby="bpartnerModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-
+                                <button type="button" class="btn btn-success w-100 mb-1" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample1" aria-expanded="false"
+                                    aria-controls="collapseExample1" id="opt1">Nuevo prestamo</button><br>
+                                <button type="button" class="btn btn-primary w-100 mb-1" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">Pago Prestamo</button>
+                                <div class="collapse" id="collapseExample1">
+                                    <div class="card card-body">
+                                        <form name="loans_store_new" id="loans_store_new" method="POST"
+                                            action="{{ route('loans.store_new') }}">
+                                            @csrf
                                             <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
@@ -151,184 +148,158 @@
                                             <input type="hidden" name="loans_users_id" value="{{ $data->id }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
+                                            <h1 class="modal-title fs-5" id="bpartnerModalLabel">Nuevo
+                                                prestamo</h1>
 
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="bpartnerModalLabel">Nuevo
-                                                    prestamo</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <label>Fecha</label>
-                                                <input name="fechanuevoprestamo" type="date" class="form-control"
-                                                    min="2022-01-01" max="2100-12-31" required>
-
-                                                <label>Monto</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text">$</span>
-                                                    <input name="monto" type="number" placeholder="0.00"
-                                                        step="0.01" class="form-control"
-                                                        aria-label="Amount (to the nearest dollar)" required>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Frecuencia</label>
-                                                        <select id="fre" class="form-select" name="frecuencia"
-                                                            onchange="deuda()" onkeyup="deuda()">
-                                                            <option selected="" value="---">No Aplica</option>
-                                                            <option value="Diario">Diario</option>
-                                                            <option value="Semanal">Semanal</option>
-                                                            <option value="Quincenal">Quincenal</option>
-                                                            <option value="Mensual">Mensual</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label>Monto cuota</label>
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text">$</span>
-                                                            <input id="cuo" name="cuota" type="number"
-                                                                placeholder="0.00" step="0.01" class="form-control"
-                                                                aria-label="Amount (to the nearest dollar)"
-                                                                value="0">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <label>Adjuntar Foto Recibo</label>
-                                                <input class=" subirimagen form-control" type="file" id="filePicker"
-                                                    placeholder="Recibo" name="FileCedula" value="0"
-                                                    onchange="imgsize()" onkeyup="imgsize()" accept=".png, .jpg, .jpeg"
+                                            <label>Fecha</label>
+                                            <input name="fechanuevoprestamo" type="date" class="form-control"
+                                                min="2022-01-01" max="2100-12-31" required>
+                                            <label>Monto</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input name="monto" type="number" placeholder="0.00" step="0.01"
+                                                    class="form-control" aria-label="Amount (to the nearest dollar)"
                                                     required>
-                                                <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
-                                                    cols="50" rows="15"></textarea>
-                                                <br>
-                                                <label>Firma</label>
-                                                <div>
-                                                    <center>
-                                                        @include('canvas/tablero3')
-                                                        <input type="hidden" id="myText3" name="firmanuevoprestamo"
-                                                            value="Firma No File" required>
-
-                                                    </center>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label>Frecuencia</label>
+                                                    <select id="fre" class="form-select" name="frecuencia"
+                                                        onchange="deuda()" onkeyup="deuda()">
+                                                        <option selected="" value="---">No Aplica
+                                                        </option>
+                                                        <option value="Diario">Diario</option>
+                                                        <option value="Semanal">Semanal</option>
+                                                        <option value="Quincenal">Quincenal</option>
+                                                        <option value="Mensual">Mensual</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label>Monto cuota</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">$</span>
+                                                        <input id="cuo" name="cuota" type="number"
+                                                            placeholder="0.00" step="0.01" class="form-control"
+                                                            aria-label="Amount (to the nearest dollar)" value="0">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cerrar</button>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button onclick="allfuncion()" type="submit"
-                                                            class="btn btn-primary">Guardar</button>
-                                                    </div>
-                                                    <script type="text/javascript">
-                                                        function allfuncion() {
-                                                            b64img3();
-                                                        }
-                                                    </script>
-                                                </div>
+                                            <label>Adjuntar Foto Recibo</label>
+                                            <input class=" subirimagen form-control" type="file" id="filePicker"
+                                                placeholder="Recibo" name="FileCedula" value="0"
+                                                onchange="imgsize()" onkeyup="imgsize()" accept=".png, .jpg, .jpeg"
+                                                required>
+                                            <textarea style="display:none;" name="filecedula" id="base64textarea" placeholder="Base64 will appear here"
+                                                cols="50" rows="15"></textarea>
+                                            <br>
+                                            <label>Firma</label>
+                                            <div>
+                                                <center>
+                                                    @include('canvas/tablero3')
+                                                    <input type="hidden" id="myText3" name="firmanuevoprestamo"
+                                                        value="Firma No File" required>
+                                                    
+                                                </center>
                                             </div>
-                                        </div>
+                                            <div class="row">
+                                                {{-- <div class="col">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="collapse">Cerrar</button>
+                                                </div> --}}
+                                                <div class="col">
+                                                    <button onclick="allfuncion()" type="submit"
+                                                        class="btn btn-primary w-100">Guardar</button>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    function allfuncion() {
+                                                        b64img3();
+                                                    }
+                                                </script>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <br>
-                            </form>
-
-                            <form name="loans_update" id="loans_update" method="POST"
-                                action="{{ route('loans.update') }}">
-                                @csrf
-                                <div class="modal fade" id="bpartnerModalPago" tabindex="-1"
-                                    aria-labelledby="bpartnerModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="bpartnerModalLabel">Pago Prestamo
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <form name="loans_update" id="loans_update" method="POST"
+                                            action="{{ route('loans.update') }}">
+                                            @csrf
+                                            <h1 class="modal-title fs-5" id="bpartnerModalLabel">Pago
+                                                Prestamo
+                                            </h1>
+                                            <label>Fecha</label>
+                                            <input name="datepayment" type="date" value="" class="form-control"
+                                                required>
+                                            <br>
+                                            <input name="loans_users_id" type="hidden" value="{{ $usuario[0]->id }}"
+                                                class="form-control">
+                                            <label>Seleccionar un prestamo</label>
+                                            <select id="cc" class="form-select"
+                                                aria-label="Default select example" required onchange="deuda()"
+                                                onkeyup="deuda()">
+                                                @if (isset($usuario_monto))
+                                                    @foreach ($usuario_monto as $info)
+                                                        <option selected value="all">Abono
+                                                            Global</option>
+                                                    @endforeach
+                                                @endif
+                                                @if (isset($usuario_loans))
+                                                    @foreach ($usuario_loans as $info)
+                                                        <option value="{{ $info->id }}">
+                                                            Fecha: {{ $info->fechanuevoprestamo }} -----
+                                                            Monto: {{ $info->monto }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            <br>
+                                            <div hidden class="input-group mb-3">
+                                                <span hidden class="input-group-text">$</span>
+                                                <input hidden name="loans_id" class="form-control" type="text"
+                                                    placeholder="Disabled input" id="xyz">
                                             </div>
-                                            <div class="modal-body">
-                                                <label>Fecha</label>
-                                                <input name="datepayment" type="date" value=""
-                                                    class="form-control" required>
-                                                <br>
-                                                <input name="loans_users_id" type="hidden"
-                                                    value="{{ $usuario[0]->id }}" class="form-control">
-
-                                                <label>Seleccionar un prestamo</label>
-                                                <select id="cc" class="form-select"
-                                                    aria-label="Default select example" required onchange="deuda()"
-                                                    onkeyup="deuda()">
-                                                    @if (isset($usuario_monto))
-                                                        @foreach ($usuario_monto as $info)
-                                                            <option selected value="all">Abono
-                                                                Global</option>
-                                                        @endforeach
-                                                    @endif
-                                                    @if (isset($usuario_loans))
-                                                        @foreach ($usuario_loans as $info)
-                                                            <option value="{{ $info->id }}">
-                                                                Fecha: {{ $info->fechanuevoprestamo }} -----
-                                                                Monto: {{ $info->monto }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <br>
-                                                <div hidden class="input-group mb-3">
-                                                    <span hidden class="input-group-text">$</span>
-                                                    <input hidden name="loans_id" class="form-control" type="text"
-                                                        placeholder="Disabled input" id="xyz">
-                                                </div>
-                                                <label>Monto a Pagar</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text">$</span>
-                                                    <input name="amount" type="number" placeholder="0.00"
-                                                        step="0.01" class="form-control"
-                                                        aria-label="Amount (to the nearest dollar)">
-                                                </div>
-                                                <br>
-                                                <label>Adjuntar Foto *Pago*</label>
-                                                <input class=" subirimagen2 form-control" type="file" id="filePicker2"
-                                                    placeholder="Recibo" name="filee" value="0"
-                                                    onchange="imgsize2()" onkeyup="imgsize2()" accept=".png, .jpg, .jpeg"
-                                                    required>
-                                                <textarea style="display:none;" name="file" id="base64textarea2" placeholder="Base64 will appear here"
-                                                    cols="50" rows="15"></textarea>
-                                                <br>
-                                                <br>
-                                                <label>Firma *Pago*</label>
-                                                <div>
-                                                    <center>
-                                                        @include('canvas/tablero4')
-                                                        <input type="hidden" id="myText4" name="signature"
-                                                            value="Firma No File" required>
-                                                    </center>
-                                                </div>
+                                            <label>Monto a Pagar</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input name="amount" type="number" placeholder="0.00" step="0.01"
+                                                    class="form-control" aria-label="Amount (to the nearest dollar)">
                                             </div>
-                                            <div class="modal-footer">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cerrar</button>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button onclick="allfuncion()" type="submit"
-                                                            class="btn btn-primary">Guardar</button>
-                                                    </div>
-                                                    <script type="text/javascript">
-                                                        function allfuncion() {
-                                                            b64img4();
-                                                        }
-                                                    </script>
-                                                </div>
+                                            <br>
+                                            <label>Adjuntar Foto *Pago*</label>
+                                            <input class=" subirimagen2 form-control" type="file" id="filePicker2"
+                                                placeholder="Recibo" name="filee" value="0" onchange="imgsize2()"
+                                                onkeyup="imgsize2()" accept=".png, .jpg, .jpeg" required>
+                                            <textarea style="display:none;" name="file" id="base64textarea2" placeholder="Base64 will appear here"
+                                                cols="50" rows="15"></textarea>
+                                            <br>
+                                            <br>
+                                            <label>Firma *Pago*</label>
+                                            <div>
+                                                <center>
+                                                    @include('canvas/tablero4')
+                                                    <input type="hidden" id="myText4" name="signature"
+                                                        value="Firma No File" required>
+                                                </center>
                                             </div>
-                                        </div>
+                                            <div class="row">
+                                                {{-- <div class="col">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cerrar</button>
+                                                </div> --}}
+                                                <div class="col">
+                                                    <button onclick="allfuncion()" type="submit"
+                                                        class="btn btn-primary w-100">Guardar</button>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    function allfuncion() {
+                                                        b64img4();
+                                                    }
+                                                </script>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         @endforeach
                     @else
                         <form name="loans_newuser" id="loans_newuser" method="POST"
