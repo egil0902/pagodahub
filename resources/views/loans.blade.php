@@ -64,44 +64,44 @@
                         @foreach ($usuario as $data)
                             <div class="container bg-primary p-2 text-dark bg-opacity-10">
                                 <h2> Datos Deudor </h2>
-                                <div class="row row-cols-2 row-cols-sm-2  row-cols-md-4 text-start">
+                                <div class="row row-cols-2 row-cols-sm-2  row-cols-md-4">
                                     <div class="col">
-                                        <p class=""> Nombre del deudor:</p>
-                                        <p class=""> Cédula o RUC:</p>
+                                        <p class="lh-1">Nombre del deudor:</p>
+                                        <p class="lh-1">Cédula o RUC:</p>
                                     </div>
                                     <div class="col">
-                                        <p class=""> {{ $data->nombre }} </p>
-                                        <p class=""> {{ $data->cedula }} </p>
+                                        <p class="lh-1">{{ $data->nombre }}</p>
+                                        <p class="lh-1">{{ $data->cedula }}</p>
                                     </div>
                                     <div class="col">
-                                        <p class=""> Total de prestamos:</p>
-                                        <p class=""> Total de pagos:</p>
-                                        <p class=""> Saldo pendiente:</p>
+                                        <p class="lh-1">Total de prestamos:</p>
+                                        <p class="lh-1">Total de pagos:</p>
+                                        <p class="lh-1"> Saldo pendiente:</p>
                                     </div>
                                     <div class="col">
                                         @if (isset($loan_view[0]->sum))
-                                            <p class="text-end" style="padding-right: 50%;">$
+                                            <p class="lh-1 ">$
                                                 @php
                                                     echo number_format($loan_view[0]->sum, 2, ',', ' ');
                                                 @endphp
                                             </p>
                                         @else
-                                            <p class="text-end" style="padding-right: 50%;">$ 0,00</p>
+                                            <p class="lh-1" >$ 0,00</p>
                                         @endif
 
                                         @if (isset($payment_view[0]->sum))
-                                            <p class="text-end" style="padding-right: 50%;">$
+                                            <p class="lh-1" >$
                                                 @php
                                                     echo number_format($payment_view[0]->sum, 2, ',', ' ');
                                                 @endphp
                                             </p>
                                         @else
-                                            <p class="text-end" style="padding-right: 50%;">$ 0,00</p>
+                                            <p class="lh-1" >$ 0,00</p>
                                         @endif
                                         @if (isset($usuario_monto))
                                             @foreach ($usuario_monto as $info)
                                                 @if (isset($usuario_payment[0]->sum))
-                                                    <p class="text-end" style="padding-right: 50%;">$
+                                                    <p class="lh-1" >$
 
                                                         @php
                                                             echo number_format($info->sum - $usuario_payment[0]->sum, 2, ',', ' ');
@@ -109,7 +109,7 @@
 
                                                     </p>
                                                 @else
-                                                    <p class="text-end" style="padding-right: 50%;">$
+                                                    <p class="lh-1" >$
                                                         @php
                                                             echo number_format($info->sum - 0, 2, ',', ' ');
                                                         @endphp
