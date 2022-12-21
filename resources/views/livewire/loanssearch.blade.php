@@ -21,10 +21,10 @@
         @csrf
         <input name="valeid" type="hidden" value="{{ $data->id }}">
         <div class="row row-cols-3 row-cols-sm-3 row-cols-md-3">
-            <div class="col-md border" align="justify">
+            <div class="col-md border" style="font-size: 14px" align="justify">
                 {{ $data->loan_type }}
             </div>
-            <div class="col-md border" align="justify">
+            <div class="col-md border" style="font-size: 14px" align="justify">
                 {{ $data->datetrx }}
             </div>
             {{-- <div class="col-md border" align="justify">
@@ -33,10 +33,13 @@
             <div class="col-md border" align="justify">
                 {{ $data->nombre }}
             </div> --}}
-            <div class="col-md border" align="right">$
+            <div class="col-md border" style="font-size: 14px" align="right">$
+
                 @php
                     echo number_format($data->monto, 2, ',', ' ');
                 @endphp
+
+
             </div>
             <br>
         </div>
