@@ -46,12 +46,14 @@ class LoansController extends Controller
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
         $orgs =  $response;
         if ($request->cedula == null) {
-            $usuario = loans_user::orwhere('nombre', 'ilike', '%' . $request->nombre . '%')->get();
+            $usuario = loans_user::orwhere('nombre', 'ilike','%'.$request->nombre.'%')->get();
+            $usuario_loans = loans::orwhere('nombre_user','ilike','%'.$request->nombre.'%')->get();
         }
         if ($request->nombre == null) {
             $usuario = loans_user::orwhere('cedula', '=', $request->cedula)->get();
+            $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
         }
-        $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
+        
         if (isset($usuario[0]->id)) {
             $usuario_monto = loans::select(loans_new::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->get();
             $usuario_payment = loans_payments::select(loans_payments::raw("SUM(COALESCE(amount,0))"))->where('loans_users_id', $usuario[0]->id)->get();
