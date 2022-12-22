@@ -62,6 +62,7 @@
                 <div class="card-body">
                     @if ($usuario->isNotEmpty())
                         @foreach ($usuario as $data)
+                            <br>
                             <div class="container bg-primary p-2 text-dark bg-opacity-10">
                                 <h2> Datos Deudor </h2>
                                 <div class="row row-cols-2 row-cols-sm-2  row-cols-md-4">
@@ -405,21 +406,21 @@
             }
 
             /* function imgsize() {
-                var imgsize = document.getElementsByClassName("subirimagen")[0].files[0].size;
-                if (imgsize > 5000000) {
-                    alert('El archivo supera los 5Mb.');
-                    document.getElementsByClassName("subirimagen").filePicker.value = "";
-                }
-            }
+                        var imgsize = document.getElementsByClassName("subirimagen")[0].files[0].size;
+                        if (imgsize > 5000000) {
+                            alert('El archivo supera los 5Mb.');
+                            document.getElementsByClassName("subirimagen").filePicker.value = "";
+                        }
+                    }
 
-            function imgsize2() {
-                var imgsize2 = document.getElementsByClassName("subirimagen2")[0].files[0].size;
-                if (imgsize2 > 5000000) {
-                    alert('El archivo supera los 5Mb.');
-                    document.getElementsByClassName("subirimagen2").filePicker2.value = "";
-                }
-            }
- */
+                    function imgsize2() {
+                        var imgsize2 = document.getElementsByClassName("subirimagen2")[0].files[0].size;
+                        if (imgsize2 > 5000000) {
+                            alert('El archivo supera los 5Mb.');
+                            document.getElementsByClassName("subirimagen2").filePicker2.value = "";
+                        }
+                    }
+         */
 
 
             function deuda() {
