@@ -51,7 +51,7 @@ class LoansController extends Controller
         }
         if ($request->nombre == null) {
             $usuario = loans_user::orwhere('cedula', '=', $request->cedula)->get();
-            $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
+            $usuario_loans = loans::orwhere('cedula_user','=', $request->cedula)->get();
         }
         
         if (isset($usuario[0]->id)) {
