@@ -46,9 +46,9 @@
             <div class="col-md border" style="font-size: 14px" align="justify">
                 <!-- Button trigger modal -->
                 <center>
-                    <button type="button" class="btn btn w-25 h-25" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal{{ $data->id }}">
-                        <img name="" width="25" height="25" src="img/ver.png">
+                    <button type="button" class="btn btn-primary w-25 h-25" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal{{ $data->id }}">ver
+                        {{-- <img name="" width="25" height="25" src="img/ver.png"> --}}
                     </button>
                 </center>
                 <!-- Modal -->
