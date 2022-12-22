@@ -120,10 +120,8 @@
                                         @endif
                                     </div>
                                     <div class="col">
-
                                     </div>
                                     <div class="col">
-
                                     </div>
                                 </div>
                                 <div class="row row-cols-2 row-cols-sm-2 ">
