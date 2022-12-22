@@ -404,7 +404,7 @@
                 }
             }
 
-            function imgsize() {
+            /* function imgsize() {
                 var imgsize = document.getElementsByClassName("subirimagen")[0].files[0].size;
                 if (imgsize > 5000000) {
                     alert('El archivo supera los 5Mb.');
@@ -419,7 +419,7 @@
                     document.getElementsByClassName("subirimagen2").filePicker2.value = "";
                 }
             }
-
+ */
 
 
             function deuda() {

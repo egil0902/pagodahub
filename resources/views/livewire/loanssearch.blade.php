@@ -1,5 +1,5 @@
 <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value="" />
-<div class="row row-cols-3 row-cols-sm-3 row-cols-md-3">
+<div class="row row-cols-4 row-cols-sm-4 row-cols-md-4">
     <div class="col-md border" align="justify">
         Tipo
     </div>
@@ -15,12 +15,16 @@
     <div class="col-md border" align="justify">
         Monto
     </div>
+    <div class="col-md border" align="justify">
+        Adjuntos
+    </div>
+
 </div>
 @foreach ($loans as $data)
     <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST" action="{{ route('valepagoda.destroy') }}">
         @csrf
         <input name="valeid" type="hidden" value="{{ $data->id }}">
-        <div class="row row-cols-3 row-cols-sm-3 row-cols-md-3">
+        <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4">
             <div class="col-md border" style="font-size: 14px" align="justify">
                 {{ $data->loan_type }}
             </div>
@@ -38,6 +42,47 @@
                 @php
                     echo number_format($data->monto, 2, ',', ' ');
                 @endphp
+            </div>
+            <div class="col-md border" style="font-size: 14px" align="justify">
+                <!-- Button trigger modal -->
+                <center>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal{{ $data->id }}">
+                        Firma - Recibo
+                    </button>
+                </center>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Abjuntos</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card h-100 w-100">
+                                    <div class="card card-body">
+                                        <img name="" src=" {{ $data->signatures }}" border="1">
+                                    </div>
+                                </div>
+                                <div class="card h-100 w-100">
+                                    <div class="card card-body">
+                                        <img name="" src="data:image/png;base64,{{ $data->files }}"
+                                            border="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <center>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
