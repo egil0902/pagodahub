@@ -338,6 +338,7 @@
                                             cols="50" rows="15"></textarea>
                                     </div>
                                 </div>
+
                                 <button type="submit" class="btn btn-success my-auto active w-100 mb-1">Guardar</button>
                                 <a href="{{ url('loans_search') }}" class="btn btn-secondary active my-auto w-100 mb-1"
                                     role="button" aria-pressed="true">Cancelar</a>

@@ -26,7 +26,7 @@ class Loanssearch extends Component
         if($searchTerm=='')
             $searchTerm=0;
         return view('livewire.loanssearch',[
-            'loans' => loans_statement_of_account::where('cedula','=',$request->cedula)->orwhere('nombre','ilike','%'.$request->nombre.'%')->paginate(25),
+            'loans' => loans_statement_of_account::where('cedula','=',$request->cedula)->orwhere('nombre','=',$request->nombre)->paginate(25),
         ]);
     }
     
