@@ -26,7 +26,7 @@ class CloseCashController extends Controller
     public function store(Request $request)
     {
         $todo = new closecash;
-
+        //dump($todo);
         $todo->x_oneamtSistema                =    $request->x_oneamtSistema;
         $todo->x_fiveamtSistema              =    $request->x_fiveamtSistema;
         $todo->x_tenamtSistema                =    $request->x_tenamtSistema;
@@ -52,6 +52,7 @@ class CloseCashController extends Controller
         $todo->x_hundredamtFiscalizadora        =    $request->x_hundredamtFiscalizadora;
         $todo->yappyFiscalizadora            =    $request->yappyFiscalizadora;
         $todo->otrosFiscalizadora            =    $request->otrosFiscalizadora;
+        $todo->otrosprimeroFiscalizadora            =    $request->otrosprimeroFiscalizadora;
         $todo->valespagodaFiscalizadora        =    $request->valespagodaFiscalizadora;
         $todo->CheckAmtFiscalizadora            =    $request->CheckAmtFiscalizadora;
         $todo->LotoAmtFiscalizadora            =    $request->LotoAmtFiscalizadora;
@@ -78,6 +79,7 @@ class CloseCashController extends Controller
         $todo->x_hundredamtGerente            =    $request->x_hundredamtGerente;
         $todo->yappyGerente                    =    $request->yappyGerente;
         $todo->otrosGerente                  =    $request->otrosGerente;
+        $todo->otrosprimeroGerente                  =    $request->otrosprimeroGerente;
         $todo->valespagodaGerente             =    $request->valespagodaGerente;
         $todo->CheckAmtGerente               =    $request->CheckAmtGerente;
         $todo->LotoAmtGerente                 =    $request->LotoAmtGerente;
@@ -108,6 +110,7 @@ class CloseCashController extends Controller
         $todo->CardBACGerente                   = $request->CardBACGerente;
         $todo->InvoiceAmtPropiasFiscalizadora   = $request->InvoiceAmtPropiasFiscalizadora;
         $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
+
 
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
@@ -143,7 +146,8 @@ class CloseCashController extends Controller
         $closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
             '',
-            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",'ba_name asc'
+            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",
+            'ba_name asc'
         );
         //dd($closecashlist);
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
@@ -253,6 +257,8 @@ class CloseCashController extends Controller
         $todo->CardBACGerente                   = $request->CardBACGerente;
         $todo->InvoiceAmtPropiasFiscalizadora   = $request->InvoiceAmtPropiasFiscalizadora;
         $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
+        $todo->otrosprimeroFiscalizadora            =    $request->otrosprimeroFiscalizadora;
+        $todo->otrosprimeroGerente                  =    $request->otrosprimeroGerente;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
         $APIController = new APIController();
