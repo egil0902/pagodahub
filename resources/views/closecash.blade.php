@@ -800,7 +800,7 @@
                                         </td>
                                         <td></td>
                                         <td align="right">
-                                            <div class="col borde text-success" id="otrosFiscalizadora_r">0.0
+                                            <div class="col borde text-success" id="otrosprimeroFiscalizadora_r">0.0
                                             </div>
                                         </td>
                                     </tr>
