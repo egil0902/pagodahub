@@ -23,26 +23,20 @@ class Loanssearch extends Component
         $searchTerm = $this->searchTerm;
         //dd($request->cedula);
         //dd(loans::paginate(10));
-        if ($searchTerm == '')
+        if ($searchTerm == '') {
             $searchTerm = 0;
-
-        //dump($request->nombre,$request->cedula);
-        if ($request->cedula == null and $request->nombre == null) {
-            return view('livewire.loanssearch');
         }
-        if ($request->cedula == null) {
+        $cedula = $request->cedula;
+        $nombre = $request->nombre;
+        if ($nombre == null) {
             return view('livewire.loanssearch', [
-                'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $request->nombre . '%')->paginate(25),
+                'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25),
+            ]);
+        } else {
+            return view('livewire.loanssearch', [
+                'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->paginate(25),
             ]);
         }
-        if ($request->nombre == null) {
-            return view('livewire.loanssearch', [
-                'loans' => loans_statement_of_account::where('cedula', '=', $request->cedula)->paginate(25),
-            ]);
-        }
-       /*  return view('livewire.loanssearch', [
-            'loans' => loans_statement_of_account::where('cedula', '=', $request->cedula)->orwhere('nombre', 'like', '%' . $request->nombre . '%')->paginate(25),
-        ]); */
-        
+        //dump($cedula, $nombre);
     }
 }

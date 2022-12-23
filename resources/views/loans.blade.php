@@ -67,7 +67,7 @@
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title">Conciendecias de busqueda {{ count($usuario) }} </h1>
+                                            <h1 class="modal-title">Coincidencias de busqueda {{ count($usuario) }}</h1>
                                         </div>
                                         <div class="modal-body">
                                             <h1></h1>
@@ -95,8 +95,7 @@
                                                 {{--   <button type="submit" class="form-control btn btn-primary">Buscar</button> --}}
                                             </form>
                                         </div>
-                                        <div class="modal-footer">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -283,14 +282,14 @@
                                                                 Global</option>
                                                         @endforeach
                                                     @endif
-                                                    @if (isset($usuario_loans))
+                                                    {{-- @if (isset($usuario_loans))
                                                         @foreach ($usuario_loans as $info)
                                                             <option value="{{ $info->id }}">
                                                                 Fecha: {{ $info->fechanuevoprestamo }} -----
                                                                 Monto: {{ $info->monto }}
                                                             </option>
                                                         @endforeach
-                                                    @endif
+                                                    @endif --}}
                                                 </select>
                                                 <br>
                                                 <div hidden class="input-group mb-3">
@@ -397,6 +396,14 @@
                             </div>
                         </form>
                         <br>
+                        <div class="card w-auto">
+                            <div class="card-header">
+                                Estado de cuenta de prestamos
+                            </div>
+                            <div class="card-body">
+                                @livewire('loanssearch')
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
