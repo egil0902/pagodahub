@@ -2,7 +2,7 @@
 
 @section('content')
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet"
@@ -331,6 +331,12 @@
                                         <td></td>
                                     </tr>
                                     <tr>
+                                        <td></td>
+                                        <td><input style="width: 100px;" disabled step="0.01"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td style="font-size:12px;">Vales Pagoda </td>
                                         <td><input style="width: 100px;" name="valespagodaSistema"
                                                 value="{{ $data->valespagoda }}" type="number" step="0.01" readonly
@@ -454,6 +460,14 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
+                                    <tr>
+                                        <td>Subtotal super</td>
+                                        <td></td>
+                                        <td align="right">
+                                            <h6 id="Monto_Subtotal_Sistema">{{ $data->SubTotal }}</h6>
+                                        </td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <br><br>
@@ -475,14 +489,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Subtotal</td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 id="Monto_Subtotal_Sistema">{{ $data->SubTotal }}</h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
+
                                     <tr>
                                         <td>Monto X </td>
                                         <td></td>
@@ -760,6 +767,32 @@
                                             @else
                                                 <input style="width: 100px;" name="otrosFiscalizadora" type="number"
                                                     step="0.01" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
+                                                    onkeyup="cal();clon();cal();colores()" value="">
+                                            @endif
+
+                                        </td>
+                                        <td></td>
+                                        <td align="right">
+                                            <div class="col borde text-success" id="otrosFiscalizadora_r">0.0
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:12px;">Primera parte</td>
+                                        <td>
+
+                                            @if ($list->isNotEmpty())
+                                                @foreach ($list as $dataday)
+                                                    <input style="width: 100px;" name="otrosprimeroFiscalizadora"
+                                                        type="number" step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
+                                                        onkeyup="cal();clon();cal();colores()"
+                                                        value="{{ $dataday->otrosprimeroFiscalizadora }}">
+                                                @endforeach
+                                            @else
+                                                <input style="width: 100px;" name="otrosprimeroFiscalizadora"
+                                                    type="number" step="0.01" placeholder="0.00"
                                                     onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()" value="">
                                             @endif
@@ -1167,57 +1200,18 @@
                                             </div>
                                         </td>
                                     </tr>
-                                </tbody>
-                            </table>
-                            <br><br>
-                            <table class="table table-borderless">
-                                <thead>
                                     <tr>
-                                        <th style="width: 200px;">
-                                            <h4 class="mb-0">Monto contado</h4>
-                                        </th>
-                                        <th style="width: 0px;">
-
-                                        </th>
-                                        <th style="width: 100px;">
-                                            <h5 class="mb-0 fw-bold text-success" id="Monto_contado_Fiscalizadora"
-                                                align="right">
-
-                                            </h5>
-                                        </th>
-                                        <th style="width: 100px;">
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Subtotal</td>
+                                        <td>Subtotal super</td>
                                         <td></td>
                                         <td align="right">
                                             <h6 class="mb-0 text-success" id="Monto_Fiscalizadora_t"></h6>
                                         </td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td>Monto X</td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 class="mb-0" id="Monto_X_Fiscalizadora">{{ $data->XAmt }}
-                                            </h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diferencia</td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 class="mb-0" id="Diferencia_Fiscalizadora">
-                                                {{ $data->DifferenceAmt }}</h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
                                 </tbody>
                             </table>
+                            <br><br>
+
 
                             <table class="table table-borderless">
                                 <thead>
@@ -1312,6 +1306,47 @@
                                     </tr>
                                 </tbody>
 
+                            </table>
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 200px;">
+                                            <h4 class="mb-0">Monto contado</h4>
+                                        </th>
+                                        <th style="width: 0px;">
+
+                                        </th>
+                                        <th style="width: 100px;">
+                                            <h5 class="mb-0 fw-bold text-success" id="Monto_contado_Fiscalizadora"
+                                                align="right">
+
+                                            </h5>
+                                        </th>
+                                        <th style="width: 100px;">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>Monto X</td>
+                                        <td></td>
+                                        <td align="right">
+                                            <h6 class="mb-0" id="Monto_X_Fiscalizadora">{{ $data->XAmt }}
+                                            </h6>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diferencia</td>
+                                        <td></td>
+                                        <td align="right">
+                                            <h6 class="mb-0" id="Diferencia_Fiscalizadora">
+                                                {{ $data->DifferenceAmt }}</h6>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
 
@@ -1443,9 +1478,9 @@
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input style="width: 100px;" name="x_fiftyamtGerente" type="number"
-                                                        class="text-left" placeholder="0.00" onchange="cal();colores()"
-                                                        onkeyup="cal();colores()"
+                                                    <input style="width: 100px;" name="x_fiftyamtGerente"
+                                                        type="number" class="text-left" placeholder="0.00"
+                                                        onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_fiftyamtGerente }}">
                                                 @endforeach
                                             @else
@@ -1559,6 +1594,33 @@
                                             <div class="col borde text-success" id="otrosGerente_r">0.0</div>
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <td style="font-size:12px;">Primera parte</td>
+                                        <td>
+                                            @if ($list->isNotEmpty())
+                                                @foreach ($list as $dataday)
+                                                    <input name="otrosprimeroGerente" type="number" step="0.01"
+                                                        style="width: 100px;" placeholder="0.00"
+                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                        value="{{ $dataday->otrosprimeroGerente }}">
+                                                @endforeach
+                                            @else
+                                                <input name="otrosvGerente" type="number" step="0.01"
+                                                    style="width: 100px;" placeholder="0.00"
+                                                    onchange="cal();colores()" onkeyup="cal();colores()"
+                                                    value="">
+                                            @endif
+                                        </td>
+                                        <th>
+                                            <div style="visibility: hidden;" class="col borde text-success"
+                                                id="otrosprimeroGerente_t">0.0</div>
+                                        </th>
+                                        <td align="right">
+                                            <div class="col borde text-success" id="otrosprimeroGerente_r">0.0</div>
+                                        </td>
+                                    </tr>
+
                                     <tr>
                                         <td style="font-size:12px;">Vales Pagoda </td>
                                         <td>
@@ -1993,55 +2055,18 @@
                                             </div>
                                         </td>
                                     </tr>
-                                </tbody>
-                            </table>
-                            <br><br>
-                            <table class="table table-borderless">
-                                <thead>
                                     <tr>
-                                        <th style="width: 200px;">
-                                            <h4 class="mb-0">Monto contado</h4>
-                                        </th>
-                                        <th style="width: 0px;">
-
-                                        </th>
-                                        <th style="width: 100px;">
-                                            <h5 class="mb-0 fw-bold text-success" id="Monto_contado_Gerente"
-                                                align="right">
-                                            </h5>
-                                        </th>
-                                        <th style="width: 100px;">
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Subtotal</td>
+                                        <td>Subtotal super</td>
                                         <td></td>
                                         <td align="right">
                                             <h6 class="mb-0 text-success" id="Monto_Gerente_t"></h6>
                                         </td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td>Monto X</td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 class="mb-0" id="Monto_X_t">{{ $data->XAmt }}</h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diferencia</td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 class="mb-0" id="Monto_Diferencia_t">
-                                                {{ $data->DifferenceAmt }}</h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
                                 </tbody>
                             </table>
+                            <br><br>
+
 
                             <table class="table table-borderless">
                                 <thead>
@@ -2139,6 +2164,45 @@
                                             @endif
                                         </td>
                                         <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 200px;">
+                                            <h4 class="mb-0">Monto contado</h4>
+                                        </th>
+                                        <th style="width: 0px;">
+
+                                        </th>
+                                        <th style="width: 100px;">
+                                            <h5 class="mb-0 fw-bold text-success" id="Monto_contado_Gerente"
+                                                align="right">
+                                            </h5>
+                                        </th>
+                                        <th style="width: 100px;">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>Monto X</td>
+                                        <td></td>
+                                        <td align="right">
+                                            <h6 class="mb-0" id="Monto_X_t">{{ $data->XAmt }}</h6>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diferencia</td>
+                                        <td></td>
+                                        <td align="right">
+                                            <h6 class="mb-0" id="Monto_Diferencia_t">
+                                                {{ $data->DifferenceAmt }}</h6>
+                                        </td>
                                         <td></td>
                                     </tr>
                                 </tbody>
