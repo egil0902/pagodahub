@@ -67,7 +67,7 @@
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title">Conciendecias de busqueda {{ count($usuario) }} </h1>
+                                            <h1 class="modal-title">Coincidencias de busqueda {{ count($usuario) }}</h1>
                                         </div>
                                         <div class="modal-body">
                                             <h1></h1>
@@ -397,6 +397,14 @@
                             </div>
                         </form>
                         <br>
+                        <div class="card w-auto">
+                            <div class="card-header">
+                                Estado de cuenta de prestamos
+                            </div>
+                            <div class="card-body">
+                                @livewire('loanssearch')
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
