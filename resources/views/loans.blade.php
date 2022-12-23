@@ -95,8 +95,7 @@
                                                 {{--   <button type="submit" class="form-control btn btn-primary">Buscar</button> --}}
                                             </form>
                                         </div>
-                                        <div class="modal-footer">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -283,14 +282,14 @@
                                                                 Global</option>
                                                         @endforeach
                                                     @endif
-                                                    @if (isset($usuario_loans))
+                                                    {{-- @if (isset($usuario_loans))
                                                         @foreach ($usuario_loans as $info)
                                                             <option value="{{ $info->id }}">
                                                                 Fecha: {{ $info->fechanuevoprestamo }} -----
                                                                 Monto: {{ $info->monto }}
                                                             </option>
                                                         @endforeach
-                                                    @endif
+                                                    @endif --}}
                                                 </select>
                                                 <br>
                                                 <div hidden class="input-group mb-3">

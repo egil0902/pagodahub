@@ -37,6 +37,6 @@ class Loanssearch extends Component
                 'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->paginate(25),
             ]);
         }
-        dump($cedula, $nombre);
+        //dump($cedula, $nombre);
     }
 }
