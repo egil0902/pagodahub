@@ -800,7 +800,7 @@
                                         </td>
                                         <td></td>
                                         <td align="right">
-                                            <div class="col borde text-success" id="otrosprimeroFiscalizadora_r">0.0
+                                            <div class="col borde text-success" id="otrosprimeroFiscalizadora_r">
                                             </div>
                                         </td>
                                     </tr>
@@ -1606,7 +1606,7 @@
                                                         value="{{ $dataday->otrosprimeroGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="otrosvGerente" type="number" step="0.01"
+                                                <input name="otrosprimeroGerente" type="number" step="0.01"
                                                     style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
