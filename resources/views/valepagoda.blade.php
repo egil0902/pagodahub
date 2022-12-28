@@ -191,31 +191,45 @@
                                 @csrf
                                 <div class="row align-items-end">
                                     <div class="col">
-                                        @foreach ($range as $data)
-                                            <input id="01" name="" value="{{ $data->amount }}" type="hidden"
-                                                class="form-control" placeholder="" onchange="clon()" onkeyup="clon()"
-                                                required>
-                                        @endforeach
-                                        @foreach ($range2 as $data)
-                                            <input id="02" name="" value="{{ $data->amount }}" type="hidden"
-                                                class="form-control" placeholder="" onchange="clon()" onkeyup="clon()"
-                                                required>
-                                        @endforeach
-                                        @foreach ($range3 as $data)
-                                            <input id="03" name="" value="{{ $data->amount }}"
-                                                type="hidden" class="form-control" placeholder="" onchange="clon()"
-                                                onkeyup="clon()" required>
-                                        @endforeach
-                                        @foreach ($range4 as $data)
-                                            <input id="04" name="" value="{{ $data->amount }}"
-                                                type="hidden" class="form-control" placeholder="" onchange="clon()"
-                                                onkeyup="clon()" required>
-                                        @endforeach
-                                        @foreach ($range5 as $data)
-                                            <input id="05" name="" value="{{ $data->amount }}"
-                                                type="hidden" class="form-control" placeholder="" onchange="clon()"
-                                                onkeyup="clon()" required>
-                                        @endforeach
+                                        @if ($datas->isEmpty())
+                                            @foreach ($range as $data)
+                                                <input id="01" name="" value="{{ $data->amount }}"
+                                                    type="hidden" class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                            @endforeach
+                                        @endif
+
+                                        @if ($datas2->isEmpty())
+                                            @foreach ($range2 as $data)
+                                                <input id="02" name="" value="{{ $data->amount }}"
+                                                    type="hidden" class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                            @endforeach
+                                        @endif
+
+                                        @if ($datas3->isEmpty())
+                                            @foreach ($range3 as $data)
+                                                <input id="03" name="" value="{{ $data->amount }}"
+                                                    type="hidden" class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                            @endforeach
+                                        @endif
+
+                                        @if ($datas4->isEmpty())
+                                            @foreach ($range4 as $data)
+                                                <input id="04" name="" value="{{ $data->amount }}"
+                                                    type="hidden" class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                            @endforeach
+                                        @endif
+
+                                        @if ($datas5->isEmpty())
+                                            @foreach ($range5 as $data)
+                                                <input id="05" name="" value="{{ $data->amount }}"
+                                                    type="hidden" class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                            @endforeach
+                                        @endif
 
                                         <br>
                                         <p>Total de vales a cambiar:</p>
