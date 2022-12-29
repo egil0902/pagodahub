@@ -18,17 +18,20 @@ class ValePagodaController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+
+    public function organizacion()
     {
         $user = auth()->user();
-        //dd($user);
         $APIController = new APIController();
         $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        //dd($response->records[0]->AD_Org_ID->id);
-
         $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-
         $orgs =  $response;
+        return $orgs;
+    }
+
+    public function index(Request $request)
+    {
+        $orgs = $this->organizacion();
         return view('valepagoda', ['orgs' => $orgs]);
     }
     public function search(Request $request)
@@ -64,12 +67,7 @@ class ValePagodaController extends Controller
         $range4 = ValesPagodaRange::where('valueFrom', '<=', $request->value4)->where('valueTo', '>=', $request->value4)->get();
         $range5 = ValesPagodaRange::where('valueFrom', '<=', $request->value5)->where('valueTo', '>=', $request->value5)->get();
 
-
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
+        $orgs = $this->organizacion();
         return view('valepagoda', [
             'datas' => $datas,
             'datas2' => $datas2,
@@ -139,13 +137,7 @@ class ValePagodaController extends Controller
             ]);
         }
         $datas = ValesPagoda::where('value', '=', $request->value)->get();
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-
-        $orgs =  $response;
+        $orgs = $this->organizacion();
         return view('valepagoda', ['orgs' => $orgs]);
     }
     public function list(Request $request)
@@ -155,10 +147,7 @@ class ValePagodaController extends Controller
     }
     public function destroy(Request $request)
     {
-
         $vale = ValesPagoda::find($request->valeid);
-
-
         $vale->delete();
         $list = ValesPagoda::all();
         return view('valepagodalist', ['list' => $list, 'request' => $request]);
