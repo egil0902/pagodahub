@@ -2209,8 +2209,11 @@
                             </table>
                         </div>
                     </div>
-
-
+                </div>
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3> <b>Recuerde validar que coincida el total con la Z generada en el día</b> </h3>
+                    </div>
                 </div>
                 <div class="card text-center m-2">
                     <div class="row border m-1">
