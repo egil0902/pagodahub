@@ -11,18 +11,46 @@ use Laravel\Ui\Presets\React;
 
 class CloseCashController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
-    }
-    public function show(Request $request)
-    {
-
         $APIController = new APIController();
         $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
         $orgs =  $response;
+        session()->put('misDatos', $orgs);
+    }
+
+    public function import(Request $request)
+    {
+        $APIController = new APIController();
+        $misDatos = session()->get('misDatos');
+        $orgs = $misDatos;
+        $response = $APIController->getModel(
+            'RV_GH_CloseCash_Sum',
+            '',
+            'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
+        );
+        $docstatus = 'CO';
+        $closecashlist = $APIController->getModel(
+            'RV_GH_CloseCash',
+            '',
+            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",
+            'ba_name asc'
+        );
+        $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
+        if (isset($response)) {
+            return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list]);
+        }
+    }
+    
+    public function show(Request $request)
+    {
+        $misDatos = session()->get('misDatos');
+        $orgs = $misDatos;
         return view('closecash', ['orgs' => $orgs, 'request' => $request]);
     }
+
     public function store(Request $request)
     {
         $todo = new closecash;
@@ -111,12 +139,10 @@ class CloseCashController extends Controller
         $todo->InvoiceAmtPropiasFiscalizadora   = $request->InvoiceAmtPropiasFiscalizadora;
         $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
 
-
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
-        $orgs =  $response;
+        $misDatos = session()->get('misDatos');
+        $orgs = $misDatos;
         if ($filename == null) {
             //dd($todo);
             $todo->save();
@@ -128,47 +154,6 @@ class CloseCashController extends Controller
             $todo->save();
             return view('closecash', ['orgs' => $orgs]);
         }
-    }
-    public function import(Request $request)
-    {
-
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
-        $orgs =  $response;
-        $response = $APIController->getModel(
-            'RV_GH_CloseCash_Sum',
-            '',
-            'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
-        );
-        $docstatus = 'CO';
-        //dd($response);
-        //dd("datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '".$docstatus."'");
-        $closecashlist = $APIController->getModel(
-            'RV_GH_CloseCash',
-            '',
-            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",
-            'ba_name asc'
-        );
-        //dd($closecashlist);
-        $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
-        //dd($list);
-        if (isset($response)) {
-            return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list]);
-        }
-    }
-    public function list(Request $request)
-    {
-        $list = closecash::all();
-
-        return view('closecashlist', ['list' => $list, 'request' => $request]);
-    }
-    public function destroy(Request $request)
-    {
-
-        $vale = closecash::find($request->valeid);
-        $vale->delete();
-        $list = closecash::all();
-        return view('closecashlist', ['list' => $list, 'request' => $request]);
     }
 
     public function edit(Request $request)
@@ -261,9 +246,8 @@ class CloseCashController extends Controller
         $todo->otrosprimeroGerente                  =    $request->otrosprimeroGerente;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
-        $orgs =  $response;
+        $misDatos = session()->get('misDatos');
+        $orgs = $misDatos;
         if ($filename == null) {
             //dd($todo);
             $todo->save();
@@ -275,5 +259,19 @@ class CloseCashController extends Controller
             $todo->save();
             return view('closecash', ['orgs' => $orgs]);
         }
+    }
+    public function list(Request $request)
+    {
+        $list = closecash::all();
+
+        return view('closecashlist', ['list' => $list, 'request' => $request]);
+    }
+    public function destroy(Request $request)
+    {
+
+        $vale = closecash::find($request->valeid);
+        $vale->delete();
+        $list = closecash::all();
+        return view('closecashlist', ['list' => $list, 'request' => $request]);
     }
 }

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row ">
         <div class="col-md-12 col-12 col-sm-12 col-lg-12">
-            <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" />
+            <input type="text" class="form-control" placeholder="Search" wire:model="searchTerm" disabled/>
         </div>
     </div>
     <div class="row fw-bold">
