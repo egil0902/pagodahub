@@ -6,7 +6,7 @@
     
     <div class="card">
       <div class="card-header">
-        Lista de cierres de cuentas
+        Listado de Cierres de Cajas
       </div>
       <div class="card-body">
         @livewire('closecashsearch')
