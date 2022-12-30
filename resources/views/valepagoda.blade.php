@@ -65,63 +65,225 @@
                             <div class="col">
                                 @if (isset($datas))
                                     @if ($datas->isEmpty() && !$range->isEmpty())
-                                        <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                            </div>
+                                        </div>
                                     @endif
+                                    @foreach ($datas as $data)
+                                        @if (!$datas->isEmpty() || $range->isEmpty())
+                                            <div class="row row-cols-1 text-center">
+                                                <div class="col">
+                                                    <h3 class="display-5 text-danger my-auto">x</h3>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="row row-cols-1 row-cols-sm-2">
+                                            <div class="col">Cédula:</div>
+                                            <div class="col"><b>{{ $data->taxid }}</b></div>
+                                            <div class="col">Nombre:</div>
+                                            <div class="col"><b>{{ $data->name }}</b></div>
+                                            <div class="col">Validado por:</div>
+                                            <div class="col"><b>{{ $data->CreatedBy }}</b></div>
+                                            <div class="col">En Fecha:</div>
+                                            <div class="col"><b>{{ date('d-m-Y', strtotime($data->created_at)) }}</b>
+                                            </div>
+                                            <div class="col">Sucursal:</div>
+                                            <div class="col"><b>{{ $data->AD_Org_ID }}</b></div>
+                                            <div class="col">Vale consumido:</div>
+                                            <div class="col"><b># {{ $data->value }}</b></div>
+                                        </div>
+                                    @endforeach
                                 @endif
                                 @if (isset($range))
                                     @if ($range->isEmpty())
-                                        <h3 class=" text-danger">El vale no es valido</h3>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h3 class=" text-danger">El vale no es valido</h3>
+                                            </div>
+                                        </div>
                                     @endif
                                 @endif
                             </div>
+
                             <div class="col">
                                 @if (isset($datas2))
                                     @if ($datas2->isEmpty() && !$range2->isEmpty())
-                                        <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                            </div>
+                                        </div>
                                     @endif
+                                    @foreach ($datas2 as $data)
+                                        @if (!$datas->isEmpty() || $range->isEmpty())
+                                            <div class="row row-cols-1 text-center">
+                                                <div class="col">
+                                                    <h3 class="display-5 text-danger my-auto">x</h3>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="row row-cols-1 row-cols-sm-2">
+                                            <div class="col">Cédula:</div>
+                                            <div class="col"><b>{{ $data->taxid }}</b></div>
+                                            <div class="col">Nombre:</div>
+                                            <div class="col"><b>{{ $data->name }}</b></div>
+                                            <div class="col">Validado por:</div>
+                                            <div class="col"><b>{{ $data->CreatedBy }}</b></div>
+                                            <div class="col">En Fecha:</div>
+                                            <div class="col"><b>{{ date('d-m-Y', strtotime($data->created_at)) }}</b>
+                                            </div>
+                                            <div class="col">Sucursal:</div>
+                                            <div class="col"><b>{{ $data->AD_Org_ID }}</b></div>
+                                            <div class="col">Vale consumido:</div>
+                                            <div class="col"><b># {{ $data->value }}</b></div>
+                                        </div>
+                                    @endforeach
                                 @endif
                                 @if (isset($range2))
                                     @if ($range2->isEmpty())
-                                        <h3 class=" text-danger">El vale no es valido</h3>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h3 class=" text-danger">El vale no es valido</h3>
+                                            </div>
+                                        </div>
                                     @endif
                                 @endif
                             </div>
                             <div class="col">
                                 @if (isset($datas3))
                                     @if ($datas3->isEmpty() && !$range3->isEmpty())
-                                        <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                            </div>
+                                        </div>
                                     @endif
+                                    @foreach ($datas3 as $data)
+                                        @if (!$datas3->isEmpty() || $range3->isEmpty())
+                                            <div class="row row-cols-1 text-center">
+                                                <div class="col">
+                                                    <h3 class="display-5 text-danger my-auto">x</h3>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="row row-cols-1 row-cols-sm-2">
+                                            <div class="col">Cédula:</div>
+                                            <div class="col"><b>{{ $data->taxid }}</b></div>
+                                            <div class="col">Nombre:</div>
+                                            <div class="col"><b>{{ $data->name }}</b></div>
+                                            <div class="col">Validado por:</div>
+                                            <div class="col"><b>{{ $data->CreatedBy }}</b></div>
+                                            <div class="col">En Fecha:</div>
+                                            <div class="col"><b>{{ date('d-m-Y', strtotime($data->created_at)) }}</b>
+                                            </div>
+                                            <div class="col">Sucursal:</div>
+                                            <div class="col"><b>{{ $data->AD_Org_ID }}</b></div>
+                                            <div class="col">Vale consumido:</div>
+                                            <div class="col"><b># {{ $data->value }}</b></div>
+                                        </div>
+                                    @endforeach
                                 @endif
                                 @if (isset($range3))
                                     @if ($range3->isEmpty())
-                                        <h3 class=" text-danger">El vale no es valido</h3>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h3 class=" text-danger">El vale no es valido</h3>
+                                            </div>
+                                        </div>
                                     @endif
                                 @endif
                             </div>
                             <div class="col">
                                 @if (isset($datas4))
                                     @if ($datas4->isEmpty() && !$range4->isEmpty())
-                                        <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                            </div>
+                                        </div>
                                     @endif
+                                    @foreach ($datas4 as $data)
+                                        @if (!$datas4->isEmpty() || $range4->isEmpty())
+                                            <div class="row row-cols-1 text-center">
+                                                <div class="col">
+                                                    <h3 class="display-5 text-danger my-auto">x</h3>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="row row-cols-1 row-cols-sm-2">
+                                            <div class="col">Cédula:</div>
+                                            <div class="col"><b>{{ $data->taxid }}</b></div>
+                                            <div class="col">Nombre:</div>
+                                            <div class="col"><b>{{ $data->name }}</b></div>
+                                            <div class="col">Validado por:</div>
+                                            <div class="col"><b>{{ $data->CreatedBy }}</b></div>
+                                            <div class="col">En Fecha:</div>
+                                            <div class="col"><b>{{ date('d-m-Y', strtotime($data->created_at)) }}</b>
+                                            </div>
+                                            <div class="col">Sucursal:</div>
+                                            <div class="col"><b>{{ $data->AD_Org_ID }}</b></div>
+                                            <div class="col">Vale consumido:</div>
+                                            <div class="col"><b># {{ $data->value }}</b></div>
+                                        </div>
+                                    @endforeach
                                 @endif
                                 @if (isset($range4))
                                     @if ($range4->isEmpty())
-                                        <h3 class=" text-danger">El vale no es valido</h3>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h3 class=" text-danger">El vale no es valido</h3>
+                                            </div>
+                                        </div>
                                     @endif
                                 @endif
                             </div>
                             <div class="col">
                                 @if (isset($datas5))
                                     @if ($datas5->isEmpty() && !$range5->isEmpty())
-                                        <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h2 class="display-5 text-success my-auto">&#10004;</h2>
+                                            </div>
+                                        </div>
                                     @endif
+                                    @foreach ($datas5 as $data)
+                                        @if (!$datas5->isEmpty() || $range5->isEmpty())
+                                            <div class="row row-cols-1 text-center">
+                                                <div class="col">
+                                                    <h3 class="display-5 text-danger my-auto">x</h3>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        <div class="row row-cols-1 row-cols-sm-2">
+                                            <div class="col">Cédula:</div>
+                                            <div class="col"><b>{{ $data->taxid }}</b></div>
+                                            <div class="col">Nombre:</div>
+                                            <div class="col"><b>{{ $data->name }}</b></div>
+                                            <div class="col">Validado por:</div>
+                                            <div class="col"><b>{{ $data->CreatedBy }}</b></div>
+                                            <div class="col">En Fecha:</div>
+                                            <div class="col"><b>{{ date('d-m-Y', strtotime($data->created_at)) }}</b>
+                                            </div>
+                                            <div class="col">Sucursal:</div>
+                                            <div class="col"><b>{{ $data->AD_Org_ID }}</b></div>
+                                            <div class="col">Vale consumido:</div>
+                                            <div class="col"><b># {{ $data->value }}</b></div>
+                                        </div>
+                                    @endforeach
                                 @endif
                                 @if (isset($range5))
                                     @if ($range5->isEmpty())
-                                        <h3 class=" text-danger">El vale no es valido</h3>
+                                        <div class="row row-cols-1 text-center">
+                                            <div class="col">
+                                                <h3 class=" text-danger">El vale no es valido</h3>
+                                            </div>
+                                        </div>
                                     @endif
                                 @endif
                             </div>
+
                         </div>
                         <div class="col">
                             @if ((!isset($datas) || !$datas->isEmpty() || $range->isEmpty()) &&
@@ -135,50 +297,6 @@
                         </div>
                     </form>
                     <br>
-
-                    <div class="row align-items-end">
-                        <div class="col">
-                            @if (isset($datas) || isset($datas2) || isset($datas3) || isset($datas4) || isset($datas5))
-                                <div class="card">
-                                    <div class="card-body">
-                                        @foreach ($datas as $data)
-                                            <p class="fw-bold"><span class="fw-light">Cédula:
-                                                </span>{{ $data->taxid }}<span class="fw-light"> Nombre:
-                                                </span>{{ $data->name }}</p>
-                                            <p class="fw-bold"><span class="fw-light">Validado por: </span>
-                                                {{ $data->CreatedBy }}
-                                                <span class="fw-light">En Fecha: </span>
-                                                {{ date('d-m-Y', strtotime($data->created_at)) }}
-                                            </p>
-                                            <p class="fw-bold"><span class="fw-light">Sucursal: </span>
-                                                {{ $data->AD_Org_ID }}
-                                            </p>
-                                        @endforeach
-                                        @foreach ($datas as $data)
-                                            <p>Vale consumido:</p>
-                                            <p># {{ $data->value }}</p>
-                                        @endforeach
-                                        @foreach ($datas2 as $data2)
-                                            <p>Vale consumido:</p>
-                                            <p># {{ $data2->value }}</p>
-                                        @endforeach
-                                        @foreach ($datas3 as $data3)
-                                            <p>Vale consumido:</p>
-                                            <p># {{ $data3->value }}</p>
-                                        @endforeach
-                                        @foreach ($datas4 as $data4)
-                                            <p>Vale consumido:</p>
-                                            <p># {{ $data4->value }}</p>
-                                        @endforeach
-                                        @foreach ($datas5 as $data5)
-                                            <p>Vale consumido:</p>
-                                            <p>#{{ $data5->value }}</p>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
 
                     @if (isset($datas) || isset($datas2) || isset($datas3) || isset($datas4) || isset($datas5))
                         @if (($datas->isEmpty() && !$range->isEmpty()) ||
@@ -232,16 +350,31 @@
                                         @endif
 
                                         <br>
-                                        <p>Total de vales a cambiar:</p>
-                                        <p id="sum"></p>
-                                        <label>Cédula</label>
-                                        <input id="c_taxid" name="" value="" type="text"
-                                            class="form-control" placeholder="" onchange="clon()" onkeyup="clon()"
-                                            required>
-                                        <label>Nombre</label>
-                                        <input id="c_name" name="" value="" type="text"
-                                            class="form-control" placeholder="" onchange="clon()" onkeyup="clon()"
-                                            required>
+                                        <div class="card text-center bg-primary text-dark bg-opacity-10">
+                                            <div class="card-header">
+                                                <h5 class="card-title">Total de vales a cambiar: <b>$</b><b
+                                                        id="sum"></b> </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="text-start">Cédula</p>
+                                                <input id="c_taxid" name="" value="" type="text"
+                                                    class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                                <br>
+                                                <p class="text-start">Nombre</p>
+                                                <input id="c_name" name="" value="" type="text"
+                                                    class="form-control" placeholder="" onchange="clon()"
+                                                    onkeyup="clon()" required>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                                                <br><br>
+                                                <a href="{{ url('valepagodacancel') }}" class="btn btn-secondary w-100"
+                                                    role="button" aria-pressed="true">Cancelar</a>
+                                            </div>
+                                        </div>
+
+
+
                                         <script>
                                             let n1 = 0;
                                             let n2 = 0;
@@ -393,10 +526,7 @@
                                     @endif
 
 
-                                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
-                                    <br>
-                                    <a href="{{ url('valepagodacancel') }}" class="btn btn-secondary w-100"
-                                        role="button" aria-pressed="true">Cancelar</a>
+
                                 </div>
                             </form>
                         @endif
