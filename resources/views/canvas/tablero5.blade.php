@@ -6,4 +6,6 @@
 @csrf
     
     <input type='hidden' name='imagen5' id='imagen5' />
+    <br>
+<button class="btn btn-primary mh-100" type='button' onclick='LimpiarTrazado5()'>Borrar</button>
 <script src="js/paintfirma3.js"></script>
