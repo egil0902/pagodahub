@@ -4,6 +4,8 @@
 <!-- creamos el form para el envio -->
 
 @csrf
-    
-    <input type='hidden' name='imagen4' id='imagen4' />
+
+<input type='hidden' name='imagen4' id='imagen4' />
+<br>
+<button class="btn btn-primary mh-100" type='button' onclick='LimpiarTrazado4()'>Borrar</button>
 <script src="js/paintfirma2.js"></script>
