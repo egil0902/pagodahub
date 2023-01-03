@@ -58,13 +58,13 @@
             @foreach ($list as $dataday)
                 <form name="closecash_edit" id="closecash_edit" method="POST" action="{{ route('closecash.edit') }}"
                     enctype="multipart/form-data">
-                    <center><label for="">Editar</label></center>
+                    
             @endforeach
         @endif
         @if ($list->isEmpty())
             <form name="closecash_store" id="closecash_store" method="POST" action="{{ route('closecash.store') }}"
                 enctype="multipart/form-data">
-                <center><label for="">Nuevo</label></center>
+               
         @endif
         @csrf
         @if ($closecashsumlist->{'records-size'} > 0)
