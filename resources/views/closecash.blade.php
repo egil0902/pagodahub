@@ -121,7 +121,7 @@
                                         <h5><b>Subtotal</b></h5>
                                     </td>
                                     <td style="width: 100px;" align="right">
-                                        <h5><b>Monto Contado</b></h5>
+                                        <h5><b>Monto contado</b></h5>
                                     </td>
                                     <td style="width: 100px;" align="right">
                                         <h5><b>Monto X</b></h5>
@@ -208,7 +208,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h5 class="card-title"><b>Monto Sistema</b></h5>
+                            <h5 class="card-title"><b>Monto sistema</b></h5>
                             <table class="table table-borderless ">
                                 <thead>
                                     <tr>
@@ -227,7 +227,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>$1x</td>
+                                        <td>$1 *</td>
                                         <td> <input style="width: 100px;" name="x_oneamtSistema"
                                                 value="{{ $data->x_oneamt }}" type="number" readonly class="text-left"
                                                 placeholder="0.00"></td>
@@ -239,7 +239,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$5x</td>
+                                        <td>$5 *</td>
                                         <td><input style="width: 100px;" name="x_fiveamtSistema"
                                                 value="{{ $data->x_fiveamt }}" type="number" readonly class="text-left"
                                                 placeholder="0.00"></td>
@@ -251,7 +251,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$10x</td>
+                                        <td>$10 *</td>
                                         <td><input style="width: 100px;" name="x_tenamtSistema"
                                                 value="{{ $data->x_tenamt }}" type="number" readonly class="text-left"
                                                 placeholder="0.00"></td>
@@ -263,7 +263,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$20x</td>
+                                        <td>$20 *</td>
                                         <td><input style="width: 100px;" name="x_twentyamtSistema"
                                                 value="{{ $data->x_twentyamt }}" type="number" readonly
                                                 class="text-left" placeholder="0.00"></td>
@@ -275,7 +275,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$50x</td>
+                                        <td>$50 *</td>
                                         <td><input style="width: 100px;" name="x_fiftyamtSistema"
                                                 value="{{ $data->x_fiftyamt }}" type="number" readonly
                                                 class="text-left" placeholder="0.0"></td>
@@ -287,7 +287,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$100x</td>
+                                        <td>$100 *</td>
                                         <td><input style="width: 100px;" name="x_hundredamtSistema"
                                                 value="{{ $data->x_hundredamt }}" type="number" readonly
                                                 class="text-left" placeholder="0.00"></td>
@@ -337,7 +337,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Vales Pagoda </td>
+                                        <td style="font-size:12px;">Vales pagoda </td>
                                         <td><input style="width: 100px;" name="valespagodaSistema"
                                                 value="{{ $data->valespagoda }}" type="number" step="0.01" readonly
                                                 placeholder="0.00"></td>
@@ -452,7 +452,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Beca Digital </td>
+                                        <td style="font-size:12px;">Beca digital </td>
                                         <td> <input style="width: 100px;" name="GrantAmtSistema"
                                                 value="{{ $data->GrantAmt }}" type="number" step="0.01" readonly
                                                 placeholder="0.00">
@@ -535,7 +535,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="width: 100px;">$1x</td>
+                                        <td style="width: 100px;">$1 *</td>
                                         <td style="width: 100px;">
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -563,7 +563,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$5x</td>
+                                        <td>$5 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -590,7 +590,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$10x</td>
+                                        <td>$10 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -619,7 +619,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$20x</td>
+                                        <td>$20 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -648,7 +648,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$50x</td>
+                                        <td>$50 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -677,7 +677,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$100x</td>
+                                        <td>$100 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -805,7 +805,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Vales Pagoda </td>
+                                        <td style="font-size:12px;">Vales pagoda </td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -906,7 +906,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Clave</td>
+                                        <td style="font-size:12px;">Tarjeta clave</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -930,7 +930,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Vale</td>
+                                        <td style="font-size:12px;">Tarjeta vale</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -955,7 +955,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Visa</td>
+                                        <td style="font-size:12px;">Tarjeta visa</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -980,7 +980,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Master</td>
+                                        <td style="font-size:12px;">Tarjeta master</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1004,7 +1004,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta American</td>
+                                        <td style="font-size:12px;">Tarjeta american</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1028,7 +1028,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta BAC</td>
+                                        <td style="font-size:12px;">Tarjeta bac</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1127,7 +1127,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Facturas Propias</td>
+                                        <td style="font-size:12px;">Facturas propias</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1176,7 +1176,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Beca Digital </td>
+                                        <td style="font-size:12px;">Beca digital </td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1226,7 +1226,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="font-size:12px;">Total Panaderia</td>
+                                        <td style="font-size:12px;">Total panaderia</td>
                                         <td><input name="totalPanaderiaFiscalizadora" type="number" step="0.01"
                                                 style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
@@ -1239,7 +1239,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Pagatodo</td>
+                                        <td style="font-size:12px;">Total pagatodo</td>
                                         <td><input name="totalPagatodoFiscalizadora" type="number" step="0.01"
                                                 style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
@@ -1252,7 +1252,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Super</td>
+                                        <td style="font-size:12px;">Total super</td>
                                         <td> <input name="totalsuperFiscalizadora" type="number" step="0.01"
                                                 style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
@@ -1265,7 +1265,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Dinero de Taxi</td>
+                                        <td style="font-size:12px;">Dinero de taxi</td>
                                         <td><input name="dineroTaxiFiscalizadora" type="number" step="0.01"
                                                 style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
@@ -1375,7 +1375,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>$1x</td>
+                                        <td>$1 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1399,7 +1399,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$5x</td>
+                                        <td>$5 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1424,7 +1424,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$10x</td>
+                                        <td>$10 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1449,7 +1449,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$20x</td>
+                                        <td>$20 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1474,7 +1474,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$50x</td>
+                                        <td>$50 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1499,7 +1499,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$100x</td>
+                                        <td>$100 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1622,7 +1622,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td style="font-size:12px;">Vales Pagoda </td>
+                                        <td style="font-size:12px;">Vales pagoda </td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -1730,7 +1730,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Clave</td>
+                                        <td style="font-size:12px;">Tarjeta clave</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1756,7 +1756,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Vale</td>
+                                        <td style="font-size:12px;">Tarjeta vale</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -1784,7 +1784,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Visa</td>
+                                        <td style="font-size:12px;">Tarjeta visa</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -1811,7 +1811,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Master</td>
+                                        <td style="font-size:12px;">Tarjeta master</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -1839,7 +1839,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta American</td>
+                                        <td style="font-size:12px;">Tarjeta american</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -1866,7 +1866,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta BAC</td>
+                                        <td style="font-size:12px;">Tarjeta bac</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
@@ -1975,7 +1975,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Facturas Propias</td>
+                                        <td style="font-size:12px;">Facturas propias</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -2029,7 +2029,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Beca Digital </td>
+                                        <td style="font-size:12px;">Beca digital </td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
@@ -2081,7 +2081,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="font-size:12px;">Total Panaderia</td>
+                                        <td style="font-size:12px;">Total panaderia</td>
                                         <td><input name="totalPanaderiaGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalPanaderiaGerente }}"
@@ -2094,7 +2094,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Pagatodo</td>
+                                        <td style="font-size:12px;">Total pagatodo</td>
                                         <td><input name="totalPagatodoGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalsuperGerente }}"
@@ -2107,7 +2107,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Super</td>
+                                        <td style="font-size:12px;">Total super</td>
                                         <td> <input name="totalsuperGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalsuperGerente }}"
@@ -2120,7 +2120,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Dinero de Taxi</td>
+                                        <td style="font-size:12px;">Dinero de taxi</td>
                                         <td><input name="dineroTaxiGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->dineroTaxiGerente }}"
