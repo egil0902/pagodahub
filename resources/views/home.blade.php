@@ -19,7 +19,7 @@
     <div class="container p-0  mx-auto">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 border border-5 border-dark-subtle">
                     <form name="close_cash" id="close_cash" method="post" action="{{ route('close.cash') }}"> @csrf
                         <center>
                             <button type="submit" class="btn btn-outline">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 border border-5 border-dark-subtle">
                     <form name="closecash_list" id="closecash_list" method="post" action="{{ route('closecash.list') }}">
                         @csrf
                         <center>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 border border-5 border-dark-subtle">
                     <form name="valespagodarange" id="valespagodarange" method="post"
                         action="{{ route('valespagodarange') }}">
                         @csrf
@@ -70,7 +70,7 @@
             </div>
 
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 border border-5 border-dark-subtle">
                     <form name="valepagoda" id="valepagoda" method="get" action="{{ route('valepagoda') }}">
                         @csrf
                         <center>
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 border border-5 border-dark-subtle">
                     <form name="valepagoda_list" id="valepagoda_list" method="GET"
                         action="{{ route('valepagoda.list') }}">
                         @csrf
@@ -105,7 +105,7 @@
             </div>
 
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 border border-5 border-dark-subtle">
                     <form name="loans" id="loans" method="get" action="{{ route('loans') }}"> @csrf
                         @csrf
                         <center>
