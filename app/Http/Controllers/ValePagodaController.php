@@ -143,7 +143,8 @@ class ValePagodaController extends Controller
     }
     public function destroy(Request $request)
     {
-        $vale = ValesPagoda::find($request->valeid);
+        //dd($request->valeidok);
+        $vale = ValesPagoda::find($request->valeidok);
         $vale->delete();
         $list = ValesPagoda::all();
         return view('valepagodalist', ['list' => $list, 'request' => $request]);
