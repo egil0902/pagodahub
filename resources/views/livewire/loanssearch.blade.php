@@ -1,9 +1,9 @@
 <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value="" />
 <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4">
-    <div class="col-md border" align="justify">
+    <div class="col-md border" align="center">
         Tipo
     </div>
-    <div class="col-md border" align="justify">
+    <div class="col-md border" align="center">
         Fecha
     </div>
     {{-- <div class="col-md border" align="justify">
@@ -12,10 +12,10 @@
     <div class="col-md border" align="justify">
         Nombre
     </div> --}}
-    <div class="col-md border" align="justify">
+    <div class="col-md border" align="center">
         Monto
     </div>
-    <div class="col-md border" align="justify">
+    <div class="col-md border" align="center">
         Adjuntos
     </div>
 
@@ -33,7 +33,7 @@
                         {{ $data->loan_type }}
                     </div>
                     <div class="col-md border" style="font-size: 14px" align="justify">
-                        {{ $data->datetrx }}
+                        {{  date('d-m-Y', strtotime($data->datetrx)) }}
                     </div>
                     <div class="col-md border" style="font-size: 14px" align="right">$
                         @php
@@ -105,7 +105,7 @@
             </form>
         @endforeach
     @else
-    @csrf
+        @csrf
     @endif
 @endif
 {{-- <div class="row">
