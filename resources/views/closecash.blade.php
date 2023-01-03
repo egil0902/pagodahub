@@ -58,13 +58,11 @@
             @foreach ($list as $dataday)
                 <form name="closecash_edit" id="closecash_edit" method="POST" action="{{ route('closecash.edit') }}"
                     enctype="multipart/form-data">
-                    <center><label for="">Editar</label></center>
             @endforeach
         @endif
         @if ($list->isEmpty())
             <form name="closecash_store" id="closecash_store" method="POST" action="{{ route('closecash.store') }}"
                 enctype="multipart/form-data">
-                <center><label for="">Nuevo</label></center>
         @endif
         @csrf
         @if ($closecashsumlist->{'records-size'} > 0)
@@ -109,38 +107,37 @@
                             <table class="table table-borderless">
                                 <tr>
                                     <td style="width: 100px;" align="left">
-                                        <h5><b>Caja</b></h5>
+                                        <h6><b>Caja</b></h6>
                                     </td>
                                     <td style="width: 100px;" align="left">
-                                        <h5><b>Cajera</b></h5>
+                                        <h6><b>Cajera</b></h6>
                                     </td>
                                     <td style="width: 100px;" align="right">
-                                        <h5><b>Inicio caja</b></h5>
+                                        <h6><b>Inicio caja</b></h6>
                                     </td>
                                     <td style="width: 100px;" align="right">
-                                        <h5><b>Subtotal</b></h5>
+                                        <h6><b>Subtotal</b></h6>
                                     </td>
                                     <td style="width: 100px;" align="right">
-                                        <h5><b>Monto Contado</b></h5>
+                                        <h6><b>Monto contado</b></h6>
                                     </td>
                                     <td style="width: 100px;" align="right">
-                                        <h5><b>Monto X</b></h5>
+                                        <h6><b>Monto X</b></h6>
                                     </td>
                                     <td style="width: 100px;" align="right">
-                                        <h5><b>Diferencia</b></h5>
+                                        <h6><b>Diferencia</b></h6>
                                     </td>
                                 </tr>
                                 @if ($closecashlist->{'records-size'} > 0)
                                     @foreach ($closecashlist->records as $closecashl)
-                                        <tbody>
+                                        <tbody style="font-size:12px;">
                                             <tr>
-                                                <td style="width: 100px;" align="left"><label>
-                                                        @php
-                                                            echo $closecashl->ba_name;
-                                                        @endphp
-                                                    </label></td>
                                                 <td style="width: 100px;" align="left">
-                                                    <label>{{ $closecashl->u_name }}</label>
+                                                    <p class="text-capitalize text-lowercase">{{ $closecashl->ba_name }}
+                                                    </p>
+                                                </td>
+                                                <td style="width: 100px;" align="left">
+                                                    <p class="text-capitalize text-lowercase">{{ $closecashl->u_name }}</p>
                                                 </td>
                                                 <td style="width: 100px;" align="right"><label>
                                                         @php
@@ -208,7 +205,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h5 class="card-title"><b>Monto Sistema</b></h5>
+                            <h5 class="card-title"><b>Monto sistema</b></h5>
                             <table class="table table-borderless ">
                                 <thead>
                                     <tr>
@@ -227,10 +224,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>$1x</td>
+                                        <td>$1 *</td>
                                         <td> <input style="width: 100px;" name="x_oneamtSistema"
-                                                value="{{ $data->x_oneamt }}" type="number" readonly class="text-left"
-                                                placeholder="0.00"></td>
+                                                value="{{ $data->x_oneamt }}" type="number" class="form-control"
+                                                readonly class="text-left  form-control" placeholder="0.00"></td>
                                         <td align="right">
                                             @php
                                                 echo number_format($data->x_oneamt * 1, 2, ',', ' ');
@@ -239,10 +236,10 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$5x</td>
+                                        <td>$5 *</td>
                                         <td><input style="width: 100px;" name="x_fiveamtSistema"
-                                                value="{{ $data->x_fiveamt }}" type="number" readonly class="text-left"
-                                                placeholder="0.00"></td>
+                                                value="{{ $data->x_fiveamt }}" type="number" class="form-control"
+                                                readonly class="text-left  form-control" placeholder="0.00"></td>
                                         <td align="right">
                                             @php
                                                 echo number_format($data->x_fiveamt * 5, 2, ',', ' ');
@@ -251,10 +248,10 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$10x</td>
+                                        <td>$10 *</td>
                                         <td><input style="width: 100px;" name="x_tenamtSistema"
-                                                value="{{ $data->x_tenamt }}" type="number" readonly class="text-left"
-                                                placeholder="0.00"></td>
+                                                value="{{ $data->x_tenamt }}" type="number" class="form-control"
+                                                readonly class="text-left  form-control" placeholder="0.00"></td>
                                         <td align="right">
                                             @php
                                                 echo number_format($data->x_tenamt * 10, 2, ',', ' ');
@@ -263,10 +260,10 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$20x</td>
+                                        <td>$20 *</td>
                                         <td><input style="width: 100px;" name="x_twentyamtSistema"
-                                                value="{{ $data->x_twentyamt }}" type="number" readonly
-                                                class="text-left" placeholder="0.00"></td>
+                                                value="{{ $data->x_twentyamt }}" type="number" class="form-control"
+                                                readonly class="text-left  form-control" placeholder="0.00"></td>
                                         <td align="right">
                                             @php
                                                 echo number_format($data->x_twentyamt * 20, 2, ',', ' ');
@@ -275,10 +272,10 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$50x</td>
+                                        <td>$50 *</td>
                                         <td><input style="width: 100px;" name="x_fiftyamtSistema"
-                                                value="{{ $data->x_fiftyamt }}" type="number" readonly
-                                                class="text-left" placeholder="0.0"></td>
+                                                value="{{ $data->x_fiftyamt }}" type="number" class="form-control"
+                                                readonly class="text-left  form-control" placeholder="0.0"></td>
                                         <td align="right">
                                             @php
                                                 echo number_format($data->x_fiftyamt * 50, 2, ',', ' ');
@@ -287,10 +284,10 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>$100x</td>
+                                        <td>$100 *</td>
                                         <td><input style="width: 100px;" name="x_hundredamtSistema"
-                                                value="{{ $data->x_hundredamt }}" type="number" readonly
-                                                class="text-left" placeholder="0.00"></td>
+                                                value="{{ $data->x_hundredamt }}" type="number" class="form-control"
+                                                readonly class="text-left  form-control" placeholder="0.00"></td>
                                         <td align="right">
                                             @php
                                                 echo number_format($data->x_hundredamt * 100, 2, ',', ' ');
@@ -318,37 +315,39 @@
                                     <tr>
                                         <td style="font-size:12px;">Yappy</td>
                                         <td> <input style="width: 100px;" name="yappySistema"
-                                                value="{{ $data->yappy }}" type="number" step="0.01" readonly
-                                                placeholder="0.00"></td>
+                                                value="{{ $data->yappy }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00"></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px;">Otros</td>
                                         <td><input style="width: 100px;" name="otrosSistema" value="{{ $data->otros }}"
-                                                type="number" step="0.01" readonly placeholder="0.00"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input style="width: 100px;" disabled step="0.01"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:12px;">Vales Pagoda </td>
-                                        <td><input style="width: 100px;" name="valespagodaSistema"
-                                                value="{{ $data->valespagoda }}" type="number" step="0.01" readonly
+                                                type="number" class="form-control" step="0.01" readonly
                                                 placeholder="0.00"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><input style="width: 100px;" disabled step="0.01" class="form-control">
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:12px;">Vales pagoda </td>
+                                        <td><input style="width: 100px;" name="valespagodaSistema"
+                                                value="{{ $data->valespagoda }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00"></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px;"> Monto cheques</td>
                                         <td> <input style="width: 100px;" name="CheckAmtSistema"
-                                                value="{{ $data->CheckAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->CheckAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -356,8 +355,8 @@
                                     <tr>
                                         <td style="font-size:12px;"> Loteria</td>
                                         <td> <input style="width: 100px;" name="LotoAmtSistema"
-                                                value="{{ $data->LotoAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->LotoAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -365,7 +364,8 @@
                                     <tr>
                                         <td style="font-size:12px;">Vale</td>
                                         <td> <input style="width: 100px;" name="valeAmt" value="{{ $data->CreditAmt }}"
-                                                type="number" step="0.01" readonly placeholder="0.00">
+                                                type="number" class="form-control" step="0.01" readonly
+                                                placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -373,47 +373,52 @@
                                     <tr>
                                         <td style="font-size:12px;">Tarjetas </td>
                                         <td> <input style="width: 100px;" name="CardAmtSistema"
-                                                value="{{ $data->CardAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->CardAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input style="width: 100px;" disabled sstep="0.01"></td>
+                                        <td><input style="width: 100px;" disabled sstep="0.01" class="form-control">
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input style="width: 100px;" disabled sstep="0.01"></td>
+                                        <td><input style="width: 100px;" disabled sstep="0.01" class="form-control">
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input style="width: 100px;" disabled sstep="0.01"></td>
+                                        <td><input style="width: 100px;" disabled sstep="0.01" class="form-control">
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input style="width: 100px;" disabled sstep="0.01"></td>
+                                        <td><input style="width: 100px;" disabled sstep="0.01" class="form-control">
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input style="width: 100px;" disabled step="0.01"></td>
+                                        <td><input style="width: 100px;" disabled step="0.01" class="form-control">
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px;"> Sencillo </td>
                                         <td><input style="width: 100px;" name="CashAmtSistema"
-                                                value="{{ $data->CashAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->CashAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -421,8 +426,8 @@
                                     <tr>
                                         <td style="font-size:12px;">Rollos </td>
                                         <td> <input style="width: 100px;" name="CoinRollSistema"
-                                                value="{{ $data->CoinRoll }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->CoinRoll }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -430,32 +435,33 @@
                                     <tr>
                                         <td style="font-size:12px;">Facturas </td>
                                         <td> <input style="width: 100px;" name="InvoiceAmtSistema"
-                                                value="{{ $data->InvoiceAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->InvoiceAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input style="width: 100px;" disabled step="0.01"></td>
+                                        <td><input style="width: 100px;" disabled step="0.01" class="form-control">
+                                        </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px; ">Vale digital </td>
                                         <td> <input style="width: 100px;" name="VoucherAmtSistema"
-                                                value="{{ $data->VoucherAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->VoucherAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Beca Digital </td>
+                                        <td style="font-size:12px;">Beca digital </td>
                                         <td> <input style="width: 100px;" name="GrantAmtSistema"
-                                                value="{{ $data->GrantAmt }}" type="number" step="0.01" readonly
-                                                placeholder="0.00">
+                                                value="{{ $data->GrantAmt }}" type="number" class="form-control"
+                                                step="0.01" readonly placeholder="0.00">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -535,20 +541,21 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="width: 100px;">$1x</td>
+                                        <td style="width: 100px;">$1 *</td>
                                         <td style="width: 100px;">
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->x_oneamtFiscalizadora }}"
-                                                        name="x_oneamtFiscalizadora" type="number"
-                                                        class="text-left"placeholder="0.00"
+                                                        name="x_oneamtFiscalizadora" type="number" class="form-control"
+                                                        class="text-left  form-control form-control"placeholder="0.00"
                                                         onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="x_oneamtFiscalizadora"
-                                                    type="number" class="text-left"placeholder="0.00"
+                                                    type="number" class="form-control"
+                                                    class="text-left  form-control"placeholder="0.00"
                                                     onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
@@ -563,20 +570,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$5x</td>
+                                        <td>$5 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->x_fiveamtFiscalizadora }}"
-                                                        name="x_fiveamtFiscalizadora" type="number" class="text-left"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="x_fiveamtFiscalizadora" type="number" class="form-control"
+                                                        class="text-left  form-control form-control" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="x_fiveamtFiscalizadora"
-                                                    type="number" class="text-left" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -590,21 +598,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$10x</td>
+                                        <td>$10 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->x_tenamtFiscalizadora }}"
-                                                        name="x_tenamtFiscalizadora" type="number" class="text-left"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="x_tenamtFiscalizadora" type="number" class="form-control"
+                                                        class="text-left  form-control" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="x_tenamtFiscalizadora"
-                                                    type="number" class="text-left" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
 
@@ -619,21 +628,23 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$20x</td>
+                                        <td>$20 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->x_twentyamtFiscalizadora }}"
-                                                        name="x_twentyamtFiscalizadora" type="number" class="text-left"
+                                                        name="x_twentyamtFiscalizadora" type="number"
+                                                        class="form-control" class="text-left  form-control"
                                                         placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="x_twentyamtFiscalizadora" type="number" class="text-left"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="x_twentyamtFiscalizadora" type="number" class="form-control"
+                                                    class="text-left  form-control" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -648,21 +659,23 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$50x</td>
+                                        <td>$50 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->x_fiftyamtFiscalizadora }}"
-                                                        name="x_fiftyamtFiscalizadora" type="number" class="text-left"
+                                                        name="x_fiftyamtFiscalizadora" type="number"
+                                                        class="form-control" class="text-left  form-control"
                                                         placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="x_fiftyamtFiscalizadora" type="number" class="text-left"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="x_fiftyamtFiscalizadora" type="number" class="form-control"
+                                                    class="text-left  form-control" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
 
@@ -677,21 +690,23 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$100x</td>
+                                        <td>$100 *</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->x_hundredamtFiscalizadora }}"
-                                                        name="x_hundredamtFiscalizadora" type="number" class="text-left"
+                                                        name="x_hundredamtFiscalizadora" type="number"
+                                                        class="form-control" class="text-left  form-control"
                                                         placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="x_hundredamtFiscalizadora" type="number" class="text-left"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="x_hundredamtFiscalizadora" type="number" class="form-control"
+                                                    class="text-left  form-control" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
 
@@ -733,14 +748,15 @@
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->yappyFiscalizadora }}"
                                                         id="yappyFiscalizadora" name="yappyFiscalizadora" type="number"
-                                                        step="0.01" placeholder="0.00"
+                                                        class="form-control" step="0.01" placeholder="0.00"
                                                         onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" id="yappyFiscalizadora"
-                                                    name="yappyFiscalizadora" type="number" step="0.01"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="yappyFiscalizadora" type="number" class="form-control"
+                                                    step="0.01" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
 
@@ -759,14 +775,14 @@
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="otrosFiscalizadora" type="number"
-                                                        step="0.01" placeholder="0.00"
+                                                        class="form-control" step="0.01" placeholder="0.00"
                                                         onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()"
                                                         value="{{ $dataday->otrosFiscalizadora }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="otrosFiscalizadora" type="number"
-                                                    step="0.01" placeholder="0.00"
+                                                    class="form-control" step="0.01" placeholder="0.00"
                                                     onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()" value="">
                                             @endif
@@ -785,15 +801,15 @@
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="otrosprimeroFiscalizadora"
-                                                        type="number" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
+                                                        type="number" class="form-control" step="0.01"
+                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()"
                                                         value="{{ $dataday->otrosprimeroFiscalizadora }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="otrosprimeroFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()" value="">
                                             @endif
 
@@ -805,20 +821,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Vales Pagoda </td>
+                                        <td style="font-size:12px;">Vales pagoda </td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="valespagodaFiscalizadora"
-                                                        type="number" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
+                                                        type="number" class="form-control" step="0.01"
+                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()"
                                                         value="{{ $dataday->valespagodaFiscalizadora }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="valespagodaFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()" value="">
                                             @endif
                                         </td>
@@ -836,14 +852,14 @@
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="CheckAmtFiscalizadora"
-                                                        type="number" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
+                                                        type="number" class="form-control" step="0.01"
+                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()"
                                                         value="{{ $dataday->CheckAmtFiscalizadora }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="CheckAmtFiscalizadora" type="number"
-                                                    step="0.01" placeholder="0.00"
+                                                    class="form-control" step="0.01" placeholder="0.00"
                                                     onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()" value="">
                                             @endif
@@ -861,14 +877,14 @@
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="LotoAmtFiscalizadora"
-                                                        type="number" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
+                                                        type="number" class="form-control" step="0.01"
+                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()"
                                                         value="{{ $dataday->LotoAmtFiscalizadora }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="LotoAmtFiscalizadora" type="number"
-                                                    step="0.01" placeholder="0.00"
+                                                    class="form-control" step="0.01" placeholder="0.00"
                                                     onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()" value="">
                                             @endif
@@ -887,14 +903,15 @@
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->valeAmtFiscalizadora }}"
-                                                        name="valeAmtFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="valeAmtFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="valeAmtFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -906,20 +923,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Clave</td>
+                                        <td style="font-size:12px;">Tarjeta clave</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CardClaveFiscalizadora }}"
-                                                        name="CardClaveFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CardClaveFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CardClaveFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -930,20 +948,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Vale</td>
+                                        <td style="font-size:12px;">Tarjeta vale</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CardValeFiscalizadora }}"
-                                                        name="CardValeFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CardValeFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CardValeFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
 
@@ -955,20 +974,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Visa</td>
+                                        <td style="font-size:12px;">Tarjeta visa</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CardVisaFiscalizadora }}"
-                                                        name="CardVisaFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CardVisaFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CardVisaFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -980,20 +1000,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Master</td>
+                                        <td style="font-size:12px;">Tarjeta master</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CardMasterFiscalizadora }}"
-                                                        name="CardMasterFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CardMasterFiscalizadora" type="number"
+                                                        class="form-control" step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="CardMasterFiscalizadora" type="number" step="0.01"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="CardMasterFiscalizadora" type="number" class="form-control"
+                                                    step="0.01" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1004,20 +1026,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta American</td>
+                                        <td style="font-size:12px;">Tarjeta american</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CardAEFiscalizadora }}"
-                                                        name="CardAEFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CardAEFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CardAEFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1028,20 +1051,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta BAC</td>
+                                        <td style="font-size:12px;">Tarjeta bac</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CardBACFiscalizadora }}"
-                                                        name="CardBACFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CardBACFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CardBACFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1059,14 +1083,14 @@
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CashAmtFiscalizadora }}"
                                                         name="CashAmtFiscalizadora" value="" type="number"
-                                                        step="0.01" placeholder="0.00"
+                                                        class="form-control" step="0.01" placeholder="0.00"
                                                         onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CashAmtFiscalizadora"
-                                                    value="" type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    value="" type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1084,14 +1108,15 @@
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->CoinRollFiscalizadora }}"
-                                                        name="CoinRollFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="CoinRollFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="CoinRollFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1109,14 +1134,16 @@
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->InvoiceAmtFiscalizadora }}"
-                                                        name="InvoiceAmtFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="InvoiceAmtFiscalizadora" type="number"
+                                                        class="form-control" step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="InvoiceAmtFiscalizadora" type="number" step="0.01"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="InvoiceAmtFiscalizadora" type="number" class="form-control"
+                                                    step="0.01" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1127,21 +1154,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Facturas Propias</td>
+                                        <td style="font-size:12px;">Facturas propias</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->InvoiceAmtPropiasFiscalizadora }}"
                                                         name="InvoiceAmtPropiasFiscalizadora" type="number"
-                                                        step="0.01" placeholder="0.00"
+                                                        class="form-control" step="0.01" placeholder="0.00"
                                                         onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="InvoiceAmtPropiasFiscalizadora" type="number" step="0.01"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="InvoiceAmtPropiasFiscalizadora" type="number"
+                                                    class="form-control" step="0.01" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1158,14 +1186,16 @@
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->VoucherAmtFiscalizadora }}"
-                                                        name="VoucherAmtFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="VoucherAmtFiscalizadora" type="number"
+                                                        class="form-control" step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value=""
-                                                    name="VoucherAmtFiscalizadora" type="number" step="0.01"
-                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                    name="VoucherAmtFiscalizadora" type="number" class="form-control"
+                                                    step="0.01" placeholder="0.00"
+                                                    onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1176,20 +1206,21 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Beca Digital </td>
+                                        <td style="font-size:12px;">Beca digital </td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;"
                                                         value="{{ $dataday->GrantAmtFiscalizadora }}"
-                                                        name="GrantAmtFiscalizadora" type="number" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
+                                                        name="GrantAmtFiscalizadora" type="number" class="form-control"
+                                                        step="0.01" placeholder="0.00"
+                                                        onchange="cal();clon();cal();colores()"
                                                         onkeyup="cal();clon();cal();colores()">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" value="" name="GrantAmtFiscalizadora"
-                                                    type="number" step="0.01" placeholder="0.00"
-                                                    onchange="cal();clon();cal();colores()"
+                                                    type="number" class="form-control" step="0.01"
+                                                    placeholder="0.00" onchange="cal();clon();cal();colores()"
                                                     onkeyup="cal();clon();cal();colores()">
                                             @endif
                                         </td>
@@ -1226,9 +1257,9 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="font-size:12px;">Total Panaderia</td>
-                                        <td><input name="totalPanaderiaFiscalizadora" type="number" step="0.01"
-                                                style="width: 100px;" placeholder="0.00"
+                                        <td style="font-size:12px;">Total panaderia</td>
+                                        <td><input name="totalPanaderiaFiscalizadora" type="number" class="form-control"
+                                                step="0.01" style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                             value="{{ $dataday->totalPanaderiaFiscalizadora }}"
                                             @endforeach
@@ -1239,9 +1270,9 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Pagatodo</td>
-                                        <td><input name="totalPagatodoFiscalizadora" type="number" step="0.01"
-                                                style="width: 100px;" placeholder="0.00"
+                                        <td style="font-size:12px;">Total pagatodo</td>
+                                        <td><input name="totalPagatodoFiscalizadora" type="number" class="form-control"
+                                                step="0.01" style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                             value="{{ $dataday->totalPagatodoFiscalizadora }}"
                                             @endforeach
@@ -1252,9 +1283,9 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Super</td>
-                                        <td> <input name="totalsuperFiscalizadora" type="number" step="0.01"
-                                                style="width: 100px;" placeholder="0.00"
+                                        <td style="font-size:12px;">Total super</td>
+                                        <td> <input name="totalsuperFiscalizadora" type="number" class="form-control"
+                                                step="0.01" style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalsuperFiscalizadora }}"
                                                 @endforeach
@@ -1265,9 +1296,9 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Dinero de Taxi</td>
-                                        <td><input name="dineroTaxiFiscalizadora" type="number" step="0.01"
-                                                style="width: 100px;" placeholder="0.00"
+                                        <td style="font-size:12px;">Dinero de taxi</td>
+                                        <td><input name="dineroTaxiFiscalizadora" type="number" class="form-control"
+                                                step="0.01" style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->dineroTaxiFiscalizadora }}"
                                                 @endforeach
@@ -1279,8 +1310,8 @@
                                     </tr>
                                     <tr>
                                         <td style="font-size:12px;"> Vuelto de mercado</td>
-                                        <td><input name="vueltoMercadoFiscalizadora" type="number" step="0.01"
-                                                style="width: 100px;" placeholder="0.00"
+                                        <td><input name="vueltoMercadoFiscalizadora" type="number" class="form-control"
+                                                step="0.01" style="width: 100px;" placeholder="0.00"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->vueltoMercadoFiscalizadora }}"
                                                 @endforeach
@@ -1295,10 +1326,12 @@
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios">{{ $dataday->comentariosFiscalizadora }}</textarea>
+                                                    <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios"
+                                                        class="form-control">{{ $dataday->comentariosFiscalizadora }}</textarea>
                                                 @endforeach
                                             @else
-                                                <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios"></textarea>
+                                                <textarea name="comentariosFiscalizadora" value="" style="width: 100px;" placeholder="Comentarios"
+                                                    class="form-control"></textarea>
                                             @endif
                                         </td>
                                         <td></td>
@@ -1375,18 +1408,20 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>$1x</td>
+                                        <td>$1 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="x_oneamtGerente" type="number"
-                                                        class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                        class="form-control" class="text-left  form-control"
+                                                        placeholder="0.00" onchange="cal();colores()"
                                                         onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_oneamtGerente }}" />
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="x_oneamtGerente" type="number"
-                                                    class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                    class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();colores()"
                                                     onkeyup="cal();colores()" value="" />
                                             @endif
                                         </td>
@@ -1399,18 +1434,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$5x</td>
+                                        <td>$5 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input style="width: 100px;" name="x_fiveamtGerente" type="number"
-                                                        class="text-left" placeholder="0.00" onchange="cal();colores()"
-                                                        onkeyup="cal();colores()"
+                                                    <input style="width: 100px;" name="x_fiveamtGerente"
+                                                        type="number" class="form-control"
+                                                        class="text-left  form-control" placeholder="0.00"
+                                                        onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_fiveamtGerente }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="x_fiveamtGerente" type="number"
-                                                    class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                    class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();colores()"
                                                     onkeyup="cal();colores()" value="">
                                             @endif
                                         </td>
@@ -1424,18 +1461,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$10x</td>
+                                        <td>$10 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="x_tenamtGerente" type="number"
-                                                        class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                        class="form-control" class="text-left  form-control"
+                                                        placeholder="0.00" onchange="cal();colores()"
                                                         onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_tenamtGerente }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="x_tenamtGerente" type="number"
-                                                    class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                    class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();colores()"
                                                     onkeyup="cal();colores()" value="">
                                             @endif
                                         </td>
@@ -1449,18 +1488,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$20x</td>
+                                        <td>$20 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input style="width: 100px;" name="x_twentyamtGerente" type="number"
-                                                        class="text-left" placeholder="0.00" onchange="cal();colores()"
-                                                        onkeyup="cal();colores()"
+                                                    <input style="width: 100px;" name="x_twentyamtGerente"
+                                                        type="number" class="form-control"
+                                                        class="text-left  form-control" placeholder="0.00"
+                                                        onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_twentyamtGerente }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="x_twentyamtGerente" type="number"
-                                                    class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                    class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();colores()"
                                                     onkeyup="cal();colores()" value="">
                                             @endif
                                         </td>
@@ -1474,18 +1515,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$50x</td>
+                                        <td>$50 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="x_fiftyamtGerente"
-                                                        type="number" class="text-left" placeholder="0.00"
+                                                        type="number" class="form-control"
+                                                        class="text-left  form-control" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_fiftyamtGerente }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="x_fiftyamtGerente" type="number"
-                                                    class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                    class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();colores()"
                                                     onkeyup="cal();colores()" value="">
                                             @endif
                                         </td>
@@ -1499,18 +1542,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>$100x</td>
+                                        <td>$100 *</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input style="width: 100px;" name="x_hundredamtGerente"
-                                                        type="number" class="text-left" placeholder="0.00"
+                                                        type="number" class="form-control"
+                                                        class="text-left  form-control" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->x_hundredamtGerente }}">
                                                 @endforeach
                                             @else
                                                 <input style="width: 100px;" name="x_hundredamtGerente" type="number"
-                                                    class="text-left" placeholder="0.00" onchange="cal();colores()"
+                                                    class="form-control" class="text-left  form-control"
+                                                    placeholder="0.00" onchange="cal();colores()"
                                                     onkeyup="cal();colores()" value="">
                                             @endif
                                         </td>
@@ -1550,13 +1595,13 @@
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input id="yappyGerente" name="yappyGerente" type="number"
-                                                        step="0.01" style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
-                                                        value="{{ $dataday->yappyGerente }}">
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()" value="{{ $dataday->yappyGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="yappyGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="yappyGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1574,14 +1619,14 @@
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="otrosGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="otrosGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->otrosGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="otrosGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="otrosGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1600,14 +1645,15 @@
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="otrosprimeroGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                    <input name="otrosprimeroGerente" type="number"
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()"
                                                         value="{{ $dataday->otrosprimeroGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="otrosprimeroGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="otrosprimeroGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1622,19 +1668,20 @@
                                     </tr>
 
                                     <tr>
-                                        <td style="font-size:12px;">Vales Pagoda </td>
+                                        <td style="font-size:12px;">Vales pagoda </td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="valespagodaGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                    <input name="valespagodaGerente" type="number"
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()"
                                                         value="{{ $dataday->valespagodaGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="valespagodaGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="valespagodaGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1654,14 +1701,14 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CheckAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CheckAmtGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CheckAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CheckAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CheckAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1681,14 +1728,14 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="LotoAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="LotoAmtGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->LotoAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="LotoAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="LotoAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1707,14 +1754,14 @@
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="valeAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="valeAmtGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->valeAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="valeAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="valeAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1730,18 +1777,18 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Clave</td>
+                                        <td style="font-size:12px;">Tarjeta clave</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CardClaveGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CardClaveGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CardClaveGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CardClaveGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CardClaveGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1756,19 +1803,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Vale</td>
+                                        <td style="font-size:12px;">Tarjeta vale</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CardValeGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CardValeGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CardValeGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CardValeGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CardValeGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1784,19 +1831,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Visa</td>
+                                        <td style="font-size:12px;">Tarjeta visa</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CardVisaGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CardVisaGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CardVisaGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CardVisaGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CardVisaGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1811,19 +1858,20 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta Master</td>
+                                        <td style="font-size:12px;">Tarjeta master</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CardMasterGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                    <input name="CardMasterGerente" type="number"
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()"
                                                         value="{{ $dataday->CardMasterGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CardMasterGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CardMasterGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1839,19 +1887,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta American</td>
+                                        <td style="font-size:12px;">Tarjeta american</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CardAEGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CardAEGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CardAEGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CardAEGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CardAEGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1866,18 +1914,18 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Tarjeta BAC</td>
+                                        <td style="font-size:12px;">Tarjeta bac</td>
                                         <td>
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CardBACGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CardBACGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CardBACGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CardBACGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CardBACGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1898,14 +1946,14 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CashAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CashAmtGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CashAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CashAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CashAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1925,14 +1973,14 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="CoinRollGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="CoinRollGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->CoinRollGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="CoinRollGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="CoinRollGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1952,14 +2000,15 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="InvoiceAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                    <input name="InvoiceAmtGerente" type="number"
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()"
                                                         value="{{ $dataday->InvoiceAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="InvoiceAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="InvoiceAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -1975,21 +2024,22 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Facturas Propias</td>
+                                        <td style="font-size:12px;">Facturas propias</td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
                                                     <input name="InvoiceAmtPropiasGerente" type="number"
-                                                        step="0.01" style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()"
                                                         value="{{ $dataday->InvoiceAmtPropiasGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="InvoiceAmtPropiasGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
-                                                    onchange="cal();colores()" onkeyup="cal();colores()"
-                                                    value="">
+                                                <input name="InvoiceAmtPropiasGerente" type="number"
+                                                    class="form-control" step="0.01" style="width: 100px;"
+                                                    placeholder="0.00" onchange="cal();colores()"
+                                                    onkeyup="cal();colores()" value="">
                                             @endif
                                         </td>
                                         <th>
@@ -2007,14 +2057,15 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="VoucherAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
-                                                        onchange="cal();colores()" onkeyup="cal();colores()"
+                                                    <input name="VoucherAmtGerente" type="number"
+                                                        class="form-control" step="0.01" style="width: 100px;"
+                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        onkeyup="cal();colores()"
                                                         value="{{ $dataday->VoucherAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="VoucherAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="VoucherAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -2029,19 +2080,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Beca Digital </td>
+                                        <td style="font-size:12px;">Beca digital </td>
                                         <td>
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <input name="GrantAmtGerente" type="number" step="0.01"
-                                                        style="width: 100px;" placeholder="0.00"
+                                                    <input name="GrantAmtGerente" type="number" class="form-control"
+                                                        step="0.01" style="width: 100px;" placeholder="0.00"
                                                         onchange="cal();colores()" onkeyup="cal();colores()"
                                                         value="{{ $dataday->GrantAmtGerente }}">
                                                 @endforeach
                                             @else
-                                                <input name="GrantAmtGerente" type="number" step="0.01"
-                                                    style="width: 100px;" placeholder="0.00"
+                                                <input name="GrantAmtGerente" type="number" class="form-control"
+                                                    step="0.01" style="width: 100px;" placeholder="0.00"
                                                     onchange="cal();colores()" onkeyup="cal();colores()"
                                                     value="">
                                             @endif
@@ -2081,54 +2132,54 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="font-size:12px;">Total Panaderia</td>
+                                        <td style="font-size:12px;">Total panaderia</td>
                                         <td><input name="totalPanaderiaGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalPanaderiaGerente }}"
                                                 @endforeach
                                                 @else
                                                 value="" @endif
-                                                style="width: 100px;" type="number" step="0.01"
-                                                placeholder="0.00"></td>
+                                                style="width: 100px;" type="number" class="form-control"
+                                                step="0.01" placeholder="0.00"></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Pagatodo</td>
+                                        <td style="font-size:12px;">Total pagatodo</td>
                                         <td><input name="totalPagatodoGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalsuperGerente }}"
                                                 @endforeach
                                                 @else
                                                 value="" @endif
-                                                style="width: 100px;" type="number" step="0.01"
-                                                placeholder="0.00"></td>
+                                                style="width: 100px;" type="number" class="form-control"
+                                                step="0.01" placeholder="0.00"></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Total Super</td>
+                                        <td style="font-size:12px;">Total super</td>
                                         <td> <input name="totalsuperGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->totalsuperGerente }}"
                                                 @endforeach
                                                 @else
                                                 value="" @endif
-                                                style="width: 100px;" type="number" step="0.01"
-                                                placeholder="0.00"> </td>
+                                                style="width: 100px;" type="number" class="form-control"
+                                                step="0.01" placeholder="0.00"> </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td style="font-size:12px;">Dinero de Taxi</td>
+                                        <td style="font-size:12px;">Dinero de taxi</td>
                                         <td><input name="dineroTaxiGerente"
                                                 @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->dineroTaxiGerente }}"
                                                 @endforeach
                                                 @else
                                                 value="" @endif
-                                                style="width: 100px;" type="number" step="0.01"
-                                                placeholder="0.00"> </td>
+                                                style="width: 100px;" type="number" class="form-control"
+                                                step="0.01" placeholder="0.00"> </td>
                                         <td></td>
                                         <td></td>
                                     </tr>
@@ -2139,12 +2190,13 @@
                                                 @foreach ($list as $dataday)
                                                     <input name="vueltoMercadoGerente"
                                                         value="{{ $dataday->vueltoMercadoGerente }}"style="width: 100px;"
-                                                        type="number" step="0.01" placeholder="0.00">
+                                                        type="number" class="form-control" step="0.01"
+                                                        placeholder="0.00">
                                                 @endforeach
                                             @else
                                                 <input name="vueltoMercadoGerente" value=""
-                                                    style="width: 100px;" type="number" step="0.01"
-                                                    placeholder="0.00">
+                                                    style="width: 100px;" type="number" class="form-control"
+                                                    step="0.01" placeholder="0.00">
                                             @endif
                                         </td>
 
@@ -2157,10 +2209,12 @@
 
                                             @if ($list->isNotEmpty())
                                                 @foreach ($list as $dataday)
-                                                    <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"> {{ $dataday->comentariosGerente }}</textarea>
+                                                    <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"
+                                                        class="form-control"> {{ $dataday->comentariosGerente }}</textarea>
                                                 @endforeach
                                             @else
-                                                <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"></textarea>
+                                                <textarea name="comentariosGerente" value="" style="width: 100px;" placeholder="Comentarios"
+                                                    class="form-control"></textarea>
                                             @endif
                                         </td>
                                         <td></td>
@@ -2221,8 +2275,16 @@
                             <div class="card-body">
                                 <label for="formFileMultiple" class="form-label">Por favor adjunte los
                                     reportes</label>
-                                <input class="form-control" type="file" id="Fileclosecash" name="Fileclosecash"
-                                    value="0">
+                                {{-- <input class="form-control" type="file" id="Fileclosecash" name="Fileclosecash"
+                                    value="0"> --}}
+                                {{--  --}}
+                                <input class=" subirimagen form-control" type="file" id="filePicker"
+                                    placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
+                                    onkeyup="imgsize()" accept=".png, .jpg, .jpeg">
+                                <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
+                                    cols="50" rows="15"></textarea>
+                                <img id="img1" src="data:image/png;base64," border="1">
+                                {{--  --}}
                             </div>
                         </div>
                     </div>
@@ -2251,5 +2313,39 @@
             @endforeach
         @endif
         </form>
+        <script>
+            var handleFileSelect = function(evt) {
+                var files = evt.target.files;
+                var file = files[0];
+                if (files && file) {
+                    var reader = new FileReader();
+                    reader.onload = function(readerEvt) {
+                        var binaryString = readerEvt.target.result;
+                        document.getElementById("base64textarea").value = btoa(binaryString);
+                        document.getElementById("img1").src= "data:image/png;base64,"+btoa(binaryString);
+
+                    };
+                    reader.readAsBinaryString(file);
+                }
+            };
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                document.getElementById('filePicker').addEventListener('change', handleFileSelect, false);
+
+            } else {
+                alert('The File APIs are not fully supported in this browser.');
+            }
+            const formulario = document.getElementById('loans_store_new');
+            const boton = document.getElementById('Nuevo');
+
+            boton.addEventListener('click', () => {
+                if (formulario.style.display === 'none') {
+                    formulario.style.display = 'block';
+                    /* boton.textContent = 'Ocultar formulario'; */
+                } else {
+                    formulario.style.display = 'none';
+                    /* boton.textContent = 'Mostrar formulario'; */
+                }
+            });
+        </script>
     @endif
 @endsection

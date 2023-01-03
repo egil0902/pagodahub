@@ -149,7 +149,7 @@ class CloseCashController extends Controller
             return view('closecash', ['orgs' => $orgs]);
         } else {
             //dd($todo);
-            $filename = $request->file('Fileclosecash')->store('public/Fileclosecash');
+           /*  $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
             $todo->Fileclosecash = $filename;
             $todo->save();
             return view('closecash', ['orgs' => $orgs]);
@@ -254,7 +254,7 @@ class CloseCashController extends Controller
             return view('closecash', ['orgs' => $orgs]);
         } else {
             //dd($todo);
-            $filename = $request->file('Fileclosecash')->store('public/Fileclosecash');
+            /* $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
             $todo->Fileclosecash = $filename;
             $todo->save();
             return view('closecash', ['orgs' => $orgs]);
