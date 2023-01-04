@@ -1425,9 +1425,16 @@
                                 <div class="form-check checkbox-xl text-center">
                                     @if ($list->isNotEmpty())
                                         @foreach ($list as $dataday)
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="check_fis" name="check_fis"
-                                                style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                            @if ($dataday->check_fis == 1)
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    id="check_fis" name="check_fis"
+                                                    style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;"
+                                                    checked>
+                                            @else
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    id="check_fis" name="check_fis"
+                                                    style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                            @endif
                                         @endforeach
                                     @else
                                         <input class="form-check-input" type="checkbox" value="1" id="check_fis"
@@ -1440,8 +1447,6 @@
                         </div>
 
                     </div>
-
-
 
                     <div class="card">
                         <div class="card-body">
@@ -2320,9 +2325,16 @@
                             <div class="form-check checkbox-xl text-center">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="check_ger" name="check_ger"
-                                            style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                        @if ($dataday->check_ger == 1)
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                id="check_ger" name="check_ger"
+                                                style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;"
+                                                checked>
+                                        @else
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                id="check_ger" name="check_ger"
+                                                style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                        @endif
                                     @endforeach
                                 @else
                                     <input class="form-check-input" type="checkbox" value="1" id="check_ger"
