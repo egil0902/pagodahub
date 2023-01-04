@@ -226,6 +226,10 @@
                             'GRAD'200,
                             'opsz'48
                     }
+
+                    .checkbox-xl .form-check-input {
+                        scale: 2.5;
+                    }
                 </style>
 
                 @if ($list->isNotEmpty())
@@ -1417,6 +1421,22 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="form-check checkbox-xl text-center">
+                                <div class="form-check checkbox-xl text-center">
+                                    @if ($list->isNotEmpty())
+                                        @foreach ($list as $dataday)
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="check_fis" name="check_fis"
+                                                style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                        @endforeach
+                                    @else
+                                        <input class="form-check-input" type="checkbox" value="1" id="check_fis"
+                                            name="check_fis"
+                                            style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                    @endif
+                                </div>
+                            </div>
+                            <p class="form-check-label text-center">Verificado por fiscalizadora</p>
                         </div>
 
                     </div>
@@ -2297,6 +2317,20 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="form-check checkbox-xl text-center">
+                                @if ($list->isNotEmpty())
+                                    @foreach ($list as $dataday)
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="check_ger" name="check_ger"
+                                            style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                    @endforeach
+                                @else
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_ger"
+                                        name="check_ger"
+                                        style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                @endif
+                            </div>
+                            <p class="form-check-label text-center">Verificado por gerente</p>
                         </div>
                     </div>
                 </div>
@@ -2319,8 +2353,9 @@
                                     onkeyup="imgsize()" accept=".png, .jpg, .jpeg">
                                 <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
                                     cols="50" rows="15"></textarea>
-
-                                <center><img id="img1" src="data:image/png;base64," border="1">
+                                <br>
+                                <center><img id="img1" src="data:image/png;base64," border="1"
+                                        style="width: 50%;">
                                 </center>
                                 {{--  --}}
                             </div>
