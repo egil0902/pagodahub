@@ -102,76 +102,112 @@
                     </div>
                 </div>
                 <div class="card text-center m-2">
-                    <div class="row border m-1">
-                        @if (isset($closecashlist))
-                            <table class="table table-borderless">
-                                <tr>
-                                    <td style="width: 100px;" align="left">
-                                        <h6><b>Caja</b></h6>
-                                    </td>
-                                    <td style="width: 100px;" align="left">
-                                        <h6><b>Cajera</b></h6>
-                                    </td>
-                                    <td style="width: 100px;" align="right">
-                                        <h6><b>Inicio caja</b></h6>
-                                    </td>
-                                    <td style="width: 100px;" align="right">
-                                        <h6><b>Subtotal</b></h6>
-                                    </td>
-                                    <td style="width: 100px;" align="right">
-                                        <h6><b>Monto contado</b></h6>
-                                    </td>
-                                    <td style="width: 100px;" align="right">
-                                        <h6><b>Monto X</b></h6>
-                                    </td>
-                                    <td style="width: 100px;" align="right">
-                                        <h6><b>Diferencia</b></h6>
-                                    </td>
-                                </tr>
+
+
+                    @if (isset($closecashlist))
+                        <div class="table-responsive">
+                            <table class="table table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"
+                                            style="
+                                        padding-right: 25px;
+                                    ">
+                                            Caja</th>
+                                        <th scope="col"
+                                            style="
+                                        padding-right: 25px;
+                                    ">
+                                            Cajera</th>
+                                        <th scope="col"
+                                            style="
+                                        padding-left: 25px;
+                                    ">
+                                            Inicio caja</th>
+                                        <th scope="col"
+                                            style="
+                                        padding-left: 25px;
+                                    ">
+                                            Subtotal</th>
+                                        <th scope="col"
+                                            style="
+                                        padding-left: 25px;
+                                    ">
+                                            Monto contado</th>
+                                        <th scope="col"
+                                            style="
+                                        padding-left: 25px;
+                                    ">
+                                            Monto X</th>
+                                        <th scope="col"
+                                            style="
+                                        padding-left: 25px;
+                                    ">
+                                            Diferencia</th>
+                                    </tr>
+                                </thead>
                                 @if ($closecashlist->{'records-size'} > 0)
                                     @foreach ($closecashlist->records as $closecashl)
-                                        <tbody style="font-size:12px;">
+                                        <tbody style="font-size: 14px">
                                             <tr>
-                                                <td style="width: 100px;" align="left">
-                                                    <p class="text-capitalize text-lowercase">{{ $closecashl->ba_name }}
-                                                    </p>
+                                                <th scope="row" class="text-start text-capitalize"
+                                                    style="
+                                                padding-right: 25px;
+                                            ">
+                                                    {{ $closecashl->ba_name }}</th>
+                                                <td class="text-start text-capitalize"
+                                                    style="
+                                                padding-right: 25px;
+                                            ">
+                                                    {{ $closecashl->u_name }}</td>
+                                                <td class="text-end"
+                                                    style="
+                                                padding-left: 25px;
+                                            ">
+                                                    @php
+                                                        echo number_format($closecashl->BeginningBalance, 2, ',', ' ');
+                                                    @endphp
                                                 </td>
-                                                <td style="width: 100px;" align="left">
-                                                    <p class="text-capitalize text-lowercase">{{ $closecashl->u_name }}</p>
+                                                <td class="text-end"
+                                                    style="
+                                                padding-left: 25px;
+                                            ">
+                                                    @php
+                                                        echo number_format($closecashl->SubTotal, 2, ',', ' ');
+                                                    @endphp
                                                 </td>
-                                                <td style="width: 100px;" align="right"><label>
-                                                        @php
-                                                            echo number_format($closecashl->BeginningBalance, 2, ',', ' ');
-                                                        @endphp
-                                                    </label></td>
-                                                <td style="width: 100px;" align="right"><label>
-                                                        @php
-                                                            echo number_format($closecashl->SubTotal, 2, ',', ' ');
-                                                        @endphp
-                                                    </label></td>
-                                                <td style="width: 100px;" align="right"><label>
-                                                        @php
-                                                            echo number_format($closecashl->NetTotal, 2, ',', ' ');
-                                                        @endphp
-                                                    </label></td>
-
-                                                <td style="width: 100px;" align="right"><label>
-                                                        @php
-                                                            echo number_format($closecashl->XAmt, 2, ',', ' ');
-                                                        @endphp
-                                                    </label></td>
-                                                <td style="width: 100px;" align="right"><label>
-                                                        @php
-                                                            echo number_format($closecashl->DifferenceAmt, 2, ',', ' ');
-                                                        @endphp
-                                                    </label></td>
+                                                <td class="text-end"
+                                                    style="
+                                                padding-left: 25px;
+                                            ">
+                                                    @php
+                                                        echo number_format($closecashl->NetTotal, 2, ',', ' ');
+                                                    @endphp
+                                                </td>
+                                                <td class="text-end"
+                                                    style="
+                                                padding-left: 25px;
+                                            ">
+                                                    @php
+                                                        echo number_format($closecashl->XAmt, 2, ',', ' ');
+                                                    @endphp
+                                                </td>
+                                                <td class="text-end"
+                                                    style="
+                                                padding-left: 25px;
+                                            ">
+                                                    @php
+                                                        echo number_format($closecashl->DifferenceAmt, 2, ',', ' ');
+                                                    @endphp
+                                                </td>
                                             </tr>
                                         </tbody>
                                     @endforeach
                                 @endif
                             </table>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
+
                 </div>
                 <style>
                     .table>:not(caption)>*>* {
@@ -189,6 +225,10 @@
                             'wght'700,
                             'GRAD'200,
                             'opsz'48
+                    }
+
+                    .checkbox-xl .form-check-input {
+                        scale: 2.5;
                     }
                 </style>
 
@@ -1381,11 +1421,32 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="form-check checkbox-xl text-center">
+                                <div class="form-check checkbox-xl text-center">
+                                    @if ($list->isNotEmpty())
+                                        @foreach ($list as $dataday)
+                                            @if ($dataday->check_fis == 1)
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    id="check_fis" name="check_fis"
+                                                    style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;"
+                                                    checked>
+                                            @else
+                                                <input class="form-check-input" type="checkbox" value="1"
+                                                    id="check_fis" name="check_fis"
+                                                    style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <input class="form-check-input" type="checkbox" value="1" id="check_fis"
+                                            name="check_fis"
+                                            style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                    @endif
+                                </div>
+                            </div>
+                            <p class="form-check-label text-center">Verificado por fiscalizadora</p>
                         </div>
 
                     </div>
-
-
 
                     <div class="card">
                         <div class="card-body">
@@ -2261,6 +2322,27 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="form-check checkbox-xl text-center">
+                                @if ($list->isNotEmpty())
+                                    @foreach ($list as $dataday)
+                                        @if ($dataday->check_ger == 1)
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                id="check_ger" name="check_ger"
+                                                style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;"
+                                                checked>
+                                        @else
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                id="check_ger" name="check_ger"
+                                                style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <input class="form-check-input" type="checkbox" value="1" id="check_ger"
+                                        name="check_ger"
+                                        style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
+                                @endif
+                            </div>
+                            <p class="form-check-label text-center">Verificado por gerente</p>
                         </div>
                     </div>
                 </div>
@@ -2283,7 +2365,10 @@
                                     onkeyup="imgsize()" accept=".png, .jpg, .jpeg">
                                 <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
                                     cols="50" rows="15"></textarea>
-                                <img id="img1" src="data:image/png;base64," border="1">
+                                <br>
+                                <center><img id="img1" src="data:image/png;base64," border="1"
+                                        style="width: 50%;">
+                                </center>
                                 {{--  --}}
                             </div>
                         </div>
@@ -2322,7 +2407,7 @@
                     reader.onload = function(readerEvt) {
                         var binaryString = readerEvt.target.result;
                         document.getElementById("base64textarea").value = btoa(binaryString);
-                        document.getElementById("img1").src= "data:image/png;base64,"+btoa(binaryString);
+                        document.getElementById("img1").src = "data:image/png;base64," + btoa(binaryString);
 
                     };
                     reader.readAsBinaryString(file);

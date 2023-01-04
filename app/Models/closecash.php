@@ -85,6 +85,8 @@ class closecash extends Model
         'AD_Org_ID',
         'valeAmt',
         'valeAmtFiscalizadora',
-        'valeAmtGerente'
+        'valeAmtGerente',
+        'check_fis',
+        'check_ger'
     ];
 }

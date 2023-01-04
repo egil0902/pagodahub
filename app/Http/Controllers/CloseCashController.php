@@ -43,7 +43,7 @@ class CloseCashController extends Controller
             return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list]);
         }
     }
-    
+
     public function show(Request $request)
     {
         $misDatos = session()->get('misDatos');
@@ -138,7 +138,8 @@ class CloseCashController extends Controller
         $todo->CardBACGerente                   = $request->CardBACGerente;
         $todo->InvoiceAmtPropiasFiscalizadora   = $request->InvoiceAmtPropiasFiscalizadora;
         $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
-
+        $todo->check_fis                        = $request->check_fis;
+        $todo->check_ger                        = $request->check_ger;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
         $misDatos = session()->get('misDatos');
@@ -149,7 +150,7 @@ class CloseCashController extends Controller
             return view('closecash', ['orgs' => $orgs]);
         } else {
             //dd($todo);
-           /*  $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
+            /*  $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
             $todo->Fileclosecash = $filename;
             $todo->save();
             return view('closecash', ['orgs' => $orgs]);
@@ -244,6 +245,8 @@ class CloseCashController extends Controller
         $todo->InvoiceAmtPropiasGerente         = $request->InvoiceAmtPropiasGerente;
         $todo->otrosprimeroFiscalizadora            =    $request->otrosprimeroFiscalizadora;
         $todo->otrosprimeroGerente                  =    $request->otrosprimeroGerente;
+        $todo->check_fis                        = $request->check_fis;
+        $todo->check_ger                        = $request->check_ger;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
         $misDatos = session()->get('misDatos');
