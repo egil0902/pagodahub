@@ -106,8 +106,8 @@
 
                     @if (isset($closecashlist))
                         <div class="table-responsive">
-                            <table class="table table table-bordered">
-                                <thead>
+                            <table class="table table table-borderless">
+                                <thead id="miTablaPersonalizada">
                                     <tr>
                                         <th scope="col"
                                             style="
@@ -233,306 +233,317 @@
                         <div class="card-body">
 
                             <h5 class="card-title"><b>Monto sistema</b></h5>
-                            <table class="table table-bordered ">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <p class="card-text">Efectivo</p>
-                                        </th>
-                                        <th></th>
-                                        <th>
-                                            <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t">
-                                                {{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}
-                                            </h5>
-                                        </th>
-                                        <th>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>$1 *</td>
-                                        <td> <input name="x_oneamtSistema" value="{{ $data->x_oneamt }}" type="number"
-                                                class="form-control" readonly class="text-left  form-control"
-                                                placeholder="0.00"></td>
-                                        <td align="right">
-                                            @php
-                                                echo number_format($data->x_oneamt * 1, 2, ',', ' ');
-                                            @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>$5 *</td>
-                                        <td><input name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}" type="number"
-                                                class="form-control" readonly class="text-left  form-control"
-                                                placeholder="0.00"></td>
-                                        <td align="right">
-                                            @php
-                                                echo number_format($data->x_fiveamt * 5, 2, ',', ' ');
-                                            @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>$10 *</td>
-                                        <td><input name="x_tenamtSistema" value="{{ $data->x_tenamt }}" type="number"
-                                                class="form-control" readonly class="text-left  form-control"
-                                                placeholder="0.00"></td>
-                                        <td align="right">
-                                            @php
-                                                echo number_format($data->x_tenamt * 10, 2, ',', ' ');
-                                            @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>$20 *</td>
-                                        <td><input name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}"
-                                                type="number" class="form-control" readonly
-                                                class="text-left  form-control" placeholder="0.00"></td>
-                                        <td align="right">
-                                            @php
-                                                echo number_format($data->x_twentyamt * 20, 2, ',', ' ');
-                                            @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>$50 *</td>
-                                        <td><input name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}"
-                                                type="number" class="form-control" readonly
-                                                class="text-left  form-control" placeholder="0.0"></td>
-                                        <td align="right">
-                                            @php
-                                                echo number_format($data->x_fiftyamt * 50, 2, ',', ' ');
-                                            @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>$100 *</td>
-                                        <td><input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}"
-                                                type="number" class="form-control" readonly
-                                                class="text-left  form-control" placeholder="0.00"></td>
-                                        <td align="right">
-                                            @php
-                                                echo number_format($data->x_hundredamt * 100, 2, ',', ' ');
-                                            @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-borderless ">
+                                    <thead id="miTablaPersonalizada">
+                                        <tr>
+                                            <th>
+                                                <p class="card-text">Efectivo</p>
+                                            </th>
+                                            <th></th>
+                                            <th>
+                                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t">
+                                                    {{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}
+                                                </h5>
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>$1 *</td>
+                                            <td> <input name="x_oneamtSistema" value="{{ $data->x_oneamt }}"
+                                                    type="number" class="form-control" readonly
+                                                    class="text-left  form-control" placeholder="0.00"></td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($data->x_oneamt * 1, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>$5 *</td>
+                                            <td><input name="x_fiveamtSistema" value="{{ $data->x_fiveamt }}"
+                                                    type="number" class="form-control" readonly
+                                                    class="text-left  form-control" placeholder="0.00"></td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($data->x_fiveamt * 5, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>$10 *</td>
+                                            <td><input name="x_tenamtSistema" value="{{ $data->x_tenamt }}"
+                                                    type="number" class="form-control" readonly
+                                                    class="text-left  form-control" placeholder="0.00"></td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($data->x_tenamt * 10, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>$20 *</td>
+                                            <td><input name="x_twentyamtSistema" value="{{ $data->x_twentyamt }}"
+                                                    type="number" class="form-control" readonly
+                                                    class="text-left  form-control" placeholder="0.00"></td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($data->x_twentyamt * 20, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>$50 *</td>
+                                            <td><input name="x_fiftyamtSistema" value="{{ $data->x_fiftyamt }}"
+                                                    type="number" class="form-control" readonly
+                                                    class="text-left  form-control" placeholder="0.0"></td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($data->x_fiftyamt * 50, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>$100 *</td>
+                                            <td><input name="x_hundredamtSistema" value="{{ $data->x_hundredamt }}"
+                                                    type="number" class="form-control" readonly
+                                                    class="text-left  form-control" placeholder="0.00"></td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($data->x_hundredamt * 100, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <br><br>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Otros</th>
-                                        <th></th>
-                                        <th align="right">
-                                            <h5 align="right" class="mb-0 fw-bold" id="Otros">
-                                                {{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}
-                                            </h5>
-                                        </th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Yappy</td>
-                                        <td> <input name="yappySistema" value="{{ $data->yappy }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Otros</td>
-                                        <td><input name="otrosSistema" value="{{ $data->otros }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled step="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vales pagoda </td>
-                                        <td><input name="valespagodaSistema" value="{{ $data->valespagoda }}"
-                                                type="number" class="form-control" step="0.01" readonly
-                                                placeholder="0.00"></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td> Monto cheques</td>
-                                        <td> <input name="CheckAmtSistema" value="{{ $data->CheckAmt }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td> Loteria</td>
-                                        <td> <input name="LotoAmtSistema" value="{{ $data->LotoAmt }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vale</td>
-                                        <td> <input name="valeAmt" value="{{ $data->CreditAmt }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tarjetas </td>
-                                        <td> <input name="CardAmtSistema" value="{{ $data->CardAmt }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled sstep="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled sstep="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled sstep="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled sstep="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled step="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td> Sencillo </td>
-                                        <td><input name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rollos </td>
-                                        <td> <input name="CoinRollSistema" value="{{ $data->CoinRoll }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Facturas </td>
-                                        <td> <input name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}"
-                                                type="number" class="form-control" step="0.01" readonly
-                                                placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><input disabled step="0.01" class="form-control">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:12px; ">Vale digital </td>
-                                        <td> <input name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}"
-                                                type="number" class="form-control" step="0.01" readonly
-                                                placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Beca digital </td>
-                                        <td> <input name="GrantAmtSistema" value="{{ $data->GrantAmt }}" type="number"
-                                                class="form-control" step="0.01" readonly placeholder="0.00">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Subtotal super</td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 id="Monto_Subtotal_Sistema">{{ $data->SubTotal }}</h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead id="miTablaPersonalizada">
+                                        <tr>
+                                            <th>Otros</th>
+                                            <th></th>
+                                            <th align="right">
+                                                <h5 align="right" class="mb-0 fw-bold" id="Otros">
+                                                    {{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}
+                                                </h5>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Yappy</td>
+                                            <td> <input name="yappySistema" value="{{ $data->yappy }}" type="number"
+                                                    class="form-control" step="0.01" readonly placeholder="0.00"></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Otros</td>
+                                            <td><input name="otrosSistema" value="{{ $data->otros }}" type="number"
+                                                    class="form-control" step="0.01" readonly placeholder="0.00"></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled step="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vales pagoda </td>
+                                            <td><input name="valespagodaSistema" value="{{ $data->valespagoda }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00"></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> Monto cheques</td>
+                                            <td> <input name="CheckAmtSistema" value="{{ $data->CheckAmt }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> Loteria</td>
+                                            <td> <input name="LotoAmtSistema" value="{{ $data->LotoAmt }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vale</td>
+                                            <td> <input name="valeAmt" value="{{ $data->CreditAmt }}" type="number"
+                                                    class="form-control" step="0.01" readonly placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tarjetas </td>
+                                            <td> <input name="CardAmtSistema" value="{{ $data->CardAmt }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled sstep="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled sstep="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled sstep="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled sstep="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled step="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td> Sencillo </td>
+                                            <td><input name="CashAmtSistema" value="{{ $data->CashAmt }}" type="number"
+                                                    class="form-control" step="0.01" readonly placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rollos </td>
+                                            <td> <input name="CoinRollSistema" value="{{ $data->CoinRoll }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Facturas </td>
+                                            <td> <input name="InvoiceAmtSistema" value="{{ $data->InvoiceAmt }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><input disabled step="0.01" class="form-control">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size:12px; ">Vale digital </td>
+                                            <td> <input name="VoucherAmtSistema" value="{{ $data->VoucherAmt }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Beca digital </td>
+                                            <td> <input name="GrantAmtSistema" value="{{ $data->GrantAmt }}"
+                                                    type="number" class="form-control" step="0.01" readonly
+                                                    placeholder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Subtotal super</td>
+                                            <td></td>
+                                            <td align="right">
+                                                <h6 id="Monto_Subtotal_Sistema">{{ $data->SubTotal }}</h6>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <br><br>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 200px;">
-                                            <h4 class="mb-0">Monto contado</h4>
-                                        </th>
-                                        <th style="width: 0px;">
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead id="miTablaPersonalizada">
+                                        <tr>
+                                            <th style="width: 200px;">
+                                                <h4 class="mb-0">Monto contado</h4>
+                                            </th>
+                                            <th style="width: 0px;">
 
-                                        </th>
-                                        <th>
-                                            <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema" align="right">
-                                                {{ $data->NetTotal }}</h5>
-                                        </th>
-                                        <th>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                            </th>
+                                            <th>
+                                                <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema" align="right">
+                                                    {{ $data->NetTotal }}</h5>
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    <tr>
-                                        <td>Monto X </td>
-                                        <td></td>
-                                        <td align="right">
-                                            <h6 id="Monto_X_Sistema">{{ $data->XAmt }}</h6>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diferencia</td>
-                                        <td></td>
-                                        <td align="right">@php
-                                            echo number_format($data->DifferenceAmt, 2, ',', ' ');
-                                        @endphp
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        <tr>
+                                            <td>Monto X </td>
+                                            <td></td>
+                                            <td align="right">
+                                                <h6 id="Monto_X_Sistema">{{ $data->XAmt }}</h6>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Diferencia</td>
+                                            <td></td>
+                                            <td align="right">@php
+                                                echo number_format($data->DifferenceAmt, 2, ',', ' ');
+                                            @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -543,9 +554,9 @@
                         <div class="card-body">
                             <h5 class="card-title"> <b> Fiscalizadora </b></h5>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
-                                        <tr >
+                                        <tr>
                                             <th>
                                                 <p class="card-text">Efectivo</p>
                                             </th>
@@ -766,14 +777,14 @@
                             </div>
                             <br><br>
                             <div class="table-responsive">
-                                <table class="table table table-bordered">
-                                    <thead  id="miTablaPersonalizada">
+                                <table class="table table table-borderless">
+                                    <thead id="miTablaPersonalizada">
                                         <tr>
                                             <th> Otros</th>
                                             <th></th>
                                             <th align="right">
                                                 <h5 align="right" class="mb-0 fw-bold text-success"
-                                                    id="Otros_Fiscalizadora_t">0.00</h5>
+                                                    id="Otros_Fiscalizadora_t">0</h5>
                                             </th>
                                             <th align="right">
                                                 <div align="right">Diferencia</div>
@@ -1347,8 +1358,8 @@
                             <br><br>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead  id="miTablaPersonalizada">
+                                <table class="table table-borderless">
+                                    <thead id="miTablaPersonalizada">
                                         <tr>
                                             <th></th>
                                             <th></th>
@@ -1374,6 +1385,9 @@
                                             </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                    id="check_" name="check_"></td>
+
                                         </tr>
                                         <tr>
                                             <td>Total pagatodo</td>
@@ -1387,6 +1401,8 @@
                                             </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Total super</td>
@@ -1400,6 +1416,8 @@
                                             </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Dinero de taxi</td>
@@ -1413,6 +1431,8 @@
                                             </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td> Vuelto de mercado</td>
@@ -1426,6 +1446,8 @@
                                             </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Comentarios</td>
@@ -1446,9 +1468,9 @@
                                 </table>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-borderless">
 
-                                    <thead  id="miTablaPersonalizada">
+                                    <thead id="miTablaPersonalizada">
                                         <tr>
                                             <th>
                                                 <h4 class="mb-0">Monto contado</h4>
@@ -1523,9 +1545,9 @@
                             <h5 class="card-title"><b>Gerente</b>
                             </h5>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
-                                        <tr >
+                                        <tr>
                                             <th>Efectivo</th>
                                             <th> </th>
 
@@ -1733,7 +1755,7 @@
 
                             <br><br>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
                                         <tr>
                                             <th>Otros</th>
@@ -2343,7 +2365,7 @@
                             <br><br>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
                                         <th>
                                         </th>
@@ -2369,6 +2391,8 @@
                                                     placeholder="0.00"></td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Total pagatodo</td>
@@ -2382,6 +2406,8 @@
                                                     placeholder="0.00"></td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Total super</td>
@@ -2395,6 +2421,8 @@
                                                     placeholder="0.00"> </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Dinero de taxi</td>
@@ -2408,6 +2436,8 @@
                                                     placeholder="0.00"> </td>
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td> Vuelto de mercado</td>
@@ -2424,9 +2454,10 @@
                                                         class="form-control" step="0.01" placeholder="0.00">
                                                 @endif
                                             </td>
-
                                             <td></td>
                                             <td></td>
+                                            <td><input class="form-check-input" type="checkbox" value="1"
+                                                id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Comentarios</td>
@@ -2447,13 +2478,13 @@
                                 </table>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
                                         <tr>
-                                            <th >
+                                            <th>
                                                 <h4 class="mb-0">Monto contado</h4>
                                             </th>
-                                            <th >
+                                            <th>
 
                                             </th>
                                             <th>
@@ -2601,20 +2632,20 @@
             });
         </script>
         <style>
-            /*
-                                                                                                                .table>:not(caption)>*>*
-                                                                                                                {
-                                                                                                                    padding: 0rem;
-                                                                                                                }
-                                                                                                                .card {
-                                                                                                                                    --bs-card-spacer-y: 0.2rem;
-                                                                                                                                    --bs-card-spacer-x: 0.2rem;
-                                                                                                                                }
-                                                                                                          
-                                                                                                                    .checkbox-xl .form-check-input {
-                                                                                                                                    scale: 1.5;
-                                                                                                                                }
-                                                                                                                                        */
+            .table>:not(caption)>*>* {
+                padding: 0rem;
+            }
+
+            /* .card {
+                    --bs-card-spacer-y: 0.2rem;
+                    --bs-card-spacer-x: 0.2rem;
+                }*/
+
+            .form-check-input {
+                scale: 1.5;
+                margin-left: 5px;
+            }
+
             .material-symbols-outlined {
                 font-variation-settings:
                     'FILL'0,
@@ -2626,15 +2657,15 @@
             #miTablaPersonalizada th {
                 width: 100px;
                 /* overflow: auto; */
-                border: 0.5px solid;
+                border: 0px solid;
             }
 
             /*     td {
-                                                                            padding-top: 1px;
-                                                                            padding-left: 0px;
-                                                                            padding-right: 0px;
-                                                                            padding-bottom: 0px;
-                                                                        } */
+                                                                                    padding-top: 1px;
+                                                                                    padding-left: 0px;
+                                                                                    padding-right: 0px;
+                                                                                    padding-bottom: 0px;
+                                                                                } */
 
             table {
                 table-layout: fixed;
