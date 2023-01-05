@@ -603,8 +603,8 @@
                                                     style="padding-left: 10px;">0.00</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -635,8 +635,8 @@
                                                     style="padding-left: 10px;">0.00</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -668,8 +668,8 @@
                                                     style="padding-left: 10px;">0.00</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -701,8 +701,8 @@
                                             </td>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -734,8 +734,8 @@
                                                     style="padding-left: 10px;">0.00</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -768,8 +768,8 @@
                                                     0.00</p>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -822,8 +822,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -852,8 +852,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -882,8 +882,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -912,8 +912,8 @@
                                                     0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -941,8 +941,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -970,8 +970,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -999,8 +999,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1027,8 +1027,8 @@
                                                     id="CardClaveFiscalizadora_r">0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1056,8 +1056,8 @@
                                                     id="CardValeFiscalizadora_r">0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1085,8 +1085,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1113,8 +1113,8 @@
                                                     id="CardMasterFiscalizadora_r">0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1141,8 +1141,8 @@
                                                     id="CardAEFiscalizadora_r">0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1169,8 +1169,8 @@
                                                     id="CardBACFiscalizadora_r">0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1198,8 +1198,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1227,8 +1227,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1255,8 +1255,8 @@
                                                     0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1283,8 +1283,8 @@
                                                     id="InvoiceAmtPropiasFiscalizadora_r"></div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1311,8 +1311,8 @@
                                                     0.0</div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1340,8 +1340,8 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                <input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1385,8 +1385,8 @@
                                             </td>
                                             <td></td>
                                             <td></td>
-                                            <td><input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_"></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_"></td>
 
                                         </tr>
                                         <tr>
@@ -1401,8 +1401,8 @@
                                             </td>
                                             <td></td>
                                             <td></td>
-                                            <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_"></td>
                                         </tr>
                                         <tr>
                                             <td>Total super</td>
@@ -1416,13 +1416,14 @@
                                             </td>
                                             <td></td>
                                             <td></td>
-                                            <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Dinero de taxi</td>
-                                            <td><input name="dineroTaxiFiscalizadora" type="number" class="form-control"
-                                                    step="0.01" placeholder="0.00"
+                                            <td><input name="dineroTaxiFiscalizadora" type="number"
+                                                    class="form-control" step="0.01" placeholder="0.00"
                                                     @if ($list->isNotEmpty()) @foreach ($list as $dataday)
                                                 value="{{ $dataday->dineroTaxiFiscalizadora }}"
                                                 @endforeach
@@ -1431,8 +1432,9 @@
                                             </td>
                                             <td></td>
                                             <td></td>
-                                            <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td> Vuelto de mercado</td>
@@ -1446,8 +1448,9 @@
                                             </td>
                                             <td></td>
                                             <td></td>
-                                            <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Comentarios</td>
@@ -1621,7 +1624,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_x_fiveamtGerente" name="check_x_fiveamtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1652,7 +1655,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_x_tenamtGerente" name="check_x_tenamtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1683,7 +1686,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_x_twentyamtGerente" name="check_x_twentyamtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1714,7 +1717,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_x_fiftyamtGerente" name="check_x_fiftyamtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1746,7 +1749,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_x_hundredamtGerente" name="check_x_hundredamtGerente">
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1800,7 +1803,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_yappyGerente" name="check_yappyGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1828,7 +1831,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_otrosGerente" name="check_otrosGerente">
                                             </td>
                                         </tr>
 
@@ -1858,7 +1861,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_otrosprimeroGerente" name="check_otrosprimeroGerente">
                                             </td>
                                         </tr>
 
@@ -1890,7 +1893,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_valespagodaGerente" name="check_valespagodaGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1920,7 +1923,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CheckAmtGerente" name="check_CheckAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1950,7 +1953,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_LotoAmtGerente" name="check_LotoAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1981,7 +1984,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_valeAmtGerente" name="check_valeAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2010,7 +2013,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CardClaveGerente" name="check_CardClaveGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2041,7 +2044,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CardValeGerente" name="check_CardValeGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2071,7 +2074,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CardVisaGerente" name="check_CardVisaGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2103,7 +2106,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CardMasterGerente" name="check_CardMasterGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2133,7 +2136,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CardAEGerente" name="check_CardAEGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2163,7 +2166,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CardBACGerente" name="check_CardBACGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2193,7 +2196,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CashAmtGerente" name="check_CashAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2223,7 +2226,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_CoinRollGerente" name="check_CoinRollGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2255,7 +2258,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_InvoiceAmtGerente" name="check_InvoiceAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2286,7 +2289,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_InvoiceAmtPropiasGerente"
+                                                    name="check_InvoiceAmtPropiasGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2317,7 +2321,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_VoucherAmtGerente" name="check_VoucherAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2347,7 +2351,7 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_" name="check_">
+                                                    id="check_GrantAmtGerente" name="check_GrantAmtGerente">
                                             </td>
                                         </tr>
                                         <tr>
@@ -2392,7 +2396,7 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                                    id="check_totalPanaderiaGerente" name="check_totalPanaderiaGerente"></td>
                                         </tr>
                                         <tr>
                                             <td>Total pagatodo</td>
@@ -2407,7 +2411,7 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                                    id="check_totalPagatodoGerente" name="check_totalPagatodoGerente"></td>
                                         </tr>
                                         <tr>
                                             <td>Total super</td>
@@ -2422,7 +2426,7 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                                    id="check_totalsuperGerente" name="check_totalsuperGerente"></td>
                                         </tr>
                                         <tr>
                                             <td>Dinero de taxi</td>
@@ -2437,7 +2441,7 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                                    id="check_dineroTaxiGerente" name="check_dineroTaxiGerente"></td>
                                         </tr>
                                         <tr>
                                             <td> Vuelto de mercado</td>
@@ -2457,7 +2461,7 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                id="check_" name="check_"></td>
+                                                    id="check_vueltoMercadoGerente" name="check_vueltoMercadoGerente"></td>
                                         </tr>
                                         <tr>
                                             <td>Comentarios</td>
@@ -2630,6 +2634,32 @@
                     boton.textContent = 'Mostrar sistema';
                 }
             });
+
+            const formulario2 = document.getElementById('card_fiscalizadora');
+            const boton2 = document.getElementById('ver_fiscalizadora');
+
+            boton2.addEventListener('click', () => {
+                if (formulario2.style.display === 'none') {
+                    formulario2.style.display = 'block';
+                    boton2.textContent = 'Ocultar fiscalizadora';
+                } else {
+                    formulario2.style.display = 'none';
+                    boton2.textContent = 'Mostrar fiscalizadora';
+                }
+            });
+
+            const formulario3 = document.getElementById('card_gerente');
+            const boton3 = document.getElementById('ver_gerente');
+
+            boton3.addEventListener('click', () => {
+                if (formulario3.style.display === 'none') {
+                    formulario3.style.display = 'block';
+                    boton3.textContent = 'Ocultar gerente';
+                } else {
+                    formulario3.style.display = 'none';
+                    boton3.textContent = 'Mostrar gerente';
+                }
+            });
         </script>
         <style>
             .table>:not(caption)>*>* {
@@ -2637,13 +2667,14 @@
             }
 
             /* .card {
-                    --bs-card-spacer-y: 0.2rem;
-                    --bs-card-spacer-x: 0.2rem;
-                }*/
+                        --bs-card-spacer-y: 0.2rem;
+                        --bs-card-spacer-x: 0.2rem;
+                    }*/
 
             .form-check-input {
                 scale: 1.5;
-                margin-left: 5px;
+                margin-left: 8px;
+
             }
 
             .material-symbols-outlined {
@@ -2661,11 +2692,11 @@
             }
 
             /*     td {
-                                                                                    padding-top: 1px;
-                                                                                    padding-left: 0px;
-                                                                                    padding-right: 0px;
-                                                                                    padding-bottom: 0px;
-                                                                                } */
+                                                                                        padding-top: 1px;
+                                                                                        padding-left: 0px;
+                                                                                        padding-right: 0px;
+                                                                                        padding-bottom: 0px;
+                                                                                    } */
 
             table {
                 table-layout: fixed;
