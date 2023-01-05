@@ -1593,7 +1593,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_x_oneamtGerente" name="check_x_oneamtGerente">
+                                                    id="check_x_oneamtGerente" name="check_x_oneamtGerente"
+                                                    {{ isset($dataday->check_x_oneamtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1624,7 +1625,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_x_fiveamtGerente" name="check_x_fiveamtGerente">
+                                                    id="check_x_fiveamtGerente" name="check_x_fiveamtGerente"
+                                                    {{ isset($dataday->check_x_fiveamtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1655,7 +1657,9 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_x_tenamtGerente" name="check_x_tenamtGerente">
+                                                    id="check_x_tenamtGerente" name="check_x_tenamtGerente"
+                                                    {{ isset($dataday->check_x_tenamtGerente) ? __('checked') : __('') }}>
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -1686,7 +1690,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_x_twentyamtGerente" name="check_x_twentyamtGerente">
+                                                    id="check_x_twentyamtGerente" name="check_x_twentyamtGerente"
+                                                    {{ isset($dataday->check_x_twentyamtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1717,7 +1722,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_x_fiftyamtGerente" name="check_x_fiftyamtGerente">
+                                                    id="check_x_fiftyamtGerente" name="check_x_fiftyamtGerente"
+                                                    {{ isset($dataday->check_x_fiftyamtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1749,7 +1755,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_x_hundredamtGerente" name="check_x_hundredamtGerente">
+                                                    id="check_x_hundredamtGerente" name="check_x_hundredamtGerente"
+                                                    {{ isset($dataday->check_x_hundredamtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1803,7 +1810,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_yappyGerente" name="check_yappyGerente">
+                                                    id="check_yappyGerente" name="check_yappyGerente"
+                                                    {{ isset($dataday->check_x_yappyGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1831,7 +1839,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_otrosGerente" name="check_otrosGerente">
+                                                    id="check_otrosGerente" name="check_otrosGerente"
+                                                    {{ isset($dataday->check_x_otrosGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
 
@@ -1861,7 +1870,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_otrosprimeroGerente" name="check_otrosprimeroGerente">
+                                                    id="check_otrosprimeroGerente" name="check_otrosprimeroGerente"
+                                                    {{ isset($dataday->check_x_otrosprimeroGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
 
@@ -1893,7 +1903,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_valespagodaGerente" name="check_valespagodaGerente">
+                                                    id="check_valespagodaGerente" name="check_valespagodaGerente"
+                                                    {{ isset($dataday->check_x_valespagodaGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1923,7 +1934,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CheckAmtGerente" name="check_CheckAmtGerente">
+                                                    id="check_CheckAmtGerente" name="check_CheckAmtGerente"
+                                                    {{ isset($dataday->check_x_CheckAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1953,7 +1965,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_LotoAmtGerente" name="check_LotoAmtGerente">
+                                                    id="check_LotoAmtGerente" name="check_LotoAmtGerente"
+                                                    {{ isset($dataday->check_x_LotoAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -1984,7 +1997,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_valeAmtGerente" name="check_valeAmtGerente">
+                                                    id="check_valeAmtGerente" name="check_valeAmtGerente"
+                                                    {{ isset($dataday->check_x_valeAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2013,7 +2027,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CardClaveGerente" name="check_CardClaveGerente">
+                                                    id="check_CardClaveGerente" name="check_CardClaveGerente"
+                                                    {{ isset($dataday->check_x_CardClaveGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2044,7 +2059,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CardValeGerente" name="check_CardValeGerente">
+                                                    id="check_CardValeGerente" name="check_CardValeGerente"
+                                                    {{ isset($dataday->check_x_CardValeGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2074,7 +2090,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CardVisaGerente" name="check_CardVisaGerente">
+                                                    id="check_CardVisaGerente" name="check_CardVisaGerente"
+                                                    {{ isset($dataday->check_x_CardVisaGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2106,7 +2123,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CardMasterGerente" name="check_CardMasterGerente">
+                                                    id="check_CardMasterGerente" name="check_CardMasterGerente"
+                                                    {{ isset($dataday->check_x_CardMasterGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2136,7 +2154,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CardAEGerente" name="check_CardAEGerente">
+                                                    id="check_CardAEGerente" name="check_CardAEGerente"
+                                                    {{ isset($dataday->check_x_CardAEGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2166,7 +2185,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CardBACGerente" name="check_CardBACGerente">
+                                                    id="check_CardBACGerente" name="check_CardBACGerente"
+                                                    {{ isset($dataday->check_x_CardBACGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2196,7 +2216,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CashAmtGerente" name="check_CashAmtGerente">
+                                                    id="check_CashAmtGerente" name="check_CashAmtGerente"
+                                                    {{ isset($dataday->check_x_CashAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2226,7 +2247,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_CoinRollGerente" name="check_CoinRollGerente">
+                                                    id="check_CoinRollGerente" name="check_CoinRollGerente"
+                                                    {{ isset($dataday->check_x_CoinRollGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2258,7 +2280,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_InvoiceAmtGerente" name="check_InvoiceAmtGerente">
+                                                    id="check_InvoiceAmtGerente" name="check_InvoiceAmtGerente"
+                                                    {{ isset($dataday->check_x_InvoiceAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2290,7 +2313,8 @@
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
                                                     id="check_InvoiceAmtPropiasGerente"
-                                                    name="check_InvoiceAmtPropiasGerente">
+                                                    name="check_InvoiceAmtPropiasGerente"
+                                                    {{ isset($dataday->check_x_InvoiceAmtPropiasGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2321,7 +2345,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_VoucherAmtGerente" name="check_VoucherAmtGerente">
+                                                    id="check_VoucherAmtGerente" name="check_VoucherAmtGerente"
+                                                    {{ isset($dataday->check_x_VoucherAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2351,7 +2376,8 @@
                                             </td>
                                             <td>
                                                 <input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_GrantAmtGerente" name="check_GrantAmtGerente">
+                                                    id="check_GrantAmtGerente" name="check_GrantAmtGerente"
+                                                    {{ isset($dataday->check_x_GrantAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
                                         <tr>
@@ -2396,7 +2422,9 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_totalPanaderiaGerente" name="check_totalPanaderiaGerente"></td>
+                                                    id="check_totalPanaderiaGerente" name="check_totalPanaderiaGerente"
+                                                    {{ isset($dataday->check_x_totalPanaderiaGerente) ? __('checked') : __('') }}>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Total pagatodo</td>
@@ -2411,7 +2439,9 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_totalPagatodoGerente" name="check_totalPagatodoGerente"></td>
+                                                    id="check_totalPagatodoGerente" name="check_totalPagatodoGerente"
+                                                    {{ isset($dataday->check_x_totalPagatodoGerente) ? __('checked') : __('') }}>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Total super</td>
@@ -2426,7 +2456,9 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_totalsuperGerente" name="check_totalsuperGerente"></td>
+                                                    id="check_totalsuperGerente" name="check_totalsuperGerente"
+                                                    {{ isset($dataday->check_x_totalsuperGerente) ? __('checked') : __('') }}>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Dinero de taxi</td>
@@ -2441,7 +2473,9 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_dineroTaxiGerente" name="check_dineroTaxiGerente"></td>
+                                                    id="check_dineroTaxiGerente" name="check_dineroTaxiGerente"
+                                                    {{ isset($dataday->check_x_dineroTaxiGerente) ? __('checked') : __('') }}>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td> Vuelto de mercado</td>
@@ -2461,7 +2495,9 @@
                                             <td></td>
                                             <td></td>
                                             <td><input class="form-check-input" type="checkbox" value="1"
-                                                    id="check_vueltoMercadoGerente" name="check_vueltoMercadoGerente"></td>
+                                                    id="check_vueltoMercadoGerente" name="check_vueltoMercadoGerente"
+                                                    {{ isset($dataday->check_x_vueltoMercadoGerente) ? __('checked') : __('') }}>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Comentarios</td>
@@ -2667,9 +2703,9 @@
             }
 
             /* .card {
-                        --bs-card-spacer-y: 0.2rem;
-                        --bs-card-spacer-x: 0.2rem;
-                    }*/
+                                                                    --bs-card-spacer-y: 0.2rem;
+                                                                    --bs-card-spacer-x: 0.2rem;
+                                                                }*/
 
             .form-check-input {
                 scale: 1.5;
@@ -2692,11 +2728,11 @@
             }
 
             /*     td {
-                                                                                        padding-top: 1px;
-                                                                                        padding-left: 0px;
-                                                                                        padding-right: 0px;
-                                                                                        padding-bottom: 0px;
-                                                                                    } */
+                                                                                                                                    padding-top: 1px;
+                                                                                                                                    padding-left: 0px;
+                                                                                                                                    padding-right: 0px;
+                                                                                                                                    padding-bottom: 0px;
+                                                                                                                                } */
 
             table {
                 table-layout: fixed;
