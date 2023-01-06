@@ -21,19 +21,16 @@ class ValePagodaController extends Controller
 
     public function organizacion()
     {
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
-        session()->put('misDatos', $orgs);
     }
 
     public function index(Request $request)
     {
         /* $orgs = $this->organizacion(); */
-        $misDatos = session()->get('misDatos');
-        $orgs = $misDatos;
+        $user = auth()->user();
+        $APIController = new APIController();
+        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+        $orgs =  $response;
         return view('valepagoda', ['orgs' => $orgs]);
     }
 
