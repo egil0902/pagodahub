@@ -28,6 +28,11 @@ class Loanssearch extends Component
         }
         $cedula = $request->cedula;
         $nombre = $request->nombre;
+        if ($request->cedula_user != null || $request->nombre_user != null) {
+            $cedula = $request->cedula_user;
+            $nombre = $request->nombre_user;
+        }
+
         if ($nombre == null) {
             return view('livewire.loanssearch', [
                 'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25),

@@ -257,7 +257,12 @@
                                         action="{{ route('loans.update') }}">
                                         @csrf
                                         <div class="card card-body">
-
+                                            <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
+                                            <input type="hidden" name="nombre_user" value="{{ $data->nombre }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
                                             <h1 class="modal-title fs-5 text-primary" id="bpartnerModalLabel">Pago
                                                 Prestamo
                                             </h1>
@@ -524,7 +529,7 @@
             boton2.addEventListener('click', () => {
                 if (formulario2.style.display === 'none') {
                     formulario2.style.display = 'block';
-                   /*  boton2.textContent = 'Ocultar formulario'; */
+                    /*  boton2.textContent = 'Ocultar formulario'; */
                 } else {
                     formulario2.style.display = 'none';
                     /* boton2.textContent = 'Mostrar formulario'; */
