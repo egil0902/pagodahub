@@ -34,9 +34,19 @@
                         <div class="form-group">
                             <p class="card-text">Fecha</p>
                             <div class="">
-                                <input name="DateTrx" type="date"
+                                <input name="DateTrx" type="date" id="abc"
                                     value={{ isset($request->DateTrx) ? date('Y-m-d', strtotime($request->DateTrx)) : date('Y-m-d') }}
                                     class="form-control" placeholder="0.00">
+
+                                <script>
+                                    // Obtener la fecha actual
+                                    var hoy = new Date();
+                                    // Restar 3 días a la fecha actual
+                                    var tresDiasAtras = new Date(hoy.getTime() - (3 * 24 * 60 * 60 * 1000));
+                                    // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                    document.getElementById("abc").max = hoy.toISOString().split("T")[0];
+                                    document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -242,8 +252,10 @@
                                             </th>
                                             <th></th>
                                             <th>
-                                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t">
+                                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t"
+                                                    name="efectivo_sistema">
                                                     {{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}
+                                                    <input hidden name="efectivo_sistema" value="{{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}">
                                                 </h5>
                                             </th>
                                             <th>
@@ -334,8 +346,10 @@
                                             <th>Otros</th>
                                             <th></th>
                                             <th align="right">
-                                                <h5 align="right" class="mb-0 fw-bold" id="Otros">
+                                                <h5 align="right" class="mb-0 fw-bold" id="Otros"
+                                                    name="otros_sistema">
                                                     {{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}
+                                                    <input hidden name="otros_sistema" value="{{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}">
                                                 </h5>
                                             </th>
                                             <th></th>
@@ -496,7 +510,11 @@
                                             <td>Subtotal super</td>
                                             <td></td>
                                             <td align="right">
-                                                <h6 id="Monto_Subtotal_Sistema">{{ $data->SubTotal }}</h6>
+                                                <h6 id="Monto_Subtotal_Sistema" name="sub_total_super_sistema">
+                                                    {{ $data->SubTotal }}
+                                                    <input hidden name="sub_total_super_sistema" value="{{ $data->SubTotal }}">
+
+                                                </h6>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -515,8 +533,11 @@
 
                                             </th>
                                             <th>
-                                                <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema" align="right">
+                                                <h5 class="mb-0 fw-bold" id="Monto_contado_Sistema"
+                                                    name="monto_contado_sistema" align="right">
                                                     {{ $data->NetTotal }}</h5>
+
+                                                    <input hidden name="monto_contado_sistema" value="{{ $data->NetTotal }}">
                                             </th>
                                             <th>
                                             </th>
@@ -528,7 +549,8 @@
                                             <td>Monto X </td>
                                             <td></td>
                                             <td align="right">
-                                                <h6 id="Monto_X_Sistema">{{ $data->XAmt }}</h6>
+                                                <h6 id="Monto_X_Sistema" name="monto_x_sistema">{{ $data->XAmt }}</h6>
+                                                <input hidden name="monto_x_sistema" value="{{ $data->XAmt }}">
                                             </td>
                                             <td></td>
                                         </tr>
@@ -2703,9 +2725,9 @@
             }
 
             /* .card {
-                                                                    --bs-card-spacer-y: 0.2rem;
-                                                                    --bs-card-spacer-x: 0.2rem;
-                                                                }*/
+                                                                                --bs-card-spacer-y: 0.2rem;
+                                                                                --bs-card-spacer-x: 0.2rem;
+                                                                            }*/
 
             .form-check-input {
                 scale: 1.5;
@@ -2728,11 +2750,11 @@
             }
 
             /*     td {
-                                                                                                                                    padding-top: 1px;
-                                                                                                                                    padding-left: 0px;
-                                                                                                                                    padding-right: 0px;
-                                                                                                                                    padding-bottom: 0px;
-                                                                                                                                } */
+                                                                                                                                                padding-top: 1px;
+                                                                                                                                                padding-left: 0px;
+                                                                                                                                                padding-right: 0px;
+                                                                                                                                                padding-bottom: 0px;
+                                                                                                                                            } */
 
             table {
                 table-layout: fixed;

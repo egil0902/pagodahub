@@ -117,7 +117,11 @@ class closecash extends Model
         'check_x_totalPagatodoGerente',
         'check_x_totalsuperGerente',
         'check_x_dineroTaxiGerente',
-        'check_x_vueltoMercadoGerente'
-    
+        'check_x_vueltoMercadoGerente',
+        'efectivo_sistema',
+        'otros_sistema',
+        'sub_total_super_sistema',
+        'monto_contado_sistema',
+        'monto_x_sistema'
     ];
 }

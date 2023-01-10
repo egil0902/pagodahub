@@ -90,7 +90,17 @@
                                             <div class="col"><b>{{ date('d-m-Y', strtotime($data->created_at)) }}</b>
                                             </div>
                                             <div class="col">Sucursal:</div>
-                                            <div class="col"><b>{{ $data->AD_Org_ID }}</b></div>
+                                            <div class="col"><b>
+                                                    @if ($data->AD_Org_ID == 1000000)
+                                                        Grupo Panama Este, S.A.
+                                                    @endif
+                                                    @if ($data->AD_Org_ID == 1000008)
+                                                        La Doña
+                                                    @endif
+                                                    @if ($data->AD_Org_ID == 1000009)
+                                                        Mañanitas
+                                                    @endif
+                                                </b></div>
                                             <div class="col">Vale consumido:</div>
                                             <div class="col"><b># {{ $data->value }}</b></div>
                                         </div>

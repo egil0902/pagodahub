@@ -17,13 +17,13 @@ class Closecashsearch extends Component
     }
     public function render()
     {
-        
+
         $searchTerm = $this->searchTerm;
         if($searchTerm=='')
             $searchTerm=0;
         return view('livewire.closecashsearch',[
             //'closecash' => closecash::where('datetrx','=', $searchTerm)->paginate(10)
-            'closecash' => closecash::paginate(10),
+            'closecash' => closecash::paginate(25),
         ]);
 
 
