@@ -170,6 +170,11 @@ class CloseCashController extends Controller
         $todo->check_x_totalsuperGerente        =  $request->check_totalsuperGerente;
         $todo->check_x_dineroTaxiGerente        =  $request->check_dineroTaxiGerente;
         $todo->check_x_vueltoMercadoGerente     =  $request->check_vueltoMercadoGerente;
+        $todo->efectivo_sistema                 =  $request->efectivo_sistema;
+        $todo->otros_sistema                    =  $request->otros_sistema;
+        $todo->sub_total_super_sistema          =  $request->sub_total_super_sistema;
+        $todo->monto_contado_sistema            =  $request->monto_contado_sistema;
+        $todo->monto_x_sistema                  =  $request->monto_x_sistema;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
         $misDatos = session()->get('misDatos');
@@ -307,6 +312,11 @@ class CloseCashController extends Controller
         $todo->check_x_totalsuperGerente        =  $request->check_totalsuperGerente;
         $todo->check_x_dineroTaxiGerente        =  $request->check_dineroTaxiGerente;
         $todo->check_x_vueltoMercadoGerente     =  $request->check_vueltoMercadoGerente;
+        $todo->efectivo_sistema                 =  $request->efectivo_sistema;
+        $todo->otros_sistema                    =  $request->otros_sistema;
+        $todo->sub_total_super_sistema          =  $request->sub_total_super_sistema;
+        $todo->monto_contado_sistema            =  $request->monto_contado_sistema;
+        $todo->monto_x_sistema                  =  $request->monto_x_sistema;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
         $misDatos = session()->get('misDatos');

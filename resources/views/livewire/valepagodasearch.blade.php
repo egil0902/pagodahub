@@ -3,7 +3,7 @@
         <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" />
     </div>
 </div>
-<div class="row fw-bold row-cols-6" style="font-size:12px;">
+<div class="row fw-bold row-cols-7" style="font-size:12px;">
     <div class="col">
         Número de vale
     </div>
@@ -20,6 +20,9 @@
         Validado Por
     </div>
     <div class="col">
+        Sucursal
+    </div>
+    <div class="col">
         <center>...</center>
     </div>
 </div>
@@ -27,7 +30,7 @@
 @foreach ($vales as $data)
     <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST" action="{{ route('valepagoda.destroy') }}">
         @csrf
-        <div class="row row-cols-6" style="font-size:12px;padding-bottom: 10px;">
+        <div class="row row-cols-7" style="font-size:12px;padding-bottom: 10px;">
             <div class="col">
                 {{ $data->value }}
             </div>
@@ -42,6 +45,17 @@
             </div>
             <div class="col">
                 {{ $data->CreatedBy }}
+            </div>
+            <div class="col">
+                @if ($data->AD_Org_ID == 1000000)
+                    Grupo Panama Este, S.A.
+                @endif
+                @if ($data->AD_Org_ID == 1000008)
+                    Mañanitas
+                @endif
+                @if ($data->AD_Org_ID == 1000009)
+                    La Doña
+                @endif
             </div>
             <div class="col">
                 <center>

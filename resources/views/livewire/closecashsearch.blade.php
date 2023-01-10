@@ -7,11 +7,15 @@
 <div class="table-responsive">
     <table class="table table-bordered">
         <thead id="miTablaPersonalizada">
-                <th>Fecha </th>
-                <th>Sucursal </th>
-                <th>
-                    <center>Eliminar</center>
-                </th>
+            <th>Fecha </th>
+            <th>Sucursal </th>
+            <th>Subtotal super</th>
+            <th>Monto contado</th>
+            <th>Monto X</th>
+            <th>Diferencia</th>
+            <th>
+                <center>Eliminar</center>
+            </th>
         </thead>
         <tbody>
             @foreach ($closecash as $data)
@@ -23,12 +27,30 @@
                         <td> {{ $data->DateTrx }} </td>
                         <td>
                             @if ($data->AD_Org_ID == 1000008)
-                                La Doña
-                            @endif
-                            @if ($data->AD_Org_ID == 1000009)
                                 Mañanitas
                             @endif
+                            @if ($data->AD_Org_ID == 1000009)
+                                La Doña
+                            @endif
                         </td>
+                        <td class="text-end">
+                            @php
+                                echo number_format($data->sub_total_super_sistema, 2, ',', ' ');
+                            @endphp
+                        </td>
+                        <td class="text-end">
+                            @php
+                                echo number_format($data->monto_contado_sistema, 2, ',', ' ');
+                            @endphp
+                        </td>
+                        <td class="text-end">
+                            @php
+                                echo number_format($data->monto_x_sistema, 2, ',', ' ');
+                            @endphp</td>
+                        <td class="text-end">
+                            @php
+                                echo number_format($data->monto_contado_sistema - $data->monto_x_sistema, 2, ',', ' ');
+                            @endphp </td>
                         <td>
                             <center>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
