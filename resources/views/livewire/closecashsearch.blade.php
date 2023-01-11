@@ -1,8 +1,8 @@
-<div class="row ">
+{{-- <div class="row ">
     <div class="col">
         <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" disabled />
     </div>
-</div>
+</div> --}}
 
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -89,12 +89,14 @@
             @endforeach
         </tbody>
     </table>
-</div>
-<div class="row">
-    <div class="col">
-        {{ $closecash->links() }}
+    <div class="row">
+        <div class="col">
+            {{ $closecash->links() }}
+        </div>
     </div>
 </div>
+
+
 <!-- Modal -->
 
 

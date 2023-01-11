@@ -35,11 +35,11 @@ class Loanssearch extends Component
         //dump(loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25));
         if ($nombre == null) {
             return view('livewire.loanssearch', [
-                'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25),
+                'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(999),
             ]);
         } else {
             return view('livewire.loanssearch', [
-                'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->paginate(25),
+                'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->paginate(999),
             ]);
         }
         //dump($cedula, $nombre);

@@ -1,4 +1,4 @@
-<input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value="" />
+{{-- <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" value="" /> --}}
 <div class="table-responsive">
     <table class="table table-bordered">
         <thead id="miTablaPersonalizada">
@@ -20,7 +20,7 @@
                             <input name="valeid" type="hidden" value="{{ $data->id }}">
                             <td> {{ $data->loan_type }}</td>
                             <td>{{ date('d-m-Y', strtotime($data->datetrx)) }}</td>
-                            <td  align="right">
+                            <td align="right">
                                 <p>@php
                                     echo number_format($data->monto, 2, ',', ' ');
                                 @endphp</p>
@@ -96,6 +96,11 @@
             @endif
         </tbody>
     </table>
+    {{-- <div class="row">
+        <div class="col">
+            {{ $loans->links() }}
+        </div>
+    </div> --}}
 </div>
 <style>
     #miTablaPersonalizada th {
@@ -103,13 +108,10 @@
         overflow: auto;
         border: 1px solid;
     }
+
     table {
-                table-layout: fixed;
-            }
+        table-layout: fixed;
+    }
 </style>
-{{-- <div class="row">
-    <div class="col-md-12 col-12 col-sm-12 col-lg-12">
-        {{ $loans->links() }}
-    </div>
-</div> --}}
+
 <!-- Modal -->
