@@ -18,7 +18,7 @@ class Valepagodasearch extends Component
     }
     public function render()
     {
-        
+
         $searchTerm = $this->searchTerm;
         if($searchTerm=='')
             $searchTerm=0;
