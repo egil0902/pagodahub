@@ -36,7 +36,7 @@
             </div>
             <div class="col">
                 <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="closecash_list" id="closecash_list" method="get" action="{{ route('closecash.list') }}">
+                    <form name="closecash_list" id="closecash_list" method="post" action="{{ route('closecash.list') }}">
                         @csrf
                         <center>
                             <button type="submit" class="btn btn-outline">
