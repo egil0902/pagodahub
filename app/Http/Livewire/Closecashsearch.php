@@ -23,7 +23,7 @@ class Closecashsearch extends Component
             $searchTerm=0;
         return view('livewire.closecashsearch',[
             //'closecash' => closecash::where('datetrx','=', $searchTerm)->paginate(10)
-            'closecash' => closecash::orderBy('DateTrx', 'asc')->paginate(25),
+            'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
         ]);
 
 

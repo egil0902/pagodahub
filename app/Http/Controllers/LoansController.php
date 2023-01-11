@@ -230,4 +230,12 @@ class LoansController extends Controller
     {
         return view('loans');
     }
+
+    public function destroy(Request $request)
+    {
+        $vale = loans_statement_of_account::find($request->valeid);
+        $vale->delete();
+        $list = loans_statement_of_account::all();
+        return view('loans_search', ['list' => $list, 'request' => $request]);
+    }
 }
