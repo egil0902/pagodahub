@@ -106,9 +106,7 @@
     table {
                 table-layout: fixed;
             }
-</style> 
-
-
+</style>
 {{-- <div class="row">
     <div class="col-md-12 col-12 col-sm-12 col-lg-12">
         {{ $loans->links() }}

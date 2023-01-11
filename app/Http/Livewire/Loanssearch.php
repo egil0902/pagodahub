@@ -32,7 +32,7 @@ class Loanssearch extends Component
             $cedula = $request->cedula_user;
             $nombre = $request->nombre_user;
         }
-
+        //dump(loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25));
         if ($nombre == null) {
             return view('livewire.loanssearch', [
                 'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25),

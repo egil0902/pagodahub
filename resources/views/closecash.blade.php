@@ -252,11 +252,12 @@
                                             </th>
                                             <th></th>
                                             <th>
-                                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t"
-                                                    name="efectivo_sistema">
+                                                <h5 align="right" class="mb-0 fw-bold" id="Montosistema_t">
                                                     {{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}
-                                                    <input hidden name="efectivo_sistema" value="{{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}">
                                                 </h5>
+                                                <input hidden name="efectivo_sistema"
+                                                    value="{{ $data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2 }}">
+
                                             </th>
                                             <th>
                                             </th>
@@ -346,11 +347,11 @@
                                             <th>Otros</th>
                                             <th></th>
                                             <th align="right">
-                                                <h5 align="right" class="mb-0 fw-bold" id="Otros"
-                                                    name="otros_sistema">
+                                                <h5 align="right" class="mb-0 fw-bold" id="Otros">
                                                     {{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}
-                                                    <input hidden name="otros_sistema" value="{{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}">
                                                 </h5>
+                                                <input hidden name="otros_sistema"
+                                                    value="{{ $data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt }}">
                                             </th>
                                             <th></th>
                                         </tr>
@@ -512,9 +513,9 @@
                                             <td align="right">
                                                 <h6 id="Monto_Subtotal_Sistema" name="sub_total_super_sistema">
                                                     {{ $data->SubTotal }}
-                                                    <input hidden name="sub_total_super_sistema" value="{{ $data->SubTotal }}">
-
                                                 </h6>
+                                                <input hidden name="sub_total_super_sistema"
+                                                    value="{{ $data->SubTotal }}">
                                             </td>
                                             <td></td>
                                         </tr>
@@ -537,7 +538,7 @@
                                                     name="monto_contado_sistema" align="right">
                                                     {{ $data->NetTotal }}</h5>
 
-                                                    <input hidden name="monto_contado_sistema" value="{{ $data->NetTotal }}">
+                                                <input hidden name="monto_contado_sistema" value="{{ $data->NetTotal }}">
                                             </th>
                                             <th>
                                             </th>
@@ -1424,7 +1425,8 @@
                                             <td></td>
                                             <td></td>
                                             <td><input style="visibility: hidden;" class="form-check-input"
-                                                    type="checkbox" value="1" id="check_" name="check_"></td>
+                                                    type="checkbox" value="1" id="check_" name="check_">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Total super</td>
@@ -2725,9 +2727,9 @@
             }
 
             /* .card {
-                                                                                --bs-card-spacer-y: 0.2rem;
-                                                                                --bs-card-spacer-x: 0.2rem;
-                                                                            }*/
+                                                                                    --bs-card-spacer-y: 0.2rem;
+                                                                                    --bs-card-spacer-x: 0.2rem;
+                                                                                }*/
 
             .form-check-input {
                 scale: 1.5;
@@ -2750,11 +2752,11 @@
             }
 
             /*     td {
-                                                                                                                                                padding-top: 1px;
-                                                                                                                                                padding-left: 0px;
-                                                                                                                                                padding-right: 0px;
-                                                                                                                                                padding-bottom: 0px;
-                                                                                                                                            } */
+                                                                                                                                                    padding-top: 1px;
+                                                                                                                                                    padding-left: 0px;
+                                                                                                                                                    padding-right: 0px;
+                                                                                                                                                    padding-bottom: 0px;
+                                                                                                                                                } */
 
             table {
                 table-layout: fixed;
