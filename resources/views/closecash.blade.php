@@ -2617,20 +2617,37 @@
                     <div class="row border m-1">
                         <div class="col">
                             <div class="card-body">
-                                <label for="formFileMultiple" class="form-label">Por favor adjunte los
-                                    reportes</label>
-                                {{-- <input class="form-control" type="file" id="Fileclosecash" name="Fileclosecash"
-                                    value="0"> --}}
-                                {{--  --}}
-                                <input class=" subirimagen form-control" type="file" id="filePicker"
-                                    placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
-                                    onkeyup="imgsize()" accept=".png, .jpg, .jpeg">
-                                <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
-                                    cols="50" rows="15"></textarea>
-                                <br>
-                                <center><img id="img1" src="data:image/png;base64," border="1"
-                                        style="width: 50%;">
-                                </center>
+
+                                @if ($list->isNotEmpty())
+                                    @foreach ($list as $dataday)
+                                        <label for="formFileMultiple" class="form-label">Por favor adjunte los
+                                            reportes</label>
+                                        <input class=" subirimagen form-control" type="file" id="filePicker"
+                                            placeholder="Recibo" name="FileCedula" value="0"
+                                            onchange="imgsize()" onkeyup="imgsize()" accept=".png, .jpg, .jpeg">
+                                        <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
+                                            cols="50" rows="15">{{ $dataday->Fileclosecash }}</textarea>
+                                        <br>
+                                        <center><img id="img1" src="data:image/png;base64,{{ $dataday->Fileclosecash }}" border="1"
+                                                style="width: 50%;">
+                                        </center>
+                                    @endforeach
+                                @else
+                                    <label for="formFileMultiple" class="form-label">Por favor adjunte los
+                                        reportes</label>
+                                    <input class=" subirimagen form-control" type="file" id="filePicker"
+                                        placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
+                                        onkeyup="imgsize()" accept=".png, .jpg, .jpeg">
+                                    <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
+                                        cols="50" rows="15"></textarea>
+                                    <br>
+                                    <center><img id="img1" src="data:image/png;base64," border="1"
+                                            style="width: 50%;">
+                                    </center>
+                                @endif
+
+
+
                                 {{--  --}}
                             </div>
                         </div>
@@ -2727,9 +2744,9 @@
             }
 
             /* .card {
-                                                                                    --bs-card-spacer-y: 0.2rem;
-                                                                                    --bs-card-spacer-x: 0.2rem;
-                                                                                }*/
+                                                                                                        --bs-card-spacer-y: 0.2rem;
+                                                                                                        --bs-card-spacer-x: 0.2rem;
+                                                                                                    }*/
 
             .form-check-input {
                 scale: 1.5;
@@ -2752,11 +2769,11 @@
             }
 
             /*     td {
-                                                                                                                                                    padding-top: 1px;
-                                                                                                                                                    padding-left: 0px;
-                                                                                                                                                    padding-right: 0px;
-                                                                                                                                                    padding-bottom: 0px;
-                                                                                                                                                } */
+                                                                                                                                                                        padding-top: 1px;
+                                                                                                                                                                        padding-left: 0px;
+                                                                                                                                                                        padding-right: 0px;
+                                                                                                                                                                        padding-bottom: 0px;
+                                                                                                                                                                    } */
 
             table {
                 table-layout: fixed;
