@@ -35,7 +35,6 @@ Route::post('/close_cash', [App\Http\Controllers\CloseCashController::class, 'sh
 
 Route::post('/closecash_store', [App\Http\Controllers\CloseCashController::class, 'store'])->name('closecash.store');
 Route::post('/closecash_import', [App\Http\Controllers\CloseCashController::class, 'import'])->name('closecash.import');
-Route::post('/closecash_list', [App\Http\Controllers\CloseCashController::class, 'list'])->name('closecash.list');
 Route::get('/closecash_list', [App\Http\Controllers\CloseCashController::class, 'list'])->name('closecash.list');
 Route::post('/closecash_destroy', [App\Http\Controllers\CloseCashController::class, 'destroy'])->name('closecash.destroy');
 Route::post('/closecash_edit', [App\Http\Controllers\CloseCashController::class, 'edit'])->name('closecash.edit');
