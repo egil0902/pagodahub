@@ -12,7 +12,7 @@ class Closecashsearch extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $searchTerm;
-    public $tipo = "1000008";
+    public $tipo = "Sucursal";
     public function updatingSearch()
     {
         $this->resetPage();
