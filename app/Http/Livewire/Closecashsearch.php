@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use Livewire\WithPagination;
 use App\Models\closecash;
 use Livewire\Component;
@@ -11,6 +12,8 @@ class Closecashsearch extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $searchTerm;
+    public $tipo = "Sucursal";
+    public $date = "";
     public function updatingSearch()
     {
         $this->resetPage();
@@ -18,14 +21,25 @@ class Closecashsearch extends Component
     public function render()
     {
 
-        $searchTerm = $this->searchTerm;
-        if($searchTerm=='')
-            $searchTerm=0;
-        return view('livewire.closecashsearch',[
-            //'closecash' => closecash::where('datetrx','=', $searchTerm)->paginate(10)
-            'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
-        ]);
 
+        if ($this->date != "") {
+            return view('livewire.closecashsearch', [
+                'closecash' => closecash::where('DateTrx', $this->date)->orderBy('DateTrx', 'desc')->paginate(25),
+            ]);
+        } else {
+            return view('livewire.closecashsearch', [
+                'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
+            ]);
+        }
 
+        if ($this->tipo != "Sucursal") {
+            return view('livewire.closecashsearch', [
+                'closecash' => closecash::where('AD_Org_ID', $this->tipo)->orderBy('DateTrx', 'desc')->paginate(25),
+            ]);
+        } else {
+            return view('livewire.closecashsearch', [
+                'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
+            ]);
+        }
     }
 }

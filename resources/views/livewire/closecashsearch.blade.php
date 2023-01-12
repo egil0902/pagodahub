@@ -3,12 +3,7 @@
         <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" disabled />
     </div>
 </div> --}}
-
-
-<div class="table-responsive">
-    <table class="table table-bordered">
-        <thead id="miTablaPersonalizada">
-            {{-- <div class="row">
+{{-- <div class="row">
                 <div class="col">
                     <select class="form-select" aria-label="Sucursal">
                         <option selected>Dia</option>
@@ -33,14 +28,19 @@
                 <br>
             </div>
             <br> --}}
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead id="miTablaPersonalizada">
             <th>
-                Fecha
+                Fecha <input type="date" class="form-control" placeholder="#Vale" wire:model="date"  data-date-format="DD MMMM YYYY" aria-label="Username"
+                aria-describedby="basic-addon1">
             </th>
             <th>
-                <select class="form-select" aria-label="Sucursal">
-                    <option selected>Sucursal</option>
-                    <option value="1">Mañanitas</option>
-                    <option value="2">La Doña</option>
+                <select wire:model="tipo" class="form-select" aria-label="Default select example">
+                    <option selected value="Sucursal">Sucursal</option>
+                    <option value="1000008">Mañanitas</option>
+                    <option value="1000009">La Doña</option>
                 </select>
             </th>
             <th>Subtotal super</th>
