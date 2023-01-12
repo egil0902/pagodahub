@@ -12,6 +12,7 @@ class Valepagodasearch extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $searchTerm;
+    public $valenum;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -19,14 +20,17 @@ class Valepagodasearch extends Component
     public function render()
     {
 
-        $searchTerm = $this->searchTerm;
-        if($searchTerm=='')
-            $searchTerm=0;
-        return view('livewire.valepagodasearch',[
-            //'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
-            'vales' => ValesPagoda::orderBy('value', 'asc')->orderBy('id', 'asc')->paginate(25),
-        ]);
-
-
+        if ($this->valenum != null) {
+            return view('livewire.valepagodasearch',[
+                //'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
+                'vales' => ValesPagoda::where('value', 'ilike', '%' . $this->valenum . '%')->orderBy('value', 'asc')->orderBy('id', 'asc')->paginate(25),
+            ]);
+        } else {
+            return view('livewire.valepagodasearch',[
+                //'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
+                'vales' => ValesPagoda::orderBy('value', 'asc')->orderBy('id', 'asc')->paginate(25),
+            ]);
+        }
     }
+
 }

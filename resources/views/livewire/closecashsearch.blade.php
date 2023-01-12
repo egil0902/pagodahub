@@ -3,12 +3,7 @@
         <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" disabled />
     </div>
 </div> --}}
-
-
-<div class="table-responsive">
-    <table class="table table-bordered">
-        <thead id="miTablaPersonalizada">
-            {{-- <div class="row">
+{{-- <div class="row">
                 <div class="col">
                     <select class="form-select" aria-label="Sucursal">
                         <option selected>Dia</option>
@@ -33,6 +28,10 @@
                 <br>
             </div>
             <br> --}}
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead id="miTablaPersonalizada">
             <th>
                 Fecha
             </th>
