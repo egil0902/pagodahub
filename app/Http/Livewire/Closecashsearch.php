@@ -27,19 +27,15 @@ class Closecashsearch extends Component
                 'closecash' => closecash::where('DateTrx', $this->date)->orderBy('DateTrx', 'desc')->paginate(25),
             ]);
         } else {
-            return view('livewire.closecashsearch', [
-                'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
-            ]);
-        }
-
-        if ($this->tipo != "Sucursal") {
-            return view('livewire.closecashsearch', [
-                'closecash' => closecash::where('AD_Org_ID', $this->tipo)->orderBy('DateTrx', 'desc')->paginate(25),
-            ]);
-        } else {
-            return view('livewire.closecashsearch', [
-                'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
-            ]);
+            if ($this->tipo != "Sucursal") {
+                return view('livewire.closecashsearch', [
+                    'closecash' => closecash::where('AD_Org_ID', $this->tipo)->orderBy('DateTrx', 'desc')->paginate(25),
+                ]);
+            } else {
+                return view('livewire.closecashsearch', [
+                    'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
+                ]);
+            }
         }
     }
 }
