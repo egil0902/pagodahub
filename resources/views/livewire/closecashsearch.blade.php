@@ -37,10 +37,10 @@
                 Fecha
             </th>
             <th>
-                <select class="form-select" aria-label="Sucursal">
-                    <option selected>Sucursal</option>
-                    <option value="1">Mañanitas</option>
-                    <option value="2">La Doña</option>
+                <select wire:model="tipo" class="form-select" aria-label="Default select example">
+                    <option selected value="Sucursal">Sucursal</option>
+                    <option value="1000008">Mañanitas</option>
+                    <option value="1000009">La Doña</option>
                 </select>
             </th>
             <th>Subtotal super</th>
