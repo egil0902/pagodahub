@@ -13,14 +13,26 @@ class Closecashsearch extends Component
 
     public $searchTerm;
     public $tipo = "Sucursal";
+    public $date = "";
     public function updatingSearch()
     {
         $this->resetPage();
     }
     public function render()
     {
-        if ($this->tipo != "Sucursal") {
 
+
+        if ($this->date != "") {
+            return view('livewire.closecashsearch', [
+                'closecash' => closecash::where('DateTrx', $this->date)->orderBy('DateTrx', 'desc')->paginate(25),
+            ]);
+        } else {
+            return view('livewire.closecashsearch', [
+                'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
+            ]);
+        }
+
+        if ($this->tipo != "Sucursal") {
             return view('livewire.closecashsearch', [
                 'closecash' => closecash::where('AD_Org_ID', $this->tipo)->orderBy('DateTrx', 'desc')->paginate(25),
             ]);

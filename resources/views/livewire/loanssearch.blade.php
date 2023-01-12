@@ -3,11 +3,13 @@
     <table class="table table-bordered">
         <thead id="miTablaPersonalizada">
 
-            <th><select class="form-select" aria-label="Sucursal">
-                <option selected>Tipo</option>
-                <option value="1">Prestamo</option>
-                <option value="2">Pago</option>
-            </select></th>
+            <th>
+                <select {{-- wire:model="tipo" --}} class="form-select" aria-label="Tipo">
+                    <option selected value="Tipo">Tipo</option>
+                    <option value="Prestamo">Prestamo</option>
+                    <option value="Pago">Pago</option>
+                </select>
+            </th>
             <th>Fecha</th>
             <th>Monto</th>
             <th>Adjuntos</th>
@@ -33,7 +35,7 @@
                             <td>
                                 <center>
                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal{{ $data->loan_type }}{{ $data->id }}">
+                                        data-bs-target="#exampleModal{{ $data->loan_type }}{{ $data->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
                                             <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
@@ -47,8 +49,8 @@
 
                                 </center>
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal{{ $data->loan_type }}{{ $data->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal{{ $data->loan_type }}{{ $data->id }}"
+                                    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">

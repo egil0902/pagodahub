@@ -33,7 +33,8 @@
     <table class="table table-bordered">
         <thead id="miTablaPersonalizada">
             <th>
-                Fecha
+                Fecha <input type="date" class="form-control" placeholder="#Vale" wire:model="date"  data-date-format="DD MMMM YYYY" aria-label="Username"
+                aria-describedby="basic-addon1">
             </th>
             <th>
                 <select wire:model="tipo" class="form-select" aria-label="Default select example">
