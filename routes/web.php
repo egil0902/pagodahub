@@ -61,7 +61,7 @@ Route::post('/loans_store_new', [App\Http\Controllers\LoansController::class, 's
 Route::post('/loans_newuser', [App\Http\Controllers\LoansController::class, 'newuser'])->name('loans.newuser');
 Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');
 
-Route::post('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
+Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 
 
 Route::get('/firma1', function () {
