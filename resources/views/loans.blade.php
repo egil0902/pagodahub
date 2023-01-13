@@ -187,8 +187,17 @@
                                                 prestamo</h1>
 
                                             <label>Fecha</label>
-                                            <input name="fechanuevoprestamo" type="date" class="form-control"
-                                                min="2022-01-01" max="2100-12-31" required>
+                                            <input id="min-max" name="fechanuevoprestamo" type="date"
+                                                class="form-control" min="2022-01-01" max="2100-12-31" required>
+                                            <script>
+                                                // Obtener la fecha actual
+                                                var hoy = new Date();
+                                                // Restar 3 días a la fecha actual
+                                                var tresDiasAtras = new Date(hoy.getTime() - (0 * 24 * 60 * 60 * 1000));
+                                                // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                                document.getElementById("min-max").max = hoy.toISOString().split("T")[0];
+                                                document.getElementById("min-max").min = tresDiasAtras.toISOString().split("T")[0];
+                                            </script>
                                             <label>Monto</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text">$</span>
@@ -267,8 +276,18 @@
                                                 Prestamo
                                             </h1>
                                             <label>Fecha</label>
-                                            <input name="datepayment" type="date" value="" class="form-control"
+                                            <input id="min-max2" name="datepayment" type="date" value="" class="form-control"
                                                 required>
+
+                                            <script>
+                                                // Obtener la fecha actual
+                                                var hoy = new Date();
+                                                // Restar 3 días a la fecha actual
+                                                var tresDiasAtras = new Date(hoy.getTime() - (0 * 24 * 60 * 60 * 1000));
+                                                // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                                document.getElementById("min-max2").max = hoy.toISOString().split("T")[0];
+                                                document.getElementById("min-max2").min = tresDiasAtras.toISOString().split("T")[0];
+                                            </script>
                                             <br>
                                             <input name="loans_users_id" type="hidden" value="{{ $usuario[0]->id }}"
                                                 class="form-control">
