@@ -4,7 +4,7 @@
         <thead id="miTablaPersonalizada">
 
             <th>
-                <select {{-- wire:model="tipo" --}} class="form-select" aria-label="Tipo">
+                <select {{-- wire:model="tipo" --}} class="form-select" aria-label="Tipo" disabled>
                     <option selected value="Tipo">Tipo</option>
                     <option value="Prestamo">Prestamo</option>
                     <option value="Pago">Pago</option>

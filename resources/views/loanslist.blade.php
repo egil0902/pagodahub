@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <div class="card">
+    <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
       <div class="card-header">
         Listado de prestamos
       </div>
