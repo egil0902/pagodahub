@@ -120,6 +120,24 @@
                     </form>
                 </div>
             </div>
+
+            <div class="col">
+                <div class="card h-100 border border-5 border-dark-subtle">
+                    <form name="loanslist" id="loanslist" method="get" action="{{ route('loans.list') }}">
+                        @csrf
+                        <center>
+                            <button type="submit" class="btn btn-outline">
+                                <h5 class="card-header">7. Prestamos</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">Listado de Prestamos</h5>
+                                    <p class="card-text">Muestra la lista de los prestamos solicitados</p>
+                                </div>
+                            </button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+
             <style>
                 h5.card-header {
                     padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);

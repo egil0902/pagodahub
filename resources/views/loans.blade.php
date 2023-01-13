@@ -59,7 +59,7 @@
         <br>
         @if (isset($usuario))
             <div class="card w-auto">
-                <div class="card-body">
+                <div class="card-body shadow p-1 mb-1 bg-body-tertiary rounded">
                     @if ($usuario->isNotEmpty())
                         {{--  Modal Inicio --}}
                         @if (count($usuario) > 1)
@@ -102,7 +102,7 @@
                         @else
                             @foreach ($usuario as $data)
                                 <br>
-                                <div class="container bg-primary p-2 text-dark bg-opacity-10">
+                                <div class="container bg-primary p-2 text-dark bg-opacity-10 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                                     <h2> Datos Deudor </h2>
                                     <div class="row row-cols-2 row-cols-sm-2  row-cols-md-4">
                                         <div class="col">
@@ -173,7 +173,7 @@
                                     <form name="loans_store_new" id="loans_store_new" method="POST"
                                         action="{{ route('loans.store_new') }}" style="display: block;">
                                         @csrf
-                                        <div class="card card-body">
+                                        <div class="card card-body  border-success shadow p-3 mb-5 bg-body-tertiary rounded">
                                             <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
@@ -265,7 +265,7 @@
                                     <form name="loans_update" id="loans_update" method="POST"
                                         action="{{ route('loans.update') }}">
                                         @csrf
-                                        <div class="card card-body">
+                                        <div class="card card-body border-info shadow p-3 mb-5 bg-body-tertiary rounded">
                                             <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
@@ -370,7 +370,7 @@
                             action="{{ route('loans.newuser') }}">
                             @csrf
 
-                            <div class="container bg-success p-2 text-dark bg-opacity-10">
+                            <div class="container bg-success p-2 text-dark bg-opacity-10 shadow p-3 mb-5 bg-body-tertiary rounded">
                                 <h2> Creacion Deudor </h2>
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
                                     <div class="co-md">

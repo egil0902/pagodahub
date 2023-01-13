@@ -228,8 +228,9 @@ class LoansController extends Controller
 
     public function list()
     {
-        return view('loans');
+        return view('loanslist');
     }
+
 
     public function destroy(Request $request)
     {
