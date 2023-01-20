@@ -16,9 +16,11 @@ class LoansController extends Controller
      *
      * @return void
      */
+          private $apiController;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->apiController = new APIController();
     }
 
     /**
@@ -26,49 +28,50 @@ class LoansController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    private function obtenerInformacion()
+    {
+        $user = auth()->user();
+        $response = $this->apiController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+        $response = $this->apiController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+        return $response;
+    }
+
     public function index()
     {
-        $user = auth()->user();
-        //dd($user);
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        //dd($response->records[0]->AD_Org_ID->id);
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
-        //dd($orgs);
+        $orgs = $this->obtenerInformacion();
         return view('loans', ['orgs' => $orgs]);
     }
+
     public function search(Request $request)
     {
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
+        //Obtenemos la informacion de las organizaciones
+        $orgs = $this->obtenerInformacion();
         if ($request->cedula == null) {
+            //Si es nulo, buscamos los usuarios con nombre similar al campo nombre
             $usuario = loans_user::orwhere('nombre', 'ilike', '%' . $request->nombre . '%')->get();
-            //$usuario_loans = loans::orwhere('nombre_user','ilike','%'.$request->nombre.'%')->get();
         }
         if ($request->nombre == null) {
+            // Si es nulo, buscamos los usuarios con cedula igual al campo cedula
             $usuario = loans_user::orwhere('cedula', '=', $request->cedula)->get();
-            //$usuario_loans = loans::orwhere('cedula_user','=', $request->cedula)->get();
         }
-        //dump($usuario);
+        // Verificamos si la variable usuario tiene al menos un elemento
         if (isset($usuario[0]->id)) {
+            //Si tiene al menos un elemento, buscamos informacion relacionada con ese usuario en las tablas loans y loans_payments
             $usuario_loans = loans::orwhere('loans_users_id', '=', $usuario[0]->id)->get();
             $usuario_monto = loans::select(loans_new::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->get();
             $usuario_payment = loans_payments::select(loans_payments::raw("SUM(COALESCE(amount,0))"))->where('loans_users_id', $usuario[0]->id)->get();
             $loan_view = loans_statement_of_account::select(loans_payments::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->where('loan_type', 'Prestamo')->get();
             $payment_view = loans_statement_of_account::select(loans_payments::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->where('loan_type', 'Pago')->get();
-            //dd($payment_view);
         } else {
+            // Si no tiene elementos, establecemos todas las variables en 0
             $usuario_loans = 0;
             $usuario_payment = 0;
             $usuario_monto = 0;
             $loan_view = 0;
             $payment_view = 0;
         }
-
+        //devolvemos la vista loans y pasamos las variables como parametros
         return view(
             'loans',
             [
@@ -84,6 +87,7 @@ class LoansController extends Controller
             ]
         );
     }
+
 
     public function store(Request $request)
     {
@@ -106,11 +110,7 @@ class LoansController extends Controller
         //dd($todo);
         $todo->save();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
+        $orgs = $this->obtenerInformacion();
         $usuario = loans_user::orwhere('cedula', '=', $request->cedula_user)->get();
         if (isset($usuario[0]->id)) {
             $usuario_loans = loans::orwhere('loans_users_id', '=', $usuario[0]->id)->get();
@@ -155,11 +155,7 @@ class LoansController extends Controller
         $todo->montototal = 0;
         $todo->save();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
+        $orgs = $this->obtenerInformacion();
         $usuario = loans_user::where('cedula', $request->cedula)->orwhere('nombre', $request->nombre)->get();
         $usuario_loans = loans::where('cedula_user', $request->cedula)->get();
         $usuario_monto = loans::select(loans_new::raw("SUM(monto)"))->where('cedula_user', $request->cedula)->get();
@@ -190,11 +186,7 @@ class LoansController extends Controller
         $todo->save();
         /* dd($request->cedula_user,$request->nombre_user); */
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $user = auth()->user();
-        $APIController = new APIController();
-        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
-        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
-        $orgs =  $response;
+        $orgs = $this->obtenerInformacion();
         $usuario = loans_user::orwhere('cedula', '=', $request->cedula_user)->get();
         if (isset($usuario[0]->id)) {
             $usuario_loans = loans::orwhere('loans_users_id', '=', $usuario[0]->id)->get();
