@@ -998,7 +998,7 @@
                                             <th>Efectivo</th>
                                             <th align="right">
                                                 @php
-                                                    echo number_format(999, 2, ',', ' ');
+                                                    echo number_format(0, 2, ',', ' ');
                                                 @endphp</th>
                                             <th>Diferencia</th>
                                         </tr>
@@ -1393,7 +1393,7 @@
                                             <th>Subtotal super</th>
                                             <th align="right">
                                                 @php
-                                                    echo number_format(9991, 2, ',', ' ');
+                                                    echo number_format(0, 2, ',', ' ');
                                                 @endphp
                                             </th>
                                             <th> </th>
