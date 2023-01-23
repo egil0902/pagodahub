@@ -74,4 +74,8 @@ Route::get('/firma3', function () {
     return view('canvas/tablero5');
 });
 
+// Ruta para dompdf
+Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');
+
+
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');

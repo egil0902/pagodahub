@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\closecash;
 use Laravel\Ui\Presets\React;
+use PDF;
 
 class CloseCashController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -39,6 +39,11 @@ class CloseCashController extends Controller
             'ba_name asc'
         );
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
+        $dia = $request->DateTrx;
+        $organizacion = $request->AD_Org_ID;
+        session()->put('dia', $dia);
+        session()->put('organizacion', $organizacion);
+
         if (isset($response)) {
             return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list]);
         }
@@ -346,5 +351,27 @@ class CloseCashController extends Controller
         $vale->delete();
         $list = closecash::all();
         return view('closecashlist', ['list' => $list, 'request' => $request]);
+    }
+    public function downloadPdf(Request $request)
+    {
+        /*   $pdf= PDF::loadHTML('<h1>Test</h1>'); */
+        $APIController = new APIController();
+        $dia = session()->get('dia');
+        $organizacion = session()->get('organizacion');
+        $response = $APIController->getModel(
+            'RV_GH_CloseCash_Sum',
+            '',
+            'datetrx eq ' . $dia . ' and parent_id eq ' . $organizacion
+        );
+        $list = closecash::where('DateTrx', $dia)->where('AD_Org_ID', $organizacion)->get();
+        $docstatus = 'CO';
+        $closecashlist = $APIController->getModel(
+            'RV_GH_CloseCash',
+            '',
+            "datetrx eq '" . $dia . "' and parent_id eq " . $organizacion . " and  docstatus eq '" . $docstatus . "'",
+            'ba_name asc'
+        );
+        $pdf = PDF::loadView('download-pdf', ['closecashsumlist' => $response, 'list' => $list, 'closecashlist' => $closecashlist]);
+        return $pdf->download('cierre-caja.pdf');
     }
 }
