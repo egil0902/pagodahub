@@ -93,6 +93,22 @@
                                         <span class="material-symbols-outlined">
                                             edit_square
                                         </span>
+                                        <br>
+
+                                        <a href="{{ route('download-pdf') }}">
+                                            <button type="button" class="btn btn-outline-secondary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z">
+                                                    </path>
+                                                    <path
+                                                        d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z">
+                                                    </path>
+                                                </svg>
+                                                Imprimir
+                                            </button>
+                                        </a>
                                     @endforeach
                                 @endif
                                 @if ($list->isEmpty())
@@ -228,6 +244,9 @@
                         </div>
                     @endforeach
                 @endif
+
+
+
                 <center>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" id="ver_sistema" class="btn btn-primary">Ocultar sistema</button>
@@ -569,9 +588,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
 
                     <div class="card" id="card_fiscalizadora">
                         <div class="card-body">
@@ -1409,7 +1425,8 @@
                                             <td></td>
                                             <td></td>
                                             <td><input style="visibility: hidden;" class="form-check-input"
-                                                    type="checkbox" value="1" id="check_" name="check_"></td>
+                                                    type="checkbox" value="1" id="check_" name="check_">
+                                            </td>
 
                                         </tr>
                                         <tr>
@@ -2608,6 +2625,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="card text-center">
                     <div class="card-body">
                         <h3> <b>Recuerde validar que coincida el total con la Z generada en el día</b> </h3>
@@ -2628,8 +2646,9 @@
                                         <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
                                             cols="50" rows="15">{{ $dataday->Fileclosecash }}</textarea>
                                         <br>
-                                        <center><img id="img1" src="data:image/png;base64,{{ $dataday->Fileclosecash }}" border="1"
-                                                style="width: 50%;">
+                                        <center><img id="img1" class="rounded"
+                                                src="data:image/png;base64,{{ $dataday->Fileclosecash }}"
+                                                border="1" style="width: 50%;">
                                         </center>
                                     @endforeach
                                 @else
@@ -2641,7 +2660,7 @@
                                     <textarea style="display:none;" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
                                         cols="50" rows="15"></textarea>
                                     <br>
-                                    <center><img id="img1" src="data:image/png;base64," border="1"
+                                    <center><img id="img1" class="rounded" src="" border="1"
                                             style="width: 50%;">
                                     </center>
                                 @endif
@@ -2659,6 +2678,7 @@
                             <div class="card-body">
 
                                 <div class="d-grid gap-2">
+
                                     <button type="submit" class="btn btn-primary" type="button"
                                         onclick="zero()">Guardar</button>
                                 </div>
@@ -2678,6 +2698,9 @@
         @endif
         </form>
         <script>
+            function imprimirpagina() {
+                window.print();
+            }
             var handleFileSelect = function(evt) {
                 var files = evt.target.files;
                 var file = files[0];
@@ -2743,11 +2766,6 @@
                 padding: 0rem;
             }
 
-            /* .card {
-                                                                                                        --bs-card-spacer-y: 0.2rem;
-                                                                                                        --bs-card-spacer-x: 0.2rem;
-                                                                                                    }*/
-
             .form-check-input {
                 scale: 1.5;
                 margin-left: 8px;
@@ -2767,13 +2785,6 @@
                 /* overflow: auto; */
                 border: 0px solid;
             }
-
-            /*     td {
-                                                                                                                                                                        padding-top: 1px;
-                                                                                                                                                                        padding-left: 0px;
-                                                                                                                                                                        padding-right: 0px;
-                                                                                                                                                                        padding-bottom: 0px;
-                                                                                                                                                                    } */
 
             table {
                 table-layout: fixed;
