@@ -363,7 +363,9 @@ class CloseCashController extends Controller
             '',
             'datetrx eq ' . $dia . ' and parent_id eq ' . $organizacion
         );
+        //dd($response);
         $list = closecash::where('DateTrx', $dia)->where('AD_Org_ID', $organizacion)->get();
+        //dd($list);
         $docstatus = 'CO';
         $closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
@@ -372,6 +374,12 @@ class CloseCashController extends Controller
             'ba_name asc'
         );
         $pdf = PDF::loadView('download-pdf', ['closecashsumlist' => $response, 'list' => $list, 'closecashlist' => $closecashlist]);
-        return $pdf->download('cierre-caja.pdf');
+        if ($organizacion == 1000008){
+            $nameorg= "Mañanitas";
+        }
+        if ($organizacion == 1000009){
+            $nameorg= "La Doña";
+        }
+        return $pdf->download("Cierre-".$nameorg."-".$dia.".pdf");
     }
 }
