@@ -5,25 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>
+        @if (isset($closecashsumlist))
+            @if ($closecashsumlist->{'records-size'} > 0)
+                @foreach ($closecashsumlist->records as $data)
+                    @if ($list->isNotEmpty())
+                        @foreach ($list as $dataday)
+                            @if ($dataday->AD_Org_ID == 1000008)
+                                Mañanitas {{ $data->DateTrx }}
+                            @endif
+                            @if ($dataday->AD_Org_ID == 1000009)
+                                La Doña {{ $data->DateTrx }}
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
+            @endif
+        @endif
+    </title>
 </head>
 <style>
     /* table {
-        font-family: arial, sans-serif;
-    }
-
-    table,
-    th,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        border-style: dotted;
-    }
-
-    th {
-        width: 100px;
-    } */
-    table {
         font-family: arial, sans-serif;
         font-size: 8px;
         width: 100%;
@@ -31,12 +33,41 @@
 
     td,
     th {
-        border: 1px solid #dddddd;
+        border: 0px solid #dddddd;
         padding: 1px;
     }
 
     tr:nth-child(even) {
         background-color: #dddddd;
+    } */
+
+    table {
+        font-family: arial, sans-serif;
+        font-size: 8px;
+        background-color: white;
+        text-align: left;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 1px;
+    }
+
+    thead {
+        background-color: #246355;
+        border-bottom: solid 5px #0F362D;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #ddd;
+    }
+
+    tr:hover td {
+        background-color: #369681;
+        color: white;
     }
 </style>
 
@@ -44,22 +75,32 @@
     @if (isset($closecashsumlist))
         @if ($closecashsumlist->{'records-size'} > 0)
             @foreach ($closecashsumlist->records as $data)
-                <h2>Cierre de caja</h2>
-                <br>
+                @if ($list->isNotEmpty())
+                    @foreach ($list as $dataday)
+                        @if ($dataday->AD_Org_ID == 1000008)
+                            <h3>Cierre de caja: Mañanitas {{ $data->DateTrx }}</h3>
+                        @endif
+                        @if ($dataday->AD_Org_ID == 1000009)
+                            <h3>Cierre de caja: La Doña {{ $data->DateTrx }}</h3>
+                        @endif
+                    @endforeach
+                @endif
+
                 <label><b>Cantidad de cierres: {{ $data->gh_closecash_id_count }}</b></label><br>
-                <label>Inicio caja:<b id="InicioCaja"> {{ $data->BeginningBalance }}
-                    </b></label>
+                <label><b> Inicio caja: {{ $data->BeginningBalance }}</b></label>
                 @if (isset($closecashlist))
                     <table>
-                        <tr align="left">
-                            <th>Caja</th>
-                            <th>Cajera</th>
-                            <th>Inicio caja</th>
-                            <th>Subtotal</th>
-                            <th>Monto contado</th>
-                            <th>Monto X</th>
-                            <th>Diferencia</th>
-                        </tr>
+                        <thead>
+                            <tr align="left">
+                                <th>Caja</th>
+                                <th>Cajera</th>
+                                <th>Inicio caja</th>
+                                <th>Subtotal</th>
+                                <th>Monto contado</th>
+                                <th>Monto X</th>
+                                <th>Diferencia</th>
+                            </tr>
+                        </thead>
                         @if ($closecashlist->{'records-size'} > 0)
                             @foreach ($closecashlist->records as $closecashl)
                                 <tr>
@@ -95,33 +136,27 @@
                         @endif
                     </table>
                 @endif
-                @if ($list->isNotEmpty())
-                    @foreach ($list as $dataday)
-                        <div class="col-2 col-sm-2 col-md-2 col-lg-2" name="id">
-                            {{--   {{ $dataday->id }} --}}
-                        </div>
-                    @endforeach
-                @endif
-
                 <table>
                     <tr>
                         <td>
                             <h3>Monto sistema</h3>
                             <table>
-                                <tr>
-                                    <th colspan="2">Efectivo</th>
-                                    <th align="right">
-                                        @php
-                                            echo number_format($data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2, ',', ' ');
-                                        @endphp
-                                    </th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th align="left" colspan="2">Efectivo</th>
+                                        <th align="right">
+                                            @php
+                                                echo number_format($data->x_oneamt * 1 + $data->x_fiveamt * 5 + $data->x_tenamt * 10 + $data->x_twentyamt * 20 + $data->x_fiftyamt * 50 + $data->x_hundredamt * 100, 2, ',', ' ');
+                                            @endphp
+                                        </th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     <td colspan="2">
-                                        <table style="width:100%">
+                                        <table>
                                             <tr>
-                                                <td align="left">$1</td>
-                                                <td align="center">*</td>
+                                                <td style="width:20px" align="left">$1</td>
+                                                <td style="width:5px">*</td>
                                                 <td align="right">@php
                                                     echo number_format($data->x_oneamt, 2, ',', ' ');
                                                 @endphp</td>
@@ -136,10 +171,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table style="width:100%">
+                                        <table>
                                             <tr>
-                                                <td align="left">$5</td>
-                                                <td align="center">*</td>
+                                                <td style="width:20px" align="left">$5</td>
+                                                <td style="width:5px">*</td>
                                                 <td align="right">@php
                                                     echo number_format($data->x_fiveamt, 2, ',', ' ');
                                                 @endphp</td>
@@ -154,10 +189,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table style="width:100%">
+                                        <table>
                                             <tr>
-                                                <td align="left">$10</td>
-                                                <td align="center">*</td>
+                                                <td style="width:20px" align="left">$10</td>
+                                                <td style="width:5px">*</td>
                                                 <td align="right">@php
                                                     echo number_format($data->x_tenamt, 2, ',', ' ');
                                                 @endphp</td>
@@ -173,10 +208,10 @@
                                 <tr>
 
                                     <td colspan="2">
-                                        <table style="width:100%">
+                                        <table>
                                             <tr>
-                                                <td align="left">$20</td>
-                                                <td align="center">*</td>
+                                                <td style="width:20px" align="left">$20</td>
+                                                <td style="width:5px">*</td>
                                                 <td align="right">@php
                                                     echo number_format($data->x_twentyamt, 2, ',', ' ');
                                                 @endphp</td>
@@ -191,10 +226,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table style="width:100%">
+                                        <table>
                                             <tr>
-                                                <td align="left">$50</td>
-                                                <td align="center">*</td>
+                                                <td style="width:20px" align="left">$50</td>
+                                                <td style="width:5px">*</td>
                                                 <td align="right">@php
                                                     echo number_format($data->x_fiftyamt, 2, ',', ' ');
                                                 @endphp</td>
@@ -209,10 +244,10 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table style="width:100%">
+                                        <table>
                                             <tr>
-                                                <td align="left">$100</td>
-                                                <td align="center">*</td>
+                                                <td style="width:20px" align="left">$100</td>
+                                                <td style="width:5px">*</td>
                                                 <td align="right">@php
                                                     echo number_format($data->x_hundredamt, 2, ',', ' ');
                                                 @endphp</td>
@@ -229,7 +264,7 @@
                             <br>
                             <table>
                                 <tr>
-                                    <th colspan="2">Otros</th>
+                                    <th align="left" colspan="2">Otros</th>
 
                                     <th align="right">
                                         @php
@@ -395,12 +430,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">Subtotal super</td>
+                                    <td colspan="2"><b>Subtotal super</b></td>
 
-                                    <td align="right">
-                                        @php
-                                            echo number_format($data->SubTotal, 2, ',', ' ');
-                                        @endphp
+                                    <td align="right"><b>
+                                            @php
+                                                echo number_format($data->SubTotal, 2, ',', ' ');
+                                            @endphp</b>
                                     </td>
                                 </tr>
                             </table>
@@ -451,7 +486,7 @@
                                     <th></th>
                                 </tr>
                                 <tr>
-                                    <th colspan="2">Monto contado</th>
+                                    <th align="left" colspan="2">Monto contado</th>
 
                                     <th align="right">
                                         @php
@@ -485,20 +520,22 @@
                             <table>
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
-                                        <tr>
-                                            <th>Efectivo</th>
-                                            <th align="right">
-                                                @php
-                                                    echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100, 2, ',', ' ');
-                                                @endphp</th>
-                                            <th>Diferencia</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th align="left">Efectivo</th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100, 2, ',', ' ');
+                                                    @endphp</th>
+                                                <th>Diferencia</th>
+                                            </tr>
+                                        </thead>
                                         <tr>
                                             <td>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">1</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$1</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">@php
                                                             echo number_format($dataday->x_oneamtFiscalizadora, 2, ',', ' ');
                                                         @endphp</td>
@@ -520,8 +557,8 @@
                                             <td>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">5</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$5</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right"> @php
                                                             echo number_format($dataday->x_fiveamtFiscalizadora, 2, ',', ' ');
                                                         @endphp</td>
@@ -543,8 +580,8 @@
                                             <td>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">10</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$10</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right"> @php
                                                             echo number_format($dataday->x_tenamtFiscalizadora, 2, ',', ' ');
                                                         @endphp
@@ -568,8 +605,8 @@
                                             <td align="right">
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">20</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$20</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">
                                                             @php
                                                                 echo number_format($dataday->x_twentyamtFiscalizadora, 2, ',', ' ');
@@ -595,8 +632,8 @@
                                             <td align="right">
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">50</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$50</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">
                                                             @php
                                                                 echo number_format($dataday->x_fiftyamtFiscalizadora, 2, ',', ' ');
@@ -621,8 +658,8 @@
                                             <td align="right">
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">100</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$100</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">
                                                             @php
                                                                 echo number_format($dataday->x_hundredamtFiscalizadora, 2, ',', ' ');
@@ -650,7 +687,7 @@
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <tr>
-                                            <th>Otros</th>
+                                            <th align="left">Otros</th>
                                             <th align="right">
                                                 @php
                                                     echo number_format($dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
@@ -679,9 +716,9 @@
                                                     echo number_format($dataday->otrosFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td align="right">
+                                            <td rowspan="2" align="right">
                                                 @php
-                                                    echo number_format($dataday->otrosFiscalizadora - $data->otros, 2, ',', ' ');
+                                                    echo number_format($dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora - $data->otros, 2, ',', ' ');
                                                 @endphp
                                             </td>
 
@@ -693,10 +730,6 @@
                                                     echo number_format($dataday->otrosprimeroFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td align="right">
-
-                                            </td>
-
                                         </tr>
                                         <tr>
                                             <td>Vales pagoda</td>
@@ -760,7 +793,11 @@
                                                     echo number_format($dataday->CardClaveFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td rowspan="6" align="right">
+                                                @php
+                                                    echo number_format($dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora - $data->CardAmt + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Tarjeta vale</td>
@@ -769,7 +806,7 @@
                                                     echo number_format($dataday->CardValeFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+
                                         </tr>
                                         <tr>
                                             <td>Tarjeta visa</td>
@@ -778,7 +815,7 @@
                                                     echo number_format($dataday->CardVisaFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+
                                         </tr>
                                         <tr>
                                             <td>Tarjeta master</td>
@@ -787,7 +824,7 @@
                                                     echo number_format($dataday->CardMasterFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+
                                         </tr>
                                         <tr>
                                             <td>Tarjeta american</td>
@@ -796,7 +833,7 @@
                                                     echo number_format($dataday->CardAEFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+
                                         </tr>
                                         <tr>
                                             <td>Tarjeta bac </td>
@@ -805,7 +842,7 @@
                                                     echo number_format($dataday->CardBACFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+
                                         </tr>
                                         <tr>
                                             <td>Sencillo</td>
@@ -839,9 +876,9 @@
                                                     echo number_format($dataday->InvoiceAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td align="right">
+                                            <td rowspan="2" align="right">
                                                 @php
-                                                    echo number_format($dataday->InvoiceAmtFiscalizadora - $data->InvoiceAmt, 2, ',', ' ');
+                                                    echo number_format($dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora - $data->InvoiceAmt, 2, ',', ' ');
                                                 @endphp
 
                                             </td>
@@ -853,7 +890,6 @@
                                                     echo number_format($dataday->InvoiceAmtPropiasFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
                                         </tr>
                                         <tr>
                                             <td>Vale digital</td>
@@ -881,7 +917,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Subtotal super</th>
+                                            <th align="left">Subtotal super</th>
                                             <th align="right">
                                                 @php
                                                     echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
@@ -957,11 +993,13 @@
                                             <th></th>
                                         </tr>
                                         <tr>
-                                            <td>Monto contado</td>
+                                            <td><b>Monto contado</b></td>
                                             <td align="right">
-                                                @php
-                                                    echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora - $data->BeginningBalance, 2, ',', ' ');
-                                                @endphp
+                                                <b>
+                                                    @php
+                                                        echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora - $data->BeginningBalance, 2, ',', ' ');
+                                                    @endphp
+                                                </b>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -994,20 +1032,22 @@
                             <table>
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
-                                        <tr>
-                                            <th>Efectivo</th>
-                                            <th align="right">
-                                                @php
-                                                    echo number_format(0, 2, ',', ' ');
-                                                @endphp</th>
-                                            <th>Diferencia</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th align="left">Efectivo</th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format($dataday->x_oneamtGerente * 1 + $dataday->x_fiveamtGerente * 5 + $dataday->x_tenamtGerente * 10 + $dataday->x_twentyamtGerente * 20 + $dataday->x_fiftyamtGerente * 50 + $dataday->x_hundredamtGerente * 100, 2, ',', ' ');
+                                                    @endphp</th>
+                                                <th>Diferencia</th>
+                                            </tr>
+                                        </thead>
                                         <tr>
                                             <td>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">1</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$1</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">@php
                                                             echo number_format($dataday->x_oneamtGerente, 2, ',', ' ');
                                                         @endphp</td>
@@ -1029,8 +1069,8 @@
                                             <td>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">5</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$5</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right"> @php
                                                             echo number_format($dataday->x_fiveamtGerente, 2, ',', ' ');
                                                         @endphp</td>
@@ -1052,8 +1092,8 @@
                                             <td>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">10</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$10</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right"> @php
                                                             echo number_format($dataday->x_tenamtGerente, 2, ',', ' ');
                                                         @endphp
@@ -1065,6 +1105,7 @@
                                                 @php
                                                     echo number_format($dataday->x_tenamtGerente * 10, 2, ',', ' ');
                                                 @endphp
+
                                             </td>
                                             <td align="right">
                                                 @php
@@ -1077,8 +1118,8 @@
                                             <td align="right">
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">20</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$20</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">
                                                             @php
                                                                 echo number_format($dataday->x_twentyamtGerente, 2, ',', ' ');
@@ -1091,6 +1132,7 @@
                                                 @php
                                                     echo number_format($dataday->x_twentyamtGerente * 20, 2, ',', ' ');
                                                 @endphp
+
                                             </td>
 
                                             <td align="right">
@@ -1104,8 +1146,8 @@
                                             <td align="right">
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">50</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$50</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">
                                                             @php
                                                                 echo number_format($dataday->x_fiftyamtGerente, 2, ',', ' ');
@@ -1118,6 +1160,8 @@
                                                 @php
                                                     echo number_format($dataday->x_fiftyamtGerente * 50, 2, ',', ' ');
                                                 @endphp
+
+
                                             </td>
                                             <td align="right">
                                                 @php
@@ -1130,8 +1174,8 @@
                                             <td align="right">
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td align="left">100</td>
-                                                        <td align="center">*</td>
+                                                        <td style="width:20px" align="left">$100</td>
+                                                        <td style="width:5px">*</td>
                                                         <td align="right">
                                                             @php
                                                                 echo number_format($dataday->x_hundredamtGerente, 2, ',', ' ');
@@ -1143,6 +1187,7 @@
                                                 @php
                                                     echo number_format($dataday->x_hundredamtGerente * 100, 2, ',', ' ');
                                                 @endphp
+
                                             </td>
                                             <td align="right">
                                                 @php
@@ -1159,10 +1204,10 @@
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <tr>
-                                            <th>Otros</th>
+                                            <th align="left">Otros</th>
                                             <th align="right">
                                                 @php
-                                                    echo number_format($dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente, 2, ',', ' ');
                                                 @endphp
                                             </th>
                                             <th>Diferencia</th>
@@ -1190,7 +1235,7 @@
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->otrosGerente-$dataday->otrosFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->otrosGerente - $dataday->otrosFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
 
@@ -1203,7 +1248,9 @@
                                                 @endphp
                                             </td>
                                             <td align="right">
-
+                                                @php
+                                                    echo number_format($dataday->otrosprimeroGerente - $dataday->otrosprimeroFiscalizadora, 2, ',', ' ');
+                                                @endphp
                                             </td>
 
                                         </tr>
@@ -1216,7 +1263,7 @@
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->valespagodaGerente-$dataday->valespagodaFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->valespagodaGerente - $dataday->valespagodaFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                         </tr>
@@ -1224,7 +1271,7 @@
                                             <td>Monto cheques</td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->CheckAmtGerente , 2, ',', ' ');
+                                                    echo number_format($dataday->CheckAmtGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                             <td align="right">
@@ -1243,7 +1290,7 @@
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->LotoAmtGerente-$dataday->LotoAmtFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->LotoAmtGerente - $dataday->LotoAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
 
                                             </td>
@@ -1257,7 +1304,7 @@
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->valeAmtGerente- $dataday->valeAmtFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->valeAmtGerente - $dataday->valeAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
 
@@ -1269,7 +1316,11 @@
                                                     echo number_format($dataday->CardClaveGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->CardClaveGerente - $dataday->CardClaveFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Tarjeta vale</td>
@@ -1278,7 +1329,11 @@
                                                     echo number_format($dataday->CardValeGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->CardValeGerente - $dataday->CardValeFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Tarjeta visa</td>
@@ -1287,16 +1342,24 @@
                                                     echo number_format($dataday->CardVisaGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->CardVisaGerente - $dataday->CardVisaFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Tarjeta master</td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->CardMasterGerente , 2, ',', ' ');
+                                                    echo number_format($dataday->CardMasterGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->CardMasterGerente - $dataday->CardMasterFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Tarjeta american</td>
@@ -1305,7 +1368,11 @@
                                                     echo number_format($dataday->CardAEGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->CardAEGerente - $dataday->CardAEFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Tarjeta bac </td>
@@ -1314,7 +1381,11 @@
                                                     echo number_format($dataday->CardBACGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->CardBACGerente - $dataday->CardBACFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Sencillo</td>
@@ -1325,7 +1396,7 @@
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->CashAmtGerente- $dataday->CashAmtFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->CashAmtGerente - $dataday->CashAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                         </tr>
@@ -1337,7 +1408,7 @@
                                                 @endphp
                                             </td>
                                             <td align="right">@php
-                                                echo number_format($dataday->CoinRollGerente-$dataday->CoinRollFiscalizadora, 2, ',', ' ');
+                                                echo number_format($dataday->CoinRollGerente - $dataday->CoinRollFiscalizadora, 2, ',', ' ');
                                             @endphp
                                             </td>
                                         </tr>
@@ -1350,7 +1421,7 @@
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->InvoiceAmtGerente-$dataday->InvoiceAmtFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->InvoiceAmtGerente - $dataday->InvoiceAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
 
                                             </td>
@@ -1362,7 +1433,11 @@
                                                     echo number_format($dataday->InvoiceAmtPropiasGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->InvoiceAmtPropiasGerente - $dataday->InvoiceAmtPropiasFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Vale digital</td>
@@ -1372,7 +1447,7 @@
                                                 @endphp
                                             </td>
                                             <td align="right">@php
-                                                echo number_format($dataday->VoucherAmtGerente-$dataday->VoucherAmtFiscalizadora, 2, ',', ' ');
+                                                echo number_format($dataday->VoucherAmtGerente - $dataday->VoucherAmtFiscalizadora, 2, ',', ' ');
                                             @endphp
                                             </td>
                                         </tr>
@@ -1380,20 +1455,20 @@
                                             <td>Beca digital</td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->GrantAmtGerente , 2, ',', ' ');
+                                                    echo number_format($dataday->GrantAmtGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->GrantAmtGerente -$dataday->GrantAmtFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->GrantAmtGerente - $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Subtotal super</th>
+                                            <th align="left">Subtotal super</th>
                                             <th align="right">
                                                 @php
-                                                    echo number_format(0, 2, ',', ' ');
+                                                    echo number_format($dataday->x_oneamtGerente * 1 + $dataday->x_fiveamtGerente * 5 + $dataday->x_tenamtGerente * 10 + $dataday->x_twentyamtGerente * 20 + $dataday->x_fiftyamtGerente * 50 + $dataday->x_hundredamtGerente * 100 + $dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente, 2, ',', ' ');
                                                 @endphp
                                             </th>
                                             <th> </th>
@@ -1414,7 +1489,7 @@
                                             <td>Total panaderia</td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->totalPanaderiaFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->totalPanaderiaGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                             <td></td>
@@ -1423,7 +1498,7 @@
                                             <td>Total pagatodo</td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->totalPagatodoFiscalizadora, 2, ',', ' ');
+                                                    echo number_format($dataday->totalPagatodoGerente, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                             <td></td>
@@ -1431,7 +1506,7 @@
                                         <tr>
                                             <td>Total super</td>
                                             <td align="right">@php
-                                                echo number_format($dataday->totalsuperFiscalizadora, 2, ',', ' ');
+                                                echo number_format($dataday->totalsuperGerente, 2, ',', ' ');
                                             @endphp
                                             </td>
                                             <td></td>
@@ -1439,7 +1514,7 @@
                                         <tr>
                                             <td>Dinero de taxi</td>
                                             <td align="right">@php
-                                                echo number_format($dataday->dineroTaxiFiscalizadora, 2, ',', ' ');
+                                                echo number_format($dataday->dineroTaxiGerente, 2, ',', ' ');
                                             @endphp
 
                                             </td>
@@ -1448,7 +1523,7 @@
                                         <tr>
                                             <td>Vuelto de mercado</td>
                                             <td align="right">@php
-                                                echo number_format($dataday->vueltoMercadoFiscalizadora, 2, ',', ' ');
+                                                echo number_format($dataday->vueltoMercadoGerente, 2, ',', ' ');
                                             @endphp
                                             </td>
                                             <td></td>
@@ -1466,11 +1541,11 @@
                                             <th></th>
                                         </tr>
                                         <tr>
-                                            <td>Monto contado</td>
-                                            <td align="right">
-                                                @php
-                                                    echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora - $data->BeginningBalance, 2, ',', ' ');
-                                                @endphp
+                                            <td><b>Monto contado</b></td>
+                                            <td align="right"><b>
+                                                    @php
+                                                        echo number_format($dataday->x_oneamtGerente * 1 + $dataday->x_fiveamtGerente * 5 + $dataday->x_tenamtGerente * 10 + $dataday->x_twentyamtGerente * 20 + $dataday->x_fiftyamtGerente * 50 + $dataday->x_hundredamtGerente * 100 + $dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente - $data->BeginningBalance, 2, ',', ' ');
+                                                    @endphp</b>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -1488,7 +1563,7 @@
                                             <td>Diferencia</td>
                                             <td align="right">
                                                 @php
-                                                    echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora - $data->BeginningBalance - $data->XAmt, 2, ',', ' ');
+                                                    echo number_format($dataday->x_oneamtGerente * 1 + $dataday->x_fiveamtGerente * 5 + $dataday->x_tenamtGerente * 10 + $dataday->x_twentyamtGerente * 20 + $dataday->x_fiftyamtGerente * 50 + $dataday->x_hundredamtGerente * 100 + $dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente - $data->BeginningBalance - $data->XAmt, 2, ',', ' ');
                                                 @endphp
                                             </td>
                                             <td></td>
