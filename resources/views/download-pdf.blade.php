@@ -876,7 +876,7 @@
                                                     echo number_format($dataday->InvoiceAmtFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td align="right">
+                                            <td rowspan="2" align="right">
                                                 @php
                                                     echo number_format($dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora - $data->InvoiceAmt, 2, ',', ' ');
                                                 @endphp
@@ -890,7 +890,6 @@
                                                     echo number_format($dataday->InvoiceAmtPropiasFiscalizadora, 2, ',', ' ');
                                                 @endphp
                                             </td>
-                                            <td> </td>
                                         </tr>
                                         <tr>
                                             <td>Vale digital</td>
