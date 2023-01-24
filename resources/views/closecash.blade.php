@@ -1556,7 +1556,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="form-check checkbox-xl text-center">
+                            {{-- <div class="form-check checkbox-xl text-center">
                                 <div class="form-check checkbox-xl text-center">
                                     @if ($list->isNotEmpty())
                                         @foreach ($list as $dataday)
@@ -1578,7 +1578,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <p class="form-check-label text-center">Verificado por fiscalizadora</p>
+                            <p class="form-check-label text-center">Verificado por fiscalizadora</p> --}}
                         </div>
 
                     </div>
@@ -2601,7 +2601,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="form-check checkbox-xl text-center">
+                            {{-- <div class="form-check checkbox-xl text-center">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         @if ($dataday->check_ger == 1)
@@ -2621,7 +2621,7 @@
                                         style="margin-left: 1px;margin-left: 50%;margin-right: 1px;margin-top: 1px;margin-bottom: 1px;">
                                 @endif
                             </div>
-                            <p class="form-check-label text-center">Verificado por gerente</p>
+                            <p class="form-check-label text-center">Verificado por gerente</p> --}}
                         </div>
                     </div>
                 </div>
