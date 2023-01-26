@@ -53,6 +53,7 @@
     th,
     td {
         padding: 1px;
+        /* border: 1px solid #0F362D; */
     }
 
     thead {
@@ -60,6 +61,31 @@
         border-bottom: solid 5px #0F362D;
         color: white;
     }
+
+    #theadtotal {
+        background-color: #1b6453;
+        border-bottom: solid 2.5px #268c74;
+        border-top: solid 2.5px #268c74;
+        color: white;
+    }
+
+   /*  #tabla1 tr {
+        border: 1px solid #000;
+    }
+
+    #tabla1 td {
+        border: 1px solid #000;
+    }
+    #tabla2 tr:nth-child(even) {
+        border:1px solid #ddd;
+        background-color: #ddd;
+    }
+
+    #tabla2 td {
+        border: 1px solid #ddd;
+    } */
+
+
 
     tr:nth-child(even) {
         background-color: #ddd;
@@ -87,9 +113,13 @@
                 @endif
 
                 <label><b>Cantidad de cierres: {{ $data->gh_closecash_id_count }}</b></label><br>
-                <label><b> Inicio caja: {{ $data->BeginningBalance }}</b></label>
+                <label><b> Inicio caja:
+                        @php
+                            echo number_format($data->BeginningBalance, 2, ',', ' ');
+                        @endphp
+                    </b></label>
                 @if (isset($closecashlist))
-                    <table>
+                    <table style="border: 1px solid #0F362D;">
                         <thead>
                             <tr align="left">
                                 <th>Caja</th>
@@ -138,9 +168,10 @@
                 @endif
                 <table>
                     <tr>
+
                         <td>
                             <h3>Monto sistema</h3>
-                            <table>
+                            <table style="border: 1px solid #0F362D;" id="tabla1">
                                 <thead>
                                     <tr>
                                         <th align="left" colspan="2">Efectivo</th>
@@ -153,7 +184,7 @@
                                 </thead>
                                 <tr>
                                     <td colspan="2">
-                                        <table>
+                                        <table id="tabla2">
                                             <tr>
                                                 <td style="width:20px" align="left">$1</td>
                                                 <td style="width:5px">*</td>
@@ -171,7 +202,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table>
+                                        <table id="tabla2">
                                             <tr>
                                                 <td style="width:20px" align="left">$5</td>
                                                 <td style="width:5px">*</td>
@@ -189,7 +220,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table>
+                                        <table id="tabla2">
                                             <tr>
                                                 <td style="width:20px" align="left">$10</td>
                                                 <td style="width:5px">*</td>
@@ -208,7 +239,7 @@
                                 <tr>
 
                                     <td colspan="2">
-                                        <table>
+                                        <table id="tabla2">
                                             <tr>
                                                 <td style="width:20px" align="left">$20</td>
                                                 <td style="width:5px">*</td>
@@ -226,7 +257,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table>
+                                        <table id="tabla2">
                                             <tr>
                                                 <td style="width:20px" align="left">$50</td>
                                                 <td style="width:5px">*</td>
@@ -244,7 +275,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <table>
+                                        <table id="tabla2">
                                             <tr>
                                                 <td style="width:20px" align="left">$100</td>
                                                 <td style="width:5px">*</td>
@@ -262,16 +293,18 @@
                                 </tr>
                             </table>
                             <br>
-                            <table>
-                                <tr>
-                                    <th align="left" colspan="2">Otros</th>
+                            <table style="border: 1px solid #0F362D;">
+                                <thead>
+                                    <tr>
+                                        <th align="left" colspan="2">Otros</th>
 
-                                    <th align="right">
-                                        @php
-                                            echo number_format($data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt, 2, ',', ' ');
-                                        @endphp
-                                    </th>
-                                </tr>
+                                        <th align="right">
+                                            @php
+                                                echo number_format($data->yappy + $data->otros + $data->valespagoda + $data->CheckAmt + $data->LotoAmt + $data->CreditAmt + $data->CardAmt + $data->CashAmt + $data->CoinRoll + $data->InvoiceAmt + $data->VoucherAmt + $data->GrantAmt, 2, ',', ' ');
+                                            @endphp
+                                        </th>
+                                    </tr>
+                                </thead>
                                 <tr>
                                     <td colspan="2">Yappy</td>
 
@@ -429,61 +462,43 @@
                                         @endphp
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="2"><b>Subtotal super</b></td>
+                                <thead id="theadtotal">
+                                    <tr>
+                                        <td colspan="2"><b>Subtotal super</b></td>
 
-                                    <td align="right"><b>
-                                            @php
-                                                echo number_format($data->SubTotal, 2, ',', ' ');
-                                            @endphp</b>
-                                    </td>
+                                        <td align="right"><b>
+                                                @php
+                                                    echo number_format($data->SubTotal, 2, ',', ' ');
+                                                @endphp</b>
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <table style="border: 1px solid #0F362D;">
+                                <tr>
+                                    <th colspan="2" style="color: white;">Diferencia</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: white;">-</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: white;">-</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: white;">-</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: white;">-</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: white;">-</th>
                                 </tr>
                             </table>
-
-                            <br>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 <tr>
                                     <th colspan="2"></th>
 
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">-</th>
-
-                                    <th align="right"></th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">-</th>
-
-                                    <th align="right">
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">-</th>
-
-                                    <th align="right">
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">-</th>
-
-                                    <th align="right">
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">-</th>
-
-                                    <th align="right">
-                                    </th>
-                                </tr>
-                            </table>
-
-                            <br>
-                            <table>
-                                <tr>
-                                    <th colspan="2"></th>
-
-                                    <th></th>
+                                    <th style="color: white;">Diferencia</th>
                                 </tr>
                                 <tr>
                                     <th align="left" colspan="2">Monto contado</th>
@@ -517,7 +532,7 @@
 
                         <td>
                             <h3>Fiscalizadora</h3>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <thead>
@@ -564,6 +579,7 @@
                                                         @endphp</td>
                                                     </tr>
                                                 </table>
+
                                             </td>
                                             <td align="right">
                                                 @php
@@ -682,19 +698,20 @@
                                 @endif
                             </table>
                             <br>
-
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
-                                        <tr>
-                                            <th align="left">Otros</th>
-                                            <th align="right">
-                                                @php
-                                                    echo number_format($dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
-                                                @endphp
-                                            </th>
-                                            <th>Diferencia</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th align="left">Otros</th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format($dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
+                                                    @endphp
+                                                </th>
+                                                <th>Diferencia</th>
+                                            </tr>
+                                        </thead>
                                         <tr>
                                             <td>Yappy</td>
                                             <td align="right">
@@ -916,26 +933,54 @@
                                                 @endphp
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th align="left">Subtotal super</th>
-                                            <th align="right">
-                                                @php
-                                                    echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
-                                                @endphp
-                                            </th>
-                                            <th> </th>
-                                        </tr>
+                                        <thead id="theadtotal">
+                                            <tr>
+                                                <th align="left">Subtotal super</th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format($dataday->x_oneamtFiscalizadora * 1 + $dataday->x_fiveamtFiscalizadora * 5 + $dataday->x_tenamtFiscalizadora * 10 + $dataday->x_twentyamtFiscalizadora * 20 + $dataday->x_fiftyamtFiscalizadora * 50 + $dataday->x_hundredamtFiscalizadora * 100 + $dataday->yappyFiscalizadora + $dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora + $dataday->valespagodaFiscalizadora + $dataday->CheckAmtFiscalizadora + $dataday->LotoAmtFiscalizadora + $dataday->valeAmtFiscalizadora + $dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora + $dataday->CashAmtFiscalizadora + $dataday->CoinRollFiscalizadora + $dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora + $dataday->VoucherAmtFiscalizadora + $dataday->GrantAmtFiscalizadora, 2, ',', ' ');
+                                                    @endphp
+                                                </th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format(
+                                                            $dataday->x_oneamtFiscalizadora -
+                                                                $data->x_oneamt +
+                                                                ($dataday->x_fiveamtFiscalizadora - $data->x_fiveamt) +
+                                                                ($dataday->x_tenamtFiscalizadora - $data->x_tenamt) +
+                                                                ($dataday->x_twentyamtFiscalizadora - $data->x_twentyamt) +
+                                                                ($dataday->x_fiftyamtFiscalizadora - $data->x_fiftyamt) +
+                                                                ($dataday->x_hundredamtFiscalizadora - $data->x_hundredamt) +
+                                                                ($dataday->yappyFiscalizadora - $data->yappy) +
+                                                                ($dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora - $data->otros) +
+                                                                ($dataday->valespagodaFiscalizadora - $data->valespagoda) +
+                                                                ($dataday->CheckAmtFiscalizadora - $data->CheckAmt) +
+                                                                ($dataday->LotoAmtFiscalizadora - $data->LotoAmt) +
+                                                                ($dataday->valeAmtFiscalizadora - $data->CreditAmt) +
+                                                                ($dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora - $data->CardAmt + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora) +
+                                                                ($dataday->CashAmtFiscalizadora - $data->CashAmt) +
+                                                                ($dataday->CoinRollFiscalizadora - $data->CoinRoll) +
+                                                                ($dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora - $data->InvoiceAmt) +
+                                                                ($dataday->VoucherAmtFiscalizadora - $data->VoucherAmt) +
+                                                                ($dataday->GrantAmtFiscalizadora - $data->GrantAmt),
+                                                            2,
+                                                            ',',
+                                                            ' ',
+                                                        );
+                                                    @endphp
+                                                </th>
+                                            </tr>
+                                        </thead>
                                     @endforeach
                                 @endif
                             </table>
-                            <br>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <tr>
                                             <th></th>
                                             <th></th>
-                                            <th></th>
+                                            <th style="color: white;">Diferencia</th>
                                         </tr>
                                         <tr>
                                             <td>Total panaderia</td>
@@ -983,14 +1028,13 @@
                                     @endforeach
                                 @endif
                             </table>
-                            <br>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <tr>
                                             <th></th>
                                             <th></th>
-                                            <th></th>
+                                            <th style="color: white;">Diferencia</th>
                                         </tr>
                                         <tr>
                                             <td><b>Monto contado</b></td>
@@ -1029,7 +1073,7 @@
 
                         <td>
                             <h3>Gerente</h3>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <thead>
@@ -1199,19 +1243,20 @@
                                 @endif
                             </table>
                             <br>
-
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
-                                        <tr>
-                                            <th align="left">Otros</th>
-                                            <th align="right">
-                                                @php
-                                                    echo number_format($dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente, 2, ',', ' ');
-                                                @endphp
-                                            </th>
-                                            <th>Diferencia</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th align="left">Otros</th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format($dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente, 2, ',', ' ');
+                                                    @endphp
+                                                </th>
+                                                <th>Diferencia</th>
+                                            </tr>
+                                        </thead>
                                         <tr>
                                             <td>Yappy</td>
                                             <td align="right">
@@ -1464,26 +1509,60 @@
                                                 @endphp
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th align="left">Subtotal super</th>
-                                            <th align="right">
-                                                @php
-                                                    echo number_format($dataday->x_oneamtGerente * 1 + $dataday->x_fiveamtGerente * 5 + $dataday->x_tenamtGerente * 10 + $dataday->x_twentyamtGerente * 20 + $dataday->x_fiftyamtGerente * 50 + $dataday->x_hundredamtGerente * 100 + $dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente, 2, ',', ' ');
+                                        <thead id="theadtotal">
+                                            <tr>
+                                                <th align="left">Subtotal super</th>
+                                                <th align="right">
+                                                    @php
+                                                        echo number_format($dataday->x_oneamtGerente * 1 + $dataday->x_fiveamtGerente * 5 + $dataday->x_tenamtGerente * 10 + $dataday->x_twentyamtGerente * 20 + $dataday->x_fiftyamtGerente * 50 + $dataday->x_hundredamtGerente * 100 + $dataday->yappyGerente + $dataday->otrosGerente + $dataday->otrosprimeroGerente + $dataday->valespagodaGerente + $dataday->CheckAmtGerente + $dataday->LotoAmtGerente + $dataday->valeAmtGerente + $dataday->CardClaveGerente + $dataday->CardValeGerente + $dataday->CardVisaGerente + $dataday->CardMasterGerente + $dataday->CardAEGerente + $dataday->CardBACGerente + $dataday->CashAmtGerente + $dataday->CoinRollGerente + $dataday->InvoiceAmtGerente + $dataday->InvoiceAmtPropiasGerente + $dataday->VoucherAmtGerente + $dataday->GrantAmtGerente, 2, ',', ' ');
+                                                    @endphp
+                                                </th>
+                                                <th align="right"> @php
+                                                    echo number_format(
+                                                        $dataday->x_oneamtGerente -
+                                                            $dataday->x_oneamtFiscalizadora +
+                                                            ($dataday->x_fiveamtGerente - $dataday->x_fiveamtFiscalizadora) +
+                                                            ($dataday->x_tenamtGerente - $dataday->x_tenamtFiscalizadora) +
+                                                            ($dataday->x_twentyamtGerente - $dataday->x_twentyamtFiscalizadora) +
+                                                            ($dataday->x_fiftyamtGerente - $dataday->x_fiftyamtFiscalizadora) +
+                                                            ($dataday->x_hundredamtGerente - $dataday->x_hundredamtFiscalizadora) +
+                                                            ($dataday->yappyGerente - $dataday->yappyFiscalizadora) +
+                                                            ($dataday->otrosGerente - $dataday->otrosFiscalizadora) +
+                                                            ($dataday->otrosprimeroGerente - $dataday->otrosprimeroFiscalizadora) +
+                                                            ($dataday->valespagodaGerente - $dataday->valespagodaFiscalizadora) +
+                                                            ($dataday->CheckAmtGerente - $dataday->CheckAmtFiscalizadora) +
+                                                            ($dataday->LotoAmtGerente - $dataday->LotoAmtFiscalizadora) +
+                                                            ($dataday->valeAmtGerente - $dataday->valeAmtFiscalizadora) +
+                                                            ($dataday->CardClaveGerente - $dataday->CardClaveFiscalizadora) +
+                                                            ($dataday->CardValeGerente - $dataday->CardValeFiscalizadora) +
+                                                            ($dataday->CardVisaGerente - $dataday->CardVisaFiscalizadora) +
+                                                            ($dataday->CardMasterGerente - $dataday->CardMasterFiscalizadora) +
+                                                            ($dataday->CardAEGerente - $dataday->CardAEFiscalizadora) +
+                                                            ($dataday->CardBACGerente - $dataday->CardBACFiscalizadora) +
+                                                            ($dataday->CashAmtGerente - $dataday->CashAmtFiscalizadora) +
+                                                            ($dataday->CoinRollGerente - $dataday->CoinRollFiscalizadora) +
+                                                            ($dataday->InvoiceAmtGerente - $dataday->InvoiceAmtFiscalizadora) +
+                                                            ($dataday->InvoiceAmtPropiasGerente - $dataday->InvoiceAmtPropiasFiscalizadora) +
+                                                            ($dataday->VoucherAmtGerente - $dataday->VoucherAmtFiscalizadora) +
+                                                            ($dataday->GrantAmtGerente - $dataday->GrantAmtFiscalizadora),
+                                                        2,
+                                                        ',',
+                                                        ' ',
+                                                    );
                                                 @endphp
-                                            </th>
-                                            <th> </th>
-                                        </tr>
+                                                </th>
+                                            </tr>
+                                        </thead>
                                     @endforeach
                                 @endif
                             </table>
-                            <br>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <tr>
                                             <th></th>
                                             <th></th>
-                                            <th></th>
+                                            <th style="color: white;">Diferencia</th>
                                         </tr>
                                         <tr>
                                             <td>Total panaderia</td>
@@ -1531,14 +1610,13 @@
                                     @endforeach
                                 @endif
                             </table>
-                            <br>
-                            <table>
+                            <table style="border: 1px solid #0F362D;">
                                 @if ($list->isNotEmpty())
                                     @foreach ($list as $dataday)
                                         <tr>
                                             <th></th>
                                             <th></th>
-                                            <th></th>
+                                            <th style="color: white;">Diferencia</th>
                                         </tr>
                                         <tr>
                                             <td><b>Monto contado</b></td>
