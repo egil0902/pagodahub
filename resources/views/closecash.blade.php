@@ -622,15 +622,15 @@
                                                             name="x_oneamtFiscalizadora" type="number"
                                                             class="form-control"
                                                             class="text-left  form-control form-control"placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonx_oneamtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonx_oneamtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="x_oneamtFiscalizadora" type="number"
                                                         class="form-control"
                                                         class="text-left  form-control"placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonx_oneamtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonx_oneamtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td align="right">
@@ -655,14 +655,14 @@
                                                             name="x_fiveamtFiscalizadora" type="number"
                                                             class="form-control"
                                                             class="text-left  form-control form-control"
-                                                            placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            placeholder="0.00" onchange="cal();clonx_fiveamtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonx_fiveamtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="x_fiveamtFiscalizadora" type="number"
                                                         class="form-control" class="text-left  form-control"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonx_fiveamtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonx_fiveamtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td align="right">
@@ -687,14 +687,14 @@
                                                         <input value="{{ $dataday->x_tenamtFiscalizadora }}"
                                                             name="x_tenamtFiscalizadora" type="number"
                                                             class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            placeholder="0.00" onchange="cal();clonx_tenamtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonx_tenamtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="x_tenamtFiscalizadora" type="number"
                                                         class="form-control" class="text-left  form-control"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonx_tenamtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonx_tenamtFiscalizadora();cal();colores()">
                                                 @endif
 
                                             </td>
@@ -720,14 +720,14 @@
                                                         <input value="{{ $dataday->x_twentyamtFiscalizadora }}"
                                                             name="x_twentyamtFiscalizadora" type="number"
                                                             class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            placeholder="0.00" onchange="cal();clonx_twentyamtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonx_twentyamtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="x_twentyamtFiscalizadora" type="number"
                                                         class="form-control" class="text-left  form-control"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonx_twentyamtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonx_twentyamtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td align="right">
@@ -753,14 +753,14 @@
                                                         <input value="{{ $dataday->x_fiftyamtFiscalizadora }}"
                                                             name="x_fiftyamtFiscalizadora" type="number"
                                                             class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            placeholder="0.00" onchange="cal();clonx_fiftyamtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonx_fiftyamtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="x_fiftyamtFiscalizadora" type="number"
                                                         class="form-control" class="text-left  form-control"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonx_fiftyamtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonx_fiftyamtFiscalizadora();cal();colores()">
                                                 @endif
 
                                             </td>
@@ -786,14 +786,14 @@
                                                         <input value="{{ $dataday->x_hundredamtFiscalizadora }}"
                                                             name="x_hundredamtFiscalizadora" type="number"
                                                             class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            placeholder="0.00" onchange="cal();clonx_hundredamtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonx_hundredamtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="x_hundredamtFiscalizadora" type="number"
                                                         class="form-control" class="text-left  form-control"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonx_hundredamtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonx_hundredamtFiscalizadora();cal();colores()">
                                                 @endif
 
 
@@ -842,15 +842,15 @@
                                                         <input value="{{ $dataday->yappyFiscalizadora }}"
                                                             id="yappyFiscalizadora" name="yappyFiscalizadora"
                                                             type="number" class="form-control" step="0.01"
-                                                            placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            placeholder="0.00" onchange="cal();clonyappyFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonyappyFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" id="yappyFiscalizadora"
                                                         name="yappyFiscalizadora" type="number" class="form-control"
                                                         step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonyappyFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonyappyFiscalizadora();cal();colores()">
                                                 @endif
 
 
@@ -873,15 +873,15 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="otrosFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()"
+                                                            onchange="cal();clonotrosFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonotrosFiscalizadora();cal();colores()"
                                                             value="{{ $dataday->otrosFiscalizadora }}">
                                                     @endforeach
                                                 @else
                                                     <input name="otrosFiscalizadora" type="number" class="form-control"
                                                         step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()" value="">
+                                                        onchange="cal();clonotrosFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonotrosFiscalizadora();cal();colores()" value="">
                                                 @endif
 
                                             </td>
@@ -903,15 +903,15 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="otrosprimeroFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()"
+                                                            onchange="cal();clonotrosprimeroFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonotrosprimeroFiscalizadora();cal();colores()"
                                                             value="{{ $dataday->otrosprimeroFiscalizadora }}">
                                                     @endforeach
                                                 @else
                                                     <input name="otrosprimeroFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()" value="">
+                                                        onchange="cal();clonotrosprimeroFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonotrosprimeroFiscalizadora();cal();colores()" value="">
                                                 @endif
 
                                             </td>
@@ -932,15 +932,15 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="valespagodaFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()"
+                                                            onchange="cal();clonvalespagodaFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonvalespagodaFiscalizadora();cal();colores()"
                                                             value="{{ $dataday->valespagodaFiscalizadora }}">
                                                     @endforeach
                                                 @else
                                                     <input name="valespagodaFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()" value="">
+                                                        onchange="cal();clonvalespagodaFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonvalespagodaFiscalizadora();cal();colores()" value="">
                                                 @endif
                                             </td>
 
@@ -962,15 +962,15 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="CheckAmtFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()"
+                                                            onchange="cal();clonCheckAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCheckAmtFiscalizadora();cal();colores()"
                                                             value="{{ $dataday->CheckAmtFiscalizadora }}">
                                                     @endforeach
                                                 @else
                                                     <input name="CheckAmtFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()" value="">
+                                                        onchange="cal();clonCheckAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCheckAmtFiscalizadora();cal();colores()" value="">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -991,15 +991,15 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="LotoAmtFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()"
+                                                            onchange="cal();clonLotoAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonLotoAmtFiscalizadora();cal();colores()"
                                                             value="{{ $dataday->LotoAmtFiscalizadora }}">
                                                     @endforeach
                                                 @else
                                                     <input name="LotoAmtFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()" value="">
+                                                        onchange="cal();clonLotoAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonLotoAmtFiscalizadora();cal();colores()" value="">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1021,14 +1021,14 @@
                                                         <input value="{{ $dataday->valeAmtFiscalizadora }}"
                                                             name="valeAmtFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonvaleAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonvaleAmtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="valeAmtFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonvaleAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonvaleAmtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1050,14 +1050,14 @@
                                                         <input value="{{ $dataday->CardClaveFiscalizadora }}"
                                                             name="CardClaveFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCardClaveFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCardClaveFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CardClaveFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCardClaveFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCardClaveFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1078,14 +1078,14 @@
                                                         <input value="{{ $dataday->CardValeFiscalizadora }}"
                                                             name="CardValeFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCardValeFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCardValeFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CardValeFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCardValeFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCardValeFiscalizadora();cal();colores()">
                                                 @endif
 
                                             </td>
@@ -1107,14 +1107,14 @@
                                                         <input value="{{ $dataday->CardVisaFiscalizadora }}"
                                                             name="CardVisaFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCardVisaFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCardVisaFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CardVisaFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCardVisaFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCardVisaFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1136,14 +1136,14 @@
                                                         <input value="{{ $dataday->CardMasterFiscalizadora }}"
                                                             name="CardMasterFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCardMasterFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCardMasterFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CardMasterFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCardMasterFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCardMasterFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1164,14 +1164,14 @@
                                                         <input value="{{ $dataday->CardAEFiscalizadora }}"
                                                             name="CardAEFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCardAEFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCardAEFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CardAEFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCardAEFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCardAEFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1192,14 +1192,14 @@
                                                         <input value="{{ $dataday->CardBACFiscalizadora }}"
                                                             name="CardBACFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCardBACFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCardBACFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CardBACFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCardBACFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCardBACFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1220,14 +1220,14 @@
                                                         <input value="{{ $dataday->CashAmtFiscalizadora }}"
                                                             name="CashAmtFiscalizadora" value="" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCashAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCashAmtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CashAmtFiscalizadora" value=""
                                                         type="number" class="form-control" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonCashAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCashAmtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1249,14 +1249,14 @@
                                                         <input value="{{ $dataday->CoinRollFiscalizadora }}"
                                                             name="CoinRollFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonCoinRollFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonCoinRollFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="CoinRollFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonCoinRollFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonCoinRollFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1278,14 +1278,14 @@
                                                         <input value="{{ $dataday->InvoiceAmtFiscalizadora }}"
                                                             name="InvoiceAmtFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonInvoiceAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonInvoiceAmtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="InvoiceAmtFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonInvoiceAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonInvoiceAmtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1306,14 +1306,14 @@
                                                         <input value="{{ $dataday->InvoiceAmtPropiasFiscalizadora }}"
                                                             name="InvoiceAmtPropiasFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonInvoiceAmtPropiasFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonInvoiceAmtPropiasFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="InvoiceAmtPropiasFiscalizadora"
                                                         type="number" class="form-control" step="0.01"
-                                                        placeholder="0.00" onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        placeholder="0.00" onchange="cal();clonInvoiceAmtPropiasFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonInvoiceAmtPropiasFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1334,14 +1334,14 @@
                                                         <input value="{{ $dataday->VoucherAmtFiscalizadora }}"
                                                             name="VoucherAmtFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonVoucherAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonVoucherAmtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="VoucherAmtFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonVoucherAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonVoucherAmtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
@@ -1362,14 +1362,14 @@
                                                         <input value="{{ $dataday->GrantAmtFiscalizadora }}"
                                                             name="GrantAmtFiscalizadora" type="number"
                                                             class="form-control" step="0.01" placeholder="0.00"
-                                                            onchange="cal();clon();cal();colores()"
-                                                            onkeyup="cal();clon();cal();colores()">
+                                                            onchange="cal();clonGrantAmtFiscalizadora();cal();colores()"
+                                                            onkeyup="cal();clonGrantAmtFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="GrantAmtFiscalizadora" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00"
-                                                        onchange="cal();clon();cal();colores()"
-                                                        onkeyup="cal();clon();cal();colores()">
+                                                        onchange="cal();clonGrantAmtFiscalizadora();cal();colores()"
+                                                        onkeyup="cal();clonGrantAmtFiscalizadora();cal();colores()">
                                                 @endif
                                             </td>
                                             <td></td>
