@@ -952,6 +952,12 @@ function clonInvoiceAmtFiscalizadora() { document.closecash_edit.InvoiceAmtGeren
 function clonInvoiceAmtPropiasFiscalizadora() { document.closecash_edit.InvoiceAmtPropiasGerente.value = document.closecash_edit.InvoiceAmtPropiasFiscalizadora.value; }
 function clonVoucherAmtFiscalizadora() { document.closecash_edit.VoucherAmtGerente.value = document.closecash_edit.VoucherAmtFiscalizadora.value; }
 function clonGrantAmtFiscalizadora() { document.closecash_edit.GrantAmtGerente.value = document.closecash_edit.GrantAmtFiscalizadora.value; }
+function clonSencilloSupervisoraFiscalizadora(){document.closecash_edit.SencilloSupervisoraGerente.value = document.closecash_edit.SencilloSupervisoraFiscalizadora.value;}
+function clontotalPanaderiaFiscalizadora(){document.closecash_edit.totalPanaderiaGerente.value = document.closecash_edit.totalPanaderiaFiscalizadora.value;}
+function clontotalPagatodoFiscalizadora(){document.closecash_edit.totalPagatodoGerente.value = document.closecash_edit.totalPagatodoFiscalizadora.value;}
+function clontotalsuperFiscalizadora(){document.closecash_edit.totalsuperGerente.value = document.closecash_edit.totalsuperFiscalizadora.value;}
+function clondineroTaxiFiscalizadora(){document.closecash_edit.dineroTaxiGerente.value = document.closecash_edit.dineroTaxiFiscalizadora.value;}
+function clonvueltoMercadoFiscalizadora(){document.closecash_edit.vueltoMercadoGerente.value = document.closecash_edit.vueltoMercadoFiscalizadora.value;}
 
 function zero() {
 }
