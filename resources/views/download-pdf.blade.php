@@ -122,6 +122,7 @@
                     <table style="border: 1px solid #0F362D;">
                         <thead>
                             <tr align="left">
+                                <th>#</th>
                                 <th>Caja</th>
                                 <th>Cajera</th>
                                 <th>Inicio caja</th>
@@ -131,9 +132,11 @@
                                 <th>Diferencia</th>
                             </tr>
                         </thead>
+                        @php $cuenta = 1;  @endphp
                         @if ($closecashlist->{'records-size'} > 0)
                             @foreach ($closecashlist->records as $closecashl)
                                 <tr>
+                                    <td>@php echo $cuenta++;  @endphp</td>
                                     <td>{{ $closecashl->ba_name }}</td>
                                     <td>{{ $closecashl->u_name }}</td>
                                     <td align="right">
@@ -477,6 +480,9 @@
                             <table style="border: 1px solid #0F362D;">
                                 <tr>
                                     <th colspan="2" style="color: white;">Diferencia</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" style="color: white;">-</th>
                                 </tr>
                                 <tr>
                                     <th colspan="2" style="color: white;">-</th>
@@ -981,6 +987,15 @@
                                             <th></th>
                                             <th></th>
                                             <th style="color: white;">Diferencia</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sencillo Supervisora</td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->SencilloSupervisoraFiscalizadora, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>Total panaderia</td>
@@ -1563,6 +1578,15 @@
                                             <th></th>
                                             <th></th>
                                             <th style="color: white;">Diferencia</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sencillo Supervisora</td>
+                                            <td align="right">
+                                                @php
+                                                    echo number_format($dataday->SencilloSupervisoraGerente, 2, ',', ' ');
+                                                @endphp
+                                            </td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>Total panaderia</td>

@@ -122,6 +122,9 @@ class closecash extends Model
         'otros_sistema',
         'sub_total_super_sistema',
         'monto_contado_sistema',
-        'monto_x_sistema'
+        'monto_x_sistema',
+        'SencilloSupervisoraFiscalizadora',
+        'SencilloSupervisoraGerente',
+        'check_SencilloSupervisoraGerente'
     ];
 }

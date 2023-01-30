@@ -44,6 +44,7 @@ class CloseCashController extends Controller
         session()->put('dia', $dia);
         session()->put('organizacion', $organizacion);
 
+        //dump( $closecashlist);
         if (isset($response)) {
             return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list]);
         }
@@ -180,6 +181,10 @@ class CloseCashController extends Controller
         $todo->sub_total_super_sistema          =  $request->sub_total_super_sistema;
         $todo->monto_contado_sistema            =  $request->monto_contado_sistema;
         $todo->monto_x_sistema                  =  $request->monto_x_sistema;
+        $todo->SencilloSupervisoraFiscalizadora =  $request->SencilloSupervisoraFiscalizadora;
+        $todo->SencilloSupervisoraGerente       =  $request->SencilloSupervisoraGerente;
+        $todo->check_SencilloSupervisoraGerente =  $request->check_SencilloSupervisoraGerente;
+        //dump($request->SencilloSupervisoraFiscalizadora,$request->SencilloSupervisoraGerente);
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 
         $misDatos = session()->get('misDatos');
@@ -322,8 +327,10 @@ class CloseCashController extends Controller
         $todo->sub_total_super_sistema          =  $request->sub_total_super_sistema;
         $todo->monto_contado_sistema            =  $request->monto_contado_sistema;
         $todo->monto_x_sistema                  =  $request->monto_x_sistema;
+        $todo->SencilloSupervisoraFiscalizadora =  $request->SencilloSupervisoraFiscalizadora;
+        $todo->SencilloSupervisoraGerente       =  $request->SencilloSupervisoraGerente;
+        $todo->check_SencilloSupervisoraGerente =  $request->check_SencilloSupervisoraGerente;
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
-
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
         if ($filename == null) {

@@ -927,32 +927,37 @@ function colores() {
     }
 }
 
-function clon() {
-    document.closecash_edit.x_oneamtGerente.value = document.closecash_edit.x_oneamtFiscalizadora.value;
-    document.closecash_edit.x_fiveamtGerente.value = document.closecash_edit.x_fiveamtFiscalizadora.value;
-    document.closecash_edit.x_tenamtGerente.value = document.closecash_edit.x_tenamtFiscalizadora.value;
-    document.closecash_edit.x_twentyamtGerente.value = document.closecash_edit.x_twentyamtFiscalizadora.value;
-    document.closecash_edit.x_fiftyamtGerente.value = document.closecash_edit.x_fiftyamtFiscalizadora.value;
-    document.closecash_edit.x_hundredamtGerente.value = document.closecash_edit.x_hundredamtFiscalizadora.value;
-    document.closecash_edit.yappyGerente.value = document.closecash_edit.yappyFiscalizadora.value;
-    document.closecash_edit.otrosGerente.value = document.closecash_edit.otrosFiscalizadora.value;
-    document.closecash_edit.otrosprimeroGerente.value = document.closecash_edit.otrosprimeroFiscalizadora.value;
-    document.closecash_edit.valespagodaGerente.value = document.closecash_edit.valespagodaFiscalizadora.value;
-    document.closecash_edit.CheckAmtGerente.value = document.closecash_edit.CheckAmtFiscalizadora.value;
-    document.closecash_edit.LotoAmtGerente.value = document.closecash_edit.LotoAmtFiscalizadora.value;
-    document.closecash_edit.valeAmtGerente.value = document.closecash_edit.valeAmtFiscalizadora.value;
-    document.closecash_edit.CardClaveGerente.value = document.closecash_edit.CardClaveFiscalizadora.value;
-    document.closecash_edit.CardValeGerente.value = document.closecash_edit.CardValeFiscalizadora.value;
-    document.closecash_edit.CardVisaGerente.value = document.closecash_edit.CardVisaFiscalizadora.value;
-    document.closecash_edit.CardMasterGerente.value = document.closecash_edit.CardMasterFiscalizadora.value;
-    document.closecash_edit.CardAEGerente.value = document.closecash_edit.CardAEFiscalizadora.value;
-    document.closecash_edit.CardBACGerente.value = document.closecash_edit.CardBACFiscalizadora.value;
-    document.closecash_edit.CashAmtGerente.value = document.closecash_edit.CashAmtFiscalizadora.value;
-    document.closecash_edit.CoinRollGerente.value = document.closecash_edit.CoinRollFiscalizadora.value;
-    document.closecash_edit.InvoiceAmtGerente.value = document.closecash_edit.InvoiceAmtFiscalizadora.value;
-    document.closecash_edit.InvoiceAmtPropiasGerente.value = document.closecash_edit.InvoiceAmtPropiasFiscalizadora.value;
-    document.closecash_edit.VoucherAmtGerente.value = document.closecash_edit.VoucherAmtFiscalizadora.value;
-    document.closecash_edit.GrantAmtGerente.value = document.closecash_edit.GrantAmtFiscalizadora.value;
-}
+function clonx_oneamtFiscalizadora() { document.closecash_edit.x_oneamtGerente.value = document.closecash_edit.x_oneamtFiscalizadora.value; }
+function clonx_fiveamtFiscalizadora() { document.closecash_edit.x_fiveamtGerente.value = document.closecash_edit.x_fiveamtFiscalizadora.value; }
+function clonx_tenamtFiscalizadora() { document.closecash_edit.x_tenamtGerente.value = document.closecash_edit.x_tenamtFiscalizadora.value; }
+function clonx_twentyamtFiscalizadora() { document.closecash_edit.x_twentyamtGerente.value = document.closecash_edit.x_twentyamtFiscalizadora.value; }
+function clonx_fiftyamtFiscalizadora() { document.closecash_edit.x_fiftyamtGerente.value = document.closecash_edit.x_fiftyamtFiscalizadora.value; }
+function clonx_hundredamtFiscalizadora() { document.closecash_edit.x_hundredamtGerente.value = document.closecash_edit.x_hundredamtFiscalizadora.value; }
+function clonyappyFiscalizadora() { document.closecash_edit.yappyGerente.value = document.closecash_edit.yappyFiscalizadora.value; }
+function clonotrosFiscalizadora() { document.closecash_edit.otrosGerente.value = document.closecash_edit.otrosFiscalizadora.value; }
+function clonotrosprimeroFiscalizadora() { document.closecash_edit.otrosprimeroGerente.value = document.closecash_edit.otrosprimeroFiscalizadora.value; }
+function clonvalespagodaFiscalizadora() { document.closecash_edit.valespagodaGerente.value = document.closecash_edit.valespagodaFiscalizadora.value; }
+function clonCheckAmtFiscalizadora() { document.closecash_edit.CheckAmtGerente.value = document.closecash_edit.CheckAmtFiscalizadora.value; }
+function clonLotoAmtFiscalizadora() { document.closecash_edit.LotoAmtGerente.value = document.closecash_edit.LotoAmtFiscalizadora.value; }
+function clonvaleAmtFiscalizadora() { document.closecash_edit.valeAmtGerente.value = document.closecash_edit.valeAmtFiscalizadora.value; }
+function clonCardClaveFiscalizadora() { document.closecash_edit.CardClaveGerente.value = document.closecash_edit.CardClaveFiscalizadora.value; }
+function clonCardValeFiscalizadora() { document.closecash_edit.CardValeGerente.value = document.closecash_edit.CardValeFiscalizadora.value; }
+function clonCardVisaFiscalizadora() { document.closecash_edit.CardVisaGerente.value = document.closecash_edit.CardVisaFiscalizadora.value; }
+function clonCardMasterFiscalizadora() { document.closecash_edit.CardMasterGerente.value = document.closecash_edit.CardMasterFiscalizadora.value; }
+function clonCardAEFiscalizadora() { document.closecash_edit.CardAEGerente.value = document.closecash_edit.CardAEFiscalizadora.value; }
+function clonCardBACFiscalizadora() { document.closecash_edit.CardBACGerente.value = document.closecash_edit.CardBACFiscalizadora.value; }
+function clonCashAmtFiscalizadora() { document.closecash_edit.CashAmtGerente.value = document.closecash_edit.CashAmtFiscalizadora.value; }
+function clonCoinRollFiscalizadora() { document.closecash_edit.CoinRollGerente.value = document.closecash_edit.CoinRollFiscalizadora.value; }
+function clonInvoiceAmtFiscalizadora() { document.closecash_edit.InvoiceAmtGerente.value = document.closecash_edit.InvoiceAmtFiscalizadora.value; }
+function clonInvoiceAmtPropiasFiscalizadora() { document.closecash_edit.InvoiceAmtPropiasGerente.value = document.closecash_edit.InvoiceAmtPropiasFiscalizadora.value; }
+function clonVoucherAmtFiscalizadora() { document.closecash_edit.VoucherAmtGerente.value = document.closecash_edit.VoucherAmtFiscalizadora.value; }
+function clonGrantAmtFiscalizadora() { document.closecash_edit.GrantAmtGerente.value = document.closecash_edit.GrantAmtFiscalizadora.value; }
+function clonSencilloSupervisoraFiscalizadora(){document.closecash_edit.SencilloSupervisoraGerente.value = document.closecash_edit.SencilloSupervisoraFiscalizadora.value;}
+function clontotalPanaderiaFiscalizadora(){document.closecash_edit.totalPanaderiaGerente.value = document.closecash_edit.totalPanaderiaFiscalizadora.value;}
+function clontotalPagatodoFiscalizadora(){document.closecash_edit.totalPagatodoGerente.value = document.closecash_edit.totalPagatodoFiscalizadora.value;}
+function clontotalsuperFiscalizadora(){document.closecash_edit.totalsuperGerente.value = document.closecash_edit.totalsuperFiscalizadora.value;}
+function clondineroTaxiFiscalizadora(){document.closecash_edit.dineroTaxiGerente.value = document.closecash_edit.dineroTaxiFiscalizadora.value;}
+function clonvueltoMercadoFiscalizadora(){document.closecash_edit.vueltoMercadoGerente.value = document.closecash_edit.vueltoMercadoFiscalizadora.value;}
+
 function zero() {
 }
