@@ -1433,7 +1433,7 @@
                                                 @if ($list->isNotEmpty())
                                                     @foreach ($list as $dataday)
                                                         <input value="{{ $dataday->SencilloSupervisoraFiscalizadora }}"
-                                                            name="SencilloSupervisoraFiscalizadora" type="number"
+                                                            name="SencilloSupervisoraFiscalizadora" type="number" step="0.01"
                                                             class="form-control" class="text-left  form-control"
                                                             placeholder="0.00"
                                                             onchange="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()"
@@ -1442,7 +1442,7 @@
                                                 @else
                                                     <input value="" name="SencilloSupervisoraFiscalizadora"
                                                         type="number" class="form-control"
-                                                        class="text-left  form-control" placeholder="0.00"
+                                                        class="text-left  form-control" placeholder="0.00" step="0.01"
                                                         onchange="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()"
                                                         onkeyup="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()">
                                                 @endif
@@ -2505,14 +2505,14 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="SencilloSupervisoraGerente" type="number"
                                                             class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00" onchange="cal();colores()"
+                                                            placeholder="0.00" onchange="cal();colores()" step="0.01"
                                                             onkeyup="cal();colores()"
                                                             value="{{ $dataday->SencilloSupervisoraGerente }}">
                                                     @endforeach
                                                 @else
                                                     <input name="SencilloSupervisoraGerente" type="number"
                                                         class="form-control" class="text-left  form-control"
-                                                        placeholder="0.00" onchange="cal();colores()"
+                                                        placeholder="0.00" onchange="cal();colores()" step="0.01"
                                                         onkeyup="cal();colores()" value="">
                                                 @endif
                                             </td>
