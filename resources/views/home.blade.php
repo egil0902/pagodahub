@@ -18,38 +18,51 @@
     <br>
     <div class="container p-0  mx-auto">
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="close_cash" id="close_cash" method="post" action="{{ route('close.cash') }}"> @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">1. Cajas</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Cierre diario de cajas</h5>
-                                    <p class="card-text">Permite el cierre diario de las cuentas para auditoría</p>
-                                </div>
-                            </button>
-                        </center>
 
-                    </form>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="closecash_list" id="closecash_list" method="get" action="{{ route('closecash.list') }}">
-                        @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">2. Cajas</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Listado de cierres de caja</h5>
-                                    <p class="card-text">Listado de los cierres diarios de caja realizados</p>
-                                </div>
-                            </button>
-                        </center>
-                    </form>
-                </div>
-            </div>
+            @foreach ($permisos->records as $record)
+                {{-- {{ $record->Name }}
+                {{ $record->AD_User_ID->identifier }}
+                {{ Auth::user()->name }} --}}
+                @if ($record->Name == 'closecash' && $record->AD_User_ID->identifier == Auth::user()->name)
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="close_cash" id="close_cash" method="post" action="{{ route('close.cash') }}"> @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">1. Cajas</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Cierre diario de cajas</h5>
+                                            <p class="card-text">Permite el cierre diario de las cuentas para auditoría</p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+
+            @foreach ($permisos->records as $record)
+                @if ($record->Name == 'closecash' && $record->AD_User_ID->identifier == Auth::user()->name)
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="closecash_list" id="closecash_list" method="get"
+                                action="{{ route('closecash.list') }}">
+                                @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">2. Cajas</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Listado de cierres de caja</h5>
+                                            <p class="card-text">Listado de los cierres diarios de caja realizados</p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
 
             <div class="col">
                 <div class="card h-100 border border-5 border-dark-subtle">
@@ -78,7 +91,8 @@
                                 <h5 class="card-header">4. Vales</h5>
                                 <div class="card-body">
                                     <h5 class="card-title">Control de los vales de La Pagoda</h5>
-                                    <p class="card-text">Administración de la numeración de los vales, registro y ajunto</p>
+                                    <p class="card-text">Administración de la numeración de los vales, registro y ajunto
+                                    </p>
                                 </div>
                             </button>
                         </center>
@@ -113,7 +127,8 @@
                                 <h5 class="card-header">6. Prestamos</h5>
                                 <div class="card-body">
                                     <h5 class="card-title">Control de los Prestamos</h5>
-                                    <p class="card-text">Administración de prestamos, registro de terceros y adjuntos</p>
+                                    <p class="card-text">Administración de prestamos, registro de terceros y adjuntos
+                                    </p>
                                 </div>
                             </button>
                         </center>

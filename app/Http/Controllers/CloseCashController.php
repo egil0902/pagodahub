@@ -7,6 +7,9 @@ use DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use App\Models\closecash;
+use App\Models\User;
+use FontLib\Table\Type\name;
+use Illuminate\Database\Console\DumpCommand;
 use Laravel\Ui\Presets\React;
 use PDF;
 
@@ -54,7 +57,21 @@ class CloseCashController extends Controller
     {
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
-        return view('closecash', ['orgs' => $orgs, 'request' => $request]);
+        $APIController = new APIController();
+        ////////////
+        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', '', '', '', '', '');
+        foreach ($permisos->records as $record) {
+            $nombreventana = $record->Name;
+            $nombreusario = $record->AD_User_ID->identifier;
+            $id_name= auth()->user()->name;
+            if ($record->Name == "closecash" && $record->AD_User_ID->identifier == $id_name) {
+                dump($nombreventana, $nombreusario, $id_name);
+                return view('closecash', ['orgs' => $orgs, 'request' => $request]);
+                break;
+            }
+        }
+        return redirect()->route('home');
+        ////////////
     }
 
     public function store(Request $request)
@@ -381,12 +398,12 @@ class CloseCashController extends Controller
             'ba_name asc'
         );
         $pdf = PDF::loadView('download-pdf', ['closecashsumlist' => $response, 'list' => $list, 'closecashlist' => $closecashlist]);
-        if ($organizacion == 1000008){
-            $nameorg= "Mañanitas";
+        if ($organizacion == 1000008) {
+            $nameorg = "Mañanitas";
         }
-        if ($organizacion == 1000009){
-            $nameorg= "La Doña";
+        if ($organizacion == 1000009) {
+            $nameorg = "La Doña";
         }
-        return $pdf->download("Cierre-".$nameorg."-".$dia.".pdf");
+        return $pdf->download("Cierre-" . $nameorg . "-" . $dia . ".pdf");
     }
 }
