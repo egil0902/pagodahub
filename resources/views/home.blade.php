@@ -29,7 +29,7 @@
                             <form name="close_cash" id="close_cash" method="post" action="{{ route('close.cash') }}"> @csrf
                                 <center>
                                     <button type="submit" class="btn btn-outline">
-                                        <h5 class="card-header">1. Cajas</h5>
+                                        <h5 class="card-header">Cajas</h5>
                                         <div class="card-body">
                                             <h5 class="card-title">Cierre diario de cajas</h5>
                                             <p class="card-text">Permite el cierre diario de las cuentas para auditoría</p>
@@ -39,11 +39,6 @@
                             </form>
                         </div>
                     </div>
-                @endif
-            @endforeach
-
-            @foreach ($permisos->records as $record)
-                @if ($record->Name == 'closecash' && $record->AD_User_ID->identifier == Auth::user()->name)
                     <div class="col">
                         <div class="card h-100 border border-5 border-dark-subtle">
                             <form name="closecash_list" id="closecash_list" method="get"
@@ -51,7 +46,7 @@
                                 @csrf
                                 <center>
                                     <button type="submit" class="btn btn-outline">
-                                        <h5 class="card-header">2. Cajas</h5>
+                                        <h5 class="card-header">Cajas</h5>
                                         <div class="card-body">
                                             <h5 class="card-title">Listado de cierres de caja</h5>
                                             <p class="card-text">Listado de los cierres diarios de caja realizados</p>
@@ -64,94 +59,105 @@
                 @endif
             @endforeach
 
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="valespagodarange" id="valespagodarange" method="post"
-                        action="{{ route('valespagodarange') }}">
-                        @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">3. Vales</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Registro de rangos de vales La Pagoda</h5>
-                                    <p class="card-text">Administración de registros de generacion de vales</p>
-                                </div>
-                            </button>
-                        </center>
-                    </form>
-                </div>
-            </div>
+            @foreach ($permisos->records as $record)
+                @if ($record->Name == 'vale' && $record->AD_User_ID->identifier == Auth::user()->name)
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="valespagodarange" id="valespagodarange" method="post"
+                                action="{{ route('valespagodarange') }}">
+                                @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">Vales</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Registro de rangos de vales La Pagoda</h5>
+                                            <p class="card-text">Administración de registros de generacion de vales</p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
 
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="valepagoda" id="valepagoda" method="get" action="{{ route('valepagoda') }}">
-                        @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">4. Vales</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Control de los vales de La Pagoda</h5>
-                                    <p class="card-text">Administración de la numeración de los vales, registro y ajunto
-                                    </p>
-                                </div>
-                            </button>
-                        </center>
-                    </form>
-                </div>
-            </div>
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="valepagoda" id="valepagoda" method="get" action="{{ route('valepagoda') }}">
+                                @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">Vales</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Control de los vales de La Pagoda</h5>
+                                            <p class="card-text">Administración de la numeración de los vales, registro y
+                                                ajunto
+                                            </p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
 
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="valepagoda_list" id="valepagoda_list" method="GET"
-                        action="{{ route('valepagoda.list') }}">
-                        @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">5. Vales</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Listado vales La Pagoda consumidos</h5>
-                                    <p class="card-text">Muestra la lista de los vales consumidos</p>
-                                </div>
-                            </button>
-                        </center>
-                    </form>
-                </div>
-            </div>
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="valepagoda_list" id="valepagoda_list" method="GET"
+                                action="{{ route('valepagoda.list') }}">
+                                @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">Vales</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Listado vales La Pagoda consumidos</h5>
+                                            <p class="card-text">Muestra la lista de los vales consumidos</p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
 
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="loans" id="loans" method="get" action="{{ route('loans') }}"> @csrf
-                        @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">6. Prestamos</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Control de los Prestamos</h5>
-                                    <p class="card-text">Administración de prestamos, registro de terceros y adjuntos
-                                    </p>
-                                </div>
-                            </button>
-                        </center>
-                    </form>
-                </div>
-            </div>
+            @foreach ($permisos->records as $record)
+                @if ($record->Name == 'loans' && $record->AD_User_ID->identifier == Auth::user()->name)
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="loans" id="loans" method="get" action="{{ route('loans') }}"> @csrf
+                                @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">Prestamos</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Control de los Prestamos</h5>
+                                            <p class="card-text">Administración de prestamos, registro de terceros y
+                                                adjuntos
+                                            </p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 border border-5 border-dark-subtle">
+                            <form name="loanslist" id="loanslist" method="get" action="{{ route('loans.list') }}">
+                                @csrf
+                                <center>
+                                    <button type="submit" class="btn btn-outline">
+                                        <h5 class="card-header">Prestamos</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Listado de Prestamos</h5>
+                                            <p class="card-text">Muestra la lista de los prestamos solicitados</p>
+                                        </div>
+                                    </button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
 
-            <div class="col">
-                <div class="card h-100 border border-5 border-dark-subtle">
-                    <form name="loanslist" id="loanslist" method="get" action="{{ route('loans.list') }}">
-                        @csrf
-                        <center>
-                            <button type="submit" class="btn btn-outline">
-                                <h5 class="card-header">7. Prestamos</h5>
-                                <div class="card-body">
-                                    <h5 class="card-title">Listado de Prestamos</h5>
-                                    <p class="card-text">Muestra la lista de los prestamos solicitados</p>
-                                </div>
-                            </button>
-                        </center>
-                    </form>
-                </div>
-            </div>
+
 
             <style>
                 h5.card-header {

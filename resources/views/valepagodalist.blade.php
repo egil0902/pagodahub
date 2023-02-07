@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <body class="p-3 m-0 border-0 bd-example">
-
+    <div class="container">
         <div class="card">
             <div class="card-header">
                 Lista de vales consumidos
@@ -12,6 +10,5 @@
                 @livewire('valepagodasearch')
             </div>
         </div>
-
-    </body>
+    </div>
 @endsection

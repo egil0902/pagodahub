@@ -65,7 +65,7 @@ class CloseCashController extends Controller
             $nombreusario = $record->AD_User_ID->identifier;
             $id_name= auth()->user()->name;
             if ($record->Name == "closecash" && $record->AD_User_ID->identifier == $id_name) {
-                dump($nombreventana, $nombreusario, $id_name);
+                //dump($nombreventana, $nombreusario, $id_name);
                 return view('closecash', ['orgs' => $orgs, 'request' => $request]);
                 break;
             }
@@ -365,8 +365,19 @@ class CloseCashController extends Controller
     public function list(Request $request)
     {
         $list = closecash::all();
+        $APIController = new APIController();
+        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', '', '', '', '', '');
+        foreach ($permisos->records as $record) {
+            $nombreventana = $record->Name;
+            $nombreusario = $record->AD_User_ID->identifier;
+            $id_name= auth()->user()->name;
+            if ($record->Name == "closecash" && $record->AD_User_ID->identifier == $id_name) {
+                return view('closecashlist', ['list' => $list, 'request' => $request]);
+                break;
+            }
+        }
+        return redirect()->route('home');
 
-        return view('closecashlist', ['list' => $list, 'request' => $request]);
     }
     public function destroy(Request $request)
     {

@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <body class="p-3 m-0 border-0 bd-example">
+    <div class="container">
         <div class="card w-auto">
             <div class="card-header">
                 Consultar Deudor
@@ -556,5 +556,5 @@
             });
             ////
         </script>
-    </body>
+    </div>
 @endsection
