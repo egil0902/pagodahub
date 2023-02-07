@@ -16,7 +16,7 @@ class LoansController extends Controller
      *
      * @return void
      */
-          private $apiController;
+    private $apiController;
     public function __construct()
     {
         $this->middleware('auth');
@@ -220,7 +220,18 @@ class LoansController extends Controller
 
     public function list()
     {
-        return view('loanslist');
+        $APIController = new APIController();
+        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', '', '', '', '', '');
+        foreach ($permisos->records as $record) {
+            $nombreventana = $record->Name;
+            $nombreusario = $record->AD_User_ID->identifier;
+            $id_name = auth()->user()->name;
+            if ($record->Name == "loans" && $record->AD_User_ID->identifier == $id_name) {
+                return view('loanslist');
+                break;
+            }
+        }
+        return redirect()->route('home');
     }
 
 

@@ -31,8 +31,9 @@ Route::get('/dashboard', function () {
 
 //Route::view('/close_cash','close_cash', [CloseCashController::class, 'show']);
 
-Route::post('/close_cash', [App\Http\Controllers\CloseCashController::class, 'show'])->name('close.cash');
+Route::get('/test', [App\Http\Controllers\test::class, 'test'])->name('test.list');
 
+Route::post('/close_cash', [App\Http\Controllers\CloseCashController::class, 'show'])->name('close.cash');
 Route::post('/closecash_store', [App\Http\Controllers\CloseCashController::class, 'store'])->name('closecash.store');
 Route::post('/closecash_import', [App\Http\Controllers\CloseCashController::class, 'import'])->name('closecash.import');
 Route::get('/closecash_list', [App\Http\Controllers\CloseCashController::class, 'list'])->name('closecash.list');
