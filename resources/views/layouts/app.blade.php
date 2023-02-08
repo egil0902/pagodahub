@@ -67,7 +67,7 @@
                     </li>
                     @if (Route::has('login'))
                         @auth
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -213,7 +213,7 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                         @endauth
                     @endif
@@ -257,7 +257,7 @@
             </div>
         </div>
     </nav>
-    <main class="py-4">
+    <main class="py-2">
         @yield('content')
     </main>
     @livewireScripts

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="py-5 text-center text-white align-items-center d-flex h-50"
+    <div class="py-1 text-center text-white align-items-center h-50"
         style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url(https://static.pingendo.com/cover-bubble-dark.svg);  background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
         <div class="container py-5">
             <div class="row">
@@ -15,7 +15,6 @@
             </div>
         </div>
     </div>
-    <br>
     <div class="p-5 m-0 border-0 bd-example">
 
         @foreach ($permisos->records as $record)
@@ -95,63 +94,78 @@
                     </div>
                     <div class="card-body">
                         <div class="row row-cols-1 row-cols-md-3 g-4">
-                            <div class="col">
-                                <div class="card h-100 border border-5 border-dark-subtle">
-                                    <form name="valespagodarange" id="valespagodarange" method="post"
-                                        action="{{ route('valespagodarange') }}">
-                                        @csrf
-                                        <center>
-                                            <button type="submit" class="btn btn-outline">
-                                                {{--  <h5 class="card-header">Vales</h5> --}}
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Registro de rangos de vales La Pagoda</h5>
-                                                    <p class="card-text">Administración de registros de generacion de
-                                                        vales</p>
-                                                </div>
-                                            </button>
-                                        </center>
-                                    </form>
-                                </div>
-                            </div>
+                            @foreach ($permisos->records as $record)
+                                @if ($record->Name == 'valespagodarange' && $record->AD_User_ID->identifier == Auth::user()->name)
+                                    <div class="col">
+                                        <div class="card h-100 border border-5 border-dark-subtle">
+                                            <form name="valespagodarange" id="valespagodarange" method="post"
+                                                action="{{ route('valespagodarange') }}">
+                                                @csrf
+                                                <center>
+                                                    <button type="submit" class="btn btn-outline">
+                                                        {{--  <h5 class="card-header">Vales</h5> --}}
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Registro de rangos de vales La Pagoda
+                                                            </h5>
+                                                            <p class="card-text">Administración de registros de generacion
+                                                                de
+                                                                vales</p>
+                                                        </div>
+                                                    </button>
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            @foreach ($permisos->records as $record)
+                                @if ($record->Name == 'valepagoda' && $record->AD_User_ID->identifier == Auth::user()->name)
+                                    <div class="col">
+                                        <div class="card h-100 border border-5 border-dark-subtle">
+                                            <form name="valepagoda" id="valepagoda" method="get"
+                                                action="{{ route('valepagoda') }}">
+                                                @csrf
+                                                <center>
+                                                    <button type="submit" class="btn btn-outline">
+                                                        {{-- <h5 class="card-header">Vales</h5> --}}
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Control de los vales de La Pagoda</h5>
+                                                            <p class="card-text">Administración de la numeración de los
+                                                                vales,
+                                                                registro y
+                                                                ajunto
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            @foreach ($permisos->records as $record)
+                                @if ($record->Name == 'valepagoda.list' && $record->AD_User_ID->identifier == Auth::user()->name)
+                                    <div class="col">
+                                        <div class="card h-100 border border-5 border-dark-subtle">
+                                            <form name="valepagoda_list" id="valepagoda_list" method="GET"
+                                                action="{{ route('valepagoda.list') }}">
+                                                @csrf
+                                                <center>
+                                                    <button type="submit" class="btn btn-outline">
+                                                        {{-- <h5 class="card-header">Vales</h5> --}}
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">Listado vales La Pagoda consumidos</h5>
+                                                            <p class="card-text">Muestra la lista de los vales consumidos
+                                                            </p>
+                                                        </div>
+                                                    </button>
+                                                </center>
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
 
-                            <div class="col">
-                                <div class="card h-100 border border-5 border-dark-subtle">
-                                    <form name="valepagoda" id="valepagoda" method="get"
-                                        action="{{ route('valepagoda') }}">
-                                        @csrf
-                                        <center>
-                                            <button type="submit" class="btn btn-outline">
-                                                {{-- <h5 class="card-header">Vales</h5> --}}
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Control de los vales de La Pagoda</h5>
-                                                    <p class="card-text">Administración de la numeración de los vales,
-                                                        registro y
-                                                        ajunto
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </center>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card h-100 border border-5 border-dark-subtle">
-                                    <form name="valepagoda_list" id="valepagoda_list" method="GET"
-                                        action="{{ route('valepagoda.list') }}">
-                                        @csrf
-                                        <center>
-                                            <button type="submit" class="btn btn-outline">
-                                                {{-- <h5 class="card-header">Vales</h5> --}}
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Listado vales La Pagoda consumidos</h5>
-                                                    <p class="card-text">Muestra la lista de los vales consumidos</p>
-                                                </div>
-                                            </button>
-                                        </center>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -216,7 +230,7 @@
         @endforeach
 
         @foreach ($permisos->records as $record)
-            @if ($record->Name == 'loans' && $record->AD_User_ID->identifier == Auth::user()->name)
+            @if ($record->Name == 'market' && $record->AD_User_ID->identifier == Auth::user()->name)
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title">
@@ -224,7 +238,7 @@
                                 class="bi bi-bag" viewBox="0 0 16 16">
                                 <path
                                     d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                            </svg> Compras
+                            </svg> Mercado
                         </h1>
                     </div>
                     <div class="card-body">
@@ -286,7 +300,7 @@
         @endforeach
 
         @foreach ($permisos->records as $record)
-            @if ($record->Name == 'loans' && $record->AD_User_ID->identifier == Auth::user()->name)
+            @if ($record->Name == 'bank' && $record->AD_User_ID->identifier == Auth::user()->name)
                 <div class="card">
                     <div class="card-header">
                         <h1 class="card-title"> <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37"
