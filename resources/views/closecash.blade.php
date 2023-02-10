@@ -37,16 +37,36 @@
                                 <input name="DateTrx" type="date" id="abc"
                                     value={{ isset($request->DateTrx) ? date('Y-m-d', strtotime($request->DateTrx)) : date('Y-m-d') }}
                                     class="form-control" placeholder="0.00">
-
-                                <script>
-                                    // Obtener la fecha actual
-                                    var hoy = new Date();
-                                    // Restar 3 días a la fecha actual
-                                    var tresDiasAtras = new Date(hoy.getTime() - (3 * 24 * 60 * 60 * 1000));
-                                    // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
-                                    document.getElementById("abc").max = hoy.toISOString().split("T")[0];
-                                    document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
-                                </script>
+                                    @foreach ($permisos->records as $user)
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'closecash')
+                                        <script>
+                                            // Obtener la fecha actual
+                                            var hoy = new Date();
+                                            // Restar 3 días a la fecha actual
+                                            var tresDiasAtras = new Date(hoy.getTime() - (3 * 24 * 60 * 60 * 1000));
+                                            // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                            document.getElementById("abc").max = hoy.toISOString().split("T")[0];
+                                            document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
+                                        </script>
+                                        @break
+                                        @endif
+                                    @endforeach
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'closecash.day')
+                                        <script>
+                                            // Obtener la fecha actual
+                                            var hoy = new Date();
+                                            // Restar 3 días a la fecha actual
+                                            var tresDiasAtras = new Date(hoy.getTime() - (3650 * 24 * 60 * 60 * 1000));
+                                            // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                            document.getElementById("abc").max = hoy.toISOString().split("T")[0];
+                                            document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
+                                        </script>
+                                        @break
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -1433,16 +1453,17 @@
                                                 @if ($list->isNotEmpty())
                                                     @foreach ($list as $dataday)
                                                         <input value="{{ $dataday->SencilloSupervisoraFiscalizadora }}"
-                                                            name="SencilloSupervisoraFiscalizadora" type="number" step="0.01"
-                                                            class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00"
+                                                            name="SencilloSupervisoraFiscalizadora" type="number"
+                                                            step="0.01" class="form-control"
+                                                            class="text-left  form-control" placeholder="0.00"
                                                             onchange="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()"
                                                             onkeyup="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()">
                                                     @endforeach
                                                 @else
                                                     <input value="" name="SencilloSupervisoraFiscalizadora"
                                                         type="number" class="form-control"
-                                                        class="text-left  form-control" placeholder="0.00" step="0.01"
+                                                        class="text-left  form-control" placeholder="0.00"
+                                                        step="0.01"
                                                         onchange="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()"
                                                         onkeyup="cal();clonSencilloSupervisoraFiscalizadora();cal();colores()">
                                                 @endif
@@ -2505,8 +2526,8 @@
                                                     @foreach ($list as $dataday)
                                                         <input name="SencilloSupervisoraGerente" type="number"
                                                             class="form-control" class="text-left  form-control"
-                                                            placeholder="0.00" onchange="cal();colores()" step="0.01"
-                                                            onkeyup="cal();colores()"
+                                                            placeholder="0.00" onchange="cal();colores()"
+                                                            step="0.01" onkeyup="cal();colores()"
                                                             value="{{ $dataday->SencilloSupervisoraGerente }}">
                                                     @endforeach
                                                 @else
