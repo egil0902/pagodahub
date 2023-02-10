@@ -54,7 +54,7 @@ class CloseCashController extends Controller
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
         foreach ($user->records  as $usuario) {
-            dump($user);
+            //dump($user);
             foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                 if ($acceso->Name == 'closecash') {
                     return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list, 'permisos' => $user]);
