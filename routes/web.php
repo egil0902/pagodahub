@@ -61,8 +61,10 @@ Route::post('/loans_store', [App\Http\Controllers\LoansController::class, 'store
 Route::post('/loans_store_new', [App\Http\Controllers\LoansController::class, 'store_new'])->name('loans.store_new');
 Route::post('/loans_newuser', [App\Http\Controllers\LoansController::class, 'newuser'])->name('loans.newuser');
 Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');
-
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
+
+
+Route::post('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
 
 
 Route::get('/firma1', function () {
