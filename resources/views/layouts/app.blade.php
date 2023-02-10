@@ -30,8 +30,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="#">
-                <img src="img/pagodalogo.jpeg" alt="Logo" width="100%" height="75"
-                    class="d-inline-block align-text-top">
+                {{-- <img src="img/pagodalogo.jpeg" alt="Logo" width="100%" height="75"
+                    class="d-inline-block align-text-top"> --}}
 
             </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
