@@ -65,7 +65,7 @@ Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])
 
 
 Route::post('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
-
+Route::post('/market_store', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
 
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
