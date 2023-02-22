@@ -64,7 +64,10 @@ Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'upda
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 
 
-Route::post('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
+// Ruta para mostrar la página del mercado (método GET)
+Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
+// Ruta para procesar el formulario del mercado (método POST)
+Route::post('/market', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
 
 
 Route::get('/firma1', function () {

@@ -281,7 +281,7 @@
                                     @if ($acceso->Name == 'market')
                                         <div class="col">
                                             <div class="card h-100 border border-5 border-dark-subtle">
-                                                <form name="market" id="market" method="post"
+                                                <form name="market" id="market" method="get"
                                                     action="{{ route('market') }}">
                                                     @csrf
                                                     <center>
