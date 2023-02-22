@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript de Bootstrap -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script> --}}
+
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -16,12 +27,42 @@
             <div class="card-header">
                 Compra
             </div>
-
             <div class="card-body">
-
                 <div class="container">
                     <div class="card-body">
-
+                        {{-- @if (session('mensaje'))
+                            <div class="alert alert-success">{{ session('mensaje') }}</div>
+                        @endif --}}
+                        <!-- Modal para mostrar el mensaje -->
+                        <div class="modal fade" id="mensajeModal" tabindex="-1" role="dialog"
+                            aria-labelledby="mensajeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="mensajeModalLabel">Mensaje de éxito</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Cerrar">
+                                            <span aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{ session('mensaje') }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sección de scripts -->
+                        @if (session('mensaje'))
+                            <script>
+                                $(document).ready(function() {
+                                    $('#mensajeModal').modal('show');
+                                });
+                            </script>
+                        @endif
                         <form name="market" id="market" method="post" action="{{ route('market.store') }}">
                             <br>
                             @csrf
@@ -66,7 +107,7 @@
                                     </datalist>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Unidad de Medida</label>
-                                    <input class="form-control product" list="opciones" name="unit[]"
+                                    <input class="form-control unit" list="opciones" name="unit[]"
                                         placeholder="Escribe para buscar...">
                                     <datalist id="opciones">
                                         @foreach ($opciones as $unidad_de_medida)
@@ -76,7 +117,7 @@
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Cantidad</label>
                                     <input type="number" class="form-control quantity" name="quantity[]"
-                                        placeholder="Example input placeholder">
+                                        placeholder="Cantidad #">
                                 </div>
                             </div>
                             <br>
@@ -103,8 +144,8 @@
                             </table>
                             <br>
                             <button type="submit" class="btn btn-outline-success w-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-bag-check" viewBox="0 0 16 16">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z">
                                     </path>
@@ -126,7 +167,6 @@
                     const counter = document.getElementById("counter");
                     let count = 0;
                     let n = 0;
-
                     addBtn.addEventListener("click", function() {
                         if (formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[0].value !=
                             '' &&
@@ -139,41 +179,41 @@
                             const formGroup = formContainer.getElementsByClassName("form-group")[n - 1];
                             const newFormGroup = formGroup.cloneNode(true);
                             formContainer.getElementsByClassName("form-group")[n - 1].setAttribute('style', 'display:none');
-
                             newFormGroup.id = "formGroup" + count;
                             formContainer.appendChild(newFormGroup);
                             counter.getElementsByTagName("span")[0].innerHTML = count;
-
                             formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[0].value = "";
                             formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[1].value = "";
                             formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[2].value = "";
                             window.alert("Producto añadido");
-                        } else {
-
-                        }
-
+                        } else {}
                     });
 
                     function updateProductList() {
-                        productList.innerHTML = "<thead><tr><th>Producto</th><th>Unidad</th><th>Cantidad</th></tr></thead>";
+                        productList.innerHTML = "<thead><tr><th>#</th><th>Producto</th><th>Unidad</th><th>Cantidad</th></tr></thead>";
                         const products = document.getElementsByClassName("product");
                         const units = document.getElementsByName("unit[]");
                         const quantities = document.getElementsByClassName("quantity");
                         for (let i = 0; i < products.length; i++) {
                             const product = products[i].value;
-                            const unit = units[i].value === "1" ? "Unidad" : "Docena";
-                            const quantity = quantities[i].value;
+                            const unit = units[i].value ;
+                            const quantity = quantities[i].value
+                            const num = i+1;
                             if (product && unit && quantity) {
                                 const row = document.createElement("tr");
                                 const productCell = document.createElement("td");
                                 const unitCell = document.createElement("td");
                                 const quantityCell = document.createElement("td");
+                                const numCell = document.createElement("td");
+                                numCell.textContent = num;
                                 productCell.textContent = product;
                                 unitCell.textContent = unit;
                                 quantityCell.textContent = quantity;
+                                row.appendChild(numCell);
                                 row.appendChild(productCell);
                                 row.appendChild(unitCell);
                                 row.appendChild(quantityCell);
+
                                 productList.appendChild(row);
                             }
                         }
