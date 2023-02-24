@@ -90,11 +90,21 @@ class MarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $day = "3000-01-01";
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        return view('marketinvoice', compact('comprasdeldia'));
     }
 
+    public function shopday(Request $request)
+    {
+        $day = $request->input('day');
+        //dd($day);
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        //dd($comprasdeldia);
+        return view('marketinvoice', compact('comprasdeldia'));
+    }
     /**
      * Update the specified resource in storage.
      *
