@@ -99,6 +99,7 @@ class MarketController extends Controller
 
     public function shopday(Request $request)
     {
+        //dump($request);
         $day = $request->input('day');
         //dd($day);
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();

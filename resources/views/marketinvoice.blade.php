@@ -25,8 +25,12 @@
                     <div class="p-4 m-0 border-0">
                         @foreach ($comprasdeldia as $data)
                             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                                <div class="col">
-                                    <h4>Numero de factura: {{ $data->id }}</h4>
+                                <div class="col">{{--  {{ $data->id }} --}}
+                                    <h4>Numero de factura:
+                                        <input class="w-100 form-control" type="number" name="NFactura"
+                                        id="NFactura" value=""
+                                        required onchange="" step="" min="0">
+                                    </h4>
                                 </div>
                                 <div class="col">
                                     <h4>Comprador: {{ $data->buyer }}</h4>
@@ -70,7 +74,8 @@
                                                     </td>
                                                     <td>
                                                         <input class="border-0 bg-transparent" type="number"
-                                                            name="quantity[]" id="quantity{{ $index + 1 }}{{ $product }}"
+                                                            name="quantity[]"
+                                                            id="quantity{{ $index + 1 }}{{ $product }}"
                                                             value="{{ json_decode($data->quantity)[$index] }}"
                                                             data-quantity-value="{{ json_decode($data->quantity)[$index] }}"
                                                             readonly>
@@ -78,7 +83,7 @@
                                                     <td>
                                                         <input class="w-100 " type="number" name="differenceFactura[]"
                                                             id="differenceFactura{{ $index + 1 }}" value=""
-                                                            required>
+                                                            required onchange="sumadiferencia();" step="0.01" min="0">
                                                     </td>
                                                     <td>
                                                         <input class="w-100 border-0 bg-transparent" type="number"
@@ -103,12 +108,12 @@
 
                                                             // Mostrar el resultado en la entrada difference
                                                             difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
-
+                                                            sumadiferencia();
                                                         });
                                                     </script>
                                                     <td>
                                                         <input class="w-100 " type="number" name="price[]" value=""
-                                                            data-price-value="" required>
+                                                            data-price-value="" onchange="sumadiferencia();" step="0.01" min="0" required>
                                                     </td>
                                                     <td>
                                                         <select class="w-100" name="paymentoption[]"
@@ -125,20 +130,63 @@
                                                 </tr>
                                             @endif
                                         @endforeach
-
                                     </tbody>
                                     <tr>
                                         <th COLSPAN=8></th>
-
                                     </tr>
                                     <tr>
                                         <th COLSPAN=3> Totales</th>
-                                        <th>654</th>
-                                        <th>453</th>
-                                        <th>123</th>
-                                        <th>312</th>
-                                        <th></th>
+                                        <th>
+                                            <input class="border-0 bg-transparent" type="number" name="sumquan"
+                                                id="sumquan" value="" readonly>
+                                        </th>
+                                        <th>
+                                            <input class="border-0 bg-transparent" type="number" name="sumdifac"
+                                                id="sumdifac" value="" readonly>
+                                        </th>
+                                        <th>
+                                            <input class="border-0 bg-transparent" type="number" name="sumdif"
+                                                id="sumdif" value="" readonly>
+                                        </th>
+                                        <th>
+                                            <input class="border-0 bg-transparent" type="number" name="sumpre"
+                                                id="sumpre" value="" readonly>
+                                        </th>
+                                        <th>
+                                        </th>
                                     </tr>
+                                    <script>
+                                        function sumadiferencia() {
+                                            var sum_quantity = 0;
+                                            var sum_difference = 0;
+                                            var sum_price = 0;
+                                            var sum_differenceFactura = 0;
+                                            var elements = document.getElementsByName('index[]');
+
+
+                                            var elements_quantity = document.getElementsByName('quantity[]');
+                                            var elements_differenceFactura = document.getElementsByName('differenceFactura[]');
+                                            var elements_difference = document.getElementsByName('difference[]');
+                                            var elements_price = document.getElementsByName('price[]');
+                                            for (var i = 0; i < elements.length; i++) {
+
+                                                var x_quantity = parseFloat(elements_quantity[i].value);
+                                                var x_differenceFactura = parseFloat(elements_differenceFactura[i].value);
+                                                var x_difference = parseFloat(elements_difference[i].value);
+                                                var x_price = parseFloat(elements_price[i].value);
+
+                                                sum_quantity = sum_quantity + x_quantity;
+                                                sum_differenceFactura = sum_differenceFactura + x_differenceFactura;
+                                                sum_difference = sum_difference + x_difference;
+                                                sum_price = sum_price + x_price;
+
+                                                document.getElementById("sumquan").value = sum_quantity.toFixed(2);
+                                                document.getElementById("sumdifac").value = sum_differenceFactura.toFixed(2);
+                                                document.getElementById("sumdif").value = sum_difference.toFixed(2);
+                                                document.getElementById("sumpre").value = sum_price.toFixed(2);
+                                            }
+                                        }
+                                    </script>
                                 </table>
                             </div>
                             <div class="container">
@@ -180,26 +228,6 @@
 
                                 </table>
                             </div>
-                            {{-- <script>
-                            function toggleTable(selectElement) {
-                                var tableContainer = document.getElementById("table-container");
-                                var selectedValue = selectElement.options[selectElement.selectedIndex].value;
-
-                                if (selectedValue === "Credito") {
-                                    // Agregar tabla de crédito
-                                    var newTable = document.createElement("table");
-                                    newTable.innerHTML =
-                                        `<tbody>  <tr>    <td>Dato1</td>    <td>Dato2</td>    <td>Dato3</td>    <td>Dato4</td>  </tr></tbody>`;
-                                    tableContainer.appendChild(newTable);
-                                } else {
-                                    // Eliminar tabla de crédito si existe
-                                    var creditTable = tableContainer.querySelector("table");
-                                    if (creditTable) {
-                                        tableContainer.removeChild(creditTable);
-                                    }
-                                }
-                            }
-                        </script> --}}
                             <script>
                                 function toggleTable(selectElement) {
                                     var tableContainer = document.getElementById("table-container");
