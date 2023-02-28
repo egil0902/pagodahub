@@ -69,8 +69,14 @@ class ValePagodaController extends Controller
                 $range4 = ValesPagodaRange::where('valueFrom', '<=', $request->value4)->where('valueTo', '>=', $request->value4)->get();
                 $range5 = ValesPagodaRange::where('valueFrom', '<=', $request->value5)->where('valueTo', '>=', $request->value5)->get();
                 //$orgs = $this->organizacion();
-                $misDatos = session()->get('misDatos');
+                /* $misDatos = session()->get('misDatos');
                 $orgs = $misDatos;
+                $user = auth()->user(); */
+                $user = auth()->user();
+                $APIController = new APIController();
+                $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+                $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+                $orgs =  $response;
                 return view('valepagoda', [
                     'datas' => $datas,
                     'datas2' => $datas2,
@@ -145,9 +151,14 @@ class ValePagodaController extends Controller
                     ]);
                 }
                 $datas = ValesPagoda::where('value', '=', $request->value)->get();
-                $misDatos = session()->get('misDatos');
-                $orgs = $misDatos;
+                /* $misDatos = session()->get('misDatos');
+                $orgs = $misDatos; */
                 //$orgs = $this->organizacion();
+                $user = auth()->user();
+                $APIController = new APIController();
+                $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+                $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+                $orgs =  $response;
                 return view('valepagoda', ['orgs' => $orgs]);
                 break;
             }
