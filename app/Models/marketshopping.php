@@ -12,6 +12,7 @@ class marketshopping extends Model
         'shoppingday',
         'buyer',
         'budget',
+        'supplier',
         'product',
         'unit',
         'quantity'

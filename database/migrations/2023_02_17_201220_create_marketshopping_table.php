@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('shoppingday')->nullable();
             $table->longText('buyer')->nullable();
             $table->longText('budget')->nullable();
+            $table->longText('supplier')->nullable();
             $table->longText('product')->nullable();
             $table->longText('unit')->nullable();
             $table->longText('quantity')->nullable();

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -16,8 +17,40 @@
             Consultar Vale pagoda
         </div>
         <div class="card-body">
+
+            <div class="modal fade" id="mensajeModal" tabindex="-1" role="dialog" aria-labelledby="mensajeModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mensajeModalLabel">Pagodahub</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="line-height: 1.5em;"> <p>{!! nl2br(e(session('mensaje'))) !!}</p> </p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sección de scripts -->
+            @if (session('mensaje'))
+                <script>
+                    $(document).ready(function() {
+                        $('#mensajeModal').modal('show');
+                    });
+                </script>
+                {{ session()->forget('mensaje') }}
+            @endif
+
             <div class="form-group">
-                <form name="valepagoda_search" id="valepagoda_search" method="GET" action="{{ route('valepagoda.search') }}">
+                <form name="valepagoda_search" id="valepagoda_search" method="GET"
+                    action="{{ route('valepagoda.search') }}">
                     @csrf
                     <label for="cars">Sucursal</label>
                     <select class="form-control w-25" name="AD_Org_ID" id="AD_Org_ID">
@@ -26,7 +59,8 @@
                                 @foreach ($orgs->records as $org)
                                     <option value="{{ $org->id }}"
                                         {{ isset($request) ? ($org->id == $request->AD_Org_ID ? __('selected') : __('')) : __('') }}>
-                                        {{ $org->Name }}</option>
+                                        {{ $org->Name }}
+                                    </option>
                                 @endforeach
                             @endif
                         @endif
