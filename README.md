@@ -39,3 +39,15 @@ una vez configurado el proyecto ya se puede correr con normalidad el proyecto co
   php artisan serve
 ```
 
+## Pasos extra
+
+esta seccion es para pasos que puede o no necesites
+
+si al ejecutar el programa te ocurre un error en el curl debes hacer lo siguiente
+1. descargar el archivo cacert.pem de https://curl.se/docs/caextract.html
+2. crear una carpeta en tu proyecto llamada certs y poner el archivo adentro
+3. configurar tu archivo php.ini en la linea ";curl.cainfo" con la ruta al cacert asi 
+```bash
+ curl.cainfo = "C:\laravel\proyecto\certs\cacert.pem"
+```
+
