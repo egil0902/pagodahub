@@ -107,13 +107,20 @@
                                     </datalist>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Unidad de Medida</label>
-                                    <input class="form-control unit" list="opciones" name="unit[]"
+                                    <!---<input class="form-control unit" list="opciones" name="unit[]"
                                         placeholder="Escribe para buscar...">
                                     <datalist id="opciones">
                                         @foreach ($opciones as $unidad_de_medida)
                                             <option value="{{ $unidad_de_medida->name }}"></option>
                                         @endforeach
-                                    </datalist>
+                                    </datalist>--->
+                                    <select class="form-control unit" list="opciones"  name="unit[]">
+                                        <option value="Sacos">Sacos</option>
+                                        <option value="Libras">Libras</option>
+                                        <option value="Kilos">Kilos</option>
+                                        <option value="Unidades">Unidades</option>
+                                        <option value="Galones">Galones</option>
+                                    </select>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Cantidad</label>
                                     <input type="number" class="form-control quantity" name="quantity[]"
@@ -168,56 +175,66 @@
                     let count = 0;
                     let n = 0;
                     addBtn.addEventListener("click", function() {
-                        if (formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[0].value !=
-                            '' &&
-                            formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[1].value !=
-                            '' &&
-                            formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[2].value != ''
-                        ) {
-                            count++;
-                            n = count;
-                            const formGroup = formContainer.getElementsByClassName("form-group")[n - 1];
-                            const newFormGroup = formGroup.cloneNode(true);
-                            formContainer.getElementsByClassName("form-group")[n - 1].setAttribute('style', 'display:none');
-                            newFormGroup.id = "formGroup" + count;
-                            formContainer.appendChild(newFormGroup);
-                            counter.getElementsByTagName("span")[0].innerHTML = count;
-                            formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[0].value = "";
-                            formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[1].value = "";
-                            formContainer.getElementsByClassName("form-group")[n].getElementsByTagName("input")[2].value = "";
-                            window.alert("Producto añadido");
-                        } else {}
+                        if (formContainer.getElementsByClassName("form-group")[n].getElementsByClassName("product")[0].value != '' &&
+                        formContainer.getElementsByClassName("form-group")[n].getElementsByClassName("unit")[0].value != '' &&
+                        formContainer.getElementsByClassName("form-group")[n].getElementsByClassName("quantity")[0].value != ''
+                    ) {
+                        count++;
+                        n = count;
+                        const formGroup = formContainer.getElementsByClassName("form-group")[n - 1];
+                        const newFormGroup = formGroup.cloneNode(true);
+                        formContainer.getElementsByClassName("form-group")[n - 1].setAttribute('style', 'display:none');
+                        newFormGroup.id = "formGroup" + count;
+                        formContainer.appendChild(newFormGroup);
+                        counter.getElementsByTagName("span")[0].innerHTML = count;
+                        formContainer.getElementsByClassName("form-group")[n].getElementsByClassName("product")[0].value = "";
+                        formContainer.getElementsByClassName("form-group")[n].getElementsByClassName("unit")[0].value = "";
+                        formContainer.getElementsByClassName("form-group")[n].getElementsByClassName("quantity")[0].value = "";
+                        window.alert("Producto añadido");
+                    } else {}
                     });
 
                     function updateProductList() {
-                        productList.innerHTML = "<thead><tr><th>#</th><th>Producto</th><th>Unidad</th><th>Cantidad</th></tr></thead>";
-                        const products = document.getElementsByClassName("product");
-                        const units = document.getElementsByName("unit[]");
-                        const quantities = document.getElementsByClassName("quantity");
-                        for (let i = 0; i < products.length; i++) {
-                            const product = products[i].value;
-                            const unit = units[i].value ;
-                            const quantity = quantities[i].value
-                            const num = i+1;
-                            if (product && unit && quantity) {
-                                const row = document.createElement("tr");
-                                const productCell = document.createElement("td");
-                                const unitCell = document.createElement("td");
-                                const quantityCell = document.createElement("td");
-                                const numCell = document.createElement("td");
-                                numCell.textContent = num;
-                                productCell.textContent = product;
-                                unitCell.textContent = unit;
-                                quantityCell.textContent = quantity;
-                                row.appendChild(numCell);
-                                row.appendChild(productCell);
-                                row.appendChild(unitCell);
-                                row.appendChild(quantityCell);
-
-                                productList.appendChild(row);
-                            }
+                    productList.innerHTML = "<thead><tr><th>#</th><th>Producto</th><th>Unidad</th><th>Cantidad</th><th></th></tr></thead>";
+                    const products = document.getElementsByClassName("product");
+                    const units = document.getElementsByName("unit[]");
+                    const quantities = document.getElementsByClassName("quantity");
+                    for (let i = 0; i < products.length; i++) {
+                        const product = products[i].value;
+                        const unit = units[i].value;
+                        const quantity = quantities[i].value;
+                        const num = i + 1;
+                        if (product && unit && quantity) {
+                        const row = document.createElement("tr");
+                        const productCell = document.createElement("td");
+                        const unitCell = document.createElement("td");
+                        const quantityCell = document.createElement("td");
+                        const numCell = document.createElement("td");
+                        const deleteCell = document.createElement("td");
+                        const deleteButton = document.createElement("button");
+                         deleteButton.innerText = "Borrar";
+                        deleteButton.classList.add("btn", "btn-danger");
+                        deleteButton.id = "deleteButton" + i;
+                        deleteButton.addEventListener("click", function() {
+                            const rowToRemove = document.getElementById("row" + i);
+                            rowToRemove.parentNode.removeChild(rowToRemove);
+                        });
+                        numCell.textContent = num;
+                        productCell.textContent = product;
+                        unitCell.textContent = unit;
+                        quantityCell.textContent = quantity;
+                        deleteCell.appendChild(deleteButton);
+                        row.id = "row" + i;
+                        row.appendChild(numCell);
+                        row.appendChild(productCell);
+                        row.appendChild(unitCell);
+                        row.appendChild(quantityCell);
+                        row.appendChild(deleteCell);
+                        productList.appendChild(row);
                         }
                     }
+                    }
+
                     document.addEventListener("input", updateProductList);
                 </script>
 
