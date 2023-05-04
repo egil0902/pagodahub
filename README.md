@@ -28,6 +28,12 @@
 ```
 4. crear el usuario adempiere con contraseña adempiere
 5. crear la base de datos "pagodahub" en posgtresql
+EN CASO DE QUE SE CREE UNA ESTANCIA DE PRODUCCION SEGUIR ESTOS PASOS ANTES
+A) crear un archivo de backup
+B) correr el backup  con el comando.
+```bash
+  pg_restore -U adempiere -d pagodahub backup.sql
+```
 6. correr las migraciones
 ```bash
   php artisan migrate
