@@ -266,10 +266,12 @@
                 <center>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" id="ver_sistema" class="btn btn-primary">Ocultar sistema</button>
-                        <button type="button" id="ver_fiscalizadora" class="btn btn-primary">Ocultar
+                        <button style="border-bottom-right-radius: 7px !important; border-top-right-radius: 7px !important;" type="button" id="ver_fiscalizadora" class="btn btn-primary">Ocultar
                             fiscalizadora</button>
-                        <button type="button" id="ver_gerente" class="btn btn-primary">Ocultar gerente</button>
+                        <button style="display:none" type="button" id="ver_gerente" class="btn btn-primary">Ocultar gerente</button>
+                        
                     </div>
+                    <span style="float: right; font-weight: normal;">Agencia ?</span><input id="agencia-checkbox" type="checkbox" style="float: right;margin-top: 5px; margin-right: 5px;"> 
                 </center>
 
                 <div class="card-group m-2">
@@ -607,7 +609,7 @@
 
                     <div class="card" id="card_fiscalizadora">
                         <div class="card-body">
-                            <h5 class="card-title"> <b> Fiscalizadora </b></h5>
+                            <h5 class="card-title"> <b> Fiscalizadora</b></h5>
                             <div class="table-responsive">
                                 <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
@@ -1418,14 +1420,7 @@
                                                     type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Subtotal super</td>
-                                            <td></td>
-                                            <td align="right">
-                                                <h6 class="mb-0 text-success" id="Monto_Fiscalizadora_t"></h6>
-                                            </td>
-                                            <td></td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -1583,6 +1578,14 @@
 
                                     <thead id="miTablaPersonalizada">
                                         <tr>
+                                            <td>Subtotal super</td>
+                                            <td></td>
+                                            <td align="right">
+                                                <h6 class="mb-0 text-success" id="Monto_Fiscalizadora_t"></h6>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
                                             <th>
                                                 <h4 class="mb-0">Monto contado</h4>
                                             </th>
@@ -1650,7 +1653,7 @@
 
                     </div>
 
-                    <div class="card" id="card_gerente">
+                    <div style="display:none" class="card" id="card_gerente">
                         <div class="card-body">
 
                             <h5 class="card-title"><b>Gerente</b>
@@ -2489,15 +2492,7 @@
                                                     {{ isset($dataday->check_x_GrantAmtGerente) ? __('checked') : __('') }}>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Subtotal super</td>
-                                            <td></td>
-                                            <td align="right">
-                                                <h6 class="mb-0 text-success" id="Monto_Gerente_t"></h6>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -2658,6 +2653,15 @@
                                 <table class="table table-borderless">
                                     <thead id="miTablaPersonalizada">
                                         <tr>
+                                            <td>Subtotal super</td>
+                                            <td></td>
+                                            <td align="right">
+                                                <h6 class="mb-0 text-success" id="Monto_Gerente_t"></h6>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
                                             <th>
                                                 <h4 class="mb-0">Monto contado</h4>
                                             </th>
@@ -2794,6 +2798,8 @@
         @endif
         </form>
         <script>
+            
+
             function imprimirpagina() {
                 window.print();
             }
@@ -2854,6 +2860,21 @@
                 } else {
                     formulario3.style.display = 'none';
                     boton3.textContent = 'Mostrar gerente';
+                }
+            });
+
+            const checkbox = document.getElementById('agencia-checkbox');
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    formulario3.style.display = 'block';
+                    boton3.style.display = 'block';
+                    formulario2.style.display = 'none';
+                    boton2.style.display = 'none';
+                } else {
+                    formulario3.style.display = 'none';
+                    boton3.style.display = 'none';
+                    formulario2.style.display = 'block';
+                    boton2.style.display = 'block';
                 }
             });
         </script>

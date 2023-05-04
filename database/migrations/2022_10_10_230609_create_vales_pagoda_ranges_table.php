@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('valueFrom');
             $table->integer('valueTo');
-            $table->decimal('amount');
+            $table->decimal('amount', 8, 2);
             $table->string('CreatedBy');
         });
     }

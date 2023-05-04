@@ -28,6 +28,12 @@
 ```
 4. crear el usuario adempiere con contraseña adempiere
 5. crear la base de datos "pagodahub" en posgtresql
+EN CASO DE QUE SE CREE UNA ESTANCIA DE PRODUCCION SEGUIR ESTOS PASOS ANTES
+A) crear un archivo de backup
+B) correr el backup  con el comando.
+```bash
+  pg_restore -U adempiere -d pagodahub backup.sql
+```
 6. correr las migraciones
 ```bash
   php artisan migrate
@@ -37,5 +43,17 @@
 una vez configurado el proyecto ya se puede correr con normalidad el proyecto con el comando
 ```bash
   php artisan serve
+```
+
+## Pasos extra
+
+esta seccion es para pasos que puede o no necesites
+
+si al ejecutar el programa te ocurre un error en el curl debes hacer lo siguiente
+1. descargar el archivo cacert.pem de https://curl.se/docs/caextract.html
+2. crear una carpeta en tu proyecto llamada certs y poner el archivo adentro
+3. configurar tu archivo php.ini en la linea ";curl.cainfo" con la ruta al cacert asi 
+```bash
+ curl.cainfo = "C:\laravel\proyecto\certs\cacert.pem"
 ```
 

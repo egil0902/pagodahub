@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('loans');
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('units')->default('0')->nullable();
+            $table->double('price')->default(0.0)->nullable();
+        });
     }
 
     /**

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('abbreviation')->nullable();
+            $table->string('units')->default('0')->nullable();
+            $table->double('price')->default(0.0)->nullable();
         });
     }
-
     /**
      * Reverse the migrations.
      *

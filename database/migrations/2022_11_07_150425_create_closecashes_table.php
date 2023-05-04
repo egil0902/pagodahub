@@ -33,6 +33,7 @@ return new class extends Migration
             $table->double('InvoiceAmtSistema', 8, 2)->nullable();
             $table->double('VoucherAmtSistema', 8, 2)->nullable();
             $table->double('GrantAmtSistema', 8, 2)->nullable();
+
             $table->double('x_oneamtFiscalizadora', 8, 2)->nullable();
             $table->double( 'x_fiveamtFiscalizadora', 8, 2)->nullable();  
             $table->double( 'x_tenamtFiscalizadora', 8, 2)->nullable(); 
@@ -44,6 +45,7 @@ return new class extends Migration
             $table->double( 'valespagodaFiscalizadora', 8, 2)->nullable(); 
             $table->double( 'CheckAmtFiscalizadora', 8, 2)->nullable(); 
             $table->double( 'LotoAmtFiscalizadora', 8, 2)->nullable(); 
+
             $table->double( 'CardValeFiscalizadora', 8, 2)->nullable(); 
             $table->double( 'CardVisaFiscalizadora', 8, 2)->nullable(); 
             $table->double( 'CardMasterFiscalizadora', 8, 2)->nullable(); 
@@ -84,7 +86,72 @@ return new class extends Migration
             $table->double( 'totalsuperGerente', 8, 2)->nullable(); 
             $table->double( 'dineroTaxiGerente', 8, 2)->nullable(); 
             $table->double( 'vueltoMercadoGerente', 8, 2)->nullable();
-            $table->text( 'comentariosGerente')->nullable();      
+            $table->text( 'comentariosGerente')->nullable();
+
+            $table->date('DateTrx');
+            $table->integer('AD_Org_ID');  
+
+            $table->longText('Fileclosecash')->nullable();
+            $table->double( 'CardClaveFiscalizadora', 8, 2)->nullable();
+            $table->double( 'CardClaveGerente', 8, 2)->nullable(); 
+            
+            $table->double('valeAmt', 8, 2)->nullable();
+            $table->double('valeAmtFiscalizadora', 8, 2)->nullable();
+            $table->double('valeAmtGerente', 8, 2)->nullable();   
+
+            $table->double( 'CardBACFiscalizadora', 8, 2)->nullable();
+            $table->double( 'CardBACGerente', 8, 2)->nullable();  
+            $table->double( 'InvoiceAmtPropiasFiscalizadora', 8, 2)->nullable(); 
+            $table->double( 'InvoiceAmtPropiasGerente', 8, 2)->nullable(); 
+
+            $table->double( 'otrosprimeroFiscalizadora', 8, 2)->nullable(); 
+            $table->double( 'otrosprimeroGerente', 8, 2)->nullable(); 
+
+            $table->string('check_fis')->nullable();
+            $table->string('check_ger')->nullable();
+
+            $table->string('check_x_oneamtGerente')->nullable();
+            $table->string('check_x_fiveamtGerente')->nullable();
+            $table->string('check_x_tenamtGerente')->nullable();
+            $table->string('check_x_twentyamtGerente')->nullable();
+            $table->string('check_x_fiftyamtGerente')->nullable();
+            $table->string('check_x_hundredamtGerente')->nullable();
+            $table->string('check_x_yappyGerente')->nullable();
+            $table->string('check_x_otrosGerente')->nullable();
+            $table->string('check_x_otrosprimeroGerente')->nullable();
+            $table->string('check_x_valespagodaGerente')->nullable();
+            $table->string('check_x_CheckAmtGerente')->nullable();
+            $table->string('check_x_LotoAmtGerente')->nullable();
+            $table->string('check_x_valeAmtGerente')->nullable();
+            $table->string('check_x_CardClaveGerente')->nullable();
+            $table->string('check_x_CardValeGerente')->nullable();
+            $table->string('check_x_CardVisaGerente')->nullable();
+            $table->string('check_x_CardMasterGerente')->nullable();
+            $table->string('check_x_CardAEGerente')->nullable();
+            $table->string('check_x_CardBACGerente')->nullable();
+            $table->string('check_x_CashAmtGerente')->nullable();
+            $table->string('check_x_CoinRollGerente')->nullable();
+            $table->string('check_x_InvoiceAmtGerente')->nullable();
+            $table->string('check_x_InvoiceAmtPropiasGerente')->nullable();
+            $table->string('check_x_VoucherAmtGerente')->nullable();
+            $table->string('check_x_GrantAmtGerente')->nullable();
+            $table->string('check_x_totalPanaderiaGerente')->nullable();
+            $table->string('check_x_totalPagatodoGerente')->nullable();
+            $table->string('check_x_totalsuperGerente')->nullable();
+            $table->string('check_x_dineroTaxiGerente')->nullable();
+            $table->string('check_x_vueltoMercadoGerente')->nullable();
+
+            $table->double('efectivo_sistema', 8, 2)->nullable();
+            $table->double('otros_sistema', 8, 2)->nullable();
+            $table->double('sub_total_super_sistema', 8, 2)->nullable();
+            $table->double('monto_contado_sistema', 8, 2)->nullable();
+            $table->double('monto_x_sistema', 8, 2)->nullable();
+
+            $table->double('SencilloSupervisoraFiscalizadora', 8, 2)->nullable();
+            $table->double('SencilloSupervisoraGerente', 8, 2)->nullable();
+
+            $table->string('check_SencilloSupervisoraGerente')->nullable();
+
         });
     }
     /**

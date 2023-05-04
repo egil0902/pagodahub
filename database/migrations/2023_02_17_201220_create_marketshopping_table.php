@@ -21,7 +21,6 @@ return new class extends Migration
             $table->longText('budget')->nullable();
             $table->longText('supplier')->nullable();
             $table->longText('product')->nullable();
-            $table->longText('unit')->nullable();
             $table->longText('quantity')->nullable();
         });
     }

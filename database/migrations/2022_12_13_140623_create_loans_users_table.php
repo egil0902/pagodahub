@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('loans_users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nombre')->nullable();
-            $table->string('cedula')->nullable()->unique();
-            $table->string('telefono')->nullable();
-            $table->string('solicitante')->nullable();
-            $table->string('direccion')->nullable();
-            $table->longText('fotocedula')->nullable();
-            $table->double('montototal', 8, 2)->nullable();
+            $table->string('nombre', 255);
+            $table->string('cedula', 255)->unique();
+            $table->string('telefono', 255);
+            $table->string('solicitante', 255);
+            $table->string('direccion', 255);
+            $table->text('fotocedula');
+            $table->double('montototal');
         });
     }
 
