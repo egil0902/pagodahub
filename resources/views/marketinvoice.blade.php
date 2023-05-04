@@ -36,7 +36,12 @@
                                     <h4>Comprador: {{ $data->buyer }}</h4>
                                 </div>
                                 <div class="col">
-                                    <h4>Proveedor: xxxxxxxxxx</h4>
+                                    <h4>Proveedor: 
+                                        <input class="w-100 form-control" type="text" name="proveedor"
+                                        id="proveedor" value=""
+                                        required onchange="">
+                                    </h4>
+                                    
                                 </div>
                             </div>
                             {{-- {{ $data }} --}}
@@ -103,8 +108,7 @@
                                                             const differenceFacturaValue{{ $index + 1 }} = differenceFactura{{ $index + 1 }}.value;
 
                                                             // Calcular la diferencia
-                                                            const differenceValue{{ $index + 1 }} = differenceFacturaValue{{ $index + 1 }} -
-                                                                quantityValue{{ $index + 1 }};
+                                                            const differenceValue{{ $index + 1 }} = quantityValue{{ $index + 1 }} -differenceFacturaValue{{ $index + 1 }};
 
                                                             // Mostrar el resultado en la entrada difference
                                                             difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
