@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vales_pagodas', function (Blueprint $table) {
+        Schema::create('factures', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('value');
-            $table->string('name');
-            $table->string('taxid');
-            $table->string('CreatedBy');
-            $table->integer('AD_Org_ID');
-            $table->unique('value', 'valueunique');
+            $table->string('id_compra');
+            $table->date('fecha');
+            $table->string('proveedor');
+            $table->double('monto_abonado')->default(0.0)->nullable();
+            $table->boolean('medio_de_pago')->default(false)->nullable();
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vales_pagodas');
+        Schema::dropIfExists('factures');
     }
 };

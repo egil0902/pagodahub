@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double("debt", 8, 2)->nullable();
             $table->string("loans_users_id")->nullable();
             $table->string("loans_id")->nullable();
+            $table->longText('file')->nullable();
+            $table->longText('signature')->nullable();
         });
     }
     /**
