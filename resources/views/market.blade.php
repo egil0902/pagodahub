@@ -120,6 +120,8 @@
                                         <option value="Kilos">Kilos</option>
                                         <option value="Unidades">Unidades</option>
                                         <option value="Galones">Galones</option>
+                                        <option value="Galones">Mazo</option>
+                                        <option value="Galones">Caja</option>                                        
                                     </select>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Cantidad</label>
