@@ -4,7 +4,27 @@
 
 @section('content')
     <div class="p-2 m-0 border-0 bd-example">
+
+    
         <form name="market" id="market" method="post" action="{{ route('market.day') }}">
+                <div class="form-group w-50 "style="padding-left: 200px;">
+
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
+                            spellcheck="false" data-ms-editor="true" name="day">
+                        <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
+                    </div>
+
+                </div>
+        </form>
+        <form name="market" id="market" method="post" action="{{ route('market.day') }}">
+        <div class="form-group w-50">
+
+            @csrf
+            
+
+            </div>
             <div class="card">
                 <div class="card-header">
                     Facturas
@@ -12,16 +32,7 @@
                 <br>
                 <center>
 
-                    <div class="form-group w-50">
-
-                        @csrf
-                        <div class="input-group mb-3">
-                            <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
-                                spellcheck="false" data-ms-editor="true" name="day">
-                            <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
-                        </div>
-
-                    </div>
+                    
                     <div class="p-4 m-0 border-0">
                         @foreach ($comprasdeldia as $data)
                             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
@@ -36,7 +47,29 @@
                                     <h4>Comprador: {{ $data->buyer }}</h4>
                                 </div>
                                 <div class="col">
-                                    <h4>Proveedor: xxxxxxxxxx</h4>
+                                    <h4>Proveedor: 
+                                        <input class="w-100 form-control" type="text" name="proveedor"
+                                        id="proveedor" value=""
+                                        required onchange="">
+                                    </h4>
+                                    
+                                </div>
+                                <div class="col">
+                                    <h4>abono: 
+                                        <input class="w-100 form-control" type="text" name="abono"
+                                        id="abono" value=""
+                                        required onchange="">
+                                    </h4>
+                                    
+                                </div>
+                                <div class="col">
+                                    <h4>metodo de pago: 
+                                        <select class="form-control unit" list="opciones"  name="metodo" id="metodo">
+                                        <option value="Sacos">Efectivo</option>
+                                        <option value="Libras">Credito</option>
+                                    </select>
+                                    </h4>
+                                    
                                 </div>
                             </div>
                             {{-- {{ $data }} --}}
@@ -51,7 +84,7 @@
                                             <th>Cantidad factura</th>
                                             <th>Diferencia</th>
                                             <th>Precio</th>
-                                            <th>Metodo de Pago</th>
+                                            <!---<th>Metodo de Pago</th>--->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -103,8 +136,7 @@
                                                             const differenceFacturaValue{{ $index + 1 }} = differenceFactura{{ $index + 1 }}.value;
 
                                                             // Calcular la diferencia
-                                                            const differenceValue{{ $index + 1 }} = differenceFacturaValue{{ $index + 1 }} -
-                                                                quantityValue{{ $index + 1 }};
+                                                            const differenceValue{{ $index + 1 }} = quantityValue{{ $index + 1 }} -differenceFacturaValue{{ $index + 1 }};
 
                                                             // Mostrar el resultado en la entrada difference
                                                             difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
@@ -115,7 +147,7 @@
                                                         <input class="w-100 " type="number" name="price[]" value=""
                                                             data-price-value="" onchange="sumadiferencia();" step="0.01" min="0" required>
                                                     </td>
-                                                    <td>
+                                                    <!---<td>
                                                         <select class="w-100" name="paymentoption[]"
                                                             onChange="toggleTable(this)" required>
                                                             <option value="Efectivo"
@@ -126,7 +158,7 @@
                                                                 Credito
                                                             </option>
                                                         </select>
-                                                    </td>
+                                                    </td>--->
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -152,8 +184,8 @@
                                             <input class="border-0 bg-transparent" type="number" name="sumpre"
                                                 id="sumpre" value="" readonly>
                                         </th>
-                                        <th>
-                                        </th>
+                                        <!---<th>
+                                        </th>--->
                                     </tr>
                                     <script>
                                         function sumadiferencia() {
@@ -196,10 +228,57 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-4 m-0 border-0">
+                                <input class="form-control" type="file" id="formFile" name="" multiple
+                                    onchange="mostrarImagenesPrevias()">
+                                <br>
+                                <center>
+                                    <div id="imagenesPrevias"></div>
+                                    {{-- <textarea style="" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
+                                        cols="50" rows="15"></textarea> --}}
+                                </center>
+
+                                <script>
+                                    function mostrarImagenesPrevias() {
+                                        var archivos = document.querySelector('#formFile').files;
+                                        var imagenesPreviasDiv = document.querySelector('#imagenesPrevias');
+
+                                        for (var i = 0; i < archivos.length; i++) {
+                                            var archivo = archivos[i];
+                                            var lector = new FileReader();
+
+                                            lector.onload = (function(archivo) {
+                                                return function(e) {
+                                                    var imagenPrevia = document.createElement('img');
+                                                    var archivoimg = document.createElement('textarea');
+                                                    imagenPrevia.src = e.target.result;
+                                                    archivoimg.name = "archivosimg[]";
+                                                    archivoimg.value = e.target.result;
+                                                    archivoimg.style.display = "none";
+                                                    imagenesPreviasDiv.appendChild(imagenPrevia);
+                                                    imagenesPreviasDiv.appendChild(archivoimg);
+                                                };
+                                            })(archivo);
+                                            lector.readAsDataURL(archivo);
+                                        }
+                                    }
+                                </script>
+                            </div>
+                            <button type="submit" class="btn btn-outline-success w-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z">
+                                    </path>
+                                    <path
+                                        d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z">
+                                    </path>
+                                </svg>
+                                Guardar
+                            </button>
+                            <br>
+                            <br>
                         @endforeach
-
-
-
                     </div>
                 </center>
 
@@ -212,8 +291,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Producto</th>
-                                            <th>Unidad</th>
+                                            <th>Numero de factura</th>
+                                            <th>Abono</th>
                                             <th>Cantidad</th>
                                             <th>Cantidad factura</th>
                                             <th>Diferencia</th>
@@ -285,43 +364,7 @@
                     </div>
                 </div>
 
-                <div class="p-4 m-0 border-0">
-                    <input class="form-control" type="file" id="formFile" name="" multiple
-                        onchange="mostrarImagenesPrevias()">
-                    <br>
-                    <center>
-                        <div id="imagenesPrevias"></div>
-                        {{-- <textarea style="" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
-                            cols="50" rows="15"></textarea> --}}
-                    </center>
-
-                    <script>
-                        function mostrarImagenesPrevias() {
-                            var archivos = document.querySelector('#formFile').files;
-                            var imagenesPreviasDiv = document.querySelector('#imagenesPrevias');
-
-                            for (var i = 0; i < archivos.length; i++) {
-                                var archivo = archivos[i];
-                                var lector = new FileReader();
-
-                                lector.onload = (function(archivo) {
-                                    return function(e) {
-                                        var imagenPrevia = document.createElement('img');
-                                        var archivoimg = document.createElement('textarea');
-                                        imagenPrevia.src = e.target.result;
-                                        archivoimg.name = "archivosimg[]";
-                                        archivoimg.value = e.target.result;
-                                        archivoimg.style.display = "none";
-                                        imagenesPreviasDiv.appendChild(imagenPrevia);
-                                        imagenesPreviasDiv.appendChild(archivoimg);
-                                    };
-                                })(archivo);
-                                lector.readAsDataURL(archivo);
-                            }
-                        }
-                    </script>
-
-                </div>
+                
                 <br>
             </div>
         </form>

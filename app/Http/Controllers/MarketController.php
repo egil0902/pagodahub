@@ -31,7 +31,12 @@ class MarketController extends Controller
     public function store(Request $request)
     {
         $productos = $request->input('product');
-        //dump($request);
+        
+        array_push($productos, 'Carton');
+        $productos = array_values(array_filter($productos, function ($valor) {
+            return !is_null($valor) && $valor !== '';
+        }));
+        //var_dump($productos);
         foreach ($productos as $nombre) {
             if ($nombre != "") {
                 $producto = products::where('name', $nombre)->first();
@@ -47,6 +52,7 @@ class MarketController extends Controller
 
 
         $unidades = $request->input('unit');
+        array_push($unidades, 'Carton');
         foreach ($unidades as $nombre) {
             if ($nombre != "") {
                 $unidad = units::where('name', $nombre)->first();
@@ -63,13 +69,16 @@ class MarketController extends Controller
         /* $prod = implode(' ', $request->input('product'));*/
         /* $unit = implode(' ', $request->input('unit')); */
         /* $quan = implode(' ', $request->input('quantity')); */
-
+        $quantity =$request->input('quantity');
+        $quantity = array_values(array_filter($quantity, function ($valor) {
+            return !is_null($valor) && $valor !== '';
+        }));
         $shop->shoppingday = $request->input('date-day');
         $shop->buyer = $request->input('comprador');
         $shop->budget = $request->input('Presupuesto');
-        $shop->product = json_encode($request->input('product'));
-        $shop->unit = json_encode($request->input('unit'));
-        $shop->quantity = json_encode($request->input('quantity'));
+        $shop->product = json_encode($productos);
+        $shop->unit = json_encode($unidades);
+        $shop->quantity = json_encode($quantity);
         $shop->save();
 
         //dd($shop);
