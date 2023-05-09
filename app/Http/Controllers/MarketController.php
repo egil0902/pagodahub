@@ -46,7 +46,6 @@ class MarketController extends Controller
                     $producto->name = $nombre;
                     $producto->save();
                 }
-                // continuar con la lógica de tu aplicación...
             }
         }
 

@@ -107,13 +107,7 @@
                                     </datalist>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Unidad de Medida</label>
-                                    <!---<input class="form-control unit" list="opciones" name="unit[]"
-                                        placeholder="Escribe para buscar...">
-                                    <datalist id="opciones">
-                                        @foreach ($opciones as $unidad_de_medida)
-                                            <option value="{{ $unidad_de_medida->name }}"></option>
-                                        @endforeach
-                                    </datalist>--->
+                                    
                                     <select class="form-control unit" list="opciones"  name="unit[]">
                                         <option value="Sacos">Sacos</option>
                                         <option value="Libras">Libras</option>
@@ -202,6 +196,8 @@
                     const units = document.getElementsByName("unit[]");
                     const quantities = document.getElementsByClassName("quantity");
                     for (let i = 0; i < products.length; i++) {
+                        try {
+                        
                         const product = products[i].value;
                         const unit = units[i].value;
                         const quantity = quantities[i].value;
@@ -220,6 +216,11 @@
                         deleteButton.addEventListener("click", function() {
                             const rowToRemove = document.getElementById("row" + i);
                             rowToRemove.parentNode.removeChild(rowToRemove);
+                            
+                            products[i].value="";
+                            units[i].value="";
+                            quantities[i].value="";
+                            updateProductList();
                         });
                         numCell.textContent = num;
                         productCell.textContent = product;
@@ -233,6 +234,12 @@
                         row.appendChild(quantityCell);
                         row.appendChild(deleteCell);
                         productList.appendChild(row);
+                        }
+                            
+                        } 
+                        catch (error) {
+                            console.log("🚀 ~ file: market.blade.php:247 ~ updateProductList ~ error:", error)
+                            
                         }
                     }
                     }
