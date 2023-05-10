@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->string('proveedor');
             $table->double('monto_abonado')->default(0.0)->nullable();
-            $table->boolean('medio_de_pago')->default(false)->nullable();
+            $table->boolean('medio_de_pago')->default(false)->nullable();            
         });
     }
 
