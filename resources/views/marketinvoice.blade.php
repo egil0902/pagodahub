@@ -3,10 +3,8 @@
 
 
 @section('content')
-    <div class="p-2 m-0 border-0 bd-example">
-
-    
-        <form name="market" id="market" method="post" action="{{ route('market.day') }}">
+<div class="p-2 m-0 border-0 bd-example">
+	<form name="market" id="market" method="post" action="{{ route('market.day') }}">
                 <div class="form-group w-50 "style="padding-left: 200px;">
 
                     @csrf
@@ -18,25 +16,19 @@
 
                 </div>
         </form>
-        <form name="market" id="market" method="post" action="{{ route('market.day') }}">
+        @foreach ($comprasdeldia as $data)
+        <form name="market" id="market" method="post" action="{{ route('factures.store') }}">
         <div class="form-group w-50">
-
-            @csrf
-            
-
+            @csrf            
             </div>
             <div class="card">
                 <div class="card-header">
                     Facturas
                 </div>
-                <br>
-                <center>
-
-                    
-                    <div class="p-4 m-0 border-0">
-                        @foreach ($comprasdeldia as $data)
-                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                                <div class="col">{{--  {{ $data->id }} --}}
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                                <div class="col"> 
+                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                    <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
                                     <h4>Numero de factura:
                                         <input class="w-100 form-control" type="number" name="NFactura"
                                         id="NFactura" value=""
@@ -58,26 +50,30 @@
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
                                         id="abono" value=""
-                                        required onchange="">
+                                        onchange="">
                                     </h4>
                                     
                                 </div>
                                 <div class="col">
                                     <h4>metodo de pago: 
                                         <select class="form-control unit" list="opciones"  name="metodo" id="metodo">
-                                        <option value="Sacos">Efectivo</option>
-                                        <option value="Libras">Credito</option>
+                                        <option value="true">Efectivo</option>
+                                        <option value="false">Credito</option>
                                     </select>
                                     </h4>
                                     
                                 </div>
                             </div>
                             {{-- {{ $data }} --}}
-                            <div class="table-responsive">
+                <br>
+                <center>                    
+                    <div class="p-4 m-0 border-0">
+                        
+                            <div class="table-responsive table-responsive-sm">
                                 <table class="table table-bordered border-success">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th style="max-width: 50px;">#</th>
                                             <th>Producto</th>
                                             <th>Unidad</th>
                                             <th>Cantidad</th>
@@ -91,9 +87,7 @@
                                         @foreach (json_decode($data->product) as $index => $product)
                                             @if ($loop->index < count(json_decode($data->product)) - 1)
                                                 <tr>
-                                                    <td> <input class="border-0 bg-transparent" type="text"
-                                                            name="index[]" value="{{ $index + 1 }}" readonly>
-                                                    </td>
+                                                     <td style="max-width: 50px;">{{ $index + 1 }}</td>
                                                     <td>
                                                         <input class="border-0 bg-transparent" type="text"
                                                             name="product[]" value="{{ $product }}"
@@ -146,19 +140,7 @@
                                                     <td>
                                                         <input class="w-100 " type="number" name="price[]" value=""
                                                             data-price-value="" onchange="sumadiferencia();" step="0.01" min="0" required>
-                                                    </td>
-                                                    <!---<td>
-                                                        <select class="w-100" name="paymentoption[]"
-                                                            onChange="toggleTable(this)" required>
-                                                            <option value="Efectivo"
-                                                                data-option-value="{{ $index }}">
-                                                                Efectivo</option>
-                                                            <option value="Credito"
-                                                                data-option-value="{{ $index }}">
-                                                                Credito
-                                                            </option>
-                                                        </select>
-                                                    </td>--->
+                                                    </td>                                                    
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -169,16 +151,14 @@
                                     <tr>
                                         <th COLSPAN=3> Totales</th>
                                         <th>
-                                            <input class="border-0 bg-transparent" type="number" name="sumquan"
-                                                id="sumquan" value="" readonly>
+                                            
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent" type="number" name="sumdifac"
-                                                id="sumdifac" value="" readonly>
+                                            <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="0" readonly>
+
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent" type="number" name="sumdif"
-                                                id="sumdif" value="" readonly>
+                                            <input class="border-0 bg-transparent" type="number" name="sumdif" id="sumdif" value="" readonly>
                                         </th>
                                         <th>
                                             <input class="border-0 bg-transparent" type="number" name="sumpre"
@@ -189,80 +169,82 @@
                                     </tr>
                                     <script>
                                         function sumadiferencia() {
-                                            var sum_quantity = 0;
-                                            var sum_difference = 0;
-                                            var sum_price = 0;
+                                            try {
+                                                
+                                            
                                             var sum_differenceFactura = 0;
-                                            var elements = document.getElementsByName('index[]');
-
-
                                             var elements_quantity = document.getElementsByName('quantity[]');
                                             var elements_differenceFactura = document.getElementsByName('differenceFactura[]');
                                             var elements_difference = document.getElementsByName('difference[]');
                                             var elements_price = document.getElementsByName('price[]');
-                                            for (var i = 0; i < elements.length; i++) {
 
-                                                var x_quantity = parseFloat(elements_quantity[i].value);
-                                                var x_differenceFactura = parseFloat(elements_differenceFactura[i].value);
-                                                var x_difference = parseFloat(elements_difference[i].value);
-                                                var x_price = parseFloat(elements_price[i].value);
+                                            for (var i = 0; i < elements_quantity.length; i++) {
+                                                var quantity = parseFloat(elements_quantity[i].value);
+                                                var differenceFactura = parseFloat(elements_differenceFactura[i].value);
+                                                var difference = quantity - differenceFactura;
+                                                if(difference==null){
+                                                    elements_difference[i].value =0.0;
+                                                }else{
+                                                elements_difference[i].value = difference.toFixed(2);
+                                                }
+                                            }
 
-                                                sum_quantity = sum_quantity + x_quantity;
-                                                sum_differenceFactura = sum_differenceFactura + x_differenceFactura;
-                                                sum_difference = sum_difference + x_difference;
-                                                sum_price = sum_price + x_price;
-
-                                                document.getElementById("sumquan").value = sum_quantity.toFixed(2);
-                                                document.getElementById("sumdifac").value = sum_differenceFactura.toFixed(2);
-                                                document.getElementById("sumdif").value = sum_difference.toFixed(2);
-                                                document.getElementById("sumpre").value = sum_price.toFixed(2);
+                                            
+                                            // Call the sumaTotal() function
+                                            var tables = document.getElementsByTagName('table');
+                                            
+                                            for (var i = 0; i < tables.length; i++) {
+                                                sumaTotal(tables[i]);
                                             }
                                         }
-                                    </script>
-                                </table>
-                            </div>
-                            <div class="container">
-                                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1">
-                                    <div class="col">
-                                        <h3>Total de registros: {{ count(json_decode($data->product)) - 1 }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4 m-0 border-0">
-                                <input class="form-control" type="file" id="formFile" name="" multiple
-                                    onchange="mostrarImagenesPrevias()">
-                                <br>
-                                <center>
-                                    <div id="imagenesPrevias"></div>
-                                    {{-- <textarea style="" name="Fileclosecash" id="base64textarea" placeholder="Base64 will appear here"
-                                        cols="50" rows="15"></textarea> --}}
-                                </center>
-
-                                <script>
-                                    function mostrarImagenesPrevias() {
-                                        var archivos = document.querySelector('#formFile').files;
-                                        var imagenesPreviasDiv = document.querySelector('#imagenesPrevias');
-
-                                        for (var i = 0; i < archivos.length; i++) {
-                                            var archivo = archivos[i];
-                                            var lector = new FileReader();
-
-                                            lector.onload = (function(archivo) {
-                                                return function(e) {
-                                                    var imagenPrevia = document.createElement('img');
-                                                    var archivoimg = document.createElement('textarea');
-                                                    imagenPrevia.src = e.target.result;
-                                                    archivoimg.name = "archivosimg[]";
-                                                    archivoimg.value = e.target.result;
-                                                    archivoimg.style.display = "none";
-                                                    imagenesPreviasDiv.appendChild(imagenPrevia);
-                                                    imagenesPreviasDiv.appendChild(archivoimg);
-                                                };
-                                            })(archivo);
-                                            lector.readAsDataURL(archivo);
+                                            catch (error) {
+                                                console.log("🚀 ~ file: marketinvoice.blade.php:206 ~ sumadiferencia ~ error:", error)
+                                                
+                                            }
                                         }
-                                    }
-                                </script>
+                                        function sumaTotal(table) {
+        var sum_differenceFactura = 0;
+        var sum_difference = 0;
+        var sum_price = 0;
+        var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
+        var elements_price = table.querySelectorAll('input[name="price[]"]');
+
+        for (var j = 0; j < elements_differenceFactura.length; j++) {
+            var differenceFactura = parseFloat(elements_differenceFactura[j].value);
+            var price = parseFloat(elements_price[j].value);
+
+            sum_differenceFactura += differenceFactura * price;
+        }
+
+        var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
+        totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
+
+        // Update other total values if needed
+        // ...
+
+        // Example: Update total sum of differences and prices
+        var elements_difference = table.querySelectorAll('input[name="difference[]"]');
+        var elements_quantity = table.querySelectorAll('input[name="quantity[]"]');
+
+        for (var k = 0; k < elements_difference.length; k++) {
+            var difference = parseFloat(elements_difference[k].value);
+            sum_difference += difference;
+        }
+
+        for (var l = 0; l < elements_price.length; l++) {
+            var quantity = parseFloat(elements_quantity[l].value);
+            var price = parseFloat(elements_price[l].value);
+            sum_price += price;
+        }
+
+        var sumDifferenceInput = table.querySelector('#sumdif');
+        sumDifferenceInput.value = sum_difference.toFixed(2);
+
+        var sumPriceInput = table.querySelector('#sumpre');
+        sumPriceInput.value = sum_price.toFixed(2);
+    }
+</script>
+                                </table>
                             </div>
                             <button type="submit" class="btn btn-outline-success w-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -278,96 +260,13 @@
                             </button>
                             <br>
                             <br>
-                        @endforeach
+                       
                     </div>
-                </center>
-
-                <div class="p-4 m-0 border-0">
-                    <div class="card border-success">
-                        <h5 class="card-header">Lista de productos a credito</h5>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered border-success">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Numero de factura</th>
-                                            <th>Abono</th>
-                                            <th>Cantidad</th>
-                                            <th>Cantidad factura</th>
-                                            <th>Diferencia</th>
-                                            <th>Precio</th>
-                                            <th>Metodo de Pago</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody id="table-container">
-
-                                    </tbody>
-
-                                </table>
-                            </div>
-                            <script>
-                                function toggleTable(selectElement) {
-                                    var tableContainer = document.getElementById("table-container");
-                                    var selectedValue = selectElement.options[selectElement.selectedIndex].value;
-                                    const selectedOption = selectElement.options[selectElement.selectedIndex];
-                                    const optionValue = selectedOption.dataset.optionValue;
-                                    console.log(selectedValue);
-                                    console.log(optionValue);
-                                    if (selectedValue === "Credito") {
-                                        // Agregar tabla de crédito
-                                        var newTable = document.createElement("tr");
-                                        // Obtener los valores de los input existentes
-                                        var indexs = document.getElementsByName("index[]");
-                                        var products = document.getElementsByName("product[]");
-                                        var units = document.getElementsByName("unit[]");
-                                        var quantities = document.getElementsByName("quantity[]");
-                                        var differenceFacturas = document.getElementsByName("differenceFactura[]");
-                                        var differences = document.getElementsByName("difference[]");
-                                        var prices = document.getElementsByName("price[]");
-
-                                        // Construir el contenido de la tabla con los valores obtenidos
-                                        var tableContent = "";
-                                        var i = optionValue;
-                                        newTable.id = optionValue;
-                                        tableContent +=
-                                            `
-                                            <td>${indexs[i].value}</td>
-                                            <td>${products[i].value}</td>
-                                            <td>${units[i].value}</td>
-                                            <td>${quantities[i].value}</td>
-                                            <td>${differenceFacturas[i].value}</td>
-                                            <td>${differences[i].value}</td>
-                                            <td>${prices[i].value}</td>
-                                            <td>Credito</td>
-                                        `;
-
-                                        // Insertar el contenido de la tabla en el elemento nuevo
-                                        newTable.innerHTML = `<tbody>${tableContent}</tbody>`;
-                                        tableContainer.appendChild(newTable);
-                                    } else {
-                                        // Eliminar tabla de crédito si existe var creditTable = tableContainer.querySelector("table");
-
-                                        var creditTable = document.getElementById(optionValue);
-                                        console.log(creditTable);
-                                        if (creditTable) {
-                                            tableContainer.removeChild(creditTable);
-                                        }
-                                    }
-                                }
-                            </script>
-
-                            <br>
-                            <a href="#" class="btn btn-primary">imprimir factura credito</a>
-                        </div>
-                    </div>
-                </div>
-
-                
+                </center> 
                 <br>
             </div>
         </form>
+        @endforeach
     </div>
     <style>
         table {
@@ -377,7 +276,11 @@
             border-collapse: collapse;
             width: 100%;
         }
-
+        .table th {
+            max-width: 100px; /* Establece el ancho máximo deseado */
+            text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+            white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        }
         th,
         td {
             padding: 1px;

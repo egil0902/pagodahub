@@ -110,7 +110,7 @@ class MarketController extends Controller
         //dump($request);
         $day = $request->input('day');
         //dd($day);
-        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->whereNull('id_compra')->get();
         //dd($comprasdeldia);
         return view('marketinvoice', compact('comprasdeldia'));
     }

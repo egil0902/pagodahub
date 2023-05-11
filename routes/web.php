@@ -63,6 +63,11 @@ Route::post('/loans_newuser', [App\Http\Controllers\LoansController::class, 'new
 Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 
+Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
+Route::post('/facture_store', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
+Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
+Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
+Route::get('/facture_search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 
 // Ruta para mostrar la página del mercado (método GET)
 Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
