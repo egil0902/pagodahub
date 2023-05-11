@@ -120,7 +120,6 @@
                                                     <script>
                                                         // Obtener las entradas numéricas
                                                         const quantity{{ $index + 1 }} = document.getElementById('quantity{{ $index + 1 }}{{ $product }}');
-                                                        console.log("🚀 ~ file: marketinvoice.blade.php:125 ~ quantity:", quantity{{ $index + 1 }})
                                                         const differenceFactura{{ $index + 1 }} = document.getElementById('differenceFactura{{ $index + 1 }}');
                                                         const difference{{ $index + 1 }} = document.getElementById('difference{{ $index + 1 }}');
 
@@ -155,7 +154,7 @@
                                             
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="" readonly>
+                                            <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="0" readonly>
 
                                         </th>
                                         <th>
@@ -170,6 +169,9 @@
                                     </tr>
                                     <script>
                                         function sumadiferencia() {
+                                            try {
+                                                
+                                            
                                             var sum_differenceFactura = 0;
                                             var elements_quantity = document.getElementsByName('quantity[]');
                                             var elements_differenceFactura = document.getElementsByName('differenceFactura[]');
@@ -180,54 +182,68 @@
                                                 var quantity = parseFloat(elements_quantity[i].value);
                                                 var differenceFactura = parseFloat(elements_differenceFactura[i].value);
                                                 var difference = quantity - differenceFactura;
+                                                if(difference==null){
+                                                    elements_difference[i].value =0.0;
+                                                }else{
                                                 elements_difference[i].value = difference.toFixed(2);
+                                                }
                                             }
 
-                                            // Calculate total sum_differenceFactura
-                                            for (var i = 0; i < elements_differenceFactura.length; i++) {
-                                                var differenceFactura = parseFloat(elements_differenceFactura[i].value);
-                                                var price = parseFloat(elements_price[i].value);
-                                                sum_differenceFactura += differenceFactura * price;
-                                            }
                                             
-                                            document.getElementById("sumdifac").value = sum_differenceFactura.toFixed(2);
-
                                             // Call the sumaTotal() function
-                                            sumaTotal();
+                                            var tables = document.getElementsByTagName('table');
+                                            
+                                            for (var i = 0; i < tables.length; i++) {
+                                                sumaTotal(tables[i]);
+                                            }
                                         }
-
-                                        function sumaTotal() {
-    var sum_differenceFactura = 0;
-    var tables = document.getElementsByTagName('table');
-    for (var i = 0; i < tables.length; i++) {
-        var table = tables[i];
+                                            catch (error) {
+                                                console.log("🚀 ~ file: marketinvoice.blade.php:206 ~ sumadiferencia ~ error:", error)
+                                                
+                                            }
+                                        }
+                                        function sumaTotal(table) {
+        var sum_differenceFactura = 0;
         var sum_difference = 0;
         var sum_price = 0;
-        var elements_quantity = table.querySelectorAll('input[name="quantity[]"]');
         var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
-        var elements_difference = table.querySelectorAll('input[name="difference[]"]');
         var elements_price = table.querySelectorAll('input[name="price[]"]');
 
-        for (var j = 0; j < elements_quantity.length; j++) {
-            var quantity = parseFloat(elements_quantity[j].value);
+        for (var j = 0; j < elements_differenceFactura.length; j++) {
             var differenceFactura = parseFloat(elements_differenceFactura[j].value);
-            var difference = parseFloat(elements_difference[j].value);
             var price = parseFloat(elements_price[j].value);
 
-            sum_difference += difference;
-            sum_price += price;
             sum_differenceFactura += differenceFactura * price;
         }
 
         var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
         totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
+
+        // Update other total values if needed
+        // ...
+
+        // Example: Update total sum of differences and prices
+        var elements_difference = table.querySelectorAll('input[name="difference[]"]');
+        var elements_quantity = table.querySelectorAll('input[name="quantity[]"]');
+
+        for (var k = 0; k < elements_difference.length; k++) {
+            var difference = parseFloat(elements_difference[k].value);
+            sum_difference += difference;
+        }
+
+        for (var l = 0; l < elements_price.length; l++) {
+            var quantity = parseFloat(elements_quantity[l].value);
+            var price = parseFloat(elements_price[l].value);
+            sum_price += price;
+        }
+
+        var sumDifferenceInput = table.querySelector('#sumdif');
+        sumDifferenceInput.value = sum_difference.toFixed(2);
+
+        var sumPriceInput = table.querySelector('#sumpre');
+        sumPriceInput.value = sum_price.toFixed(2);
     }
-
-    document.getElementById('sumpre').value = sum_price.toFixed(2);
-    document.getElementById('sumdif').value = sum_difference.toFixed(2);
-}
-
-                                    </script>
+</script>
                                 </table>
                             </div>
                             <button type="submit" class="btn btn-outline-success w-100">
