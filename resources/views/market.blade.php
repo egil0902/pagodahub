@@ -114,7 +114,7 @@
                                         <option value="Kilos">Kilos</option>
                                         <option value="Unidades">Unidades</option>
                                         <option value="Galones">Galones</option>
-                                        <option value="Mazo">Mazo</option>
+                                        <option value="Maso">Maso</option>
                                         <option value="Caja">Caja</option>                                        
                                     </select>
                                     <br>
