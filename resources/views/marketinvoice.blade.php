@@ -3,6 +3,11 @@
 
 
 @section('content')
+@if(session('refresh'))
+    <script>
+        window.location.reload();
+    </script>
+@endif
 <div class="p-2 m-0 border-0 bd-example">
 	<form name="market" id="market" method="post" action="{{ route('market.day') }}">
                 <div class="form-group w-50 "style="padding-left: 200px;">
@@ -85,7 +90,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach (json_decode($data->product) as $index => $product)
-                                            @if ($loop->index < count(json_decode($data->product)) - 1)
+
+                                            @if ($loop->index < count(json_decode($data->product)) )
                                                 <tr>
                                                      <td style="max-width: 50px;">{{ $index + 1 }}</td>
                                                     <td>
