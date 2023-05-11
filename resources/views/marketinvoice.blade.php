@@ -90,7 +90,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach (json_decode($data->product) as $index => $product)
-                                            @if ($loop->index < count(json_decode($data->product)) - 1)
+
+                                            @if ($loop->index < count(json_decode($data->product)) )
                                                 <tr>
                                                      <td style="max-width: 50px;">{{ $index + 1 }}</td>
                                                     <td>
