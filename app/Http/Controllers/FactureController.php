@@ -38,6 +38,7 @@ class FactureController extends Controller
         
         // Asignar los valores del formulario a las propiedades del modelo
         $registro->save(); // Guardar el nuevo registro en la base de datos
+        return redirect()->route('marketinvoice')->with('refresh', true);
         //return redirect()->route('tabla.index')->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
