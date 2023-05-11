@@ -111,7 +111,7 @@
                                     <select class="form-control unit" list="opciones"  name="unit[]">
                                         <option value="Sacos">Sacos</option>
                                         <option value="Libras">Libras</option>
-                                        <option value="Kilos">Kilos</option>
+                                        <option value="kilogramo">kilogramo</option>
                                         <option value="Unidades">Unidades</option>
                                         <option value="Galones">Galones</option>
                                         <option value="Maso">Maso</option>
