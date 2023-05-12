@@ -27,7 +27,7 @@ class APIController extends Controller
         //$user = auth()->user();
         //dd($user);
 
-        $client_token_post = new Client(['base_uri' => 'https://erp.superlapagoda.com:444/']);
+        $client_token_post = new Client(['base_uri' => 'https://erp.superlapagoda.com/']);
         $http_token_post   = $client_token_post->request('POST', 'api/v1/auth/tokens', [
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -42,7 +42,7 @@ class APIController extends Controller
 
         $response_token_post = json_decode($http_token_post->getBody()->getContents());
         //dd($response_token_post->clients);
-        $client_token_put = new Client(['base_uri' => 'https://erp.superlapagoda.com:444/']);
+        $client_token_put = new Client(['base_uri' => 'https://erp.superlapagoda.com/']);
         $http_token_put   = $client_token_put->request('PUT', 'api/v1/auth/tokens', [
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -76,7 +76,7 @@ $valrule -> to get PO records using a validation rule - AD_ValRule_ID or AD_ValR
 $context -> to put variables in context to be parsed by the validation rule
     */
     public function getModel(String $model_name,String $select='', String $filter='',String $orderby='',String $top='',String $skip='',String $expand=''){
-        $client = new Client(['base_uri' => 'https://erp.superlapagoda.com:444/']);
+        $client = new Client(['base_uri' => 'https://erp.superlapagoda.com/']);
         $http   = $client->request('GET', 'api/v1/models/'.$model_name, [
             'headers' => [
                 'Content-Type' => 'application/json',
