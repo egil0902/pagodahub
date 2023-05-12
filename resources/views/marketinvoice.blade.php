@@ -109,8 +109,8 @@
                                                         <input class="border-0 bg-transparent" type="number"
                                                             name="quantity[]"
                                                             id="quantity{{ $index + 1 }}{{ $product }}"
-                                                            value="{{ json_decode($data->quantity)[$index] }}"
-                                                            data-quantity-value="{{ json_decode($data->quantity)[$index] }}"
+                                                            value="{{ isset(json_decode($data->quantity)[$index]) ? json_decode($data->quantity)[$index] : '0' }}"
+                                                            data-quantity-value="{{ isset(json_decode($data->quantity)[$index]) ? json_decode($data->quantity)[$index] : '0' }}"
                                                             readonly>
                                                     </td>
                                                     <td>
