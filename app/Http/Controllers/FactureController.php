@@ -9,8 +9,8 @@ class FactureController extends Controller
 {
     public function index()
     {
-        $registros = Facture::all(); // Obtener todos los registros de la tabla
-        return view('tabla.index', compact('registros')); // Pasar los registros a la vista
+        $facturas = Facture::all(); // Obtener todos los facturas de la tabla
+        return view('facture', compact('facturas')); // Pasar los facturas a la vista
     }
 
     public function create()
@@ -55,21 +55,37 @@ class FactureController extends Controller
         $registro->save(); // Guardar los cambios en la base de datos
         return redirect()->route('tabla.index')->with('success', 'Registro actualizado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
-
-    /*
-    public function destroy(Facture $registro)
-    {
-        $registro->delete(); // Eliminar el registro de la base de datos
-        return redirect()->route('tabla.index')->with('success', 'Registro eliminado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
-    }
-    */
-    public function searchByProvider(Request $request)
-{
-    $providerName = $request->input('proveedor');
-    $invoices = Facture::whereHas('proveedor', function($query) use ($providerName) {
-        $query->where('proveedor', 'LIKE', '%' . $providerName . '%');
-    })->get();
     
-    return view('facture.index', compact('invoices'));
-}
+    public function searchByProvider(Request $request)
+    {
+        $providerName = $request->input('provider');
+        $query = Facture::query();
+        if (!empty($providerName)) {
+            $query->where('proveedor', $providerName);
+        }
+        $facturas = $query->get();
+        return view('facture', compact('facturas'));
+    }
+
+    public function getAllCredit(Request $request)
+    {
+        //RECORDATORIO QUE TODOS LOS CREDITOS ESTAN EN LA DB CON VALOR 1
+        $facturas = Facture::where('medio_de_pago', 1)->get();
+        
+        return view('facture', compact('facturas'));
+    }
+    public function borrar($id)
+    {
+        // Buscar la factura por su ID y eliminarla directamente
+        $facture = Facture::find($id);
+
+        if (!$facture) {
+            return redirect()->back()->with('error', 'La factura no existe');
+        }
+
+        $facture->delete();
+
+        return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente');
+    }
+
 }
