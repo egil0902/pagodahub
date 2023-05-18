@@ -32,7 +32,6 @@ class MarketController extends Controller
     {
         $productos = $request->input('product');
         
-        array_push($productos, 'Carton');
         $productos = array_values(array_filter($productos, function ($valor) {
             return !is_null($valor) && $valor !== '';
         }));
@@ -51,7 +50,6 @@ class MarketController extends Controller
 
 
         $unidades = $request->input('unit');
-        array_push($unidades, 'Carton');
         foreach ($unidades as $nombre) {
             if ($nombre != "") {
                 $unidad = units::where('name', $nombre)->first();
@@ -72,7 +70,6 @@ class MarketController extends Controller
         $quantity = array_values(array_filter($quantity, function ($valor) {
             return !is_null($valor) && $valor !== '';
         }));
-        array_push($quantity, "0");
         $shop->shoppingday = $request->input('date-day');
         $shop->buyer = $request->input('comprador');
         $shop->budget = $request->input('Presupuesto');
