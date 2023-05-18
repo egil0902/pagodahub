@@ -43,7 +43,7 @@
 
     table {
         font-family: arial, sans-serif;
-        font-size: 8px;
+        font-size: 12px;
         background-color: white;
         text-align: left;
         border-collapse: collapse;
@@ -535,7 +535,31 @@
                                 </tr>
                             </table>
                         </td>
-
+                        
+                        @if(number_format(
+                                                            $dataday->x_oneamtFiscalizadora -
+                                                                $data->x_oneamt +
+                                                                ($dataday->x_fiveamtFiscalizadora - $data->x_fiveamt) +
+                                                                ($dataday->x_tenamtFiscalizadora - $data->x_tenamt) +
+                                                                ($dataday->x_twentyamtFiscalizadora - $data->x_twentyamt) +
+                                                                ($dataday->x_fiftyamtFiscalizadora - $data->x_fiftyamt) +
+                                                                ($dataday->x_hundredamtFiscalizadora - $data->x_hundredamt) +
+                                                                ($dataday->yappyFiscalizadora - $data->yappy) +
+                                                                ($dataday->otrosFiscalizadora + $dataday->otrosprimeroFiscalizadora - $data->otros) +
+                                                                ($dataday->valespagodaFiscalizadora - $data->valespagoda) +
+                                                                ($dataday->CheckAmtFiscalizadora - $data->CheckAmt) +
+                                                                ($dataday->LotoAmtFiscalizadora - $data->LotoAmt) +
+                                                                ($dataday->valeAmtFiscalizadora - $data->CreditAmt) +
+                                                                ($dataday->CardClaveFiscalizadora + $dataday->CardValeFiscalizadora + $dataday->CardVisaFiscalizadora - $data->CardAmt + $dataday->CardMasterFiscalizadora + $dataday->CardAEFiscalizadora + $dataday->CardBACFiscalizadora) +
+                                                                ($dataday->CashAmtFiscalizadora - $data->CashAmt) +
+                                                                ($dataday->CoinRollFiscalizadora - $data->CoinRoll) +
+                                                                ($dataday->InvoiceAmtFiscalizadora + $dataday->InvoiceAmtPropiasFiscalizadora - $data->InvoiceAmt) +
+                                                                ($dataday->VoucherAmtFiscalizadora - $data->VoucherAmt) +
+                                                                ($dataday->GrantAmtFiscalizadora - $data->GrantAmt),
+                                                            2,
+                                                            ',',
+                                                            ' ',
+                                                        )>0.0)
                         <td>
                             <h3>Fiscalizadora</h3>
                             <table style="border: 1px solid #0F362D;">
@@ -1085,7 +1109,38 @@
                                 @endif
                             </table>
                         </td>
-
+                        @endif
+                        @if(number_format(
+                                                        $dataday->x_oneamtGerente -
+                                                            $dataday->x_oneamtFiscalizadora +
+                                                            ($dataday->x_fiveamtGerente - $dataday->x_fiveamtFiscalizadora) +
+                                                            ($dataday->x_tenamtGerente - $dataday->x_tenamtFiscalizadora) +
+                                                            ($dataday->x_twentyamtGerente - $dataday->x_twentyamtFiscalizadora) +
+                                                            ($dataday->x_fiftyamtGerente - $dataday->x_fiftyamtFiscalizadora) +
+                                                            ($dataday->x_hundredamtGerente - $dataday->x_hundredamtFiscalizadora) +
+                                                            ($dataday->yappyGerente - $dataday->yappyFiscalizadora) +
+                                                            ($dataday->otrosGerente - $dataday->otrosFiscalizadora) +
+                                                            ($dataday->otrosprimeroGerente - $dataday->otrosprimeroFiscalizadora) +
+                                                            ($dataday->valespagodaGerente - $dataday->valespagodaFiscalizadora) +
+                                                            ($dataday->CheckAmtGerente - $dataday->CheckAmtFiscalizadora) +
+                                                            ($dataday->LotoAmtGerente - $dataday->LotoAmtFiscalizadora) +
+                                                            ($dataday->valeAmtGerente - $dataday->valeAmtFiscalizadora) +
+                                                            ($dataday->CardClaveGerente - $dataday->CardClaveFiscalizadora) +
+                                                            ($dataday->CardValeGerente - $dataday->CardValeFiscalizadora) +
+                                                            ($dataday->CardVisaGerente - $dataday->CardVisaFiscalizadora) +
+                                                            ($dataday->CardMasterGerente - $dataday->CardMasterFiscalizadora) +
+                                                            ($dataday->CardAEGerente - $dataday->CardAEFiscalizadora) +
+                                                            ($dataday->CardBACGerente - $dataday->CardBACFiscalizadora) +
+                                                            ($dataday->CashAmtGerente - $dataday->CashAmtFiscalizadora) +
+                                                            ($dataday->CoinRollGerente - $dataday->CoinRollFiscalizadora) +
+                                                            ($dataday->InvoiceAmtGerente - $dataday->InvoiceAmtFiscalizadora) +
+                                                            ($dataday->InvoiceAmtPropiasGerente - $dataday->InvoiceAmtPropiasFiscalizadora) +
+                                                            ($dataday->VoucherAmtGerente - $dataday->VoucherAmtFiscalizadora) +
+                                                            ($dataday->GrantAmtGerente - $dataday->GrantAmtFiscalizadora),
+                                                        2,
+                                                        ',',
+                                                        ' ',
+                                                    )>0.0)                                  
                         <td>
                             <h3>Gerente</h3>
                             <table style="border: 1px solid #0F362D;">
@@ -1674,7 +1729,7 @@
                                 @endif
                             </table>
                         </td>
-
+                         @endif
                     </tr>
                 </table>
             @endforeach
