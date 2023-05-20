@@ -41,7 +41,9 @@
                                     </h4>
                                 </div>
                                 <div class="col">
-                                    <h4>Comprador: {{ $data->buyer }}</h4>
+                                    <h4>Comprador: 
+                                        <br/> 
+                                        {{ $data->buyer }}</h4>
                                 </div>
                                 <div class="col">
                                     <h4>Proveedor: 
@@ -54,7 +56,7 @@
                                 <div class="col">
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value=""
+                                        id="abono" value="0"
                                         onchange="">
                                     </h4>
                                     
@@ -66,10 +68,20 @@
                                         <option value="false">Credito</option>
                                     </select>
                                     </h4>
-                                    
+                                    <h4>presupuesto: 
+                                        <input class="w-100 form-control" type="text" name="presupuesto"
+                                        id="presupuesto" value="{{ $data->budget }} " readonly>
+                                    </h4>
                                 </div>
+                                <div class="col">
+                                    <h4>Carton: 
+                                        <input class="w-100 form-control" type="text" name="carton"
+                                        id="carton" value="0"
+                                        onchange="">
+                                    </h4>                                    
+                                </div>
+                                
                             </div>
-                            {{-- {{ $data }} --}}
                 <br>
                 <center>                    
                     <div class="p-4 m-0 border-0">
@@ -96,11 +108,14 @@
                                                      <td style="max-width: 50px;">{{ $index + 1 }}</td>
                                                     <td>
                                                         <input class="border-0 bg-transparent" type="text"
-                                                            name="product[]" value="{{ $product }}"
+                                                            name="product[]" 
+                                                            id="product{{ $index + 1 }}"
+                                                            value="{{ $product }}"
                                                             data-product-value="{{ $product }}" readonly>
                                                     </td>
                                                     <td>
                                                         <input class="border-0 bg-transparent" type="text" name="unit[]"
+                                                            id="unit{{ $index + 1 }}"
                                                             value=" {{ json_decode($data->unit)[$index] }}"
                                                             data-unit-value="{{ json_decode($data->unit)[$index] }}"
                                                             readonly>
@@ -155,7 +170,7 @@
                                         <th COLSPAN=8></th>
                                     </tr>
                                     <tr>
-                                        <th COLSPAN=3> Totales</th>
+                                        <th COLSPAN=3> Total facturado</th>
                                         <th>
                                             
                                         </th>
@@ -164,15 +179,61 @@
 
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent" type="number" name="sumdif" id="sumdif" value="" readonly>
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent" type="number" name="sumpre"
-                                                id="sumpre" value="" readonly>
                                         </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
+                                    <tr>
+                                        <th COLSPAN=3> Total comprado</th>
+                                        <th>
+                                            
+                                        </th>
+                                        <th>
+                                            <input class="border-0 bg-transparent total-difference-compra" type="Tcompra" name="Tcompra" value="0" readonly>
+
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <!---<th>
+                                        </th>--->
+                                    </tr>
+                                    <tr>
+                                        <th COLSPAN=3> diferencia</th>
+                                        <th>
+                                            
+                                        </th>
+                                        <th>
+                                            <input class="border-0 bg-transparent total-difference-diff" type="number" name="diff" value="0" readonly>
+
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <!---<th>
+                                        </th>--->
+                                    </tr>
+                                    <tr>
+                                        <th COLSPAN=3> Presupuesto final</th>
+                                        <th>
+                                            
+                                        </th>
+                                        <th>
+                                            <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $data->budget }}" readonly>
+
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <th>
+                                        </th>
+                                        <!---<th>
+                                        </th>--->
+                                    </tr>
+                                    
                                     <script>
                                         function sumadiferencia() {
                                             try {
@@ -183,6 +244,7 @@
                                             var elements_differenceFactura = document.getElementsByName('differenceFactura[]');
                                             var elements_difference = document.getElementsByName('difference[]');
                                             var elements_price = document.getElementsByName('price[]');
+                                           
 
                                             for (var i = 0; i < elements_quantity.length; i++) {
                                                 var quantity = parseFloat(elements_quantity[i].value);
@@ -200,6 +262,10 @@
                                             var tables = document.getElementsByTagName('table');
                                             
                                             for (var i = 0; i < tables.length; i++) {
+                                                var presupuesto=parseFloat(document.getElementsByName('presupuesto')[i].value);
+                                                var abono=parseFloat(document.getElementsByName('abono')[i].value);
+                                                var carton=parseFloat(document.getElementsByName('carton')[i].value);
+                                                presupuesto= presupuesto+carton-abono;
                                                 sumaTotal(tables[i]);
                                             }
                                         }
@@ -209,46 +275,59 @@
                                             }
                                         }
                                         function sumaTotal(table) {
-        var sum_differenceFactura = 0;
-        var sum_difference = 0;
-        var sum_price = 0;
-        var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
-        var elements_price = table.querySelectorAll('input[name="price[]"]');
+                                            var sum_differenceFactura = 0;
+                                            var sum_difference = 0;
+                                            var sum_price = 0;
+                                            var sum_compra= 0;
+                                            
+                                            var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
+                                            var elements_price = table.querySelectorAll('input[name="price[]"]');
+                                            var elements_compra = table.querySelectorAll('input[name="quantity[]"]');
+                                            var diff=0
+                                            for (var j = 0; j < elements_differenceFactura.length; j++) {
+                                                var differenceFactura = parseFloat(elements_differenceFactura[j].value);
+                                                var price = parseFloat(elements_price[j].value);
+                                                var diffCompra = parseFloat(elements_compra[j].value);
+                                                sum_differenceFactura += differenceFactura * price;
+                                                sum_compra+=diffCompra*price;
+                                                sum_difference=sum_compra-sum_differenceFactura;
+                                            }
 
-        for (var j = 0; j < elements_differenceFactura.length; j++) {
-            var differenceFactura = parseFloat(elements_differenceFactura[j].value);
-            var price = parseFloat(elements_price[j].value);
+                                            var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
+                                            totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
 
-            sum_differenceFactura += differenceFactura * price;
-        }
+                                            var totalDifferenceCompraInput = table.querySelector('.total-difference-compra');
+                                            totalDifferenceCompraInput.value = sum_compra.toFixed(2);
 
-        var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
-        totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
+                                            var totalDifferenceInput = table.querySelector('.total-difference-diff');
+                                            totalDifferenceInput.value = sum_difference.toFixed(2);
 
-        // Update other total values if needed
-        // ...
+                                            var totalFinalInput = table.querySelector('.total-difference-final');
+                                            var total=totalFinalInput.value
+                                            var attributeValue = "{{ $data->budget }}"
+                                            totalFinalInput.value = attributeValue - sum_compra.toFixed(2);
 
-        // Example: Update total sum of differences and prices
-        var elements_difference = table.querySelectorAll('input[name="difference[]"]');
-        var elements_quantity = table.querySelectorAll('input[name="quantity[]"]');
+                                            // Update other total values if needed
+                                            // ...
 
-        for (var k = 0; k < elements_difference.length; k++) {
-            var difference = parseFloat(elements_difference[k].value);
-            sum_difference += difference;
-        }
+                                            // Example: Update total sum of differences and prices
+                                            var elements_difference = table.querySelectorAll('input[name="difference[]"]');
+                                            var elements_quantity = table.querySelectorAll('input[name="quantity[]"]');
 
-        for (var l = 0; l < elements_price.length; l++) {
-            var quantity = parseFloat(elements_quantity[l].value);
-            var price = parseFloat(elements_price[l].value);
-            sum_price += price;
-        }
 
-        var sumDifferenceInput = table.querySelector('#sumdif');
-        sumDifferenceInput.value = sum_difference.toFixed(2);
+                                            for (var l = 0; l < elements_price.length; l++) {
+                                                var quantity = parseFloat(elements_quantity[l].value);
+                                                var price = parseFloat(elements_price[l].value);
+                                                sum_price += price;
+                                            }
 
-        var sumPriceInput = table.querySelector('#sumpre');
-        sumPriceInput.value = sum_price.toFixed(2);
-    }
+                                            var sumDifferenceInput = table.querySelector('#sumdif');
+                                            
+                                            sumDifferenceInput.value = sum_difference.toFixed(2);
+
+                                            var sumPriceInput = table.querySelector('#sumpre');
+                                            sumPriceInput.value = sum_price.toFixed(2);
+                                        }
 </script>
                                 </table>
                             </div>
