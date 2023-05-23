@@ -258,7 +258,7 @@
                                                 var abono=parseFloat(document.getElementsByName('abono')[i].value);
                                                 var carton=parseFloat(document.getElementsByName('carton')[i].value);
                                                 presupuesto= presupuesto+carton-abono;
-                                                sumaTotal(tables[i]);
+                                                sumaTotal(tables[i],presupuesto);
                                             }
                                         }
                                             catch (error) {
@@ -266,7 +266,7 @@
                                                 
                                             }
                                         }
-                                        function sumaTotal(table) {
+                                        function sumaTotal(table,presupuesto) {
                                             var sum_differenceFactura = 0;
                                             var sum_difference = 0;
                                             var sum_price = 0;
@@ -297,7 +297,7 @@
                                             var totalFinalInput = table.querySelector('.total-difference-final');
                                             var total=totalFinalInput.value
                                             var attributeValue = "{{ $data->budget }}"
-                                            totalFinalInput.value = attributeValue - sum_compra.toFixed(2);
+                                            totalFinalInput.value = presupuesto.toFixed(2) - sum_compra.toFixed(2);
 
                                             // Update other total values if needed
                                             // ...
