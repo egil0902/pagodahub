@@ -119,8 +119,9 @@
                                     </select>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Cantidad</label>
-                                    <input type="number" class="form-control quantity" name="quantity[]"
-                                        placeholder="Cantidad #">
+                                    <input type="text" class="form-control quantity" name="quantity[]" 
+                                    value="{{ old('quantity') ? number_format(old('quantity'), 2, '.', '') : '' }}" placeholder="Cantidad #">
+
                                 </div>
                             </div>
                             <br>

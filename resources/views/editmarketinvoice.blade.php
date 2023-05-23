@@ -9,22 +9,11 @@
     </script>
 @endif
 <div class="p-2 m-0 border-0 bd-example">
-	<form name="market" id="market" method="post" action="{{ route('market.day') }}">
-                <div class="form-group w-50 "style="padding-left: 200px;">
-
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
-                            spellcheck="false" data-ms-editor="true" name="day">
-                        <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
-                    </div>
-
-                </div>
-        </form>
-        @foreach ($comprasdeldia as $data)
-        <form name="market" id="market" method="post" action="{{ route('factures.store') }}">
+	    @foreach ($comprasdeldia as $data)   
+        <form name="market" id="market" method="post" action="{{ route('factures.update',$data->id) }}">
         <div class="form-group w-50">
-            @csrf            
+            @csrf
+            @method('GET')          
             </div>
             <div class="card">
                 <div class="card-header">
@@ -36,7 +25,7 @@
                                     <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
                                     <h4>Numero de factura:
                                         <input class="w-100 form-control" type="number" name="NFactura"
-                                        id="NFactura" value=""
+                                        id="NFactura" value="{{ $data->id_compra }}"
                                         required onchange="" step="" min="0">
                                     </h4>
                                 </div>
@@ -48,7 +37,7 @@
                                 <div class="col">
                                     <h4>Proveedor: 
                                         <input class="w-100 form-control" type="text" name="proveedor"
-                                        id="proveedor" value=""
+                                        id="proveedor" value="{{ $data->proveedor }}"
                                         required onchange="">
                                     </h4>
                                     
@@ -56,14 +45,15 @@
                                 <div class="col">
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value="0"
+                                        id="abono" value="{{ $data->monto_abonado }}"
                                         onchange="">
                                     </h4>
                                     
                                 </div>
                                 <div class="col">
                                     <h4>metodo de pago: 
-                                        <select class="form-control unit" list="opciones"  name="metodo" id="metodo">
+                                        <select class="form-control unit" list="opciones"  name="metodo" id="metodo"
+                                        value="{{ $data->medio_de_pago }}">
                                         <option value="true">Efectivo</option>
                                         <option value="false">Credito</option>
                                     </select>
@@ -76,7 +66,7 @@
                                 <div class="col">
                                     <h4>Carton: 
                                         <input class="w-100 form-control" type="text" name="carton"
-                                        id="carton" value="0"
+                                        id="carton" value="{{ $data->carton }}"
                                         onchange="">
                                     </h4>                                    
                                 </div>
@@ -130,13 +120,14 @@
                                                     </td>
                                                     <td>
                                                         <input class="w-100 " type="number" name="differenceFactura[]"
-                                                            id="differenceFactura{{ $index + 1 }}" value=""
+                                                            id="differenceFactura{{ $index + 1 }}" value="{{ isset(json_decode($data->factured_quantity)[$index]) ? json_decode($data->factured_quantity)[$index] : '0' }}"
                                                             required onchange="sumadiferencia();" step="0.01" min="0">
                                                     </td>
                                                     <td>
                                                         <input class="w-100 border-0 bg-transparent" type="number"
                                                             id="difference{{ $index + 1 }}" name="difference[]"
-                                                            value="" readonly>
+                                                            value="" 
+                                                            readonly>
                                                     </td>
                                                     <script>
                                                         // Obtener las entradas numéricas
@@ -159,7 +150,8 @@
                                                         });
                                                     </script>
                                                     <td>
-                                                        <input class="w-100 " type="number" name="price[]" value=""
+                                                        <input class="w-100 " type="number" name="price[]" 
+                                                        value="{{ isset(json_decode($data->price)[$index]) ? json_decode($data->price)[$index] : '0' }}"
                                                             data-price-value="" onchange="sumadiferencia();" step="0.01" min="0" required>
                                                     </td>                                                    
                                                 </tr>
@@ -328,7 +320,7 @@
                                             var sumPriceInput = table.querySelector('#sumpre');
                                             sumPriceInput.value = sum_price.toFixed(2);
                                         }
-</script>
+                                    </script>
                                 </table>
                             </div>
                             <button type="submit" class="btn btn-outline-success w-100">
@@ -341,7 +333,7 @@
                                         d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z">
                                     </path>
                                 </svg>
-                                Guardar
+                                Modificar
                             </button>
                             <br>
                             <br>
@@ -352,6 +344,12 @@
             </div>
         </form>
         @endforeach
+        <script>
+            // Función que se ejecuta cuando la página ha cargado completamente
+            document.addEventListener("DOMContentLoaded", function(event) {
+                sumadiferencia();
+            });
+        </script>
     </div>
     <style>
         table {

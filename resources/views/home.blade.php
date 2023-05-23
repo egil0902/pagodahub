@@ -330,7 +330,7 @@
                                                         <button type="submit" class="btn btn-outline">
                                                             {{-- <h5 class="card-header">Compras</h5> --}}
                                                             <div class="card-body">
-                                                                <h5 class="card-title">Listado de creditos por proveedor
+                                                                <h5 class="card-title">Listado de facturas
                                                                 </h5>
                                                                 <p class="card-text">---------------</p>
                                                             </div>
