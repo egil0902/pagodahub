@@ -68,6 +68,10 @@ Route::post('/facture_store', [App\Http\Controllers\FactureController::class, 's
 Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
 Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
 Route::delete('/facture_delete/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
+//Route::post('/facture/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
+Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
+
+Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.credit');
 
@@ -92,6 +96,6 @@ Route::get('/firma3', function () {
 
 // Ruta para dompdf
 Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');
-
+Route::get('facturas-pdf', [App\Http\Controllers\FactureController::class, 'downloadPdf'])->name('facture-pdf');
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');

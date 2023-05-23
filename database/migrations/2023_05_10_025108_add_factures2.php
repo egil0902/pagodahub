@@ -18,6 +18,8 @@ return new class extends Migration
             $table->double('Total_compra')->default(0.0);
             $table->double('diferencia')->default(0.0);
             $table->double('carton')->default(0.0);
+            $table->longText('price')->nullable();
+            $table->longText('Factured_quantity')->nullable();
         });
     }
 

@@ -48,6 +48,7 @@
                     <td>{{$factura->medio_de_pago?"Crédito":"Contado"}}</td>
                     <td>{{$factura->total}}</td>
                     <td>
+                        
                         <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                             @csrf
                             @method('DELETE')
@@ -59,21 +60,43 @@
                         </form>
                     </td>
                     <td>
-                        <form action="{{route('factures.show', $factura->id) }}" method="post">
-                            @csrf
-                            @method('POST')
-                            <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal">
-                                Ver
-                            </button>
-                        </form>
-                        
+                        <input type="checkbox" name="factura_ids[]" value="{{$factura->id_compra}}">
                     </td>
-
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        
+        <!-- Formulario para imprimir facturas -->
+        <form name="provider" id="provider" method="get" action="{{ route('facture-pdf') }}">
+            @csrf
+            <div class="form-group">
+                <input type="hidden" name="factura_ids" id="factura_ids" value="">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                    Imprimir facturas
+                </button>
+            </div>
+        </form>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Escucha el evento de cambio en los checkboxes
+                $('input[name="factura_ids[]"]').change(function() {
+                    // Obtén los IDs de las facturas seleccionadas
+                    var selectedIds = [];
+                    $('input[name="factura_ids[]"]:checked').each(function() {
+                        selectedIds.push($(this).val());
+                    });
+
+                    // Asigna los IDs al campo oculto
+                    $('#factura_ids').val(selectedIds.join(','));
+                });
+            });
+
+            // Función para deseleccionar todos los checkboxes
+            function deselectAllCheckboxes() {
+                $('input[name="factura_ids[]"]').prop('checked', false);
+            }
+        </script>
     </div>
 </div>
 
