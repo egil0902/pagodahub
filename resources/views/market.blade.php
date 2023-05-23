@@ -115,7 +115,9 @@
                                         <option value="Unidades">Unidades</option>
                                         <option value="Galones">Galones</option>
                                         <option value="Maso">Maso</option>
-                                        <option value="Caja">Caja</option>                                        
+                                        <option value="Caja">Caja</option>
+                                        <option value="Docena">Docena</option>  
+                                        <option value="Bolsa">Bolsa</option>  
                                     </select>
                                     <br>
                                     <label for="formGroupExampleInput" class="form-label">Cantidad</label>
