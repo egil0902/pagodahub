@@ -97,6 +97,8 @@
             <th>Producto</th>
             <th>Cantidad</th>
             <th>Precio</th>
+            <th>Valor total</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -105,6 +107,7 @@
             <td>{{ $product }}</td>
             <td>{{ json_decode($data->factured_quantity)[$index] }}</td>
             <td>{{ json_decode($data->price)[$index] }}</td>
+            <td>{{ json_decode($data->factured_quantity)[$index] * json_decode($data->price)[$index] }}</td>
         </tr>
         @endforeach
     </tbody>
