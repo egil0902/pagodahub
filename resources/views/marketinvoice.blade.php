@@ -97,6 +97,7 @@
                                             <th>Cantidad factura</th>
                                             <th>Diferencia</th>
                                             <th>Precio</th>
+                                            <th>Valor</th>
                                             <!---<th>Metodo de Pago</th>--->
                                         </tr>
                                     </thead>
@@ -161,7 +162,12 @@
                                                     <td>
                                                         <input class="w-100 " type="number" name="price[]" value=""
                                                             data-price-value="" onchange="sumadiferencia();" step="0.01" min="0" required>
-                                                    </td>                                                    
+                                                    </td>
+                                                    <td>
+                                                        <input class="w-100 border-0 bg-transparent" type="number"
+                                                            id="mult{{ $index + 1 }}" name="mult[]"
+                                                            value="" readonly>
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -177,6 +183,8 @@
                                         <th>
                                             <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="0" readonly>
 
+                                        </th>
+                                        <th>
                                         </th>
                                         <th>
                                         </th>
@@ -198,6 +206,8 @@
                                         </th>
                                         <th>
                                         </th>
+                                        <th>
+                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
@@ -214,6 +224,8 @@
                                         </th>
                                         <th>
                                         </th>
+                                        <th>
+                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
@@ -225,6 +237,8 @@
                                         <th>
                                             <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $data->budget }}" readonly>
 
+                                        </th>
+                                        <th>
                                         </th>
                                         <th>
                                         </th>
@@ -283,6 +297,8 @@
                                             var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
                                             var elements_price = table.querySelectorAll('input[name="price[]"]');
                                             var elements_compra = table.querySelectorAll('input[name="quantity[]"]');
+                                            var elements_mult = table.querySelectorAll('input[name="mult[]"]');
+                                            
                                             var diff=0
                                             for (var j = 0; j < elements_differenceFactura.length; j++) {
                                                 var differenceFactura = parseFloat(elements_differenceFactura[j].value);
@@ -290,6 +306,7 @@
                                                 var diffCompra = parseFloat(elements_compra[j].value);
                                                 sum_differenceFactura += differenceFactura * price;
                                                 sum_compra+=diffCompra*price;
+                                                elements_mult[j].value=differenceFactura*price;
                                                 sum_difference=sum_compra-sum_differenceFactura;
                                             }
 
@@ -305,7 +322,8 @@
                                             var totalFinalInput = table.querySelector('.total-difference-final');
                                             var total=totalFinalInput.value
                                             var attributeValue = "{{ $data->budget }}"
-                                            totalFinalInput.value = presupuesto.toFixed(2) - sum_compra.toFixed(2);
+                                            var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
+                                            totalFinalInput.value = answer.toFixed(2);
 
                                             // Update other total values if needed
                                             // ...
