@@ -124,7 +124,7 @@ class FactureController extends Controller
         $registro->total = $request->pfinal;
         $registro->diferencia = $request->diff;
         $registro->Total_compra = $request->pfinal;
-        $registro->factured_quantity = json_encode($request->differenceFactura);
+        $registro->Factured_quantity = json_encode($request->differenceFactura);
         $registro->price = json_encode($request->price);
 
         if (!empty($request->archivosimg) && is_array($request->archivosimg) && count($request->archivosimg) > 0) {

@@ -38,6 +38,7 @@
     th,
     td {
         padding: 1px;
+        text-align: center;
         /* border: 1px solid #0F362D; */
     }
 
@@ -105,9 +106,9 @@
         @foreach(json_decode($data->product) as $index => $product)
         <tr>
             <td>{{ $product }}</td>
-            <td>{{ json_decode($data->factured_quantity)[$index] }}</td>
+            <td>{{ json_decode($data->Factured_quantity)[$index] }}</td>
             <td>{{ json_decode($data->price)[$index] }}</td>
-            <td>{{ json_decode($data->factured_quantity)[$index] * json_decode($data->price)[$index] }}</td>
+            <td>{{ json_decode($data->Factured_quantity)[$index] * json_decode($data->price)[$index] }}</td>
         </tr>
         @endforeach
     </tbody>
