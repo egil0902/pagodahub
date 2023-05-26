@@ -45,7 +45,7 @@
                     <td>{{$factura->fecha}}</td>
                     <td>{{$factura->proveedor}}</td>
                     <td>{{$factura->monto_abonado}}</td>
-                    <td>{{$factura->medio_de_pago?"Crédito":"Contado"}}</td>
+                    <td>{{$factura->medio_de_pago?"Contado":"Credito"}}</td>
                     <td>{{$factura->total}}</td>
                     <td>
                         <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
