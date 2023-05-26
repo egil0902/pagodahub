@@ -313,7 +313,8 @@
                                                 var diffCompra = parseFloat(elements_compra[j].value);
                                                 sum_differenceFactura += differenceFactura * price;
                                                 sum_compra+=diffCompra*price;
-                                                elements_mult[j].value=differenceFactura*price;
+                                                var mult=differenceFactura*price;
+                                                elements_mult[j].value=mult.toFixed(2);
                                                 sum_difference=sum_compra-sum_differenceFactura;
                                             }
 
