@@ -80,7 +80,8 @@ Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::clas
 Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
 // Ruta para procesar el formulario del mercado (método POST)
 Route::post('/market', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
-
+Route::post('/market/{id}', [App\Http\Controllers\MarketController::class, 'update'])->name('market.update');
+Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'])->name('market.edit');
 Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoice');
 Route::post('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day');
 

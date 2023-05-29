@@ -8,6 +8,10 @@
         window.location.reload();
     </script>
 @endif
+@if (session('mensaje'))
+    <div class="alert alert-warning">{{ session('mensaje') }}</div>
+@endif
+
 <div class="p-2 m-0 border-0 bd-example">
 	<form name="market" id="market" method="post" action="{{ route('market.day') }}">
                 <div class="form-group w-50 "style="padding-left: 200px;">
@@ -173,7 +177,11 @@
                                         @endforeach
                                     </tbody>
                                     <tr>
-                                        <th COLSPAN=8></th>
+                                        
+                                        <th COLSPAN=8>
+                                        <a href="{{ route('market.edit', $data->id) }}" class="btn btn-outline-success w-100">    Modificar Productos
+                                        </a>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th COLSPAN=3> Total facturado</th>
@@ -319,10 +327,10 @@
                                             }
 
                                             var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
-                                            totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
+                                            totalDifferenceFacturaInput.value = sum_compra.toFixed(2);
 
                                             var totalDifferenceCompraInput = table.querySelector('.total-difference-compra');
-                                            totalDifferenceCompraInput.value = sum_compra.toFixed(2);
+                                            totalDifferenceCompraInput.value = sum_differenceFactura.toFixed(2);
 
                                             var totalDifferenceInput = table.querySelector('.total-difference-diff');
                                             totalDifferenceInput.value = sum_difference.toFixed(2);
@@ -330,7 +338,7 @@
                                             var totalFinalInput = table.querySelector('.total-difference-final');
                                             var total=totalFinalInput.value
                                             var attributeValue = "{{ $data->budget }}"
-                                            var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
+                                            var answer = presupuesto.toFixed(2) - sum_differenceFactura.toFixed(2);
                                             totalFinalInput.value = answer.toFixed(2);
 
                                             // Update other total values if needed

@@ -214,12 +214,35 @@
                                                         <button type="submit" class="btn btn-outline">
                                                             {{-- <h5 class="card-header">Prestamos</h5> --}}
                                                             <div class="card-body">
-                                                                <h5 class="card-title">Control de los Prestamos</h5>
-                                                                <p class="card-text">Administración de prestamos, registro
+                                                                <h5 class="card-title">Crear Prestamos</h5>
+                                                                <p class="card-text">Creación de prestamos, registro
                                                                     de
                                                                     terceros
                                                                     y
                                                                     adjuntos
+                                                                </p>
+                                                            </div>
+                                                        </button>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                    @if ($acceso->Name == 'loans')
+                                        <div class="col">
+                                            <div class="card h-100 border border-5 border-dark-subtle">
+                                                <form name="loanslist" id="loanslist" method="get"
+                                                    action="{{ route('loans.list') }}">
+                                                    @csrf
+                                                    <center>
+                                                        <button type="submit" class="btn btn-outline">
+                                                            {{-- <h5 class="card-header">Prestamos</h5> --}}
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Cancelar Prestamos</h5>
+                                                                <p class="card-text">
+                                                                    Opcion para pagar los prestamos
                                                                 </p>
                                                             </div>
                                                         </button>

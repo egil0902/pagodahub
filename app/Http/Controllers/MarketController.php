@@ -113,6 +113,22 @@ class MarketController extends Controller
         return view('marketinvoice', compact('comprasdeldia'));
     }
     /**
+     * edit the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, $id)
+    {
+        $comprasdeldia = marketshopping::where('id', $id)->get();
+        
+        $opciones = units::all();
+        $opciones2 = products::all();
+        return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -120,8 +136,33 @@ class MarketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        
+        $shop = MarketShopping::findOrFail($id);
+        
+        
+
+        $productos = $request->input('product');        
+        $productos = array_values(array_filter($productos, function ($valor) {
+            return !is_null($valor) && $valor !== '';
+        }));
+
+        $quantity =$request->input('quantity');
+        $quantity = array_values(array_filter($quantity, function ($valor) {
+            return !is_null($valor) && $valor !== '';
+        }));
+        $unidades = $request->input('unit');
+        $shop->shoppingday = $request->input('date-day');
+        $shop->buyer = $request->input('comprador');
+        $shop->budget = $request->input('Presupuesto');
+        $shop->product = json_encode($productos);
+        $shop->unit = json_encode($unidades);
+        $shop->quantity = json_encode($quantity);
+        $shop->save();
+        
+        $day = "3000-01-01";
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        return view('marketinvoice', compact('comprasdeldia'));
     }
 
     /**
