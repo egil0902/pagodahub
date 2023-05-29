@@ -36,6 +36,7 @@ class FactureController extends Controller
         $registro->total =$request->pfinal;
         $registro->diferencia =$request->diff;
         $registro->Total_compra =$request->pfinal;
+        $registro->carton = $request->carton;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
         
@@ -121,9 +122,10 @@ class FactureController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request);
         // Obtener el registro existente de la base de datos
         $registro = Facture::findOrFail($id);
-
+        $updateMarket = marketshopping::where('id_compra', $registro->id_compra)->first();
         // Actualizar los valores del registro con los datos del formulario
         $registro->id_compra = $request->NFactura;
         $registro->fecha = $request->fecha_registro;
@@ -134,6 +136,7 @@ class FactureController extends Controller
         $registro->diferencia = $request->diff;
         $registro->Total_compra = $request->pfinal;
         $registro->Factured_quantity = json_encode($request->differenceFactura);
+        $registro->carton = $request->carton;
         $registro->price = json_encode($request->price);
 
         if (!empty($request->archivosimg) && is_array($request->archivosimg) && count($request->archivosimg) > 0) {
@@ -141,12 +144,12 @@ class FactureController extends Controller
         }
         $registro->total = $request->sumdifac;
 
-        $registro->save(); // Guardar los cambios en la base de datos
 
         // Actualizar el registro relacionado en la tabla marketshopping
-        $updateMarket = marketshopping::where('id', $request->id)->first();
         $updateMarket->id_compra = $request->NFactura;
         $updateMarket->save();
+        
+        $registro->save(); // Guardar los cambios en la base de datos
 
         $facturas = Facture::all(); // Obtener todos los facturas de la tabla
         return view('facture', compact('facturas')); // Pasar los facturas a la vista
