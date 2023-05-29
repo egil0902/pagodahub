@@ -8,6 +8,9 @@
         window.location.reload();
     </script>
 @endif
+@if (session('mensaje'))
+    <div class="alert alert-warning">{{ session('mensaje') }}</div>
+@endif
 <div class="p-2 m-0 border-0 bd-example">
         @foreach ($comprasdeldia as $ind =>$data)
         <form name="market[]" id="market{{$ind}}" method="post" action="{{ route('factures.update',$data->id) }}">
@@ -244,7 +247,6 @@
                                     <script>
                                         function sumadiferencia(numero) {
                                             try {
-                                            console.log(numero)
                                             var elements_market = document.getElementsByName('market[]');
                                             
                                                 var sum_differenceFactura = 0;
@@ -258,7 +260,6 @@
                                                 var elements_difference = document.getElementsByName('difference[]');
                                                 var elements_price = document.getElementsByName('price[]');
                                                 */
-                                                //console.log(elements_differenceFactura);
 
                                                 for (var i = 0; i < elements_quantity.length; i++) {
                                                     var quantity = parseFloat(elements_quantity[i].value);

@@ -122,7 +122,6 @@ class FactureController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request);
         // Obtener el registro existente de la base de datos
         $registro = Facture::findOrFail($id);
         $updateMarket = marketshopping::where('id_compra', $registro->id_compra)->first();

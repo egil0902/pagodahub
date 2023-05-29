@@ -241,7 +241,6 @@
                             deleteButton.classList.add("btn", "btn-danger");
                             deleteButton.id = "deleteButton" + i;
                             deleteButton.addEventListener("click", function() {
-                                console.log("asdf")
                                 const rowToRemove = document.getElementById("row" + i);
                                 rowToRemove.parentNode.removeChild(rowToRemove);
                                 
@@ -286,8 +285,7 @@
                         const units = JSON.parse(unitsJson);
                         const quantities = JSON.parse(quantitiesJson);
                         
-                        console.log("🚀 ~ file: marketEdit.blade.php:281 ~ editProductList ~ quantities:", quantities)
-
+                        
                         for (let i = 0; i < products.length; i++) {
                             try {
                             
@@ -307,7 +305,6 @@
                             deleteButton.classList.add("btn", "btn-danger");
                             deleteButton.id = "deleteButton" + i;
                             deleteButton.addEventListener("click", function() {
-                                console.log("asdf")
                                 const rowToRemove = document.getElementById("row" + i);
                                 rowToRemove.parentNode.removeChild(rowToRemove);
                             });
@@ -324,14 +321,12 @@
                             row.appendChild(deleteCell);
                             count++;
                             n = count;
-                            console.log(formContainer.getElementsByClassName("form-group"))
                             formContainer.getElementsByClassName("form-group")[i].getElementsByClassName("product")[0].value = product;
                             formContainer.getElementsByClassName("form-group")[i].getElementsByClassName("unit")[0].value = unit;
                             formContainer.getElementsByClassName("form-group")[i].getElementsByClassName("quantity")[0].value = quantity;
                             
                             const formGroup = formContainer.getElementsByClassName("form-group")[n - 1];
                             const newFormGroup = formGroup.cloneNode(true);
-                            console.log("🚀 ~ file: marketEdit.blade.php:330 ~ editProductList ~ newFormGroup:", newFormGroup)
                             formContainer.getElementsByClassName("form-group")[i].setAttribute('style', 'display:none');
                             newFormGroup.id = "formGroup" + count;
                             formContainer.appendChild(newFormGroup);
