@@ -17,6 +17,15 @@ class FactureController extends Controller
 
     public function store(Request $request)
     {
+        // Buscar si existe un registro con el mismo número de factura
+        $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
+        if ($existingFacture) {
+            // Si se encuentra un registro con el mismo número de factura, devuelve un mensaje de error
+            $request->session()->flash('mensaje', 'El numero de factura ya existe');
+            $day = $request->fecha_registro;
+            $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+            return view('marketinvoice', compact('comprasdeldia'));
+        }
         //dd($request);
         $registro = new Facture();
         $registro->id_compra = $request->NFactura;
