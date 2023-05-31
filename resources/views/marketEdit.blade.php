@@ -21,7 +21,6 @@
             </ul>
         </div>
     @endif
-        {{$comprasdeldia}}
     <div class="container">
         <div class="card w-auto">
             <div class="card-header">
