@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\marketshopping;
 use App\Models\products;
 use App\Models\units;
+use App\Models\Facture;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
+
 
 class MarketController extends Controller
 {
@@ -70,6 +72,17 @@ class MarketController extends Controller
         $quantity = array_values(array_filter($quantity, function ($valor) {
             return !is_null($valor) && $valor !== '';
         }));
+        $presupuesto = $request->input('Presupuesto');
+
+        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
+        foreach ($comprasdeldia as $compra) {
+            if ($compra->budget != $presupuesto) {
+                $compra->budget = $presupuesto;
+                $compra->save();
+            }
+        }
+
+
         $shop->shoppingday = $request->input('date-day');
         $shop->buyer = $request->input('comprador');
         $shop->budget = $request->input('Presupuesto');
@@ -100,7 +113,11 @@ class MarketController extends Controller
     {
         $day = "3000-01-01";
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
-        return view('marketinvoice', compact('comprasdeldia'));
+        $presupuesto=0;
+        if($comprasdeldia->count() > 0) {
+            $presupuesto=$comprasdeldia[0]->budget;
+        }
+        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
     }
 
     public function shopday(Request $request)
@@ -109,8 +126,21 @@ class MarketController extends Controller
         $day = $request->input('day');
         //dd($day);
         $comprasdeldia = marketshopping::where('shoppingday', $day)->whereNull('id_compra')->get();
-        //dd($comprasdeldia);
-        return view('marketinvoice', compact('comprasdeldia'));
+        
+        $presupuesto=0;
+        if($comprasdeldia->count() > 0) {
+            $presupuesto=$comprasdeldia[0]->budget;
+        }
+        
+        $facturas = Facture::where('fecha', $day)->get();
+        if($facturas->count() > 0) {
+            foreach ($facturas as $factura) {
+                $presupuesto-=$factura->monto_abonado;
+                $presupuesto+=$factura->carton;
+                
+            }
+        }
+        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
     }
     /**
      * edit the specified resource in storage.
@@ -138,10 +168,7 @@ class MarketController extends Controller
     public function update(Request $request, $id)
     {   
         
-        $shop = MarketShopping::findOrFail($id);
-        
-        
-
+        $shop = MarketShopping::findOrFail($id);  
         $productos = $request->input('product');        
         $productos = array_values(array_filter($productos, function ($valor) {
             return !is_null($valor) && $valor !== '';
@@ -151,6 +178,18 @@ class MarketController extends Controller
         $quantity = array_values(array_filter($quantity, function ($valor) {
             return !is_null($valor) && $valor !== '';
         }));
+
+        $presupuesto = $request->input('Presupuesto');
+        
+        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
+        if($comprasdeldia->count() > 0){
+            foreach ($comprasdeldia as $compra) {
+                if ($compra->budget != $presupuesto) {
+                    $compra->budget = $presupuesto;
+                    $compra->save();
+                }
+            }
+        }
         $unidades = $request->input('unit');
         $shop->shoppingday = $request->input('date-day');
         $shop->buyer = $request->input('comprador');

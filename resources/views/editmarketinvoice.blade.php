@@ -49,7 +49,7 @@
                                 <div class="col">
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value="{{ $data->monto_abonado }}"
+                                        id="abono" value="{{ $data->monto_abonado }}" readonly
                                         onchange="sumadiferencia({{$ind}});">
                                     </h4>
                                     
@@ -177,7 +177,7 @@
                                             
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="{{$data->Total_compra + $data->diferencia}}" readonly>
+                                            <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="{{$data->total}}" readonly>
 
                                         </th>
                                         <th>
@@ -195,7 +195,7 @@
                                             
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent total-difference-compra" type="Tcompra" name="Tcompra" value="{{$data->Total_compra}}" readonly>
+                                            <input class="border-0 bg-transparent total-difference-compra" type="Tcompra" name="Tcompra" value="{{$data->monto_abonado}}" readonly>
 
                                         </th>
                                         <th>
@@ -231,7 +231,7 @@
                                             
                                         </th>
                                         <th>
-                                            <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $data->total }}" readonly>
+                                            <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $data->Total_compra }}" readonly>
 
                                         </th>
                                         <th>
@@ -279,7 +279,7 @@
                                                 var presupuesto=parseFloat(elements_market[numero].querySelectorAll('[name="presupuesto"]')[0].value);
                                                 var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
                                                 var carton=parseFloat(elements_market[numero].querySelectorAll('[name="carton"]')[0].value);
-                                                presupuesto= presupuesto+carton-abono;
+                                                presupuesto= presupuesto+carton;
                                                 sumaTotal(elements_market[numero],presupuesto);
                                                 
                                             
@@ -295,6 +295,7 @@
                                             var sum_price = 0;
                                             var sum_compra= 0;
                                             
+                                            var abono=table.querySelectorAll('[name="abono"]')[0];
                                             var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
                                             var elements_price = table.querySelectorAll('input[name="price[]"]');
                                             var elements_compra = table.querySelectorAll('input[name="quantity[]"]');
@@ -325,8 +326,14 @@
                                             var total=totalFinalInput.value
                                             var attributeValue = "{{ $data->budget }}"
                                             var answer = presupuesto.toFixed(2) - sum_differenceFactura.toFixed(2);
-                                            totalFinalInput.value = answer.toFixed(2);
+                                            if(answer>=0){
+                                                abono.value=sum_differenceFactura.toFixed(2);
+                                            }
+                                            if(answer<0){
+                                                abono.value= presupuesto.toFixed(2);
+                                            }
 
+                                            totalFinalInput.value = answer.toFixed(2);
                                             // Update other total values if needed
                                             // ...
 

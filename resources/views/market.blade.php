@@ -86,8 +86,9 @@
                                             <input class="form-control" type="text" name="comprador" id=""
                                                 value="{{ Auth::user()->name }}" readonly style="display:none">
                                         </div>
-                                        <div class="col"><label for="" class="form-label">Presupuesto</label>
+                                        <div class="col"><label for="" class="form-label">Presupuesto del dia</label>
                                             <input class="form-control" type="number" name="Presupuesto" id=""
+                                            title="Si coloca un valor diferente a uno que ya haya puesto este se reescribira"
                                                 step="0.01" required>
                                         </div>
                                         {{-- <div class="col">Column</div> --}}

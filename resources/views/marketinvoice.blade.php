@@ -25,7 +25,24 @@
 
                 </div>
         </form>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+            <div class="col">                
+                <h4>presupuesto: 
+                    <input class="w-100 form-control" type="text" name="presupuesto"
+                    id="presupuesto" value="{{ $presupuesto }} " readonly>
+                </h4>
+            </div>
+            <div class="col">
+                <h4>Carton: 
+                    <input class="w-100 form-control" type="text" name="carton"
+                    id="carton" value="0" 
+                    onchange="">
+                </h4>                                    
+            </div>
+            
+        </div>
         @foreach ($comprasdeldia as $ind =>$data)
+        
         <form name="market[]" id="market{{$ind}}" method="post" action="{{ route('factures.store') }}">
         <div class="form-group w-50">
             @csrf            
@@ -35,57 +52,47 @@
                     Facturas
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                                <div class="col"> 
-                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                    <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
-                                    <h4>Numero de factura:
-                                        <input class="w-100 form-control" type="number" name="NFactura"
-                                        id="NFactura" value=""
-                                        required onchange="" step="" min="0">
-                                    </h4>
-                                </div>
-                                <div class="col">
-                                    <h4>Comprador: 
-                                        <br/> 
-                                        {{ $data->buyer }}</h4>
-                                </div>
-                                <div class="col">
-                                    <h4>Proveedor: 
-                                        <input class="w-100 form-control" type="text" name="proveedor"
-                                        id="proveedor" value=""
-                                        required onchange="">
-                                    </h4>
-                                    
-                                </div>
-                                <div class="col">
-                                    <h4>abono: 
-                                        <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value="0"
-                                        onchange="sumadiferencia({{$ind}});">
-                                    </h4>
-                                    
-                                </div>
-                                <div class="col">
-                                    <h4>metodo de pago: 
-                                        <select class="form-control unit" list="opciones"  name="metodo" id="metodo">
-                                        <option value="true">Efectivo</option>
-                                        <option value="false">Credito</option>
-                                    </select>
-                                    </h4>
-                                    <h4>presupuesto: 
-                                        <input class="w-100 form-control" type="text" name="presupuesto"
-                                        id="presupuesto" value="{{ $data->budget }} " readonly>
-                                    </h4>
-                                </div>
-                                <div class="col">
-                                    <h4>Carton: 
-                                        <input class="w-100 form-control" type="text" name="carton"
-                                        id="carton" value="0" 
-                                        onchange="sumadiferencia({{$ind}});">
-                                    </h4>                                    
-                                </div>
-                                
-                            </div>
+                    <div class="col"> 
+                        <input type="hidden" name="id" value="{{ $data->id }}">
+                        <input type="hidden" name="pres" value="{{ $presupuesto }}">
+                        <input type="hidden" name="cart" value="0">
+                        <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
+                        <h4>Numero de factura:
+                            <input class="w-100 form-control" type="number" name="NFactura"
+                            id="NFactura" value=""
+                            required onchange="" step="" min="0">
+                        </h4>
+                    </div>
+                    <div class="col">
+                        <h4>Comprador: 
+                            <br/> 
+                            {{ $data->buyer }}</h4>
+                    </div>
+                    <div class="col">
+                        <h4>Proveedor: 
+                            <input class="w-100 form-control" type="text" name="proveedor"
+                            id="proveedor" value=""
+                            required onchange="">
+                        </h4>
+                        
+                    </div>
+                    <div class="col">
+                        <h4>abono: 
+                            <input class="w-100 form-control" type="text" name="abono"
+                            id="abono" value="0" readonly
+                            onchange="sumadiferencia({{$ind}});">
+                        </h4>
+                        
+                    </div>
+                    <div class="col">
+                        <h4>metodo de pago: 
+                            <select class="form-control unit" list="opciones"  name="metodo" id="metodo">
+                            <option value="true">Efectivo</option>
+                            <option value="false">Credito</option>
+                        </select>
+                        </h4>
+                    </div>
+                </div>
                 <br>
                 <center>                    
                     <div class="p-4 m-0 border-0">
@@ -259,7 +266,7 @@
                                     <script>
                                         function sumadiferencia(numero) {
                                             try {
-                                            var elements_market = document.getElementsByName('market[]');
+                                                var elements_market = document.getElementsByName('market[]');
                                             
                                                 var sum_differenceFactura = 0;
                                                 var elements_quantity = elements_market[numero].querySelectorAll('[name="quantity[]"]');
@@ -288,10 +295,12 @@
                                                 // Call the sumaTotal() function
                                                 //var tables = elements_market[numero].querySelectorAll('[name="table[]"]');
                                                 
-                                                var presupuesto=parseFloat(elements_market[numero].querySelectorAll('[name="presupuesto"]')[0].value);
+                                                var presupuesto=parseFloat(document.getElementById('presupuesto').value);
                                                 var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
-                                                var carton=parseFloat(elements_market[numero].querySelectorAll('[name="carton"]')[0].value);
-                                                presupuesto= presupuesto+carton-abono;
+                                                var carton=parseFloat(document.getElementById('carton').value);
+                                                var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
+                                                cart.value= carton.toFixed(2);
+                                                presupuesto= presupuesto+carton;
                                                 sumaTotal(elements_market[numero],presupuesto);
                                                 
                                             
@@ -306,7 +315,8 @@
                                             var sum_difference = 0;
                                             var sum_price = 0;
                                             var sum_compra= 0;
-                                            
+
+                                            var abono=table.querySelectorAll('[name="abono"]')[0];
                                             var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
                                             var elements_price = table.querySelectorAll('input[name="price[]"]');
                                             var elements_compra = table.querySelectorAll('input[name="quantity[]"]');
@@ -337,6 +347,13 @@
                                             var total=totalFinalInput.value
                                             var attributeValue = "{{ $data->budget }}"
                                             var answer = presupuesto.toFixed(2) - sum_differenceFactura.toFixed(2);
+                                            if(answer>=0){
+                                                abono.value=sum_differenceFactura.toFixed(2);
+                                            }
+                                            if(answer<0){
+                                                abono.value= presupuesto.toFixed(2);
+                                            }
+
                                             totalFinalInput.value = answer.toFixed(2);
 
                                             // Update other total values if needed
@@ -360,7 +377,7 @@
                                             var sumPriceInput = table.querySelector('#sumpre');
                                             sumPriceInput.value = sum_price.toFixed(2);
                                         }
-</script>
+                                    </script>
                                 </table>
                             </div>
                             <button type="submit" class="btn btn-outline-success w-100">

@@ -17,6 +17,7 @@ class FactureController extends Controller
 
     public function store(Request $request)
     {
+        
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -33,10 +34,9 @@ class FactureController extends Controller
         $registro->proveedor = $request->proveedor;
         $registro->monto_abonado = $request->abono;
         $registro->medio_de_pago = $request->metodo;
-        $registro->total =$request->pfinal;
         $registro->diferencia =$request->diff;
         $registro->Total_compra =$request->pfinal;
-        $registro->carton = $request->carton;
+        $registro->carton = $request->cart;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
         
@@ -48,6 +48,13 @@ class FactureController extends Controller
         $updateMarket = marketshopping::where('id', $request->id)->first();
         $updateMarket->id_compra = $request->NFactura;
         $updateMarket->save();
+        $updateCarton = Facture::where('fecha', $registro->fecha)->get();
+        if($updateCarton->count()>0){
+            foreach ($updateCarton as $carton) {
+                $carton->carton= $request->cart;
+                $carton->save();
+            }
+        }
         
         // Asignar los valores del formulario a las propiedades del modelo
         $registro->save(); // Guardar el nuevo registro en la base de datos
@@ -100,7 +107,6 @@ class FactureController extends Controller
         if (!$comprasdeldia) {
             return redirect()->back()->with('error', 'La factura no existe');
         }
-        //dd($comprasdeldia);
         return view('editmarketinvoice', compact('comprasdeldia'));
     }
 
@@ -122,21 +128,32 @@ class FactureController extends Controller
 
     public function update(Request $request, $id)
     {
+        $updateCarton = Facture::where('fecha', $request->fecha_registro)->get();
+        if($updateCarton->count()>0){
+            foreach ($updateCarton as $carton) {
+                if($carton->carton!= $request->carton){
+                    
+                    $carton->carton= $request->carton;
+                    $carton->save();
+                }
+            }
+        }
         // Obtener el registro existente de la base de datos
         $registro = Facture::findOrFail($id);
         $updateMarket = marketshopping::where('id_compra', $registro->id_compra)->first();
+        $registro->id_compra = $request->NFactura;
         // Actualizar los valores del registro con los datos del formulario
+        
         $registro->id_compra = $request->NFactura;
         $registro->fecha = $request->fecha_registro;
         $registro->proveedor = $request->proveedor;
         $registro->monto_abonado = $request->abono;
         $registro->medio_de_pago = $request->metodo;
-        $registro->total = $request->pfinal;
-        $registro->diferencia = $request->diff;
-        $registro->Total_compra = $request->pfinal;
-        $registro->Factured_quantity = json_encode($request->differenceFactura);
+        $registro->diferencia =$request->diff;
+        $registro->Total_compra =$request->pfinal;
         $registro->carton = $request->carton;
-        $registro->price = json_encode($request->price);
+        $registro->Factured_quantity =json_encode($request->differenceFactura);
+        $registro->price =json_encode($request->price);
 
         if (!empty($request->archivosimg) && is_array($request->archivosimg) && count($request->archivosimg) > 0) {
             $registro->file = $request->archivosimg[0];
@@ -150,6 +167,7 @@ class FactureController extends Controller
         
         $registro->save(); // Guardar los cambios en la base de datos
 
+        
         $facturas = Facture::all(); // Obtener todos los facturas de la tabla
         return view('facture', compact('facturas')); // Pasar los facturas a la vista
     }
