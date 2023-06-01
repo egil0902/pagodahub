@@ -201,7 +201,8 @@ class MarketController extends Controller
         
         $day = "3000-01-01";
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
-        return view('marketinvoice', compact('comprasdeldia'));
+        $presupuesto=0;
+        return view('marketinvoice', compact('comprasdeldia','$presupuesto'));
     }
 
     /**

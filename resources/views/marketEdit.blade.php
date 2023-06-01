@@ -158,17 +158,9 @@
                                     </tr>
 
                                 </thead>
-                                @foreach(json_decode($comprasdeldia[0]->product) as $ind => $product)
-                                <tr id="row{{$ind}}">
-                                    <td>{{$ind+1}}</td>
-                                    <td>{{$product}}</td>
-                                    <td>{{json_decode($comprasdeldia[0]->unit)[$ind]}}</td>
-                                    <td>{{json_decode($comprasdeldia[0]->quantity)[$ind]}}</td>
-                                    <td>
-                                        <a class="btn btn-danger" id="deletea{{$ind}}">Borrar</a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                                <tbody>
+
+                                </tbody>
                             </table>
                             <br>
                             <button type="submit" class="btn btn-outline-success w-100">
@@ -181,7 +173,7 @@
                                         d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z">
                                     </path>
                                 </svg>
-                                Guardar
+                                Actualizar
                             </button>
 
                         </form>
@@ -283,6 +275,8 @@
                         const products = JSON.parse(productsJson);
                         const units = JSON.parse(unitsJson);
                         const quantities = JSON.parse(quantitiesJson);
+
+                        const tableBody = document.getElementById("productList");
                         
                         
                         for (let i = 0; i < products.length; i++) {
@@ -292,12 +286,21 @@
                             const unit = units[i];
                             const quantity = quantities[i];
                             const num = i + 1;
-                            if (product && unit && quantity) {
                             const row = document.createElement("tr");
-                            const productCell = document.createElement("td");
-                            const unitCell = document.createElement("td");
-                            const quantityCell = document.createElement("td");
+                            row.id = "row" + i;
+
                             const numCell = document.createElement("td");
+                            numCell.textContent = num;
+
+                            const productCell = document.createElement("td");
+                            productCell.textContent = product;
+
+                            const unitCell = document.createElement("td");
+                            unitCell.textContent = unit;
+
+                            const quantityCell = document.createElement("td");
+                            quantityCell.textContent = quantity;
+
                             const deleteCell = document.createElement("td");
                             const deleteButton = document.createElement("button");
                             deleteButton.innerText = "Borrar";
@@ -306,18 +309,20 @@
                             deleteButton.addEventListener("click", function() {
                                 const rowToRemove = document.getElementById("row" + i);
                                 rowToRemove.parentNode.removeChild(rowToRemove);
+                                products[i].value="";
+                                units[i].value="";
+                                quantities[i].value="";
+                                updateProductList();
                             });
-                            numCell.textContent = num;
-                            productCell.textContent = product;
-                            unitCell.textContent = unit;
-                            quantityCell.textContent = quantity;
                             deleteCell.appendChild(deleteButton);
-                            row.id = "row" + i;
+
                             row.appendChild(numCell);
                             row.appendChild(productCell);
                             row.appendChild(unitCell);
                             row.appendChild(quantityCell);
                             row.appendChild(deleteCell);
+
+                            tableBody.appendChild(row);
                             count++;
                             n = count;
                             formContainer.getElementsByClassName("form-group")[i].getElementsByClassName("product")[0].value = product;
@@ -334,7 +339,7 @@
                             formContainer.getElementsByClassName("form-group")[i+1].getElementsByClassName("unit")[0].value = "";
                             formContainer.getElementsByClassName("form-group")[i+1].getElementsByClassName("quantity")[0].value = "";
                             
-                            }
+                            
                                 
                             } 
                             catch (error) {
