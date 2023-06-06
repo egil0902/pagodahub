@@ -74,12 +74,13 @@ Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 's
 Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.credit');
-
+Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
 // Ruta para mostrar la página del mercado (método GET)
 Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
 // Ruta para procesar el formulario del mercado (método POST)
-Route::post('/market', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
+Route::post('/market/create', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
+Route::post('/market', [App\Http\Controllers\MarketController::class, 'charge'])->name('market.charge');
 Route::post('/market/{id}', [App\Http\Controllers\MarketController::class, 'update'])->name('market.update');
 Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'])->name('market.edit');
 Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoice');

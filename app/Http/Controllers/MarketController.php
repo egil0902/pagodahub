@@ -22,7 +22,9 @@ class MarketController extends Controller
         $opciones = units::all();
         $opciones2 = products::all();
         //dump($opciones, $opciones2);
-        return view('market', compact('opciones', 'opciones2'));
+        $presupuesto =-1;
+        
+        return view('market', compact('opciones', 'opciones2', 'presupuesto'));
     }
     /**
      * Store a newly created resource in storage.
@@ -82,6 +84,35 @@ class MarketController extends Controller
             }
         }
 
+        // Paso 1: Crear un arreglo asociativo con información de productos, unidades y cantidades
+        $info_productos = [];
+        for ($i = 0; $i < count($productos); $i++) {
+            $info_productos[$productos[$i]] = [
+                'unidad' => $unidades[$i],
+                'cantidad' => $quantity[$i]
+            ];
+        }
+
+        // Paso 2: Ordenar el arreglo $productos
+        sort($productos);
+
+        // Paso 3: Crear arreglos vacíos para unidades y cantidades ordenadas
+        $unidades_ordenadas = [];
+        $quantity_ordenado = [];
+
+        // Paso 4: Recorrer el arreglo $productos ordenado
+        foreach ($productos as $producto) {
+            // Paso 5: Encontrar el índice del producto en el arreglo original
+            $indice = array_search($producto, $request->input('product'));
+
+            // Paso 6: Obtener las unidades y la cantidad correspondiente del arreglo original
+            $unidades_ordenadas[] = $info_productos[$producto]['unidad'];
+            $quantity_ordenado[] = $info_productos[$producto]['cantidad'];
+        }
+
+        // Paso 8: Actualizar los arreglos originales con los arreglos ordenados
+        $unidades = $unidades_ordenadas;
+        $quantity = $quantity_ordenado;
 
         $shop->shoppingday = $request->input('date-day');
         $shop->buyer = $request->input('comprador');
@@ -125,22 +156,36 @@ class MarketController extends Controller
         //dump($request);
         $day = $request->input('day');
         //dd($day);
-        $comprasdeldia = marketshopping::where('shoppingday', $day)->whereNull('id_compra')->get();
         
         $presupuesto=0;
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        if($comprasdeldia->count() > 0) {
+            $presupuesto=$comprasdeldia[0]->budget;
+        }
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->whereNull('id_compra')->get();
+        
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
         }
         
         $facturas = Facture::where('fecha', $day)->get();
+        $carton =0;
         if($facturas->count() > 0) {
             foreach ($facturas as $factura) {
-                $presupuesto-=$factura->monto_abonado;
-                $presupuesto+=$factura->carton;
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->total;
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->abono;
+                }
+                
+                if($factura->carton>0){
+                    $carton =$factura->carton;
+                }
                 
             }
         }
-        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
     }
     /**
      * edit the specified resource in storage.
@@ -180,7 +225,7 @@ class MarketController extends Controller
         }));
 
         $presupuesto = $request->input('Presupuesto');
-        
+        $unidades = $request->input('unit');
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
         if($comprasdeldia->count() > 0){
             foreach ($comprasdeldia as $compra) {
@@ -190,7 +235,38 @@ class MarketController extends Controller
                 }
             }
         }
-        $unidades = $request->input('unit');
+
+        // Paso 1: Crear un arreglo asociativo con información de productos, unidades y cantidades
+        $info_productos = [];
+        for ($i = 0; $i < count($productos); $i++) {
+            $info_productos[$productos[$i]] = [
+                'unidad' => $unidades[$i],
+                'cantidad' => $quantity[$i]
+            ];
+        }
+
+        // Paso 2: Ordenar el arreglo $productos
+        sort($productos);
+
+        // Paso 3: Crear arreglos vacíos para unidades y cantidades ordenadas
+        $unidades_ordenadas = [];
+        $quantity_ordenado = [];
+
+        // Paso 4: Recorrer el arreglo $productos ordenado
+        foreach ($productos as $producto) {
+            // Paso 5: Encontrar el índice del producto en el arreglo original
+            $indice = array_search($producto, $request->input('product'));
+
+            // Paso 6: Obtener las unidades y la cantidad correspondiente del arreglo original
+            $unidades_ordenadas[] = $info_productos[$producto]['unidad'];
+            $quantity_ordenado[] = $info_productos[$producto]['cantidad'];
+        }
+
+        // Paso 8: Actualizar los arreglos originales con los arreglos ordenados
+        $unidades = $unidades_ordenadas;
+        $quantity = $quantity_ordenado;
+
+        
         $shop->shoppingday = $request->input('date-day');
         $shop->buyer = $request->input('comprador');
         $shop->budget = $request->input('Presupuesto');
@@ -202,7 +278,7 @@ class MarketController extends Controller
         $day = "3000-01-01";
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
         $presupuesto=0;
-        return view('marketinvoice', compact('comprasdeldia','$presupuesto'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
     }
 
     /**
@@ -214,5 +290,22 @@ class MarketController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function charge(Request $request)
+    {
+        $opciones = units::all();
+        $opciones2 = products::all();
+        //dump($opciones, $opciones2);
+        $presupuesto =-1;
+        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
+        if ($comprasdeldia->count()>0) {
+            $presupuesto=$comprasdeldia[0]->budget ;
+        }
+        else {
+            $presupuesto=0;
+        }
+        $dia =$request->input('date-day');
+        
+        return view('market', compact('opciones', 'opciones2', 'presupuesto','dia'));
     }
 }

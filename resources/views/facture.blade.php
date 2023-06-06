@@ -20,7 +20,7 @@
         <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
             <div class="form-group">
                 @csrf
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas a crédito</button>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
             </div>
         </form>
     </div>
@@ -31,9 +31,10 @@
                     <th># factura</th>
                     <th>Fecha</th>
                     <th>Proveedor</th>
-                    <th>Abono</th>
+                    <th>Valor cancelado</th>
                     <th>Medio de pago</th>
                     <th>Valor Deuda</th>
+                    <th>Pagada?</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -47,6 +48,7 @@
                     <td>{{$factura->monto_abonado}}</td>
                     <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
                     <td>{{$factura->Total_compra>=0?$factura->monto_abonado:$factura->Total_compra}}</td>
+                    <td>{{$factura->pagada?"Si":"No"}}</td>
                     <td>
                         <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                             @csrf

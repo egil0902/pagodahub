@@ -55,6 +55,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- Sección de scripts -->
                         @if (session('mensaje'))
                             <script>
@@ -63,6 +64,29 @@
                                 });
                             </script>
                         @endif
+                        @if($presupuesto < 0)
+                        <form name="market" id="market" method="post" action="{{ route('market.charge') }}">
+                            <br>
+                            @csrf
+                            <div id="formContainer">
+                                <div class="container text-center">
+                                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3">
+                                        <div class="col"><label for="" class="form-label">Fecha</label>
+                                            <input class="form-control" type="date" name="date-day" id=""
+                                                required>
+                                        </div>
+                                         <button type="submit" class="btn btn-outline-success w-40">
+                                            cargar informacion
+                                        </button>
+                                    </div>
+                                   
+                                </div>
+                                
+                            </div>
+                            
+                        </form>
+                        @endif
+                        @if($presupuesto>=0)
                         <form name="market" id="market" method="post" action="{{ route('market.store') }}">
                             <br>
                             @csrf
@@ -79,6 +103,7 @@
                                     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3">
                                         <div class="col"><label for="" class="form-label">Fecha</label>
                                             <input class="form-control" type="date" name="date-day" id=""
+                                            value="{{$dia}}"
                                                 required>
                                         </div>
                                         <div class="col"><label for=""
@@ -88,6 +113,7 @@
                                         </div>
                                         <div class="col"><label for="" class="form-label">Presupuesto del dia</label>
                                             <input class="form-control" type="number" name="Presupuesto" id=""
+                                            value="{{$presupuesto}}"
                                             title="Si coloca un valor diferente a uno que ya haya puesto este se reescribira"
                                                 step="0.01" required>
                                         </div>
@@ -164,6 +190,7 @@
                             </button>
 
                         </form>
+                        @endif
                     </div>
                 </div>
 

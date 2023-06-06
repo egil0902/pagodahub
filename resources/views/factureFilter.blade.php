@@ -20,7 +20,7 @@
         <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
             <div class="form-group">
                 @csrf
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas a crédito</button>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas por pagar</button>
             </div>
         </form>
     </div>
@@ -72,7 +72,16 @@
             <div class="form-group">
                 <input type="hidden" name="factura_ids" id="factura_ids" value="">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                    Imprimir facturas
+                    Imprimir en cheque
+                </button>
+            </div>
+        </form>
+        <form name="provider" id="provider" method="post" action="{{ route('factures.pagar') }}">
+            @csrf
+            <div class="form-group">
+                <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                    Cambiar estado a pagada
                 </button>
             </div>
         </form>
@@ -89,6 +98,7 @@
 
                     // Asigna los IDs al campo oculto
                     $('#factura_ids').val(selectedIds.join(','));
+                    $('#facturas_ids').val(selectedIds.join(','));
                 });
             });
 

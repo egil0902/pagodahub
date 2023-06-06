@@ -281,7 +281,6 @@
                         
                         for (let i = 0; i < products.length; i++) {
                             try {
-                            
                             const product = products[i];
                             const unit = units[i];
                             const quantity = quantities[i];
@@ -351,7 +350,12 @@
                     document.addEventListener("DOMContentLoaded", function() {
                     //updateProductList()
                     
-                    editProductList();
+                        editProductList();
+                        console.log(count);
+                        formContainer.getElementsByClassName("form-group")[count].getElementsByClassName("product")[0].value = "";
+                        formContainer.getElementsByClassName("form-group")[count].getElementsByClassName("unit")[0].value = "";
+                        formContainer.getElementsByClassName("form-group")[count].getElementsByClassName("quantity")[0].value = "";
+                            
                     });
                     document.addEventListener("input", updateProductList);
                 </script>

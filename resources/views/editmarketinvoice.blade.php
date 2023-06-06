@@ -49,18 +49,19 @@
                                 <div class="col">
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value="{{ $data->monto_abonado }}" readonly
-                                        onchange="sumadiferencia({{$ind}});">
+                                        id="abono" value="{{ $data->monto_abonado }}" style="display: none;"
+                                        >
                                     </h4>
                                     
                                 </div>
                                 <div class="col">
                                     <h4>metodo de pago: 
                                         <select class="form-control unit" list="opciones"  name="metodo" id="metodo"
-                                        value="{{ $data->medio_de_pago }}">
-                                        <option value="true">Efectivo</option>
-                                        <option value="false">Credito</option>
-                                    </select>
+                                            value="{{ $data->medio_de_pago }}"
+                                            onchange="activarAbono({{$ind}});">
+                                            <option value="true">Efectivo</option>
+                                            <option value="false">Credito</option>
+                                        </select>
                                     </h4>
                                     <h4>presupuesto: 
                                         <input class="w-100 form-control" type="text" name="presupuesto"
@@ -74,7 +75,13 @@
                                         onchange="sumadiferencia({{$ind}});">
                                     </h4>                                    
                                 </div>
-                                
+                                <!--<div class="col">
+                                    <h4>Vuelto: 
+                                        <input class="w-100 form-control" type="text" name="Vuelto"
+                                        id="Vuelto" value="{{$data->vuelto}}" >
+                                    </h4>
+                                </div>
+                                -->
                             </div>
                 <br>
                 <center>                    
@@ -91,6 +98,7 @@
                                             <th>Cantidad factura</th>
                                             <th>Diferencia</th>
                                             <th>Precio</th>
+                                            <th>Medio de pago</th>
                                             <th>Valor</th>
                                             <!---<th>Metodo de Pago</th>--->
                                         </tr>
@@ -160,6 +168,13 @@
                                                         data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
                                                     </td> 
                                                     <td>
+                                                        <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
+                                                            value="true">
+                                                            <option value="true">Efectivo</option>
+                                                            <option value="false">Credito</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
                                                         <input class="w-100 border-0 bg-transparent" type="number"
                                                             id="mult{{ $index + 1 }}" name="mult[]"
                                                             value="" readonly>
@@ -169,11 +184,13 @@
                                         @endforeach
                                     </tbody>
                                     <tr>
-                                        <th COLSPAN=8></th>
+                                        <th COLSPAN=9></th>
                                     </tr>
                                     <tr>
-                                        <th COLSPAN=3> Total facturado</th>
+                                        <th COLSPAN=3> Total en factura</th>
                                         <th>
+                                            
+                                        </th>
                                             
                                         </th>
                                         <th>
@@ -186,11 +203,13 @@
                                         </th>
                                         <th>
                                         </th>
+                                        <th>
+                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
                                     <tr>
-                                        <th COLSPAN=3> Total comprado</th>
+                                        <th COLSPAN=3> Total Recibido</th>
                                         <th>
                                             
                                         </th>
@@ -204,11 +223,13 @@
                                         </th>
                                         <th>
                                         </th>
+                                        <th>
+                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
                                     <tr>
-                                        <th COLSPAN=3> diferencia</th>
+                                        <th COLSPAN=3> diferencia (mercancia recibida - en factura)</th>
                                         <th>
                                             
                                         </th>
@@ -222,11 +243,13 @@
                                         </th>
                                         <th>
                                         </th>
+                                        <th>
+                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
                                     <tr>
-                                        <th COLSPAN=3> Presupuesto final</th>
+                                        <th COLSPAN=3> Total a entregar (Vuelto)</th>
                                         <th>
                                             
                                         </th>
@@ -240,11 +263,28 @@
                                         </th>
                                         <th>
                                         </th>
+                                        <th>
+                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
                                     
                                     <script>
+                                        function activarAbono(numero){
+                                            var elements_market = document.getElementsByName('market[]');
+                                            var metodo=elements_market[numero].querySelectorAll('[name="metodo"]');
+                                            var abono=elements_market[numero].querySelectorAll('[name="abono"]');
+                                            // Obtener el valor seleccionado en el método de pago
+                                            var metodoSeleccionado = metodo[0].value;
+                                            
+                                            // Verificar el valor seleccionado y establecer la visibilidad del elemento "abono"
+                                            if (metodoSeleccionado === 'false') { // Si el método de pago es "Credito"
+                                                abono[0].style.display = 'block'; // Mostrar el elemento "abono"
+                                            } else {
+                                                abono[0].style.display = 'none'; // Ocultar el elemento "abono"
+                                            }
+
+                                        }
                                         function sumadiferencia(numero) {
                                             try {
                                             var elements_market = document.getElementsByName('market[]');
@@ -310,22 +350,22 @@
                                                 sum_compra+=diffCompra*price;
                                                 var mult=differenceFactura*price;
                                                 elements_mult[j].value=mult.toFixed(2);
-                                                sum_difference=sum_compra-sum_differenceFactura;
+                                                sum_difference=sum_differenceFactura-sum_compra;
                                             }
 
                                             var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
                                             totalDifferenceFacturaInput.value = sum_compra.toFixed(2);
-
+                                            
                                             var totalDifferenceCompraInput = table.querySelector('.total-difference-compra');
                                             totalDifferenceCompraInput.value = sum_differenceFactura.toFixed(2);
 
                                             var totalDifferenceInput = table.querySelector('.total-difference-diff');
                                             totalDifferenceInput.value = sum_difference.toFixed(2);
-
+                                 
                                             var totalFinalInput = table.querySelector('.total-difference-final');
                                             var total=totalFinalInput.value
                                             var attributeValue = "{{ $data->budget }}"
-                                            var answer = presupuesto.toFixed(2) - sum_differenceFactura.toFixed(2);
+                                            var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
                                             if(answer>=0){
                                                 abono.value=sum_differenceFactura.toFixed(2);
                                             }

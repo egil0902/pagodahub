@@ -35,7 +35,14 @@ class FactureController extends Controller
         $registro->monto_abonado = $request->abono;
         $registro->medio_de_pago = $request->metodo;
         $registro->diferencia =$request->diff;
-        $registro->Total_compra =$request->pfinal;
+        $registro->Total_compra =$request->sumdifac;
+        //$registro->vuelto =$registro->vuelto;
+        $registro->vuelto=$request->pfinal;
+        if($request->pfinal>=0){
+            $registro->pagada=true;
+        }else{
+            $registro->pagada=false;
+        }
         $registro->carton = $request->cart;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
@@ -58,7 +65,18 @@ class FactureController extends Controller
         
         // Asignar los valores del formulario a las propiedades del modelo
         $registro->save(); // Guardar el nuevo registro en la base de datos
-        return redirect()->route('marketinvoice')->with('refresh', true);
+        
+        $comprasdeldia = marketshopping::where('shoppingday', $registro->fecha)->where('id_compra',null)->get();
+        $presupuesto=0;
+        if($comprasdeldia->count() > 0) {
+            if($factura->medio_de_pago){
+                $presupuesto-=$factura->pfinal;
+            }
+            if(!$factura->medio_de_pago){
+                $presupuesto-=$factura->abono;
+            }
+        }
+        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
         //return redirect()->route('tabla.index')->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
@@ -68,7 +86,7 @@ class FactureController extends Controller
         $providerName = $request->input('provider');
         $query = Facture::query();
         if (!empty($providerName)) {
-            $query->where('proveedor', $providerName);
+            $query->where('proveedor', $providerName)->where('pagada', false);
         }
         $facturas = $query->get();
         
@@ -78,7 +96,7 @@ class FactureController extends Controller
     public function getAllCredit(Request $request)
     {
         //RECORDATORIO QUE TODOS LOS CREDITOS ESTAN EN LA DB CON VALOR 1
-        $facturas = Facture::where('medio_de_pago', 1)->get();
+        $facturas = Facture::where('pagada', false)->get();
         
         return view('factureFilter', compact('facturas'))->with('refresh', true);
     }
@@ -125,6 +143,22 @@ class FactureController extends Controller
         
         return $pdf->download("factura".".pdf");
     }
+    public function pagar(Request $request)
+    {
+        /*   $pdf= PDF::loadHTML('<h1>Test</h1>'); */
+        $idCompras = $request->input('facturas_ids');
+        $idCompras = explode(',', $idCompras);
+        
+        
+        for ($i=0; $i < count($idCompras); $i++) { 
+            
+            $factura = Facture::where('id_compra', $idCompras[$i])->first();
+            $factura->pagada=true;
+            $factura->save();
+        }
+        $facturas = Facture::all(); // Obtener todos los facturas de la tabla
+        return view('facture', compact('facturas')); // Pasar los facturas a la vista
+    }
 
     public function update(Request $request, $id)
     {
@@ -151,6 +185,9 @@ class FactureController extends Controller
         $registro->medio_de_pago = $request->metodo;
         $registro->diferencia =$request->diff;
         $registro->Total_compra =$request->pfinal;
+        
+        //$registro->vuelto =$registro->vuelto;
+        $registro->vuelto=$request->pfinal;
         $registro->carton = $request->carton;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
