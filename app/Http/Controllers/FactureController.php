@@ -17,7 +17,6 @@ class FactureController extends Controller
 
     public function store(Request $request)
     {
-        
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -27,7 +26,21 @@ class FactureController extends Controller
             $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
             return view('marketinvoice', compact('comprasdeldia'));
         }
-        //dd($request);
+        $productos = $request->product;
+        $cantidadRecibida =$request->differenceFactura;
+        $precio = $request->price;
+        $unidadMedida =$request->unit;
+        $cantidadFact =$request->quantity;
+        
+        for ($i=0; $i < count($productos); $i++) { 
+            if($cantidadRecibida[$i]==0){
+                array_splice($productos, $i, 1);
+                array_splice($cantidadRecibida, $i, 1);
+                array_splice($precio, $i, 1);
+                array_splice($unidadMedida, $i, 1);
+                array_splice($cantidadFact, $i, 1);
+            }
+        }
         $registro = new Facture();
         $registro->id_compra = $request->NFactura;
         $registro->fecha = $request->fecha_registro;
@@ -44,16 +57,24 @@ class FactureController extends Controller
             $registro->pagada=false;
         }
         $registro->carton = $request->cart;
-        $registro->Factured_quantity =json_encode($request->differenceFactura);
-        $registro->price =json_encode($request->price);
+        $registro->Factured_quantity =json_encode($cantidadRecibida);
+        $registro->price =json_encode($precio);
+        $registro->product = json_encode($productos);
+        $registro->units = json_encode($unidadMedida);
         
         if (!empty($request->archivosimg) && is_array($request->archivosimg) && count($request->archivosimg) > 0) {
             $registro->file = $request->archivosimg[0];
         }
         $registro->total = $request->sumdifac;
-        
-        $updateMarket = marketshopping::where('id', $request->id)->first();
+        $updateMarket = new marketshopping;
         $updateMarket->id_compra = $request->NFactura;
+        $updateMarket->shoppingday = $request->input('fecha_registro');
+        $updateMarket->buyer = $request->input('comprador');
+        $updateMarket->budget = $request->input('Presupuesto');
+        $updateMarket->product = json_encode($productos);
+        $updateMarket->unit = json_encode($unidadMedida);
+        $updateMarket->quantity = json_encode($cantidadRecibida);
+
         $updateMarket->save();
         $updateCarton = Facture::where('fecha', $registro->fecha)->get();
         if($updateCarton->count()>0){
@@ -69,15 +90,18 @@ class FactureController extends Controller
         $comprasdeldia = marketshopping::where('shoppingday', $registro->fecha)->where('id_compra',null)->get();
         $presupuesto=0;
         if($comprasdeldia->count() > 0) {
-            if($factura->medio_de_pago){
-                $presupuesto-=$factura->pfinal;
+            foreach ($comprasdeldia as $factura) {
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->pfinal;
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->abono;
+                }
             }
-            if(!$factura->medio_de_pago){
-                $presupuesto-=$factura->abono;
-            }
+            
         }
-        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
-        //return redirect()->route('tabla.index')->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
+        //return view('marketinvoice', compact('comprasdeldia','presupuesto'));
+        return redirect()->back()->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
     
@@ -103,13 +127,13 @@ class FactureController extends Controller
     public function borrar($id)
     {
         // Buscar la factura por su ID y eliminarla directamente
-        $facture = Facture::find($id);
-
+        $facture = facture::where('id_compra', $id)->delete();
         if (!$facture) {
             return redirect()->back()->with('error', 'La factura no existe');
         }
 
-        $facture->delete();
+       
+        $market = marketshopping::where('id_compra', $id)->delete();
 
         return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente');
     }

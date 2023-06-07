@@ -162,10 +162,25 @@ class MarketController extends Controller
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
         }
-        $comprasdeldia = marketshopping::where('shoppingday', $day)->whereNull('id_compra')->get();
+        if ($comprasdeldia->count() > 1) {
+            $presupuesto = $comprasdeldia[0]->budget;
+            $productos = json_decode($comprasdeldia[0]->product);
+            $quantity = json_decode($comprasdeldia[0]->quantity);
         
-        if($comprasdeldia->count() > 0) {
-            $presupuesto=$comprasdeldia[0]->budget;
+            for ($i = 1; $i < $comprasdeldia->count(); $i++) {
+                $Fproductos = json_decode($comprasdeldia[$i]->product);
+                $Fquantity = json_decode($comprasdeldia[$i]->quantity);
+        
+                // Comparar los elementos de los arreglos y restar las cantidades correspondientes
+                foreach ($productos as $posicion => $producto) {
+                    if (in_array($producto, $Fproductos)) {
+                        $fPosicion = array_search($producto, $Fproductos);
+                        $quantity[$posicion] -= $Fquantity[$fPosicion];
+                    }
+                }
+            }
+        
+            $comprasdeldia[0]->quantity = json_encode($quantity);
         }
         
         $facturas = Facture::where('fecha', $day)->get();
@@ -185,6 +200,14 @@ class MarketController extends Controller
                 
             }
         }
+        foreach ($comprasdeldia as $posicion => $compra) {
+            foreach ($facturas as $posicion_diferente => $factura) {
+                if ($compra->id_compra === $factura->id_compra) {
+                    $comprasdeldia[$posicion]->factura = $factura;
+                }
+            }
+        }
+
         return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
     }
     /**
@@ -300,11 +323,14 @@ class MarketController extends Controller
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
         if ($comprasdeldia->count()>0) {
             $presupuesto=$comprasdeldia[0]->budget ;
+            return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2'));
         }
         else {
             $presupuesto=0;
         }
         $dia =$request->input('date-day');
+
+
         
         return view('market', compact('opciones', 'opciones2', 'presupuesto','dia'));
     }

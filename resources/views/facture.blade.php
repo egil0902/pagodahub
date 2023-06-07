@@ -23,6 +23,8 @@
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
             </div>
         </form>
+        <div class="divider"></div>
+        Presupuesto restante: (en desarrollo)
     </div>
     <div>
         <table>
@@ -35,7 +37,7 @@
                     <th>Medio de pago</th>
                     <th>Valor Deuda</th>
                     <th>Pagada?</th>
-                    <th></th>
+                    <!--<th></th>-->
                     <th></th>
                 </tr>
             </thead>
@@ -47,9 +49,9 @@
                     <td>{{$factura->proveedor}}</td>
                     <td>{{$factura->monto_abonado}}</td>
                     <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
-                    <td>{{$factura->Total_compra>=0?$factura->monto_abonado:$factura->Total_compra}}</td>
+                    <td>{{$factura->medio_de_pago?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
                     <td>{{$factura->pagada?"Si":"No"}}</td>
-                    <td>
+                    <!--<td>
                         <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                             @csrf
                             @method('DELETE')
@@ -60,6 +62,7 @@
                             </button>
                         </form>
                     </td>
+                    -->
                     <td>
                         <form action="{{route('factures.show', $factura->id) }}" method="post">
                             @csrf
