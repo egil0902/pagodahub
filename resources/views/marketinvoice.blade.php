@@ -119,7 +119,7 @@
                                                 <th>Cantidad factura</th>
                                                 <th>Diferencia</th>
                                                 <th>Precio</th>
-                                                <th>Medio de pago</th>
+                                                <!---<th>Medio de pago</th>--->
                                                 <th>Total</th>
                                                 <!---<th>Metodo de Pago</th>--->
                                             </tr>
@@ -186,13 +186,13 @@
                                                             <input class="w-100 " type="number" name="price[]" value="0"
                                                                 data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
                                                         </td>
-                                                        <td>
+                                                        <!---<td>
                                                             <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
                                                                 value="true">
                                                                 <option value="true">Efectivo</option>
                                                                 <option value="false">Credito</option>
                                                             </select>
-                                                        </td>
+                                                        </td>--->
                                                         <td>
                                                             <input class="w-100 border-0 bg-transparent" type="number"
                                                                 id="mult{{ $index + 1 }}" name="mult[]"
@@ -225,9 +225,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
-                                            </th>
                                             <!---<th>
+                                            </th>
+                                            <th>
                                             </th>--->
                                         </tr>
                                         <tr>
@@ -245,9 +245,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
-                                            </th>
                                             <!---<th>
+                                            </th>
+                                            <th>
                                             </th>--->
                                         </tr>
                                         <tr>
@@ -265,9 +265,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
-                                            </th>
                                             <!---<th>
+                                            </th>
+                                            <th>
                                             </th>--->
                                         </tr>
                                         <tr>
@@ -285,9 +285,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
-                                            </th>
                                             <!---<th>
+                                            </th>
+                                            <th>
                                             </th>--->
                                         </tr>
                                         
@@ -518,7 +518,7 @@
                                                 <th>Cantidad factura</th>
                                                 <th>Diferencia</th>
                                                 <th>Precio</th>
-                                                <th>Medio de pago</th>
+                                                <!---<th>Medio de pago</th>--->
                                                 <th>Total</th>
                                                 <!---<th>Metodo de Pago</th>--->
                                             </tr>
@@ -578,13 +578,13 @@
                                                             <input class="w-100 " type="number" name="price[]" value="{{json_decode($data->factura->price)[$index]}}"
                                                                 data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
                                                         </td>
-                                                        <td>
+                                                        <!--<td>
                                                             <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
                                                                 value="true">
                                                                 <option value="true">Efectivo</option>
                                                                 <option value="false">Credito</option>
                                                             </select>
-                                                        </td>
+                                                        </td>-->
                                                         <td>
                                                             <input class="w-100 border-0 bg-transparent" type="number"
                                                                 id="mult{{ $index + 1 }}" name="mult[]"
@@ -615,9 +615,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
-                                            </th>
                                             <!---<th>
+                                            </th>
+                                            <th>
                                             </th>--->
                                         </tr>
                                         
@@ -634,9 +634,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
-                                            </th>
                                             <!---<th>
+                                            </th>
+                                            <th>
                                             </th>--->
                                         </tr>
                                         
