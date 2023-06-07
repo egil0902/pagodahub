@@ -17,6 +17,7 @@ class FactureController extends Controller
 
     public function store(Request $request)
     {
+        
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -31,14 +32,15 @@ class FactureController extends Controller
         $precio = $request->price;
         $unidadMedida =$request->unit;
         $cantidadFact =$request->quantity;
-        
-        for ($i=0; $i < count($productos); $i++) { 
-            if($cantidadRecibida[$i]==0){
+        $contador=0;
+        for ($i=0; $i <= count($cantidadRecibida); $i++) { 
+            if(isset($cantidadRecibida[$i]) &&$cantidadRecibida[$i]==0){
                 array_splice($productos, $i, 1);
                 array_splice($cantidadRecibida, $i, 1);
                 array_splice($precio, $i, 1);
                 array_splice($unidadMedida, $i, 1);
                 array_splice($cantidadFact, $i, 1);
+                $i--;
             }
         }
         $registro = new Facture();

@@ -320,7 +320,7 @@ class MarketController extends Controller
         $opciones2 = products::all();
         //dump($opciones, $opciones2);
         $presupuesto =-1;
-        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
+        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->where('id_compra',null )->get();
         if ($comprasdeldia->count()>0) {
             $presupuesto=$comprasdeldia[0]->budget ;
             return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2'));
