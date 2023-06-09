@@ -22,10 +22,11 @@ class FactureController extends Controller
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
             // Si se encuentra un registro con el mismo número de factura, devuelve un mensaje de error
-            $request->session()->flash('mensaje', 'El numero de factura ya existe');
-            $day = $request->fecha_registro;
-            $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
-            return view('marketinvoice', compact('comprasdeldia'));
+            $request->session()->flash('mensaje', 'El numero de factura '.$request->NFactura.' ya existe');
+            //$day = $request->fecha_registro;
+            //$comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+            //return view('marketinvoice', compact('comprasdeldia'));
+            return redirect()->back();
         }
         $productos = $request->product;
         $cantidadRecibida =$request->differenceFactura;
@@ -97,7 +98,7 @@ class FactureController extends Controller
                     $presupuesto-=$factura->pfinal;
                 }
                 if(!$factura->medio_de_pago){
-                    $presupuesto-=$factura->abono;
+                    $presupuesto-=$factura->monto_abonado;
                 }
             }
             

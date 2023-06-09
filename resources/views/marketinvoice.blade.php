@@ -292,12 +292,13 @@
                                         </tr>
                                         
                                         <script>
+                                            var metodoSeleccionado=false
                                             function activarAbono(numero){
                                                 var elements_market = document.getElementsByName('market[]');
                                                 var metodo=elements_market[numero].querySelectorAll('[name="metodo"]');
                                                 var abono=elements_market[numero].querySelectorAll('[name="abono"]');
                                                 // Obtener el valor seleccionado en el método de pago
-                                                var metodoSeleccionado = metodo[0].value;
+                                                metodoSeleccionado = metodo[0].value;
                                                 
                                                 // Verificar el valor seleccionado y establecer la visibilidad del elemento "abono"
                                                 if (metodoSeleccionado === 'false') { // Si el método de pago es "Credito"
@@ -378,10 +379,10 @@
                                                 }
 
                                                 var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
-                                                totalDifferenceFacturaInput.value = sum_compra.toFixed(2);
+                                                totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
                                                 
                                                 var totalDifferenceCompraInput = table.querySelector('.total-difference-compra');
-                                                totalDifferenceCompraInput.value = sum_differenceFactura.toFixed(2);
+                                                totalDifferenceCompraInput.value = sum_compra.toFixed(2);
 
                                                 var totalDifferenceInput = table.querySelector('.total-difference-diff');
                                                 totalDifferenceInput.value = sum_difference.toFixed(2);
@@ -390,15 +391,13 @@
                                                 var total=totalFinalInput.value
                                                 var attributeValue = "{{ $data->budget }}"
                                                 var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
-                                                if(answer>=0){
-                                                    abono.value=sum_differenceFactura.toFixed(2);
+                                                if(metodoSeleccionado){
+                                                    abono.value;
+                                                    
+                                                    totalFinalInput.value = presupuesto.toFixed(2)- abono.value;
+                                                }else{
+                                                    totalFinalInput.value = answer.toFixed(2);
                                                 }
-                                                if(answer<0){
-                                                    abono.value= presupuesto.toFixed(2);
-                                                }
-
-                                                totalFinalInput.value = answer.toFixed(2);
-
                                                 // Update other total values if needed
                                                 // ...
 
@@ -419,6 +418,7 @@
 
                                                 var sumPriceInput = table.querySelector('#sumpre');
                                                 sumPriceInput.value = sum_price.toFixed(2);
+                                                console.log(metodoSeleccionado)
                                             }
                                         </script>
                                     </table>
@@ -486,12 +486,12 @@
                             </h4>
                             
                         </div>
+                        
                         <div class="col">
-                            <h4>Método de pago: 
-                                <select class="form-control unit" list="opciones"  name="metodo" id="metodo"
-                                onchange="activarAbono({{$ind}});" value="{{$data->factura->medio_de_pago}}">
-                                <option value="true">Efectivo</option>
-                                <option value="false">Credito</option>
+                            <h4>Método de pago: {{$data->factura->medio_de_pago+1}}
+                            <select class="form-control unit" list="opciones" name="metodo" id="metodo" onchange="activarAbono({{$ind}});">
+                                <option value="true" {{$data->factura->medio_de_pago+1 === 2 ? 'selected' : ''}}>Efectivo</option>
+                                <option value="false" {{$data->factura->medio_de_pago+1 === 1 ? 'selected' : ''}}>Crédito</option>
                             </select>
                             </h4>
                         </div>
@@ -576,7 +576,7 @@
                                                         </script>
                                                         <td>
                                                             <input class="w-100 " type="number" name="price[]" value="{{json_decode($data->factura->price)[$index]}}"
-                                                                data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
+                                                                data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required readonly>
                                                         </td>
                                                         <!--<td>
                                                             <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
@@ -640,7 +640,7 @@
                                             </th>--->
                                         </tr>
                                         
-                                        <script>
+                                        <!--<script>
                                             function activarAbono(numero){
                                                 var elements_market = document.getElementsByName('market[]');
                                                 var metodo=elements_market[numero].querySelectorAll('[name="metodo"]');
@@ -739,12 +739,12 @@
                                                 var total=totalFinalInput.value
                                                 var attributeValue = "{{ $data->budget }}"
                                                 var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
-                                                if(answer>=0){
+                                                /*if(answer>=0){
                                                     abono.value=sum_differenceFactura.toFixed(2);
                                                 }
                                                 if(answer<0){
                                                     abono.value= presupuesto.toFixed(2);
-                                                }
+                                                }*/
 
                                                 totalFinalInput.value = answer.toFixed(2);
 
@@ -769,7 +769,7 @@
                                                 var sumPriceInput = table.querySelector('#sumpre');
                                                 sumPriceInput.value = sum_price.toFixed(2);
                                             }
-                                        </script>
+                                        </script>-->
                                     </table>
                                 </div>
                                 @csrf

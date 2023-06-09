@@ -191,7 +191,7 @@ class MarketController extends Controller
                     $presupuesto-=$factura->total;
                 }
                 if(!$factura->medio_de_pago){
-                    $presupuesto-=$factura->abono;
+                    $presupuesto-=$factura->monto_abonado;
                 }
                 
                 if($factura->carton>0){
