@@ -24,7 +24,7 @@
             </div>
         </form>
         <div class="divider"></div>
-        Presupuesto restante: (en desarrollo)
+        Presupuesto restante para el dia: {{$presupuesto}}
     </div>
     <div>
         <table>

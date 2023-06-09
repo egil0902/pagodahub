@@ -115,7 +115,7 @@
 </table>
 
 <!-- Total a pagar -->
-<p>Total a pagar: {{ $data->Total_compra }}</p>
+<p>Total a pagar: {{ $data->Total_compra -$data->monto_abonado }}</p>
 
 @endforeach
 </body>

@@ -207,6 +207,12 @@ class MarketController extends Controller
                 }
             }
         }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $presupuesto-=$check->monto;
+                }
+        }
 
         return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
     }

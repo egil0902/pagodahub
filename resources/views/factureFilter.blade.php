@@ -23,7 +23,38 @@
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas por pagar</button>
             </div>
         </form>
+        <div class="divider"></div>
+        Presupuesto restante para el dia: {{$presupuesto}}
     </div>
+    <br>
+    <div>
+    <form name="provider" id="provider" method="post" action="{{ route('factures.pagar') }}">
+            @csrf
+            <div class="form-group">
+                <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
+                Descontar del presupuesto?
+                <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" onchange="togglePagoPresupuesto(this)">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                    Cambiar estado a pagada
+                </button>
+            </div>
+            <script>
+                function togglePagoPresupuesto(checkbox) {
+                    if (checkbox.checked) {
+                        checkbox.value = "true";
+                    } else {
+                        checkbox.value = "false";
+                    }
+                }
+
+                function confirmarPago() {
+                    // Enviar el formulario
+                    document.getElementById('provider').submit();
+                }
+            </script>
+        </form>
+    </div>
+
     <div>
         <table>
             <thead>
@@ -76,15 +107,7 @@
                 </button>
             </div>
         </form>
-        <form name="provider" id="provider" method="post" action="{{ route('factures.pagar') }}">
-            @csrf
-            <div class="form-group">
-                <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                    Cambiar estado a pagada
-                </button>
-            </div>
-        </form>
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
