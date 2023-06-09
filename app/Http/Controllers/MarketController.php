@@ -8,6 +8,7 @@ use App\Models\units;
 use App\Models\Facture;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
+use App\Models\Cheque;
 
 
 class MarketController extends Controller
