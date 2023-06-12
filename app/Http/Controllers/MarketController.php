@@ -149,6 +149,12 @@ class MarketController extends Controller
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
         }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $presupuesto-=$check->monto;
+                }
+        }
         return view('marketinvoice', compact('comprasdeldia','presupuesto'));
     }
 

@@ -481,14 +481,14 @@
                         <div class="col">
                             <h4>abono: 
                                 <input class="w-100 form-control" type="text" name="abono"
-                                id="abono" value="{{$data->factura->abono}}" style="display: none;"
+                                id="abono" value="{{$data->factura->monto_abonado}}" readonly
                                 >
                             </h4>
                             
                         </div>
                         
                         <div class="col">
-                            <h4>Método de pago: {{$data->factura->medio_de_pago+1}}
+                            <h4>Método de pago:
                             <select class="form-control unit" list="opciones" name="metodo" id="metodo" onchange="activarAbono({{$ind}});">
                                 <option value="true" {{$data->factura->medio_de_pago+1 === 2 ? 'selected' : ''}}>Efectivo</option>
                                 <option value="false" {{$data->factura->medio_de_pago+1 === 1 ? 'selected' : ''}}>Crédito</option>
