@@ -297,21 +297,35 @@ class FactureController extends Controller
         $idCompras = explode(',', $idCompras);
         $pagoPresupuesto=false;
         if($request->pagoPresupuesto){
-            $pagoPresupuesto=true;
+            $pagoPresupuesto=$request->pagoPresupuesto;
+        }
+        $monto=0;
+        if($request->monto){
+            $monto=$request->monto;
         }
         if (count($idCompras)>0) {
             
             for ($i=0; $i < count($idCompras); $i++) { 
                 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
-                $factura->pagada=true;
+                
+                if($monto===0){
+                    $monto=($factura->total-$factura->monto_abonado);
+                }
+                if($monto!==0){
+                    $factura->monto_abonado+=$monto;
+                    if($factura->monto_abonado>=$factura->total){
+                        $factura->pagada=true;
+                    }
+                }
+
                 $factura->save();
                 
                 $cheque = Cheque::create([
                     'fecha' => date('Y-m-d'),
                     'id_factura' => $factura->id_compra,
                     'pago_presupuesto' => $pagoPresupuesto,
-                    'monto' => ($factura->total-$factura->monto_abonado),
+                    'monto' => $monto,
                 ]);
             }
             # code...

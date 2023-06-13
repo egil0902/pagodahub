@@ -29,29 +29,51 @@
     <br>
     <div>
     <form name="provider" id="provider" method="post" action="{{ route('factures.pagar') }}">
-            @csrf
-            <div class="form-group">
-                <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
-                Descontar del presupuesto?
-                <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" onchange="togglePagoPresupuesto(this)">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                    Cambiar estado a pagada
-                </button>
-            </div>
-            <script>
-                function togglePagoPresupuesto(checkbox) {
-                    if (checkbox.checked) {
-                        checkbox.value = "true";
-                    } else {
-                        checkbox.value = "false";
-                    }
-                }
+    @csrf
+    <div class="form-group">
+        <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
+            <label for="pagoPresupuesto">Descontar del presupuesto?</label>
+            <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" onchange="togglePagoPresupuesto(this)">
+        <div>
+            <label for="pagoValor">desea pagar un monto?</label>
+            <input type="checkbox" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
+        </div>
+        <div>
+            <label for="monto">Monto:</label>
+            <input type="text" name="monto" id="monto" maxlength="10" value=0 disabled>
+        </div>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+            Cambiar estado a pagada
+        </button>
+        <br></br>
+    </div>
+</form>
 
-                function confirmarPago() {
-                    // Enviar el formulario
-                    document.getElementById('provider').submit();
-                }
-            </script>
+<script>
+    function togglePagoParcial(checkbox) {
+        if (checkbox.checked) {
+            checkbox.value = "true";
+            document.getElementById('monto').disabled = false;
+        } else {
+            checkbox.value = "false";
+            document.getElementById('monto').disabled = true;
+        }
+    }
+
+    function togglePagoPresupuesto(checkbox) {
+        if (checkbox.checked) {
+            checkbox.value = "true";
+        } else {
+            checkbox.value = "false";
+        }
+    }
+
+    function confirmarPago() {
+        // Enviar el formulario
+        document.getElementById('provider').submit();
+    }
+</script>
+
         </form>
     </div>
 
