@@ -516,7 +516,7 @@
                                                 <th>Unidad</th>
                                                 
                                                 <th>Cantidad factura</th>
-                                                <th>Diferencia</th>
+                                                <!--<th>Diferencia</th>-->
                                                 <th>Precio</th>
                                                 <!---<th>Medio de pago</th>--->
                                                 <th>Total</th>
@@ -549,11 +549,11 @@
                                                                 id="differenceFactura{{ $index + 1 }}" value="{{json_decode($data->quantity)[$index]}}" readonly
                                                                 required onchange="sumadiferencia({{$ind}});" step="0.01" min="0">
                                                         </td>
-                                                        <td>
+                                                        <!--<td>
                                                             <input class="w-100 border-0 bg-transparent" type="number"
                                                                 id="difference{{ $index + 1 }}" name="difference[]"
                                                                 value="" readonly>
-                                                        </td>
+                                                        </td>-->
                                                         <script>
                                                             // Obtener las entradas numéricas
                                                             const quantity{{ $index + 1 }} = document.getElementById('quantity{{ $index + 1 }}{{ $product }}');
@@ -588,7 +588,7 @@
                                                         <td>
                                                             <input class="w-100 border-0 bg-transparent" type="number"
                                                                 id="mult{{ $index + 1 }}" name="mult[]"
-                                                                value="" readonly>
+                                                                value="{{json_decode($data->factura->price)[$index]*json_decode($data->quantity)[$index]}}" readonly>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -613,9 +613,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
+                                            <!--<th>
                                             </th>
-                                            <!---<th>
+                                            <th>
                                             </th>
                                             <th>
                                             </th>--->
@@ -632,9 +632,9 @@
                                             </th>
                                             <th>
                                             </th>
-                                            <th>
+                                            <!--<th>
                                             </th>
-                                            <!---<th>
+                                            <th>
                                             </th>
                                             <th>
                                             </th>--->

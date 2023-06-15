@@ -24,31 +24,35 @@
             </div>
         </form>
         <div class="divider"></div>
+        <div style="padding-top: 20px;">
         Presupuesto restante para el dia: {{$presupuesto}}
+        </div>
+        
     </div>
     <br>
     <div>
     <form name="provider" id="provider" method="post" action="{{ route('factures.pagar') }}">
-    @csrf
-    <div class="form-group">
-        <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
-            <label for="pagoPresupuesto">Descontar del presupuesto?</label>
-            <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" onchange="togglePagoPresupuesto(this)">
-        <div>
-            <label for="pagoValor">desea pagar un monto?</label>
-            <input type="checkbox" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
+        @csrf
+        <div class="form-group">
+            <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
+            <div>
+                <label for="pagoPresupuesto">Descontar del presupuesto del día?</label>
+                <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" onchange="togglePagoPresupuesto(this)">
+            </div>
+            <div>
+                <label for="pagoValor">¿Desea pagar un monto?</label>
+                <input type="checkbox" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
+            </div>
+            <div>
+                <label for="monto">Monto:</label>
+                <input type="text" name="monto" id="monto" maxlength="10" value="0" disabled>
+            </div>
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                Cambiar estado a pagada
+            </button>
         </div>
-        <div>
-            <label for="monto">Monto:</label>
-            <input type="text" name="monto" id="monto" maxlength="10" value=0 disabled>
-        </div>
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-            Cambiar estado a pagada
-        </button>
-        <br></br>
-    </div>
-</form>
-
+    </form>
+    <br/>
 <script>
     function togglePagoParcial(checkbox) {
         if (checkbox.checked) {
@@ -208,7 +212,26 @@
             border: 1px solid;
         }
         .divider {
-        width: 15px;
+            width: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="checkbox"],
+        input[type="text"] {
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 10px;
         }
     </style>
 @endsection
