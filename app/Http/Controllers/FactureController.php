@@ -269,10 +269,34 @@ class FactureController extends Controller
             ->join('factures', 'factures.id_compra', '=', 'marketshoppings.id_compra')
             ->where('factures.id_compra', $factura->id_compra)
             ->get();
+        $day =$comprasdeldia[0]->shoppingday; // Obtener la fecha actual
+        $presupuesto = "no asignado para el dia";
+        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
+        if ($calculo->count()>0) {
+            $presupuesto=$calculo[0]->budget;
+            $compras = Facture::where('fecha', $day)->get();
+            
+            foreach ($compras as $fact) {
+                if($fact->medio_de_pago){
+                    $presupuesto-=$fact->total;
+
+                }
+                if(!$fact->medio_de_pago){
+                    $presupuesto-=$fact->monto_abonado;
+                }
+            }
+        }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $presupuesto-=$check->monto;
+                }
+        }
         if (!$comprasdeldia) {
             return redirect()->back()->with('error', 'La factura no existe');
         }
-        return view('editmarketinvoice', compact('comprasdeldia'));
+        $presupuesto+=$comprasdeldia[0]->total;
+        return view('editmarketinvoice', compact('comprasdeldia','presupuesto'));
     }
 
     public function downloadPdf(Request $request)
@@ -405,7 +429,30 @@ class FactureController extends Controller
 
         
         $facturas = Facture::all(); // Obtener todos los facturas de la tabla
-        return view('facture', compact('facturas')); // Pasar los facturas a la vista
+        $day = date('Y-m-d'); // Obtener la fecha actual
+        $presupuesto = "no asignado para el dia";
+        $calculo = marketshopping::where('shoppingday', $day)->whereNotNull('budget')->get();
+        if ($calculo->count()>0) {
+            $presupuesto=$calculo[0]->budget;
+            $comprasdeldia = Facture::where('fecha', $day)->get();
+            
+            foreach ($comprasdeldia as $factura) {
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->total;
+
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->monto_abonado;
+                }
+            }
+        }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $presupuesto-=$check->monto;
+                }
+        }
+        return view('facture', compact('facturas','presupuesto')); // Pasar los facturas a la vista
     }
 
 }

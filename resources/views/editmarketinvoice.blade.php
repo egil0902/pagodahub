@@ -21,7 +21,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    Facturas (aun en construccion)
+                    Facturas
                 </div>
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                                 <div class="col"> 
@@ -49,23 +49,21 @@
                                 <div class="col">
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value="{{ $data->monto_abonado }}" style="display: none;"
+                                        id="abono" value="{{ $data->monto_abonado }}" style="display: {{$data->medio_de_pago+1 === 1 ? 'block' : 'none'}}"
                                         >
                                     </h4>
                                     
                                 </div>
                                 <div class="col">
-                                    <h4>metodo de pago: 
-                                        <select class="form-control unit" list="opciones"  name="metodo" id="metodo"
-                                            value="{{ $data->medio_de_pago }}"
-                                            onchange="activarAbono({{$ind}});">
-                                            <option value="true">Efectivo</option>
-                                            <option value="false">Credito</option>
+                                    <h4>Método de pago:
+                                        <select class="form-control unit" list="opciones" name="metodo" id="metodo" onchange="activarAbono({{$ind}});">
+                                            <option value="true" {{$data->medio_de_pago+1 === 2 ? 'selected' : ''}}>Efectivo</option>
+                                            <option value="false" {{$data->medio_de_pago+1 === 1 ? 'selected' : ''}}>Crédito</option>
                                         </select>
                                     </h4>
                                     <h4>presupuesto: 
                                         <input class="w-100 form-control" type="text" name="presupuesto"
-                                        id="presupuesto" value="{{ $data->budget }} " readonly>
+                                        id="presupuesto" value="{{ $presupuesto }} " readonly>
                                     </h4>
                                 </div>
                                 <div class="col">
@@ -98,7 +96,6 @@
                                             <th>Cantidad factura</th>
                                             <th>Diferencia</th>
                                             <th>Precio</th>
-                                            <th>Medio de pago</th>
                                             <th>Valor</th>
                                             <!---<th>Metodo de Pago</th>--->
                                         </tr>
@@ -168,13 +165,6 @@
                                                         data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
                                                     </td> 
                                                     <td>
-                                                        <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
-                                                            value="true">
-                                                            <option value="true">Efectivo</option>
-                                                            <option value="false">Credito</option>
-                                                        </select>
-                                                    </td>
-                                                    <td>
                                                         <input class="w-100 border-0 bg-transparent" type="number"
                                                             id="mult{{ $index + 1 }}" name="mult[]"
                                                             value="" readonly>
@@ -203,8 +193,6 @@
                                         </th>
                                         <th>
                                         </th>
-                                        <th>
-                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
@@ -216,8 +204,6 @@
                                         <th>
                                             <input class="border-0 bg-transparent total-difference-compra" type="Tcompra" name="Tcompra" value="{{$data->monto_abonado}}" readonly>
 
-                                        </th>
-                                        <th>
                                         </th>
                                         <th>
                                         </th>
@@ -243,8 +229,6 @@
                                         </th>
                                         <th>
                                         </th>
-                                        <th>
-                                        </th>
                                         <!---<th>
                                         </th>--->
                                     </tr>
@@ -256,8 +240,6 @@
                                         <th>
                                             <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $data->Total_compra }}" readonly>
 
-                                        </th>
-                                        <th>
                                         </th>
                                         <th>
                                         </th>
