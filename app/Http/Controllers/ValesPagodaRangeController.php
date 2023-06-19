@@ -62,4 +62,13 @@ class ValesPagodaRangeController extends Controller
         $list = ValesPagodaRange::all();
         return view('valespagodarange', ['list' => $list, 'request' => $request]);
     }
+    
+    public function delete( Request $request)
+    {
+        $vale = ValesPagodaRange::find($request->id);
+        $vale->delete();
+        $list = ValesPagodaRange::all();
+        return view('valespagodarange', ['list' => $list, 'request' => $request]);
+
+    }
 }
