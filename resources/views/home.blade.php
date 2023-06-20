@@ -229,7 +229,7 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                <!--@foreach ($user->PAGODAHUB_closecash as $acceso)
                                     @if ($acceso->Name == 'loans')
                                         <div class="col">
                                             <div class="card h-100 border border-5 border-dark-subtle">
@@ -251,7 +251,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                @endforeach
+                                @endforeach-->
                                 @foreach ($user->PAGODAHUB_closecash as $acceso)
                                     @if ($acceso->Name == 'loans')
                                         <div class="col">

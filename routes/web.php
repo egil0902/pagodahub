@@ -62,14 +62,20 @@ Route::post('/loans_store_new', [App\Http\Controllers\LoansController::class, 's
 Route::post('/loans_newuser', [App\Http\Controllers\LoansController::class, 'newuser'])->name('loans.newuser');
 Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
+Route::delete('/loans_list', [App\Http\Controllers\LoansController::class, 'destroy'])->name('loans.destroy');
+Route::post('/loans_list/{id}', [App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');
+Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updateLoan'])->name('loans.update_loan');
+
 
 Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
+Route::post('/facture/resume', [App\Http\Controllers\FactureController::class, 'resume'])->name('factures.resume');
 Route::post('/facture_store', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
 Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
 Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
 Route::delete('/facture_delete/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
 //Route::post('/facture/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
+
 
 Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');

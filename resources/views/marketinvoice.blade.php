@@ -14,17 +14,17 @@
 
 <div class="p-2 m-0 border-0 bd-example">
 	<form name="market" id="market" method="post" action="{{ route('market.day') }}">
-                <div class="form-group w-50 "style="padding-left: 200px;">
+            <div class="form-group w-50 "style="padding-left: 200px;">
 
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
-                            spellcheck="false" data-ms-editor="true" name="day">
-                        <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
-                    </div>
-
+                @csrf
+                <div class="input-group mb-3">
+                    <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
+                        spellcheck="false" data-ms-editor="true" name="day">
+                    <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
                 </div>
-        </form>
+
+            </div>
+    </form>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
             <div class="col">                
                 <h4>presupuesto: 
