@@ -56,6 +56,8 @@ Route::post('/valespagodarange_list', [App\Http\Controllers\ValesPagodaRangeCont
 Route::post('/valespagodarange_delete', [App\Http\Controllers\ValesPagodaRangeController::class, 'delete'])->name('valespagodarange.delete');
 
 Route::get('/loans', [App\Http\Controllers\LoansController::class, 'index'])->name('loans');
+Route::get('/loans_debt', [App\Http\Controllers\LoansController::class, 'indexDebt'])->name('loans_debt');
+Route::get('/loans_debt_search', [App\Http\Controllers\LoansController::class, 'searchDebt'])->name('loans_debt.search');
 Route::get('/loans_search', [App\Http\Controllers\LoansController::class, 'search'])->name('loans.search');
 Route::post('/loans_store', [App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
 Route::post('/loans_store_new', [App\Http\Controllers\LoansController::class, 'store_new'])->name('loans.store_new');

@@ -43,6 +43,12 @@ class LoansController extends Controller
         return view('loans', ['orgs' => $orgs]);
     }
 
+    public function indexDebt()
+    {
+        $orgs = $this->obtenerInformacion();
+        return view('loansDebt', ['orgs' => $orgs]);
+    }
+
     public function search(Request $request)
     {
         //Obtenemos la informacion de las organizaciones
@@ -74,6 +80,51 @@ class LoansController extends Controller
         //devolvemos la vista loans y pasamos las variables como parametros
         return view(
             'loans',
+            [
+                'usuario' => $usuario,
+                'usuario_monto' => $usuario_monto,
+                'usuario_payment' => $usuario_payment,
+                'usuario_loans' => $usuario_loans,
+                'loan_view' => $loan_view,
+                'payment_view' => $payment_view,
+                'orgs' => $orgs,
+                'cedula' => $request->cedula,
+                'nombre' => $request->nombre
+            ]
+        );
+    }
+
+    public function searchDebt(Request $request)
+    {
+        //Obtenemos la informacion de las organizaciones
+        $orgs = $this->obtenerInformacion();
+        if ($request->cedula == null) {
+            //Si es nulo, buscamos los usuarios con nombre similar al campo nombre
+            $usuario = loans_user::orwhere('nombre', 'ilike', '%' . $request->nombre . '%')->get();
+        }
+        if ($request->nombre == null) {
+            // Si es nulo, buscamos los usuarios con cedula igual al campo cedula
+            $usuario = loans_user::orwhere('cedula', '=', $request->cedula)->get();
+        }
+        // Verificamos si la variable usuario tiene al menos un elemento
+        if (isset($usuario[0]->id)) {
+            //Si tiene al menos un elemento, buscamos informacion relacionada con ese usuario en las tablas loans y loans_payments
+            $usuario_loans = loans::orwhere('loans_users_id', '=', $usuario[0]->id)->get();
+            $usuario_monto = loans::select(loans_new::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->get();
+            $usuario_payment = loans_payments::select(loans_payments::raw("SUM(COALESCE(amount,0))"))->where('loans_users_id', $usuario[0]->id)->get();
+            $loan_view = loans_statement_of_account::select(loans_payments::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->where('loan_type', 'Prestamo')->get();
+            $payment_view = loans_statement_of_account::select(loans_payments::raw("SUM(COALESCE(monto,0))"))->where('loans_users_id', $usuario[0]->id)->where('loan_type', 'Pago')->get();
+        } else {
+            // Si no tiene elementos, establecemos todas las variables en 0
+            $usuario_loans = 0;
+            $usuario_payment = 0;
+            $usuario_monto = 0;
+            $loan_view = 0;
+            $payment_view = 0;
+        }
+        //devolvemos la vista loans y pasamos las variables como parametros
+        return view(
+            'loansDebt',
             [
                 'usuario' => $usuario,
                 'usuario_monto' => $usuario_monto,
@@ -211,7 +262,7 @@ class LoansController extends Controller
         }
 
         return view(
-            'loans',
+            'loansDebt',
             [
                 'usuario' => $usuario,
                 'usuario_monto' => $usuario_monto,
@@ -244,18 +295,13 @@ class LoansController extends Controller
 
 
     public function destroy(Request $request)
-    {
-        $queryParameters = $request->query;
-        $keys = $queryParameters->keys();
-        
-        // Acceder a la clave (key) deseada
-        $key = $keys[0];
-
-        $vale = loans::find($key);
+    {   
+        $vale = loans::find($request->valeid);
         $vale->delete();
         $list = loans_statement_of_account::all();
-        return view('loanslist');
+        return redirect()->back();
     }
+
     public function show($id)
     {
         
@@ -317,7 +363,6 @@ class LoansController extends Controller
         $vale->cedula_user          = $request->cedula_user;
         $vale->nombre_user          = $request->nombre_user;
         $vale->loans_users_id       = $request->loans_users_id;
-        //dd($vale);
         $vale->save();
         $orgs = $this->obtenerInformacion();
         return view('loans', ['orgs' => $orgs]);
