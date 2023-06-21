@@ -455,4 +455,56 @@ class FactureController extends Controller
         return view('facture', compact('facturas','presupuesto')); // Pasar los facturas a la vista
     }
 
+    public function resume(Request $request){
+        $calculo = marketshopping::where('shoppingday', $request->day)->whereNotNull('budget')->get();
+        $facturas = Facture::where('fecha', $request->day)->get();
+        $cantidadProductos=0;
+        $tFactura=0;        
+        $abonado=0;
+        $tEfectivo=0;
+        $tCredito=0;
+        foreach ($facturas as $f) {
+            $cantidades=json_decode($f->Factured_quantity);
+            foreach ($cantidades as $cantidad) {
+                $cantidadProductos+=$cantidad;
+            }
+            $tFactura+=$f->total;
+            $abonado+=$f->monto_abonado;
+            if($f->medio_de_pago==true){
+                $tEfectivo+=$f->total;
+            }
+            if($f->medio_de_pago==false){
+                $tCredito+=$f->total;
+            }
+        }
+        
+        $pagosAnteriores=0;
+        $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $pagosAnteriores+=$check->monto;
+                }
+        }
+        
+        $fecha=$request->day;
+        $presupuesto=$calculo[0]->budget;
+        $carton=$facturas[0]->carton;
+        
+        $tComprado=0;
+        $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;
+        return view('factureResume',compact('fecha',
+        'cantidadProductos',
+        'presupuesto',
+        'facturas',
+        'carton',
+        'tComprado',
+        'tFactura',
+        'tEfectivo',
+        'tCredito',
+        'abonado',
+        'pagosAnteriores',
+        'vuelto',
+        'cheques'
+        ));
+    }
 }

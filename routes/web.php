@@ -62,7 +62,7 @@ Route::post('/loans_store_new', [App\Http\Controllers\LoansController::class, 's
 Route::post('/loans_newuser', [App\Http\Controllers\LoansController::class, 'newuser'])->name('loans.newuser');
 Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
-Route::delete('/loans_list', [App\Http\Controllers\LoansController::class, 'destroy'])->name('loans.destroy');
+Route::post('/loans_list_delete', [App\Http\Controllers\LoansController::class, 'destroy'])->name('loans.destroy');
 Route::post('/loans_list/{id}', [App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');
 Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updateLoan'])->name('loans.update_loan');
 

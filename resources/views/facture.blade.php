@@ -25,7 +25,22 @@
         </form>
         <div class="divider"></div>
         Presupuesto restante para el dia: {{$presupuesto}}
+        <div class="divider"></div>
+        <form name="factures" id="factures" method="post" action="{{ route('factures.resume') }}">
+                <div class="form-group "style="padding-left: 200px;">
+
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
+                            spellcheck="false" data-ms-editor="true" name="day">
+                        <button class="btn btn-outline-secondary" type="" id="button-addon2">resumen del dia</button>
+                    </div>
+
+                </div>
+        </form>
     </div>
+</br>
+    
     <div>
         <table>
             <thead>
