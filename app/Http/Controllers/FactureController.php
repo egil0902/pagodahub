@@ -187,6 +187,8 @@ class FactureController extends Controller
         $query = Facture::query();
         if (!empty($providerName)) {
             $query->where('proveedor', $providerName)->where('pagada', false);
+        }else{
+            $query->where('pagada', false);
         }
         $facturas = $query->get();
 
@@ -504,7 +506,8 @@ class FactureController extends Controller
         'abonado',
         'pagosAnteriores',
         'vuelto',
-        'cheques'
+        'cheques',
+        'deuda'
         ));
     }
 }

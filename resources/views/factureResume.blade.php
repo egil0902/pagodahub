@@ -3,41 +3,31 @@
 
 
 @section('content')
-<div class="p-2 centrado" style ="width:80%;">
+<div class="p-2 centrado" style="width: 80%;">
     <table>
-        
         <thead>
             <tr>
-                <td colspan="12">RESUMEN COMPRAS:</td>
+                <th colspan="12">RESUMEN COMPRAS:</th>
             </tr>
-        </thead>    
+        </thead>
         <tr>
             <td colspan="2">FECHA</td>
-            
             <td colspan="2">{{$fecha}}</td>
-            
-            <td colspan="1">CANTIDAD DE PRODUCTOS</td>        
+            <td colspan="1">CANTIDAD DE PRODUCTOS</td>
             <td colspan="1">{{$cantidadProductos}}</td>
-
-            <td colspan="2">PRESUPUESTO</td>        
+            <td colspan="2">PRESUPUESTO</td>
             <td colspan="2">{{$presupuesto}}</td>
         </tr>
     </table>
-    <br>
-    <br>
-    
+    <br><br>
+
     @if(count($facturas)>0)
     <table>
         <thead>
-            
-            <tr >
-                <th>FACTURAS</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+            <tr>
+                <th colspan="5">FACTURAS</th>
             </tr>
-            <tr style='background-color:#2cbc9c'>
+            <tr style="background-color:#2cbc9c">
                 <th># FACTURA</th>
                 <th>METODO DE PAGO</th>
                 <th>MONTO TOTAL</th>
@@ -45,43 +35,37 @@
                 <th>DEUDA</th>
             </tr>
         </thead>
-            @foreach ($facturas as $factura)
-                <tr>
-                    <td>{{$factura->id}}</td>
-                    <td>{{$factura->medio_de_pago?'Contado':'Credito'}}</td>
-                    <td>{{$factura->total}}</td>
-                    <td>{{$factura->medio_de_pago?$factura->total:$factura->monto_abonado}}</td>
-                    <td>{{$factura->medio_de_pago?0:($factura->total-$factura->monto_abonado)}}</td>
-                
-                </tr>
-            @endforeach
-       
+        @foreach ($facturas as $factura)
+        <tr>
+            <td>{{$factura->id}}</td>
+            <td>{{$factura->medio_de_pago?'Contado':'Credito'}}</td>
+            <td>{{$factura->total}}</td>
+            <td>{{$factura->medio_de_pago?$factura->total:$factura->monto_abonado}}</td>
+            <td>{{$factura->medio_de_pago?0:($factura->total-$factura->monto_abonado)}}</td>
+        </tr>
+        @endforeach
     </table>
     @endif
-    <BR>
+    <br>
     @if(count($cheques)>0)
     <table>
         <thead>
-            <tr >
-                <th>PAGOS A FACTURAS ANTERIORES</th>
-                <th></th>
-                <th></th>
+            <tr>
+                <th colspan="3">PAGOS A FACTURAS ANTERIORES</th>
             </tr>
-            <tr style='background-color:#2cbc9c'>
+            <tr style="background-color:#2cbc9c">
                 <th># FACTURA</th>
                 <th>PROCEDENCIA DE LOS RECURSOS</th>
                 <th>MONTO</th>
             </tr>
         </thead>
-            @foreach ($cheques as $cheque)
-                <tr>
-                    <td>{{$cheque->id_factura}}</td>
-                    <td>{{($cheque->pago_presupuesto===true)?'Presupuesto':'Otros'}}</td>
-                    <td>{{$cheque->monto}}</td>
-                
-                </tr>
-            @endforeach
-       
+        @foreach ($cheques as $cheque)
+        <tr>
+            <td>{{$cheque->id_factura}}</td>
+            <td>{{($cheque->pago_presupuesto===true)?'Presupuesto':'Otros'}}</td>
+            <td>{{$cheque->monto}}</td>
+        </tr>
+        @endforeach
     </table>
     @endif
     <br>
@@ -121,89 +105,98 @@
             <td>{{$vuelto}}</td>
         </tr>
     </table>
+</div>
 
-        
-    </div>
-    
-
-    <style>
-        .centrado {
+<style>
+    .centrado {
         margin-left: auto;
         margin-right: auto;
-        text-align: center; /* Opcional: si deseas centrar el texto dentro del div */
+        text-align: center;
     }
-        table {
-            font-family: arial, sans-serif;
-            background-color: white;
-            text-align: left;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .table th {
-            max-width: 100px; /* Establece el ancho máximo deseado */
-            text-overflow: ellipsis; /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
-            white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-        }
-        th,
-        td {
-            padding: 1px;
 
-        }
+    table {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        text-align: left;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-        thead {
-            background-color: #246355;
-            border-bottom: solid 5px #0F362D;
-            color: white;
-        }
+    table th,
+    table td {
+        padding: 8px;
+    }
 
-        #theadtotal {
-            background-color: #1b6453;
-            border-bottom: solid 2.5px #268c74;
-            border-top: solid 2.5px #268c74;
-            color: white;
-        }
+    table thead {
+        background-color: #246355;
+        border-bottom: 5px solid #0F362D;
+        color: white;
+    }
 
-        tr:nth-child(even) {
-            background-color: #ddd;
-        }
+    table th {
+        max-width: 100px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-        tr:hover td {
-            background-color: #369681;
-            color: white;
-        }
+    table tr:nth-child(even) {
+        background-color: #ddd;
+    }
 
-        #imagenesPrevias {
-            display: center;
-            flex-wrap: wrap;
-        }
+    table tr:hover td {
+        background-color: #369681;
+        color: white;
+    }
 
-        #imagenesPrevias img {
-            max-width: 75%;
-            height: auto;
-            margin: 5px;
-            border: 1px solid;
-        }
-        .divider {
-            width: 15px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-        }
+    table thead th[colspan="12"],
+    table thead th[colspan="5"],
+    table thead th[colspan="3"] {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
-        label {
-            font-weight: bold;
-        }
+    table thead th[colspan="12"],
+    table thead th[colspan="5"],
+    table thead th[colspan="3"],
+    table td[colspan="2"] {
+        text-align: center;
+    }
 
-        input[type="checkbox"],
-        input[type="text"] {
-            margin-top: 5px;
-        }
+    table td[colspan="2"] {
+        font-weight: bold;
+    }
 
-        button {
-            margin-top: 10px;
-        }
-    </style>
+    table tr td:first-child {
+        font-weight: bold;
+    }
+
+    table tr:last-child td {
+        font-weight: bold;
+    }
+
+    .table-divider {
+        width: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="checkbox"],
+    input[type="text"] {
+        margin-top: 5px;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+</style>
 @endsection
+
