@@ -465,6 +465,7 @@ class FactureController extends Controller
         $abonado=0;
         $tEfectivo=0;
         $tCredito=0;
+        $deuda=0;
         foreach ($facturas as $f) {
             $cantidades=json_decode($f->Factured_quantity);
             foreach ($cantidades as $cantidad) {
@@ -477,6 +478,7 @@ class FactureController extends Controller
             }
             if($f->medio_de_pago==false){
                 $tCredito+=$f->total;
+                $deuda+=$f->total-$f->monto_abonado;
             }
         }
         

@@ -97,6 +97,10 @@
             <td>{{$tCredito}}</td>
         </tr>
         <tr>
+            <td>TOTAL DE DEUDA FACTURAS A CREDITO</td>
+            <td>{{$deuda}}</td>
+        </tr>
+        <tr>
             <td>PAGO FACTURAS ANTERIORES</td>
             <td>{{$pagosAnteriores}}</td>
         </tr>
