@@ -390,7 +390,8 @@
                                                 var totalFinalInput = table.querySelector('.total-difference-final');
                                                 var total=totalFinalInput.value
                                                 var attributeValue = "{{ $data->budget }}"
-                                                var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
+                                                var answer = presupuesto.toFixed(2) - sum_differenceFactura.toFixed(2);    
+                                                console.log(sum_compra.toFixed(2));
                                                 if(metodoSeleccionado){
                                                     abono.value;
                                                     
