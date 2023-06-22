@@ -15,7 +15,6 @@
         <div class="card w-auto">
             <div class="card-header">
                 Consultar Deudor
-                AAAAAAAAAAAAAAAAAAAAAA
             </div>
             <div class="card-body">
                 <form name="loans_search" id="loans_search" method="get" action="{{ route('loans_debt.search') }}">
@@ -361,7 +360,7 @@
                                     Estado de cuenta de prestamos
                                 </div>
                                 <div class="card-body">
-                                    @livewire('loanssearch')
+                                    @livewire('loanssearchdebt')
                                 </div>
                             </div>
                         @endif

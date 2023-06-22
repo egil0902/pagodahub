@@ -13,7 +13,7 @@
             <th>Fecha</th>
             <th>Monto</th>
             <th>Adjuntos</th>
-            <th style="display:none;">Eliminar</th>
+            <th>Eliminar</th>
 
         </thead>
         <tbody>
@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td style="display:none;">
+                            <td>
                                 <center>
                                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
                                         data-bs-target="#example2Modal{{ $data->loan_type }}{{ $data->id }}">
