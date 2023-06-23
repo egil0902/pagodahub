@@ -515,7 +515,7 @@
                                                     <th style="max-width: 50px;">#</th>
                                                     <th>Producto</th>
                                                     <th>Unidad</th>
-                                                    
+                                                    ----------------
                                                     <th>Cantidad factura</th>
                                                     <!--<th>Diferencia</th>-->
                                                     <th>Precio</th>
