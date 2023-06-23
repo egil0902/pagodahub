@@ -13,6 +13,7 @@
 @endif
 
 <div class="p-2 m-0 border-0 bd-example">
+    
 	<form name="market" id="market" method="post" action="{{ route('market.day') }}">
             <div class="form-group w-50 "style="padding-left: 200px;">
 
