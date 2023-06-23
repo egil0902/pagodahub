@@ -41,6 +41,7 @@ class CloseCashController extends Controller
             "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",
             'ba_name asc'
         );
+
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
         //dump($list);
         $dia = $request->DateTrx;
@@ -53,11 +54,84 @@ class CloseCashController extends Controller
         $name_user = auth()->user()->name;
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        //dd($closecashlist->records); //el chiste se hace con ba_value
+        //NetTotal=montoContado
+        $panaderia = (object) [
+            'nombre'=>'Total panaderia',
+            'BeginningBalance' => 0,
+            'SubTotal' => 0,
+            'NetTotal' => 0,
+            'XAmt' => 0,
+            'DifferenceAmt' => 0
+        ];
+        
+        $caja = (object) [
+            'nombre'=>'Total cajas',
+            'BeginningBalance' => 0,
+            'SubTotal' => 0,
+            'NetTotal' => 0,
+            'XAmt' => 0,
+            'DifferenceAmt' => 0
+        ];
+        
+        $pagaTodo = (object) [
+            'nombre'=>'Total pagatodo',
+            'BeginningBalance' => 0,
+            'SubTotal' => 0,
+            'NetTotal' => 0,
+            'XAmt' => 0,
+            'DifferenceAmt' => 0
+        ];
+        
+        foreach ($closecashlist->records as $cajas) {
+            switch ($cajas->ba_value) {
+                case 'panaderia':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                    
+                case '1000004':
+                    $pagaTodo->BeginningBalance += $cajas->BeginningBalance;
+                    $pagaTodo->SubTotal += $cajas->SubTotal;
+                    $pagaTodo->NetTotal += $cajas->NetTotal;
+                    $pagaTodo->XAmt += $cajas->XAmt;
+                    $pagaTodo->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                    
+                default:
+                    if ($cajas->ba_value !== '1000004') {
+                        $caja->BeginningBalance += $cajas->BeginningBalance;
+                        $caja->SubTotal += $cajas->SubTotal;
+                        $caja->NetTotal += $cajas->NetTotal;
+                        $caja->XAmt += $cajas->XAmt;
+                        $caja->DifferenceAmt += $cajas->DifferenceAmt;
+                    }
+                    break;
+            }
+        }
+        $tDia = (object) [
+            'nombre'=>'Total del día',
+            'BeginningBalance' => $panaderia->BeginningBalance+$caja->BeginningBalance+$pagaTodo->BeginningBalance,
+            'SubTotal' => $panaderia->SubTotal+$caja->SubTotal+$pagaTodo->SubTotal,
+            'NetTotal' => $panaderia->NetTotal+$caja->NetTotal+$pagaTodo->NetTotal,
+            'XAmt' => $panaderia->XAmt+$caja->XAmt+$pagaTodo->XAmt,
+            'DifferenceAmt' => $panaderia->DifferenceAmt+$caja->DifferenceAmt+$pagaTodo->DifferenceAmt
+        ];
+        $total=[$caja,$pagaTodo,$panaderia,$tDia];
         foreach ($user->records  as $usuario) {
             //dump($user);
             foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                 if ($acceso->Name == 'closecash') {
-                    return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list, 'permisos' => $user]);
+                    return view('closecash', ['orgs' => $orgs, 
+                                              'closecashsumlist' => $response, 
+                                              'request' => $request, 
+                                              'closecashlist' => $closecashlist, 
+                                              'list' => $list, 
+                                              'permisos' => $user,
+                                              'totales'=> $total]);
                     break;
                 }
             }
