@@ -196,7 +196,8 @@
                                 @php $cuenta = 1;  @endphp
                                 @if ($closecashlist->{'records-size'} > 0)
                                     @foreach ($closecashlist->records as $closecashl)
-                                        <tbody style="font-size: 14px">
+                                    <tbody style="font-size: 14px; <?php echo (isset($closecashl->ba_value) ? '' : 'color: red;') ?>">
+
                                             <tr>
                                                 <th cope="row" class="text-start text-capitalize"
                                                     style="padding-right: 10px;">
@@ -240,56 +241,6 @@
                                             ">
                                                     @php
                                                         echo number_format($closecashl->DifferenceAmt, 2, ',', ' ');
-                                                    @endphp
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    @endforeach
-                                    @foreach ($totales as $total)
-                                        <tbody style="font-size: 14px">
-                                            <tr>
-                                                <th cope="row" class="text-start text-capitalize"
-                                                    style="padding-right: 10px;">
-                                                    @php echo $cuenta++;  @endphp</th>
-                                                <th class="text-start text-capitalize" style="padding-right: 25px;">
-                                                    {{ $total->nombre }}</th>
-                                                <td class="text-start text-capitalize" style="padding-right: 25px;">
-                                                    ---------------</td>
-                                                <td class="text-end" style="padding-left: 25px;">
-                                                    @php
-                                                        echo number_format($total->BeginningBalance, 2, ',', ' ');
-                                                    @endphp
-                                                </td>
-                                                <td class="text-end"
-                                                    style="
-                                                padding-left: 25px;
-                                            ">
-                                                    @php
-                                                        echo number_format($total->SubTotal, 2, ',', ' ');
-                                                    @endphp
-                                                </td>
-                                                <td class="text-end"
-                                                    style="
-                                                padding-left: 25px;
-                                            ">
-                                                    @php
-                                                        echo number_format($total->NetTotal, 2, ',', ' ');
-                                                    @endphp
-                                                </td>
-                                                <td class="text-end"
-                                                    style="
-                                                padding-left: 25px;
-                                            ">
-                                                    @php
-                                                        echo number_format($total->XAmt, 2, ',', ' ');
-                                                    @endphp
-                                                </td>
-                                                <td class="text-end"
-                                                    style="
-                                                padding-left: 25px;
-                                            ">
-                                                    @php
-                                                        echo number_format($total->DifferenceAmt, 2, ',', ' ');
                                                     @endphp
                                                 </td>
                                             </tr>

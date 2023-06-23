@@ -57,7 +57,8 @@ class CloseCashController extends Controller
         //dd($closecashlist->records); //el chiste se hace con ba_value
         //NetTotal=montoContado
         $panaderia = (object) [
-            'nombre'=>'Total panaderia',
+            'ba_name'=>'Total panaderia',
+            'u_name'=>'------------',
             'BeginningBalance' => 0,
             'SubTotal' => 0,
             'NetTotal' => 0,
@@ -66,7 +67,8 @@ class CloseCashController extends Controller
         ];
         
         $caja = (object) [
-            'nombre'=>'Total cajas',
+            'ba_name'=>'Total cajas',
+            'u_name'=>'------------',
             'BeginningBalance' => 0,
             'SubTotal' => 0,
             'NetTotal' => 0,
@@ -75,15 +77,16 @@ class CloseCashController extends Controller
         ];
         
         $pagaTodo = (object) [
-            'nombre'=>'Total pagatodo',
+            'ba_name'=>'Total pagatodo',
+            'u_name'=>'------------',
             'BeginningBalance' => 0,
             'SubTotal' => 0,
             'NetTotal' => 0,
             'XAmt' => 0,
             'DifferenceAmt' => 0
         ];
-        
-        foreach ($closecashlist->records as $cajas) {
+        $lastIndex=null;
+        foreach ($closecashlist->records as $index =>$cajas) {
             switch ($cajas->ba_value) {
                 case 'panaderia':
                     $panaderia->BeginningBalance += $cajas->BeginningBalance;
@@ -99,8 +102,43 @@ class CloseCashController extends Controller
                     $pagaTodo->NetTotal += $cajas->NetTotal;
                     $pagaTodo->XAmt += $cajas->XAmt;
                     $pagaTodo->DifferenceAmt += $cajas->DifferenceAmt;
+                    $lastIndex=$index;
                     break;
-                    
+                case 'Caja 5_Panaderia':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Caja 10':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Principal Panaderia Susy':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Caja Panaderia':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Dulceria Susy Fortuna P':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
                 default:
                     if ($cajas->ba_value !== '1000004') {
                         $caja->BeginningBalance += $cajas->BeginningBalance;
@@ -113,7 +151,8 @@ class CloseCashController extends Controller
             }
         }
         $tDia = (object) [
-            'nombre'=>'Total del día',
+            'ba_name'=>'Total del día',
+            'u_name'=>'------------',
             'BeginningBalance' => $panaderia->BeginningBalance+$caja->BeginningBalance+$pagaTodo->BeginningBalance,
             'SubTotal' => $panaderia->SubTotal+$caja->SubTotal+$pagaTodo->SubTotal,
             'NetTotal' => $panaderia->NetTotal+$caja->NetTotal+$pagaTodo->NetTotal,
@@ -121,6 +160,19 @@ class CloseCashController extends Controller
             'DifferenceAmt' => $panaderia->DifferenceAmt+$caja->DifferenceAmt+$pagaTodo->DifferenceAmt
         ];
         $total=[$caja,$pagaTodo,$panaderia,$tDia];
+        $closecashlist->records[] = $panaderia;
+        $closecashlist->records[] = $tDia;
+        //dd($closecashlist->records,$posicion);
+        $closecashlist->records = array_merge(
+            array_slice($closecashlist->records, 0, $lastIndex + 1),
+            [$pagaTodo],
+            array_slice($closecashlist->records, $lastIndex + 1)
+        );
+        $closecashlist->records = array_merge(
+            array_slice($closecashlist->records, 0, $lastIndex),
+            [$caja],
+            array_slice($closecashlist->records, $lastIndex)
+        );
         foreach ($user->records  as $usuario) {
             //dump($user);
             foreach ($usuario->PAGODAHUB_closecash as $acceso) {
