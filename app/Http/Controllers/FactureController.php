@@ -216,7 +216,7 @@ class FactureController extends Controller
                 }
         }
         
-        return view('factureFilter', compact('facturas','presupuesto'))->with('ok',true);
+        return view('factureFilter', compact('facturas','presupuesto','providerName'))->with('ok',true);
     }
 
     public function getAllCredit(Request $request)
@@ -246,8 +246,8 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        
-        return view('factureFilter', compact('facturas','presupuesto'))->with('refresh', true);
+        $providerName="";
+        return view('factureFilter', compact('facturas','presupuesto','providerName'))->with('refresh', true);
     }
     public function borrar($id)
     {

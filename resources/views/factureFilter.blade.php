@@ -10,7 +10,7 @@
             <div class="form-group">
                 @csrf
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="" spellcheck="false" name="provider">
+                    <input type="text" class="form-control" placeholder="{{$providerName}}" aria-label="" aria-describedby="" spellcheck="false" name="provider">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar proveedor</button>
                 </div>
             </div>
