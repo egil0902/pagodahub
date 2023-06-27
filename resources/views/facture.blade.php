@@ -45,7 +45,7 @@
         <table>
             <thead>
                 <tr>
-                    <th># factura</th>
+                    <th># Factura</th>
                     <th>Fecha</th>
                     <th>Proveedor</th>
                     <th>Medio de pago</th>
