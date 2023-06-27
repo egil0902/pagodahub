@@ -68,22 +68,11 @@ class MarketController extends Controller
             }
         }
         $shop = new marketshopping;
-        /* $prod = implode(' ', $request->input('product'));*/
-        /* $unit = implode(' ', $request->input('unit')); */
-        /* $quan = implode(' ', $request->input('quantity')); */
         $quantity =$request->input('quantity');
         $quantity = array_values(array_filter($quantity, function ($valor) {
             return !is_null($valor) && $valor !== '';
         }));
         $presupuesto = $request->input('Presupuesto');
-
-        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
-        foreach ($comprasdeldia as $compra) {
-            if ($compra->budget != $presupuesto) {
-                $compra->budget = $presupuesto;
-                $compra->save();
-            }
-        }
 
         // Paso 1: Crear un arreglo asociativo con información de productos, unidades y cantidades
         $info_productos = [];
@@ -123,11 +112,6 @@ class MarketController extends Controller
         $shop->quantity = json_encode($quantity);
         $shop->save();
 
-        //dd($shop);
-        //$opciones = units::all();
-        //$opciones2 = products::all();
-        //return view('market', compact('opciones', 'opciones2'));
-
         // Procesar los datos enviados a través del formulario
 
         $request->session()->flash('mensaje', 'El formulario de compra ha sido guardado correctamente.');
@@ -165,7 +149,8 @@ class MarketController extends Controller
         //dd($day);
         
         $presupuesto=0;
-        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->orderBy('created_at', 'asc')->get();
+        
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
         }
@@ -262,15 +247,6 @@ class MarketController extends Controller
 
         $presupuesto = $request->input('Presupuesto');
         $unidades = $request->input('unit');
-        $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
-        if($comprasdeldia->count() > 0){
-            foreach ($comprasdeldia as $compra) {
-                if ($compra->budget != $presupuesto) {
-                    $compra->budget = $presupuesto;
-                    $compra->save();
-                }
-            }
-        }
 
         // Paso 1: Crear un arreglo asociativo con información de productos, unidades y cantidades
         $info_productos = [];

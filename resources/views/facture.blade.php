@@ -48,11 +48,11 @@
                     <th># factura</th>
                     <th>Fecha</th>
                     <th>Proveedor</th>
-                    <th>Valor abonado</th>
                     <th>Medio de pago</th>
+                    <th>Valor abonado</th>
+                    <th>Total</th>
                     <th>Valor Deuda</th>
                     <th>Pagada?</th>
-                    <th>Total</th>
                     <th></th>
                 </tr>
             </thead>
@@ -62,11 +62,11 @@
                     <td>{{$factura->id_compra}}</td>
                     <td>{{$factura->fecha}}</td>
                     <td>{{$factura->proveedor}}</td>
-                    <td>{{$factura->monto_abonado}}</td>
                     <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
+                    <td>{{$factura->monto_abonado}}</td>
+                    <td>{{$factura->total}}</td>
                     <td>{{$factura->medio_de_pago?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
                     <td>{{$factura->pagada?"Si":"No"}}</td>
-                    <td>{{$factura->total}}</td>
                     <!--<td>
                         <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                             @csrf
