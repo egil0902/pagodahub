@@ -27,7 +27,7 @@
         </form>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                 <div class="col">                
-                    <h4>presupuesto: 
+                    <h4>Presupuesto: 
                         <input class="w-100 form-control" type="text" name="presupuesto"
                         id="presupuesto" value="{{isset($presupuesto)?$presupuesto:0 }} " readonly>
                     </h4>
@@ -80,7 +80,7 @@
                                 
                             </div>
                             <div class="col">
-                                <h4>abono: 
+                                <h4>Abono: 
                                     <input class="w-100 form-control" type="text" name="abono"
                                     id="abono" value="0" style="display: none;"
                                     >
@@ -251,7 +251,7 @@
                                                 </th>--->
                                             </tr>
                                             <tr>
-                                                <th COLSPAN=3> diferencia (mercancia recibida - en factura)</th>
+                                                <th COLSPAN=3> Diferencia (mercancia recibida - en factura)</th>
                                                 <th>
                                                     
                                                 </th>

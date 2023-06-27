@@ -33,7 +33,7 @@
                     <div class="input-group mb-3">
                         <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
                             spellcheck="false" data-ms-editor="true" name="day" required>
-                        <button class="btn btn-outline-secondary" type="" id="button-addon2">resumen del dia</button>
+                        <button class="btn btn-outline-secondary" type="" id="button-addon2">Resumen del dia</button>
                     </div>
 
                 </div>

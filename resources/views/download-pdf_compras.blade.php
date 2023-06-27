@@ -89,28 +89,24 @@
 <h1>Factura número: {{ $data->id_compra }}</h1>
 <p>Fecha: {{ $data->shoppingday }}</p>
 <p>Proveedor: {{ $data->proveedor }}</p>
-<p>Monto abonado: {{ $data->monto_abonado }}</p>
 
 <!-- Listado de productos -->
 <table>
     <thead>
         <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Valor total</th>
+            <th>Medio de pago</th>
+            <th>Abono</th>
+            <th>Valor Deuda</th>
             
         </tr>
     </thead>
     <tbody>
-        @foreach(json_decode($data->product) as $index => $product)
         <tr>
-            <td>{{ $product }}</td>
-            <td>{{ json_decode($data->Factured_quantity)[$index] }}</td>
-            <td>{{ json_decode($data->price)[$index] }}</td>
-            <td>{{ json_decode($data->Factured_quantity)[$index] * json_decode($data->price)[$index] }}</td>
+            <td>{{$data->medio_de_pago?"Contado":"Crédito"}}</td>
+            <td>{{$data->monto_abonado}}</td>
+            <td>{{$data->Total_compra >= 0 ? $data->monto_abonado : $data->Total_compra}}</td>
+            
         </tr>
-        @endforeach
     </tbody>
 </table>
 
