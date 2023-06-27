@@ -12,7 +12,7 @@ class FactureController extends Controller
 {
     public function index()
     {
-        $facturas = Facture::all(); // Obtener todos los facturas de la tabla
+        $facturas = Facture::orderBy('fecha', 'desc')->get(); // Obtener todos los facturas de la tabla
         $day = date('Y-m-d'); // Obtener la fecha actual
         $presupuesto = "no asignado para el dia";
         $calculo = marketshopping::where('shoppingday', $day)->whereNotNull('budget')->get();
@@ -48,9 +48,7 @@ class FactureController extends Controller
         if ($existingFacture) {
             // Si se encuentra un registro con el mismo número de factura, devuelve un mensaje de error
             $request->session()->flash('mensaje', 'El numero de factura '.$request->NFactura.' ya existe');
-            //$day = $request->fecha_registro;
-            //$comprasdeldia = marketshopping::where('shoppingday', $day)->get();
-            //return view('marketinvoice', compact('comprasdeldia'));
+            
             return redirect()->back();
         }
         $productos = $request->product;
@@ -80,7 +78,8 @@ class FactureController extends Controller
         //$registro->vuelto =$registro->vuelto;
         $registro->vuelto=$request->pfinal;        
         $registro->pagada=false;
-        if($request->metodo===true){
+        
+        if($request->metodo==="true"){
             $registro->pagada=true;
         }
         if (isset($request->cart) && strpos($request->cart, ':') !== false) {
@@ -120,7 +119,7 @@ class FactureController extends Controller
         $registro->save(); // Guardar el nuevo registro en la base de datos   
         
         $presupuesto=0;
-        $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->get();
+        $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
         }
