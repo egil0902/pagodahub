@@ -104,12 +104,23 @@
 
     // Manejar el evento de confirmación
     document.getElementById("confirmar").addEventListener("click", function() {
-        event.target.submit();
+        if(pagos.length){
+
+            event.target.submit();
+            pagos.forEach(function(pago) {
+                var row = document.getElementById('row' + pago.fact_id)
+                row.style.display = "none";
+            });
+            pagos=[];
+        }
+        
+        $('.modal').modal('hide');
     });
 
     // Manejar el evento de cancelación
     document.getElementById("cancelar").addEventListener("click", function() {
         $('.modal').modal('hide');
+
     });
 });
 
@@ -162,13 +173,13 @@
     </thead>
     <tbody>
         @foreach ($facturas as $factura)
-        <tr>
+        <tr name="row{{$factura->id_compra}}" id="row{{$factura->id_compra}}">
             <td name="id{{$factura->id_compra}}" id="id{{$factura->id_compra}}">{{$factura->id_compra}}</td>
             <td>{{$factura->fecha}}</td>
             <td>{{$factura->proveedor}}</td>
             <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
             <td>{{$factura->monto_abonado}}</td>
-            <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">{{$factura->Total_compra >= 0 ? $factura->monto_abonado : $factura->Total_compra}}</td>
+            <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">{{$factura->Total_compra- $factura->monto_abonado}}</td>
             <td>
                 <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                     @csrf
@@ -201,12 +212,12 @@
         var facturaTotal = document.getElementById('totalPagar' + checkbox.value).innerText;
         var fact_id = document.getElementById('id' + checkbox.value).innerText;
         var totalValue = parseFloat(document.getElementById('total' + checkbox.value).innerText);
-
+        console.log(totalValue)
         if (checkbox.checked) {
-            total += parseFloat(facturaTotal);
+            total += parseFloat(totalValue);
             pagos.push({ fact_id: fact_id, total: totalValue });
         } else {
-            total -= parseFloat(facturaTotal);
+            total -= parseFloat(totalValue);
             pagos = pagos.filter(function(pago) {
                 return pago.fact_id !== fact_id;
             });

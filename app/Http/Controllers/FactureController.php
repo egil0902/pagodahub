@@ -329,19 +329,20 @@ class FactureController extends Controller
             $monto=$request->monto;
         }
         if (count($idCompras)>0) {
-            
             for ($i=0; $i < count($idCompras); $i++) { 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
                 
                 if($monto===0){
                     
                     $monto=($factura->total-$factura->monto_abonado);
+                    $factura->monto_abonado=$monto;
                 }
                 if($monto!==0){
                     $factura->monto_abonado+=$monto;
-                    if($factura->monto_abonado>=$factura->total){
-                        $factura->pagada=true;
-                    }
+                    
+                }
+                if($factura->monto_abonado>=$factura->total){
+                    $factura->pagada=true;
                 }
 
                 $factura->save();
@@ -355,13 +356,6 @@ class FactureController extends Controller
             }
             # code...
         }
-        
-        //return $pdf->download("factura".".pdf");
-        // Descarga el PDF
-    //$pdf->download("factura".".pdf");
-
-    // Redirecciona a la página actual
-   // echo '<script>setTimeout(function() { window.location.reload(); }, 1000);</script>';
     $providerName = $request->input('provider');
         $query = Facture::query();
         if (!empty($providerName)) {
@@ -397,12 +391,7 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-//        return $pdf->download("factura".".pdf")->refresh();
-        $pdf->download("factura.pdf");
-
-        // Redireccionar y recargar la página después de la descarga
-        echo '<script>window.location.href = "/facture";</script>';
-        echo '<script>window.location.reload();</script>';
+        return $pdf->download("factura".".pdf");
     }
     public function pagar(Request $request)
     {
