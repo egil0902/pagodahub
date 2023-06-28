@@ -33,6 +33,9 @@ class FactureController extends Controller
         $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
+                    if($presupuesto == "no asignado para el dia"){
+                        $presupuesto=0;
+                    }
                     $presupuesto-=$check->monto;
                 }
         }
@@ -242,6 +245,9 @@ class FactureController extends Controller
         $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
+                    if($presupuesto == "no asignado para el dia"){
+                        $presupuesto=0;
+                    }
                     $presupuesto-=$check->monto;
                 }
         }
@@ -302,7 +308,6 @@ class FactureController extends Controller
 
     public function downloadPdf(Request $request)
     {
-        /*   $pdf= PDF::loadHTML('<h1>Test</h1>'); */
         $idCompras = $request->input('factura_ids');
         $idCompras = explode(',', $idCompras);
         
@@ -311,13 +316,96 @@ class FactureController extends Controller
             ->join('factures', 'factures.id_compra', '=', 'marketshoppings.id_compra')
             ->whereIn('factures.id_compra', $idCompras)
             ->get();
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados]);
         
-        return $pdf->download("factura".".pdf");
+        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados]);
+        $idCompras = $request->input('facturas_ids');
+        $idCompras = explode(',', $idCompras);
+        $pagoPresupuesto=false;
+        if($request->pagoPresupuesto){
+            $pagoPresupuesto=$request->pagoPresupuesto;
+        }
+        $monto=0;
+        if($request->monto){
+            $monto=$request->monto;
+        }
+        if (count($idCompras)>0) {
+            
+            for ($i=0; $i < count($idCompras); $i++) { 
+                $factura = Facture::where('id_compra', $idCompras[$i])->first();
+                
+                if($monto===0){
+                    
+                    $monto=($factura->total-$factura->monto_abonado);
+                }
+                if($monto!==0){
+                    $factura->monto_abonado+=$monto;
+                    if($factura->monto_abonado>=$factura->total){
+                        $factura->pagada=true;
+                    }
+                }
+
+                $factura->save();
+                
+                $cheque = Cheque::create([
+                    'fecha' => date('Y-m-d'),
+                    'id_factura' => $factura->id_compra,
+                    'pago_presupuesto' => $pagoPresupuesto,
+                    'monto' => $monto,
+                ]);
+            }
+            # code...
+        }
+        
+        //return $pdf->download("factura".".pdf");
+        // Descarga el PDF
+    //$pdf->download("factura".".pdf");
+
+    // Redirecciona a la página actual
+   // echo '<script>setTimeout(function() { window.location.reload(); }, 1000);</script>';
+    $providerName = $request->input('provider');
+        $query = Facture::query();
+        if (!empty($providerName)) {
+            $query->where('proveedor', $providerName)->where('pagada', false);
+        }else{
+            $query->where('pagada', false);
+        }
+        $facturas = $query->get();
+
+        $day = date('Y-m-d'); // Obtener la fecha actual
+        $presupuesto = "no asignado para el dia";
+        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
+        if ($calculo->count()>0) {
+            $presupuesto=$calculo[0]->budget;
+            $comprasdeldia = Facture::where('fecha', $day)->get();
+            
+            foreach ($comprasdeldia as $factura) {
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->total;
+
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->monto_abonado;
+                }
+            }
+        }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    if($presupuesto == "no asignado para el dia"){
+                        $presupuesto=0;
+                    }
+                    $presupuesto-=$check->monto;
+                }
+        }
+//        return $pdf->download("factura".".pdf")->refresh();
+        $pdf->download("factura.pdf");
+
+        // Redireccionar y recargar la página después de la descarga
+        echo '<script>window.location.href = "/facture";</script>';
+        echo '<script>window.location.reload();</script>';
     }
     public function pagar(Request $request)
     {
-        /*   $pdf= PDF::loadHTML('<h1>Test</h1>'); */
         $idCompras = $request->input('facturas_ids');
         $idCompras = explode(',', $idCompras);
         $pagoPresupuesto=false;

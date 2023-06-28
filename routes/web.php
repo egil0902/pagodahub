@@ -106,6 +106,6 @@ Route::get('/firma3', function () {
 
 // Ruta para dompdf
 Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');
-Route::get('facturas-pdf', [App\Http\Controllers\FactureController::class, 'downloadPdf'])->name('facture-pdf');
+Route::post('facture-pdf', [App\Http\Controllers\FactureController::class, 'downloadPdf'])->name('facture-pdf');
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');
