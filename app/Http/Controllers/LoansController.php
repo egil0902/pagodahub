@@ -201,7 +201,7 @@ class LoansController extends Controller
         if ($duplicado) {
             // La consulta tiene resultados
             $orgs = $this->obtenerInformacion();
-            return view('loans', ['orgs' => $orgs, 'error'=>"El usuario con documento "+$request->cedula+" ya existe" ]);
+            return view('loans', ['orgs' => $orgs, 'error'=>"El usuario con documento ".$request->cedula." ya existe" ]);
         }
 
         $todo = new loans_user;
