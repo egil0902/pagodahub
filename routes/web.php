@@ -66,8 +66,8 @@ Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'upda
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
 Route::post('/loans_list_delete', [App\Http\Controllers\LoansController::class, 'destroy'])->name('loans.destroy');
 Route::post('/loans_list/{id}', [App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');
-Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updateLoan'])->name('loans.update_loan');
-
+Route::post('/loans_list', [App\Http\Controllers\LoansController::class, 'updateLoan'])->name('loans.updateLoan');
+Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updatePayment'])->name('loans.updatePayment');
 
 Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
 Route::post('/facture/resume', [App\Http\Controllers\FactureController::class, 'resume'])->name('factures.resume');

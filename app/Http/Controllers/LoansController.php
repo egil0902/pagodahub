@@ -296,16 +296,27 @@ class LoansController extends Controller
 
     public function destroy(Request $request)
     {   
-        $vale = loans::find($request->valeid);
-        $vale->delete();
+        if($request->loan_type==="Prestamo"){
+            $vale = loans::find($request->valeid);
+            $vale->delete();
+        }else{
+            $vale = loans_payments::find($request->valeid);            
+            $vale->delete();
+        }
+        
         $list = loans_statement_of_account::all();
         return redirect()->back();
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        
-        $vale = loans::where('id', '=',$id)->get();
+        //dd($request->loan_type,$request->loan_id);
+        $vale;
+        if($request->loan_type==="Prestamo"){
+            $vale = loans::where('id', '=',$request->loan_id)->get();
+        }else{
+            $vale = loans_payments::where('id', '=',$request->loan_id)->get();
+        }
 
         $orgs = $this->obtenerInformacion();
         
@@ -339,13 +350,14 @@ class LoansController extends Controller
                 'orgs' => $orgs,
                 'cedula' => $usuario[0]->cedula,
                 'nombre' => $usuario[0]->nombre,
-                'loan'=> $vale
+                'loan'=> $vale,
+                'tipo'=> $request->loan_type
             ]
         );
     }
     public function updateLoan(Request $request){
 
-        $vale = loans::where('id', '=',$request->loan_id)->first();
+        $vale = loans::where('id', '=',$request->id_payment)->first();
 
         $vale->fechanuevoprestamo   = $request->fechanuevoprestamo;
         $vale->monto                = $request->monto;
@@ -368,4 +380,21 @@ class LoansController extends Controller
         return view('loans', ['orgs' => $orgs]);
     }
 
+    public function updatePayment(Request $request){
+        $vale = loans_payments::where('id', '=',$request->id_payment)->first();
+
+        $vale->datepayment   = $request->datepayment;
+        $vale->amount                = $request->amount;
+        //$vale->debt                = $request->cuota;
+
+        if($request->file!=null){
+            $vale->file           = $request->file;
+        }
+        if($request->signature !="Firma No File"){
+            $vale->signature   = $request->signature;
+        }
+        $vale->save();
+        $orgs = $this->obtenerInformacion();
+        return view('loans', ['orgs' => $orgs]);
+    }
 }

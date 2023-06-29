@@ -85,10 +85,14 @@
                                     </div>
                                     <br>
                                     <!--MODIFICAR RUTA-->
+                                    @if($tipo=="Prestamo")
                                     <form name="loans_store_new" id="loans_store_new" method="POST"
-                                        action="{{ route('loans.update_loan') }}" style="display: block;">
+                                        action="{{ route('loans.updateLoan') }}" style="display: block;">
                                         @csrf
                                         <div class="card card-body  border-success shadow p-3 mb-5 bg-body-tertiary rounded">
+                                            <input type="hidden" name="id_payment" value="{{ $loan[0]->id }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
                                             <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
@@ -167,7 +171,101 @@
                                             </div>
                                         </div>
                                     </form>
+                                    @endif
+                                    @if($tipo=="Pago")
+                                    <form name="loans_update" id="loans_update" method="POST"
+                                        action="{{ route('loans.updatePayment') }}">
+                                        @csrf
+                                        <div class="card card-body border-info shadow p-3 mb-5 bg-body-tertiary rounded">
+                                            <input type="hidden" name="id_payment" value="{{ $loan[0]->id }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
+                                            <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
+                                            <input type="hidden" name="nombre_user" value="{{ $data->nombre }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
+                                            <h1 class="modal-title fs-5 text-primary" id="bpartnerModalLabel">Pago
+                                                Prestamo
+                                            </h1>
+                                            <label>Fecha</label>
+                                            <input id="min-max2" name="datepayment" type="date" value="{{$loan[0]->datepayment}}" class="form-control"
+                                                required>
 
+                                            <script>
+                                                // Obtener la fecha actual
+                                                var hoy = new Date();
+                                                // Restar 3 días a la fecha actual
+                                                // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                                document.getElementById("min-max2").max = hoy.toISOString().split("T")[0];
+                                            </script>
+                                            <br>
+                                            <input name="loans_users_id" type="hidden" value="{{ $usuario[0]->id }}"
+                                                class="form-control">
+                                            <label>Seleccionar un prestamo</label>
+                                            <select id="cc" class="form-select"
+                                                aria-label="Default select example" required onchange="deuda()"
+                                                onkeyup="deuda()">
+                                                @if (isset($usuario_monto))
+                                                    @foreach ($usuario_monto as $info)
+                                                        <option selected value="all">Abono
+                                                            Global</option>
+                                                    @endforeach
+                                                @endif
+                                                {{-- @if (isset($usuario_loans))
+                                                        @foreach ($usuario_loans as $info)
+                                                            <option value="{{ $info->id }}">
+                                                                Fecha: {{ $info->fechanuevoprestamo }} -----
+                                                                Monto: {{ $info->monto }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif --}}
+                                            </select>
+                                            <br>
+                                            <div hidden class="input-group mb-3">
+                                                <span hidden class="input-group-text">$</span>
+                                                <input hidden name="loans_id" class="form-control" type="text"
+                                                    placeholder="Disabled input" id="xyz">
+                                            </div>
+                                            <label>Monto a Pagar</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text">$</span>
+                                                <input name="amount" type="number" placeholder="0.00" step="0.01" value="{{$loan[0]->amount}}"
+                                                    class="form-control" aria-label="Amount (to the nearest dollar)">
+                                            </div>
+                                            <br>
+                                            <label>Adjuntar Foto *Pago*</label>
+                                            <input class=" subirimagen2 form-control" type="file" id="filePicker2"
+                                                placeholder="Recibo" name="filee" value="0" onchange="imgsize2()"
+                                                onkeyup="imgsize2()" accept=".png, .jpg, .jpeg" >
+                                            <textarea style="display:none;" name="file" id="base64textarea2" placeholder="Base64 will appear here"
+                                                cols="50" rows="15"></textarea>
+                                            <br>
+                                            <br>
+                                            <label>Firma *Pago*</label>
+                                            <div>
+                                                <center>
+                                                    @include('canvas/tablero4')
+                                                    <input type="hidden" id="myText4" name="signature"
+                                                        value="Firma No File" >
+                                                </center>
+                                            </div>
+                                            <div class="row">
+                                                {{-- <div class="col">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                            </div> --}}
+                                                <div class="col">
+                                                    <button onclick="allfuncion()" type="submit"
+                                                        class="btn btn-primary w-100">Guardar</button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    @endif
                                 </div>
                             @endforeach
                         @endif

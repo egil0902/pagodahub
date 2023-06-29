@@ -120,20 +120,35 @@
                             </td>
                             <td>
                                 <div style="display: flex;">
-                                <form action="{{ route('loans.destroy', $data->id) }}" method="post">
+                                <form action="{{ route('loans.destroy') }}" method="post" id="delete-form">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal">
+                                    <input type="hidden" name="loan_type" value="{{$data->loan_type}}">                                    
+                                    <input type="hidden" name="valeid" id="valeid" value="{{$data->id}}">
+                                    <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal" onclick="confirmDelete(event)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
                                         </svg>
                                     </button>
                                 </form>
+
+                                <script>
+                                    function confirmDelete(event) {
+                                        event.preventDefault();
+
+                                        if (confirm('¿Estás seguro de eliminar este registro?')) {
+                                            document.getElementById('delete-form').submit();
+                                        }
+                                    }
+                                </script>
+
+
                                 &nbsp; 
                                 &nbsp; 
                                 <form action="{{route('loans.show', $data->id) }}" method="post">
                                     @csrf
                                     @method('POST')
+                                    <input type="hidden" name="loan_type" value="{{$data->loan_type}}">
+                                    <input type="hidden" name="loan_id" value="{{$data->id}}">
                                     <button type="submit" class="btn btn-outline-primary" data-bs-toggle="modal">
                                         Editar
                                     </button>
