@@ -41,14 +41,14 @@
                         <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" checked onchange="togglePagoPresupuesto(this)">
                     </div>
 
-                    <div>
+                    <!--<div>
                         <label for="pagoValor">¿Desea pagar un monto?</label>
-                        <input type="checkbox" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
-                    </div>
+                        --><input type="hidden" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
+                    <!--</div>
                     <div>
                         <label for="monto">Monto:</label>
-                        <input type="text" name="monto" id="monto" maxlength="10" value="0" disabled>
-                    </div>
+                        --><input type="hidden" name="monto" id="monto" maxlength="10" value="0" disabled>
+                    <!--</div>-->
                         <input type="hidden" name="factura_ids" id="factura_ids" value="">
                         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
                             Pagar facturas

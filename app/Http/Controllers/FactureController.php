@@ -534,8 +534,8 @@ class FactureController extends Controller
     }
 
     public function resume(Request $request){
-        $calculo = marketshopping::where('shoppingday', $request->day)->whereNotNull('budget')->get();
-        $facturas = Facture::where('fecha', $request->day)->get();
+        $calculo = marketshopping::where('shoppingday', $request->day)->whereNotNull('budget')->orderBy('shoppingday', 'desc')->get();
+        $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
         $cantidadProductos=0;
         $tFactura=0;        
         $abonado=0;
@@ -567,8 +567,12 @@ class FactureController extends Controller
         }
         
         $fecha=$request->day;
-        $presupuesto=$calculo[0]->budget;
-        $carton=$facturas[0]->carton;
+        $presupuesto=0;
+        $carton=0;
+        if(count($calculo)){
+            $presupuesto=$calculo[0]->budget;
+            $carton=$facturas[0]->carton;
+        }
         
         $tComprado=0;
         $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;

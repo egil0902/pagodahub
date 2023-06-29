@@ -6,38 +6,47 @@
 <div class="p-2 m-0 border-0 bd-example">
     <div class="d-flex">
         <!-- Formulario de búsqueda por proveedor -->
-        <form name="provider" id="provider" method="post" action="{{ route('factures.searchByProvider') }}" class="mr-2">
-            <div class="form-group">
-                @csrf
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="" spellcheck="false" name="provider">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar proveedor</button>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">Filtrar facturas</div>
+                <div class="card-body">
+                    <form name="provider" id="provider" method="post" action="{{ route('factures.searchByProvider') }}" class="mr-2">
+                        <div class="form-group">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="" spellcheck="false" name="provider">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar proveedor</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Formulario para mostrar facturas a crédito -->
+                    <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
+                        <div class="form-group w-auto">
+                            @csrf
+                            <button class=" w-100 btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
-        <div class="divider"></div>
-        <!-- Formulario para mostrar facturas a crédito -->
-        <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
-            <div class="form-group">
-                @csrf
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
-            </div>
-        </form>
-        <div class="divider"></div>
-        Presupuesto restante para el dia: {{$presupuesto}}
-        <div class="divider"></div>
-        <form name="factures" id="factures" method="post" action="{{ route('factures.resume') }}">
-                <div class="form-group "style="padding-left: 200px;">
+        </div>
+        
+        <div class="container">
+            <form name="factures" id="factures" method="post" action="{{ route('factures.resume') }}">
+                    <div class="form-group ">
 
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
-                            spellcheck="false" data-ms-editor="true" name="day" required>
-                        <button class="btn btn-outline-secondary" type="" id="button-addon2">Resumen del dia</button>
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
+                                spellcheck="false" data-ms-editor="true" name="day" required>
+                            <button class="btn btn-outline-secondary" type="" id="button-addon2">Resumen del dia</button>
+                        </div>
+
                     </div>
-
-                </div>
-        </form>
+            </form>
+        </div>
+        <div class="container">
+        Presupuesto restante para el dia: {{$presupuesto}}
+        </div>
     </div>
 </br>
     
