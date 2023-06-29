@@ -573,6 +573,9 @@ class FactureController extends Controller
             $presupuesto=$calculo[0]->budget;
             $carton=$facturas[0]->carton;
         }
+        if(count($facturas)){
+            $facturas[0]->carton;
+        }
         
         $tComprado=0;
         $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;
