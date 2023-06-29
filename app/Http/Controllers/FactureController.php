@@ -570,11 +570,10 @@ class FactureController extends Controller
         $presupuesto=0;
         $carton=0;
         if(count($calculo)){
-            $presupuesto=$calculo[0]->budget;
-            $carton=$facturas[0]->carton;
+            $presupuesto=$calculo[0]->budget;            
         }
         if(count($facturas)){
-            $facturas[0]->carton;
+            $carton=$facturas[0]->carton;
         }
         
         $tComprado=0;
