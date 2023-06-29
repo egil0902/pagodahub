@@ -71,10 +71,10 @@ Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updatePayme
 
 Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
 Route::post('/facture/resume', [App\Http\Controllers\FactureController::class, 'resume'])->name('factures.resume');
-Route::post('/facture_store', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
+Route::post('/facture', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
 Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
 Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
-Route::delete('/facture_delete/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
+Route::delete('/marketinvoice/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
 //Route::post('/facture/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 
@@ -82,7 +82,7 @@ Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 's
 Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.credit');
-Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
+//Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
 // Ruta para mostrar la página del mercado (método GET)
 Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');

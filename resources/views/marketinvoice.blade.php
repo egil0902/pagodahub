@@ -594,14 +594,6 @@
                                                     @endif
                                                 @endforeach
                                             </tbody>
-                                            <!---<tr>
-                                                
-                                                <th COLSPAN=9>
-                                                <a href="{{ route('market.edit', $data->id) }}" class="btn btn-outline-success w-100">    Modificar Productos
-                                                </a>
-                                                </th>
-                                            </tr>
-                                            --->
                                             <tr>
                                                 <th COLSPAN=3> Total en factura</th>
                                                 <th>
@@ -613,12 +605,6 @@
                                                 </th>
                                                 <th>
                                                 </th>
-                                                <!--<th>
-                                                </th>
-                                                <th>
-                                                </th>
-                                                <th>
-                                                </th>--->
                                             </tr>
                                             
                                             <tr>
@@ -632,144 +618,7 @@
                                                 </th>
                                                 <th>
                                                 </th>
-                                                <!--<th>
-                                                </th>
-                                                <th>
-                                                </th>
-                                                <th>
-                                                </th>--->
                                             </tr>
-                                            
-                                            <!--<script>
-                                                function activarAbono(numero){
-                                                    var elements_market = document.getElementsByName('market[]');
-                                                    var metodo=elements_market[numero].querySelectorAll('[name="metodo"]');
-                                                    var abono=elements_market[numero].querySelectorAll('[name="abono"]');
-                                                    // Obtener el valor seleccionado en el método de pago
-                                                    var metodoSeleccionado = metodo[0].value;
-                                                    
-                                                    // Verificar el valor seleccionado y establecer la visibilidad del elemento "abono"
-                                                    if (metodoSeleccionado === 'false') { // Si el método de pago es "Credito"
-                                                        abono[0].style.display = 'block'; // Mostrar el elemento "abono"
-                                                    } else {
-                                                        abono[0].style.display = 'none'; // Ocultar el elemento "abono"
-                                                    }
-
-                                                }
-                                                function sumadiferencia(numero) {
-                                                    try {
-                                                        var elements_market = document.getElementsByName('market[]');
-                                                    
-                                                        var sum_differenceFactura = 0;
-                                                        var elements_quantity = elements_market[numero].querySelectorAll('[name="quantity[]"]');
-                                                        var elements_differenceFactura =elements_market[numero].querySelectorAll('[name="differenceFactura[]"]');
-                                                        var elements_difference = elements_market[numero].querySelectorAll('[name="difference[]"]');
-                                                        var elements_price = elements_market[numero].querySelectorAll('[name="price[]"]');
-                                                        /*
-                                                        var elements_quantity = document.getElementsByName('quantity[]');
-                                                        var elements_differenceFactura = document.getElementsByName('differenceFactura[]');
-                                                        var elements_difference = document.getElementsByName('difference[]');
-                                                        var elements_price = document.getElementsByName('price[]');
-                                                        */
-
-                                                        for (var i = 0; i < elements_quantity.length; i++) {
-                                                            var quantity = parseFloat(elements_quantity[i].value);
-                                                            var differenceFactura = parseFloat(elements_differenceFactura[i].value);
-                                                            var difference = quantity - differenceFactura;
-                                                            if(difference==null){
-                                                                elements_difference[i].value =0.0;
-                                                            }else{
-                                                            elements_difference[i].value = difference.toFixed(2);
-                                                            }
-                                                        }
-
-                                                        
-                                                        // Call the sumaTotal() function
-                                                        //var tables = elements_market[numero].querySelectorAll('[name="table[]"]');
-                                                        
-                                                        var presupuesto=parseFloat(document.getElementById('presupuesto').value);
-                                                        var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
-                                                        var carton=parseFloat(document.getElementById('carton').value);
-                                                        var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
-                                                        cart.value= carton.toFixed(2);
-                                                        presupuesto= presupuesto+carton;
-                                                        sumaTotal(elements_market[numero],presupuesto);
-                                                        
-                                                    
-                                                }
-                                                    catch (error) {
-                                                        console.log(error)
-                                                        
-                                                    }
-                                                }
-                                                function sumaTotal(table,presupuesto) {
-                                                    var sum_differenceFactura = 0;
-                                                    var sum_difference = 0;
-                                                    var sum_price = 0;
-                                                    var sum_compra= 0;
-
-                                                    var abono=table.querySelectorAll('[name="abono"]')[0];
-                                                    var elements_differenceFactura = table.querySelectorAll('input[name="differenceFactura[]"]');
-                                                    var elements_price = table.querySelectorAll('input[name="price[]"]');
-                                                    var elements_compra = table.querySelectorAll('input[name="quantity[]"]');
-                                                    var elements_mult = table.querySelectorAll('input[name="mult[]"]');
-                                                    
-                                                    var diff=0
-                                                    for (var j = 0; j < elements_differenceFactura.length; j++) {
-                                                        var differenceFactura = parseFloat(elements_differenceFactura[j].value);
-                                                        var price = parseFloat(elements_price[j].value);
-                                                        var diffCompra = parseFloat(elements_compra[j].value);
-                                                        sum_differenceFactura += differenceFactura * price;
-                                                        sum_compra+=diffCompra*price;
-                                                        var mult=differenceFactura*price;
-                                                        elements_mult[j].value=mult.toFixed(2);
-                                                        sum_difference=sum_differenceFactura-sum_compra;
-                                                    }
-
-                                                    var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
-                                                    totalDifferenceFacturaInput.value = sum_compra.toFixed(2);
-                                                    
-                                                    var totalDifferenceCompraInput = table.querySelector('.total-difference-compra');
-                                                    totalDifferenceCompraInput.value = sum_differenceFactura.toFixed(2);
-
-                                                    var totalDifferenceInput = table.querySelector('.total-difference-diff');
-                                                    totalDifferenceInput.value = sum_difference.toFixed(2);
-
-                                                    var totalFinalInput = table.querySelector('.total-difference-final');
-                                                    var total=totalFinalInput.value
-                                                    var attributeValue = "{{ $data->budget }}"
-                                                    var answer = presupuesto.toFixed(2) - sum_compra.toFixed(2);
-                                                    /*if(answer>=0){
-                                                        abono.value=sum_differenceFactura.toFixed(2);
-                                                    }
-                                                    if(answer<0){
-                                                        abono.value= presupuesto.toFixed(2);
-                                                    }*/
-
-                                                    totalFinalInput.value = answer.toFixed(2);
-
-                                                    // Update other total values if needed
-                                                    // ...
-
-                                                    // Example: Update total sum of differences and prices
-                                                    var elements_difference = table.querySelectorAll('input[name="difference[]"]');
-                                                    var elements_quantity = table.querySelectorAll('input[name="quantity[]"]');
-
-
-                                                    for (var l = 0; l < elements_price.length; l++) {
-                                                        var quantity = parseFloat(elements_quantity[l].value);
-                                                        var price = parseFloat(elements_price[l].value);
-                                                        sum_price += price;
-                                                    }
-
-                                                    var sumDifferenceInput = table.querySelector('#sumdif');
-                                                    
-                                                    sumDifferenceInput.value = sum_difference.toFixed(2);
-
-                                                    var sumPriceInput = table.querySelector('#sumpre');
-                                                    sumPriceInput.value = sum_price.toFixed(2);
-                                                }
-                                            </script>-->
                                         </table>
                                     </div>
                                     @csrf
