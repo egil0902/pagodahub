@@ -23,8 +23,8 @@
     DB_HOST=127.0.0.1
     DB_PORT=5432
     DB_DATABASE=pagodahub
-    DB_USERNAME=adempiere
-    DB_PASSWORD=adempiere
+    DB_USERNAME=XXXXXXXXXX
+    DB_PASSWORD=XXXXXXXXXX
 ```
 4. crear el usuario adempiere con contraseña adempiere
 5. crear la base de datos "pagodahub" en posgtresql
