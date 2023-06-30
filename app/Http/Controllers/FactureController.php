@@ -188,7 +188,8 @@ class FactureController extends Controller
         $providerName = $request->input('provider');
         $query = Facture::query();
         if (!empty($providerName)) {
-            $query->where('proveedor', $providerName)->where('pagada', false);
+            $query->whereRaw("LOWER(REPLACE(proveedor, ' ', '')) LIKE '%' || LOWER(REPLACE(?, ' ', '')) || '%'", [$providerName])
+                ->where('pagada', false);
         }else{
             $query->where('pagada', false);
         }
@@ -359,7 +360,8 @@ class FactureController extends Controller
     $providerName = $request->input('provider');
         $query = Facture::query();
         if (!empty($providerName)) {
-            $query->where('proveedor', $providerName)->where('pagada', false);
+            $query->whereRaw("LOWER(REPLACE(proveedor, ' ', '')) LIKE '%' || LOWER(REPLACE(?, ' ', '')) || '%'", [$providerName])
+                ->where('pagada', false);
         }else{
             $query->where('pagada', false);
         }

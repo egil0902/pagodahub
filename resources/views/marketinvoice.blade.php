@@ -96,13 +96,6 @@
                                 </select>
                                 </h4>
                             </div>
-                            <!---<div class="col">
-                                <h4>Vuelto: 
-                                    <input class="w-100 form-control" type="text" name="Vuelto"
-                                    id="Vuelto" value="0" >
-                                </h4>
-                            </div>
-                            --->
                         </div>
                         <br>
                         <center>                    
@@ -186,13 +179,6 @@
                                                                 <input class="w-100 " type="number" name="price[]" value="0"
                                                                     data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
                                                             </td>
-                                                            <!---<td>
-                                                                <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
-                                                                    value="true">
-                                                                    <option value="true">Efectivo</option>
-                                                                    <option value="false">Credito</option>
-                                                                </select>
-                                                            </td>--->
                                                             <td>
                                                                 <input class="w-100 border-0 bg-transparent" type="number"
                                                                     id="mult{{ $index + 1 }}" name="mult[]"
@@ -202,14 +188,7 @@
                                                     @endif
                                                 @endforeach
                                             </tbody>
-                                            <!---<tr>
-                                                
-                                                <th COLSPAN=9>
-                                                <a href="{{ route('market.edit', $data->id) }}" class="btn btn-outline-success w-100">    Modificar Productos
-                                                </a>
-                                                </th>
-                                            </tr>
-                                            --->
+                                            
                                             <tr>
                                                 <th COLSPAN=3> Total en factura</th>
                                                 <th>
@@ -225,10 +204,6 @@
                                                 </th>
                                                 <th>
                                                 </th>
-                                                <!---<th>
-                                                </th>
-                                                <th>
-                                                </th>--->
                                             </tr>
                                             <tr>
                                                 <th COLSPAN=3> Total Recibido</th>
@@ -245,10 +220,6 @@
                                                 </th>
                                                 <th>
                                                 </th>
-                                                <!---<th>
-                                                </th>
-                                                <th>
-                                                </th>--->
                                             </tr>
                                             <tr>
                                                 <th COLSPAN=3> Diferencia (mercancia recibida - en factura)</th>
@@ -265,10 +236,6 @@
                                                 </th>
                                                 <th>
                                                 </th>
-                                                <!---<th>
-                                                </th>
-                                                <th>
-                                                </th>--->
                                             </tr>
                                             <tr>
                                                 <th COLSPAN=3> Total a entregar (Vuelto)</th>
@@ -285,10 +252,6 @@
                                                 </th>
                                                 <th>
                                                 </th>
-                                                <!---<th>
-                                                </th>
-                                                <th>
-                                                </th>--->
                                             </tr>
                                             
                                             <script>
@@ -317,12 +280,7 @@
                                                         var elements_differenceFactura =elements_market[numero].querySelectorAll('[name="differenceFactura[]"]');
                                                         var elements_difference = elements_market[numero].querySelectorAll('[name="difference[]"]');
                                                         var elements_price = elements_market[numero].querySelectorAll('[name="price[]"]');
-                                                        /*
-                                                        var elements_quantity = document.getElementsByName('quantity[]');
-                                                        var elements_differenceFactura = document.getElementsByName('differenceFactura[]');
-                                                        var elements_difference = document.getElementsByName('difference[]');
-                                                        var elements_price = document.getElementsByName('price[]');
-                                                        */
+                                                   
 
                                                         for (var i = 0; i < elements_quantity.length; i++) {
                                                             var quantity = parseFloat(elements_quantity[i].value);
@@ -496,13 +454,7 @@
                                 </select>
                                 </h4>
                             </div>
-                            <!---<div class="col">
-                                <h4>Vuelto: 
-                                    <input class="w-100 form-control" type="text" name="Vuelto"
-                                    id="Vuelto" value="0" >
-                                </h4>
-                            </div>
-                            --->
+                            
                         </div>
                         <br>
                         <center>                    
@@ -549,11 +501,6 @@
                                                                     id="differenceFactura{{ $index + 1 }}" value="{{json_decode($data->quantity)[$index]}}" readonly
                                                                     required onchange="sumadiferencia({{$ind}});" step="0.01" min="0">
                                                             </td>
-                                                            <!--<td>
-                                                                <input class="w-100 border-0 bg-transparent" type="number"
-                                                                    id="difference{{ $index + 1 }}" name="difference[]"
-                                                                    value="" readonly>
-                                                            </td>-->
                                                             <script>
                                                                 // Obtener las entradas numéricas
                                                                 const quantity{{ $index + 1 }} = document.getElementById('quantity{{ $index + 1 }}{{ $product }}');
@@ -578,13 +525,6 @@
                                                                 <input class="w-100 " type="number" name="price[]" value="{{json_decode($data->factura->price)[$index]}}"
                                                                     data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required readonly>
                                                             </td>
-                                                            <!--<td>
-                                                                <select class="form-control unit" list="opciones"  name="ind_pago" id="ind_pago"
-                                                                    value="true">
-                                                                    <option value="true">Efectivo</option>
-                                                                    <option value="false">Credito</option>
-                                                                </select>
-                                                            </td>-->
                                                             <td>
                                                                 <input class="w-100 border-0 bg-transparent" type="number"
                                                                     id="mult{{ $index + 1 }}" name="mult[]"
