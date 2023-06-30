@@ -13,6 +13,10 @@ use Illuminate\Database\Console\DumpCommand;
 use Laravel\Ui\Presets\React;
 use PDF;
 
+use App\Models\marketshopping;
+use App\Models\Cheque;
+use App\Models\Facture;
+
 class CloseCashController extends Controller
 {
     public function __construct()
@@ -173,6 +177,69 @@ class CloseCashController extends Controller
             [$caja],
             array_slice($closecashlist->records, $lastIndex)
         );
+
+        $day = $request->DateTrx;
+        
+        $presupuesto=0;
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->orderBy('created_at', 'asc')->get();
+        
+        if($comprasdeldia->count() > 0) {
+            $presupuesto=$comprasdeldia[0]->budget;
+        }
+        if ($comprasdeldia->count() > 1) {
+            $presupuesto = $comprasdeldia[0]->budget;
+            $productos = json_decode($comprasdeldia[0]->product);
+            $quantity = json_decode($comprasdeldia[0]->quantity);
+        
+            for ($i = 1; $i < $comprasdeldia->count(); $i++) {
+                $Fproductos = json_decode($comprasdeldia[$i]->product);
+                $Fquantity = json_decode($comprasdeldia[$i]->quantity);
+        
+                // Comparar los elementos de los arreglos y restar las cantidades correspondientes
+                foreach ($productos as $posicion => $producto) {
+                    if (in_array($producto, $Fproductos)) {
+                        $fPosicion = array_search($producto, $Fproductos);
+                        $quantity[$posicion] -= $Fquantity[$fPosicion];
+                    }
+                }
+            }
+        
+            $comprasdeldia[0]->quantity = json_encode($quantity);
+        }
+        
+        $facturas = Facture::where('fecha', $day)->get();
+        $carton =0;
+        if($facturas->count() > 0) {
+            foreach ($facturas as $factura) {
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->total;
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->monto_abonado;
+                }
+                
+                if($factura->carton>0){
+                    $carton =$factura->carton;
+                }
+                
+            }
+        }
+        foreach ($comprasdeldia as $posicion => $compra) {
+            foreach ($facturas as $posicion_diferente => $factura) {
+                if ($compra->id_compra === $factura->id_compra) {
+                    $comprasdeldia[$posicion]->factura = $factura;
+                }
+            }
+        }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $presupuesto-=$check->monto;
+                }
+        }
+
+
+
         foreach ($user->records  as $usuario) {
             //dump($user);
             foreach ($usuario->PAGODAHUB_closecash as $acceso) {
@@ -183,7 +250,9 @@ class CloseCashController extends Controller
                                               'closecashlist' => $closecashlist, 
                                               'list' => $list, 
                                               'permisos' => $user,
-                                              'totales'=> $total]);
+                                              'totales'=> $total,
+                                              'vuelto'=> $presupuesto
+                                            ]);
                     break;
                 }
             }

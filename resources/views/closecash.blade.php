@@ -272,7 +272,7 @@
                         <button style="display:none" type="button" id="ver_gerente" class="btn btn-primary">Ocultar gerente</button>
                         
                     </div>
-                    <span style="float: right; font-weight: normal;">Agencia ?</span><input id="agencia-checkbox" type="checkbox" style="float: right;margin-top: 5px; margin-right: 5px;"> 
+                    <span style="float: right; font-weight: normal;">Gerencia ?</span><input id="agencia-checkbox" type="checkbox" style="float: right;margin-top: 5px; margin-right: 5px;"> 
                 </center>
 
                 <div class="card-group m-2">
@@ -1540,7 +1540,7 @@
                                         </tr>
                                         <tr>
                                             <td> Vuelto de mercado</td>
-                                            <td><input name="vueltoMercadoFiscalizadora" type="number"
+                                            <td><input name="vueltoMercadoFiscalizadora" type="number" readonly
                                                     class="form-control" step="0.01" placeolder="0.00"
                                                     onchange="cal();clonvueltoMercadoFiscalizadora();cal();colores()"
                                                     onkeyup="cal();clonvueltoMercadoFiscalizadora();cal();colores()"
@@ -1548,7 +1548,7 @@
                                                 value="{{ $dataday->vueltoMercadoFiscalizadora }}"
                                                 @endforeach
                                                 @else
-                                                value="" @endif>
+                                                value="{{$vuelto}}" @endif>
                                             </td>
                                             <td></td>
                                             <td></td>
@@ -2618,10 +2618,10 @@
                                                         <input name="vueltoMercadoGerente"
                                                             value="{{ $dataday->vueltoMercadoGerente }}"
                                                             type="number" class="form-control" step="0.01"
-                                                            placeholder="0.00">
+                                                            placeholder="0.00" readonly>
                                                     @endforeach
                                                 @else
-                                                    <input name="vueltoMercadoGerente" value="" type="number"
+                                                    <input name="vueltoMercadoGerente" value="{{$vuelto}}" type="number"
                                                         class="form-control" step="0.01" placeholder="0.00">
                                                 @endif
                                             </td>
