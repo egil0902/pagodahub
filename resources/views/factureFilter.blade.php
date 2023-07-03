@@ -168,7 +168,33 @@
             <th>Abono</th>
             <th>Valor Deuda</th>
             <th></th>
-            <th></th>
+            <th>
+                <input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll(this)">
+            </th>
+            <script>
+                function toggleSelectAll(checkbox) {
+                    var checkboxes = document.querySelectorAll('input[data-checkbox]');
+                    if(checkbox.checked===true){
+                        
+                        var totalElement = document.getElementById('totalCancelar');
+                        var total = parseFloat(totalElement.innerText) || 0;
+                        total = parseFloat(0);
+                        totalElement.innerText = total.toFixed(2);
+                    }
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        checkboxes[i].checked = checkbox.checked;
+                        toggleSelectToPay(checkboxes[i]);
+                    }
+                    if(checkbox.checked===false){
+                        
+                        var totalElement = document.getElementById('totalCancelar');
+                        var total = parseFloat(totalElement.innerText) || 0;
+                        total = parseFloat(0);
+                        totalElement.innerText = total.toFixed(2);
+                    }
+                }
+            </script>
+
         </tr>
     </thead>
     <tbody>
@@ -208,7 +234,7 @@
             </td>
             <td>
                 <input type="hidden" name="totalPagar{{$factura->id_compra}}" id="totalPagar{{$factura->id_compra}}" value="{{$factura->Total_compra >= 0 ? $factura->monto_abonado : $factura->Total_compra}}">
-                <input type="checkbox" name="factura_ids[]" value="{{$factura->id_compra}}" onchange="toggleSelectToPay(this)">
+                <input type="checkbox" name="factura_ids[]" value="{{$factura->id_compra}}" onchange="toggleSelectToPay(this)" data-checkbox>
             </td>
         </tr>
         @endforeach

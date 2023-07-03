@@ -37,7 +37,7 @@
         </thead>
         @foreach ($facturas as $factura)
         <tr>
-            <td>{{$factura->id}}</td>
+            <td>{{$factura->id_compra}}</td>
             <td>{{$factura->medio_de_pago?'Contado':'Credito'}}</td>
             <td>{{$factura->total}}</td>
             <td>{{$factura->medio_de_pago?$factura->total:$factura->monto_abonado}}</td>
