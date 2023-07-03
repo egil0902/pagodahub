@@ -268,6 +268,21 @@ class FactureController extends Controller
 
         return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente');
     }
+    public function eliminar(Request $request)
+    {   
+        // Buscar la factura por su ID y eliminarla directamente
+        $facture = facture::where('id', $request->id)->first();
+        $market = marketshopping::where('id_compra', $facture ->id_compra)->delete();
+        $facture->delete();
+        
+        if (!$facture) {
+            return redirect()->back()->with('error', 'La factura no existe');
+        }
+
+       
+
+        return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente');
+    }
 
     public function show($id)
     {

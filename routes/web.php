@@ -78,10 +78,12 @@ Route::delete('/marketinvoice/{id}', [App\Http\Controllers\FactureController::cl
 //Route::post('/facture/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 
-Route::delete('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.eliminar');
+Route::delete('/facture', [App\Http\Controllers\FactureController::class, 'eliminar'])->name('factures.eliminar');
 Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.credit');
+Route::get('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.get_credit');
+
 //Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
 // Ruta para mostrar la página del mercado (método GET)

@@ -563,7 +563,7 @@
                                     </div>
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-success w-100">
+                                    <button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationPopup(event)">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd"
@@ -575,6 +575,21 @@
                                         </svg>
                                         Borrar
                                     </button>
+                                    <script>
+                                        function showConfirmationPopup(event) {
+                                            event.preventDefault(); // Evita que el formulario se envíe por defecto
+                                            console.log("default")
+                                            // Muestra el popup de confirmación (puedes usar librerías como Bootstrap o implementar tu propio popup)
+                                            // Aquí hay un ejemplo de cómo mostrar un popup simple utilizando JavaScript nativo:
+                                            var confirmed = confirm("¿Estás seguro de que deseas eliminar la factura {{$data->id_compra}}?");
+                                            
+                                            if (confirmed) {
+                                                // Si el usuario confirma, envía el formulario
+                                                document.getElementById("market{{$ind}}").submit();
+                                            }
+                                        }
+                                    </script>
+
                                     <br>
                                     <br>
                             
