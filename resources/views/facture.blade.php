@@ -62,6 +62,7 @@
                     <th>Total</th>
                     <th>Valor Deuda</th>
                     <th>Pagada?</th>
+                    <th>Fecha cancelacion</th>
                     <th></th>
                 </tr>
             </thead>
@@ -76,6 +77,7 @@
                     <td>{{$factura->total}}</td>
                     <td>{{$factura->medio_de_pago?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
                     <td>{{$factura->pagada?"Si":"No"}}</td>
+                    <td>{{$factura->fecha_pago}}</td>
                     <!--<td>
                         <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                             @csrf

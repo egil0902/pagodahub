@@ -81,9 +81,10 @@ class FactureController extends Controller
         //$registro->vuelto =$registro->vuelto;
         $registro->vuelto=$request->pfinal;        
         $registro->pagada=false;
-        
+        $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
             $registro->pagada=true;
+            $registro->fecha_pago="No aplica";
         }
         if (isset($request->cart) && strpos($request->cart, ':') !== false) {
             $valorDespuesDeDosPuntos = substr($request->cart, strpos($request->cart, ':') + 1);
@@ -359,6 +360,7 @@ class FactureController extends Controller
                 }
                 if($factura->monto_abonado>=$factura->total){
                     $factura->pagada=true;
+                    $factura->fecha_pago=date('Y-m-d');
                 }
 
                 $factura->save();
@@ -435,6 +437,7 @@ class FactureController extends Controller
                     $factura->monto_abonado+=$monto;
                     if($factura->monto_abonado>=$factura->total){
                         $factura->pagada=true;
+                        $factura->fecha_pago=date('Y-m-d');
                     }
                 }
 

@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::table('factures', function (Blueprint $table) {
             
-            $table->longText('product')->nullable();
-            $table->longText('units')->nullable();
+            $table->string('fecha_pago')->default("No aplica")->nullable();
         });
     }
 
