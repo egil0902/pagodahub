@@ -327,8 +327,6 @@ class FactureController extends Controller
     {
         $idCompras = $request->input('factura_ids');
         $idCompras = explode(',', $idCompras);
-        
-        
         $resultados = DB::table('marketshoppings')
             ->join('factures', 'factures.id_compra', '=', 'marketshoppings.id_compra')
             ->whereIn('factures.id_compra', $idCompras)
@@ -343,16 +341,16 @@ class FactureController extends Controller
         }
         $monto=0;
         if($request->monto){
+            //pago parcial
             $monto=$request->monto;
         }
+        
         if (count($idCompras)>0) {
             for ($i=0; $i < count($idCompras); $i++) { 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
                 
                 if($monto===0){
-                    
-                    $monto=($factura->total-$factura->monto_abonado);
-                    $factura->monto_abonado=$monto;
+                    $factura->monto_abonado=($factura->total-$factura->monto_abonado);
                 }
                 if($monto!==0){
                     $factura->monto_abonado+=$monto;
