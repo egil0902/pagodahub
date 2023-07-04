@@ -29,14 +29,28 @@
                 <div class="col">                
                     <h4>Presupuesto: 
                         <input class="w-100 form-control" type="text" name="presupuesto"
-                        id="presupuesto" value="{{isset($presupuesto)?$presupuesto:0 }} " readonly>
+                        id="presupuesto" value="{{isset($presupuesto)?$presupuesto+(isset($carton)?$carton:0):0 }} " readonly>
                     </h4>
                 </div>
                 <div class="col">
-                    <h4>Carton: 
+                    <h4>Carton: {{isset($carton)?$carton:0}}
                         <input class="w-100 form-control" type="text" name="carton"
                         id="carton" value="{{isset($carton)?$carton:0}}" 
-                        onchange="">
+                        onchange="sumapresupuesto();">
+                        <input class="w-100 form-control" type="hidden" name="control"
+                        id="control" value="{{isset($carton)?$carton:0}}" 
+                        onchange="sumapresupuesto();">
+                        <script>
+                            function sumapresupuesto(){
+                                var carton=parseFloat(document.getElementById('carton').value);
+                                var control=parseFloat(document.getElementById('control').value);
+                                var presupuesto=parseFloat(document.getElementById('presupuesto').value);
+                                presupuesto=presupuesto+carton-control;
+                                control=carton;
+                                document.getElementById('presupuesto').value=presupuesto;
+
+                            }
+                        </script>
                     </h4>                                    
                 </div>
                 
@@ -82,7 +96,7 @@
                             <div class="col">
                                 <h4>Abono: 
                                     <input class="w-100 form-control" type="text" name="abono"
-                                    id="abono" value="0" style="display: none;"
+                                    id="abono" value="0" style="display: none;" onchange="sumadiferencia({{$ind}});"
                                     >
                                 </h4>
                                 
@@ -301,8 +315,9 @@
                                                         var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
                                                         var carton=parseFloat(document.getElementById('carton').value);
                                                         var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
+                                                        
                                                         cart.value= carton.toFixed(2);
-                                                        presupuesto= presupuesto+carton;
+                                                        presupuesto= presupuesto;
                                                         sumaTotal(elements_market[numero],presupuesto);
                                                         
                                                     

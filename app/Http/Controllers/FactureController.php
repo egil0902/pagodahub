@@ -178,8 +178,7 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        
-        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
         //return redirect()->back()->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
@@ -333,8 +332,7 @@ class FactureController extends Controller
             ->get();
         
         $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados]);
-        $idCompras = $request->input('facturas_ids');
-        $idCompras = explode(',', $idCompras);
+        
         $pagoPresupuesto=false;
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;
@@ -346,6 +344,7 @@ class FactureController extends Controller
         }
         
         if (count($idCompras)>0) {
+            
             for ($i=0; $i < count($idCompras); $i++) { 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
                 
