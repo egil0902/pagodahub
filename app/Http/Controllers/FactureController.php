@@ -100,6 +100,7 @@ class FactureController extends Controller
             $registro->file = $request->archivosimg[0];
         }
         $registro->total = $request->sumdifac;
+        $registro->save(); // Guardar el nuevo registro en la base de datos   
         $updateMarket = new marketshopping;
         $updateMarket->id_compra = $request->NFactura;
         $updateMarket->shoppingday = $request->input('fecha_registro');
@@ -120,7 +121,7 @@ class FactureController extends Controller
         }
         
         // Asignar los valores del formulario a las propiedades del modelo
-        $registro->save(); // Guardar el nuevo registro en la base de datos   
+        
         
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
