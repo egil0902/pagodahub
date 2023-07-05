@@ -95,8 +95,8 @@
     <thead>
         <tr>
             <th>Medio de pago</th>
-            <th>Abono</th>
-            <th>Valor Deuda</th>
+            <th>Abono anterior</th>
+            <th>Valor factura</th>
             
         </tr>
     </thead>
@@ -104,7 +104,7 @@
         <tr>
             <td>{{$data->medio_de_pago?"Contado":"Crédito"}}</td>
             <td>{{$data->monto_abonado}}</td>
-            <td>{{$data->Total_compra >= 0 ? $data->monto_abonado : $data->Total_compra}}</td>
+            <td>{{$data->Total_compra}}</td>
             
         </tr>
     </tbody>

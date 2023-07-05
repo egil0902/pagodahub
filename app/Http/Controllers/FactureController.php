@@ -338,23 +338,20 @@ class FactureController extends Controller
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;
         }
-        $monto=0;
-        if($request->monto){
-            //pago parcial
-            $monto=$request->monto;
-        }
         
         if (count($idCompras)>0) {
             
             for ($i=0; $i < count($idCompras); $i++) { 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
                 
-                if($monto===0){
-                    $factura->monto_abonado=($factura->total-$factura->monto_abonado);
+                $monto=0;
+                if($request->monto===0||$request->monto===null){
+                    $monto=$factura->total-$factura->monto_abonado;
+                    $factura->monto_abonado=$factura->total;
                 }
-                if($monto!==0){
-                    $factura->monto_abonado+=$monto;
-                    
+                if($request->monto!==0){
+                    $monto==$request->monto;
+                    $factura->monto_abonado+=$request->monto;
                 }
                 if($factura->monto_abonado>=$factura->total){
                     $factura->pagada=true;
