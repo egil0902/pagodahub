@@ -172,7 +172,7 @@
                                         </div>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationPopup(event)">
+                                        <!--<button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationPopup(event)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
@@ -183,7 +183,7 @@
                                                 </path>
                                             </svg>
                                             Borrar
-                                        </button>
+                                        </button>-->
                                         <script>
                                             function showConfirmationPopup(event) {
                                                 event.preventDefault(); // Evita que el formulario se envíe por defecto
