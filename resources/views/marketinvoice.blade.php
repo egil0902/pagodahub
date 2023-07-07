@@ -419,7 +419,7 @@
                 </form>
             @endif 
             @if($data->budget===null)
-                <form name="market[]" id="market{{$ind}}" method="post" action="{{ route('factures.borrar',$data->id_compra) }}">
+                <form name="market[]" id="market{{$data->id_compra}}" method="post" action="{{ route('factures.borrar',$data->id_compra) }}">
                     <div class="form-group w-50">
                         @csrf            
                         </div>
@@ -434,9 +434,7 @@
                                     <input type="hidden" name="cart" value="isset($carton)?$carton:0">
                                     <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
                                     <h4>Numero de factura:
-                                        <input class="w-100 form-control" type="number" name="NFactura"
-                                        id="NFactura" value="{{$data->id_compra}}" readonly
-                                        required onchange="" step="" min="0">
+                                    <input class="w-100 form-control" type="number" name="NFactura" id="NFactura{{$ind}}" value="{{$data->id_compra}}" readonly required onchange="" step="" min="0">
                                     </h4>
                                 </div>
                                 <div class="col">
@@ -578,31 +576,25 @@
                                         </div>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationPopup(event)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z">
-                                                </path>
-                                                <path
-                                                    d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z">
-                                                </path>
+                                        <button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationPopup(event)" data-compra="{{$data->id_compra}}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"></path>
+                                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
                                             </svg>
-                                            Borrar
+                                            Borrar {{$data->id_compra}}
                                         </button>
+
                                         <script>
                                             function showConfirmationPopup(event) {
-                                                event.preventDefault(); // Evita que el formulario se envíe por defecto
-                                                console.log("default")
-                                                // Muestra el popup de confirmación (puedes usar librerías como Bootstrap o implementar tu propio popup)
-                                                // Aquí hay un ejemplo de cómo mostrar un popup simple utilizando JavaScript nativo:
-                                                var confirmed = confirm("¿Estás seguro de que deseas eliminar la factura {{$data->id_compra}}?");
-                                                
+                                                event.preventDefault();
+                                                var compra = event.target.dataset.compra;
+                                                console.log(compra);
+                                                var confirmed = confirm("¿Estás seguro de que deseas eliminar la factura " + compra + "?");
                                                 if (confirmed) {
-                                                    // Si el usuario confirma, envía el formulario
-                                                    document.getElementById("market{{$ind}}").submit();
+                                                    document.getElementById("market" + compra).submit();
                                                 }
                                             }
+
                                         </script>
 
                                         <br>
