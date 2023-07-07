@@ -21,8 +21,6 @@ class Loanssearchdebt extends Component
     {
 
         $searchTerm = $this->searchTerm;
-        //dd($request->cedula);
-        //dd(loans::paginate(10));
         if ($searchTerm == '') {
             $searchTerm = 0;
         }
@@ -32,7 +30,6 @@ class Loanssearchdebt extends Component
             $cedula = $request->cedula_user;
             $nombre = $request->nombre_user;
         }
-        //dump(loans_statement_of_account::orwhere('cedula', '=', $cedula)->paginate(25));
         if ($nombre == null) {
             return view('livewire.loanssearchdebt', [
                 'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->orderBy('datetrx', 'desc')->paginate(999),
@@ -42,6 +39,5 @@ class Loanssearchdebt extends Component
                 'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->orderBy('datetrx', 'desc')->paginate(999),
             ]);
         }
-        //dump($cedula, $nombre);
     }
 }

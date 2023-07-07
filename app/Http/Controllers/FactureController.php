@@ -369,7 +369,7 @@ class FactureController extends Controller
             }
             # code...
         }
-    $providerName = $request->input('provider');
+        $providerName = $request->input('provider');
         $query = Facture::query();
         if (!empty($providerName)) {
             $query->whereRaw("LOWER(REPLACE(proveedor, ' ', '')) LIKE '%' || LOWER(REPLACE(?, ' ', '')) || '%'", [$providerName])
