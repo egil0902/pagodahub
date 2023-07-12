@@ -19,10 +19,8 @@
         <tbody>
             @if (isset($loans))
                 @if ($loans->isNotEmpty())
-                
                     @foreach ($loans as $data)
-
-                        @if($data->loan_type==='Prestamo')    
+                        @if($data->loan_type==='Pago')   
                             {{-- <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST"
                                 action="{{ route('valepagoda.destroy') }}">
                                 @csrf --}}

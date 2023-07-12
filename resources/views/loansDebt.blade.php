@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (isset($error))
+    @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
+                @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
+                @endforeach
             </ul>
         </div>
     @endif
@@ -15,7 +17,7 @@
                 Consultar Deudor
             </div>
             <div class="card-body">
-                <form name="loans_search" id="loans_search" method="get" action="{{ route('loans.search') }}">
+                <form name="loans_search" id="loans_search" method="get" action="{{ route('loans_debt.search') }}">
                     @csrf
                     <div class="row gy-2 gx-3 align-items-center">
                         <div class="col-md">
@@ -166,7 +168,7 @@
                                     </div>
                                     <br>
 
-                                    <button id="Nuevo" class="btn btn-success w-100 mb-1">Nuevo prestamo</button>
+                                    <button id="Nuevo" style="display:none" class="btn btn-success w-100 mb-1">Nuevo prestamo</button>
                                     <form name="loans_store_new" id="loans_store_new" method="POST"
                                         action="{{ route('loans.store_new') }}" style="display: block;">
                                         @csrf
@@ -255,10 +257,10 @@
                                             </div>
                                         </div>
                                     </form>
-
+                                            
 
                                     <br>
-                                    <button id="Pago"  style="display:none" class="btn btn-primary w-100 mb-1">Pago Prestamo</button>
+                                    <button id="Pago" class="btn btn-primary w-100 mb-1">Pago Prestamo</button>
                                     <form name="loans_update" id="loans_update" method="POST"
                                         action="{{ route('loans.update') }}">
                                         @csrf
@@ -358,7 +360,7 @@
                                     Estado de cuenta de prestamos
                                 </div>
                                 <div class="card-body">
-                                    @livewire('loanssearch')
+                                    @livewire('loanssearchdebt')
                                 </div>
                             </div>
                         @endif

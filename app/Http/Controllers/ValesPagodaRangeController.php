@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ValesPagodaRange;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
 
@@ -62,4 +64,24 @@ class ValesPagodaRangeController extends Controller
         $list = ValesPagodaRange::all();
         return view('valespagodarange', ['list' => $list, 'request' => $request]);
     }
+    
+    public function delete(Request $request)
+    {
+        $vale = ValesPagodaRange::find($request->id);
+        $valorMinimo = $vale->valueFrom;
+        $valorMaximo = $vale->valueTo;
+
+        $resultados = DB::table('vales_pagodas')
+                        ->whereBetween('value', [$valorMinimo, $valorMaximo])
+                        ->get();
+        if ($resultados->count() == 0) {
+            $vale->delete();
+            $list = ValesPagodaRange::all();
+            return view('valespagodarange', ['list' => $list, 'request' => $request])->with('success', 'El vale fue eliminado exitosamente.');
+        } else {
+            $list = ValesPagodaRange::all();
+            return view('valespagodarange', ['list' => $list, 'request' => $request])->with('error', 'No se puede eliminar el vale porque ya hay un vale consumido.');
+        }
+    }
+
 }

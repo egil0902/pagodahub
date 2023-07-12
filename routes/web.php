@@ -53,33 +53,44 @@ Route::post('/valespagodarange', [App\Http\Controllers\ValesPagodaRangeControlle
 Route::get('/valespagodarange_search', [App\Http\Controllers\ValesPagodaRangeController::class, 'search'])->name('valespagodarange.search');
 Route::post('/valespagodarange_store', [App\Http\Controllers\ValesPagodaRangeController::class, 'store'])->name('valespagodarange.store');
 Route::post('/valespagodarange_list', [App\Http\Controllers\ValesPagodaRangeController::class, 'list'])->name('valespagodarange.list');
-
+Route::post('/valespagodarange_delete', [App\Http\Controllers\ValesPagodaRangeController::class, 'delete'])->name('valespagodarange.delete');
 
 Route::get('/loans', [App\Http\Controllers\LoansController::class, 'index'])->name('loans');
+Route::get('/loans_debt', [App\Http\Controllers\LoansController::class, 'indexDebt'])->name('loans_debt');
+Route::get('/loans_debt_search', [App\Http\Controllers\LoansController::class, 'searchDebt'])->name('loans_debt.search');
 Route::get('/loans_search', [App\Http\Controllers\LoansController::class, 'search'])->name('loans.search');
 Route::post('/loans_store', [App\Http\Controllers\LoansController::class, 'store'])->name('loans.store');
 Route::post('/loans_store_new', [App\Http\Controllers\LoansController::class, 'store_new'])->name('loans.store_new');
 Route::post('/loans_newuser', [App\Http\Controllers\LoansController::class, 'newuser'])->name('loans.newuser');
 Route::post('/loans_update', [App\Http\Controllers\LoansController::class, 'update'])->name('loans.update');
 Route::get('/loans_list', [App\Http\Controllers\LoansController::class, 'list'])->name('loans.list');
+Route::post('/loans_list_delete', [App\Http\Controllers\LoansController::class, 'destroy'])->name('loans.destroy');
+Route::post('/loans_list/{id}', [App\Http\Controllers\LoansController::class, 'show'])->name('loans.show');
+Route::post('/loans_list', [App\Http\Controllers\LoansController::class, 'updateLoan'])->name('loans.updateLoan');
+Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updatePayment'])->name('loans.updatePayment');
 
 Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
-Route::post('/facture_store', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
+Route::post('/facture/resume', [App\Http\Controllers\FactureController::class, 'resume'])->name('factures.resume');
+Route::post('/facture', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
 Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
 Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
-Route::delete('/facture_delete/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
+Route::delete('/marketinvoice/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
 //Route::post('/facture/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 
+Route::delete('/facture', [App\Http\Controllers\FactureController::class, 'eliminar'])->name('factures.eliminar');
 Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.credit');
+Route::get('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.get_credit');
 
+//Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
 // Ruta para mostrar la página del mercado (método GET)
 Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
 // Ruta para procesar el formulario del mercado (método POST)
-Route::post('/market', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
+Route::post('/market/create', [App\Http\Controllers\MarketController::class, 'store'])->name('market.store');
+Route::post('/market', [App\Http\Controllers\MarketController::class, 'charge'])->name('market.charge');
 Route::post('/market/{id}', [App\Http\Controllers\MarketController::class, 'update'])->name('market.update');
 Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'])->name('market.edit');
 Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoice');
@@ -97,6 +108,6 @@ Route::get('/firma3', function () {
 
 // Ruta para dompdf
 Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');
-Route::get('facturas-pdf', [App\Http\Controllers\FactureController::class, 'downloadPdf'])->name('facture-pdf');
+Route::post('facture-pdf', [App\Http\Controllers\FactureController::class, 'downloadPdf'])->name('facture-pdf');
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');

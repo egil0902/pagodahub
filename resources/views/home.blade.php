@@ -234,13 +234,13 @@
                                         <div class="col">
                                             <div class="card h-100 border border-5 border-dark-subtle">
                                                 <form name="loanslist" id="loanslist" method="get"
-                                                    action="{{ route('loans.list') }}">
+                                                    action="{{ route('loans_debt') }}">
                                                     @csrf
                                                     <center>
                                                         <button type="submit" class="btn btn-outline">
                                                             {{-- <h5 class="card-header">Prestamos</h5> --}}
                                                             <div class="card-body">
-                                                                <h5 class="card-title">Cancelar Prestamos</h5>
+                                                                <h5 class="card-title">Pagar Prestamos</h5>
                                                                 <p class="card-text">
                                                                     Opcion para pagar los prestamos
                                                                 </p>

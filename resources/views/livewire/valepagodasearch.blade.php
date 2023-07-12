@@ -55,31 +55,37 @@
                                 </svg>
                             </button>
                         </center>
-                        <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST"
-                            action="{{ route('valepagoda.destroy') }}">
+                        <form name="valepagoda_destroy" id="valepagoda_destroy" method="POST" action="{{ route('valepagoda.destroy') }}">
                             {{ csrf_field() }}
-                            <div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmación</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <input name="valeidok" type="hidden" value="{{ $data->id }}">
-                                            Seguro desea eliminar este registro? {{ $data->value }}
+                                            ¿Seguro desea eliminar este registro? {{ $data->value }}
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary" onclick="showConfirmationPopup(event)">Confirmar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
+                        <script>
+                            function showConfirmationPopup(event) {
+                                event.preventDefault(); // Evita que el formulario se envíe por defecto
+
+                                // Muestra el popup de confirmación utilizando Bootstrap
+                                $('#exampleModal{{ $data->id }}').modal('show');
+                            }
+                        </script>
+
                     </td>
 
                 </tr>

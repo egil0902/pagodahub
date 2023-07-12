@@ -13,6 +13,10 @@ use Illuminate\Database\Console\DumpCommand;
 use Laravel\Ui\Presets\React;
 use PDF;
 
+use App\Models\marketshopping;
+use App\Models\Cheque;
+use App\Models\Facture;
+
 class CloseCashController extends Controller
 {
     public function __construct()
@@ -41,6 +45,7 @@ class CloseCashController extends Controller
             "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",
             'ba_name asc'
         );
+
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
         //dump($list);
         $dia = $request->DateTrx;
@@ -53,11 +58,201 @@ class CloseCashController extends Controller
         $name_user = auth()->user()->name;
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        //dd($closecashlist->records); //el chiste se hace con ba_value
+        //NetTotal=montoContado
+        $panaderia = (object) [
+            'ba_name'=>'Total panaderia',
+            'u_name'=>'------------',
+            'BeginningBalance' => 0,
+            'SubTotal' => 0,
+            'NetTotal' => 0,
+            'XAmt' => 0,
+            'DifferenceAmt' => 0
+        ];
+        
+        $caja = (object) [
+            'ba_name'=>'Total cajas',
+            'u_name'=>'------------',
+            'BeginningBalance' => 0,
+            'SubTotal' => 0,
+            'NetTotal' => 0,
+            'XAmt' => 0,
+            'DifferenceAmt' => 0
+        ];
+        
+        $pagaTodo = (object) [
+            'ba_name'=>'Total pagatodo',
+            'u_name'=>'------------',
+            'BeginningBalance' => 0,
+            'SubTotal' => 0,
+            'NetTotal' => 0,
+            'XAmt' => 0,
+            'DifferenceAmt' => 0
+        ];
+        $lastIndex=null;
+        foreach ($closecashlist->records as $index =>$cajas) {
+            switch ($cajas->ba_value) {
+                case 'panaderia':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                    
+                case '1000004':
+                    $pagaTodo->BeginningBalance += $cajas->BeginningBalance;
+                    $pagaTodo->SubTotal += $cajas->SubTotal;
+                    $pagaTodo->NetTotal += $cajas->NetTotal;
+                    $pagaTodo->XAmt += $cajas->XAmt;
+                    $pagaTodo->DifferenceAmt += $cajas->DifferenceAmt;
+                    $lastIndex=$index;
+                    break;
+                case 'Caja 5_Panaderia':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Caja 10':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Principal Panaderia Susy':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Caja Panaderia':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                case 'Dulceria Susy Fortuna P':
+                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
+                    $panaderia->SubTotal += $cajas->SubTotal;
+                    $panaderia->NetTotal += $cajas->NetTotal;
+                    $panaderia->XAmt += $cajas->XAmt;
+                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
+                    break;
+                default:
+                    if ($cajas->ba_value !== '1000004') {
+                        $caja->BeginningBalance += $cajas->BeginningBalance;
+                        $caja->SubTotal += $cajas->SubTotal;
+                        $caja->NetTotal += $cajas->NetTotal;
+                        $caja->XAmt += $cajas->XAmt;
+                        $caja->DifferenceAmt += $cajas->DifferenceAmt;
+                    }
+                    break;
+            }
+        }
+        $tDia = (object) [
+            'ba_name'=>'Total del día',
+            'u_name'=>'------------',
+            'BeginningBalance' => $panaderia->BeginningBalance+$caja->BeginningBalance+$pagaTodo->BeginningBalance,
+            'SubTotal' => $panaderia->SubTotal+$caja->SubTotal+$pagaTodo->SubTotal,
+            'NetTotal' => $panaderia->NetTotal+$caja->NetTotal+$pagaTodo->NetTotal,
+            'XAmt' => $panaderia->XAmt+$caja->XAmt+$pagaTodo->XAmt,
+            'DifferenceAmt' => $panaderia->DifferenceAmt+$caja->DifferenceAmt+$pagaTodo->DifferenceAmt
+        ];
+        $total=[$caja,$pagaTodo,$panaderia,$tDia];
+        $closecashlist->records[] = $panaderia;
+        $closecashlist->records[] = $tDia;
+        //dd($closecashlist->records,$posicion);
+        $closecashlist->records = array_merge(
+            array_slice($closecashlist->records, 0, $lastIndex + 1),
+            [$pagaTodo],
+            array_slice($closecashlist->records, $lastIndex + 1)
+        );
+        $closecashlist->records = array_merge(
+            array_slice($closecashlist->records, 0, $lastIndex),
+            [$caja],
+            array_slice($closecashlist->records, $lastIndex)
+        );
+
+        $day = $request->DateTrx;
+        
+        $presupuesto=0;
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->orderBy('created_at', 'asc')->get();
+        
+        if($comprasdeldia->count() > 0) {
+            $presupuesto=$comprasdeldia[0]->budget;
+        }
+        if ($comprasdeldia->count() > 1) {
+            $presupuesto = $comprasdeldia[0]->budget;
+            $productos = json_decode($comprasdeldia[0]->product);
+            $quantity = json_decode($comprasdeldia[0]->quantity);
+        
+            for ($i = 1; $i < $comprasdeldia->count(); $i++) {
+                $Fproductos = json_decode($comprasdeldia[$i]->product);
+                $Fquantity = json_decode($comprasdeldia[$i]->quantity);
+        
+                // Comparar los elementos de los arreglos y restar las cantidades correspondientes
+                foreach ($productos as $posicion => $producto) {
+                    if (in_array($producto, $Fproductos)) {
+                        $fPosicion = array_search($producto, $Fproductos);
+                        $quantity[$posicion] -= $Fquantity[$fPosicion];
+                    }
+                }
+            }
+        
+            $comprasdeldia[0]->quantity = json_encode($quantity);
+        }
+        
+        $facturas = Facture::where('fecha', $day)->get();
+        $carton =0;
+        if($facturas->count() > 0) {
+            foreach ($facturas as $factura) {
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->total;
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->monto_abonado;
+                }
+                
+                if($factura->carton>0){
+                    $carton =$factura->carton;
+                }
+                
+            }
+        }
+        foreach ($comprasdeldia as $posicion => $compra) {
+            foreach ($facturas as $posicion_diferente => $factura) {
+                if ($compra->id_compra === $factura->id_compra) {
+                    $comprasdeldia[$posicion]->factura = $factura;
+                }
+            }
+        }
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                    $presupuesto-=$check->monto;
+                }
+        }
+
+
+
         foreach ($user->records  as $usuario) {
             //dump($user);
             foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                 if ($acceso->Name == 'closecash') {
-                    return view('closecash', ['orgs' => $orgs, 'closecashsumlist' => $response, 'request' => $request, 'closecashlist' => $closecashlist, 'list' => $list, 'permisos' => $user]);
+                    return view('closecash', ['orgs' => $orgs, 
+                                              'closecashsumlist' => $response, 
+                                              'request' => $request, 
+                                              'closecashlist' => $closecashlist, 
+                                              'list' => $list, 
+                                              'permisos' => $user,
+                                              'totales'=> $total,
+                                              'vuelto'=> $presupuesto
+                                            ]);
                     break;
                 }
             }
