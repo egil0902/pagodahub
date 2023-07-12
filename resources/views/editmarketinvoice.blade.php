@@ -108,7 +108,7 @@
                                                                 <td>
                                                                     <input class="w-100 " type="number" name="differenceFactura[]"
                                                                         id="differenceFactura{{ $index + 1 }}" value="{{json_decode($data->quantity)[$index]}}" readonly
-                                                                        required onchange="sumadiferencia({{$ind}});" step="0.01" min="0">
+                                                                        required onchange="sumadiferencia({{$ind}});" step="0.000001" min="0">
                                                                 </td>
                                                                 <script>
                                                                     // Obtener las entradas numéricas
@@ -132,7 +132,7 @@
                                                                 </script>
                                                                 <td>
                                                                     <input class="w-100 " type="number" name="price[]" value="{{json_decode($data->price)[$index]}}"
-                                                                        data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required readonly>
+                                                                        data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.000001" min="0" required readonly>
                                                                 </td>
                                                                 <td>
                                                                     <input class="w-100 border-0 bg-transparent" type="number"

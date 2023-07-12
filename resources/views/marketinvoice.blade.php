@@ -162,7 +162,7 @@
                                                             <td>
                                                                 <input class="w-100 " type="number" name="differenceFactura[]"
                                                                     id="differenceFactura{{ $index + 1 }}" value="0"
-                                                                    required onchange="sumadiferencia({{$ind}});" step="0.01" min="0">
+                                                                    required onchange="sumadiferencia({{$ind}});" step="0.000001" min="0">
                                                             </td>
                                                             <td>
                                                                 <input class="w-100 border-0 bg-transparent" type="number"
@@ -191,7 +191,7 @@
                                                             </script>
                                                             <td>
                                                                 <input class="w-100 " type="number" name="price[]" value="0"
-                                                                    data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required>
+                                                                    data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.000001" min="0" required>
                                                             </td>
                                                             <td>
                                                                 <input class="w-100 border-0 bg-transparent" type="number"
@@ -303,7 +303,7 @@
                                                             if(difference==null){
                                                                 elements_difference[i].value =0.0;
                                                             }else{
-                                                            elements_difference[i].value = difference.toFixed(2);
+                                                            elements_difference[i].value = difference.toFixed(6);
                                                             }
                                                         }
 
@@ -316,7 +316,7 @@
                                                         var carton=parseFloat(document.getElementById('carton').value);
                                                         var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
                                                         
-                                                        cart.value= carton.toFixed(2);
+                                                        cart.value= carton.toFixed(6);
                                                         presupuesto= presupuesto;
                                                         sumaTotal(elements_market[numero],presupuesto);
                                                         
@@ -347,30 +347,30 @@
                                                         sum_differenceFactura += differenceFactura * price;
                                                         sum_compra+=diffCompra*price;
                                                         var mult=differenceFactura*price;
-                                                        elements_mult[j].value=mult.toFixed(2);
+                                                        elements_mult[j].value=mult.toFixed(6);
                                                         sum_difference=sum_differenceFactura-sum_compra;
                                                     }
 
                                                     var totalDifferenceFacturaInput = table.querySelector('.total-difference-factura');
-                                                    totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(2);
+                                                    totalDifferenceFacturaInput.value = sum_differenceFactura.toFixed(6);
                                                     
                                                     var totalDifferenceCompraInput = table.querySelector('.total-difference-compra');
-                                                    totalDifferenceCompraInput.value = sum_compra.toFixed(2);
+                                                    totalDifferenceCompraInput.value = sum_compra.toFixed(6);
 
                                                     var totalDifferenceInput = table.querySelector('.total-difference-diff');
-                                                    totalDifferenceInput.value = sum_difference.toFixed(2);
+                                                    totalDifferenceInput.value = sum_difference.toFixed(6);
 
                                                     var totalFinalInput = table.querySelector('.total-difference-final');
                                                     var total=totalFinalInput.value
                                                     var attributeValue = "{{ $data->budget }}"
-                                                    var answer = presupuesto.toFixed(2) - sum_differenceFactura.toFixed(2);    
-                                                    console.log(sum_compra.toFixed(2));
+                                                    var answer = presupuesto.toFixed(6) - sum_differenceFactura.toFixed(6);    
+                                                    console.log(sum_compra.toFixed(6));
                                                     if(metodoSeleccionado){
                                                         abono.value;
                                                         
-                                                        totalFinalInput.value = presupuesto.toFixed(2)- abono.value;
+                                                        totalFinalInput.value = presupuesto.toFixed(6)- abono.value;
                                                     }else{
-                                                        totalFinalInput.value = answer.toFixed(2);
+                                                        totalFinalInput.value = answer.toFixed(6);
                                                     }
                                                     // Update other total values if needed
                                                     // ...
@@ -388,10 +388,10 @@
 
                                                     var sumDifferenceInput = table.querySelector('#sumdif');
                                                     
-                                                    sumDifferenceInput.value = sum_difference.toFixed(2);
+                                                    sumDifferenceInput.value = sum_difference.toFixed(6);
 
                                                     var sumPriceInput = table.querySelector('#sumpre');
-                                                    sumPriceInput.value = sum_price.toFixed(2);
+                                                    sumPriceInput.value = sum_price.toFixed(6);
                                                     console.log(metodoSeleccionado)
                                                 }
                                             </script>
@@ -512,7 +512,7 @@
                                                                 <td>
                                                                     <input class="w-100 " type="number" name="differenceFactura[]"
                                                                         id="differenceFactura{{ $index + 1 }}" value="{{json_decode($data->quantity)[$index]}}" readonly
-                                                                        required onchange="sumadiferencia({{$ind}});" step="0.01" min="0">
+                                                                        required onchange="sumadiferencia({{$ind}});" step="0.000001" min="0">
                                                                 </td>
                                                                 <script>
                                                                     // Obtener las entradas numéricas
@@ -536,7 +536,7 @@
                                                                 </script>
                                                                 <td>
                                                                     <input class="w-100 " type="number" name="price[]" value="{{json_decode($data->factura->price)[$index]}}"
-                                                                        data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.01" min="0" required readonly>
+                                                                        data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.000001" min="0" required readonly>
                                                                 </td>
                                                                 <td>
                                                                     <input class="w-100 border-0 bg-transparent" type="number"
