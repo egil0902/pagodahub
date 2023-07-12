@@ -84,36 +84,45 @@
 </style>
 
 <body>
-@foreach($resultados as $data)
-    <!-- Encabezado -->
-<h1>Factura número: {{ $data->id_compra }}</h1>
-<p>Fecha: {{ $data->shoppingday }}</p>
-<p>Proveedor: {{ $data->proveedor }}</p>
+    @php
+    $totalAPagar = 0;
+    @endphp
 
-<!-- Listado de productos -->
-<table>
-    <thead>
-        <tr>
-            <th>Medio de pago</th>
-            <th>Abono anterior</th>
-            <th>Valor factura</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{$data->medio_de_pago?"Contado":"Crédito"}}</td>
-            <td>{{$data->monto_abonado}}</td>
-            <td>{{$data->Total_compra}}</td>
-            
-        </tr>
-    </tbody>
-</table>
+    @foreach($resultados as $data)
+        <!-- Encabezado -->
+        <h1>Factura número: {{ $data->id_compra }}</h1>
+        <p>Fecha: {{ $data->shoppingday }}</p>
+        <p>Proveedor: {{ $data->proveedor }}</p>
 
-<!-- Total a pagar -->
-<p>Total a pagar: {{ $data->Total_compra -$data->monto_abonado }}</p>
+        <!-- Listado de productos -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Medio de pago</th>
+                    <th>Abono anterior</th>
+                    <th>Valor factura</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{$data->medio_de_pago?"Contado":"Crédito"}}</td>
+                    <td>{{$data->monto_abonado}}</td>
+                    <td>{{$data->Total_compra}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-@endforeach
+        <!-- Total a pagar -->
+        <p>Total factura a pagar: {{ $data->Total_compra - $data->monto_abonado }}</p>
+
+        @php
+        $totalAPagar += ($data->Total_compra - $data->monto_abonado);
+        @endphp
+    @endforeach
+
+    <hr>
+    <h2>Total a pagar: {{ $totalAPagar }}</h2>
+
 </body>
 
 </html>
