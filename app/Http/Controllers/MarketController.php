@@ -9,6 +9,7 @@ use App\Models\Facture;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use App\Models\Cheque;
+use Exception;
 
 
 class MarketController extends Controller
@@ -233,64 +234,81 @@ class MarketController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        
-        $shop = MarketShopping::findOrFail($id);  
-        $productos = $request->input('product');        
-        $productos = array_values(array_filter($productos, function ($valor) {
-            return !is_null($valor) && $valor !== '';
-        }));
+        try{
+            $shop = MarketShopping::findOrFail($id);  
+            $productos = $request->input('product');        
+            $productos = array_values(array_filter($productos, function ($valor) {
+                return !is_null($valor) && $valor !== '';
+            }));
 
-        $quantity =$request->input('quantity');
-        $quantity = array_values(array_filter($quantity, function ($valor) {
-            return !is_null($valor) && $valor !== '';
-        }));
+            $quantity =$request->input('quantity');
+            $quantity = array_values(array_filter($quantity, function ($valor) {
+                return !is_null($valor) && $valor !== '';
+            }));
 
-        $presupuesto = $request->input('Presupuesto');
-        $unidades = $request->input('unit');
+            $presupuesto = $request->input('Presupuesto');
+            $unidades = $request->input('unit');
 
-        // Paso 1: Crear un arreglo asociativo con información de productos, unidades y cantidades
-        $info_productos = [];
-        for ($i = 0; $i < count($productos); $i++) {
-            $info_productos[$productos[$i]] = [
-                'unidad' => $unidades[$i],
-                'cantidad' => $quantity[$i]
-            ];
+            // Paso 1: Crear un arreglo asociativo con información de productos, unidades y cantidades
+            $info_productos = [];
+            for ($i = 0; $i < count($productos); $i++) {
+                $info_productos[$productos[$i]] = [
+                    'unidad' => $unidades[$i],
+                    'cantidad' => $quantity[$i]
+                ];
+            }
+
+            // Paso 2: Ordenar el arreglo $productos
+            sort($productos);
+
+            // Paso 3: Crear arreglos vacíos para unidades y cantidades ordenadas
+            $unidades_ordenadas = [];
+            $quantity_ordenado = [];
+
+            // Paso 4: Recorrer el arreglo $productos ordenado
+            foreach ($productos as $producto) {
+                // Paso 5: Encontrar el índice del producto en el arreglo original
+                $indice = array_search($producto, $request->input('product'));
+
+                // Paso 6: Obtener las unidades y la cantidad correspondiente del arreglo original
+                $unidades_ordenadas[] = $info_productos[$producto]['unidad'];
+                $quantity_ordenado[] = $info_productos[$producto]['cantidad'];
+            }
+
+            // Paso 8: Actualizar los arreglos originales con los arreglos ordenados
+            $unidades = $unidades_ordenadas;
+            $quantity = $quantity_ordenado;
+            $productList = [];
+            $facturas = Facture::where('fecha',$shop->shoppingday)->get();
+            foreach ($facturas as $p) {
+                $productsArray = json_decode($p->product, true);
+                foreach ($productsArray as $product) {
+                    $productList[] = $product;
+                }
+            }
+            $missingProducts = array_diff($productList, $productos);
+
+            if (!empty($missingProducts)) {
+                $missingProductNames = implode(', ', $missingProducts);
+                throw new Exception("Los siguientes productos no pueden ser borrados: $missingProductNames");
+            }
+
+            
+            $shop->shoppingday = $request->input('date-day');
+            $shop->buyer = $request->input('comprador');
+            $shop->budget = $request->input('Presupuesto');
+            $shop->product = json_encode($productos);
+            $shop->unit = json_encode($unidades);
+            $shop->quantity = json_encode($quantity);
+            $shop->save();
+            
+            $day = "3000-01-01";
+            $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+            $presupuesto=0;
+            return view('marketinvoice', compact('comprasdeldia','presupuesto'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-
-        // Paso 2: Ordenar el arreglo $productos
-        sort($productos);
-
-        // Paso 3: Crear arreglos vacíos para unidades y cantidades ordenadas
-        $unidades_ordenadas = [];
-        $quantity_ordenado = [];
-
-        // Paso 4: Recorrer el arreglo $productos ordenado
-        foreach ($productos as $producto) {
-            // Paso 5: Encontrar el índice del producto en el arreglo original
-            $indice = array_search($producto, $request->input('product'));
-
-            // Paso 6: Obtener las unidades y la cantidad correspondiente del arreglo original
-            $unidades_ordenadas[] = $info_productos[$producto]['unidad'];
-            $quantity_ordenado[] = $info_productos[$producto]['cantidad'];
-        }
-
-        // Paso 8: Actualizar los arreglos originales con los arreglos ordenados
-        $unidades = $unidades_ordenadas;
-        $quantity = $quantity_ordenado;
-
-        
-        $shop->shoppingday = $request->input('date-day');
-        $shop->buyer = $request->input('comprador');
-        $shop->budget = $request->input('Presupuesto');
-        $shop->product = json_encode($productos);
-        $shop->unit = json_encode($unidades);
-        $shop->quantity = json_encode($quantity);
-        $shop->save();
-        
-        $day = "3000-01-01";
-        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
-        $presupuesto=0;
-        return view('marketinvoice', compact('comprasdeldia','presupuesto'));
     }
 
     /**
