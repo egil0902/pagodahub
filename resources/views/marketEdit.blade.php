@@ -38,14 +38,14 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="mensajeModalLabel">Mensaje de éxito</h5>
+                                        <h5 class="modal-title" id="mensajeModalLabel">Error al actualizar</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Cerrar">
                                             <span aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>{{ session('mensaje') }}</p>
+                                        <p>{{ session('error') }}</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -55,13 +55,15 @@
                             </div>
                         </div>
                         <!-- Sección de scripts -->
-                        @if (session('mensaje'))
+                        @if (session('error'))
                             <script>
                                 $(document).ready(function() {
                                     $('#mensajeModal').modal('show');
                                 });
                             </script>
                         @endif
+
+
                         <form name="market" id="market" method="post" action="{{ route('market.update',$comprasdeldia[0]->id) }}">
                             <br>
                             @csrf
