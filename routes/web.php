@@ -71,7 +71,7 @@ Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updatePayme
 
 Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
 Route::post('/facture/resume', [App\Http\Controllers\FactureController::class, 'resume'])->name('factures.resume');
-Route::post('/facture', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
+Route::post('/marketinvoice', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
 Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
 Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
 Route::delete('/marketinvoice/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
@@ -93,8 +93,8 @@ Route::post('/market/create', [App\Http\Controllers\MarketController::class, 'st
 Route::post('/market', [App\Http\Controllers\MarketController::class, 'charge'])->name('market.charge');
 Route::post('/market/{id}', [App\Http\Controllers\MarketController::class, 'update'])->name('market.update');
 Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'])->name('market.edit');
-Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoice');
-Route::post('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day');
+Route::get('/marketinvoices', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoices');
+Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day')->where('day', 'monday');
 
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
