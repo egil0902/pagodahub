@@ -33,11 +33,11 @@ class FactureController extends Controller
         $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
-                    if($presupuesto == "no asignado para el dia"){
-                        $presupuesto=0;
-                    }
-                    $presupuesto-=$check->monto;
+                if($presupuesto == "no asignado para el dia"){
+                    $presupuesto=0;
                 }
+                $presupuesto-=$check->monto;
+            }
         }
         return view('facture', compact('facturas', 'presupuesto')); // Pasar los facturas a la vista
     }
@@ -84,7 +84,7 @@ class FactureController extends Controller
         $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
             $registro->pagada=true;
-            $registro->fecha_pago="No aplica";
+            $registro->fecha_pago=$request->fecha_registro;
         }
         if (isset($request->cart) && strpos($request->cart, ':') !== false) {
             $valorDespuesDeDosPuntos = substr($request->cart, strpos($request->cart, ':') + 1);
@@ -325,6 +325,9 @@ class FactureController extends Controller
 
     public function downloadPdf(Request $request)
     {
+        
+        $metodoPago="Presupuesto";
+        $codigo="000000";
         $idCompras = $request->input('factura_ids');
         $idCompras = explode(',', $idCompras);
         $resultados = DB::table('marketshoppings')
@@ -337,6 +340,10 @@ class FactureController extends Controller
         $pagoPresupuesto=false;
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;
+            
+        }else{
+            $metodoPago=$request->metodoPago;
+            $codigo=$request->codigo;
         }
         
         if (count($idCompras)>0) {
@@ -359,12 +366,13 @@ class FactureController extends Controller
                 }
 
                 $factura->save();
-                
                 $cheque = Cheque::create([
                     'fecha' => date('Y-m-d'),
                     'id_factura' => $factura->id_compra,
                     'pago_presupuesto' => $pagoPresupuesto,
                     'monto' => $monto,
+                    'tipo'=>$metodoPago,
+                    'codigo'=>$codigo
                 ]);
             }
             # code...

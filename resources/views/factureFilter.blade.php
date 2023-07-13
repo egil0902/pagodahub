@@ -46,7 +46,20 @@
                     <label for="pagoPresupuesto">Descontar del presupuesto del día?</label>
                     <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" checked onchange="togglePagoPresupuesto(this)">
                 </div>
-
+                <div id="myDiv" style="display: none;">
+                    <div >
+                        <label for="metodoPago">Seleccione una opción:</label>
+                        <select id="metodoPago"  name="metodoPago" style="height: 30px;">
+                            <option value="cheque" selected>Cheque</option>
+                            <option value="transacciones">Transacciones bancarias</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div >
+                        <label for="codigo">Código:</label>
+                        <input type="text" id="codigo" name="codigo" value="" style="height: 30px;" required>
+                    </div>
+                </div>
                 <!--<div>
                     <label for="pagoValor">¿Desea pagar un monto?</label>
                     --><input type="hidden" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
@@ -157,10 +170,13 @@
             }
 
             function togglePagoPresupuesto(checkbox) {
+                var myDiv = document.getElementById("myDiv");
                 if (checkbox.checked) {
                     checkbox.value = "true";
+                    myDiv.style.display = "none";
                 } else {
                     checkbox.value = "false";
+                    myDiv.style.display = "flex";
                 }
             }
 
