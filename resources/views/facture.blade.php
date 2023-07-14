@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">Filtrar facturas</div>
                 <div class="card-body">
-                    <form name="provider" id="provider" method="post" action="{{ route('factures.searchByProvider') }}" class="mr-2">
+                    <!--<form name="provider" id="provider" method="post" action="{{ route('factures.searchByProvider') }}" class="mr-2">
                         <div class="form-group">
                             @csrf
                             <div class="input-group">
@@ -23,7 +23,7 @@
                     <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
                         <div class="form-group w-auto">
                             @csrf
-                            <button class=" w-100 btn btn-outline-secondary" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
+                            <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
                         </div>
                     </form>
                 </div>
@@ -51,8 +51,7 @@
 </br>
     
     <div>
-        @livewire('App\Http\Livewire\FactureList')
-        
+        @livewire('App\Http\Livewire\FactureList')        
     </div>
 </div>
 
