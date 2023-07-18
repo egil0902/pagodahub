@@ -8,21 +8,28 @@
                 <div>
                     <label for="pagoPresupuesto">Descontar del presupuesto del día?</label>
                     <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" checked onchange="togglePagoPresupuesto(this)">
+                    
                 </div>
                 <div id="myDiv" style="display: none;">
-                    <div >
+                    <div>
                         <label for="metodoPago">Seleccione una opción:</label>
-                        <select id="metodoPago"  name="metodoPago" style="height: 30px;">
-                            <option value="cheque" selected>Cheque</option>
-                            <option value="transacciones">Transacciones bancarias</option>
-                            <option value="otro">Otro</option>
+                        <select id="metodoPago" name="metodoPago" style="height: 30px;" onchange="toggleFechaCampo(this)">
+                        <option value="Cheque" selected>Cheque</option>
+                        <option value="Transacciones">Transacciones bancarias</option>
+                        <option value="Otro">Otro</option>
+                        <option value="Dia anterior">Presupuesto anterior</option>
                         </select>
                     </div>
-                    <div >
+                    <div id="campoFecha" style="display: none;">
+                        <label for="fecha">Seleccione una fecha:</label>
+                        <input type="date" id="fechaPago" name="fechaPago" style="height: 30px;" max="<?= date("Y-m-d") ?>">
+                    </div>
+                    <div>
                         <label for="codigo">Código:</label>
-                        <input type="text" id="codigo" name="codigo" value="" style="height: 30px;" required>
+                        <input type="text" id="codigo" name="codigo" value="" style="height: 30px;">
                     </div>
                 </div>
+
                 <!--<div>
                     <label for="pagoValor">¿Desea pagar un monto?</label>
                     --><input type="hidden" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
@@ -59,6 +66,7 @@
                 </div>
 
                 <script>
+                    document.getElementById("pagoPresupuesto").value = "true";
                     document.getElementById("imprimirCheque").addEventListener("submit", function(event) {
                     event.preventDefault();
 
@@ -130,16 +138,34 @@
                     checkbox.value = "false";
                     document.getElementById('monto').disabled = true;
                 }
-            }
+            }   
+            function toggleFechaCampo(selectElement) {
+                var campoFecha = document.getElementById("campoFecha");
+                
+                // Obtener el valor seleccionado del select
+                var selectedOption = selectElement.options[selectElement.selectedIndex].value;
+                var elementoRequerido = document.getElementById("fechaPago");
+                // Si el valor seleccionado es "Dia anterior", mostrar el campo de selección de fecha, de lo contrario, ocultarlo
+                if (selectedOption === "Dia anterior") {
+                    campoFecha.style.display = "block";                    
+                    elementoRequerido.setAttribute("required", "required");                    
+                }else{
+                    campoFecha.style.display = "none";                    
+                    elementoRequerido.removeAttribute("required");
 
+                }
+            }
             function togglePagoPresupuesto(checkbox) {
                 var myDiv = document.getElementById("myDiv");
+                var elementoRequerido = document.getElementById("codigo");
                 if (checkbox.checked) {
                     checkbox.value = "true";
                     myDiv.style.display = "none";
+                    elementoRequerido.removeAttribute("required");
                 } else {
                     checkbox.value = "false";
                     myDiv.style.display = "flex";
+                    elementoRequerido.setAttribute("required", "required");
                 }
             }
 

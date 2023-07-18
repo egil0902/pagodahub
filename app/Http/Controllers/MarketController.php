@@ -149,21 +149,18 @@ class MarketController extends Controller
         $day = $request->input('day');
         //dd($day);
         
+        
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $day)->orderBy('created_at', 'asc')->get();
-        
         if($comprasdeldia->count() > 0) {
-            $presupuesto=$comprasdeldia[0]->budget;
-        }
-        if ($comprasdeldia->count() > 1) {
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
             $quantity = json_decode($comprasdeldia[0]->quantity);
-        
-            for ($i = 1; $i < $comprasdeldia->count(); $i++) {
-                $Fproductos = json_decode($comprasdeldia[$i]->product);
-                $Fquantity = json_decode($comprasdeldia[$i]->quantity);
-        
+            $facturas = Facture::where('id_market', $comprasdeldia[0]->id)->get();
+            
+            for ($i = 0; $i < $facturas->count(); $i++) {
+                $Fproductos = json_decode($facturas[$i]->product);
+                $Fquantity = json_decode($facturas[$i]->Factured_quantity);
                 // Comparar los elementos de los arreglos y restar las cantidades correspondientes
                 foreach ($productos as $posicion => $producto) {
                     if (in_array($producto, $Fproductos)) {
@@ -172,7 +169,7 @@ class MarketController extends Controller
                     }
                 }
             }
-        
+            
             $comprasdeldia[0]->quantity = json_encode($quantity);
         }
         
@@ -207,7 +204,7 @@ class MarketController extends Controller
                 }
         }
 
-        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas'));
     }
     /**
      * edit the specified resource in storage.
