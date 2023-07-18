@@ -231,6 +231,7 @@ class MarketController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        
         try{
             $shop = MarketShopping::findOrFail($id);  
             $productos = $request->input('product');        
@@ -304,7 +305,8 @@ class MarketController extends Controller
             $presupuesto=0;
             return view('marketinvoice', compact('comprasdeldia','presupuesto'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            $presupuesto=-1;
+            return view('market', compact('presupuesto'))->withErrors($e->getMessage());
         }
     }
 
