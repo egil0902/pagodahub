@@ -125,10 +125,8 @@ class FactureController extends Controller
         
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
-        if($comprasdeldia->count() > 0) {
-            $presupuesto=$comprasdeldia[0]->budget;
-        }
-        if ($comprasdeldia->count() > 1) {
+        
+        if ($comprasdeldia->count() > 0) {
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
             $quantity = json_decode($comprasdeldia[0]->quantity);
