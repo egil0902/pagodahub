@@ -30,11 +30,22 @@
                 </div>
             </div>
         </div>
+        
+
         <div style="padding-top: 20px;">
         Presupuesto restante para el dia: {{$presupuesto}}
         </div>
         
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <br>
     @livewire('App\Http\Livewire\FactureFilter')
 

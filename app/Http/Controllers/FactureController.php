@@ -322,29 +322,64 @@ class FactureController extends Controller
         $metodoPago="Presupuesto";
         $codigo="000000";
         $fechaPago=date('Y-m-d');
-        
-        $idCompras = $request->input('factura_ids');
-        $idCompras = explode(',', $idCompras);
-        $resultados = DB::table('marketshoppings')
-            ->join('factures', 'factures.id_compra', '=', 'marketshoppings.id_compra')
-            ->whereIn('factures.id_compra', $idCompras)
-            ->get();
-        
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados]);
-        
-        $pagoPresupuesto=false;
+        $presupuesto = "no asignado para el dia";
+        $calculo=[];
         if($request->pagoPresupuesto){
-            $pagoPresupuesto=$request->pagoPresupuesto;
-            
+            $pagoPresupuesto=$request->pagoPresupuesto;  
+            $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
+                  
         }else{
             $metodoPago=$request->metodoPago;
             $codigo=$request->codigo;
             if($metodoPago==="Dia anterior"){
                 $fechaPago=$request->fechaPago;
-
+                $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
+        
             }
         }
         
+        $idCompras = $request->input('factura_ids');
+        $idCompras = explode(',', $idCompras);
+        $resultados = DB::table('factures')->whereIn('id_compra', $idCompras)->get();
+        
+        if ($calculo->count()>0) {
+            $presupuesto=$calculo[0]->budget;
+            $comprasdeldia = $resultados;
+            
+            foreach ($comprasdeldia as $factura) {
+                if($factura->medio_de_pago){
+                    $presupuesto-=$factura->total;
+                }
+                if(!$factura->medio_de_pago){
+                    $presupuesto-=$factura->monto_abonado;
+                }
+            }
+        }
+        $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                if($presupuesto == "no asignado para el dia"){
+                    $presupuesto=0;
+                }
+                $presupuesto-=$check->monto;
+            }
+        }
+        
+
+        $deuda=0;
+        foreach ($resultados as $resultado) {
+            $deuda+=$resultado->Total_compra-$resultado->monto_abonado;
+        }
+        if($deuda>$presupuesto||$presupuesto==="no asignado para el dia"){
+            //la deuda no se puede pagar con el presupuesto
+            $providerName="";
+            $facturas=$resultados;
+            return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
+        }
+
+        $pagoPresupuesto=false;
+        
+        //por cada cidigo se genera un registro
         if (count($idCompras)>0) {
             
             for ($i=0; $i < count($idCompras); $i++) { 
@@ -356,7 +391,7 @@ class FactureController extends Controller
                     $factura->monto_abonado=$factura->total;
                 }
                 if($request->monto!==0){
-                    $monto==$request->monto;
+                    $monto=$request->monto;
                     $factura->monto_abonado+=$request->monto;
                 }
                 if($factura->monto_abonado>=$factura->total){
@@ -376,43 +411,9 @@ class FactureController extends Controller
                 ]);
             }
         }
-        $providerName = $request->input('provider');
-        $query = Facture::query();
-        if (!empty($providerName)) {
-            $query->whereRaw("LOWER(REPLACE(proveedor, ' ', '')) LIKE '%' || LOWER(REPLACE(?, ' ', '')) || '%'", [$providerName])
-                ->where('pagada', false);
-        }else{
-            $query->where('pagada', false);
-        }
-        $facturas = $query->get();
 
-        $day = date('Y-m-d'); // Obtener la fecha actual
-        $presupuesto = "no asignado para el dia";
-        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
-        if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
-            $comprasdeldia = Facture::where('fecha', $day)->get();
-            
-            foreach ($comprasdeldia as $factura) {
-                if($factura->medio_de_pago){
-                    $presupuesto-=$factura->total;
-
-                }
-                if(!$factura->medio_de_pago){
-                    $presupuesto-=$factura->monto_abonado;
-                }
-            }
-        }
-        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
-        if ($cheques->count()>0) {
-            foreach ($cheques as $check) {
-                    if($presupuesto == "no asignado para el dia"){
-                        $presupuesto=0;
-                    }
-                    $presupuesto-=$check->monto;
-                }
-        }
-        return $pdf->download("factura".".pdf");
+        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago]);
+        return $pdf->download("factura.pdf");
     }
     public function pagar(Request $request)
     {
