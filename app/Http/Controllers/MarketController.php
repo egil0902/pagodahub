@@ -130,9 +130,11 @@ class MarketController extends Controller
     {
         $day = "3000-01-01";
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
-        $presupuesto=0;
+        $presupuesto=0;        
+        $carton=0;
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
+            $carton=$comprasdeldia[0]->carton;
         }
         $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
