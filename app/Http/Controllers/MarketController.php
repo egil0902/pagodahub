@@ -151,8 +151,10 @@ class MarketController extends Controller
         
         
         $presupuesto=0;
-        $comprasdeldia = marketshopping::where('shoppingday', $day)->orderBy('created_at', 'asc')->get();
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        $carton =0;
         if($comprasdeldia->count() > 0) {
+            $carton =$comprasdeldia[0]->carton;            
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
             $quantity = json_decode($comprasdeldia[0]->quantity);
@@ -174,7 +176,7 @@ class MarketController extends Controller
         }
         
         $facturas = Facture::where('fecha', $day)->get();
-        $carton =0;
+        
         if($facturas->count() > 0) {
             foreach ($facturas as $factura) {
                 if($factura->medio_de_pago){
@@ -184,17 +186,6 @@ class MarketController extends Controller
                     $presupuesto-=$factura->monto_abonado;
                 }
                 
-                if($factura->carton>0){
-                    $carton =$factura->carton;
-                }
-                
-            }
-        }
-        foreach ($comprasdeldia as $posicion => $compra) {
-            foreach ($facturas as $posicion_diferente => $factura) {
-                if ($compra->id_compra === $factura->id_compra) {
-                    $comprasdeldia[$posicion]->factura = $factura;
-                }
             }
         }
         $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();

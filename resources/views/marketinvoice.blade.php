@@ -29,29 +29,33 @@
                 <div class="col">                
                     <h4>Presupuesto: 
                         <input class="w-100 form-control" type="text" name="presupuesto"
-                        id="presupuesto" value="{{isset($presupuesto)?$presupuesto+(isset($carton)?$carton:0):0 }} " readonly>
+                        id="presupuesto" value="{{isset($presupuesto)?($presupuesto+$carton):0 }} " readonly>
                     </h4>
                 </div>
                 <div class="col">
-                    <h4>Carton: {{isset($carton)?$carton:0}}
-                        <input class="w-100 form-control" type="text" name="carton"
-                        id="carton" value="{{isset($carton)?$carton:0}}" 
-                        onchange="sumapresupuesto();">
-                        <input class="w-100 form-control" type="hidden" name="control"
-                        id="control" value="{{isset($carton)?$carton:0}}" 
-                        onchange="sumapresupuesto();">
+                    <h4>Carton: {{$carton}}
+                        <input class="w-100 form-control" type="number" name="carton" id="carton" value="0" 
+                            min="0" step="1" onchange="sumapresupuesto();" >
+
+                        
+                        <input class="w-100 form-control" type="hidden" name="anterior"
+                        id="anterior" value="{{$carton}}">
                         <script>
                             function sumapresupuesto(){
                                 var carton=parseFloat(document.getElementById('carton').value);
-                                var control=parseFloat(document.getElementById('control').value);
-                                var presupuesto=parseFloat(document.getElementById('presupuesto').value);
-                                presupuesto=presupuesto+carton-control;
-                                control=carton;
-                                document.getElementById('presupuesto').value=presupuesto;
-
+                                var anterior=parseFloat(document.getElementById('anterior').value);
+                                console.log("🚀 ~ file: marketinvoice.blade.php:49 ~ sumapresupuesto ~ anterior:", anterior)
+                                
+                                if(carton){
+                                    var presupuesto={{$presupuesto}}+{{$carton}};
+                                    console.log(presupuesto);
+                                    presupuesto=presupuesto+carton;
+                                    document.getElementById('anterior').value=carton;
+                                    document.getElementById('presupuesto').value=presupuesto;
+                                }
                             }
                         </script>
-                    </h4>                                    
+                    </h4>
                 </div>
                 
             </div>
