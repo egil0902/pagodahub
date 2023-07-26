@@ -74,7 +74,7 @@
                             <div class="col"> 
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 <input type="hidden" name="pres" value="{{ isset($presupuesto)?$presupuesto:0 }}">
-                                <input type="hidden" name="cart" value="isset($carton)?$carton:0">
+                                <input type="hidden" name="cart" value="{{isset($carton)?$carton:0}}">
                                 <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
                                 <h4>Numero de factura:
                                     <input class="w-100 form-control" type="number" name="NFactura"

@@ -90,8 +90,11 @@ class FactureController extends Controller
             $compradeldia = marketshopping::where('id', $request->id)->first();
             
             if($compradeldia){
-                $compradeldia->carton+=$request->cart;
-                $compradeldia->save();
+                if($request->cart!=null&&$request->cart!=""){
+                    dd($request->cart);
+                    $compradeldia->carton+=$request->cart;
+                }
+                    $compradeldia->save();
             }
         
         }
