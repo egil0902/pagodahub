@@ -91,7 +91,6 @@ class FactureController extends Controller
             
             if($compradeldia){
                 if($request->cart!=null&&$request->cart!=""){
-                    dd($request->cart);
                     $compradeldia->carton+=$request->cart;
                 }
                     $compradeldia->save();
