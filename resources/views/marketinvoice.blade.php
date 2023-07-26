@@ -74,7 +74,7 @@
                             <div class="col"> 
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 <input type="hidden" name="pres" value="{{ isset($presupuesto)?$presupuesto:0 }}">
-                                <input type="hidden" name="cart" value="{{isset($carton)?$carton:0}}">
+                                <input type="hidden" name="cart" value="{{$carton}}">
                                 <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
                                 <h4>Numero de factura:
                                     <input class="w-100 form-control" type="number" name="NFactura"
@@ -318,10 +318,10 @@
                                                         
                                                         var presupuesto=parseFloat(document.getElementById('presupuesto').value);
                                                         var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
-                                                        //var carton=parseFloat(document.getElementById('carton').value);
-                                                        //var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
+                                                        var carton=parseFloat(document.getElementById('carton').value);
+                                                        var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
                                                         
-                                                        //cart.value= carton.toFixed(6);
+                                                        cart.value= carton.toFixed(6);
                                                         presupuesto= presupuesto;
                                                         sumaTotal(elements_market[numero],presupuesto);
                                                         
@@ -524,18 +524,18 @@
                                                                     </td>
                                                                     <script>
                                                                         // Obtener las entradas numéricas
-                                                                        const quantity{{ $index + 1 }} = document.getElementById('quantity{{ $index + 1 }}{{ $product }}');
-                                                                        const differenceFactura{{ $index + 1 }} = document.getElementById('differenceFactura{{ $index + 1 }}');
-                                                                        const difference{{ $index + 1 }} = document.getElementById('difference{{ $index + 1 }}');
+                                                                        const cuantity{{ $index + 1 }} = document.getElementById('quantity{{ $index + 1 }}{{ $product }}');
+                                                                        const diferenceFactura{{ $index + 1 }} = document.getElementById('differenceFactura{{ $index + 1 }}');
+                                                                        const diference{{ $index + 1 }} = document.getElementById('difference{{ $index + 1 }}');
 
                                                                         // Agregar un evento input a la entrada differenceFactura
-                                                                        differenceFactura{{ $index + 1 }}.addEventListener('input', function() {
+                                                                        diferenceFactura{{ $index + 1 }}.addEventListener('input', function() {
                                                                             // Obtener los valores de las entradas numéricas
-                                                                            const quantityValue{{ $index + 1 }} = quantity{{ $index + 1 }}.value;
-                                                                            const differenceFacturaValue{{ $index + 1 }} = differenceFactura{{ $index + 1 }}.value;
+                                                                            const quantityValue{{ $index + 1 }} = cuantity{{ $index + 1 }}.value;
+                                                                            const diferenceFacturaValue{{ $index + 1 }} = diferenceFactura{{ $index + 1 }}.value;
 
                                                                             // Calcular la diferencia
-                                                                            const differenceValue{{ $index + 1 }} = quantityValue{{ $index + 1 }} -differenceFacturaValue{{ $index + 1 }};
+                                                                            const differenceValue{{ $index + 1 }} = quantityValue{{ $index + 1 }} -diferenceFacturaValue{{ $index + 1 }};
 
                                                                             // Mostrar el resultado en la entrada difference
                                                                             difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
