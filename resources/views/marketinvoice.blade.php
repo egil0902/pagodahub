@@ -53,6 +53,7 @@
                                     document.getElementById('anterior').value=carton;
                                     document.getElementById('presupuesto').value=presupuesto;
                                 }
+                                sumadiferencia(0)
                             }
                         </script>
                     </h4>
@@ -261,7 +262,7 @@
                                                     
                                                 </th>
                                                 <th>
-                                                    <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $presupuesto }}" readonly>
+                                                    <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $presupuesto+$carton }}" readonly>
 
                                                 </th>
                                                 <th>
@@ -317,10 +318,10 @@
                                                         
                                                         var presupuesto=parseFloat(document.getElementById('presupuesto').value);
                                                         var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
-                                                        var carton=parseFloat(document.getElementById('carton').value);
-                                                        var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
+                                                        //var carton=parseFloat(document.getElementById('carton').value);
+                                                        //var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
                                                         
-                                                        cart.value= carton.toFixed(6);
+                                                        //cart.value= carton.toFixed(6);
                                                         presupuesto= presupuesto;
                                                         sumaTotal(elements_market[numero],presupuesto);
                                                         
