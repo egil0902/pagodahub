@@ -298,11 +298,12 @@ class FactureController extends Controller
         $fechaPago=date('Y-m-d');
         $presupuesto = "no asignado para el dia";
         $calculo=[];
+        $ispresupuesto=false;
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;  
             $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
-                  
+            $ispresupuesto=true;
         }else{
             $metodoPago=$request->metodoPago;
             $codigo=$request->codigo;
@@ -310,7 +311,7 @@ class FactureController extends Controller
             if($metodoPago==="Dia anterior"){
                 $fechaPago=$request->fechaPago;
                 $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
-        
+                $ispresupuesto=true;
             }
         }
         $idCompras = $request->input('factura_ids');
@@ -319,45 +320,47 @@ class FactureController extends Controller
         $resultados = DB::table('factures')->whereIn('id_compra', $idCompras)->get();
         
         //valida si hay un presupuesto asignado ese dia y si no manda error
-        if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
-            //descuenta del presupuesto las facturas que toca cancelar
-            $comprasdeldia = Facture::where('fecha', $calculo[0]->shoppingday)->where('id_market', $calculo[0]->id)->get();            
-            foreach ($comprasdeldia as $factura) {
-                if($factura->medio_de_pago){
-                    $presupuesto-=$factura->total;
+        if($ispresupuesto===true){
+            if ($calculo->count()>0) {
+                $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
+                //descuenta del presupuesto las facturas que toca cancelar
+                $comprasdeldia = Facture::where('fecha', $calculo[0]->shoppingday)->where('id_market', $calculo[0]->id)->get();            
+                foreach ($comprasdeldia as $factura) {
+                    if($factura->medio_de_pago){
+                        $presupuesto-=$factura->total;
+                    }
+                    if(!$factura->medio_de_pago){
+                        $presupuesto-=$factura->monto_abonado;
+                    }
                 }
-                if(!$factura->medio_de_pago){
-                    $presupuesto-=$factura->monto_abonado;
+            }else{
+                $providerName="";
+                $facturas=Facture::where('pagada', false)->get();
+                return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
+            }
+
+            $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->get();
+            if ($cheques->count()>0) {
+                foreach ($cheques as $check) {
+                    if($presupuesto == "no asignado para el dia"){
+                        $presupuesto=0;
+                    }
+                    $presupuesto-=$check->monto;
                 }
             }
-        }else{
-            $providerName="";
-            $facturas=Facture::where('pagada', false)->get();
-            return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
+            $deuda=0;
+            foreach ($resultados as $resultado) {
+                $deuda+=$resultado->Total_compra-$resultado->monto_abonado;
+            }
+            if($deuda>$presupuesto){
+                //la deuda no se puede pagar con el presupuesto
+                $providerName="";
+                $facturas=$resultados;
+                return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
+            }
         }
 
-        $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->get();
-        if ($cheques->count()>0) {
-            foreach ($cheques as $check) {
-                if($presupuesto == "no asignado para el dia"){
-                    $presupuesto=0;
-                }
-                $presupuesto-=$check->monto;
-            }
-        }
         
-
-        $deuda=0;
-        foreach ($resultados as $resultado) {
-            $deuda+=$resultado->Total_compra-$resultado->monto_abonado;
-        }
-        if($deuda>$presupuesto){
-            //la deuda no se puede pagar con el presupuesto
-            $providerName="";
-            $facturas=$resultados;
-            return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
-        }
 
         $pagoPresupuesto=false;
         
