@@ -296,8 +296,16 @@ class MarketController extends Controller
             $day = "3000-01-01";
             $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
             $presupuesto=0;
-            $carton =0;
-            return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
+            $opciones = units::all();
+            $opciones2 = products::all();
+            //dump($opciones, $opciones2);
+            $presupuesto =-1;
+            $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
+            $dia=$request->input('date-day');
+            $presupuesto=$comprasdeldia[0]->budget ;
+            $mensajeExito='¡La operación se realizó con éxito!';
+            return view('marketEdit', compact('comprasdeldia', 'opciones', 'opciones2','mensajeExito'));
+        
         } catch (Exception $e) {
             $opciones = units::all();
             $opciones2 = products::all();
