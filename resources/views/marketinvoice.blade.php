@@ -390,14 +390,14 @@
                                                         var price = parseFloat(elements_price[l].value);
                                                         sum_price += price;
                                                     }
-
+                                                    /*
                                                     var sumDifferenceInput = table.querySelector('#sumdif');
+                                                    console.log(sumDifferenceInput)
                                                     
                                                     sumDifferenceInput.value = sum_difference.toFixed(6);
-
+*/
                                                     var sumPriceInput = table.querySelector('#sumpre');
                                                     sumPriceInput.value = sum_price.toFixed(6);
-                                                    console.log(metodoSeleccionado)
                                                 }
                                             </script>
                                         </table>

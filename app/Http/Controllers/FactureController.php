@@ -363,32 +363,34 @@ class FactureController extends Controller
         
 
         $pagoPresupuesto=false;
-        
-        //por cada cidigo se genera un registro
+        if($metodoPago==='Dia anterior'||$metodoPago==='Presupuesto'){
+            $pagoPresupuesto=true;
+        }
+        //por cada c0digo se genera un registro
         if (count($idCompras)>0) {
             
             for ($i=0; $i < count($idCompras); $i++) { 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
+                
+                $monto=0;
                 if($factura){
-                    $monto=0;
                     if($request->monto===0||$request->monto===null){
                         $monto=$factura->total-$factura->monto_abonado;
                         $factura->monto_abonado=$factura->total;
                     }
-                    if($request->monto!==0){
+                    /*if($request->monto!==0){
                         $monto=$request->monto;
                         $factura->monto_abonado+=$request->monto;
-                    }
+                        dd($request->monto);
+                    }*/
                     if($factura->monto_abonado>=$factura->total){
                         $factura->pagada=true;
                         $factura->fecha_pago=date('Y-m-d');
                     }
-
                     $factura->save();
                 }else{
                     return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
-                
                 
                 $cheque = Cheque::create([
                     'fecha' => $fechaPago,
