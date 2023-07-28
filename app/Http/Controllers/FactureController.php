@@ -376,17 +376,17 @@ class FactureController extends Controller
                 if($factura){
                     if($request->monto===0||$request->monto===null){
                         $monto=$factura->total-$factura->monto_abonado;
-                        $factura->monto_abonado=$factura->total;
+                        //$factura->monto_abonado=$factura->total;
                     }
                     /*if($request->monto!==0){
                         $monto=$request->monto;
                         $factura->monto_abonado+=$request->monto;
                         dd($request->monto);
                     }*/
-                    if($factura->monto_abonado>=$factura->total){
+                    //if($factura->monto_abonado>=$factura->total){
                         $factura->pagada=true;
                         $factura->fecha_pago=date('Y-m-d');
-                    }
+                    //}
                     $factura->save();
                 }else{
                     return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
@@ -449,15 +449,14 @@ class FactureController extends Controller
         $facturas = Facture::all(); // Obtener todos los facturas de la tabla
         $presupuesto = "no asignado para el dia";
         $day = date('Y-m-d'); // Obtener la fecha actual
-        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
+        $calculo = marketshopping::where('shoppingday', $day)->get();
         if ($calculo->count()>0) {
             $presupuesto=$calculo[0]->budget+$calculo[0]->carton;;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
-                if($factura->medio_de_pago){
+                if($actura->medio_de_pago){
                     $presupuesto-=$factura->total;
-
                 }
                 if(!$factura->medio_de_pago){
                     $presupuesto-=$factura->monto_abonado;
