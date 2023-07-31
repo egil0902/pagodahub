@@ -174,8 +174,7 @@ class CloseCashController extends Controller
         );
         $closecashlist->records = array_merge(
             array_slice($closecashlist->records, 0, $lastIndex),
-            [$caja],
-            array_slice($closecashlist->records, $lastIndex)
+            [$caja]
         );
 
         $day = $request->DateTrx;
