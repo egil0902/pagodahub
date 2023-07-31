@@ -98,29 +98,29 @@
                 {{ $data->CreatedBy }}
             </div>
             <div class="col">
-                <form id="delete-form" action="{{ route('valespagodarange.delete') }}" method="post">
+                <form id="delete-form-{{ $data->id }}" action="{{ route('valespagodarange.delete') }}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $data->id }}">
-                    <button class="btn btn-outline-danger" data-bs-toggle="modal" onclick="showConfirmationPopup(event)">
+                    <button class="btn btn-outline-danger" data-bs-toggle="modal" onclick="showConfirmationPopup(event, '{{ $data->id }}')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
                         </svg>
                     </button>
                 </form>
-                <script>
-                    function showConfirmationPopup(event) {
-                        event.preventDefault(); // Evita que el formulario se envíe por defecto
+                    <script>
+                        function showConfirmationPopup(event, id) {
+                            event.preventDefault(); // Evita que el formulario se envíe por defecto
 
-                        // Muestra el popup de confirmación (puedes usar librerías como Bootstrap o implementar tu propio popup)
-                        // Aquí hay un ejemplo de cómo mostrar un popup simple utilizando JavaScript nativo:
-                        var confirmed = confirm("¿Estás seguro de que deseas eliminar el vale de rango {{$data->valueFrom}} - {{ $data->valueTo }}?");
-                        
-                        if (confirmed) {
-                            // Si el usuario confirma, envía el formulario
-                            document.getElementById("delete-form").submit();
+                            // Muestra el popup de confirmación (puedes usar librerías como Bootstrap o implementar tu propio popup)
+                            // Aquí hay un ejemplo de cómo mostrar un popup simple utilizando JavaScript nativo:
+                            var confirmed = confirm("¿Estás seguro de que deseas eliminar el vale de rango {{$data->valueFrom}} - {{ $data->valueTo }}?");
+                            
+                            if (confirmed) {
+                                // Si el usuario confirma, envía el formulario
+                                document.getElementById("delete-form-" + id).submit();
+                            }
                         }
-                    }
-                </script>
+                    </script>
             </div>
 
         </div>
