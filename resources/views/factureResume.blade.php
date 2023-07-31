@@ -40,8 +40,9 @@
             <td>{{$factura->id_compra}}</td>
             <td>{{$factura->medio_de_pago?'Contado':'Credito'}}</td>
             <td>{{$factura->total}}</td>
-            <td>{{$factura->medio_de_pago?$factura->total:$factura->monto_abonado}}</td>
-            <td>{{$factura->medio_de_pago?0:($factura->total-$factura->monto_abonado)}}</td>
+            <td>{{$factura->pagada?$factura->total:$factura->monto_abonado}}</td>
+            
+            <td>{{$factura->pagada?0:($factura->total-$factura->monto_abonado)}}</td>
         </tr>
         @endforeach
     </table>

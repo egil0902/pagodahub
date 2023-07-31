@@ -91,8 +91,10 @@
     @foreach($resultados as $data)
         <!-- Encabezado -->
         <h1>Factura número: {{ $data->id_compra }}</h1>
-        <p>Fecha: {{ $data->shoppingday }}</p>
+        <p>Fecha: {{ $data->fecha }}</p>
         <p>Proveedor: {{ $data->proveedor }}</p>
+        <p>Forma de pago: {{ ($metodoPago==="Dia anterior")?"Presupuesto dia anterior": $metodoPago}}</p>
+        
 
         <!-- Listado de productos -->
         <table>

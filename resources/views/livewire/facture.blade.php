@@ -8,7 +8,7 @@
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg></span>
-                    <input type="text" class="form-control" placeholder="# factura" wire:model="id_factura"
+                    <input type="text" class="form-control" placeholder="# factura" wire:model="id_compra"
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
@@ -34,7 +34,7 @@
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg></span>
-                    <input type="text" class="form-control" placeholder="nombre proveedor" wire:model="nombre"
+                    <input type="text" class="form-control" placeholder="nombre proveedor" wire:model="proveedor"
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
@@ -54,9 +54,9 @@
             <td>{{$factura->fecha}}</td>
             <td>{{$factura->proveedor}}</td>
             <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
-            <td>{{$factura->monto_abonado}}</td>
+            <td>{{$factura->pagada?$factura->Total_compra:$factura->monto_abonado}}</td>
             <td>{{$factura->total}}</td>
-            <td>{{$factura->medio_de_pago?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
+            <td>{{($factura->medio_de_pago&&$factura->pagada)?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
             <td>{{$factura->pagada?"Si":"No"}}</td>
             <td>{{$factura->fecha_pago}}</td>
             <!--<td>

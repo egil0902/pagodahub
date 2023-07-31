@@ -21,6 +21,9 @@
             </ul>
         </div>
     @endif
+    @if (isset($mensajeExito))
+        <div class="alert alert-success">{{ $mensajeExito }}</div>
+    @endif
     <div class="container">
         <div class="card w-auto">
             <div class="card-header">

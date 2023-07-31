@@ -12,8 +12,7 @@
     <div class="alert alert-warning">{{ session('mensaje') }}</div>
 @endif
 <div class="p-2 m-0 border-0 bd-example">
-        @foreach ($comprasdeldia as $ind =>$data)
-        <form name="market[]" id="market{{$ind}}" method="post" action="{{ route('factures.borrar',$data->id_compra) }}">
+        <form name="market[]" id="market0" method="post" action="{{ route('factures.borrar',$comprasdeldia->id) }}">
                     <div class="form-group w-50">
                         @csrf            
                         </div>
@@ -23,25 +22,25 @@
                             </div>
                             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                                 <div class="col"> 
-                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                    <input type="hidden" name="id" value="{{ $comprasdeldia->id }}">
                                     <input type="hidden" name="pres" value="{{ isset($presupuesto)?$presupuesto:0 }}">
                                     <input type="hidden" name="cart" value="isset($carton)?$carton:0">
-                                    <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
+                                    <input type="hidden" name="fecha_registro" value="{{ $comprasdeldia->shoppingday }}">
                                     <h4>Numero de factura:
                                         <input class="w-100 form-control" type="number" name="NFactura"
-                                        id="NFactura" value="{{$data->id_compra}}" readonly
+                                        id="NFactura" value="{{$comprasdeldia->id_compra}}" readonly
                                         required onchange="" step="" min="0">
                                     </h4>
                                 </div>
                                 <div class="col">
                                     <h4>Comprador: 
                                         <br/> 
-                                        {{ $data->buyer }}</h4>
+                                        {{ $comprasdeldia->buyer }}</h4>
                                 </div>
                                 <div class="col">
                                     <h4>Proveedor: 
                                         <input class="w-100 form-control" type="text" name="proveedor"
-                                        id="proveedor" value="{{$data->proveedor}}" readonly
+                                        id="proveedor" value="{{$comprasdeldia->proveedor}}" readonly
                                         required onchange="">
                                     </h4>
                                     
@@ -49,7 +48,7 @@
                                 <div class="col">
                                     <h4>abono: 
                                         <input class="w-100 form-control" type="text" name="abono"
-                                        id="abono" value="{{$data->monto_abonado}}" readonly
+                                        id="abono" value="{{$comprasdeldia->monto_abonado}}" readonly
                                         >
                                     </h4>
                                     
@@ -57,9 +56,9 @@
                                 
                                 <div class="col">
                                     <h4>Método de pago:
-                                    <select class="form-control unit" list="opciones" name="metodo" id="metodo" onchange="activarAbono({{$ind}});">
-                                        <option value="true" {{$data->medio_de_pago+1 === 2 ? 'selected' : ''}}>Efectivo</option>
-                                        <option value="false" {{$data->medio_de_pago+1 === 1 ? 'selected' : ''}}>Crédito</option>
+                                    <select class="form-control unit" list="opciones" name="metodo" id="metodo" onchange="activarAbono(0);">
+                                        <option value="true" {{$comprasdeldia->medio_de_pago+1 === 2 ? 'selected' : ''}}>Efectivo</option>
+                                        <option value="false" {{$comprasdeldia->medio_de_pago+1 === 1 ? 'selected' : ''}}>Crédito</option>
                                     </select>
                                     </h4>
                                 </div>
@@ -85,14 +84,14 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (json_decode($data->product) as $index => $product)
+                                                    @foreach (json_decode($comprasdeldia->product) as $index => $product)
 
-                                                        @if ($loop->index < count(json_decode($data->product)) )
+                                                        @if ($loop->index < count(json_decode($comprasdeldia->product)) )
                                                             <tr>
                                                                 <td style="max-width: 50px;">{{ $index + 1 }}</td>
                                                                 <td>
                                                                     <input class="border-0 bg-transparent" type="text"
-                                                                        name="product[]{{$ind}}" 
+                                                                        name="product[]0" 
                                                                         id="product{{ $index + 1 }}"
                                                                         value="{{ $product }}"
                                                                         data-product-value="{{ $product }}" readonly>
@@ -100,15 +99,15 @@
                                                                 <td>
                                                                     <input class="border-0 bg-transparent" type="text" name="unit[]"
                                                                         id="unit{{ $index + 1 }}"
-                                                                        value=" {{ json_decode($data->unit)[$index] }}"
-                                                                        data-unit-value="{{ json_decode($data->unit)[$index] }}"
+                                                                        value=" {{ json_decode($comprasdeldia->units)[$index] }}"
+                                                                        data-unit-value="{{ json_decode($comprasdeldia->units)[$index] }}"
                                                                         readonly>
                                                                 </td>
                                                                 
                                                                 <td>
                                                                     <input class="w-100 " type="number" name="differenceFactura[]"
-                                                                        id="differenceFactura{{ $index + 1 }}" value="{{json_decode($data->quantity)[$index]}}" readonly
-                                                                        required onchange="sumadiferencia({{$ind}});" step="0.000001" min="0">
+                                                                        id="differenceFactura{{ $index + 1 }}" value="{{json_decode($comprasdeldia->Factured_quantity)[$index]}}" readonly
+                                                                        required onchange="sumadiferencia(0);" step="0.000001" min="0">
                                                                 </td>
                                                                 <script>
                                                                     // Obtener las entradas numéricas
@@ -127,17 +126,17 @@
 
                                                                         // Mostrar el resultado en la entrada difference
                                                                         difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
-                                                                        sumadiferencia({{$ind}});
+                                                                        sumadiferencia(0);
                                                                     });
                                                                 </script>
                                                                 <td>
-                                                                    <input class="w-100 " type="number" name="price[]" value="{{json_decode($data->price)[$index]}}"
-                                                                        data-price-value="" onchange="sumadiferencia({{$ind}});" step="0.000001" min="0" required readonly>
+                                                                    <input class="w-100 " type="number" name="price[]" value="{{json_decode($comprasdeldia->price)[$index]}}"
+                                                                        data-price-value="" onchange="sumadiferencia(0);" step="0.000001" min="0" required readonly>
                                                                 </td>
                                                                 <td>
                                                                     <input class="w-100 border-0 bg-transparent" type="number"
                                                                         id="mult{{ $index + 1 }}" name="mult[]"
-                                                                        value="{{json_decode($data->price)[$index]*json_decode($data->quantity)[$index]}}" readonly>
+                                                                        value="{{json_decode($comprasdeldia->price)[$index]*json_decode($comprasdeldia->Factured_quantity)[$index]}}" readonly>
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -149,7 +148,7 @@
                                                         
                                                     </th>
                                                     <th>
-                                                        <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="{{ $data->Total_compra }}" readonly>
+                                                        <input class="border-0 bg-transparent total-difference-factura" type="number" name="sumdifac" value="{{ $comprasdeldia->Total_compra }}" readonly>
 
                                                     </th>
                                                     <th>
@@ -162,7 +161,7 @@
                                                         
                                                     </th>
                                                     <th>
-                                                        <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $data->vuelto }}" readonly>
+                                                        <input class="border-0 bg-transparent total-difference-final" type="number" name="pfinal" value="{{ $comprasdeldia->vuelto }}" readonly>
 
                                                     </th>
                                                     <th>
@@ -190,11 +189,11 @@
                                                 console.log("default")
                                                 // Muestra el popup de confirmación (puedes usar librerías como Bootstrap o implementar tu propio popup)
                                                 // Aquí hay un ejemplo de cómo mostrar un popup simple utilizando JavaScript nativo:
-                                                var confirmed = confirm("¿Estás seguro de que deseas eliminar la factura {{$data->id_compra}}?");
+                                                var confirmed = confirm("¿Estás seguro de que deseas eliminar la factura {{$comprasdeldia->id}}?");
                                                 
                                                 if (confirmed) {
                                                     // Si el usuario confirma, envía el formulario
-                                                    document.getElementById("market{{$ind}}").submit();
+                                                    document.getElementById("market0").submit();
                                                 }
                                             }
                                         </script>
@@ -207,7 +206,7 @@
                             <br>
                         </div>
                 </form>
-        @endforeach
+        
         <script>
             // Función que se ejecuta cuando la página ha cargado completamente
             document.addEventListener("DOMContentLoaded", function(event) {

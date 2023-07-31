@@ -17,7 +17,7 @@ class FactureController extends Controller
         $presupuesto = "no asignado para el dia";
         $calculo = marketshopping::where('shoppingday', $day)->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
+            $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
@@ -33,11 +33,11 @@ class FactureController extends Controller
         $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
-                    if($presupuesto == "no asignado para el dia"){
-                        $presupuesto=0;
-                    }
-                    $presupuesto-=$check->monto;
+                if($presupuesto == "no asignado para el dia"){
+                    $presupuesto=0;
                 }
+                $presupuesto-=$check->monto;
+            }
         }
         return view('facture', compact('facturas', 'presupuesto')); // Pasar los facturas a la vista
     }
@@ -45,7 +45,6 @@ class FactureController extends Controller
 
     public function store(Request $request)
     {
-        
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -71,6 +70,7 @@ class FactureController extends Controller
             }
         }
         $registro = new Facture();
+        $registro->id_market =$request->id;
         $registro->id_compra = $request->NFactura;
         $registro->fecha = $request->fecha_registro;
         $registro->proveedor = $request->proveedor;
@@ -84,13 +84,19 @@ class FactureController extends Controller
         $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
             $registro->pagada=true;
-            $registro->fecha_pago="No aplica";
+            $registro->fecha_pago=$request->fecha_registro;
         }
-        if (isset($request->cart) && strpos($request->cart, ':') !== false) {
-            $valorDespuesDeDosPuntos = substr($request->cart, strpos($request->cart, ':') + 1);
-            $request->cart = trim($valorDespuesDeDosPuntos); // Elimina posibles espacios en blanco antes o después del valor
+        if (isset($request->cart) ) {
+            $compradeldia = marketshopping::where('id', $request->id)->first();
+            
+            if($compradeldia){
+                if($request->cart!=null&&$request->cart!=""){
+                    $compradeldia->carton+=$request->cart;
+                }
+                    $compradeldia->save();
+            }
+        
         }
-        $registro->carton = $request->cart;
         $registro->Factured_quantity =json_encode($cantidadRecibida);
         $registro->price =json_encode($precio);
         $registro->product = json_encode($productos);
@@ -101,41 +107,22 @@ class FactureController extends Controller
         }
         $registro->total = $request->sumdifac;
         $registro->save(); // Guardar el nuevo registro en la base de datos   
-        $updateMarket = new marketshopping;
-        $updateMarket->id_compra = $request->NFactura;
-        $updateMarket->shoppingday = $request->input('fecha_registro');
-        $updateMarket->buyer = $request->input('comprador');
-        $updateMarket->budget = $request->input('Presupuesto');
-        $updateMarket->product = json_encode($productos);
-        $updateMarket->unit = json_encode($unidadMedida);
-        $updateMarket->quantity = json_encode($cantidadRecibida);
-
-        $updateMarket->save();
-        $updateCarton = Facture::where('fecha', $registro->fecha)->get();
-       
-        if($updateCarton->count()>0){
-            foreach ($updateCarton as $carton) {
-                $carton->carton= $request->cart;
-                $carton->save();
-            }
-        }
         
         // Asignar los valores del formulario a las propiedades del modelo
         
         
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
-        if($comprasdeldia->count() > 0) {
-            $presupuesto=$comprasdeldia[0]->budget;
-        }
-        if ($comprasdeldia->count() > 1) {
+        $carton =0;
+        if ($comprasdeldia->count() > 0) {
+            $carton =$comprasdeldia[0]->carton;
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
             $quantity = json_decode($comprasdeldia[0]->quantity);
-        
-            for ($i = 1; $i < $comprasdeldia->count(); $i++) {
-                $Fproductos = json_decode($comprasdeldia[$i]->product);
-                $Fquantity = json_decode($comprasdeldia[$i]->quantity);
+            $facturas = Facture::where('id_market', $comprasdeldia[0]->id)->get();
+            for ($i = 0; $i < $facturas->count(); $i++) {
+                $Fproductos = json_decode($facturas[$i]->product);
+                $Fquantity = json_decode($facturas[$i]->Factured_quantity);
         
                 // Comparar los elementos de los arreglos y restar las cantidades correspondientes
                 foreach ($productos as $posicion => $producto) {
@@ -145,12 +132,11 @@ class FactureController extends Controller
                     }
                 }
             }
-        
             $comprasdeldia[0]->quantity = json_encode($quantity);
         }
         
         $facturas = Facture::where('fecha', $request->input('fecha_registro'))->get();
-        $carton =0;
+        
         if($facturas->count() > 0) {
             foreach ($facturas as $factura) {
                 if($factura->medio_de_pago){
@@ -159,18 +145,11 @@ class FactureController extends Controller
                 if(!$factura->medio_de_pago){
                     $presupuesto-=$factura->monto_abonado;
                 }
-                
+                /*
                 if($factura->carton>0){
                     $carton =$factura->carton;
                 }
-                
-            }
-        }
-        foreach ($comprasdeldia as $posicion => $compra) {
-            foreach ($facturas as $posicion_diferente => $factura) {
-                if ($compra->id_compra === $factura->id_compra) {
-                    $comprasdeldia[$posicion]->factura = $factura;
-                }
+                */
             }
         }
         $cheques = Cheque::where('fecha',$request->input('fecha_registro'))->where('pago_presupuesto',true)->get();
@@ -179,7 +158,7 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas'));
         //return redirect()->back()->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
@@ -200,7 +179,7 @@ class FactureController extends Controller
         $presupuesto = "no asignado para el dia";
         $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
+            $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
@@ -231,7 +210,7 @@ class FactureController extends Controller
         $presupuesto = "no asignado para el dia";
         $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
+            $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
@@ -264,9 +243,6 @@ class FactureController extends Controller
             return redirect()->back()->with('error', 'La factura no existe');
         }
 
-       
-        $market = marketshopping::where('id_compra', $id)->delete();
-
         return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente');
     }
     public function eliminar(Request $request)
@@ -288,17 +264,12 @@ class FactureController extends Controller
     public function show($id)
     {
         // Buscar la factura por su ID 
-        $factura = Facture::find($id);
-        $comprasdeldia = DB::table('marketshoppings')
-            ->join('factures', 'factures.id_compra', '=', 'marketshoppings.id_compra')
-            ->where('factures.id_compra', $factura->id_compra)
-            ->get();
-        $day =$comprasdeldia[0]->shoppingday; // Obtener la fecha actual
+        $comprasdeldia = Facture::find($id);
         $presupuesto = "no asignado para el dia";
-        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
+        $calculo = marketshopping::where('id', $comprasdeldia->id_market)->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
-            $compras = Facture::where('fecha', $day)->get();
+            $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
+            $compras = Facture::where('fecha', $calculo[0]->shoppingday)->get();
             
             foreach ($compras as $fact) {
                 if($fact->medio_de_pago){
@@ -310,102 +281,130 @@ class FactureController extends Controller
                 }
             }
         }
-        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        $cheques = Cheque::where('fecha',$calculo[0]->shoppingday)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
                     $presupuesto-=$check->monto;
                 }
         }
-        if (!$comprasdeldia) {
-            return redirect()->back()->with('error', 'La factura no existe');
-        }
-        $presupuesto+=$comprasdeldia[0]->total;
+        $presupuesto+=$comprasdeldia->total;
         return view('editmarketinvoice', compact('comprasdeldia','presupuesto'));
     }
 
     public function downloadPdf(Request $request)
     {
+        $metodoPago="Presupuesto";
+        $codigo="000000";
+        $fechaPago=date('Y-m-d');
+        $presupuesto = "no asignado para el dia";
+        $calculo=[];
+        $ispresupuesto=false;
+        //revisa si se paga con el presupuesto
+        if($request->pagoPresupuesto){
+            $pagoPresupuesto=$request->pagoPresupuesto;  
+            $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
+            $ispresupuesto=true;
+        }else{
+            $metodoPago=$request->metodoPago;
+            $codigo=$request->codigo;
+            //verifica si se paga con el presupuesto de un dia anterior
+            if($metodoPago==="Dia anterior"){
+                $fechaPago=$request->fechaPago;
+                $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
+                $ispresupuesto=true;
+            }
+        }
         $idCompras = $request->input('factura_ids');
         $idCompras = explode(',', $idCompras);
-        $resultados = DB::table('marketshoppings')
-            ->join('factures', 'factures.id_compra', '=', 'marketshoppings.id_compra')
-            ->whereIn('factures.id_compra', $idCompras)
-            ->get();
+        //busca las facturas que se seleccionaron para pagar
+        $resultados = DB::table('factures')->whereIn('id_compra', $idCompras)->get();
         
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados]);
-        
-        $pagoPresupuesto=false;
-        if($request->pagoPresupuesto){
-            $pagoPresupuesto=$request->pagoPresupuesto;
+        //valida si hay un presupuesto asignado ese dia y si no manda error
+        if($ispresupuesto===true){
+            if ($calculo->count()>0) {
+                $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
+                //descuenta del presupuesto las facturas que toca cancelar
+                $comprasdeldia = Facture::where('fecha', $calculo[0]->shoppingday)->where('id_market', $calculo[0]->id)->get();            
+                foreach ($comprasdeldia as $factura) {
+                    if($factura->medio_de_pago){
+                        $presupuesto-=$factura->total;
+                    }
+                    if(!$factura->medio_de_pago){
+                        $presupuesto-=$factura->monto_abonado;
+                    }
+                }
+            }else{
+                $providerName="";
+                $facturas=Facture::where('pagada', false)->get();
+                return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
+            }
+
+            $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->get();
+            if ($cheques->count()>0) {
+                foreach ($cheques as $check) {
+                    if($presupuesto == "no asignado para el dia"){
+                        $presupuesto=0;
+                    }
+                    $presupuesto-=$check->monto;
+                }
+            }
+            $deuda=0;
+            foreach ($resultados as $resultado) {
+                $deuda+=$resultado->Total_compra-$resultado->monto_abonado;
+            }
+            if($deuda>$presupuesto){
+                //la deuda no se puede pagar con el presupuesto
+                $providerName="";
+                $facturas=$resultados;
+                return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
+            }
         }
+
         
+
+        $pagoPresupuesto=false;
+        if($metodoPago==='Dia anterior'||$metodoPago==='Presupuesto'){
+            $pagoPresupuesto=true;
+        }
+        //por cada c0digo se genera un registro
         if (count($idCompras)>0) {
             
             for ($i=0; $i < count($idCompras); $i++) { 
                 $factura = Facture::where('id_compra', $idCompras[$i])->first();
                 
                 $monto=0;
-                if($request->monto===0||$request->monto===null){
-                    $monto=$factura->total-$factura->monto_abonado;
-                    $factura->monto_abonado=$factura->total;
+                if($factura){
+                    if($request->monto===0||$request->monto===null){
+                        $monto=$factura->total-$factura->monto_abonado;
+                        //$factura->monto_abonado=$factura->total;
+                    }
+                    /*if($request->monto!==0){
+                        $monto=$request->monto;
+                        $factura->monto_abonado+=$request->monto;
+                        dd($request->monto);
+                    }*/
+                    //if($factura->monto_abonado>=$factura->total){
+                        $factura->pagada=true;
+                        $factura->fecha_pago=date('Y-m-d');
+                    //}
+                    $factura->save();
+                }else{
+                    return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
-                if($request->monto!==0){
-                    $monto==$request->monto;
-                    $factura->monto_abonado+=$request->monto;
-                }
-                if($factura->monto_abonado>=$factura->total){
-                    $factura->pagada=true;
-                    $factura->fecha_pago=date('Y-m-d');
-                }
-
-                $factura->save();
                 
                 $cheque = Cheque::create([
-                    'fecha' => date('Y-m-d'),
+                    'fecha' => $fechaPago,
                     'id_factura' => $factura->id_compra,
                     'pago_presupuesto' => $pagoPresupuesto,
                     'monto' => $monto,
+                    'tipo'=>$metodoPago,
+                    'codigo'=>$codigo
                 ]);
             }
-            # code...
         }
-        $providerName = $request->input('provider');
-        $query = Facture::query();
-        if (!empty($providerName)) {
-            $query->whereRaw("LOWER(REPLACE(proveedor, ' ', '')) LIKE '%' || LOWER(REPLACE(?, ' ', '')) || '%'", [$providerName])
-                ->where('pagada', false);
-        }else{
-            $query->where('pagada', false);
-        }
-        $facturas = $query->get();
 
-        $day = date('Y-m-d'); // Obtener la fecha actual
-        $presupuesto = "no asignado para el dia";
-        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
-        if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
-            $comprasdeldia = Facture::where('fecha', $day)->get();
-            
-            foreach ($comprasdeldia as $factura) {
-                if($factura->medio_de_pago){
-                    $presupuesto-=$factura->total;
-
-                }
-                if(!$factura->medio_de_pago){
-                    $presupuesto-=$factura->monto_abonado;
-                }
-            }
-        }
-        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
-        if ($cheques->count()>0) {
-            foreach ($cheques as $check) {
-                    if($presupuesto == "no asignado para el dia"){
-                        $presupuesto=0;
-                    }
-                    $presupuesto-=$check->monto;
-                }
-        }
-        return $pdf->download("factura".".pdf");
+        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago]);
+        return $pdf->download("factura.pdf");
     }
     public function pagar(Request $request)
     {
@@ -450,15 +449,14 @@ class FactureController extends Controller
         $facturas = Facture::all(); // Obtener todos los facturas de la tabla
         $presupuesto = "no asignado para el dia";
         $day = date('Y-m-d'); // Obtener la fecha actual
-        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
+        $calculo = marketshopping::where('shoppingday', $day)->get();
         if ($calculo->count()>0) {
-            $presupuesto=$calculo[0]->budget;
+            $presupuesto=$calculo[0]->budget+$calculo[0]->carton;;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
-                if($factura->medio_de_pago){
+                if($actura->medio_de_pago){
                     $presupuesto-=$factura->total;
-
                 }
                 if(!$factura->medio_de_pago){
                     $presupuesto-=$factura->monto_abonado;
@@ -490,7 +488,6 @@ class FactureController extends Controller
         }
         // Obtener el registro existente de la base de datos
         $registro = Facture::findOrFail($id);
-        $updateMarket = marketshopping::where('id_compra', $registro->id_compra)->first();
         $registro->id_compra = $request->NFactura;
         // Actualizar los valores del registro con los datos del formulario
         
@@ -515,9 +512,11 @@ class FactureController extends Controller
 
 
         // Actualizar el registro relacionado en la tabla marketshopping
+        /*
+        $updateMarket = marketshopping::where('id_compra', $registro->id_compra)->first();
         $updateMarket->id_compra = $request->NFactura;
         $updateMarket->save();
-        
+        */
         $registro->save(); // Guardar los cambios en la base de datos
 
         
@@ -549,7 +548,7 @@ class FactureController extends Controller
     }
 
     public function resume(Request $request){
-        $calculo = marketshopping::where('shoppingday', $request->day)->whereNotNull('budget')->orderBy('shoppingday', 'desc')->get();
+        $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
         $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
         $cantidadProductos=0;
         $tFactura=0;        
@@ -577,18 +576,16 @@ class FactureController extends Controller
         $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
-                    $pagosAnteriores+=$check->monto;
-                }
+                $pagosAnteriores+=$check->monto;
+            }
         }
         
         $fecha=$request->day;
         $presupuesto=0;
         $carton=0;
         if(count($calculo)){
-            $presupuesto=$calculo[0]->budget;            
-        }
-        if(count($facturas)){
-            $carton=$facturas[0]->carton;
+            $presupuesto=$calculo[0]->budget;
+            $carton=$calculo[0]->carton;
         }
         
         $tComprado=0;

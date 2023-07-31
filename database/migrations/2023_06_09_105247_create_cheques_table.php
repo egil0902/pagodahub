@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_factura');
             $table->boolean('pago_presupuesto')->default(false);
             $table->double('monto')->default(0.0)->nullable();
+            $table->string('tipo')->default("Cheque")->nullable();
+            $table->string('codigo')->nullable();
             $table->timestamps();
         });
     }
