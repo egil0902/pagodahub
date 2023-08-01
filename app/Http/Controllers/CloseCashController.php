@@ -167,6 +167,10 @@ class CloseCashController extends Controller
         $closecashlist->records[] = $panaderia;
         $closecashlist->records[] = $tDia;
         //dd($closecashlist->records,$posicion);
+        if($lastIndex===null){
+           $lastIndex = count($closecashlist->records)-2;
+        }
+
         $closecashlist->records = array_merge(
             array_slice($closecashlist->records, 0, $lastIndex + 1),
             [$pagaTodo],
@@ -174,9 +178,10 @@ class CloseCashController extends Controller
         );
         $closecashlist->records = array_merge(
             array_slice($closecashlist->records, 0, $lastIndex),
-            [$caja]
+            [$caja],
+            array_slice($closecashlist->records, $lastIndex)
         );
-
+        var_dump( $lastIndex);
         $day = $request->DateTrx;
         
         $presupuesto=0;
