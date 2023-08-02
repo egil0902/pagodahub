@@ -181,7 +181,6 @@ class CloseCashController extends Controller
             [$caja],
             array_slice($closecashlist->records, $lastIndex)
         );
-        var_dump( $lastIndex);
         $day = $request->DateTrx;
         
         $presupuesto=0;
