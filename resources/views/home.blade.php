@@ -391,7 +391,7 @@
                                         <div class="col">
                                             <div class="card h-100 border border-5 border-dark-subtle">
                                                 <form name="loanslist" id="loanslist" method="get"
-                                                    action="{{ route('home') }}">
+                                                    action="{{ route('Brink') }}">
                                                     @csrf
                                                     <center>
                                                         <button type="submit" class="btn btn-outline">
@@ -412,13 +412,13 @@
                                         <div class="col">
                                             <div class="card h-100 border border-5 border-dark-subtle">
                                                 <form name="loanslist" id="loanslist" method="get"
-                                                    action="{{ route('home') }}">
+                                                    action="{{ route('BrinkSend') }}">
                                                     @csrf
                                                     <center>
                                                         <button type="submit" class="btn btn-outline">
                                                             {{--  <h5 class="card-header">Banco</h5> --}}
                                                             <div class="card-body">
-                                                                <h5 class="card-title">Entrega</h5>
+                                                                <h5 class="card-title">Envio bancos</h5>
                                                                 <p class="card-text">---------------</p>
                                                             </div>
                                                         </button>

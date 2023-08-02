@@ -96,6 +96,12 @@ Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'
 Route::get('/marketinvoices', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoices');
 Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day')->where('day', 'monday');
 
+//rutas de Brick supervisor
+Route::get('/Brink', [App\Http\Controllers\BankController::class, 'index'])->name('Brink');
+
+//rutas de Brick envio
+Route::get('/BrinkSend', [App\Http\Controllers\BankController::class, 'indexSend'])->name('BrinkSend');
+
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
 });
@@ -105,6 +111,7 @@ Route::get('/firma2', function () {
 Route::get('/firma3', function () {
     return view('canvas/tablero5');
 });
+
 
 // Ruta para dompdf
 Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');
