@@ -42,7 +42,13 @@
             <th>Valor abonado</th>
             <th>Total</th>
             <th>Valor Deuda</th>
-            <th>Pagada?</th>
+            <th>
+                <select class="form-select" wire:model="pagada">
+                    <option value="">Pagada</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </th>
             <th>Fecha cancelacion</th>
             <th></th>
         </tr>
