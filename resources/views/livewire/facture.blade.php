@@ -56,15 +56,15 @@
     <tbody>
         @foreach ($facturas as $factura)
         <tr>
-            <td>{{$factura->id_compra}}</td>
-            <td>{{$factura->fecha}}</td>
-            <td>{{$factura->proveedor}}</td>
-            <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
-            <td>{{$factura->pagada?$factura->Total_compra:$factura->monto_abonado}}</td>
-            <td>{{$factura->total}}</td>
-            <td>{{($factura->medio_de_pago&&$factura->pagada)?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
-            <td>{{$factura->pagada?"Si":"No"}}</td>
-            <td>{{$factura->fecha_pago}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->id_compra}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->proveedor}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->pagada?$factura->Total_compra:$factura->monto_abonado}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->total}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{($factura->medio_de_pago&&$factura->pagada)?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->pagada?"Si":"No"}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha_pago}}</td>
             <!--<td>
                 <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                     @csrf
