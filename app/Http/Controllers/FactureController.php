@@ -298,7 +298,12 @@ class FactureController extends Controller
         $fechaPago=date('Y-m-d');
         $presupuesto = "no asignado para el dia";
         $calculo=[];
+        $banco="";
         $ispresupuesto=false;
+        if($request->banco){
+            $banco=$request->banco;
+        }
+
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;  
@@ -387,7 +392,7 @@ class FactureController extends Controller
                         $factura->pagada=true;
                         $factura->fecha_pago=date('Y-m-d');
                     //}
-                    $factura->save();
+                    //$factura->save();
                 }else{
                     return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
@@ -402,8 +407,7 @@ class FactureController extends Controller
                 ]);
             }
         }
-
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago]);
+        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco]);
         return $pdf->download("factura.pdf");
     }
     public function pagar(Request $request)

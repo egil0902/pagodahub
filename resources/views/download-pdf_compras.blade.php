@@ -10,22 +10,6 @@
     </title>
 </head>
 <style>
-    /* table {
-        font-family: arial, sans-serif;
-        font-size: 8px;
-        width: 100%;
-    }
-
-    td,
-    th {
-        border: 0px solid #dddddd;
-        padding: 1px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    } */
-
     table {
         font-family: arial, sans-serif;
         font-size: 12px;
@@ -55,24 +39,6 @@
         color: white;
     }
 
-   /*  #tabla1 tr {
-        border: 1px solid #000;
-    }
-
-    #tabla1 td {
-        border: 1px solid #000;
-    }
-    #tabla2 tr:nth-child(even) {
-        border:1px solid #ddd;
-        background-color: #ddd;
-    }
-
-    #tabla2 td {
-        border: 1px solid #ddd;
-    } */
-
-
-
     tr:nth-child(even) {
         background-color: #ddd;
     }
@@ -81,21 +47,24 @@
         background-color: #369681;
         color: white;
     }
+    h2, p {
+        margin: 0.8rem 0;
+    }
 </style>
 
 <body>
     @php
     $totalAPagar = 0;
     @endphp
-
+    <h1>Comprobante de pago</h1>
     @foreach($resultados as $data)
         <!-- Encabezado -->
-        <h1>Factura número: {{ $data->id_compra }}</h1>
-        <p>Fecha: {{ $data->fecha }}</p>
+        <h2>Factura número: {{ $data->id_compra }}</h2>
+        <p>Fecha: {{ $data->fecha }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            Forma de pago: {{ ($metodoPago==="Dia anterior")?"Presupuesto dia anterior": $metodoPago}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            {{$banco!=""?"Banco:$banco":""}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            {{$codigo!="000000"?"Código:$codigo":""}}</p>
         <p>Proveedor: {{ $data->proveedor }}</p>
-        <p>Forma de pago: {{ ($metodoPago==="Dia anterior")?"Presupuesto dia anterior": $metodoPago}}</p>
-        
-
         <!-- Listado de productos -->
         <table>
             <thead>
@@ -116,14 +85,13 @@
 
         <!-- Total a pagar -->
         <p>Total factura a pagar: {{ $data->Total_compra - $data->monto_abonado }}</p>
-
+        <hr>
         @php
         $totalAPagar += ($data->Total_compra - $data->monto_abonado);
         @endphp
     @endforeach
-
-    <hr>
-    <h2>Total a pagar: {{ $totalAPagar }}</h2>
+    <br/>
+    <h1>Total a pagar: {{ $totalAPagar }}</h1>
 
 </body>
 

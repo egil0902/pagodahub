@@ -28,6 +28,10 @@
                         <label for="codigo">Código:</label>
                         <input type="text" id="codigo" name="codigo" value="" style="height: 30px;">
                     </div>
+                    <div id="campoBanco" >
+                        <label for="banco">Banco</label>
+                        <input type="text" id="banco" name="banco" value="" style="height: 30px;">
+                    </div>
                 </div>
 
                 <!--<div>
@@ -141,16 +145,23 @@
             }   
             function toggleFechaCampo(selectElement) {
                 var campoFecha = document.getElementById("campoFecha");
-                
+                var campoBanco = document.getElementById("campoBanco");
                 // Obtener el valor seleccionado del select
                 var selectedOption = selectElement.options[selectElement.selectedIndex].value;
                 var elementoRequerido = document.getElementById("fechaPago");
+
                 // Si el valor seleccionado es "Dia anterior", mostrar el campo de selección de fecha, de lo contrario, ocultarlo
                 if (selectedOption === "Dia anterior") {
                     campoFecha.style.display = "block";                    
-                    elementoRequerido.setAttribute("required", "required");                    
-                }else{
-                    campoFecha.style.display = "none";                    
+                    elementoRequerido.setAttribute("required", "required"); 
+                    campoBanco.style.display = "none"; 
+                }else if(selectedOption === "Cheque"||selectedOption === "Transacciones"){
+                    campoFecha.style.display = "none"; 
+                    campoBanco.style.display = "block"; 
+                }
+                else{
+                    campoFecha.style.display = "none"; 
+                    campoBanco.style.display = "none";                    
                     elementoRequerido.removeAttribute("required");
 
                 }
