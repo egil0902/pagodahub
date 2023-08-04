@@ -217,6 +217,31 @@
 
                         @endauth
                     @endif
+                    @if (Request::is('market','market/*', 'marketinvoice', 'facture'))
+                        @auth
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mercado
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li>
+                                        <a class="dropdown-item" href="../market">Recepcion productos</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="../marketinvoice">Carga de facturas</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="../facture">Listado de facturas</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                </ul>
+                            </li>                            
+                        @endauth
+                    @endif
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
