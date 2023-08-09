@@ -237,8 +237,8 @@ class FactureController extends Controller
     }
     public function borrar($id)
     {
-        // Buscar la factura por su ID y eliminarla directamente
-        $facture = facture::where('id_compra', $id)->delete();
+        // Buscar la factura por su ID 
+        $facture = facture::where('id', $id)->delete();
         if (!$facture) {
             return redirect()->back()->with('error', 'La factura no existe');
         }
@@ -478,41 +478,18 @@ class FactureController extends Controller
         return view('facture', compact('facturas','presupuesto')); // Pasar los facturas a la vista
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $updateCarton = Facture::where('fecha', $request->fecha_registro)->get();
-        if($updateCarton->count()>0){
-            foreach ($updateCarton as $carton) {
-                if($carton->carton!= $request->carton){
-                    
-                    $carton->carton= $request->carton;
-                    $carton->save();
-                }
-            }
-        }
         // Obtener el registro existente de la base de datos
-        $registro = Facture::findOrFail($id);
-        $registro->id_compra = $request->NFactura;
-        // Actualizar los valores del registro con los datos del formulario
+        $registro = Facture::findOrFail($request->id);
         
-        $registro->id_compra = $request->NFactura;
-        $registro->fecha = $request->fecha_registro;
-        $registro->proveedor = $request->proveedor;
-        $registro->monto_abonado = $request->abono;
-        $registro->medio_de_pago = $request->metodo;
-        $registro->diferencia =$request->diff;
-        $registro->Total_compra =$request->pfinal;
+        // Actualizar los valores del registro con los datos del formulario        
+        $registro->Total_compra =$request->sumdifac;
         
         //$registro->vuelto =$registro->vuelto;
         $registro->vuelto=$request->pfinal;
-        $registro->carton = $request->carton;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
-
-        if (!empty($request->archivosimg) && is_array($request->archivosimg) && count($request->archivosimg) > 0) {
-            $registro->file = $request->archivosimg[0];
-        }
-        $registro->total = $request->sumdifac;
 
 
         // Actualizar el registro relacionado en la tabla marketshopping

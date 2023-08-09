@@ -44,11 +44,9 @@
                             function sumapresupuesto(){
                                 var carton=parseFloat(document.getElementById('carton').value);
                                 var anterior=parseFloat(document.getElementById('anterior').value);
-                                console.log("🚀 ~ file: marketinvoice.blade.php:49 ~ sumapresupuesto ~ anterior:", anterior)
                                 
                                 if(carton){
                                     var presupuesto={{$presupuesto}}+{{$carton}};
-                                    console.log(presupuesto);
                                     presupuesto=presupuesto+carton;
                                     document.getElementById('anterior').value=carton;
                                     document.getElementById('presupuesto').value=presupuesto;
@@ -293,7 +291,6 @@
                                                 function sumadiferencia(numero) {
                                                     try {
                                                         var elements_market = document.getElementsByName('market[]');
-                                                    
                                                         var sum_differenceFactura = 0;
                                                         var elements_quantity = elements_market[numero].querySelectorAll('[name="quantity[]"]');
                                                         var elements_differenceFactura =elements_market[numero].querySelectorAll('[name="differenceFactura[]"]');
@@ -327,6 +324,38 @@
                                                         
                                                     
                                                 }
+                                                    catch (error) {
+                                                        console.log(error)
+                                                        
+                                                    }
+                                                }
+                                                function sumadiferenciaUpdate(numero,vuelto,viejoTotal) {
+                                                    try {
+                                                        var elements_market = document.getElementById('market'+numero);
+                                                        console.log(elements_market)
+                                                    
+                                                        var sum_differenceFactura = 0;
+                                                        var elements_differenceFactura =elements_market.querySelectorAll('[name="differenceFactura[]"]');
+                                                        var elements_price = elements_market.querySelectorAll('[name="price[]"]');
+                                                        var elements_mult = elements_market.querySelectorAll('[name="mult[]"]');
+                                                        var nuevoTotal=0;
+                                                        for (var i = 0; i < elements_differenceFactura.length; i++) {
+                                                            var differenceFactura = parseFloat(elements_differenceFactura[i].value);
+                                                            var price = parseFloat(elements_price[i].value);  
+                                                            nuevoTotal=differenceFactura*price;                                             
+                                                            elements_mult[i].value=nuevoTotal;
+                                                            
+                                                        }
+                                                        var total= elements_market.querySelectorAll('[name="sumdifac"]');
+                                                        total[0].value=nuevoTotal;
+
+                                                        var vueltoNuevo= elements_market.querySelectorAll('[name="pfinal"]');
+                                                        vueltoNuevo[0].value=vuelto-(nuevoTotal-viejoTotal);
+                                                        
+                                                        // Call the sumaTotal() function
+                                                        //var tables = elements_market[numero].querySelectorAll('[name="table[]"]');
+                                                        
+                                                    }
                                                     catch (error) {
                                                         console.log(error)
                                                         
@@ -369,7 +398,6 @@
                                                     var total=totalFinalInput.value
                                                     var attributeValue = "{{ $data->budget }}"
                                                     var answer = presupuesto.toFixed(6) - sum_differenceFactura.toFixed(6);    
-                                                    console.log(sum_compra.toFixed(6));
                                                     if(metodoSeleccionado){
                                                         abono.value;
                                                         
@@ -392,10 +420,9 @@
                                                     }
                                                     /*
                                                     var sumDifferenceInput = table.querySelector('#sumdif');
-                                                    console.log(sumDifferenceInput)
                                                     
                                                     sumDifferenceInput.value = sum_difference.toFixed(6);
-*/
+                                                    */
                                                     var sumPriceInput = table.querySelector('#sumpre');
                                                     sumPriceInput.value = sum_price.toFixed(6);
                                                 }
@@ -427,7 +454,7 @@
                 
                 @if($dataf->id_market==$data->id)
                 
-                    <form name="market[]" id="market{{$dataf->id_compra}}" method="post" action="{{ route('factures.borrar',$dataf->id_compra) }}">
+                    <form name="market[]" id="market{{$dataf->id_compra}}" method="post" action="{{ route('factures.update') }}">
                         <div class="form-group w-50">
                             @csrf            
                             </div>
@@ -519,8 +546,8 @@
                                                                     
                                                                     <td>
                                                                         <input class="w-100 " type="number" name="differenceFactura[]"
-                                                                            id="differenceFactura{{ $index + 1 }}" value="{{json_decode($dataf->Factured_quantity)[$index]}}" readonly
-                                                                            required onchange="sumadiferencia({{$ind2}});" step="0.000001" min="0">
+                                                                            id="differenceFactura{{ $index + 1 }}" value="{{json_decode($dataf->Factured_quantity)[$index]}}" 
+                                                                            required onchange="sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }});" step="0.000001" min="0">
                                                                     </td>
                                                                     <script>
                                                                         // Obtener las entradas numéricas
@@ -539,12 +566,12 @@
 
                                                                             // Mostrar el resultado en la entrada difference
                                                                             difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
-                                                                            sumadiferencia({{$ind2}});
+                                                                            sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }});
                                                                         });
                                                                     </script>
                                                                     <td>
                                                                         <input class="w-100 " type="number" name="price[]" value="{{json_decode($dataf->price)[$index]}}"
-                                                                            data-price-value="" onchange="sumadiferencia({{$ind2}});" step="0.000001" min="0" required readonly>
+                                                                            data-price-value="" onchange="sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }});" step="0.000001" min="0" required >
                                                                     </td>
                                                                     <td>
                                                                         <input class="w-100 border-0 bg-transparent" type="number"
@@ -582,37 +609,53 @@
                                                     </tr>
                                                 </table>
                                             </div>
+                                            
                                             @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationPopup(event)" data-compra="{{$dataf->id_compra}}">
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-outline-success w-100" onclick="showConfirmationEditPopup(event)" data-compra="{{$dataf->id_compra}}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"></path>
                                                     <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"></path>
                                                 </svg>
-                                                Borrar {{$dataf->id_compra}}
+                                                Actualizar {{$dataf->id_compra}}
                                             </button>
 
                                             <script>
                                                 function showConfirmationPopup(event) {
                                                     event.preventDefault();
-                                                    var compra = event.target.dataset.compra;
-                                                    console.log(compra);
+                                                    var compra = event.target.dataset.borrar;
                                                     var confirmed = confirm("¿Estás seguro de que deseas eliminar la factura " + compra + "?");
+                                                    if (confirmed) {
+                                                        document.getElementById("borrar" + compra).submit();
+                                                    }
+                                                }
+                                                function showConfirmationEditPopup(event) {
+                                                    event.preventDefault();
+                                                    var compra = event.target.dataset.compra;
+                                                    var confirmed = confirm("¿Estás seguro de que deseas actualizar la factura " + compra + "?");
+                                                    console.log("🚀 ~ file: marketinvoice.blade.php:636 ~ showConfirmationEditPopup ~ compra:", compra)
                                                     if (confirmed) {
                                                         document.getElementById("market" + compra).submit();
                                                     }
                                                 }
 
                                             </script>
-
-                                            <br>
-                                            <br>
                                     
                                     </div>
                                 </center> 
-                                <br>
                             </div>
                     </form>
+                    <form action="{{ route('factures.borrar', $dataf->id) }}" id='borrar{{$dataf->id_compra}}' method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-outline-danger w-100" onclick="showConfirmationPopup(event)"  data-borrar="{{$dataf->id_compra}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+                            </svg>
+                            Borrar {{$dataf->id_compra}}
+                        </button>
+                    </form> 
+                    <br>
                 @endif   
                 @endforeach
             @endif 
