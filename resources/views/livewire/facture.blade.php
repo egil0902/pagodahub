@@ -1,8 +1,8 @@
 <table>
     <thead>
         <tr>
-            <th>
-                <div class="input-group" style="width:60%">
+            <th class="centered-th" style=" max-width:100px;">
+                <div class="input-group" >
                     <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path
@@ -12,8 +12,8 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>
-                <div class="input-group" style="width:75%">
+            <th class="centered-th">
+                <div class="input-group" style=" max-width:200px;">
                     <span class="input-group-text" id="basic-addon2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-calendar3" viewBox="0 0 16 16">
@@ -27,8 +27,8 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>
-                <div class="input-group" style="width:70%">
+            <th class="centered-th" style=" max-width:200px;">
+                <div class="input-group" style="">
                     <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path
@@ -38,7 +38,13 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>Medio de pago</th>
+            <th style=" max-width:110px;">
+                <select class="form-select" wire:model="medio">
+                    <option value="">Medio de pago</option>
+                    <option value="true">Contado</option>
+                    <option value="false">Credito</option>
+                </select>
+            </th>
             <th>Valor abonado</th>
             <th>Total</th>
             <th>Valor Deuda</th>
@@ -60,9 +66,9 @@
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->proveedor}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
-            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->pagada?$factura->Total_compra:$factura->monto_abonado}}</td>
-            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->total}}</td>
-            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{($factura->medio_de_pago&&$factura->pagada)?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">${{$factura->pagada?$factura->Total_compra:$factura->monto_abonado}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">${{$factura->total}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">${{($factura->medio_de_pago&&$factura->pagada)?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->pagada?"Si":"No"}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha_pago}}</td>
             <!--<td>
@@ -92,3 +98,11 @@
         @endforeach
     </tbody>
 </table>
+<style>
+    tr,td{
+        text-align:center;
+    }
+    .centered-th {
+       
+    }
+</style>

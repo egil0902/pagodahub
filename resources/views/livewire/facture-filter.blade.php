@@ -267,8 +267,8 @@
                     <td>{{$factura->fecha}}</td>
                     <td>{{$factura->proveedor}}</td>
                     <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
-                    <td>{{$factura->monto_abonado}}</td>
-                    <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">{{$factura->Total_compra- $factura->monto_abonado}}</td>
+                    <td>${{$factura->monto_abonado}}</td>
+                    <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">${{$factura->Total_compra- $factura->monto_abonado}}</td>
                     <td>
                     <form action="{{ route('factures.eliminar') }}" method="post" id="deleteForm">
                         @csrf
@@ -315,7 +315,10 @@
                 var total = parseFloat(totalElement.innerText) || 0;
                 var facturaTotal = document.getElementById('totalPagar' + checkbox.value).innerText;
                 var fact_id = document.getElementById('id' + checkbox.value).innerText;
-                var totalValue = parseFloat(document.getElementById('total' + checkbox.value).innerText);
+                var element = document.getElementById('total' + checkbox.value);
+                var contentWithDollarSign = element.innerText;
+                var contentWithoutDollarSign = contentWithDollarSign.replace('$', ''); // Elimina el signo de dólar
+                var totalValue = parseFloat(contentWithoutDollarSign);
                 console.log(totalValue)
                 if (checkbox.checked) {
                     total += parseFloat(totalValue);
@@ -356,3 +359,10 @@
         </div>
     </div>
 </div>
+<style>
+    tr,td{
+        text-align:center;
+    }
+    .centered-th {
+    }
+</style>
