@@ -78,7 +78,7 @@ class FactureController extends Controller
         $registro->medio_de_pago = $request->metodo;
         $registro->diferencia =$request->diff;
         $registro->Total_compra =$request->sumdifac;
-        //$registro->vuelto =$registro->vuelto;
+        $registro->descripcion=$request->observaciones;
         $registro->vuelto=$request->pfinal;        
         $registro->pagada=false;
         $registro->fecha_pago="Sin pagar";

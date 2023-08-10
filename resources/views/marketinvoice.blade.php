@@ -428,6 +428,9 @@
                                                 }
                                             </script>
                                         </table>
+                                        <br>
+                                        <h4>Observaciones:</h4>
+                                        <textarea class="long-textarea" id="observaciones" name="observaciones"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-outline-success w-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -608,6 +611,8 @@
                                                         </th>
                                                     </tr>
                                                 </table>
+                                                <h4>Observaciones:</h4>
+                                                <textarea class="long-textarea" id="observaciones" name="observaciones" readonly>{{$dataf->descripcion}}</textarea>
                                             </div>
                                             
                                             @csrf
@@ -713,6 +718,11 @@
                 height: auto;
                 margin: 5px;
                 border: 1px solid;
+            }
+            .long-textarea {
+                width: 100%;
+                height: 150px;
+                resize: vertical; /* Permite redimensionar verticalmente */
             }
         </style>
 @endsection

@@ -168,6 +168,8 @@
                                                     </th>
                                                 </tr>
                                             </table>
+                                            <h4>Observaciones:</h4>
+                                                <textarea class="long-textarea" id="observaciones" name="observaciones" readonly>{{$comprasdeldia->descripcion}}</textarea>
                                         </div>
                                         @csrf
                                         @method('DELETE')
@@ -215,6 +217,11 @@
         </script>
     </div>
     <style>
+        .long-textarea {
+            width: 100%;
+            height: 150px;
+            resize: vertical; /* Permite redimensionar verticalmente */
+        }
         table {
             font-family: arial, sans-serif;
             background-color: white;
