@@ -132,6 +132,7 @@ class MarketController extends Controller
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
         $presupuesto=0;        
         $carton=0;
+        $vuelto=0;
         if($comprasdeldia->count() > 0) {
             $presupuesto=$comprasdeldia[0]->budget;
             $carton=$comprasdeldia[0]->carton;
@@ -142,7 +143,7 @@ class MarketController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('marketinvoice', compact('carton','comprasdeldia','presupuesto'));
+        return view('marketinvoice', compact('carton','comprasdeldia','presupuesto','vuelto'));
     }
 
     public function shopday(Request $request)
@@ -155,7 +156,9 @@ class MarketController extends Controller
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
         $carton =0;
+        $vuelto=0;
         if($comprasdeldia->count() > 0) {
+            $vuelto=$comprasdeldia[0]->vuelto;
             $carton =$comprasdeldia[0]->carton;            
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
@@ -197,7 +200,7 @@ class MarketController extends Controller
                 }
         }
 
-        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas','vuelto'));
     }
     /**
      * edit the specified resource in storage.

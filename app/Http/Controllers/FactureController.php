@@ -15,9 +15,11 @@ class FactureController extends Controller
         $facturas = Facture::orderBy('fecha', 'desc')->get(); // Obtener todos los facturas de la tabla
         $day = date('Y-m-d'); // Obtener la fecha actual
         $presupuesto = "no asignado para el dia";
+        $vuelto=0;
         $calculo = marketshopping::where('shoppingday', $day)->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
             $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
+            $vuelto=$calculo[0]->vuelto;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
@@ -39,12 +41,12 @@ class FactureController extends Controller
                 $presupuesto-=$check->monto;
             }
         }
-        return view('facture', compact('facturas', 'presupuesto')); // Pasar los facturas a la vista
+        return view('facture', compact('facturas', 'presupuesto','vuelto')); // Pasar los facturas a la vista
     }
 
 
     public function store(Request $request)
-    {
+    {   
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -92,6 +94,8 @@ class FactureController extends Controller
             if($compradeldia){
                 if($request->cart!=null&&$request->cart!=""){
                     $compradeldia->carton+=$request->cart;
+                }if($request->vuelto_p!=null&&$request->vuelto_p!=""){
+                    $compradeldia->vuelto=$request->vuelto_p;
                 }
                     $compradeldia->save();
             }
@@ -114,8 +118,10 @@ class FactureController extends Controller
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
         $carton =0;
+        $vuelto=0;
         if ($comprasdeldia->count() > 0) {
             $carton =$comprasdeldia[0]->carton;
+            $vuelto=$comprasdeldia[0]->vuelto;
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
             $quantity = json_decode($comprasdeldia[0]->quantity);
@@ -158,7 +164,7 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas','vuelto'));
         //return redirect()->back()->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
@@ -530,6 +536,7 @@ class FactureController extends Controller
 
     public function resume(Request $request){
         $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
+        $vuelto_manual= 
         $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
         $cantidadProductos=0;
         $tFactura=0;        
@@ -567,6 +574,7 @@ class FactureController extends Controller
         if(count($calculo)){
             $presupuesto=$calculo[0]->budget;
             $carton=$calculo[0]->carton;
+            $vuelto_manual=$calculo[0]->vuelto;
         }
         
         $tComprado=0;
@@ -583,6 +591,7 @@ class FactureController extends Controller
         'abonado',
         'pagosAnteriores',
         'vuelto',
+        'vuelto_manual',
         'cheques',
         'deuda'
         ));

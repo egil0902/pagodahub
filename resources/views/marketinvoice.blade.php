@@ -56,6 +56,12 @@
                         </script>
                     </h4>
                 </div>
+                <div class="col">
+                    <h4>Vuelto entregado: 
+                        <input class="w-100 form-control" type="text" name="vuelto_entregado"
+                        id="vuelto_entregado" value="{{isset($vuelto)?($vuelto):0 }} ">
+                    </h4>
+                </div>
                 
             </div>
             @foreach ($comprasdeldia as $ind =>$data)
@@ -73,6 +79,7 @@
                                 <input type="hidden" name="id" value="{{ $data->id }}">
                                 <input type="hidden" name="pres" value="{{ isset($presupuesto)?$presupuesto:0 }}">
                                 <input type="hidden" name="cart" value="{{$carton}}">
+                                <input type="hidden" name="vuelto_p" value="{{$vuelto}}">
                                 <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
                                 <h4>Numero de factura:
                                     <input class="w-100 form-control" type="number" name="NFactura"
@@ -317,7 +324,9 @@
                                                         var abono=parseFloat(elements_market[numero].querySelectorAll('[name="abono"]')[0].value);
                                                         var carton=parseFloat(document.getElementById('carton').value);
                                                         var cart = elements_market[numero].querySelectorAll('[name="cart"]')[0];
-                                                        
+                                                        var vuelto_entregado=parseFloat(document.getElementById('vuelto_entregado').value);
+                                                        var vuelto_p = elements_market[numero].querySelectorAll('[name="vuelto_p"]')[0];
+                                                        vuelto_p.value= vuelto_entregado.toFixed(2);
                                                         cart.value= carton.toFixed(6);
                                                         presupuesto= presupuesto;
                                                         sumaTotal(elements_market[numero],presupuesto);
