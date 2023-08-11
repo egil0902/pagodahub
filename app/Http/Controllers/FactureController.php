@@ -81,7 +81,7 @@ class FactureController extends Controller
         $registro->diferencia =$request->diff;
         $registro->Total_compra =$request->sumdifac;
         $registro->descripcion=$request->observaciones;
-        $registro->vuelto=$request->pfinal;        
+        $registro->vuelto=$request->pfinal;
         $registro->pagada=false;
         $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
@@ -536,7 +536,7 @@ class FactureController extends Controller
 
     public function resume(Request $request){
         $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
-        $vuelto_manual= 
+        $vueltoEntregado= 0;
         $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
         $cantidadProductos=0;
         $tFactura=0;        
@@ -574,7 +574,7 @@ class FactureController extends Controller
         if(count($calculo)){
             $presupuesto=$calculo[0]->budget;
             $carton=$calculo[0]->carton;
-            $vuelto_manual=$calculo[0]->vuelto;
+            $vueltoEntregado=$calculo[0]->vuelto;
         }
         
         $tComprado=0;
@@ -591,7 +591,7 @@ class FactureController extends Controller
         'abonado',
         'pagosAnteriores',
         'vuelto',
-        'vuelto_manual',
+        'vueltoEntregado',
         'cheques',
         'deuda'
         ));
