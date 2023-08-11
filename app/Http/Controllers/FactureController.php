@@ -88,7 +88,7 @@ class FactureController extends Controller
             $registro->pagada=true;
             $registro->fecha_pago=$request->fecha_registro;
         }
-        if (isset($request->cart) ) {
+        if (isset($request->cart)||isset($request->vuelto_p) ) {
             $compradeldia = marketshopping::where('id', $request->id)->first();
             
             if($compradeldia){
