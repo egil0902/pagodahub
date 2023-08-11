@@ -59,7 +59,7 @@
                 <div class="col">
                     <h4>Vuelto entregado: 
                         <input class="w-100 form-control" type="text" name="vuelto_entregado"
-                        id="vuelto_entregado" value="{{isset($vuelto)?($vuelto):0 }} ">
+                        id="vuelto_entregado" value="{{isset($vuelto)?($vuelto):0 }} "  onchange="sumapresupuesto();" >
                     </h4>
                 </div>
                 
