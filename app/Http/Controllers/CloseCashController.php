@@ -413,6 +413,8 @@ class CloseCashController extends Controller
         $todo->SencilloSupervisoraFiscalizadora =  $request->SencilloSupervisoraFiscalizadora;
         $todo->SencilloSupervisoraGerente       =  $request->SencilloSupervisoraGerente;
         $todo->check_SencilloSupervisoraGerente =  $request->check_SencilloSupervisoraGerente;
+        $todo->vueltoEntregadoFiscalizadora =  $request->vueltoEntregadoFiscalizadora;
+        $todo->vueltoEntregadoGerente =  $request->vueltoEntregadoGerente;
         //dump($request->SencilloSupervisoraFiscalizadora,$request->SencilloSupervisoraGerente);
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
 

@@ -12,7 +12,7 @@
 <style>
     table {
         font-family: arial, sans-serif;
-        font-size: 12px;
+        font-size: 10px;
         background-color: white;
         text-align: left;
         border-collapse: collapse;
@@ -56,10 +56,10 @@
     @php
     $totalAPagar = 0;
     @endphp
-    <h1>Comprobante de pago</h1>
+    <h2>Comprobante de pago</h2>
     @foreach($resultados as $data)
         <!-- Encabezado -->
-        <h2>Factura número: {{ $data->id_compra }}</h2>
+        <h3>Factura número: {{ $data->id_compra }}</h3>
         <p>Fecha: {{ $data->fecha }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             Forma de pago: {{ ($metodoPago==="Dia anterior")?"Presupuesto dia anterior ": $metodoPago}}{{$fecha_expedicion}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             {{$banco!=""?"Banco:$banco":""}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -91,7 +91,7 @@
         @endphp
     @endforeach
     <br/>
-    <h1>Total pagado: {{ $totalAPagar }}</h1>
+    <h2>Total pagado: {{ $totalAPagar }}</h2>
 
 </body>
 

@@ -1539,7 +1539,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td> Vuelto de mercado</td>
+                                            <td> Vuelto de sistema</td>
                                             <td><input name="vueltoMercadoFiscalizadora" type="number" readonly
                                                     class="form-control" step="0.01" placeolder="0.00"
                                                     onchange="cal();clonvueltoMercadoFiscalizadora();cal();colores()"
@@ -1549,6 +1549,17 @@
                                                 @endforeach
                                                 @else
                                                 value="{{$vuelto}}" @endif>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Vuelto entregado</td>
+                                            <td><input name="vueltoEntregadoFiscalizadora" type="number" value="0.00"
+                                                    class="form-control" step="0.01" placeolder="0.00">
                                             </td>
                                             <td></td>
                                             <td></td>
@@ -2611,7 +2622,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td> Vuelto de mercado</td>
+                                            <td> Vuelto de sistema</td>
                                             <td>
                                                 @if ($list->isNotEmpty())
                                                     @foreach ($list as $dataday)
@@ -2621,7 +2632,7 @@
                                                             placeholder="0.00" readonly>
                                                     @endforeach
                                                 @else
-                                                    <input name="vueltoMercadoGerente" value="{{$vuelto}}" type="number"
+                                                    <input name="vueltoMercadoGerente" value="{{$vuelto}}" type="number" readonly
                                                         class="form-control" step="0.01" placeholder="0.00">
                                                 @endif
                                             </td>
@@ -2630,6 +2641,17 @@
                                             <td><input class="form-check-input" type="checkbox" value="1"
                                                     id="check_vueltoMercadoGerente" name="check_vueltoMercadoGerente"
                                                     {{ isset($dataday->check_x_vueltoMercadoGerente) ? __('checked') : __('') }}>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> Vuelto entregado</td>
+                                            <td><input name="vueltoEntregadoGerente" type="number" value="0.00"
+                                                    class="form-control" step="0.01" placeolder="0.00">
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><input style="visibility: hidden;" class="form-check-input"
+                                                    type="checkbox" value="1" id="check_" name="check_">
                                             </td>
                                         </tr>
                                         <tr>
