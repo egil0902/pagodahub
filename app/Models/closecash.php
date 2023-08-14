@@ -125,6 +125,8 @@ class closecash extends Model
         'monto_x_sistema',
         'SencilloSupervisoraFiscalizadora',
         'SencilloSupervisoraGerente',
-        'check_SencilloSupervisoraGerente'
+        'check_SencilloSupervisoraGerente',
+        'vueltoEntregadoGerente',
+        'vueltoEntregadoFiscalizadora'
     ];
 }
