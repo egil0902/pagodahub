@@ -61,7 +61,7 @@
         <!-- Encabezado -->
         <h2>Factura número: {{ $data->id_compra }}</h2>
         <p>Fecha: {{ $data->fecha }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            Forma de pago: {{ ($metodoPago==="Dia anterior")?"Presupuesto dia anterior": $metodoPago}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            Forma de pago: {{ ($metodoPago==="Dia anterior")?"Presupuesto dia anterior ": $metodoPago}}{{$fecha_expedicion}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             {{$banco!=""?"Banco:$banco":""}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             {{$codigo!="000000"?"Código:$codigo":""}}</p>
         <p>Proveedor: {{ $data->proveedor }}</p>
@@ -83,15 +83,15 @@
             </tbody>
         </table>
 
-        <!-- Total a pagar -->
-        <p>Total factura a pagar: {{ $data->Total_compra - $data->monto_abonado }}</p>
+        <!-- Total pagado -->
+        <p>Total factura pagado: {{ $data->Total_compra - $data->monto_abonado }}</p>
         <hr>
         @php
         $totalAPagar += ($data->Total_compra - $data->monto_abonado);
         @endphp
     @endforeach
     <br/>
-    <h1>Total a pagar: {{ $totalAPagar }}</h1>
+    <h1>Total pagado: {{ $totalAPagar }}</h1>
 
 </body>
 

@@ -338,7 +338,7 @@
                                                         
                                                     }
                                                 }
-                                                function sumadiferenciaUpdate(numero,vuelto,viejoTotal) {
+                                                function sumadiferenciaUpdate(numero,vuelto,viejoTotal,medioPago) {
                                                     try {
                                                         var elements_market = document.getElementById('market'+numero);
                                                         console.log(elements_market)
@@ -357,10 +357,10 @@
                                                         }
                                                         var total= elements_market.querySelectorAll('[name="sumdifac"]');
                                                         total[0].value=nuevoTotal;
-
+                                                        if(medioPago){
                                                         var vueltoNuevo= elements_market.querySelectorAll('[name="pfinal"]');
                                                         vueltoNuevo[0].value=vuelto-(nuevoTotal-viejoTotal);
-                                                        
+                                                        }
                                                         // Call the sumaTotal() function
                                                         //var tables = elements_market[numero].querySelectorAll('[name="table[]"]');
                                                         
@@ -559,7 +559,7 @@
                                                                     <td>
                                                                         <input class="w-100 " type="number" name="differenceFactura[]"
                                                                             id="differenceFactura{{ $index + 1 }}" value="{{json_decode($dataf->Factured_quantity)[$index]}}" 
-                                                                            required onchange="sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }});" step="0.000001" min="0">
+                                                                            required onchange="sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }},{{$dataf->medio_de_pago}});" step="0.000001" min="0">
                                                                     </td>
                                                                     <script>
                                                                         // Obtener las entradas numéricas
@@ -578,12 +578,12 @@
 
                                                                             // Mostrar el resultado en la entrada difference
                                                                             difference{{ $index + 1 }}.value = differenceValue{{ $index + 1 }};
-                                                                            sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }});
+                                                                            sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }},{{$dataf->medio_de_pago}});
                                                                         });
                                                                     </script>
                                                                     <td>
                                                                         <input class="w-100 " type="number" name="price[]" value="{{json_decode($dataf->price)[$index]}}"
-                                                                            data-price-value="" onchange="sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }});" step="0.000001" min="0" required >
+                                                                            data-price-value="" onchange="sumadiferenciaUpdate({{$dataf->id_compra}},{{ $dataf->vuelto }},{{ $dataf->Total_compra }},{{$dataf->medio_de_pago}});" step="0.000001" min="0" required >
                                                                     </td>
                                                                     <td>
                                                                         <input class="w-100 border-0 bg-transparent" type="number"

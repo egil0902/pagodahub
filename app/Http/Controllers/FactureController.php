@@ -398,7 +398,7 @@ class FactureController extends Controller
                         $factura->pagada=true;
                         $factura->fecha_pago=date('Y-m-d');
                     //}
-                    //$factura->save();
+                    $factura->save();
                 }else{
                     return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
@@ -413,7 +413,7 @@ class FactureController extends Controller
                 ]);
             }
         }
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco]);
+        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago]);
         return $pdf->download("factura.pdf");
     }
     public function pagar(Request $request)
@@ -531,7 +531,7 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('facture', compact('facturas','presupuesto')); // Pasar los facturas a la vista
+        return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente'); // Pasar los facturas a la vista
     }
 
     public function resume(Request $request){
