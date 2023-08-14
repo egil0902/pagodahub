@@ -28,6 +28,10 @@
                         <label for="codigo">Código:</label>
                         <input type="text" id="codigo" name="codigo" value="" style="height: 30px;">
                     </div>
+                    <div id="campoBanco" >
+                        <label for="banco">Banco</label>
+                        <input type="text" id="banco" name="banco" value="" style="height: 30px;">
+                    </div>
                 </div>
 
                 <!--<div>
@@ -141,16 +145,23 @@
             }   
             function toggleFechaCampo(selectElement) {
                 var campoFecha = document.getElementById("campoFecha");
-                
+                var campoBanco = document.getElementById("campoBanco");
                 // Obtener el valor seleccionado del select
                 var selectedOption = selectElement.options[selectElement.selectedIndex].value;
                 var elementoRequerido = document.getElementById("fechaPago");
+
                 // Si el valor seleccionado es "Dia anterior", mostrar el campo de selección de fecha, de lo contrario, ocultarlo
                 if (selectedOption === "Dia anterior") {
                     campoFecha.style.display = "block";                    
-                    elementoRequerido.setAttribute("required", "required");                    
-                }else{
-                    campoFecha.style.display = "none";                    
+                    elementoRequerido.setAttribute("required", "required"); 
+                    campoBanco.style.display = "none"; 
+                }else if(selectedOption === "Cheque"||selectedOption === "Transacciones"){
+                    campoFecha.style.display = "none"; 
+                    campoBanco.style.display = "block"; 
+                }
+                else{
+                    campoFecha.style.display = "none"; 
+                    campoBanco.style.display = "none";                    
                     elementoRequerido.removeAttribute("required");
 
                 }
@@ -256,8 +267,8 @@
                     <td>{{$factura->fecha}}</td>
                     <td>{{$factura->proveedor}}</td>
                     <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
-                    <td>{{$factura->monto_abonado}}</td>
-                    <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">{{$factura->Total_compra- $factura->monto_abonado}}</td>
+                    <td>${{$factura->monto_abonado}}</td>
+                    <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">${{$factura->Total_compra- $factura->monto_abonado}}</td>
                     <td>
                     <form action="{{ route('factures.eliminar') }}" method="post" id="deleteForm">
                         @csrf
@@ -304,7 +315,10 @@
                 var total = parseFloat(totalElement.innerText) || 0;
                 var facturaTotal = document.getElementById('totalPagar' + checkbox.value).innerText;
                 var fact_id = document.getElementById('id' + checkbox.value).innerText;
-                var totalValue = parseFloat(document.getElementById('total' + checkbox.value).innerText);
+                var element = document.getElementById('total' + checkbox.value);
+                var contentWithDollarSign = element.innerText;
+                var contentWithoutDollarSign = contentWithDollarSign.replace('$', ''); // Elimina el signo de dólar
+                var totalValue = parseFloat(contentWithoutDollarSign);
                 console.log(totalValue)
                 if (checkbox.checked) {
                     total += parseFloat(totalValue);
@@ -345,3 +359,10 @@
         </div>
     </div>
 </div>
+<style>
+    tr,td{
+        text-align:center;
+    }
+    .centered-th {
+    }
+</style>

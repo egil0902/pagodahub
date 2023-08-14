@@ -15,6 +15,8 @@ class FactureList extends Component
     public $id_compra;
     public $fecha;
     public $proveedor;
+    public $pagada;
+    public $medio;
 
     public function updatingSearch()
     {
@@ -36,6 +38,16 @@ class FactureList extends Component
             });
         })->when($this->fecha, function ($query) {
             $query->where('fecha', $this->fecha);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->pagada, function ($query) {
+            $query->where('pagada', $this->pagada);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->medio, function ($query) {
+            $query->where('medio_de_pago', $this->medio);
         }, function ($query) {
             $query->where(function ($query) {
             });

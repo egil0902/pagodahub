@@ -15,9 +15,11 @@ class FactureController extends Controller
         $facturas = Facture::orderBy('fecha', 'desc')->get(); // Obtener todos los facturas de la tabla
         $day = date('Y-m-d'); // Obtener la fecha actual
         $presupuesto = "no asignado para el dia";
+        $vuelto=0;
         $calculo = marketshopping::where('shoppingday', $day)->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
             $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
+            $vuelto=$calculo[0]->vuelto;
             $comprasdeldia = Facture::where('fecha', $day)->get();
             
             foreach ($comprasdeldia as $factura) {
@@ -39,12 +41,12 @@ class FactureController extends Controller
                 $presupuesto-=$check->monto;
             }
         }
-        return view('facture', compact('facturas', 'presupuesto')); // Pasar los facturas a la vista
+        return view('facture', compact('facturas', 'presupuesto','vuelto')); // Pasar los facturas a la vista
     }
 
 
     public function store(Request $request)
-    {
+    {   
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -78,20 +80,22 @@ class FactureController extends Controller
         $registro->medio_de_pago = $request->metodo;
         $registro->diferencia =$request->diff;
         $registro->Total_compra =$request->sumdifac;
-        //$registro->vuelto =$registro->vuelto;
-        $registro->vuelto=$request->pfinal;        
+        $registro->descripcion=$request->observaciones;
+        $registro->vuelto=$request->pfinal;
         $registro->pagada=false;
         $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
             $registro->pagada=true;
             $registro->fecha_pago=$request->fecha_registro;
         }
-        if (isset($request->cart) ) {
+        if (isset($request->cart)||isset($request->vuelto_p) ) {
             $compradeldia = marketshopping::where('id', $request->id)->first();
             
             if($compradeldia){
                 if($request->cart!=null&&$request->cart!=""){
                     $compradeldia->carton+=$request->cart;
+                }if($request->vuelto_p!=null&&$request->vuelto_p!=""){
+                    $compradeldia->vuelto=$request->vuelto_p;
                 }
                     $compradeldia->save();
             }
@@ -114,8 +118,10 @@ class FactureController extends Controller
         $presupuesto=0;
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
         $carton =0;
+        $vuelto=0;
         if ($comprasdeldia->count() > 0) {
             $carton =$comprasdeldia[0]->carton;
+            $vuelto=$comprasdeldia[0]->vuelto;
             $presupuesto = $comprasdeldia[0]->budget;
             $productos = json_decode($comprasdeldia[0]->product);
             $quantity = json_decode($comprasdeldia[0]->quantity);
@@ -158,7 +164,7 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas'));
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas','vuelto'));
         //return redirect()->back()->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
@@ -237,8 +243,8 @@ class FactureController extends Controller
     }
     public function borrar($id)
     {
-        // Buscar la factura por su ID y eliminarla directamente
-        $facture = facture::where('id_compra', $id)->delete();
+        // Buscar la factura por su ID 
+        $facture = facture::where('id', $id)->delete();
         if (!$facture) {
             return redirect()->back()->with('error', 'La factura no existe');
         }
@@ -298,7 +304,12 @@ class FactureController extends Controller
         $fechaPago=date('Y-m-d');
         $presupuesto = "no asignado para el dia";
         $calculo=[];
+        $banco="";
         $ispresupuesto=false;
+        if($request->banco){
+            $banco=$request->banco;
+        }
+
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;  
@@ -402,8 +413,7 @@ class FactureController extends Controller
                 ]);
             }
         }
-
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago]);
+        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago]);
         return $pdf->download("factura.pdf");
     }
     public function pagar(Request $request)
@@ -474,41 +484,18 @@ class FactureController extends Controller
         return view('facture', compact('facturas','presupuesto')); // Pasar los facturas a la vista
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $updateCarton = Facture::where('fecha', $request->fecha_registro)->get();
-        if($updateCarton->count()>0){
-            foreach ($updateCarton as $carton) {
-                if($carton->carton!= $request->carton){
-                    
-                    $carton->carton= $request->carton;
-                    $carton->save();
-                }
-            }
-        }
         // Obtener el registro existente de la base de datos
-        $registro = Facture::findOrFail($id);
-        $registro->id_compra = $request->NFactura;
-        // Actualizar los valores del registro con los datos del formulario
+        $registro = Facture::findOrFail($request->id);
         
-        $registro->id_compra = $request->NFactura;
-        $registro->fecha = $request->fecha_registro;
-        $registro->proveedor = $request->proveedor;
-        $registro->monto_abonado = $request->abono;
-        $registro->medio_de_pago = $request->metodo;
-        $registro->diferencia =$request->diff;
-        $registro->Total_compra =$request->pfinal;
+        // Actualizar los valores del registro con los datos del formulario        
+        $registro->Total_compra =$request->sumdifac;
         
         //$registro->vuelto =$registro->vuelto;
         $registro->vuelto=$request->pfinal;
-        $registro->carton = $request->carton;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
-
-        if (!empty($request->archivosimg) && is_array($request->archivosimg) && count($request->archivosimg) > 0) {
-            $registro->file = $request->archivosimg[0];
-        }
-        $registro->total = $request->sumdifac;
 
 
         // Actualizar el registro relacionado en la tabla marketshopping
@@ -544,11 +531,12 @@ class FactureController extends Controller
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('facture', compact('facturas','presupuesto')); // Pasar los facturas a la vista
+        return redirect()->back()->with('success', 'La factura ha sido borrada exitosamente'); // Pasar los facturas a la vista
     }
 
     public function resume(Request $request){
         $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
+        $vueltoEntregado= 0;
         $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
         $cantidadProductos=0;
         $tFactura=0;        
@@ -586,6 +574,7 @@ class FactureController extends Controller
         if(count($calculo)){
             $presupuesto=$calculo[0]->budget;
             $carton=$calculo[0]->carton;
+            $vueltoEntregado=$calculo[0]->vuelto;
         }
         
         $tComprado=0;
@@ -602,6 +591,7 @@ class FactureController extends Controller
         'abonado',
         'pagosAnteriores',
         'vuelto',
+        'vueltoEntregado',
         'cheques',
         'deuda'
         ));

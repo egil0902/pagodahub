@@ -72,14 +72,13 @@ Route::post('/loans', [App\Http\Controllers\LoansController::class, 'updatePayme
 Route::get('/facture', [App\Http\Controllers\FactureController::class, 'index'])->name('factures');
 Route::post('/facture/resume', [App\Http\Controllers\FactureController::class, 'resume'])->name('factures.resume');
 Route::post('/marketinvoice', [App\Http\Controllers\FactureController::class, 'store'])->name('factures.store');
-Route::post('/facture_update', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
+Route::post('/facture', [App\Http\Controllers\FactureController::class, 'update'])->name('factures.update');
 Route::post('/facture_edit', [App\Http\Controllers\FactureController::class, 'edit'])->name('factures.edit');
 Route::delete('/marketinvoice/{id}', [App\Http\Controllers\FactureController::class, 'borrar'])->name('factures.borrar');
 //Route::post('/facture/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 Route::post('/factures/{id}', [App\Http\Controllers\FactureController::class, 'show'])->name('factures.show');
 
 Route::delete('/facture', [App\Http\Controllers\FactureController::class, 'eliminar'])->name('factures.eliminar');
-Route::get('/factures/{id}', [App\Http\Controllers\FactureController::class,'update'])->name('factures.update');
 Route::post('/facture/search_by_provider', [App\Http\Controllers\FactureController::class, 'searchByProvider'])->name('factures.searchByProvider');
 Route::post('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.credit');
 Route::get('/facture/get_credit', [App\Http\Controllers\FactureController::class, 'getAllCredit'])->name('factures.get_credit');
@@ -96,6 +95,12 @@ Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'
 Route::get('/marketinvoices', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoices');
 Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day')->where('day', 'monday');
 
+//rutas de Brick supervisor
+Route::get('/Brink', [App\Http\Controllers\BankController::class, 'index'])->name('Brink');
+
+//rutas de Brick envio
+Route::get('/BrinkSend', [App\Http\Controllers\BankController::class, 'indexSend'])->name('BrinkSend');
+
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
 });
@@ -105,6 +110,7 @@ Route::get('/firma2', function () {
 Route::get('/firma3', function () {
     return view('canvas/tablero5');
 });
+
 
 // Ruta para dompdf
 Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');

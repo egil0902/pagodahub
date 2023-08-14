@@ -65,9 +65,8 @@
                         @endauth
                     @endif
                     </li>
-                    @if (Route::has('login'))
                         @auth
-                            {{-- <li class="nav-item dropdown">
+                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -84,17 +83,21 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                                                <path
-                                                    d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                                            </svg>
-                                            Cierre diario de cajas</a>
+                                        <form name="close_cash" id="close_cash" method="post"
+                                            action="{{ route('close.cash') }}"> 
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                                                    <path
+                                                        d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                                    </svg>Cierre diario de cajas
+                                                </button>
+                                        </form>
                                     </li>
-                                    <li> <a class="dropdown-item" href="#">
+                                    <li> <a class="dropdown-item" href="/closecash_list">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
                                                 <path
@@ -122,17 +125,22 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li>
-                                        <a class="dropdown-item" href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor" class="bi bi-stickies"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z" />
-                                                <path
-                                                    d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z" />
-                                            </svg>
-                                            Registro de rango de vales</a>
+                                        <form name="valespagodarange" id="valespagodarange" method="post"
+                                                    action="{{ route('valespagodarange') }}">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                    width="16" height="16" fill="currentColor" class="bi bi-stickies"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z" />
+                                                    <path
+                                                        d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z" />
+                                                </svg>Registro de rango de vales
+                                                </button>
+                                        </form>
                                     </li>
-                                    <li> <a class="dropdown-item" href="#">
+                                    <li> <a class="dropdown-item" href="/valepagoda">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
@@ -143,7 +151,7 @@
                                                     d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                             </svg>
                                             Control de vales La Pagoda</a></li>
-                                    <li> <a class="dropdown-item" href="#">
+                                    <li> <a class="dropdown-item" href="/valepagoda_list">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
@@ -163,60 +171,62 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            Control de prestamos</a>
+                                        <a class="dropdown-item" href="/loans">
+                                            Crear prestamos</a>
                                     </li>
-                                    <li> <a class="dropdown-item" href="#">
-                                            Listado de prestamos
+                                    <li> 
+                                        <a class="dropdown-item" href="/loans_debt">
+                                            Pagar prestamos
                                         </a>
                                     </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
+                                    <li> 
+                                        <a class="dropdown-item" href="/loans_list">
+                                            Listar prestamos
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Compras
+                                    Mercado
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li>
-                                        <a class="dropdown-item" href="#">Recepcion productos</a>
+                                        <a class="dropdown-item" href="../market">Recepcion productos</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">Carga de facturas</a>
+                                        <a class="dropdown-item" href="../marketinvoice">Carga de facturas</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">Listado creditos productos</a>
+                                        <a class="dropdown-item" href="../facture">Listado de facturas</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                 </ul>
-                            </li>
+                            </li>   
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Bancos
+                                    Banco
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="/Brink">
                                             Solicitud supervisor</a>
                                     </li>
-                                    <li> <a class="dropdown-item" href="#">
-                                            Entrega
+                                    <li> <a class="dropdown-item" href="/BrinkSend">
+                                            Envio bancos
                                         </a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                 </ul>
-                            </li> --}}
+                            </li> 
 
                         @endauth
-                    @endif
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->

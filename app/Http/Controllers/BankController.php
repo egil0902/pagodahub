@@ -13,9 +13,18 @@ class BankController extends Controller
      */
     public function index()
     {
-        //
+        return view('brinks');
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSend()
+    {
+        return view('brinksEnvio');
+    }
     /**
      * Store a newly created resource in storage.
      *

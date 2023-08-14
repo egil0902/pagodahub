@@ -106,8 +106,16 @@
             <td>{{$pagosAnteriores}}</td>
         </tr>
         <tr>
-            <td>VUELTO</td>
+            <td>VUELTO CALCULADO</td>
             <td>{{$vuelto}}</td>
+        </tr>
+        <tr>
+            <td>VUELTO ENTREGADO</td>
+            <td>{{$vueltoEntregado}}</td>
+        </tr>
+        <tr>
+            <td>DIFERENCIA DE VUELTO</td>
+            <td>{{$vuelto-$vueltoEntregado}}</td>
         </tr>
     </table>
 </div>
