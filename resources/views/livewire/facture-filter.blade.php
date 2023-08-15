@@ -89,7 +89,7 @@
                     checkboxes.forEach(function(checkbox) {
                         selectedIds.push(checkbox.value);
                     });
-                    if (document.getElementById("pagoParcial").value&&selectedIds.length>1) {
+                    if (document.getElementById("pagoParcial").value>0&&selectedIds.length>1) {
                         // La validación falló, mostrar un mensaje de advertencia
                         alert("¡No puede hacer un pago parcial de mas de una factura a la vez!");
                         return; // Terminar el proceso
