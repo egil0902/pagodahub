@@ -7,7 +7,7 @@
     <div class="d-flex">
         
         <!-- Formulario de búsqueda por proveedor -->
-        <div class="container w-auto m-0 pl-0">
+        <!--<div class="container w-auto m-0 pl-0">
             <div class="card">
                 <div class="card-header">Filtrar facturas</div>
                 <div class="card-body">
@@ -20,7 +20,6 @@
                             </div>
                         </div>
                     </form>
-                    <!-- Formulario para mostrar facturas a crédito -->
                     <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
                         <div class="form-group w-auto">
                             @csrf
@@ -30,7 +29,7 @@
                 </div>
             </div>
         </div>
-        
+-->
 
         <div style="padding-top: 20px;">
         Presupuesto restante para el dia: {{$presupuesto}}

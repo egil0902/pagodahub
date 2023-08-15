@@ -299,6 +299,7 @@ class FactureController extends Controller
 
     public function downloadPdf(Request $request)
     {
+        //request->montoParcial
         $metodoPago="Presupuesto";
         $codigo="000000";
         $fechaPago=date('Y-m-d');
@@ -309,6 +310,7 @@ class FactureController extends Controller
         if($request->banco){
             $banco=$request->banco;
         }
+
 
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
@@ -360,8 +362,12 @@ class FactureController extends Controller
                 }
             }
             $deuda=0;
-            foreach ($resultados as $resultado) {
-                $deuda+=$resultado->Total_compra-$resultado->monto_abonado;
+            if($request->pagoParcial==true){
+                $deuda=$request->montoParcial;
+            }else{
+                foreach ($resultados as $resultado) {
+                    $deuda+=$resultado->Total_compra-$resultado->monto_abonado;
+                }
             }
             if($deuda>$presupuesto){
                 //la deuda no se puede pagar con el presupuesto
@@ -370,39 +376,33 @@ class FactureController extends Controller
                 return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
             }
         }
-
-        
-
         $pagoPresupuesto=false;
         if($metodoPago==='Dia anterior'||$metodoPago==='Presupuesto'){
             $pagoPresupuesto=true;
         }
         //por cada c0digo se genera un registro
+
         if (count($idCompras)>0) {
-            
-            for ($i=0; $i < count($idCompras); $i++) { 
-                $factura = Facture::where('id_compra', $idCompras[$i])->first();
-                
-                $monto=0;
+            if($request->pagoParcial==true){
+                $factura = Facture::where('id_compra', $idCompras[0])->first();
+                $monto=$deuda;
                 if($factura){
-                    if($request->monto===0||$request->monto===null){
+                    /*if($request->monto===0||$request->monto===null){
                         $monto=$factura->total-$factura->monto_abonado;
                         //$factura->monto_abonado=$factura->total;
-                    }
-                    /*if($request->monto!==0){
-                        $monto=$request->monto;
-                        $factura->monto_abonado+=$request->monto;
-                        dd($request->monto);
                     }*/
-                    //if($factura->monto_abonado>=$factura->total){
+                    //if($request->monto!==0){
+                        //$monto=$request->monto;
+                        $factura->monto_abonado+=$monto;
+                    //}
+                    if($factura->monto_abonado>=$factura->total){
                         $factura->pagada=true;
                         $factura->fecha_pago=date('Y-m-d');
-                    //}
+                    }
                     $factura->save();
                 }else{
                     return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
-                
                 $cheque = Cheque::create([
                     'fecha' => $fechaPago,
                     'id_factura' => $factura->id_compra,
@@ -411,10 +411,48 @@ class FactureController extends Controller
                     'tipo'=>$metodoPago,
                     'codigo'=>$codigo
                 ]);
+            }else{
+                for ($i=0; $i < count($idCompras); $i++) { 
+                    $factura = Facture::where('id_compra', $idCompras[$i])->first();
+                    
+                    $monto=0;
+                    if($factura){
+                        if($request->monto===0||$request->monto===null){
+                            $monto=$factura->total-$factura->monto_abonado;
+                            //$factura->monto_abonado=$factura->total;
+                        }
+                        /*if($request->monto!==0){
+                            $monto=$request->monto;
+                            $factura->monto_abonado+=$request->monto;
+                            dd($request->monto);
+                        }*/
+                        //if($factura->monto_abonado>=$factura->total){
+                            $factura->pagada=true;
+                            $factura->fecha_pago=date('Y-m-d');
+                        //}
+                        $factura->save();
+                    }else{
+                        return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
+                    }
+                    
+                    $cheque = Cheque::create([
+                        'fecha' => $fechaPago,
+                        'id_factura' => $factura->id_compra,
+                        'pago_presupuesto' => $pagoPresupuesto,
+                        'monto' => $monto,
+                        'tipo'=>$metodoPago,
+                        'codigo'=>$codigo
+                    ]);
+                }
             }
         }
-        $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago]);
-        return $pdf->download("factura.pdf");
+        if($request->pagoParcial==true){
+            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago,'montoParcial'=>$deuda]);
+            return $pdf->download("factura.pdf");
+        }else{
+            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago,'montoParcial'=>0]);
+            return $pdf->download("factura.pdf");
+        }
     }
     public function pagar(Request $request)
     {
@@ -579,6 +617,7 @@ class FactureController extends Controller
         
         $tComprado=0;
         $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;
+        $cheques = Cheque::where('fecha',$request->day)->get();
         return view('factureResume',compact('fecha',
         'cantidadProductos',
         'presupuesto',
