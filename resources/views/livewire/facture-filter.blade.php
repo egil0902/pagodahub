@@ -128,6 +128,7 @@
                                     row.style.display = "none";
                                 });
                                 pagos=[];
+                                document.getElementById('totalCancelar').innerText=0;
                             }
                             
                             $('.modal').modal('hide');
