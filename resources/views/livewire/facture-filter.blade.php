@@ -8,7 +8,14 @@
                 <div>
                     <label for="pagoPresupuesto">Descontar del presupuesto del día?</label>
                     <input type="checkbox" name="pagoPresupuesto" id="pagoPresupuesto" value="true" checked onchange="togglePagoPresupuesto(this)">
-                    
+                </div>
+                <div>
+                    <label for="pagoParcial">Es un pago parcial?</label>
+                    <input type="checkbox" name="pagoParcial" id="pagoParcial" value="false"  onchange="togglePagoParcial(this)">
+                    <div  id="montoVal" style="display: none;">
+                        <label for="montoParcial">Monto:</label>
+                        <input type="number" id="montoParcial" name="montoParcial" value="0.00" style="height: 30px;">
+                    </div>
                 </div>
                 <div id="myDiv" style="display: none;">
                     <div>
@@ -36,7 +43,7 @@
 
                 <!--<div>
                     <label for="pagoValor">¿Desea pagar un monto?</label>
-                    --><input type="hidden" name="pagoValor" id="pagoValor" value="true" onchange="togglePagoParcial(this)">
+                    --><input type="hidden" name="pagoValor" id="pagoValor" value="true" >
                 <!--</div>
                 <div>
                     <label for="monto">Monto:</label>
@@ -73,7 +80,7 @@
                     document.getElementById("pagoPresupuesto").value = "true";
                     document.getElementById("imprimirCheque").addEventListener("submit", function(event) {
                     event.preventDefault();
-
+                    
                     // Obtén los checkboxes seleccionados
                     var checkboxes = document.querySelectorAll('input[name="factura_ids[]"]:checked');
 
@@ -82,7 +89,11 @@
                     checkboxes.forEach(function(checkbox) {
                         selectedIds.push(checkbox.value);
                     });
-
+                    if (document.getElementById("pagoParcial").value&&selectedIds.length>1) {
+                        // La validación falló, mostrar un mensaje de advertencia
+                        alert("¡No puede hacer un pago parcial de mas de una factura a la vez!");
+                        return; // Terminar el proceso
+                    }
                     // Asigna los IDs al campo oculto
                     document.getElementById('factura_ids').value = selectedIds.join(',');
 
@@ -135,12 +146,13 @@
         <br/>
         <script>
             function togglePagoParcial(checkbox) {
+                console.log(document.getElementById('montoVal'))
                 if (checkbox.checked) {
                     checkbox.value = "true";
-                    document.getElementById('monto').disabled = false;
+                    document.getElementById('montoVal').style.display = "block";
                 } else {
                     checkbox.value = "false";
-                    document.getElementById('monto').disabled = true;
+                    document.getElementById('montoVal').style.display = "none";
                 }
             }   
             function toggleFechaCampo(selectElement) {

@@ -84,14 +84,14 @@
         </table>
 
         <!-- Total pagado -->
-        <p>Total factura pagado: {{ $data->Total_compra - $data->monto_abonado }}</p>
+        <p>Total factura pagado: {{$montoParcial!=0? $montoParcial:($data->Total_compra - $data->monto_abonado) }}</p>
         <hr>
         @php
         $totalAPagar += ($data->Total_compra - $data->monto_abonado);
         @endphp
     @endforeach
     <br/>
-    <h2>Total pagado: {{ $totalAPagar }}</h2>
+    <h2>Total pagado: {{ $montoParcial!=0? $montoParcial:$totalAPagar }}</h2>
 
 </body>
 
