@@ -1558,8 +1558,13 @@
                                         </tr>
                                         <tr>
                                             <td> Vuelto entregado</td>
-                                            <td><input name="vueltoEntregadoFiscalizadora" type="number" value="0.00"
-                                                    class="form-control" step="0.01" placeolder="0.00">
+                                            <td><input name="vueltoEntregadoFiscalizadora" type="number" 
+                                                    class="form-control" step="0.01" placeolder="0.00"
+                                                    @if ($list->isNotEmpty()) @foreach ($list as $dataday)
+                                                value="{{ $dataday->vueltoEntregadoFiscalizadora }}"
+                                                @endforeach
+                                                @else
+                                                value="{{0.00}}" @endif>
                                             </td>
                                             <td></td>
                                             <td></td>
@@ -2645,8 +2650,10 @@
                                         </tr>
                                         <tr>
                                             <td> Vuelto entregado</td>
-                                            <td><input name="vueltoEntregadoGerente" type="number" value="0.00"
-                                                    class="form-control" step="0.01" placeolder="0.00">
+                                            <td><input name="vueltoEntregadoGerente" type="number"
+                                                    class="form-control" step="0.01" placeolder="0.00"
+                                                    value="{{isset($dataday->vueltoEntregadoGerente)?$dataday->vueltoEntregadoGerente:0.00}}"
+                                                    >
                                             </td>
                                             <td></td>
                                             <td></td>

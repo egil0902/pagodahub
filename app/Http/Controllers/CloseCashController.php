@@ -47,7 +47,7 @@ class CloseCashController extends Controller
         );
 
         $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->get();
-        //dump($list);
+        
         $dia = $request->DateTrx;
         $organizacion = $request->AD_Org_ID;
         session()->put('dia', $dia);
@@ -574,6 +574,9 @@ class CloseCashController extends Controller
         $todo->SencilloSupervisoraFiscalizadora =  $request->SencilloSupervisoraFiscalizadora;
         $todo->SencilloSupervisoraGerente       =  $request->SencilloSupervisoraGerente;
         $todo->check_SencilloSupervisoraGerente =  $request->check_SencilloSupervisoraGerente;
+        $todo->vueltoEntregadoFiscalizadora =  $request->vueltoEntregadoFiscalizadora;
+        $todo->vueltoEntregadoGerente =  $request->vueltoEntregadoGerente;
+        //dd( $todo);
         $filename = $request->Fileclosecash;    //$request->file('Fileclosecash');//->store('public/Fileclosecash');
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
