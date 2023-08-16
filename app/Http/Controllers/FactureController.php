@@ -322,6 +322,7 @@ class FactureController extends Controller
             $codigo=$request->codigo;
             //verifica si se paga con el presupuesto de un dia anterior
             if($metodoPago==="Dia anterior"){
+                $codigo="000000";
                 $fechaPago=$request->fechaPago;
                 $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
                 $ispresupuesto=true;

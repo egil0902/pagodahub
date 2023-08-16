@@ -31,8 +31,8 @@
                         <label for="fecha">Seleccione una fecha:</label>
                         <input type="date" id="fechaPago" name="fechaPago" style="height: 30px;" max="<?= date("Y-m-d") ?>">
                     </div>
-                    <div>
-                        <label for="codigo">Código:</label>
+                    <div id="codigoDiv">
+                        <label for="codigo">Comprobante de pago:</label>
                         <input type="text" id="codigo" name="codigo" value="" style="height: 30px;">
                     </div>
                     <div id="campoBanco" >
@@ -162,15 +162,25 @@
                 // Obtener el valor seleccionado del select
                 var selectedOption = selectElement.options[selectElement.selectedIndex].value;
                 var elementoRequerido = document.getElementById("fechaPago");
-
+                var codigodiv = document.getElementById("codigoDiv");
+                var codigo = document.getElementById("codigo");
                 // Si el valor seleccionado es "Dia anterior", mostrar el campo de selección de fecha, de lo contrario, ocultarlo
                 if (selectedOption === "Dia anterior") {
                     campoFecha.style.display = "block";                    
                     elementoRequerido.setAttribute("required", "required"); 
-                    campoBanco.style.display = "none"; 
+                    campoBanco.style.display = "none";
+                    codigodiv.style.display="none";
+                    codigo.removeAttribute("required");
                 }else if(selectedOption === "Cheque"||selectedOption === "Transacciones"){
                     campoFecha.style.display = "none"; 
                     campoBanco.style.display = "block"; 
+                    codigodiv.style.display="block";
+                    codigo.setAttribute("required", "required"); 
+                    if(selectedOption === "Cheque"){
+                        document.getElementById("codigoDiv").querySelector("label").innerHTML = "Comprobante de pago:";
+                    } else{
+                        document.getElementById("codigoDiv").querySelector("label").innerHTML = "N° comprobante de pago";
+                    }
                 }
                 else{
                     campoFecha.style.display = "none"; 
