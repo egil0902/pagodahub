@@ -453,10 +453,10 @@ class FactureController extends Controller
             }
         }
         if($request->pagoParcial==true){
-            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago,'montoParcial'=>$deuda]);
+            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaExpedicion,'montoParcial'=>$deuda]);
             return $pdf->download("factura.pdf");
         }else{
-            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaPago,'montoParcial'=>0]);
+            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaExpedicion,'montoParcial'=>0]);
             return $pdf->download("factura.pdf");
         }
     }
