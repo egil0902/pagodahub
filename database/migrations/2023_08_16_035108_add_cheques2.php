@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('cheques', function (Blueprint $table) {
-            $table->date('fechaExpedicion')->nullable();
+            $table->text('fechaExpedicion')->nullable();
         });
     }
 

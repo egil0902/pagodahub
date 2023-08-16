@@ -312,7 +312,6 @@ class FactureController extends Controller
             $banco=$request->banco;
         }
 
-
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;  
@@ -389,7 +388,8 @@ class FactureController extends Controller
         if (count($idCompras)>0) {
             if($request->pagoParcial==true){
                 $factura = Facture::where('id_compra', $idCompras[0])->first();
-                $monto=$deuda;
+                $monto=$request->montoParcial;
+                $deuda=$request->montoParcial;
                 if($factura){
                     /*if($request->monto===0||$request->monto===null){
                         $monto=$factura->total-$factura->monto_abonado;
@@ -407,15 +407,16 @@ class FactureController extends Controller
                 }else{
                     return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
-                $cheque = Cheque::create([
-                    'fecha' => $fechaPago,
-                    'id_factura' => $factura->id_compra,
-                    'pago_presupuesto' => $pagoPresupuesto,
-                    'monto' => $monto,
-                    'tipo'=>$metodoPago,
-                    'codigo'=>$codigo,
-                    'fechaExpedicion'=>$fechaExpedicion
-                ]);
+                $cheque = new Cheque();
+                $cheque->fecha = $fechaPago;
+                $cheque->id_factura = $factura->id_compra;
+                $cheque->pago_presupuesto = $pagoPresupuesto;
+                $cheque->monto = $monto;
+                $cheque->tipo=$metodoPago;
+                $cheque->codigo=$codigo;
+                $cheque->fechaExpedicion=$fechaExpedicion;
+                $cheque->save();
+                
             }else{
                 for ($i=0; $i < count($idCompras); $i++) { 
                     $factura = Facture::where('id_compra', $idCompras[$i])->first();
@@ -440,15 +441,16 @@ class FactureController extends Controller
                         return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                     }
                     
-                    $cheque = Cheque::create([
-                        'fecha' => $fechaPago,
-                        'id_factura' => $factura->id_compra,
-                        'pago_presupuesto' => $pagoPresupuesto,
-                        'monto' => $monto,
-                        'tipo'=>$metodoPago,
-                        'codigo'=>$codigo,
-                        'fechaExpedicion'=>$fechaExpedicion
-                    ]);
+                    $cheque = new Cheque();
+                    $cheque->fecha = $fechaPago;
+                    $cheque->id_factura = $factura->id_compra;
+                    $cheque->pago_presupuesto = $pagoPresupuesto;
+                    $cheque->monto = $monto;
+                    $cheque->tipo=$metodoPago;
+                    $cheque->codigo=$codigo;
+                    $cheque->fechaExpedicion=$fechaExpedicion;
+                    $cheque->save();
+                    
                 }
             }
         }
