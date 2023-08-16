@@ -13,9 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('cheques', function (Blueprint $table) {
-            $table->text('fechaExpedicion')->nullable();
-        });
+        DB::statement('ALTER TABLE cheques ALTER COLUMN fechaExpedicion TYPE TEXT USING fechaExpedicion::text');
     }
 
     /**
