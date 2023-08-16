@@ -56,11 +56,12 @@
                 </select>
             </th>
             <th>Fecha cancelacion</th>
-            <th></th>
+            <th><input wire:model="descripcion" class="form-control" type="text" placeholder="Observaciones"></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($facturas as $factura)
+        
         <tr>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->id_compra}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha}}</td>
@@ -91,7 +92,8 @@
                         Ver
                     </button>
                 </form>
-                
+                <BR>
+                <p>{{$factura->descripcion}}</p>
             </td>
 
         </tr>

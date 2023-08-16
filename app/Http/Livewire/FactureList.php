@@ -17,6 +17,7 @@ class FactureList extends Component
     public $proveedor;
     public $pagada;
     public $medio;
+    public $descripcion;
 
     public function updatingSearch()
     {
@@ -51,6 +52,9 @@ class FactureList extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
+        })
+        ->when($this->descripcion, function ($query) {
+            $query->where('descripcion', 'ilike', "%$this->descripcion%");
         })->orderBy('fecha', 'desc')->paginate(25);; // Obtener todos los facturas de la tabla
         return view('livewire.facture', [
             'facturas' => $facturas,
