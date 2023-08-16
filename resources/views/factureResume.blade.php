@@ -52,12 +52,13 @@
     <table>
         <thead>
             <tr>
-                <th colspan="3">PAGOS A FACTURAS ANTERIORES</th>
+                <th colspan="4">PAGOS A FACTURAS ANTERIORES</th>
             </tr>
             <tr style="background-color:#2cbc9c">
                 <th># FACTURA</th>
                 <th>PROCEDENCIA DE LOS RECURSOS</th>
                 <th>MONTO</th>
+                <th>Fecha de pago</th>
             </tr>
         </thead>
         @foreach ($cheques as $cheque)
@@ -65,6 +66,7 @@
             <td>{{$cheque->id_factura}}</td>
             <td>{{($cheque->pago_presupuesto===true)?'Presupuesto':'Otros'}}</td>
             <td>{{$cheque->monto}}</td>
+            <td>{{$cheque->fechaExpedicion}}</td>
         </tr>
         @endforeach
     </table>

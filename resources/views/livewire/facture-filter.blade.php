@@ -28,7 +28,7 @@
                         </select>
                     </div>
                     <div id="campoFecha" style="display: none;">
-                        <label for="fecha">Seleccione una fecha:</label>
+                        <label for="fecha">Seleccione una fecha (presupuesto):</label>
                         <input type="date" id="fechaPago" name="fechaPago" style="height: 30px;" max="<?= date("Y-m-d") ?>">
                     </div>
                     <div id="codigoDiv">
@@ -38,6 +38,10 @@
                     <div id="campoBanco" >
                         <label for="banco">Banco</label>
                         <input type="text" id="banco" name="banco" value="" style="height: 30px;">
+                    </div>
+                    <div id="campofechaExpedicion" >
+                        <label for="fechaExpedicion">fecha del pago:</label>
+                        <input type="date" id="fechaExpedicion" name="fechaExpedicion" value="<?= date("Y-m-d") ?>" style="height: 30px;" max="<?= date("Y-m-d") ?>">
                     </div>
                 </div>
 
@@ -163,6 +167,8 @@
                 var selectedOption = selectElement.options[selectElement.selectedIndex].value;
                 var elementoRequerido = document.getElementById("fechaPago");
                 var codigodiv = document.getElementById("codigoDiv");
+                var campofechaExpedicion = document.getElementById("campofechaExpedicion");
+                campofechaExpedicion.style.display="none";
                 var codigo = document.getElementById("codigo");
                 // Si el valor seleccionado es "Dia anterior", mostrar el campo de selección de fecha, de lo contrario, ocultarlo
                 if (selectedOption === "Dia anterior") {
@@ -175,6 +181,8 @@
                     campoFecha.style.display = "none"; 
                     campoBanco.style.display = "block"; 
                     codigodiv.style.display="block";
+                    campofechaExpedicion.style.display="block";
+                    elementoRequerido.removeAttribute("required");
                     codigo.setAttribute("required", "required"); 
                     if(selectedOption === "Cheque"){
                         document.getElementById("codigoDiv").querySelector("label").innerHTML = "Comprobante de pago:";
@@ -183,8 +191,8 @@
                     }
                 }
                 else{
-                    campoFecha.style.display = "none"; 
-                    campoBanco.style.display = "none";                    
+                    campoFecha.style.display = "none";
+                    campoBanco.style.display = "none";
                     elementoRequerido.removeAttribute("required");
 
                 }

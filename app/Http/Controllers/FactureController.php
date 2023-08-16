@@ -305,6 +305,7 @@ class FactureController extends Controller
         $fechaPago=date('Y-m-d');
         $presupuesto = "no asignado para el dia";
         $calculo=[];
+        $fechaExpedicion=$fechaPago;
         $banco="";
         $ispresupuesto=false;
         if($request->banco){
@@ -320,12 +321,14 @@ class FactureController extends Controller
         }else{
             $metodoPago=$request->metodoPago;
             $codigo=$request->codigo;
+            $fechaExpedicion=$request->fechaPago;
             //verifica si se paga con el presupuesto de un dia anterior
             if($metodoPago==="Dia anterior"){
                 $codigo="000000";
                 $fechaPago=$request->fechaPago;
                 $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
                 $ispresupuesto=true;
+                $fechaExpedicion=$fechaPago;
             }
         }
         $idCompras = $request->input('factura_ids');
@@ -410,7 +413,8 @@ class FactureController extends Controller
                     'pago_presupuesto' => $pagoPresupuesto,
                     'monto' => $monto,
                     'tipo'=>$metodoPago,
-                    'codigo'=>$codigo
+                    'codigo'=>$codigo,
+                    'fechaExpedicion'=>$fechaExpedicion
                 ]);
             }else{
                 for ($i=0; $i < count($idCompras); $i++) { 
@@ -442,7 +446,8 @@ class FactureController extends Controller
                         'pago_presupuesto' => $pagoPresupuesto,
                         'monto' => $monto,
                         'tipo'=>$metodoPago,
-                        'codigo'=>$codigo
+                        'codigo'=>$codigo,
+                        'fechaExpedicion'=>$fechaExpedicion
                     ]);
                 }
             }
