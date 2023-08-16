@@ -32,7 +32,7 @@
                         <input type="date" id="fechaPago" name="fechaPago" style="height: 30px;" max="<?= date("Y-m-d") ?>">
                     </div>
                     <div id="codigoDiv">
-                        <label for="codigo">Comprobante de pago:</label>
+                        <label for="codigo"> N° de cheque:</label>
                         <input type="text" id="codigo" name="codigo" value="" style="height: 30px;">
                     </div>
                     <div id="campoBanco" >
