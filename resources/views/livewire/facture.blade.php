@@ -45,9 +45,9 @@
                     <option value="false">Credito</option>
                 </select>
             </th>
-            <th>Valor abonado</th>
+            <th>Abonado</th>
             <th>Total</th>
-            <th>Valor Deuda</th>
+            <th>Deuda</th>
             <th>
                 <select class="form-select" wire:model="pagada">
                     <option value="">Pagada</option>
@@ -56,11 +56,13 @@
                 </select>
             </th>
             <th>Fecha cancelacion</th>
-            <th></th>
+            <th class="centered-th"><input wire:model="descripcion" class="form-control centered-th" type="text" placeholder="Observaciones" style="max-width: 250px;">
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach ($facturas as $factura)
+        
         <tr>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->id_compra}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha}}</td>
@@ -83,7 +85,7 @@
                 </form>
             </td>
             -->
-            <td>
+            <td style="max-width: 250px;">
                 <form action="{{route('factures.show', $factura->id) }}" method="post">
                     @csrf
                     @method('POST')
@@ -91,7 +93,8 @@
                         Ver
                     </button>
                 </form>
-                
+                <BR>
+                <p>{{$factura->descripcion}}</p>
             </td>
 
         </tr>

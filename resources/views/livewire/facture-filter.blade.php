@@ -28,16 +28,20 @@
                         </select>
                     </div>
                     <div id="campoFecha" style="display: none;">
-                        <label for="fecha">Seleccione una fecha:</label>
+                        <label for="fecha">Seleccione una fecha (presupuesto):</label>
                         <input type="date" id="fechaPago" name="fechaPago" style="height: 30px;" max="<?= date("Y-m-d") ?>">
                     </div>
-                    <div>
-                        <label for="codigo">Código:</label>
+                    <div id="codigoDiv">
+                        <label for="codigo"> N° de cheque:</label>
                         <input type="text" id="codigo" name="codigo" value="" style="height: 30px;">
                     </div>
                     <div id="campoBanco" >
                         <label for="banco">Banco</label>
                         <input type="text" id="banco" name="banco" value="" style="height: 30px;">
+                    </div>
+                    <div id="campofechaExpedicion" >
+                        <label for="fechaExpedicion">fecha del pago:</label>
+                        <input type="date" id="fechaExpedicion" name="fechaExpedicion" value="<?= date("Y-m-d") ?>" style="height: 30px;" max="<?= date("Y-m-d") ?>">
                     </div>
                 </div>
 
@@ -162,19 +166,33 @@
                 // Obtener el valor seleccionado del select
                 var selectedOption = selectElement.options[selectElement.selectedIndex].value;
                 var elementoRequerido = document.getElementById("fechaPago");
-
+                var codigodiv = document.getElementById("codigoDiv");
+                var campofechaExpedicion = document.getElementById("campofechaExpedicion");
+                campofechaExpedicion.style.display="none";
+                var codigo = document.getElementById("codigo");
                 // Si el valor seleccionado es "Dia anterior", mostrar el campo de selección de fecha, de lo contrario, ocultarlo
                 if (selectedOption === "Dia anterior") {
                     campoFecha.style.display = "block";                    
                     elementoRequerido.setAttribute("required", "required"); 
-                    campoBanco.style.display = "none"; 
+                    campoBanco.style.display = "none";
+                    codigodiv.style.display="none";
+                    codigo.removeAttribute("required");
                 }else if(selectedOption === "Cheque"||selectedOption === "Transacciones"){
                     campoFecha.style.display = "none"; 
                     campoBanco.style.display = "block"; 
+                    codigodiv.style.display="block";
+                    campofechaExpedicion.style.display="block";
+                    elementoRequerido.removeAttribute("required");
+                    codigo.setAttribute("required", "required"); 
+                    if(selectedOption === "Cheque"){
+                        document.getElementById("codigoDiv").querySelector("label").innerHTML = "Comprobante de pago:";
+                    } else{
+                        document.getElementById("codigoDiv").querySelector("label").innerHTML = "N° comprobante de pago";
+                    }
                 }
                 else{
-                    campoFecha.style.display = "none"; 
-                    campoBanco.style.display = "none";                    
+                    campoFecha.style.display = "none";
+                    campoBanco.style.display = "none";
                     elementoRequerido.removeAttribute("required");
 
                 }

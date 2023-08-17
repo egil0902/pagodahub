@@ -364,7 +364,14 @@
                     });
                     document.addEventListener("input", updateProductList);
                 </script>
-
+                <script>
+                    // Prevent form submission on Enter key press
+                    document.getElementById("market").addEventListener("keydown", function (event) {
+                        if (event.key === "Enter") {
+                            event.preventDefault();
+                        }
+                    });
+                </script>
                 <style>
                     table {
                         font-family: arial, sans-serif;
