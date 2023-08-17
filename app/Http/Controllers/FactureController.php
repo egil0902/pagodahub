@@ -311,7 +311,6 @@ class FactureController extends Controller
         if($request->banco){
             $banco=$request->banco;
         }
-
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;  
@@ -320,7 +319,7 @@ class FactureController extends Controller
         }else{
             $metodoPago=$request->metodoPago;
             $codigo=$request->codigo;
-            $fechaExpedicion=$request->fechaPago;
+            $fechaExpedicion=$request->fechaExpedicion;
             //verifica si se paga con el presupuesto de un dia anterior
             if($metodoPago==="Dia anterior"){
                 $codigo="000000";
@@ -414,6 +413,7 @@ class FactureController extends Controller
                 $cheque->monto = $monto;
                 $cheque->tipo=$metodoPago;
                 $cheque->codigo=$codigo;
+                $cheque->banco=$banco;
                 $cheque->fechaExpedicion=$fechaExpedicion;
                 $cheque->save();
                 
@@ -440,7 +440,6 @@ class FactureController extends Controller
                     }else{
                         return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                     }
-                    
                     $cheque = new Cheque();
                     $cheque->fecha = $fechaPago;
                     $cheque->id_factura = $factura->id_compra;
@@ -448,6 +447,7 @@ class FactureController extends Controller
                     $cheque->monto = $monto;
                     $cheque->tipo=$metodoPago;
                     $cheque->codigo=$codigo;
+                    $cheque->banco=$banco;
                     $cheque->fechaExpedicion=$fechaExpedicion;
                     $cheque->save();
                     
