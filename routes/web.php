@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+
 
 Auth::routes();
 
@@ -33,6 +31,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/test', [App\Http\Controllers\test::class, 'test'])->name('test.list');
 Route::middleware(['auth', 'user.data'])->group(function () {
+    Route::get('/', function () {
+        return view('auth/login');
+    });
     Route::post('/close_cash', [App\Http\Controllers\CloseCashController::class, 'show'])->name('close.cash');
     Route::post('/closecash_store', [App\Http\Controllers\CloseCashController::class, 'store'])->name('closecash.store');
     Route::post('/closecash_import', [App\Http\Controllers\CloseCashController::class, 'import'])->name('closecash.import');
