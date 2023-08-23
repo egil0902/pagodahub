@@ -241,7 +241,7 @@
                                             <ul class="dropdown-menu dropdown-menu-dark">
                                                 <li>
                                                     <a class="dropdown-item" href="/Brink">
-                                                        Solicitud supervisor</a>
+                                                        Banco supervisor</a>
                                                 </li>
                                                 <li> <a class="dropdown-item" href="/BrinkSend">
                                                         Envio bancos

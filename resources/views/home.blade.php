@@ -397,7 +397,7 @@
                                                         <button type="submit" class="btn btn-outline">
                                                             {{-- <h5 class="card-header">Banco</h5> --}}
                                                             <div class="card-body">
-                                                                <h5 class="card-title">Solicitud Supervisor</h5>
+                                                                <h5 class="card-title">Banco Supervisor</h5>
                                                                 <p class="card-text">---------------</p>
                                                             </div>
                                                         </button>
