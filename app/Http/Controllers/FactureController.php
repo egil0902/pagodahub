@@ -643,4 +643,68 @@ class FactureController extends Controller
         'deuda'
         ));
     }
+    public function resumePdf(Request $request){
+        $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
+        $vueltoEntregado= 0;
+        $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
+        $cantidadProductos=0;
+        $tFactura=0;        
+        $abonado=0;
+        $tEfectivo=0;
+        $tCredito=0;
+        $deuda=0;
+        foreach ($facturas as $f) {
+            $cantidades=json_decode($f->Factured_quantity);
+            foreach ($cantidades as $cantidad) {
+                $cantidadProductos+=$cantidad;
+            }
+            $tFactura+=$f->total;
+            $abonado+=$f->monto_abonado;
+            if($f->medio_de_pago==true){
+                $tEfectivo+=$f->total;
+            }
+            if($f->medio_de_pago==false){
+                $tCredito+=$f->total;
+                $deuda+=$f->total-$f->monto_abonado;
+            }
+        }
+        
+        $pagosAnteriores=0;
+        $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->get();
+        if ($cheques->count()>0) {
+            foreach ($cheques as $check) {
+                $pagosAnteriores+=$check->monto;
+            }
+        }
+        
+        $fecha=$request->day;
+        $presupuesto=0;
+        $carton=0;
+        if(count($calculo)){
+            $presupuesto=$calculo[0]->budget;
+            $carton=$calculo[0]->carton;
+            $vueltoEntregado=$calculo[0]->vuelto;
+        }
+        
+        $tComprado=0;
+        $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;
+        $cheques = Cheque::where('fecha',$request->day)->get();
+        $pdf = PDF::loadView('download-pdf_resumen_del_dia', ['fecha'=>$request->day,
+        'cantidadProductos'=>$cantidadProductos,
+        'presupuesto'=>$presupuesto,
+        'facturas'=>$facturas,
+        'carton'=>$carton,
+        'tComprado'=>$tComprado,
+        'tFactura'=>$tFactura,
+        'tEfectivo'=>$tEfectivo,
+        'tCredito'=>$tCredito,
+        'abonado'=>$abonado,
+        'pagosAnteriores'=>$pagosAnteriores,
+        'vuelto'=>$vuelto,
+        'vueltoEntregado'=>$vueltoEntregado,
+        'cheques'=>$cheques,
+        'deuda'=>$deuda]);
+        return $pdf->download("resumen-".$request->day.".pdf");
+        
+    }
 }

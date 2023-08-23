@@ -120,6 +120,12 @@
             <td>{{$vuelto-$vueltoEntregado}}</td>
         </tr>
     </table>
+    <form method="POST" action="{{ route('resume-pdf') }}">
+        @csrf
+        <input type="hidden" name="day" value="{{ $fecha }}">
+        <button type="submit" class="btn btn-primary">Imprimir</button>
+    </form>
+
 </div>
 
 <style>
