@@ -97,11 +97,14 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day')->where('day', 'monday');
 
     //rutas de Brick supervisor
-    Route::get('/Brink', [App\Http\Controllers\BankController::class, 'index'])->name('Brink');
-    Route::get('/Brink_Import', [App\Http\Controllers\BankController::class, 'import'])->name('Brink.import');
+    Route::get('/Brink', [App\Http\Controllers\BrinkController::class, 'index'])->name('Brink');
+    Route::post('/Brink', [App\Http\Controllers\BrinkController::class, 'import'])->name('Brink.import');
+    Route::post('/Brink_save', [App\Http\Controllers\BrinkController::class, 'store'])->name('Brink.store');
+    Route::post('/Brink_update', [App\Http\Controllers\BrinkController::class, 'update'])->name('Brink.update');
+    Route::post('/Brink_print', [App\Http\Controllers\BrinkController::class, 'imprimir'])->name('Brink.imprimir');
 
     //rutas de Brick envio
-    Route::get('/BrinkSend', [App\Http\Controllers\BankController::class, 'indexSend'])->name('BrinkSend');
+    Route::get('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'indexSend'])->name('BrinkSend');
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
