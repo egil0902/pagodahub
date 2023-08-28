@@ -23,27 +23,32 @@
                                 id="today" name="today" placeholder="" value="<?php echo date("Y-m-d"); ?>" readonly >
                                 
                         </div>
-                        <div class=" col-md-6 mb-3">
-                            <label for="date">Fecha del cierre</label>
-                            <input type="date" class="form-control" date-format="mm/dd/yyyy" id="DateTrx"
-                            name="DateTrx" placeholder="" required>
-                            <script>
-                                // Obtén la fecha actual
-                                var today = new Date();
+                        <div class="col-md-6 mb-3">
+                            <label for="start_date">Fecha Inicial</label>
+                            <input type="date" class="form-control" id="startDate" name="startDate" min="{{ date('Y-m-d', strtotime('-15 days')) }}" max="{{ date('Y-m-d') }}" onchange="validateStartDate()" required>
+                        </div>
 
-                                // Calcula la fecha hace quince días
-                                var fifteenDaysAgo = new Date();
-                                fifteenDaysAgo.setDate(today.getDate() - 15);
+                        <div class="col-md-6 mb-3">
+                            <label for="end_date">Fecha Final</label>
+                            <input type="date" class="form-control" id="endDate" name="endDate" min="" max="" readonly required>
+                        </div>
 
-                                // Convierte las fechas a formato YYYY-MM-DD para establecer los atributos min y max
-                                var maxDate = today.toISOString().split('T')[0];
-                                var minDate = fifteenDaysAgo.toISOString().split('T')[0];
+                        <script>
+                            function validateStartDate() {
+                                var startDate = new Date(document.getElementById('startDate').value);
+                                setEndDate(startDate);
+                            }
 
-                                // Establece los valores min y max en el elemento de fecha
-                                document.getElementById('DateTrx').setAttribute('min', minDate);
-                                document.getElementById('DateTrx').setAttribute('max', maxDate);
-                            </script>                            
-                        </div> 
+                            function setEndDate(startDate) {
+                                var endDate = new Date(startDate);
+                                endDate.setDate(startDate.getDate() + 2 ); // Avanza 3 días desde la fecha inicial
+                                document.getElementById('endDate').min = startDate.toISOString().split('T')[0];
+                                document.getElementById('endDate').max = endDate.toISOString().split('T')[0];
+                                document.getElementById('endDate').removeAttribute('readonly');
+                                document.getElementById('endDate').value = endDate.toISOString().split('T')[0];
+                            }
+                        </script>
+
                         <div class="card-body">
                             <p for="cars" class="card-text">Sucursal</p>
                             <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
@@ -65,13 +70,35 @@
                         </div>
                     </form>
                     <hr class="mb-4">
+                    @php
+                        $x_oneamt = 0;
+                        $x_fiveamt = 0;
+                        $x_tenamt = 0;
+                        $x_twentyamt = 0;
+                        $rollo1 = 0;
+                        $rollo25 = 0;
+                        $rollo50 = 0;
+                        $gerencia = 0;
+                    @endphp
                     @if(!isset($brink))
-                        @if(isset($closecashlist))
+                        @if(isset($closecashsumlist))
                             @if ($closecashsumlist->{'records-size'} > 0)
                                 @foreach ($closecashsumlist->records as $data)
-                                    <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
+                                    @php
+                                        $x_oneamt +=$data->x_oneamt;
+                                        $x_fiveamt +=$data->x_fiveamt;
+                                        $x_tenamt +=$data->x_tenamt;
+                                        $x_twentyamt +=$data->x_twentyamt;
+                                        $rollo1 +=0;
+                                        $rollo25 +=0;
+                                        $rollo50 +=0;
+                                        $gerencia +=$data->x_oneamt;
+                                    @endphp
+                                @endforeach
+                                <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
                                         @csrf
                                         <input type="hidden" name="fecha_dia" value="{{ $fecha_dia }}">
+                                        
                                         <input type="hidden" name="fecha_cierre" value="{{ $fecha_cierre }}">
                                         <input type="hidden" name="sucursal" value="{{ $sucursal }}">
                                         <div align="center" style='width:90%!important; padding-left:10%'>
@@ -90,10 +117,6 @@
                                                             <h5 align="center" class="mb-0 fw-bold" id="Montosistema_t">
                                                             Cantidad
                                                             </h5>
-                                                            
-                                                            <input hidden name="efectivo_sistema"
-                                                                value="">
-
                                                         </th>
                                                         <th>
                                                             <h5 align="center" class="mb-0 fw-bold" id="Montosistema_t">
@@ -110,10 +133,10 @@
                                                                 type="number" class="text-center form-control w-50" >
                                                         </td>
                                                         <td align="center">
-                                                            <span id="sumColumn1">{{$data->x_oneamt}}</span>
+                                                            <span id="sumColumn1">{{$x_oneamt}}</span>
                                                         </td>
                                                         <td align="center">
-                                                            <span id="resultColumn1">{{$data->x_oneamt}}</span>
+                                                            <span id="resultColumn1">{{$x_oneamt}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -121,10 +144,10 @@
                                                         <td><input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='0' onchange="calOne(2)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn2">{{$data->x_fiveamt}}
+                                                        <span id="sumColumn2">{{$x_fiveamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn2">{{$data->x_fiveamt}}</span>
+                                                        <span id="resultColumn2">{{$x_fiveamt}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -135,10 +158,10 @@
                                                                 
                                                         </td>
                                                         <td align="center">
-                                                        <span id="sumColumn3">{{$data->x_tenamt}}
+                                                        <span id="sumColumn3">{{$x_tenamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn3">{{$data->x_tenamt}}</span>
+                                                        <span id="resultColumn3">{{$x_tenamt}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -146,14 +169,14 @@
                                                         <td><input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='0' onchange="calOne(4)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn4">{{$data->x_twentyamt}}
+                                                        <span id="sumColumn4">{{$x_twentyamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn4">{{$data->x_twentyamt}}</span>
+                                                        <span id="resultColumn4">{{$x_twentyamt}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Rollos</td>
+                                                        <td>Rollos 0.10</td>
                                                         <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='0' onchange="calOne(5)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
@@ -164,16 +187,57 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Sencillo</td>
-                                                        <td><input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='0' onchange="calOne(6)"
+                                                        <td>Rollos 0.25</td>
+                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='0' onchange="calOne(5)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn6">0</span>
+                                                        <span id="sumColumn5">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn6">{{isset($list)?$list->SencilloSupervisoraFiscalizadora:0}}</span>
+                                                        <span id="resultColumn5">0</span>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Rollos 0.50</td>
+                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='0' onchange="calOne(5)"
+                                                                type="number" class="text-center  form-control w-50" ></td>
+                                                        <td align="center">
+                                                        <span id="sumColumn5">0</span>
+                                                        </td>
+                                                        <td align="center">
+                                                        <span id="resultColumn5">0</span>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $sencillo = 0;
+                                                    @endphp
+
+                                                    @foreach ($list as $item)
+                                                        @php
+                                                            // Obtén el valor de SencilloSupervisoraFiscalizadora
+                                                            $value = $item->SencilloSupervisoraFiscalizadora;
+                                                            
+                                                            // Si el valor es mayor que cero, suma al total
+                                                            if ($value > 0) {
+                                                                $sencillo += $value;
+                                                            }
+                                                        @endphp
+
+                                                    @endforeach
+                                                    
+                                                    <tr>
+                                                            <td>Sencillo</td>
+                                                            <td>
+                                                                <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value="0" onchange="calOne(6)"
+                                                                    type="number" class="text-center form-control w-50">
+                                                            </td>
+                                                            <td align="center">
+                                                                <span id="sumColumn6">0</span>
+                                                            </td>
+                                                            <td align="center">
+                                                                <span id="resultColumn6">{{ $sencillo}}</span>
+                                                            </td>
+                                                        </tr>
                                                     @foreach ($permisos->records as $user)
                                                         @foreach ($user->PAGODAHUB_closecash as $acceso)
                                                             @if($acceso->Name  == 'bank.gerency')
@@ -320,13 +384,24 @@
                                                 alert('The File APIs are not fully supported in this browser.');
                                             }
                                         </script>
-                                @endforeach
+                                
                             @endif
                         @endif
                     @else
-                        @if(isset($closecashlist))
+                        @if(isset($closecashsumlist))
                             @if ($closecashsumlist->{'records-size'} > 0)
                                 @foreach ($closecashsumlist->records as $data)
+                                    @php
+                                        $x_oneamt +=$data->x_oneamt;
+                                        $x_fiveamt +=$data->x_fiveamt;
+                                        $x_tenamt +=$data->x_tenamt;
+                                        $x_twentyamt +=$data->x_twentyamt;
+                                        $rollo1 +=0;
+                                        $rollo25 +=0;
+                                        $rollo50 +=0;
+                                        $gerencia +=$data->x_oneamt;
+                                    @endphp
+                                @endforeach
                                     <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
                                         @csrf
                                         <input type="hidden" name="fecha_dia" value="{{ $fecha_dia }}">
@@ -349,8 +424,6 @@
                                                             Cantidad
                                                             </h5>
                                                             
-                                                            <input hidden name="efectivo_sistema"
-                                                                value="">
 
                                                         </th>
                                                         <th>
@@ -368,10 +441,10 @@
                                                                 type="number" class="text-center form-control w-50" >
                                                         </td>
                                                         <td align="center">
-                                                            <span id="sumColumn1">{{$data->x_oneamt}}</span>
+                                                            <span id="sumColumn1">{{$x_oneamt}}</span>
                                                         </td>
                                                         <td align="center">
-                                                            <span id="resultColumn1">{{$data->x_oneamt+$brink->billete_1}}</span>
+                                                            <span id="resultColumn1">{{$x_oneamt+$brink->billete_1}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -379,10 +452,10 @@
                                                         <td><input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='{{$brink->billete_5}}' onchange="calOne(2)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn2">{{$data->x_fiveamt}}
+                                                        <span id="sumColumn2">{{$x_fiveamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn2">{{$data->x_fiveamt+$brink->billete_5}}</span>
+                                                        <span id="resultColumn2">{{$x_fiveamt+$brink->billete_5}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -393,10 +466,10 @@
                                                                 
                                                         </td>
                                                         <td align="center">
-                                                        <span id="sumColumn3">{{$data->x_tenamt}}
+                                                        <span id="sumColumn3">{{$x_tenamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn3">{{$data->x_tenamt+$brink->billete_10}}</span>
+                                                        <span id="resultColumn3">{{$x_tenamt+$brink->billete_10}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -404,21 +477,43 @@
                                                         <td><input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='{{$brink->billete_20}}' onchange="calOne(4)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn4">{{$data->x_twentyamt}}
+                                                        <span id="sumColumn4">{{$x_twentyamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn4">{{$data->x_twentyamt+$brink->billete_20}}</span>
+                                                        <span id="resultColumn4">{{$x_twentyamt+$brink->billete_20}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Rollos</td>
-                                                        <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$brink->rollos}}' onchange="calOne(5)"
+                                                        <td>Rollos 0.10</td>
+                                                        <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$brink->rollos_10}}' onchange="calOne(5)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">{{$brink->rollos}}</span>
+                                                        <span id="resultColumn5">0</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Rollos 0.25</td>
+                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$brink->rollos_25}}' onchange="calOne(5)"
+                                                                type="number" class="text-center  form-control w-50" ></td>
+                                                        <td align="center">
+                                                        <span id="sumColumn5">0</span>
+                                                        </td>
+                                                        <td align="center">
+                                                        <span id="resultColumn5">0</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Rollos 0.50</td>
+                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='{{$brink->rollos}}' onchange="calOne(5)"
+                                                                type="number" class="text-center  form-control w-50" ></td>
+                                                        <td align="center">
+                                                        <span id="sumColumn5">0</span>
+                                                        </td>
+                                                        <td align="center">
+                                                        <span id="resultColumn5">0</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -429,7 +524,23 @@
                                                         <span id="sumColumn6">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn6">{{isset($list)?($list->SencilloSupervisoraFiscalizadora+$brink->sencillo):$brink->sencillo}}</span>
+                                                        @php
+                                                            $sencillo = 0;
+                                                        @endphp
+
+                                                        @foreach ($list as $item)
+                                                            @php
+                                                                // Obtén el valor de SencilloSupervisoraFiscalizadora
+                                                                $value = $item->SencilloSupervisoraFiscalizadora;
+                                                                
+                                                                // Si el valor es mayor que cero, suma al total
+                                                                if ($value > 0) {
+                                                                    $sencillo += $value;
+                                                                }
+                                                            @endphp
+
+                                                        @endforeach
+                                                        <span id="resultColumn6">{{$sencillo+$brink->sencillo}}</span>
                                                         </td>
                                                     </tr>
                                                     @foreach ($permisos->records as $user)
@@ -579,7 +690,7 @@
                                                 alert('The File APIs are not fully supported in this browser.');
                                             }
                                         </script>
-                                @endforeach
+                                
                             @endif
                         @endif
                     @endif

@@ -46,21 +46,27 @@ class BrinkController extends Controller
         $APIController = new APIController();
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
+
+        
+
         $response = $APIController->getModel(
             'RV_GH_CloseCash_Sum',
             '',
-            'datetrx eq ' . $request->DateTrx . ' and parent_id eq ' . $request->AD_Org_ID
+            'datetrx ge ' . $request->startDate . ' and datetrx le ' . $request->endDate
         );
+        
         $docstatus = 'CO';
         $closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
             '',
-            "datetrx eq '" . $request->DateTrx . "' and parent_id eq " . $request->AD_Org_ID . " and  docstatus eq '" . $docstatus . "'",
+            "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate . "' and docstatus eq '" . $docstatus . "'",
             'ba_name asc'
         );
-        $list = closecash::where('DateTrx', $request->DateTrx)->where('AD_Org_ID', $request->AD_Org_ID)->first();
+        $list = closecash::whereBetween('DateTrx', [$request->startDate, $request->endDate])
+                  ->where('AD_Org_ID', $request->AD_Org_ID)
+                  ->get();
         
-        $dia = $request->DateTrx;
+        $dia = $request->startDate;
         $organizacion = $request->AD_Org_ID;
         session()->put('dia', $dia);
         session()->put('organizacion', $organizacion);
@@ -205,14 +211,26 @@ class BrinkController extends Controller
                     } 
                 }
             }
-        }   
-            
-        
-
-        $brink = Brink::where('fecha_cierre',$request->DateTrx)->where('sucursal',$sucursal)->first();
-        if($brink!==null){
+        }  
+        $brink = Brink::where('fecha_inicio',$request->startDate)->where('fecha_cierre',$request->endDate)->where('sucursal',$sucursal)->first();
+        if($brink==null){
+            $exist = Brink::where(function ($query) use ($request, $sucursal) {
+            $query->where('fecha_cierre', '>=', $request->startDate)
+                  ->where('fecha_cierre', '<=', $request->endDate)
+                  ->where('sucursal', $sucursal)
+                  ->orWhere(function ($query) use ($request, $sucursal) {
+                      $query->where('fecha_inicio', '>=', $request->startDate)
+                            ->where('fecha_inicio', '<=', $request->endDate)
+                            ->where('sucursal', $sucursal);
+                  });
+            })->first();
+            if($exist){
+                return redirect()->back()->with('mensaje', 'Existe un registro con las fecha de inicio '. $exist->fecha_inicio.' y fecha de cierre '.$exist->fecha_cierre );;
+            }
+        } 
+        if($brink){
             foreach ($user->records  as $usuario) {
-                //dump($user);
+                
                 foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                     if ($acceso->Name == 'closecash') {
                         return view('brinks', ['orgs' => $orgs, 
@@ -222,8 +240,8 @@ class BrinkController extends Controller
                                                 'list' => $list, 
                                                 'permisos' => $user,
                                                 'totales'=> $total,
-                                                'fecha_dia'=>$request->today,
-                                                'fecha_cierre'=>$request->DateTrx,
+                                                'fecha_dia'=>$request->startDate,
+                                                'fecha_cierre'=>$request->endDate,
                                                 'sucursal'=>$sucursal,
                                                 'caja'=>$caja,
                                                 'brink'=>$brink
@@ -235,7 +253,6 @@ class BrinkController extends Controller
             }
         }else{
             foreach ($user->records  as $usuario) {
-                //dump($user);
                 foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                     if ($acceso->Name == 'closecash') {
                         return view('brinks', ['orgs' => $orgs, 
@@ -245,8 +262,8 @@ class BrinkController extends Controller
                                                 'list' => $list, 
                                                 'permisos' => $user,
                                                 'totales'=> $total,
-                                                'fecha_dia'=>$request->today,
-                                                'fecha_cierre'=>$request->DateTrx,
+                                                'fecha_dia'=>$request->startDate,
+                                                'fecha_cierre'=>$request->endDate,
                                                 'sucursal'=>$sucursal,
                                                 'caja'=>$caja
                                                 ]);
@@ -278,20 +295,23 @@ class BrinkController extends Controller
     public function store(Request $request)
     {
         $brink = new Brink;
-        $brink->fecha_dia=$request->fecha_dia;
+        $brink->fecha_inicio=$request->fecha_dia;
+        $brink->fecha_dia=date('Y-m-d');        
         $brink->fecha_cierre=$request->fecha_cierre;
         $brink->billete_1=$request->x_sistema1;
         $brink->billete_5=$request->x_sistema2;
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
         $brink->rollos=$request->x_sistema5;
+        $brink->rollos_10=$request->x_sistema9;
+        $brink->rollos_25=$request->x_sistema10;
+
         $brink->sencillo=$request->x_sistema6;
         $brink->dinero_gerencia=$request->x_sistema7;
         $brink->total_caja=$request->x_sistema8;
         $brink->total_brink=$request->BrinkresultColumn;
         $brink->total_quantity=$request->QuantityresultColumn;
         $brink->total=$request->TotalresultColumn;
-        
 
         $brink->sucursal=$request->sucursal;
         $brink->foto=$request->foto;
@@ -334,7 +354,9 @@ class BrinkController extends Controller
         $brink->billete_5=$request->x_sistema2;
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
-        $brink->rollos=$request->x_sistema5;
+        $brink->rollos=$request->x_sistema5;        
+        $brink->rollos_10=$request->x_sistema9;
+        $brink->rollos_25=$request->x_sistema10;
         $brink->sencillo=$request->x_sistema6;
         $brink->dinero_gerencia=$request->x_sistema7;
         $brink->total_caja=$request->x_sistema8;
