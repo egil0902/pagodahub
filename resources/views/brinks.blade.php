@@ -129,7 +129,7 @@
                                                     <tr>
                                                         <td>$1 *</td>
                                                         <td>
-                                                            <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='0' onchange="calOne(1)"
+                                                            <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='0' onchange="calOne(1,1)"
                                                                 type="number" class="text-center form-control w-50" >
                                                         </td>
                                                         <td align="center">
@@ -141,19 +141,19 @@
                                                     </tr>
                                                     <tr>
                                                         <td>$5 *</td>
-                                                        <td><input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='0' onchange="calOne(2)"
+                                                        <td><input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='0' onchange="calOne(2,5)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn2">{{$x_fiveamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn2">{{$x_fiveamt}}</span>
+                                                        <span id="resultColumn2">{{$x_fiveamt*5}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>$10 *</td>
                                                         <td >
-                                                            <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='0' onchange="calOne(3)"
+                                                            <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='0' onchange="calOne(3,10)"
                                                                 type="number" class="text-center  form-control w-50" >
                                                                 
                                                         </td>
@@ -161,51 +161,51 @@
                                                         <span id="sumColumn3">{{$x_tenamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn3">{{$x_tenamt}}</span>
+                                                        <span id="resultColumn3">{{$x_tenamt*10}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>$20 *</td>
-                                                        <td><input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='0' onchange="calOne(4)"
+                                                        <td><input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='0' onchange="calOne(4,20)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn4">{{$x_twentyamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn4">{{$x_twentyamt}}</span>
+                                                        <span id="resultColumn4">{{$x_twentyamt*20}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.10</td>
-                                                        <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='0' onchange="calOne(5)"
+                                                        <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='0' onchange="calOne(5,0.10)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0</span>
+                                                        <span id="resultColumn5">0*0.10</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.25</td>
-                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='0' onchange="calOne(5)"
+                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='0' onchange="calOne(5,0.25)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0</span>
+                                                        <span id="resultColumn5">0*0.25</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.50</td>
-                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='0' onchange="calOne(5)"
+                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='0' onchange="calOne(5,0.50)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0</span>
+                                                        <span id="resultColumn5">0*0.50</span>
                                                         </td>
                                                     </tr>
                                                     @php
@@ -228,7 +228,7 @@
                                                     <tr>
                                                             <td>Sencillo</td>
                                                             <td>
-                                                                <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value="0" onchange="calOne(6)"
+                                                                <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value="0" onchange="calOne(6,1)"
                                                                     type="number" class="text-center form-control w-50">
                                                             </td>
                                                             <td align="center">
@@ -243,7 +243,7 @@
                                                             @if($acceso->Name  == 'bank.gerency')
                                                                 <tr>
                                                                     <td>Dinero Gerencia</td>
-                                                                    <td><input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='0' onchange="calOne(7)"
+                                                                    <td><input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='0' onchange="calOne(7,1)"
                                                                             type="number" class="text-center  form-control w-50" ></td>
                                                                     <td align="center">
                                                                     <span id="sumColumn7">0</span>
@@ -259,7 +259,7 @@
                                                     
                                                     <tr>
                                                         <td>Total caja</td>
-                                                        <td><input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='0' onchange="calOne(8)"
+                                                        <td><input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='0' onchange="calOne(8,1)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn8">{{$caja->SubTotal}}</span>
@@ -286,7 +286,7 @@
                                                 </tbody>
                                             </table>
                                             <script>
-                                                function calOne(index) {
+                                                function calOne(index,mult) {
                                                     // Obtener el valor ingresado en el input
                                                     var inputValue = parseFloat(document.getElementById('x_sistema' + index).value);
 
@@ -297,7 +297,7 @@
                                                     var sum = inputValue + xOneamtValue;
 
                                                     // Actualizar el valor en la columna
-                                                    document.getElementById('resultColumn' + index).textContent = sum;
+                                                    document.getElementById('resultColumn' + index).textContent = sum*mult;
 
                                                     // Recalcular el total
                                                     calculateTotal();
@@ -437,7 +437,7 @@
                                                     <tr>
                                                         <td>$1 *</td>
                                                         <td>
-                                                            <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='{{$brink->billete_1}}' onchange="calOne(1)"
+                                                            <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='{{$brink->billete_1}}' onchange="calOne(1,1)"
                                                                 type="number" class="text-center form-control w-50" >
                                                         </td>
                                                         <td align="center">
@@ -449,19 +449,19 @@
                                                     </tr>
                                                     <tr>
                                                         <td>$5 *</td>
-                                                        <td><input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='{{$brink->billete_5}}' onchange="calOne(2)"
+                                                        <td><input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='{{$brink->billete_5}}' onchange="calOne(2,5)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn2">{{$x_fiveamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn2">{{$x_fiveamt+$brink->billete_5}}</span>
+                                                        <span id="resultColumn2">{{($x_fiveamt+$brink->billete_5)*5}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>$10 *</td>
                                                         <td >
-                                                            <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='{{$brink->billete_10}}' onchange="calOne(3)"
+                                                            <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='{{$brink->billete_10}}' onchange="calOne(3,10)"
                                                                 type="number" class="text-center  form-control w-50" >
                                                                 
                                                         </td>
@@ -469,23 +469,23 @@
                                                         <span id="sumColumn3">{{$x_tenamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn3">{{$x_tenamt+$brink->billete_10}}</span>
+                                                        <span id="resultColumn3">{{($x_tenamt+$brink->billete_10)*10}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>$20 *</td>
-                                                        <td><input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='{{$brink->billete_20}}' onchange="calOne(4)"
+                                                        <td><input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='{{$brink->billete_20}}' onchange="calOne(4,20)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn4">{{$x_twentyamt}}
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn4">{{$x_twentyamt+$brink->billete_20}}</span>
+                                                        <span id="resultColumn4">{{($x_twentyamt+$brink->billete_20)*20}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.10</td>
-                                                        <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$brink->rollos_10}}' onchange="calOne(5)"
+                                                        <td><input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$brink->rollos_10}}' onchange="calOne(5,0.10)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
@@ -496,7 +496,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.25</td>
-                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$brink->rollos_25}}' onchange="calOne(5)"
+                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$brink->rollos_25}}' onchange="calOne(5,0.25)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
@@ -507,7 +507,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.50</td>
-                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='{{$brink->rollos}}' onchange="calOne(5)"
+                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='{{$brink->rollos}}' onchange="calOne(5,0.50)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn5">0</span>
@@ -518,7 +518,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Sencillo</td>
-                                                        <td><input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='{{$brink->sencillo}}' onchange="calOne(6)"
+                                                        <td><input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='{{$brink->sencillo}}' onchange="calOne(6,1)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn6">0</span>
@@ -548,7 +548,7 @@
                                                             @if($acceso->Name  == 'bank.gerency')
                                                                 <tr>
                                                                     <td>Dinero Gerencia</td>
-                                                                    <td><input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='{{$brink->dinero_gerencia}}' onchange="calOne(7)"
+                                                                    <td><input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='{{$brink->dinero_gerencia}}' onchange="calOne(7,1)"
                                                                             type="number" class="text-center  form-control w-50" ></td>
                                                                     <td align="center">
                                                                     <span id="sumColumn7">0</span>
@@ -564,7 +564,7 @@
                                                     
                                                     <tr>
                                                         <td>Total caja</td>
-                                                        <td><input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='{{$brink->total_caja}}' onchange="calOne(8)"
+                                                        <td><input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='{{$brink->total_caja}}' onchange="calOne(8,1)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
                                                         <span id="sumColumn8">{{$caja->SubTotal}}</span>
@@ -591,7 +591,7 @@
                                                 </tbody>
                                             </table>
                                             <script>
-                                                function calOne(index) {
+                                                function calOne(index,mult) {
                                                     // Obtener el valor ingresado en el input
                                                     var inputValue = parseFloat(document.getElementById('x_sistema' + index).value);
 
@@ -602,7 +602,7 @@
                                                     var sum = inputValue + xOneamtValue;
 
                                                     // Actualizar el valor en la columna
-                                                    document.getElementById('resultColumn' + index).textContent = sum;
+                                                    document.getElementById('resultColumn' + index).textContent = sum*mult;
 
                                                     // Recalcular el total
                                                     calculateTotal();
