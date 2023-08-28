@@ -117,7 +117,7 @@
         </tr>
         <tr>
             <td>DIFERENCIA DE VUELTO</td>
-            <td>{{$vuelto-$vueltoEntregado}}</td>
+            <td>{{($vuelto>0)?$vueltoEntregado-$vuelto:$vueltoEntregado}}</td>
         </tr>
     </table>
     <form method="POST" action="{{ route('resume-pdf') }}">
