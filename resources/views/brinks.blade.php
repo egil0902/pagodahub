@@ -183,29 +183,29 @@
                                                         <span id="sumColumn5">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0*0.10</span>
+                                                        <span id="resultColumn5">0</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.25</td>
-                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='0' onchange="calOne(5,0.25)"
+                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='0' onchange="calOne(9,0.25)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn5">0</span>
+                                                        <span id="sumColumn9">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0*0.25</span>
+                                                        <span id="resultColumn9">0</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.50</td>
-                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='0' onchange="calOne(5,0.50)"
+                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='0' onchange="calOne(10,0.50)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn5">0</span>
+                                                        <span id="sumColumn10">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0*0.50</span>
+                                                        <span id="resultColumn10">0</span>
                                                         </td>
                                                     </tr>
                                                     @php
@@ -330,17 +330,17 @@
 
                                             </script>
                                             <div class="col-md">
-                                            <label for="formFileMultiple" class="form-label">Por favor adjunte los
-                                            reportes</label>
-                                        <input class=" subirimagen form-control" type="file" id="filePicker"
-                                            placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
-                                            onkeyup="imgsize()" accept=".png">
-                                        <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
-                                            cols="50" rows="15"></textarea>
-                                        <br>
-                                        <center><img id="img1" class="rounded" src="" border="1"
-                                                style="width: 50%;">
-                                        </center>
+                                                <label for="formFileMultiple" class="form-label">Por favor adjunte los
+                                                    reportes</label>
+                                                <input class=" subirimagen form-control" type="file" id="filePicker"
+                                                    placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
+                                                    onkeyup="imgsize()" accept=".png">
+                                                <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
+                                                    cols="50" rows="15"></textarea>
+                                                <br>
+                                                <center><img id="img1" class="rounded" src="" border="1"
+                                                        style="width: 50%;">
+                                                </center>
                                             </div>
                                             <hr class="mb-4">
                                             
