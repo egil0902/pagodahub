@@ -19,21 +19,21 @@
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
-                                id="date" name="date" placeholder="" value=""   max="<?php echo date("Y-m-d"); ?>" >
+                                id="date" name="date" placeholder="" value=""   max="<?php echo date("Y-m-d"); ?>" required>
                                 <div class="text-danger" id="Ddate" style="display:none">
                                         Campo requerido
                                     </div>
                         </div> 
                         <div class="col-md-6 mb-3">
                             <label for="Banco">Banco </label>
-                            <input type="text" class="form-control " id="Banco" name="Banco" placeholder=""  >
+                            <input type="text" class="form-control " id="Banco" name="Banco" placeholder=""  required>
                             <div class="text-danger" style="display:none" id="DBanco">
                                 Campo requerido
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="Monto">Monto </label>
-                            <input type="number" class="form-control" id="Monto" name="Monto" placeholder=""  >
+                            <input type="number" class="form-control" id="Monto" name="Monto" placeholder="" required >
                             <div class="text-danger" style="display:none" id="DMonto">
                                 Campo requerido
                             </div>
@@ -43,7 +43,7 @@
                             <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
                             <input class=" subirimagen form-control" type="file" id="filePicker"
                                 placeholder="foto" name="FileCedula" value="0" onchange="imgsize()"
-                                onkeyup="imgsize()" accept=".png">
+                                onkeyup="imgsize()" accept=".png" required>
                             <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
                                 cols="50" rows="15"></textarea>
                             <br>
