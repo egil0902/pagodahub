@@ -105,6 +105,8 @@ Route::middleware(['auth', 'user.data'])->group(function () {
 
     //rutas de Brick envio
     Route::get('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'indexSend'])->name('BrinkSend');
+    Route::post('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'brinkStore'])->name('Brink.brinkStore');
+    Route::delete('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'brinkdestroy'])->name('BrinkSend.brinkdestroy');
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');

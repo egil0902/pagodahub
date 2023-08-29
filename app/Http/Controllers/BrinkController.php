@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\closecash;
 use App\Models\Brink;
+use App\Models\BrinkSend;
 
 class BrinkController extends Controller
 {
@@ -317,6 +318,24 @@ class BrinkController extends Controller
         $brink->foto=$request->foto;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido guardado exitosamente');
+    }
+
+    public function brinkStore(Request $request){
+        $brink= new BrinkSend;
+        $brink->fecha=$request->date;
+        $brink->monto=$request->Monto;
+        $brink->banco=$request->Banco;
+        $brink->foto=$request->foto;
+        $brink->save();
+        return redirect()->back()->with('mensaje', 'Registro ha sido guardado exitosamente');
+    }
+
+    public function brinkdestroy(Request $request){
+        $brink = BrinkSend::where('id', $request->id)->first();
+        if ($brink) {
+            $brink->delete();              
+            return redirect()->back()->with('mensaje', 'Registro ha sido eliminado exitosamente');
+        }
     }
 
     /**

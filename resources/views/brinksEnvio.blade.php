@@ -5,13 +5,17 @@
 @section('content')
 <div class="p-2 m-0 border-0 bd-example">
     <div class="d-flex">
+        
         <!-- Formulario de búsqueda por proveedor -->
         <div class="container">
+            @if (session('mensaje'))
+                <div class="alert alert-success">{{ session('mensaje') }}</div>
+            @endif
             <div class="card">
                 <div class="card-header">Envio bancos</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
-                    <form name="provider" id="provider" method="post" action="{{ print(0) }}">
+                    <form name="provider" id="provider" method="post" action="{{ route('Brink.brinkStore') }}">
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
@@ -29,18 +33,45 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="Monto">Monto </label>
-                            <input type="text" class="form-control" id="Monto" name="Monto" placeholder=""  >
+                            <input type="number" class="form-control" id="Monto" name="Monto" placeholder=""  >
                             <div class="text-danger" style="display:none" id="DMonto">
                                 Campo requerido
                             </div>
                         </div>
                         <hr class="mb-4">
                         <div class="col-md">
-                            <label>Adjuntar Foto bolsa</label>
+                            <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
                             <input class=" subirimagen form-control" type="file" id="filePicker"
-                                placeholder="bolsa" name="" value="0" accept=".png, .jpg, .jpeg" required>
-                            <textarea style="display:none;" name="fotobolsa" id="base64textarea" placeholder="Base64 will appear here"
+                                placeholder="foto" name="FileCedula" value="0" onchange="imgsize()"
+                                onkeyup="imgsize()" accept=".png">
+                            <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
                                 cols="50" rows="15"></textarea>
+                            <br>
+                            <center><img id="img1" class="rounded" src="" border="1"
+                                    style="width: 50%;">
+                            </center>
+                            <script>                                            
+                                var handleFileSelect = function(evt) {
+                                    var files = evt.target.files;
+                                    var file = files[0];
+                                    if (files && file) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(readerEvt) {
+                                            var binaryString = readerEvt.target.result;
+                                            document.getElementById("base64textarea").value = btoa(binaryString);
+                                            document.getElementById("img1").src = "data:image/png;base64," + btoa(binaryString);
+
+                                        };
+                                        reader.readAsBinaryString(file);
+                                    }
+                                };
+                                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                                    document.getElementById('filePicker').addEventListener('change', handleFileSelect, false);
+
+                                } else {
+                                    alert('The File APIs are not fully supported in this browser.');
+                                }
+                            </script>
                         </div>
                         <hr class="mb-4">
                         
@@ -51,11 +82,19 @@
                     </form>
                 </div>
             </div>
-        </div>
-        
+        </div>        
     </div>
     </br>
-    
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Lista de envios a banco
+            </div>
+            <div class="card-body">
+                @livewire('App\Http\Livewire\brinkSendSearch')
+            </div>
+        </div>
+    </div>
 </div>
 
     <style>
