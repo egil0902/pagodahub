@@ -496,24 +496,24 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.25</td>
-                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$brink->rollos_25}}' onchange="calOne(5,0.25)"
+                                                        <td><input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$brink->rollos_25}}' onchange="calOne(9,0.25)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn5">0</span>
+                                                        <span id="sumColumn9">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0</span>
+                                                        <span id="resultColumn9">0</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Rollos 0.50</td>
-                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='{{$brink->rollos}}' onchange="calOne(5,0.50)"
+                                                        <td><input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value='{{$brink->rollos}}' onchange="calOne(10,0.50)"
                                                                 type="number" class="text-center  form-control w-50" ></td>
                                                         <td align="center">
-                                                        <span id="sumColumn5">0</span>
+                                                        <span id="sumColumn10">0</span>
                                                         </td>
                                                         <td align="center">
-                                                        <span id="resultColumn5">0</span>
+                                                        <span id="resultColumn10">0</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
