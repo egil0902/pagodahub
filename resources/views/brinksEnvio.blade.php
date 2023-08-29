@@ -91,7 +91,7 @@
                 Lista de envios a banco
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\brinkSendSearch')
+                @livewire('App\Http\Livewire\BrinkSendSearch')
             </div>
         </div>
     </div>
