@@ -20,6 +20,7 @@ class BrinkSendSearch extends Component
     public function render()
     {
 
+        
         $brinksend = BrinkSend::when($this->banco, function ($query) {
             $query->where('banco', 'ilike', "%$this->banco%");
         }, function ($query) {
