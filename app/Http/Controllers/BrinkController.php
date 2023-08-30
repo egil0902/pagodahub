@@ -63,9 +63,9 @@ class BrinkController extends Controller
             "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate . "' and docstatus eq '" . $docstatus . "'",
             'ba_name asc'
         );
-        $list = closecash::whereBetween('DateTrx', [$request->startDate, $request->endDate])
+        /*$list = closecash::whereBetween('DateTrx', [$request->startDate, $request->endDate])
                   ->where('AD_Org_ID', $request->AD_Org_ID)
-                  ->get();
+                  ->get();*/
         
         $dia = $request->startDate;
         $organizacion = $request->AD_Org_ID;
@@ -79,7 +79,7 @@ class BrinkController extends Controller
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
         //dd($closecashlist->records); //el chiste se hace con ba_value
         //NetTotal=montoContado
-        $panaderia = (object) [
+        /*$panaderia = (object) [
             'ba_name'=>'Total panaderia',
             'u_name'=>'------------',
             'BeginningBalance' => 0,
@@ -200,7 +200,7 @@ class BrinkController extends Controller
             [$caja],
             array_slice($closecashlist->records, $lastIndex)
         );
-        $day = $request->DateTrx;
+        */$day = $request->DateTrx;
         
         $presupuesto=0;
         $sucursal="";
@@ -230,8 +230,7 @@ class BrinkController extends Controller
             }
         } 
         if($brink){
-            foreach ($user->records  as $usuario) {
-                
+            /*foreach ($user->records  as $usuario) {                
                 foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                     if ($acceso->Name == 'closecash') {
                         return view('brinks', ['orgs' => $orgs, 
@@ -251,9 +250,17 @@ class BrinkController extends Controller
                     }
                 }
                 return redirect()->route('home');
-            }
+            }*/
+            return view('brinks', ['orgs' => $orgs, 
+                                    'request' => $request,
+                                    'permisos' => $user,
+                                    'fecha_dia'=>$request->startDate,
+                                    'fecha_cierre'=>$request->endDate,
+                                    'sucursal'=>$sucursal,
+                                    'brink'=>$brink
+                                    ]);
         }else{
-            foreach ($user->records  as $usuario) {
+            /*foreach ($user->records  as $usuario) {
                 foreach ($usuario->PAGODAHUB_closecash as $acceso) {
                     if ($acceso->Name == 'closecash') {
                         return view('brinks', ['orgs' => $orgs, 
@@ -272,7 +279,14 @@ class BrinkController extends Controller
                     }
                 }
                 return redirect()->route('home');
-            }
+            }*/
+            return view('brinks', ['orgs' => $orgs, 
+                                    'request' => $request, 
+                                    'permisos' => $user,
+                                    'fecha_dia'=>$request->startDate,
+                                    'fecha_cierre'=>$request->endDate,
+                                    'sucursal'=>$sucursal,
+                                    ]);
         }
         ////////////
 
@@ -304,8 +318,11 @@ class BrinkController extends Controller
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
         $brink->rollos=$request->x_sistema5;
+        
         $brink->rollos_10=$request->x_sistema9;
         $brink->rollos_25=$request->x_sistema10;
+        $brink->rollos_01=$request->x_sistema11;
+        $brink->rollos_05=$request->x_sistema12;
 
         $brink->sencillo=$request->x_sistema6;
         $brink->dinero_gerencia=$request->x_sistema7;
@@ -376,6 +393,8 @@ class BrinkController extends Controller
         $brink->rollos=$request->x_sistema5;        
         $brink->rollos_10=$request->x_sistema9;
         $brink->rollos_25=$request->x_sistema10;
+        $brink->rollos_01=$request->x_sistema11;
+        $brink->rollos_05=$request->x_sistema12;
         $brink->sencillo=$request->x_sistema6;
         $brink->dinero_gerencia=$request->x_sistema7;
         $brink->total_caja=$request->x_sistema8;
