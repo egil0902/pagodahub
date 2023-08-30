@@ -492,7 +492,16 @@
         
     </div>
     </br>
-    
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Lista de envios a banco
+            </div>
+            <div class="card-body">
+                @livewire('App\Http\Livewire\BrinkSearch')
+            </div>
+        </div>
+    </div>
 </div>
 
     <style>

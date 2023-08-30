@@ -317,6 +317,7 @@ class BrinkController extends Controller
         $brink->billete_5=$request->x_sistema2;
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
+        //rollos hace referencia a los rollos de 0.50
         $brink->rollos=$request->x_sistema5;
         
         $brink->rollos_10=$request->x_sistema9;
