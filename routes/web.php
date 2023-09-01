@@ -107,6 +107,13 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::get('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'indexSend'])->name('BrinkSend');
     Route::post('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'brinkStore'])->name('Brink.brinkStore');
     Route::delete('/BrinkSend', [App\Http\Controllers\BrinkController::class, 'brinkdestroy'])->name('BrinkSend.brinkdestroy');
+
+    //rutas solicitud brick
+    Route::get('/requestBrink', [App\Http\Controllers\RequestBrinkController::class, 'index'])->name('requestBrink');
+    Route::post('/requestBrink', [App\Http\Controllers\RequestBrinkController::class, 'store'])->name('requestBrink.store');
+    //rutas solicitud gerencia
+    Route::get('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'index'])->name('requestGerency');
+    Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');

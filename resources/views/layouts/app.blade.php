@@ -247,6 +247,16 @@
                                                         Envio bancos
                                                     </a>
                                                 </li>
+                                                <li> <a class="dropdown-item" href="/requestBrink">
+                                                        Solicitud Brink
+                                                    </a>
+                                                </li>
+                                                @if ($acceso->Name == 'bank.gerency')
+                                                <li> <a class="dropdown-item" href="/requestGerency">
+                                                        Solicitud gerencia
+                                                    </a>
+                                                </li>
+                                                @endif
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>

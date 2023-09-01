@@ -385,7 +385,7 @@
                                 </svg> Banco</h1>
                         </div>
                         <div class="card-body">
-                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="row row-cols-1 row-cols-md-4 g-4">
                                 @foreach ($user->PAGODAHUB_closecash as $acceso)
                                     @if ($acceso->Name == 'bank')
                                         <div class="col">
@@ -419,6 +419,48 @@
                                                             {{--  <h5 class="card-header">Banco</h5> --}}
                                                             <div class="card-body">
                                                                 <h5 class="card-title">Envio bancos</h5>
+                                                                <p class="card-text">---------------</p>
+                                                            </div>
+                                                        </button>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                    @if ($acceso->Name == 'bank.gerency')
+                                        <div class="col">
+                                            <div class="card h-100 border border-5 border-dark-subtle">
+                                                <form name="loanslist" id="loanslist" method="get"
+                                                    action="{{ route('requestGerency') }}">
+                                                    @csrf
+                                                    <center>
+                                                        <button type="submit" class="btn btn-outline">
+                                                            {{--  <h5 class="card-header">Banco</h5> --}}
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Solicitud gerencia</h5>
+                                                                <p class="card-text">---------------</p>
+                                                            </div>
+                                                        </button>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                    @if ($acceso->Name == 'bank')
+                                        <div class="col">
+                                            <div class="card h-100 border border-5 border-dark-subtle">
+                                                <form name="loanslist" id="loanslist" method="get"
+                                                    action="{{ route('requestBrink') }}">
+                                                    @csrf
+                                                    <center>
+                                                        <button type="submit" class="btn btn-outline">
+                                                            {{--  <h5 class="card-header">Banco</h5> --}}
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Solicitud Brink</h5>
                                                                 <p class="card-text">---------------</p>
                                                             </div>
                                                         </button>
