@@ -24,7 +24,7 @@ class RequestBrinkSearch extends Component
             $query->where(function ($query) {
             });
         })->orderBy('fecha', 'desc')->paginate(25);; // Obtener todos los brinksend de la tabla
-        return view('livewire.requestBrinkSearch', [
+        return view('livewire.requestbrinksearch', [
             'brinksend' => $brinksend,
         ]);
     }

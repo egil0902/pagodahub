@@ -49,7 +49,7 @@
                 Lista de solicitudes de gerencia
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\requestGerencySearch')
+                @livewire('App\Http\Livewire\RequestGerencySearch')
             </div>
         </div>
     </div>
