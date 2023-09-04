@@ -233,7 +233,7 @@
                                 @endforeach
                                 @foreach ($permisos2->records as $user)
                                     @foreach ($user->PAGODAHUB_closecash as $acceso)
-                                        @if ($acceso->Name == 'bank')
+                                        @if ($acceso->Name == 'bank'|| $acceso->Name == 'bank.gerency')
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
