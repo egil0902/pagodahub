@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\closecash;
 use App\Models\Brink;
+use App\Models\BrinkSend;
+use App\Models\RequestGerency;
+use App\Models\RequestBrink;
 
 class BrinkController extends Controller
 {
@@ -47,6 +50,8 @@ class BrinkController extends Controller
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
 
+        $sumatoriaMonto = RequestGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('monto');
+        $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->get();
         
 
         $response = $APIController->getModel(
@@ -62,9 +67,17 @@ class BrinkController extends Controller
             "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate . "' and docstatus eq '" . $docstatus . "'",
             'ba_name asc'
         );
+        $sumaBeginningBalance = 0;
+
+        foreach ($closecashlist->records as $record) {
+            // Verificar si el registro tiene la propiedad BeginningBalance y es numérica
+            if (isset($record->BeginningBalance) && is_numeric($record->BeginningBalance)) {
+                $sumaBeginningBalance += $record->BeginningBalance;
+            }
+        }
         $list = closecash::whereBetween('DateTrx', [$request->startDate, $request->endDate])
                   ->where('AD_Org_ID', $request->AD_Org_ID)
-                  ->get();
+                  ->sum('SencilloSupervisoraFiscalizadora');
         
         $dia = $request->startDate;
         $organizacion = $request->AD_Org_ID;
@@ -77,128 +90,6 @@ class BrinkController extends Controller
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
         //dd($closecashlist->records); //el chiste se hace con ba_value
-        //NetTotal=montoContado
-        $panaderia = (object) [
-            'ba_name'=>'Total panaderia',
-            'u_name'=>'------------',
-            'BeginningBalance' => 0,
-            'SubTotal' => 0,
-            'NetTotal' => 0,
-            'XAmt' => 0,
-            'DifferenceAmt' => 0
-        ];
-        
-        $caja = (object) [
-            'ba_name'=>'Total cajas',
-            'u_name'=>'------------',
-            'BeginningBalance' => 0,
-            'SubTotal' => 0,
-            'NetTotal' => 0,
-            'XAmt' => 0,
-            'DifferenceAmt' => 0
-        ];
-        
-        $pagaTodo = (object) [
-            'ba_name'=>'Total pagatodo',
-            'u_name'=>'------------',
-            'BeginningBalance' => 0,
-            'SubTotal' => 0,
-            'NetTotal' => 0,
-            'XAmt' => 0,
-            'DifferenceAmt' => 0
-        ];
-        $lastIndex=null;
-        foreach ($closecashlist->records as $index =>$cajas) {
-            switch ($cajas->ba_value) {
-                case 'panaderia':
-                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
-                    $panaderia->SubTotal += $cajas->SubTotal;
-                    $panaderia->NetTotal += $cajas->NetTotal;
-                    $panaderia->XAmt += $cajas->XAmt;
-                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
-                    break;
-                    
-                case '1000004':
-                    $pagaTodo->BeginningBalance += $cajas->BeginningBalance;
-                    $pagaTodo->SubTotal += $cajas->SubTotal;
-                    $pagaTodo->NetTotal += $cajas->NetTotal;
-                    $pagaTodo->XAmt += $cajas->XAmt;
-                    $pagaTodo->DifferenceAmt += $cajas->DifferenceAmt;
-                    $lastIndex=$index;
-                    break;
-                case 'Caja 5_Panaderia':
-                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
-                    $panaderia->SubTotal += $cajas->SubTotal;
-                    $panaderia->NetTotal += $cajas->NetTotal;
-                    $panaderia->XAmt += $cajas->XAmt;
-                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
-                    break;
-                case 'Caja 10':
-                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
-                    $panaderia->SubTotal += $cajas->SubTotal;
-                    $panaderia->NetTotal += $cajas->NetTotal;
-                    $panaderia->XAmt += $cajas->XAmt;
-                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
-                    break;
-                case 'Principal Panaderia Susy':
-                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
-                    $panaderia->SubTotal += $cajas->SubTotal;
-                    $panaderia->NetTotal += $cajas->NetTotal;
-                    $panaderia->XAmt += $cajas->XAmt;
-                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
-                    break;
-                case 'Caja Panaderia':
-                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
-                    $panaderia->SubTotal += $cajas->SubTotal;
-                    $panaderia->NetTotal += $cajas->NetTotal;
-                    $panaderia->XAmt += $cajas->XAmt;
-                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
-                    break;
-                case 'Dulceria Susy Fortuna P':
-                    $panaderia->BeginningBalance += $cajas->BeginningBalance;
-                    $panaderia->SubTotal += $cajas->SubTotal;
-                    $panaderia->NetTotal += $cajas->NetTotal;
-                    $panaderia->XAmt += $cajas->XAmt;
-                    $panaderia->DifferenceAmt += $cajas->DifferenceAmt;
-                    break;
-                default:
-                    if ($cajas->ba_value !== '1000004') {
-                        $caja->BeginningBalance += $cajas->BeginningBalance;
-                        $caja->SubTotal += $cajas->SubTotal;
-                        $caja->NetTotal += $cajas->NetTotal;
-                        $caja->XAmt += $cajas->XAmt;
-                        $caja->DifferenceAmt += $cajas->DifferenceAmt;
-                    }
-                    break;
-            }
-        }
-        $tDia = (object) [
-            'ba_name'=>'Total del día',
-            'u_name'=>'------------',
-            'BeginningBalance' => $panaderia->BeginningBalance+$caja->BeginningBalance+$pagaTodo->BeginningBalance,
-            'SubTotal' => $panaderia->SubTotal+$caja->SubTotal+$pagaTodo->SubTotal,
-            'NetTotal' => $panaderia->NetTotal+$caja->NetTotal+$pagaTodo->NetTotal,
-            'XAmt' => $panaderia->XAmt+$caja->XAmt+$pagaTodo->XAmt,
-            'DifferenceAmt' => $panaderia->DifferenceAmt+$caja->DifferenceAmt+$pagaTodo->DifferenceAmt
-        ];
-        $total=[$caja,$pagaTodo,$panaderia,$tDia];
-        $closecashlist->records[] = $panaderia;
-        $closecashlist->records[] = $tDia;
-        //dd($closecashlist->records,$posicion);
-        if($lastIndex===null){
-           $lastIndex = count($closecashlist->records)-2;
-        }
-
-        $closecashlist->records = array_merge(
-            array_slice($closecashlist->records, 0, $lastIndex + 1),
-            [$pagaTodo],
-            array_slice($closecashlist->records, $lastIndex + 1)
-        );
-        $closecashlist->records = array_merge(
-            array_slice($closecashlist->records, 0, $lastIndex),
-            [$caja],
-            array_slice($closecashlist->records, $lastIndex)
-        );
         $day = $request->DateTrx;
         
         $presupuesto=0;
@@ -211,7 +102,7 @@ class BrinkController extends Controller
                     } 
                 }
             }
-        }  
+        }
         $brink = Brink::where('fecha_inicio',$request->startDate)->where('fecha_cierre',$request->endDate)->where('sucursal',$sucursal)->first();
         if($brink==null){
             $exist = Brink::where(function ($query) use ($request, $sucursal) {
@@ -229,49 +120,29 @@ class BrinkController extends Controller
             }
         } 
         if($brink){
-            foreach ($user->records  as $usuario) {
-                
-                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                    if ($acceso->Name == 'closecash') {
-                        return view('brinks', ['orgs' => $orgs, 
-                                                'closecashsumlist' => $response, 
-                                                'request' => $request, 
-                                                'closecashlist' => $closecashlist, 
-                                                'list' => $list, 
-                                                'permisos' => $user,
-                                                'totales'=> $total,
-                                                'fecha_dia'=>$request->startDate,
-                                                'fecha_cierre'=>$request->endDate,
-                                                'sucursal'=>$sucursal,
-                                                'caja'=>$caja,
-                                                'brink'=>$brink
-                                                ]);
-                        break;
-                    }
-                }
-                return redirect()->route('home');
-            }
+            return view('brinks', ['orgs' => $orgs, 
+                                    'request' => $request,
+                                    'permisos' => $user,
+                                    'fecha_dia'=>$request->startDate,
+                                    'fecha_cierre'=>$request->endDate,
+                                    'sucursal'=>$sucursal,
+                                    'brink'=>$brink,
+                                    'gerencia'=>$sumatoriaMonto,
+                                    'requestBrink'=>$requestBrink,
+                                    'sencillo'=>$list
+                                    ]);
         }else{
-            foreach ($user->records  as $usuario) {
-                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                    if ($acceso->Name == 'closecash') {
-                        return view('brinks', ['orgs' => $orgs, 
-                                                'closecashsumlist' => $response, 
-                                                'request' => $request, 
-                                                'closecashlist' => $closecashlist, 
-                                                'list' => $list, 
-                                                'permisos' => $user,
-                                                'totales'=> $total,
-                                                'fecha_dia'=>$request->startDate,
-                                                'fecha_cierre'=>$request->endDate,
-                                                'sucursal'=>$sucursal,
-                                                'caja'=>$caja
-                                                ]);
-                        break;
-                    }
-                }
-                return redirect()->route('home');
-            }
+            return view('brinks', ['orgs' => $orgs, 
+                                    'request' => $request, 
+                                    'permisos' => $user,
+                                    'fecha_dia'=>$request->startDate,
+                                    'fecha_cierre'=>$request->endDate,
+                                    'sucursal'=>$sucursal,
+                                    'gerencia'=>$sumatoriaMonto,
+                                    'requestBrink'=>$requestBrink,
+                                    'cajas'=>$sumaBeginningBalance,                                    
+                                    'sencillo'=>$list
+                                ]);
         }
         ////////////
 
@@ -302,21 +173,43 @@ class BrinkController extends Controller
         $brink->billete_5=$request->x_sistema2;
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
-        $brink->rollos=$request->x_sistema5;
-        $brink->rollos_10=$request->x_sistema9;
-        $brink->rollos_25=$request->x_sistema10;
+        //rollos hace referencia a los rollos de 0.50
+        $brink->rollos=$request->x_sistema9;
+        
+        $brink->rollos_10=$request->x_sistema7;
+        $brink->rollos_25=$request->x_sistema8;
+        $brink->rollos_01=$request->x_sistema5;
+        $brink->rollos_05=$request->x_sistema6;
 
-        $brink->sencillo=$request->x_sistema6;
-        $brink->dinero_gerencia=$request->x_sistema7;
-        $brink->total_caja=$request->x_sistema8;
+        $brink->sencillo=$request->x_sistema10;
+        $brink->dinero_gerencia=$request->x_sistema11;
+        $brink->total_caja=$request->x_sistema12;
         $brink->total_brink=$request->BrinkresultColumn;
-        $brink->total_quantity=$request->QuantityresultColumn;
-        $brink->total=$request->TotalresultColumn;
 
         $brink->sucursal=$request->sucursal;
         $brink->foto=$request->foto;
+        $brink->observaciones=$request->observaciones;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido guardado exitosamente');
+    }
+
+    public function brinkStore(Request $request){
+        $brink= new BrinkSend;
+        $brink->fecha=$request->date;
+        $brink->monto=$request->Monto;
+        $brink->banco=$request->Banco;
+        $brink->foto=$request->foto;
+        $brink->observaciones=$request->observaciones;
+        $brink->save();
+        return redirect()->back()->with('mensaje', 'Registro ha sido guardado exitosamente');
+    }
+
+    public function brinkdestroy(Request $request){
+        $brink = BrinkSend::where('id', $request->id)->first();
+        if ($brink) {
+            $brink->delete();              
+            return redirect()->back()->with('mensaje', 'Registro ha sido eliminado exitosamente');
+        }
     }
 
     /**
@@ -357,6 +250,8 @@ class BrinkController extends Controller
         $brink->rollos=$request->x_sistema5;        
         $brink->rollos_10=$request->x_sistema9;
         $brink->rollos_25=$request->x_sistema10;
+        $brink->rollos_01=$request->x_sistema11;
+        $brink->rollos_05=$request->x_sistema12;
         $brink->sencillo=$request->x_sistema6;
         $brink->dinero_gerencia=$request->x_sistema7;
         $brink->total_caja=$request->x_sistema8;
@@ -365,6 +260,7 @@ class BrinkController extends Controller
         $brink->total=$request->TotalresultColumn;
         $brink->sucursal=$request->sucursal;
         $brink->foto=$request->foto;
+        $brink->observaciones=$request->observaciones;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido actualizado exitosamente');
     }

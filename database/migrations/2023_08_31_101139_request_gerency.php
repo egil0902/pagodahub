@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('envio_banco', function (Blueprint $table) {
+        Schema::create('requestGerency', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('fecha');
             $table->double('monto');
-            $table->text('banco');
-            $table->longText('foto');
         });
     }
 
