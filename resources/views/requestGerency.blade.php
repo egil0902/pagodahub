@@ -31,8 +31,44 @@
                                 Campo requerido
                             </div>
                         </div>
-                        <hr class="mb-4">
+                        <h4>Observaciones:</h4>
+                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
                         
+                        <hr class="mb-4">
+                        <div class="col-md">
+                            <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
+                            <input class=" subirimagen form-control" type="file" id="filePicker"
+                                placeholder="foto" name="FileCedula" value="0" onchange="imgsize()"
+                                onkeyup="imgsize()" accept=".png" required>
+                            <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
+                                cols="50" rows="15"></textarea>
+                            <br>
+                            <center><img id="img1" class="rounded" src="" border="1"
+                                    style="width: 50%;">
+                            </center>
+                            <script>                                            
+                                var handleFileSelect = function(evt) {
+                                    var files = evt.target.files;
+                                    var file = files[0];
+                                    if (files && file) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(readerEvt) {
+                                            var binaryString = readerEvt.target.result;
+                                            document.getElementById("base64textarea").value = btoa(binaryString);
+                                            document.getElementById("img1").src = "data:image/png;base64," + btoa(binaryString);
+
+                                        };
+                                        reader.readAsBinaryString(file);
+                                    }
+                                };
+                                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                                    document.getElementById('filePicker').addEventListener('change', handleFileSelect, false);
+
+                                } else {
+                                    alert('The File APIs are not fully supported in this browser.');
+                                }
+                            </script>
+                        </div>
                         <div class="form-group w-auto">
                             @csrf
                             <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Guardar</button>

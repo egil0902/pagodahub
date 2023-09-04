@@ -24,13 +24,16 @@
                 </div>
             </th>
             <th>Monto </th>
+            <th>Observaciones </th>
+            <th></th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
                 <tr>
                     <td>{{ date('d-m-Y', strtotime($data->fecha)) }} </td>
                     <td>{{ $data->monto }} </td>
-                    {{--<td>
+                    <th>{{$data->observaciones}} </th>
+                    <td>
                         <center>
                             <form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
                                 @csrf
@@ -73,7 +76,7 @@
                     <!-- Imagen que se mostrará/ocultará -->
                     <td colspan="4">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
-                    </td>--}}
+                    </td>
                 </tr>
             @endforeach
         </tbody>

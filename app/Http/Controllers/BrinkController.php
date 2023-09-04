@@ -188,6 +188,7 @@ class BrinkController extends Controller
 
         $brink->sucursal=$request->sucursal;
         $brink->foto=$request->foto;
+        $brink->observaciones=$request->observaciones;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido guardado exitosamente');
     }
@@ -198,6 +199,7 @@ class BrinkController extends Controller
         $brink->monto=$request->Monto;
         $brink->banco=$request->Banco;
         $brink->foto=$request->foto;
+        $brink->observaciones=$request->observaciones;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Registro ha sido guardado exitosamente');
     }
@@ -258,6 +260,7 @@ class BrinkController extends Controller
         $brink->total=$request->TotalresultColumn;
         $brink->sucursal=$request->sucursal;
         $brink->foto=$request->foto;
+        $brink->observaciones=$request->observaciones;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido actualizado exitosamente');
     }

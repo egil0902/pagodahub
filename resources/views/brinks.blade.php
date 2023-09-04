@@ -258,6 +258,10 @@
 
                                         </script>
                                         <div class="col-md">
+                                            <h4>Observaciones:</h4>
+                                            <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
+                                        </div>
+                                        <div class="col-md">
                                             <label for="formFileMultiple" class="form-label">Por favor adjunte los
                                                 reportes</label>
                                             <input class=" subirimagen form-control" type="file" id="filePicker"
@@ -279,9 +283,9 @@
                                             <div class="col-4">
 
                                             </div>
-                                            <div class="col-4">
+                                            {{--<div class="col-4">
                                                 <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.imprimir') }}')">Imprimir</button>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                     </form>
 
@@ -317,11 +321,6 @@
                         @endif
                 </div>
             </div>
-        </div>
-        
-    </div>
-    </br>
-    <div class="container">
         <div class="card">
             <div class="card-header">
                 Lista de envios a banco
@@ -331,6 +330,9 @@
             </div>
         </div>
     </div>
+    </div>
+    </br>
+    
 </div>
 
     <style>

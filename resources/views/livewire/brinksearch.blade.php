@@ -62,7 +62,7 @@
                         $0.25:{{ $data->rollos_25 }} <br>
                         $0.50:{{ $data->rollos }} 
                     </td>
-                    <td>{{ $data->total_brink }}   </td>
+                    <td>{{ $data->total_caja }}   </td>
                     <td>
                         <center>
                             <form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
@@ -99,6 +99,13 @@
                                 }
                             }
                         </script>
+                    </td>
+                </tr>
+                <tr>
+                    
+                    <!-- Imagen que se mostrará/ocultará -->
+                    <td colspan="8">
+                        {{$data->observaciones}}
                     </td>
                 </tr>
                 <tr>

@@ -16,6 +16,8 @@ class RequestGerencyController extends Controller
         $brink= new RequestGerency;
         $brink->fecha = $request->date;
         $brink->monto = $request->Monto;
+        $brink->observaciones=$request->observaciones;
+        $brink->foto=$request->foto;
         $brink->save();
         return view('requestGerency')->with('mensaje', 'Brink ha sido guardado exitosamente');
     }

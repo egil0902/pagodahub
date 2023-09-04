@@ -27,6 +27,9 @@ class RequestBrinkController extends Controller
         $brink->rollos_25=$request->x_sistema8;
         $brink->rollos_50=$request->x_sistema9;
         $brink->total=$request->BrinkresultColumn;
+        $brink->observaciones=$request->observaciones;
+        $brink->foto=$request->foto;
+        
 
         $brink->save();
         return view('requestBrink')->with('mensaje', 'Brink ha sido guardado exitosamente');
