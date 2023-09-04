@@ -300,6 +300,11 @@ class FactureController extends Controller
 
     public function downloadPdf(Request $request)
     {
+        $APIController = new APIController();
+         $name_user = auth()->user()->name;
+        $email_user = auth()->user()->email;
+        $permisos2 = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        
         //request->montoParcial
         $metodoPago="Presupuesto";
         $codigo="000000";
@@ -352,7 +357,7 @@ class FactureController extends Controller
             }else{
                 $providerName="";
                 $facturas=Facture::where('pagada', false)->get();
-                return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
+                return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
             }
 
             $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->get();
@@ -376,7 +381,7 @@ class FactureController extends Controller
                 //la deuda no se puede pagar con el presupuesto
                 $providerName="";
                 $facturas=$resultados;
-                return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
+                return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
             }
         }
         $pagoPresupuesto=false;
@@ -405,7 +410,7 @@ class FactureController extends Controller
                     }
                     $factura->save();
                 }else{
-                    return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
+                    return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
                 $cheque = new Cheque();
                 $cheque->fecha = $fechaPago;
@@ -439,7 +444,7 @@ class FactureController extends Controller
                         //}
                         $factura->save();
                     }else{
-                        return view('factureFilter', compact('facturas','presupuesto','providerName'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
+                        return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                     }
                     $cheque = new Cheque();
                     $cheque->fecha = $fechaPago;
@@ -456,10 +461,10 @@ class FactureController extends Controller
             }
         }
         if($request->pagoParcial==true){
-            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaExpedicion,'montoParcial'=>$deuda]);
+            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaExpedicion,'montoParcial'=>$deuda,'permisos2'=>$permisos2]);
             return $pdf->download("factura.pdf");
         }else{
-            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaExpedicion,'montoParcial'=>0]);
+            $pdf = PDF::loadView('download-pdf_compras', ['resultados' => $resultados,'metodoPago'=>$metodoPago,'codigo'=>$codigo,'banco'=>$banco,'fecha_expedicion'=>$fechaExpedicion,'montoParcial'=>0,'permisos2'=>$permisos2]);
             return $pdf->download("factura.pdf");
         }
     }
