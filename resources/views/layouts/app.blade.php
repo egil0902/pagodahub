@@ -239,14 +239,6 @@
                                                 Banco
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-dark">
-                                                <li>
-                                                    <a class="dropdown-item" href="/Brink">
-                                                        Banco supervisor</a>
-                                                </li>
-                                                <li> <a class="dropdown-item" href="/BrinkSend">
-                                                        Envio bancos
-                                                    </a>
-                                                </li>
                                                 <li> <a class="dropdown-item" href="/requestBrink">
                                                         Solicitud Brink
                                                     </a>
@@ -257,6 +249,15 @@
                                                     </a>
                                                 </li>
                                                 @endif
+                                                <li>
+                                                    <a class="dropdown-item" href="/Brink">
+                                                        Banco supervisor</a>
+                                                </li>
+                                                <li> <a class="dropdown-item" href="/BrinkSend">
+                                                        Envio bancos
+                                                    </a>
+                                                </li>
+                                                
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
