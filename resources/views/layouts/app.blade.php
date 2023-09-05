@@ -232,40 +232,52 @@
                                     @endforeach
                                 @endforeach
                                 @foreach ($permisos2->records as $user)
+                                    @php
+                                        $hasBank = false;
+                                        $hasBankGerency = false;
+                                    @endphp
+
                                     @foreach ($user->PAGODAHUB_closecash as $acceso)
                                         @if ($acceso->Name == 'bank')
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Banco
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-dark">
-                                                    <li> <a class="dropdown-item" href="/requestBrink">
-                                                            Solicitud Brink
-                                                        </a>
-                                                    </li>
-                                                    @if ($acceso->Name == 'bank.gerency')
-                                                    <li> <a class="dropdown-item" href="/requestGerency">
-                                                            Solicitud gerencia
-                                                        </a>
-                                                    </li>
-                                                    @endif
-                                                    <li>
-                                                        <a class="dropdown-item" href="/Brink">
-                                                            Banco supervisor</a>
-                                                    </li>
-                                                    <li> <a class="dropdown-item" href="/BrinkSend">
-                                                            Envio bancos
-                                                        </a>
-                                                    </li>
-                                                    
-                                                    <li>
-                                                        <hr class="dropdown-divider">
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                            @php $hasBank = true; @endphp
+                                        @elseif ($acceso->Name == 'bank.gerency')
+                                            @php $hasBankGerency = true; @endphp
                                         @endif
                                     @endforeach
+
+                                    @if ($hasBank || $hasBankGerency)
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Banco
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                                <li> <a class="dropdown-item" href="/requestBrink">
+                                                        Solicitud Brink
+                                                    </a>
+                                                </li>
+                                                @if ($hasBankGerency)
+                                                <li> <a class="dropdown-item" href="/requestGerency">
+                                                        Solicitud gerencia
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                <li>
+                                                    <a class="dropdown-item" href="/Brink">
+                                                        Banco supervisor
+                                                    </a>
+                                                </li>
+                                                <li> <a class="dropdown-item" href="/BrinkSend">
+                                                        Envio bancos
+                                                    </a>
+                                                </li>
+                                                
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @endif
                                 @endforeach
                             @endif
                         @endauth
