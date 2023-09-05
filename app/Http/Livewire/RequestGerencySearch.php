@@ -24,7 +24,7 @@ class RequestGerencySearch extends Component
             $query->where(function ($query) {
             });
         })->orderBy('fecha', 'desc')->paginate(25);; // Obtener todos los brinksend de la tabla
-        return view('livewire.requestGerencySearch', [
+        return view('livewire.requestgerencysearch', [
             'brinksend' => $brinksend,
         ]);
     }
