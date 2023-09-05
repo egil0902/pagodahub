@@ -52,7 +52,7 @@
                     <td>{{ $data->observaciones }}   </td>
                     <td>
                         <center>
-                            <form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
+                            {{--<form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
                                 @csrf
                                 @method('DELETE')
                                 <input class=" form-control" type="hidden" name="id"id="id" value="{{$data->id}}">
@@ -60,6 +60,14 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
                                     </svg>
+                                </button>
+                            </form>--}}
+                            <form name="brinkSend_edit" id="brinkSend_edit" method="POST" action="{{ route('requestBrink.edit') }}">
+                                @csrf
+                                @method('GET')
+                                <input class=" form-control" type="hidden" name="id"id="id" value="{{$data->id}}">
+                                <button type="submit" class="btn btn-outline-primary w-100" onclick="showConfirmationPopup(event)"  data-borrar="{{$data->id}}">
+                                    Editar
                                 </button>
                             </form>
                             <button class="btn btn-primary" onclick="toggleImage({{ $data->id }})">Mostrar/Ocultar Imagen</button>
@@ -70,11 +78,11 @@
                                 console.log("default")
                                 // Muestra el popup de confirmación (puedes usar librerías como Bootstrap o implementar tu propio popup)
                                 // Aquí hay un ejemplo de cómo mostrar un popup simple utilizando JavaScript nativo:
-                                var confirmed = confirm("¿Estás seguro de que deseas eliminar el registro?");
+                                var confirmed = confirm("¿Estás seguro de que deseas Editar el registro?");
                                 
                                 if (confirmed) {
                                     // Si el usuario confirma, envía el formulario
-                                    document.getElementById("brinkSend_destroy").submit();
+                                    document.getElementById("brinkSend_edit").submit();
                                 }
                             }
                             function toggleImage(id) {

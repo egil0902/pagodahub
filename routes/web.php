@@ -111,9 +111,13 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     //rutas solicitud brick
     Route::get('/requestBrink', [App\Http\Controllers\RequestBrinkController::class, 'index'])->name('requestBrink');
     Route::post('/requestBrink', [App\Http\Controllers\RequestBrinkController::class, 'store'])->name('requestBrink.store');
+    Route::get('/requestBrink_edit', [App\Http\Controllers\RequestBrinkController::class, 'edit'])->name('requestBrink.edit');
+    Route::post('/requestBrink_edit', [App\Http\Controllers\RequestBrinkController::class, 'update'])->name('requestBrink.update');
     //rutas solicitud gerencia
     Route::get('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'index'])->name('requestGerency');
-    Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');
+    Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');    
+    Route::get('/requestGerency_edit', [App\Http\Controllers\requestGerencyController::class, 'edit'])->name('requestGerency.edit');
+    Route::post('/requestGerency_edit', [App\Http\Controllers\requestGerencyController::class, 'update'])->name('requestGerency.update');
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
