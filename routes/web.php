@@ -116,8 +116,8 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     //rutas solicitud gerencia
     Route::get('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'index'])->name('requestGerency');
     Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');    
-    Route::get('/requestGerency_edit', [App\Http\Controllers\requestGerencyController::class, 'edit'])->name('requestGerency.edit');
-    Route::post('/requestGerency_edit', [App\Http\Controllers\requestGerencyController::class, 'update'])->name('requestGerency.update');
+    Route::get('/requestGerency_edit', [App\Http\Controllers\RequestGerencyController::class, 'edit'])->name('requestGerency.edit');
+    Route::post('/requestGerency_edit', [App\Http\Controllers\RequestGerencyController::class, 'update'])->name('requestGerency.update');
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
