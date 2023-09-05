@@ -12,7 +12,7 @@
                 <div class="alert alert-success">{{ session('mensaje') }}</div>
             @endif
             <div class="card">
-                <div class="card-header">Solicitud Brink</div>
+                <div class="card-header">Solicitud Brinks</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
                     <form name="provider" id="provider" method="post" action="{{ route('requestBrink.store') }}">

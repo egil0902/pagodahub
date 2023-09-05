@@ -253,12 +253,12 @@
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-dark">
                                                 <li> <a class="dropdown-item" href="/requestBrink">
-                                                        Solicitud Brink
+                                                        Solicitud Brinks
                                                     </a>
                                                 </li>
                                                 @if ($hasBankGerency)
                                                 <li> <a class="dropdown-item" href="/requestGerency">
-                                                        Solicitud gerencia
+                                                        Solicitud Gerencia
                                                     </a>
                                                 </li>
                                                 @endif
@@ -268,7 +268,7 @@
                                                     </a>
                                                 </li>
                                                 <li> <a class="dropdown-item" href="/BrinkSend">
-                                                        Envio bancos
+                                                        Envío Bancos
                                                     </a>
                                                 </li>
                                                 

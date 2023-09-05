@@ -12,7 +12,7 @@
                 <div class="alert alert-success">{{ session('mensaje') }}</div>
             @endif
             <div class="card">
-                <div class="card-header">Envio bancos</div>
+                <div class="card-header">Envío Bancos</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
                     <form name="provider" id="provider" method="post" action="{{ route('Brink.brinkStore') }}">
