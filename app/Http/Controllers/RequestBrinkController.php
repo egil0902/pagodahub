@@ -36,7 +36,7 @@ class RequestBrinkController extends Controller
     }
     public function edit(Request $request){
         $brink= RequestBrink::where('id',$request->id)->first();
-        return view(('RequestBrinkEdit'),compact('brink'));
+        return view(('requestBrinkEdit'),compact('brink'));
     }
     public function update(Request $request){
         $brink= RequestBrink::where('id',$request->id)->first();
