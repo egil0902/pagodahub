@@ -129,6 +129,7 @@ class BrinkController extends Controller
                                     'brink'=>$brink,
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
+                                    'cajas'=>$sumaBeginningBalance,
                                     'sencillo'=>$list
                                     ]);
         }else{

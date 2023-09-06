@@ -79,7 +79,7 @@
                             $rollos_10 = 0;
                             $rollos_25 = 0;
                             $rollos_50 = 0;
-                            $total = -$cajas-$gerencia;
+                            $total = -($cajas-$gerencia);
                         @endphp
                         @foreach ($requestBrink as $data)
                             @php
@@ -93,7 +93,7 @@
                                 $rollos_25 +=$data->rollos_25;
                                 $rollos_50 +=$data->rollos_50;
                                 // Actualizar la variable $total con la suma de los elementos actuales
-                                $total += $data->billete_1 + $data->billete_5 + $data->billete_10 + $data->billete_20 + $data->rollos_01 + $data->rollos_05 + $data->rollos_10 + $data->rollos_25 + $data->rollos_50;
+                                $total += $data->billete_1 + $data->billete_5*5 + $data->billete_10*10 + $data->billete_20*20 + $data->rollos_01*0.01 + $data->rollos_05*0.05 + $data->rollos_10*0.1 + $data->rollos_25*0.25 + $data->rollos_50*0.5;
                             @endphp
                         @endforeach                          
                             <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
@@ -155,7 +155,7 @@
                                                 <tr>
                                                     <td>Rollos 0.01</td>
                                                     <td>
-                                                        <input type="hidden" id="mult11" value="0.01">
+                                                        <input type="hidden" id="mult5" value="0.01">
                                                         <input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$rollos_01}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
@@ -164,7 +164,7 @@
                                                 <tr>
                                                     <td>Rollos 0.05</td>
                                                     <td>
-                                                    <input type="hidden" id="mult12" value="0.05">
+                                                    <input type="hidden" id="mult6" value="0.05">
                                                     <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='{{$rollos_05}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
@@ -172,14 +172,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Rollos 0.10</td>
-                                                    <td><input type="hidden" id="mult5" value="0.1">
+                                                    <td><input type="hidden" id="mult7" value="0.1">
                                                         <input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='{{$rollos_10}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" ></td>
                                             
                                                 </tr>
                                                 <tr>
                                                     <td>Rollos 0.25</td>
-                                                    <td><input type="hidden" id="mult9" value="0.25">
+                                                    <td><input type="hidden" id="mult8" value="0.25">
                                                         <input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='{{$rollos_25}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
@@ -188,7 +188,7 @@
                                                 <tr>
                                                     <td>Rollos 0.50</td>
                                                     <td>
-                                                    <input type="hidden" id="mult10" value="0.5">
+                                                    <input type="hidden" id="mult9" value="0.5">
                                                         <input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$rollos_50}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
@@ -198,7 +198,7 @@
                                                 <tr>
                                                     <td>Sencillo</td>
                                                     <td>
-                                                    <input type="hidden" id="mult6" value="1">
+                                                    <input type="hidden" id="mult10" value="1">
                                                         <input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value="{{$sencillo}}" onchange="calOne()" readonly
                                                             type="number" class="text-center form-control w-50">
                                                     </td>
@@ -206,7 +206,7 @@
                                                 <tr>
                                                     <td>Dinero Gerencia</td>
                                                     <td>
-                                                    <input type="hidden" id="mult7" value="1">
+                                                    <input type="hidden" id="mult11" value="1">
                                                         <input name="x_sistema11" id="x_sistema11" style="margin-left: 25%;" value='{{$gerencia}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
@@ -214,7 +214,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Total caja</td>
-                                                    <td><input type="hidden" id="mult8" value="1">
+                                                    <td><input type="hidden" id="mult12" value="1">
                                                         <input name="x_sistema12" id="x_sistema12" style="margin-left: 25%;" value='{{$cajas}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" ></td>
                                                     
@@ -234,20 +234,22 @@
                                             function calOne() {
                                             // Obtener el valor ingresado en el input
                                             var totalBrink = 0;
+                                            var resta=0;
                                             for (let index = 1; index < 13; index++) {
                                                 var inputValue = parseFloat(document.getElementById('x_sistema' + index).value);
                                                 var mult = parseFloat(document.getElementById('mult' + index).value);
-                                                if (index != 7 && index != 8) {
+                                                if (index < 11) {
                                                     totalBrink += inputValue * mult;
                                                 } else {
                                                     // Verificar si el elemento con id 'x_sistema7' existe antes de usarlo
-                                                    var element = document.getElementById('x_sistema7');
-                                                    if (element) {
-                                                        totalBrink -= inputValue * mult;
+                                                    if (index ==11) {
+                                                        resta -=inputValue * mult;
+                                                    }else{
+                                                        resta +=inputValue * mult;
                                                     }
                                                 }
                                             }
-
+                                            totalBrink -=resta;
                                             // Redondear totalBrink a 2 decimales
                                             totalBrink = totalBrink.toFixed(2);
 
