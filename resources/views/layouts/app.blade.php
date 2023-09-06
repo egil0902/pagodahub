@@ -215,7 +215,10 @@
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-dark">
                                                     <li>
-                                                        <a class="dropdown-item" href="../market">Recepcion productos</a>
+                                                        <a class="dropdown-item" href="../budget">Creación presupuesto</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="../market">Recepción productos</a>
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item" href="../marketinvoice">Carga de facturas</a>

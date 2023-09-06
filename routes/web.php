@@ -86,6 +86,11 @@ Route::middleware(['auth', 'user.data'])->group(function () {
 
     //Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
+    //rutas de creacion de presupuesto
+    Route::get('/budget', [App\Http\Controllers\BudgetController::class, 'index'])->name('budget');
+    Route::post('/budget', [App\Http\Controllers\BudgetController::class, 'create'])->name('budget.create');
+    
+
     // Ruta para mostrar la página del mercado (método GET)
     Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
     // Ruta para procesar el formulario del mercado (método POST)
