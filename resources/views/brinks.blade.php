@@ -79,7 +79,7 @@
                             $rollos_10 = 0;
                             $rollos_25 = 0;
                             $rollos_50 = 0;
-                            $total = -($cajas-$gerencia);
+                            $total = ($cajas-$gerencia);
                         @endphp
                         @foreach ($requestBrink as $data)
                             @php
@@ -93,7 +93,7 @@
                                 $rollos_25 +=$data->rollos_25;
                                 $rollos_50 +=$data->rollos_50;
                                 // Actualizar la variable $total con la suma de los elementos actuales
-                                $total += $data->billete_1 + $data->billete_5*5 + $data->billete_10*10 + $data->billete_20*20 + $data->rollos_01*0.01 + $data->rollos_05*0.05 + $data->rollos_10*0.1 + $data->rollos_25*0.25 + $data->rollos_50*0.5+$sencillo;
+                                $total -= $data->billete_1 + $data->billete_5*5 + $data->billete_10*10 + $data->billete_20*20 + $data->rollos_01*0.01 + $data->rollos_05*0.05 + $data->rollos_10*0.1 + $data->rollos_25*0.25 + $data->rollos_50*0.5+$sencillo;
                             @endphp
                         @endforeach                          
                             <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
