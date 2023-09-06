@@ -107,11 +107,11 @@
                                             <thead id="miTablaPersonalizada">
                                                 <tr>
                                                     <th>
-                                                        <p class="card-text">Billetes</p>
+                                                        <p class="card-text">Descripción</p>
                                                     </th>
                                                     <th>
                                                         <h5 align="center" class="mb-0 fw-bold" id="Montosistema_t">
-                                                            Brinks
+                                                            Sub-Total
                                                         </h5>
                                                     </th>
                                                     
