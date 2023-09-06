@@ -118,81 +118,48 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>$1 *</td>
-                                                    <td>
                                                         <input type="hidden" id="mult1" value="1">
                                                         <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='{{$billete_1}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center form-control w-50" >
-                                                    </td>
-                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>$5 *</td>
-                                                    <td>
+                                                            type="hidden" class="text-center form-control w-50" >
+                                                    
                                                         <input type="hidden" id="mult2" value="5">
                                                         <input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='{{$billete_5}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" ></td>
+                                                            type="hidden" class="text-center  form-control w-50" ></td>
                                                 
-                                                </tr>
-                                                <tr>
-                                                    <td>$10 *</td>
-                                                    <td >
                                                     <input type="hidden" id="mult3" value="10">
                                                         <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='{{$billete_10}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                            
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>$20 *</td>
-                                                    <td><input type="hidden" id="mult4" value="20">
+                                                            type="hidden" class="text-center  form-control w-50" >
+                                                     
+                                                    <input type="hidden" id="mult4" value="20">
                                                         <input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='{{$billete_20}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                        
-                                                </tr>
-                                                <tr>
-                                                    <td>Rollos 0.01</td>
-                                                    <td>
+                                                            type="hidden" class="text-center  form-control w-50" >
+                                                        
                                                         <input type="hidden" id="mult5" value="0.01">
                                                         <input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$rollos_01}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>Rollos 0.05</td>
-                                                    <td>
+                                                            type="hidden" class="text-center  form-control w-50" >
+                                                        
                                                     <input type="hidden" id="mult6" value="0.05">
                                                     <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='{{$rollos_05}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                        
-                                                </tr>
-                                                <tr>
-                                                    <td>Rollos 0.10</td>
-                                                    <td><input type="hidden" id="mult7" value="0.1">
+                                                            type="hidden" class="text-center  form-control w-50" >
+                                                        
+                                                    <input type="hidden" id="mult7" value="0.1">
                                                         <input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='{{$rollos_10}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" ></td>
+                                                            type="hidden" class="text-center  form-control w-50" ></td>
                                             
-                                                </tr>
-                                                <tr>
-                                                    <td>Rollos 0.25</td>
-                                                    <td><input type="hidden" id="mult8" value="0.25">
+                                                    <input type="hidden" id="mult8" value="0.25">
                                                         <input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='{{$rollos_25}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                        
-                                                </tr>
-                                                <tr>
-                                                    <td>Rollos 0.50</td>
-                                                    <td>
+                                                            type="hidden" class="text-center  form-control w-50" >
+                                                        
                                                     <input type="hidden" id="mult9" value="0.5">
                                                         <input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$rollos_50}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                
+                                                            type="hidden" class="text-center  form-control w-50" >
+                                                <tr>
+                                                    <td>Brink</td>
+                                                    <td>
+                                                    <input type="hidden" id="mult10" value="1">
+                                                        <input name="x_sistema" id="x_sistema" style="margin-left: 25%;" value="{{$billete_1 + $billete_5*5 + $billete_10*10 + $billete_20*20 + $rollos_01*0.01 + $rollos_05*0.05 + $rollos_10*0.1 + $rollos_25*0.25 + $rollos_50*0.5}}" onchange="calOne()" readonly
+                                                            type="number" class="text-center form-control w-50">
+                                                    </td>
                                                 </tr>
                                                 
                                                 <tr>
@@ -261,14 +228,14 @@
                                         </script>
                                         <div class="col-md">
                                             <h4>Observaciones:</h4>
-                                            <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
+                                            <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" required></textarea>
                                         </div>
                                         <div class="col-md">
                                             <label for="formFileMultiple" class="form-label">Por favor adjunte los
                                                 reportes</label>
                                             <input class=" subirimagen form-control" type="file" id="filePicker"
                                                 placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
-                                                onkeyup="imgsize()" accept=".png">
+                                                onkeyup="imgsize()" accept=".png" required>
                                             <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
                                                 cols="50" rows="15"></textarea>
                                             <br>
@@ -279,12 +246,19 @@
                                         <hr class="mb-4">
                                         
                                         <div class="col-12" style="display: flex">
-                                            <div class="col-4">
-                                                <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.store') }}')">Guardar</button>
+                                            @if(!isset($brink)){
+                                                <div class="col-4">
+                                                    <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.store') }}')">Guardar</button>
+                                                </div>
+                                                <div class="col-4">                                                    
                                             </div>
-                                            <div class="col-4">
-
-                                            </div>
+                                            }@else
+                                                <div class="col-4">
+                                                    <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.update') }}')">Actualizar</button>
+                                                </div>
+                                                    <div class="col-4">                                                    
+                                                </div>
+                                            @endif
                                             {{--<div class="col-4">
                                                 <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.imprimir') }}')">Imprimir</button>
                                             </div>--}}
