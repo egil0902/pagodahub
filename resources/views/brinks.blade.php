@@ -246,13 +246,13 @@
                                         <hr class="mb-4">
                                         
                                         <div class="col-12" style="display: flex">
-                                            @if(!isset($brink)){
+                                            @if(!isset($brink))
                                                 <div class="col-4">
                                                     <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.store') }}')">Guardar</button>
                                                 </div>
                                                 <div class="col-4">                                                    
                                             </div>
-                                            }@else
+                                            @else
                                                 <div class="col-4">
                                                     <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.update') }}')">Actualizar</button>
                                                 </div>
