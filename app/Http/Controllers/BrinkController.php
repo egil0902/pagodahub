@@ -205,8 +205,11 @@ class BrinkController extends Controller
         $brink->fecha=$request->date;
         $brink->monto=$request->Monto;
         $brink->banco=$request->Banco;
-        $brink->foto=$request->foto;
-        $brink->observaciones=$request->observaciones;
+        $brink->foto="";
+        if ($request->foto!=null) {
+            $brink->foto=$request->foto;
+        }
+        
         $brink->save();
         return redirect()->back()->with('mensaje', 'Registro ha sido guardado exitosamente');
     }
