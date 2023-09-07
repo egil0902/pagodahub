@@ -114,8 +114,7 @@
                                         <div class="col"><label for="" class="form-label">Presupuesto del dia</label>
                                             <input class="form-control" type="number" name="Presupuesto" id=""
                                             value="{{$presupuesto}}"
-                                            title="Si coloca un valor diferente a uno que ya haya puesto este se reescribira"
-                                                step="0.01" required>
+                                                step="0.01" required readonly>
                                         </div>
                                         {{-- <div class="col">Column</div> --}}
                                     </div>

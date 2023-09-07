@@ -9,6 +9,7 @@ use App\Models\Facture;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use App\Models\Cheque;
+use App\Models\Budget;
 use Exception;
 
 
@@ -337,18 +338,27 @@ class MarketController extends Controller
         $opciones2 = products::all();
         //dump($opciones, $opciones2);
         $presupuesto =-1;
+        $budget=Budget::where('fecha', $request->input('date-day'))->first();
+        if($budget){
+            $presupuesto=$budget->presupuesto;
+        }
+
         $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->where('id_compra',null )->get();
         if ($comprasdeldia->count()>0) {
-            $presupuesto=$comprasdeldia[0]->budget ;
-            return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2'));
-        }
-        else {
-            $presupuesto=0;
+            
+            if($budget&&$presupuesto!=$comprasdeldia[0]->budget){
+                $presupuesto=$budget->presupuesto;
+                return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2', 'presupuesto'));
+            }
+            $presupuesto=$comprasdeldia[0]->budget;
+            return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2', 'presupuesto'));
         }
         $dia =$request->input('date-day');
 
 
-        
-        return view('market', compact('opciones', 'opciones2', 'presupuesto','dia'));
+        if($presupuesto>=0){
+            return view('market', compact('opciones', 'opciones2', 'presupuesto','dia'));
+        }
+        return view('market', compact('opciones', 'opciones2', 'presupuesto','dia'))->withErrors("No hay un presupuesto creado");
     }
 }
