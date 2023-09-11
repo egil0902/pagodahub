@@ -12,32 +12,30 @@
                 <div class="alert alert-success">{{ session('mensaje') }}</div>
             @endif
             <div class="card">
-                <div class="card-header">Envío Bancos</div>
+                <div class="card-header">Solicitud de gerencia</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
-                    <form name="provider" id="provider" method="post" action="{{ route('Brink.brinkStore') }}">
+                    <form name="provider" id="provider" method="post" action="{{ route('requestGerency.update') }}">
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
-                                id="date" name="date" placeholder="" value=""   max="<?php echo date("Y-m-d"); ?>" required>
+                                id="date" name="date" placeholder="" value="{{$brink->fecha}}"   readonly required>
                                 <div class="text-danger" id="Ddate" style="display:none">
                                         Campo requerido
                                     </div>
-                        </div> 
-                        <div class="col-md-6 mb-3">
-                            <label for="Banco">Banco </label>
-                            <input type="text" class="form-control " id="Banco" name="Banco" placeholder=""  required>
-                            <div class="text-danger" style="display:none" id="DBanco">
-                                Campo requerido
-                            </div>
                         </div>
+                        <input type="hidden" name="id" id="id" value="{{$brink->id}}">
+                                        
                         <div class="col-md-6 mb-3">
                             <label for="Monto">Monto </label>
-                            <input type="number" class="form-control" id="Monto" name="Monto" placeholder="" required >
+                            <input type="number" class="form-control" id="Monto" name="Monto" value="{{$brink->monto}}" required >
                             <div class="text-danger" style="display:none" id="DMonto">
                                 Campo requerido
                             </div>
                         </div>
+                        <h4>Observaciones:</h4>
+                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" >{{$brink->observaciones}}</textarea>
+                        
                         <hr class="mb-4">
                         <div class="col-md">
                             <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
@@ -73,11 +71,10 @@
                                 }
                             </script>
                         </div>
-                        <hr class="mb-4">
-                        
                         <div class="form-group w-auto">
                             @csrf
-                            <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Guardar</button>
+                            @method('POST')
+                            <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Actualizar</button>
                         </div>
                     </form>
                 </div>
@@ -85,16 +82,6 @@
         </div>        
     </div>
     </br>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Lista de envios a banco
-            </div>
-            <div class="card-body">
-                @livewire('App\Http\Livewire\BrinkSendSearch')
-            </div>
-        </div>
-    </div>
 </div>
 
     <style>

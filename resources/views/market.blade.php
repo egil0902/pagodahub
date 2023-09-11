@@ -114,8 +114,7 @@
                                         <div class="col"><label for="" class="form-label">Presupuesto del dia</label>
                                             <input class="form-control" type="number" name="Presupuesto" id=""
                                             value="{{$presupuesto}}"
-                                            title="Si coloca un valor diferente a uno que ya haya puesto este se reescribira"
-                                                step="0.01" required>
+                                                step="0.01" required readonly>
                                         </div>
                                         {{-- <div class="col">Column</div> --}}
                                     </div>
@@ -176,18 +175,25 @@
                             <table style="width:100%; border:1px solid black;" id="productList">
                             </table>
                             <br>
-                            <button type="submit" class="btn btn-outline-success w-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z">
-                                    </path>
-                                    <path
-                                        d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z">
-                                    </path>
+                            <button type="submit" class="btn btn-outline-success w-100" id="guardarButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-bag-check" viewBox="0 0 16 16">
+                                    <!-- Icono SVG aquí -->
                                 </svg>
                                 Guardar
                             </button>
+
+                            <script>
+                            $("#guardarButton").click(function () {
+                                // Deshabilitar el botón al hacer clic
+                                $(this).prop("disabled", true);
+
+                                // Habilitar el botón después de 3 segundos (3000 milisegundos)
+                                setTimeout(function () {
+                                    $("#guardarButton").prop("disabled", false);
+                                }, 3000);
+                            });
+                            </script>
 
                         </form>
                         @endif

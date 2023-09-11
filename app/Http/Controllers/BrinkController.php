@@ -129,6 +129,7 @@ class BrinkController extends Controller
                                     'brink'=>$brink,
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
+                                    'cajas'=>$sumaBeginningBalance,
                                     'sencillo'=>$list
                                     ]);
         }else{
@@ -187,6 +188,12 @@ class BrinkController extends Controller
         $brink->total_brink=$request->BrinkresultColumn;
 
         $brink->sucursal=$request->sucursal;
+        if($request->observaciones===null){
+            $request->observaciones="";
+        }
+        if($request->foto===null){
+            $request->foto="no";
+        }
         $brink->foto=$request->foto;
         $brink->observaciones=$request->observaciones;
         $brink->save();
@@ -198,8 +205,11 @@ class BrinkController extends Controller
         $brink->fecha=$request->date;
         $brink->monto=$request->Monto;
         $brink->banco=$request->Banco;
-        $brink->foto=$request->foto;
-        $brink->observaciones=$request->observaciones;
+        $brink->foto="";
+        if ($request->foto!=null) {
+            $brink->foto=$request->foto;
+        }
+        
         $brink->save();
         return redirect()->back()->with('mensaje', 'Registro ha sido guardado exitosamente');
     }
@@ -259,8 +269,12 @@ class BrinkController extends Controller
         $brink->total_quantity=$request->QuantityresultColumn;
         $brink->total=$request->TotalresultColumn;
         $brink->sucursal=$request->sucursal;
-        $brink->foto=$request->foto;
-        $brink->observaciones=$request->observaciones;
+        if($request->observaciones!==null){
+            $brink->observaciones=$request->observaciones;
+        }
+        if($request->foto!==null){
+            $brink->foto=$request->foto;
+        }
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido actualizado exitosamente');
     }

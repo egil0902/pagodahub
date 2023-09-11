@@ -17,15 +17,35 @@
   composer install
   npm run build
 ```
-3. cambiar el archivo .env en la parte de DB_CONNECTION cambiar por 
+3. cambiar el archivo .env en la parte de DB_CONNECTION  y MAIL para las notificacionescambiar por 
 ```bash
+    APP_NAME=Pagodahub
+    APP_URL="nueva url"
+
     DB_CONNECTION=pgsql
     DB_HOST=127.0.0.1
     DB_PORT=5432
     DB_DATABASE=pagodahub
     DB_USERNAME=XXXXXXXXXX
     DB_PASSWORD=XXXXXXXXXX
+
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.gmail.com
+    MAIL_PORT=587
+    MAIL_USERNAME="casadelsoftwareprueba@gmail.com"
+    MAIL_PASSWORD=cds1d3mp13r.
+    MAIL_ENCRYPTION=tls
+    MAIL_FROM_ADDRESS="casadelsoftwareprueba@gmail.com"
+    MAIL_FROM_NAME="${APP_NAME}"
 ```
+adicionalmente se debe de modificar el siguiente archivo vendor\laravel\framework\src\Illuminate\Auth\Passwords\CanResetPassword.php
+en sus import y dejarlo de la siguiente manera
+
+```
+use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPasswordNotification;
+```
+
 4. crear el usuario adempiere con contraseña adempiere
 5. crear la base de datos "pagodahub" en posgtresql
 EN CASO DE QUE SE CREE UNA ESTANCIA DE PRODUCCION SEGUIR ESTOS PASOS ANTES

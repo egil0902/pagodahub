@@ -86,6 +86,11 @@ Route::middleware(['auth', 'user.data'])->group(function () {
 
     //Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
+    //rutas de creacion de presupuesto
+    Route::get('/budget', [App\Http\Controllers\BudgetController::class, 'index'])->name('budget');
+    Route::post('/budget', [App\Http\Controllers\BudgetController::class, 'create'])->name('budget.create');
+    
+
     // Ruta para mostrar la página del mercado (método GET)
     Route::get('/market', [App\Http\Controllers\MarketController::class, 'index'])->name('market');
     // Ruta para procesar el formulario del mercado (método POST)
@@ -111,9 +116,13 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     //rutas solicitud brick
     Route::get('/requestBrink', [App\Http\Controllers\RequestBrinkController::class, 'index'])->name('requestBrink');
     Route::post('/requestBrink', [App\Http\Controllers\RequestBrinkController::class, 'store'])->name('requestBrink.store');
+    Route::get('/requestBrink_edit', [App\Http\Controllers\RequestBrinkController::class, 'edit'])->name('requestBrink.edit');
+    Route::post('/requestBrink_edit', [App\Http\Controllers\RequestBrinkController::class, 'update'])->name('requestBrink.update');
     //rutas solicitud gerencia
     Route::get('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'index'])->name('requestGerency');
-    Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');
+    Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');    
+    Route::get('/requestGerency_edit', [App\Http\Controllers\RequestGerencyController::class, 'edit'])->name('requestGerency.edit');
+    Route::post('/requestGerency_edit', [App\Http\Controllers\RequestGerencyController::class, 'update'])->name('requestGerency.update');
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');

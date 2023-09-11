@@ -93,8 +93,8 @@
                                         </div>
                                         <div class="col"><label for="" class="form-label">Presupuesto</label>
                                             <input class="form-control" type="number" name="Presupuesto" id=""
-                                            value="{{$comprasdeldia[0]->budget}}"  
-                                                step="0.01" required>
+                                            value="{{$presupuesto}}"  
+                                                step="0.01" required readonly>
                                         </div>
                                         {{-- <div class="col">Column</div> --}}
                                     </div>

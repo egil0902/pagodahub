@@ -15,16 +15,17 @@
                 <div class="card-header">Solicitud Brinks</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
-                    <form name="provider" id="provider" method="post" action="{{ route('requestBrink.store') }}">
+                    <form name="provider" id="provider" method="post" action="{{ route('requestBrink.update') }}">
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
-                                id="date" name="date" placeholder="" value="<?php echo date("Y-m-d"); ?>" readOnly>
+                                id="date" name="date" placeholder="" value="{{$brink->fecha}}" readOnly>
                                 <div class="text-danger" id="Ddate" style="display:none">
                                         Campo requerido
                                     </div>
                         </div>
-
+                        <input type="hidden" name="id" id="idF" value="{{$brink->id}}">
+                                        
                         <div align="center" style='width:90%!important; padding-left:10%'>
                             <table class="table table-borderless ">
                                 <thead id="miTablaPersonalizada">
@@ -44,7 +45,7 @@
                                         <td>$1 *</td>
                                         <td>
                                         <input type="hidden" id="mult1" value="1">
-                                            <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                            <input name="x_sistema1" id="x_sistema1" style="margin-left: 25%;" value='{{$brink->billete_1}}' onchange="calOne()"
                                                 type="number" class="text-center form-control w-50" >
                                         </td>
                                     </tr>
@@ -52,7 +53,7 @@
                                         <td>$5 *</td>
                                         <td>
                                         <input type="hidden" id="mult2" value="5">
-                                        <input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                        <input name="x_sistema2" id="x_sistema2" style="margin-left: 25%;" value='{{$brink->billete_5}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                                         
                                     </tr>
@@ -60,7 +61,7 @@
                                         <td>$10 *</td>
                                         <td >
                                         <input type="hidden" id="mult3" value="10">
-                                            <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                            <input name="x_sistema3" id="x_sistema3" style="margin-left: 25%;" value='{{$brink->billete_10}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" >
                                                 
                                         </td>
@@ -69,7 +70,7 @@
                                         <td>$20 *</td>
                                         <td>
                                         <input type="hidden" id="mult4" value="20">
-                                            <input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                            <input name="x_sistema4" id="x_sistema4" style="margin-left: 25%;" value='{{$brink->billete_20}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                                         
                                     </tr>
@@ -77,7 +78,7 @@
                                         <td>Rollos 0.01</td>
                                         <td>
                                         <input type="hidden" id="mult5" value="0.01">
-                                        <input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                        <input name="x_sistema5" id="x_sistema5" style="margin-left: 25%;" value='{{$brink->rollos_01}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                                         
                                     </tr>
@@ -85,7 +86,7 @@
                                         <td>Rollos 0.05</td>
                                         <td>
                                         <input type="hidden" id="mult6" value="0.05">
-                                        <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                        <input name="x_sistema6" id="x_sistema6" style="margin-left: 25%;" value='{{$brink->rollos_05}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                             
                                     </tr>
@@ -93,7 +94,7 @@
                                         <td>Rollos 0.10</td>
                                         <td>
                                         <input type="hidden" id="mult7" value="0.1">
-                                        <input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                        <input name="x_sistema7" id="x_sistema7" style="margin-left: 25%;" value='{{$brink->rollos_10}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                             
                                     </tr>
@@ -101,7 +102,7 @@
                                         <td>Rollos 0.25</td>
                                         <td>
                                         <input type="hidden" id="mult8" value="0.25">
-                                        <input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                        <input name="x_sistema8" id="x_sistema8" style="margin-left: 25%;" value='{{$brink->rollos_25}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                             
                                     </tr>
@@ -109,18 +110,18 @@
                                         <td>Rollos 0.50</td>
                                         <td>
                                         <input type="hidden" id="mult9" value="0.5">
-                                        <input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='0' onchange="calOne()"
+                                        <input name="x_sistema9" id="x_sistema9" style="margin-left: 25%;" value='{{$brink->rollos_50}}' onchange="calOne()"
                                                 type="number" class="text-center  form-control w-50" ></td>
                                     </tr>
                                     
                                     
                                     <tr>
-                                        <input type="hidden" name="BrinkresultColumn" id="BrinkresultColumnF" value="0">
+                                        <input type="hidden" name="BrinkresultColumn" id="BrinkresultColumnF" value="{{$brink->total}}">
                                         <input type="hidden" name="QuantityresultColumn" id="QuantityresultColumnF" value="0">
                                         <input type="hidden" name="TotalresultColumn" id="TotalresultColumnF" value="0">
                                         <td>Total</td>
                                         <td align="center">
-                                            <span id="BrinkresultColumn">0</span>
+                                            <span id="BrinkresultColumn">{{$brink->total}}</span>
                                         </td>                                        
                                     </tr>
                                 </tbody>
@@ -147,7 +148,7 @@
                                 
                             </table>
                             <h4>Observaciones:</h4>
-                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
+                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" >{{$brink->observaciones}}</textarea>
                         </div>
 
                         <hr class="mb-4">
@@ -188,23 +189,12 @@
                         <hr class="mb-4">
                         <div class="form-group w-auto">
                             @csrf
-                            <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Guardar</button>
+                            <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Actualizar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>        
-    </div>
-    </br>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                Lista de solicitudes a Brink
-            </div>
-            <div class="card-body">
-                @livewire('App\Http\Livewire\RequestBrinkSearch')
-            </div>
-        </div>
     </div>
 </div>
 
