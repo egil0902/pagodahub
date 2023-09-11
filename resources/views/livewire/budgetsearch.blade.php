@@ -47,6 +47,7 @@
                 </div>
             </th>
             <th>Presupuesto</th>
+            <th>Cheques</th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -58,7 +59,21 @@
                         {{ $data->responsable_recibe }} 
                     </td>
                     <td>{{ $data->presupuesto }}   </td>
-                    
+                    <td>{{-- Obtén el JSON de la variable --}}
+                        @if(isset($data->cheques))
+                            @php
+                                $json = $data->cheques;
+
+                                // Decodifica el JSON en un array asociativo
+                                $array = json_decode($json, true);
+                            @endphp
+
+                            {{-- Itera a través del array y muestra cada elemento con un salto de línea --}}
+                            @foreach ($array as $cheque)
+                                {{ $cheque }} <br>
+                            @endforeach
+                        @endif   
+                    </td>
                 </tr>
             @endforeach
         </tbody>
