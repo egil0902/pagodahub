@@ -1057,12 +1057,24 @@
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td>Vuelto de mercado</td>
+                                            <td>Vuelto de sistema</td>
                                             <td align="right">@php
                                                 echo number_format($dataday->vueltoMercadoFiscalizadora, 2, ',', ' ');
                                             @endphp
                                             </td>
                                             <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vuelto entregado</td>
+                                            <td align="right">@php
+                                                echo number_format($dataday->vueltoEntregadoFiscalizadora, 2, ',', ' ');
+                                            @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr><td></td>
+                                        <td>{{$dataday->comentariosFiscalizadora}}</td>
+                                        <td></td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -1679,12 +1691,24 @@
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td>Vuelto de mercado</td>
+                                            <td>Vuelto de sistema</td>
                                             <td align="right">@php
                                                 echo number_format($dataday->vueltoMercadoGerente, 2, ',', ' ');
                                             @endphp
                                             </td>
                                             <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vuelto entregado</td>
+                                            <td align="right">@php
+                                                echo number_format($dataday->vueltoEntregadoGerente, 2, ',', ' ');
+                                            @endphp
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr><td></td>
+                                        <td>{{$dataday->comentariosFiscalizadora}}</td>
+                                        <td></td>
                                         </tr>
                                     @endforeach
                                 @endif

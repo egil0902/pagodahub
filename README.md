@@ -33,15 +33,15 @@
     MAIL_HOST=smtp.gmail.com
     MAIL_PORT=587
     MAIL_USERNAME="casadelsoftwareprueba@gmail.com"
-    MAIL_PASSWORD=cds1d3mp13r.
-    MAIL_ENCRYPTION=tls
+    MAIL_PASSWORD="CONTRASEÑA_DE_APLICACION"
+    MAIL_ENCRYPTION=null
     MAIL_FROM_ADDRESS="casadelsoftwareprueba@gmail.com"
     MAIL_FROM_NAME="${APP_NAME}"
 ```
 adicionalmente se debe de modificar el siguiente archivo vendor\laravel\framework\src\Illuminate\Auth\Passwords\CanResetPassword.php
 en sus import y dejarlo de la siguiente manera
 
-```
+```bash
 use Illuminate\Auth\Notifications\ResetPassword;
 use App\Notifications\ResetPasswordNotification;
 ```

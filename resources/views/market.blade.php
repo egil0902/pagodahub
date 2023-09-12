@@ -186,6 +186,7 @@
                             <script>
                             $("#guardarButton").click(function () {
                                 // Deshabilitar el botón al hacer clic
+                                document.getElementById("market").submit();
                                 $(this).prop("disabled", true);
 
                                 // Habilitar el botón después de 3 segundos (3000 milisegundos)

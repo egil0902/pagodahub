@@ -35,6 +35,51 @@
                             <label for="presupuesto">Presupuesto </label>
                             <input type="number" class="form-control" id="presupuesto" name="presupuesto"  step="0.01" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="numero">Número: </label>
+                            <input type="number" id="numero" name="numero" onkeyup="agregarCampos()">
+                        </div>
+                        <div id="container_cheques"></div>
+                        <script>
+                            function agregarCampos() {
+                                const numero = document.getElementById("numero").value;
+                                const container = document.getElementById("container_cheques");
+
+                                // Limpia cualquier contenido previo
+                                container.innerHTML = "";
+
+                                // Crea y agrega los nuevos campos
+                                for (let i = 1; i <= numero; i++) {
+                                    const div = document.createElement("div");
+                                    div.className = "campo";
+
+                                    const label1 = document.createElement("label");
+                                    label1.textContent = `N° Cheque ${i}: `;
+                                    const input1 = document.createElement("input");
+                                    input1.type = "text";
+                                    input1.name = `n_cheque_${i}`;
+                                    input1.id = `n_cheque_${i}`;
+
+                                    const label3 = document.createElement("label");
+                                    label3.textContent = `Banco ${i}: `;
+                                    const input3 = document.createElement("input");
+                                    input3.type = "text";
+                                    input3.name = `banco_${i}`;
+                                    input3.id = `banco_${i}`;
+
+                                    div.appendChild(label1);
+                                    div.innerHTML += '&nbsp;';
+                                    div.appendChild(input1);
+                                    div.innerHTML += '&nbsp;&nbsp;';
+                                    div.appendChild(label3);
+                                    div.innerHTML += '&nbsp;';
+                                    div.appendChild(input3);
+
+                                    container.appendChild(div);
+                                    container.appendChild(document.createElement("br"));
+                                }
+                            }
+                        </script>
                         
                         <div class="form-group w-auto">
                             @csrf
@@ -59,6 +104,9 @@
 </div>
 
     <style>
+        .campo input {
+            margin-bottom: 10px;
+        }
         
         table {
             font-family: arial, sans-serif;
