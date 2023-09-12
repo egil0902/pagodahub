@@ -216,7 +216,9 @@ class MarketController extends Controller
         
         $opciones = units::all();
         $opciones2 = products::all();
-        return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2'));
+        $presupuesto =$comprasdeldia[0]->budget;
+        
+        return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2','presupuesto'));
     }
 
     /**
@@ -308,7 +310,7 @@ class MarketController extends Controller
             $dia=$request->input('date-day');
             $presupuesto=$comprasdeldia[0]->budget ;
             $mensajeExito='¡La operación se realizó con éxito!';
-            return view('marketEdit', compact('comprasdeldia', 'opciones', 'opciones2','mensajeExito'));
+            return view('marketEdit', compact('comprasdeldia', 'opciones', 'opciones2','presupuesto','mensajeExito'));
         
         } catch (Exception $e) {
             $opciones = units::all();
@@ -318,7 +320,7 @@ class MarketController extends Controller
             $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
             $dia=$request->input('date-day');
             $presupuesto=$comprasdeldia[0]->budget ;
-            return view('marketEdit', compact('comprasdeldia','opciones', 'opciones2'))->withErrors($e->getMessage());
+            return view('marketEdit', compact('comprasdeldia','opciones', 'presupuesto','opciones2'))->withErrors($e->getMessage());
         }
     }
 
