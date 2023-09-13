@@ -60,7 +60,7 @@
                         $0.05:{{ $data->rollos_05 }} <br>
                         $0.10:{{ $data->rollos_10 }} <br>
                         $0.25:{{ $data->rollos_25 }} <br>
-                        $0.50:{{ $data->rollos }} 
+                        $0.50:{{ $data->rollos_50 }} 
                     </td>
                     <td>{{ $data->total_caja }}   </td>
                     <td>

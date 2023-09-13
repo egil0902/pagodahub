@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class RequestBrink extends Model
 {
     use HasFactory;
-    protected $table = 'requestBrink';
+    protected $table = 'requestbrinks';
 
 }

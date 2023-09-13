@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class BrinkSend extends Model
 {
     use HasFactory;
-    protected $table = 'brinkSend';
+    protected $table = 'brinks_sends';
 }

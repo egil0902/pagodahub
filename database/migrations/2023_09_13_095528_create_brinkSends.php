@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('brink', function (Blueprint $table) {
-            $table->double('rollos_01')->default(0.0)->nullable();
-            $table->double('rollos_05')->default(0.0)->nullable();
+        Schema::create('brinks_sends', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->date('fecha');
+            $table->double('monto');
+            $table->text('banco');
+            $table->longText('foto');
         });
     }
 

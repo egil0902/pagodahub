@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class RequestGerency extends Model
 {
     use HasFactory;
-    protected $table = 'requestGerency';
+    protected $table = 'requestgerencies';
 
 }

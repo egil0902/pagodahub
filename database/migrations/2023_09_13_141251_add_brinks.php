@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('requestGerency', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->double('monto');
+        Schema::table('brinks', function (Blueprint $table) {
+            
+            $table->longText('observaciones');
         });
     }
 

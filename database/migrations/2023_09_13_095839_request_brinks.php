@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('requestBrink', function (Blueprint $table) {
+        Schema::create('requestbrinks', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->date('fecha');
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->double('rollos_25')->default(0.0)->nullable();
             $table->double('rollos_50')->default(0.0)->nullable();
             $table->double('total')->default(0.0)->nullable();
+            $table->longText('foto')->nullable();
+            $table->text('observaciones')->nullable();
         });
     }
 

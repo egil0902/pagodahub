@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Brink extends Model
 {
     use HasFactory;
-    protected $table = 'brink';
+    protected $table = 'brinks';
 
 }
