@@ -187,7 +187,8 @@ class BrinkController extends Controller
         $brink->total_caja=$request->x_sistema12;
         $brink->total_brink=$request->BrinkresultColumn;
 
-        $brink->sucursal=$request->sucursal;
+        $brink->sucursal=$request->sucursal;        
+        $brink->observaciones=$request->observaciones;
         if($request->observaciones===null){
             $request->observaciones="";
         }
@@ -195,7 +196,6 @@ class BrinkController extends Controller
             $request->foto="no";
         }
         $brink->foto=$request->foto;
-        $brink->observaciones=$request->observaciones;
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido guardado exitosamente');
     }
