@@ -33,16 +33,20 @@ class BrinkController extends Controller
         $name_user = auth()->user()->name;
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
         foreach ($user->records  as $usuario) {
-            foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                if ($acceso->Name == 'closecash') {
-                    return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
-                    break;
+            if(isset($permisoA->PAGODAHUB_closecash)){
+                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
+                    if ($acceso->Name == 'closecash') {
+                        return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
+                        break;
+                    }
                 }
+                return redirect()->route('home');
+                break;
             }
-            return redirect()->route('home');
         }
-        return view('brinks');
+        return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
     }
     public function import(Request $request)
     {

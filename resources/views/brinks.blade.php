@@ -68,7 +68,7 @@
                         </div>
                     </form>
                     <hr class="mb-4">
-                    @if($request!=='')
+                    @if($request!='')
                         @php
                             $billete_1 = 0;
                             $billete_5 = 0;
