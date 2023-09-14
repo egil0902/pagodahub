@@ -18,8 +18,8 @@
                         <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
                             <option value="0">*</option>
                             @if (isset($orgs))
-                                @if ($orgs->{'records-size'} > 0)
-                                    @foreach ($orgs->records as $org)
+                                @if ($orgs)
+                                    @foreach ($orgs as $org)
                                         <option
                                             {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
                                             value="{{ $org->id }}">{{ $org->Name }}</option>
@@ -37,8 +37,7 @@
                                 <input name="DateTrx" type="date" id="abc"
                                     value={{ isset($request->DateTrx) ? date('Y-m-d', strtotime($request->DateTrx)) : date('Y-m-d') }}
                                     class="form-control" placeholder="0.00">
-                                    @foreach ($permisos->records as $user)
-                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                    @foreach ($permisos->records[0]->PAGODAHUB_closecash as $acceso)
                                         @if ($acceso->Name == 'closecash')
                                         <script>
                                             // Obtener la fecha actual
@@ -52,7 +51,7 @@
                                         @break
                                         @endif
                                     @endforeach
-                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                    @foreach ($permisos->records[0]->PAGODAHUB_closecash as $acceso)
                                         @if ($acceso->Name == 'closecash.day')
                                         <script>
                                             // Obtener la fecha actual
@@ -66,7 +65,6 @@
                                         @break
                                         @endif
                                     @endforeach
-                                @endforeach
                             </div>
                         </div>
                     </div>
