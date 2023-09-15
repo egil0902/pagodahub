@@ -40,7 +40,7 @@
             <th>Billetes</th>
             <th>Rollos</th>
             <th>Total</th>
-            <th>Devolucion</th>
+            {{--<th>Devolucion</th>--}}
             <th>Inicio caja</th>
             <th></th>
         </thead>
@@ -65,7 +65,7 @@
                         $0.50:{{ $data->rollos_50 }} 
                     </td>
                     <td>{{ $data->total_caja }}   </td>
-                    <td>{{ $data->devolucion }}   </td>
+                    {{--<td>{{ $data->devolucion }}   </td>--}}
                     <td>{{ $data->presupuesto }}   </td>
                     <td>
                         <center>

@@ -47,7 +47,7 @@
                 </div>
             </th>
             <th>Presupuesto</th>
-            <th>Devolucion</th>
+            {{--<th>Devolucion</th>--}}
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -59,10 +59,10 @@
                         {{ $data->responsable_recibe }} 
                     </td>
                     <td>{{ $data->presupuesto }}   </td>
-                    <td>
+                    {{--<td>
                         {{ $data->devolucion}}
                           
-                    </td>
+                    </td>--}}
                 </tr>
             @endforeach
         </tbody>

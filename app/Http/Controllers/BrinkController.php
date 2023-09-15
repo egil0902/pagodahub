@@ -124,7 +124,7 @@ class BrinkController extends Controller
                 return redirect()->back()->with('mensaje', 'Existe un registro con las fecha de inicio '. $exist->fecha_inicio.' y fecha de cierre '.$exist->fecha_cierre );;
             }
         }
-        $devgerencia=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('devolucion');
+        //$devgerencia=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('devolucion');
         $start=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('presupuesto');
 
 
@@ -139,7 +139,7 @@ class BrinkController extends Controller
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
                                     'cajas'=>$sumaBeginningBalance,
-                                    'devgerencia'=>$devgerencia,
+                                    //'devgerencia'=>$devgerencia,
                                     'start'=>$start,
                                     'sencillo'=>$list
                                     ]);
@@ -153,7 +153,7 @@ class BrinkController extends Controller
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
                                     'cajas'=>$sumaBeginningBalance,  
-                                    'devgerencia'=>$devgerencia,
+                                    //'devgerencia'=>$devgerencia,
                                     'start'=>$start,                                  
                                     'sencillo'=>$list
                                 ]);

@@ -32,10 +32,6 @@
                             <input type="text" class="form-control" id="entrega" name="entrega" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="devolucion">Devolucion gerencia </label>
-                            <input type="number" class="form-control" id="devolucion" name="devolucion"  step="0.01" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
                             <label for="presupuesto">Inicio banco </label>
                             <input type="number" class="form-control" id="presupuesto" name="presupuesto"  step="0.01" required>
                         </div>
