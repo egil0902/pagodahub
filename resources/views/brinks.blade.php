@@ -52,7 +52,7 @@
                             <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
                                 <option value="0">*</option>
                                 @if (isset($orgs))
-                                    @if ($orgs->{'records-size'} > 0)
+                                    @if (isset($orgs->{'records-size'}))
                                         @foreach ($orgs->records as $org)
                                             <option
                                                 {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
