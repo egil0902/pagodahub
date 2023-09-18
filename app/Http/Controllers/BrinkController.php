@@ -8,6 +8,7 @@ use App\Models\Brink;
 use App\Models\BrinkSend;
 use App\Models\RequestGerency;
 use App\Models\RequestBrink;
+use App\Models\StartBrink;
 
 class BrinkController extends Controller
 {
@@ -33,16 +34,20 @@ class BrinkController extends Controller
         $name_user = auth()->user()->name;
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
         foreach ($user->records  as $usuario) {
-            foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                if ($acceso->Name == 'closecash') {
-                    return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
-                    break;
+            if(isset($permisoA->PAGODAHUB_closecash)){
+                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
+                    if ($acceso->Name == 'closecash') {
+                        return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
+                        break;
+                    }
                 }
+                return redirect()->route('home');
+                break;
             }
-            return redirect()->route('home');
         }
-        return view('brinks');
+        return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
     }
     public function import(Request $request)
     {
@@ -118,7 +123,11 @@ class BrinkController extends Controller
             if($exist){
                 return redirect()->back()->with('mensaje', 'Existe un registro con las fecha de inicio '. $exist->fecha_inicio.' y fecha de cierre '.$exist->fecha_cierre );;
             }
-        } 
+        }
+        //$devgerencia=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('devolucion');
+        $start=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('presupuesto');
+
+
         if($brink){
             return view('brinks', ['orgs' => $orgs, 
                                     'request' => $request,
@@ -130,6 +139,8 @@ class BrinkController extends Controller
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
                                     'cajas'=>$sumaBeginningBalance,
+                                    //'devgerencia'=>$devgerencia,
+                                    'start'=>$start,
                                     'sencillo'=>$list
                                     ]);
         }else{
@@ -141,7 +152,9 @@ class BrinkController extends Controller
                                     'sucursal'=>$sucursal,
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
-                                    'cajas'=>$sumaBeginningBalance,                                    
+                                    'cajas'=>$sumaBeginningBalance,  
+                                    //'devgerencia'=>$devgerencia,
+                                    'start'=>$start,                                  
                                     'sencillo'=>$list
                                 ]);
         }
@@ -175,7 +188,7 @@ class BrinkController extends Controller
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
         //rollos hace referencia a los rollos de 0.50
-        $brink->rollos=$request->x_sistema9;
+        $brink->rollos_50=$request->x_sistema9;
         
         $brink->rollos_10=$request->x_sistema7;
         $brink->rollos_25=$request->x_sistema8;
@@ -185,17 +198,21 @@ class BrinkController extends Controller
         $brink->sencillo=$request->x_sistema10;
         $brink->dinero_gerencia=$request->x_sistema11;
         $brink->total_caja=$request->x_sistema12;
+        $brink->devolucion=$request->x_sistema13;
+        $brink->presupuesto=$request->x_sistema14;
         $brink->total_brink=$request->BrinkresultColumn;
 
-        $brink->sucursal=$request->sucursal;
+        $brink->sucursal=$request->sucursal;        
+        $brink->observaciones=$request->observaciones;
         if($request->observaciones===null){
             $request->observaciones="";
         }
+        
+        $brink->foto=$request->foto;
         if($request->foto===null){
             $request->foto="no";
         }
-        $brink->foto=$request->foto;
-        $brink->observaciones=$request->observaciones;
+
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido guardado exitosamente');
     }
@@ -257,7 +274,7 @@ class BrinkController extends Controller
         $brink->billete_5=$request->x_sistema2;
         $brink->billete_10=$request->x_sistema3;
         $brink->billete_20=$request->x_sistema4;
-        $brink->rollos=$request->x_sistema5;        
+        $brink->rollos_50=$request->x_sistema5;        
         $brink->rollos_10=$request->x_sistema9;
         $brink->rollos_25=$request->x_sistema10;
         $brink->rollos_01=$request->x_sistema11;

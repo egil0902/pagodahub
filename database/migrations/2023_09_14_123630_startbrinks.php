@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('requestGerency', function (Blueprint $table) {
+        Schema::create('startbrinks', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->double('monto');
+            $table->date('fecha');
+            $table->string('responsable_entrega');
+            $table->string('responsable_recibe');
+            $table->double('presupuesto')->default(0.0)->nullable();
+            $table->double('devolucion')->default(0.0)->nullable();
         });
     }
 

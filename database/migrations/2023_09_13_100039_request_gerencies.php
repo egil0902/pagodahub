@@ -13,19 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('brink', function (Blueprint $table) {
+        Schema::create('requestgerencies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('fecha_dia');
-            $table->date('fecha_cierre');
-            $table->integer('billete_1');
-            $table->integer('billete_5');
-            $table->integer('billete_10');
-            $table->integer('billete_20');
-            $table->integer('rollos');
-            $table->double('sencillo');
-            $table->text('sucursal');
-            $table->longText('foto');
+            $table->double('monto');
+            $table->date('fecha');
+            $table->longText('foto')->nullable();
+            $table->text('observaciones')->nullable();
         });
     }
 

@@ -18,8 +18,8 @@
                         <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
                             <option value="0">*</option>
                             @if (isset($orgs))
-                                @if ($orgs->{'records-size'} > 0)
-                                    @foreach ($orgs->records as $org)
+                                @if ($orgs)
+                                    @foreach ($orgs as $org)
                                         <option
                                             {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
                                             value="{{ $org->id }}">{{ $org->Name }}</option>
@@ -37,36 +37,43 @@
                                 <input name="DateTrx" type="date" id="abc"
                                     value={{ isset($request->DateTrx) ? date('Y-m-d', strtotime($request->DateTrx)) : date('Y-m-d') }}
                                     class="form-control" placeholder="0.00">
-                                    @foreach ($permisos->records as $user)
-                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
-                                        @if ($acceso->Name == 'closecash')
-                                        <script>
-                                            // Obtener la fecha actual
-                                            var hoy = new Date();
-                                            // Restar 3 días a la fecha actual
-                                            var tresDiasAtras = new Date(hoy.getTime() - (3 * 24 * 60 * 60 * 1000));
-                                            // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
-                                            document.getElementById("abc").max = hoy.toISOString().split("T")[0];
-                                            document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
-                                        </script>
-                                        @break
+                                    @php
+                                        $permisosRecords = $permisos->records ?? [];
+                                    @endphp
+
+                                    @for ($i = 0; $i < count($permisosRecords); $i++)
+                                        @if(isset($permisos->records[$i]->PAGODAHUB_closecash))
+                                            @foreach ($permisos->records[$i]->PAGODAHUB_closecash as $acceso)
+                                                @if ($acceso->Name == 'closecash')
+                                                <script>
+                                                    // Obtener la fecha actual
+                                                    var hoy = new Date();
+                                                    // Restar 3 días a la fecha actual
+                                                    var tresDiasAtras = new Date(hoy.getTime() - (3 * 24 * 60 * 60 * 1000));
+                                                    // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                                    document.getElementById("abc").max = hoy.toISOString().split("T")[0];
+                                                    document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
+                                                </script>
+                                                @break
+                                                @endif
+                                            @endforeach
+                                            @foreach ($permisos->records[$i]->PAGODAHUB_closecash as $acceso)
+                                                @if ($acceso->Name == 'closecash.day')
+                                                <script>
+                                                    // Obtener la fecha actual
+                                                    var hoy = new Date();
+                                                    // Restar 3 días a la fecha actual
+                                                    var tresDiasAtras = new Date(hoy.getTime() - (3650 * 24 * 60 * 60 * 1000));
+                                                    // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
+                                                    document.getElementById("abc").max = hoy.toISOString().split("T")[0];
+                                                    document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
+                                                </script>
+                                                @break
+                                                @endif
+                                            @endforeach
+                                            @break
                                         @endif
-                                    @endforeach
-                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
-                                        @if ($acceso->Name == 'closecash.day')
-                                        <script>
-                                            // Obtener la fecha actual
-                                            var hoy = new Date();
-                                            // Restar 3 días a la fecha actual
-                                            var tresDiasAtras = new Date(hoy.getTime() - (3650 * 24 * 60 * 60 * 1000));
-                                            // Establecer el atributo min en el campo de fecha con la fecha de hace 3 días
-                                            document.getElementById("abc").max = hoy.toISOString().split("T")[0];
-                                            document.getElementById("abc").min = tresDiasAtras.toISOString().split("T")[0];
-                                        </script>
-                                        @break
-                                        @endif
-                                    @endforeach
-                                @endforeach
+                                    @endfor
                             </div>
                         </div>
                     </div>

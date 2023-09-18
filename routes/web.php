@@ -101,6 +101,10 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::get('/marketinvoices', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoices');
     Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day')->where('day', 'monday');
 
+    //rutas de creacion de presupuesto
+    Route::get('/startBrink', [App\Http\Controllers\StartBrinkController::class, 'index'])->name('startbrink');
+    Route::post('/startBrink', [App\Http\Controllers\StartBrinkController::class, 'create'])->name('startbrink.create');
+    
     //rutas de Brick supervisor
     Route::get('/Brink', [App\Http\Controllers\BrinkController::class, 'index'])->name('Brink');
     Route::post('/Brink', [App\Http\Controllers\BrinkController::class, 'import'])->name('Brink.import');

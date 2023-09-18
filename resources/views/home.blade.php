@@ -423,6 +423,27 @@
                                             <div class="col">
                                                 <div class="card h-100 border border-5 border-dark-subtle">
                                                     <form name="loanslist" id="loanslist" method="get"
+                                                        action="{{ route('startbrink') }}">
+                                                        @csrf
+                                                        <center>
+                                                            <button type="submit" class="btn btn-outline">
+                                                                {{--  <h5 class="card-header">Banco</h5> --}}
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Inicio Banco</h5>
+                                                                    <p class="card-text">---------------</p>
+                                                                </div>
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'bank')
+                                            <div class="col">
+                                                <div class="card h-100 border border-5 border-dark-subtle">
+                                                    <form name="loanslist" id="loanslist" method="get"
                                                         action="{{ route('requestBrink') }}">
                                                         @csrf
                                                         <center>

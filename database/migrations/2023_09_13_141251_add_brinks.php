@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('brink', function (Blueprint $table) {
-            $table->double('rollos_01')->default(0.0)->nullable();
-            $table->double('rollos_05')->default(0.0)->nullable();
+        Schema::table('brinks', function (Blueprint $table) {
+            
+            $table->longText('observaciones');
         });
     }
 

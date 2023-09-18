@@ -245,44 +245,70 @@ class CloseCashController extends Controller
 
         foreach ($user->records  as $usuario) {
             //dump($user);
-            foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                if ($acceso->Name == 'closecash') {
-                    return view('closecash', ['orgs' => $orgs, 
-                                              'closecashsumlist' => $response, 
-                                              'request' => $request, 
-                                              'closecashlist' => $closecashlist, 
-                                              'list' => $list, 
-                                              'permisos' => $user,
-                                              'totales'=> $total,
-                                              'vuelto'=> $presupuesto
-                                            ]);
-                    break;
-                }
+            if(isset($usuario->PAGODAHUB_closecash)){
+                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
+                    if ($acceso->Name == 'closecash') {
+                        return view('closecash', ['orgs' => $orgs, 
+                                                'closecashsumlist' => $response, 
+                                                'request' => $request, 
+                                                'closecashlist' => $closecashlist, 
+                                                'list' => $list, 
+                                                'permisos' => $user,
+                                                'totales'=> $total,
+                                                'vuelto'=> $presupuesto
+                                                ]);
+                        break;
+                    }
+                }            
+                return redirect()->route('home');
             }
-            return redirect()->route('home');
         }
+        return redirect()->route('home');
         ////////////
 
     }
 
     public function show(Request $request)
     {
-        $misDatos = session()->get('misDatos');
-        $orgs = $misDatos;
+        
         $APIController = new APIController();
         ////////////
         $name_user = auth()->user()->name;
         $email_user = auth()->user()->email;
-        $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
-        foreach ($user->records  as $usuario) {
-            foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                if ($acceso->Name == 'closecash') {
-                    return view('closecash', ['orgs' => $orgs, 'request' => $request, 'permisos' => $user]);
-                    break;
-                }
+        /*$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $user->records[0]->AD_Org_ID->id);
+        */$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
+        // Inicializa un array para almacenar los AD_Org_ID
+        $orgs = []; // Inicializa un array para almacenar los registros de AD_Org
+
+        foreach ($user->records as $record) {
+            $orgId = $record->AD_Org_ID->id;
+            
+            // Consulta el registro de AD_Org para el AD_Org_ID actual
+            $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+            
+            // Verifica si la consulta fue exitosa
+            if ($response && isset($response->records[0])) {
+                // Agrega el registro de AD_Org al array de resultados
+                $orgs[] = $response->records[0];
             }
-            return redirect()->route('home');
         }
+        foreach ($user->records  as $usuario) {
+            if(isset($usuario->PAGODAHUB_closecash)){
+                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
+                    if ($acceso->Name == 'closecash') {
+                        
+                        session()->put('misDatos', $orgs);
+                        return view('closecash', ['orgs' => $orgs, 'request' => $request, 'permisos' => $user]);
+                        break;
+                    }
+                }
+                return redirect()->route('home');
+            }
+        }
+        return redirect()->route('home');
         ////////////
     }
 
@@ -426,24 +452,27 @@ class CloseCashController extends Controller
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
         foreach ($user->records  as $usuario) {
-            foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                if ($acceso->Name == 'closecash') {
+            if(isset($usuario->PAGODAHUB_closecash)){
+                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
+                    if ($acceso->Name == 'closecash') {
 
-                    if ($filename == null) {
-                        //dd($todo);
-                        $todo->save();
-                        return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
-                    } else {
-                        //dd($todo);
-                        /*  $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
-                        $todo->Fileclosecash = $filename;
-                        $todo->save();
-                        return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
+                        if ($filename == null) {
+                            //dd($todo);
+                            $todo->save();
+                            return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
+                        } else {
+                            //dd($todo);
+                            /*  $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
+                            $todo->Fileclosecash = $filename;
+                            $todo->save();
+                            return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
+                        }
                     }
                 }
+                return redirect()->route('home');
             }
-            return redirect()->route('home');
         }
+        return redirect()->route('home');
     }
 
     public function edit(Request $request)
@@ -586,18 +615,20 @@ class CloseCashController extends Controller
         $email_user = auth()->user()->email;
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
         foreach ($user->records  as $usuario) {
-            foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                if ($acceso->Name == 'closecash') {
-                    if ($filename == null) {
-                        //dd($todo);
-                        $todo->save();
-                        return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
-                    } else {
-                        //dd($todo);
-                        /* $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
-                        $todo->Fileclosecash = $filename;
-                        $todo->save();
-                        return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
+            if(isset($usuario->PAGODAHUB_closecash)){
+                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
+                    if ($acceso->Name == 'closecash') {
+                        if ($filename == null) {
+                            //dd($todo);
+                            $todo->save();
+                            return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
+                        } else {
+                            //dd($todo);
+                            /* $filename = $request->file('Fileclosecash')->store('public/Fileclosecash'); */
+                            $todo->Fileclosecash = $filename;
+                            $todo->save();
+                            return view('closecash', ['orgs' => $orgs, 'permisos' => $user]);
+                        }
                     }
                 }
             }

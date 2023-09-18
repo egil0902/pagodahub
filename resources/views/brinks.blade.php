@@ -52,8 +52,14 @@
                             <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
                                 <option value="0">*</option>
                                 @if (isset($orgs))
-                                    @if ($orgs->{'records-size'} > 0)
+                                    @if (isset($orgs->records))
                                         @foreach ($orgs->records as $org)
+                                            <option
+                                                {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
+                                                value="{{ $org->id }}">{{ $org->Name }}</option>
+                                        @endforeach                                    
+                                    @else
+                                        @foreach ($orgs as $org)
                                             <option
                                                 {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
                                                 value="{{ $org->id }}">{{ $org->Name }}</option>
@@ -68,7 +74,7 @@
                         </div>
                     </form>
                     <hr class="mb-4">
-                    @if($request!=='')
+                    @if($request!='')
                         @php
                             $billete_1 = 0;
                             $billete_5 = 0;
@@ -179,6 +185,24 @@
                                                         </td>
                                                     
                                                 </tr>
+                                                {{--<tr>
+                                                    <td>Devolucion Gerencia</td>
+                                                    <td>
+                                                    <input type="hidden" id="mult13" value="1">
+                                                        <input name="x_sistema13" id="x_sistema13" style="margin-left: 25%;" value='{{$devgerencia}}' onchange="calOne()" readonly
+                                                            type="number" class="text-center  form-control w-50" >
+                                                        </td>
+                                                    
+                                                </tr>--}}
+                                                <tr>
+                                                    <td>Inicio banco</td>
+                                                    <td>
+                                                    <input type="hidden" id="mult14" value="1">
+                                                        <input name="x_sistema14" id="x_sistema14" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
+                                                            type="number" class="text-center  form-control w-50" >
+                                                        </td>
+                                                    
+                                                </tr>
                                                 <tr>
                                                     <td>Total caja</td>
                                                     <td><input type="hidden" id="mult12" value="1">
@@ -202,14 +226,14 @@
                                             // Obtener el valor ingresado en el input
                                             var totalBrink = 0;
                                             var resta=0;
-                                            for (let index = 1; index < 13; index++) {
+                                            for (let index = 1; index < 15; index++) {
                                                 var inputValue = parseFloat(document.getElementById('x_sistema' + index).value);
                                                 var mult = parseFloat(document.getElementById('mult' + index).value);
                                                 if (index < 11) {
                                                     totalBrink += inputValue * mult;
                                                 } else {
                                                     // Verificar si el elemento con id 'x_sistema7' existe antes de usarlo
-                                                    if (index ==11) {
+                                                    if (index ==11|| index==13) {
                                                         resta -=inputValue * mult;
                                                     }else{
                                                         resta +=inputValue * mult;

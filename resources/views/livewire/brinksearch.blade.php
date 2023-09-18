@@ -40,6 +40,8 @@
             <th>Billetes</th>
             <th>Rollos</th>
             <th>Total</th>
+            {{--<th>Devolucion</th>--}}
+            <th>Inicio caja</th>
             <th></th>
         </thead>
         <tbody>
@@ -60,9 +62,11 @@
                         $0.05:{{ $data->rollos_05 }} <br>
                         $0.10:{{ $data->rollos_10 }} <br>
                         $0.25:{{ $data->rollos_25 }} <br>
-                        $0.50:{{ $data->rollos }} 
+                        $0.50:{{ $data->rollos_50 }} 
                     </td>
                     <td>{{ $data->total_caja }}   </td>
+                    {{--<td>{{ $data->devolucion }}   </td>--}}
+                    <td>{{ $data->presupuesto }}   </td>
                     <td>
                         <center>
                             <form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
