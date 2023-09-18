@@ -100,11 +100,21 @@ class BrinkController extends Controller
         $presupuesto=0;
         $sucursal="";
         if (isset($orgs)){
-            if ($orgs->{'records-size'} > 0){
+            if ($orgs->{'records-size'}){
                 foreach ($orgs->records as $org){
                     if($org->id==$request->AD_Org_ID){ 
                         $sucursal=$org->Name;
                     } 
+                }
+            }
+            else{
+                if ($orgs){
+                    dd($orgs);
+                    foreach ($orgs as $org){
+                        if($org->id==$request->AD_Org_ID){ 
+                            $sucursal=$org->Name;
+                        } 
+                    }
                 }
             }
         }
