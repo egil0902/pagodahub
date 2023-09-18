@@ -135,7 +135,7 @@ class BrinkController extends Controller
             }
         }
         //$devgerencia=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('devolucion');
-        $start=$list = StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('presupuesto');
+        $start= StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('presupuesto');
 
 
         if($brink){
