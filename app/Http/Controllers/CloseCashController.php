@@ -25,6 +25,7 @@ class CloseCashController extends Controller
         $APIController = new APIController();
         $response = $APIController->getModel('AD_Org', '', 'issummary eq true');
         $orgs =  $response;
+        
         session()->put('misDatos', $orgs);
     }
 
@@ -285,15 +286,28 @@ class CloseCashController extends Controller
 
         foreach ($user->records as $record) {
             $orgId = $record->AD_Org_ID->id;
+            $response = $APIController->getModel('RV_GH_Org', '', 'AD_Org_ID eq ' . $orgId);
             
-            // Consulta el registro de AD_Org para el AD_Org_ID actual
-            $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
-            
-            // Verifica si la consulta fue exitosa
-            if ($response && isset($response->records[0])) {
-                // Agrega el registro de AD_Org al array de resultados
-                $orgs[] = $response->records[0];
+            if($response->records[0]->Parent_ID->id!==0){
+                // Consulta el registro de AD_Org para el AD_Org_ID actual
+                $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->Parent_ID->id);
+                //tabla rv_gh_org  campo AD_Org_ID
+                // Verifica si la consulta fue exitosa
+                if ($response && isset($response->records[0])) {
+                    // Agrega el registro de AD_Org al array de resultados
+                    $orgs[] = $response->records[0];
+                }
+            }else{
+                // Consulta el registro de AD_Org para el AD_Org_ID actual
+                $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+                //tabla rv_gh_org  campo AD_Org_ID
+                // Verifica si la consulta fue exitosa
+                if ($response && isset($response->records[0])) {
+                    // Agrega el registro de AD_Org al array de resultados
+                    $orgs[] = $response->records[0];
+                }
             }
+                
         }
         foreach ($user->records  as $usuario) {
             if(isset($usuario->PAGODAHUB_closecash)){
