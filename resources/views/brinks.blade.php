@@ -185,7 +185,7 @@
                                                         </td>
                                                     
                                                 </tr>
-                                                {{--<tr>
+                                                <tr>
                                                     <td>Devolucion Gerencia</td>
                                                     <td>
                                                     <input type="hidden" id="mult13" value="1">
@@ -193,7 +193,7 @@
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
                                                     
-                                                </tr>--}}
+                                                </tr>
                                                 <tr>
                                                     <td>Inicio banco</td>
                                                     <td>
@@ -216,7 +216,7 @@
                                                     <input type="hidden" name="TotalresultColumn" id="TotalresultColumnF" value="0">
                                                     <td>Total</td>
                                                     <td align="center">
-                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$total}}</span>
+                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$billete_1 + $billete_5*5 + $billete_10*10 + $billete_20*20 + $rollos_01*0.01 + $rollos_05*0.05 + $rollos_10*0.1 + $rollos_25*0.25 + $rollos_50*0.5+$sencillo-$devgerencia-$gerencia+$total}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>

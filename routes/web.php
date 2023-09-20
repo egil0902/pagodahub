@@ -105,6 +105,10 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::get('/startBrink', [App\Http\Controllers\StartBrinkController::class, 'index'])->name('startbrink');
     Route::post('/startBrink', [App\Http\Controllers\StartBrinkController::class, 'create'])->name('startbrink.create');
     
+    //rutas de creacion de devolucion gerencia
+    Route::get('/devgerency', [App\Http\Controllers\DevolucionGerencyController::class, 'index'])->name('devgerency');
+    Route::post('/devgerency', [App\Http\Controllers\DevolucionGerencyController::class, 'create'])->name('devgerency.create');
+    
     //rutas de Brick supervisor
     Route::get('/Brink', [App\Http\Controllers\BrinkController::class, 'index'])->name('Brink');
     Route::post('/Brink', [App\Http\Controllers\BrinkController::class, 'import'])->name('Brink.import');
