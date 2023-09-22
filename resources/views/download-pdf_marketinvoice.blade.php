@@ -332,6 +332,7 @@
     table th,
     table td {
         padding: 7px;
+        text-align: center;
     }
 
     table thead {
