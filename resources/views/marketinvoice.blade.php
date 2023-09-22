@@ -461,6 +461,13 @@
                         <br>
                     </div>
                 </form>
+                <form name="print" id="print" method="post" action="{{ route('market.print') }}">
+                    @csrf
+                    <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
+                    <button type="submit" class="btn btn-outline-success w-100">
+                        Imprimir registro
+                    </button>
+                </form>
                 
                 @foreach ($facturas as $ind2 =>$dataf)
                 

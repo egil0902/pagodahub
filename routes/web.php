@@ -100,6 +100,8 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::get('/market/{id}', [App\Http\Controllers\MarketController::class, 'edit'])->name('market.edit');
     Route::get('/marketinvoices', [App\Http\Controllers\MarketController::class, 'show'])->name('marketinvoices');
     Route::get('/marketinvoice', [App\Http\Controllers\MarketController::class, 'shopday'])->name('market.day')->where('day', 'monday');
+    
+
 
     //rutas de creacion de presupuesto
     Route::get('/startBrink', [App\Http\Controllers\StartBrinkController::class, 'index'])->name('startbrink');
@@ -147,5 +149,6 @@ Route::get('/firma3', function () {
 Route::get('download-pdf', [App\Http\Controllers\CloseCashController::class, 'downloadPdf'])->name('download-pdf');
 Route::post('facture-pdf', [App\Http\Controllers\FactureController::class, 'downloadPdf'])->name('facture-pdf');
 Route::post('resume-pdf', [App\Http\Controllers\FactureController::class, 'resumePdf'])->name('resume-pdf');
+Route::post('/marketinvoice-pdf', [App\Http\Controllers\MarketController::class, 'print'])->name('market.print');
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth'])->name('homeredirect');

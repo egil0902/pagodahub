@@ -10,6 +10,8 @@ use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use App\Models\Cheque;
 use App\Models\Budget;
+
+use PDF;
 use Exception;
 
 
@@ -363,4 +365,50 @@ class MarketController extends Controller
         }
         return view('market', compact('opciones', 'opciones2', 'presupuesto','dia'))->withErrors("No hay un presupuesto creado");
     }
+
+    public function print(Request $request){
+        $day = $request->fecha_registro;
+
+        $presupuesto=0;
+        $comprasdeldia = marketshopping::where('shoppingday', $day)->get();
+        $carton =0;
+        $vuelto=0;
+        if($comprasdeldia->count() > 0) {
+            $vuelto=$comprasdeldia[0]->vuelto;
+            $carton =$comprasdeldia[0]->carton;
+            $presupuesto = $comprasdeldia[0]->budget;
+            $productos = json_decode($comprasdeldia[0]->product);
+            $quantity = json_decode($comprasdeldia[0]->quantity);
+            $facturas = Facture::where('id_market', $comprasdeldia[0]->id)->get();
+            $pprice = json_decode($comprasdeldia[0]->product);
+            for ($i = 0; $i < $facturas->count(); $i++) {
+                $Fproductos = json_decode($facturas[$i]->product);
+                $Fquantity = json_decode($facturas[$i]->Factured_quantity);
+                $Fprice = json_decode($facturas[$i]->price);
+                
+                // Comparar los elementos de los arreglos y restar las cantidades correspondientes
+                foreach ($productos as $posicion => $producto) {
+                    if (in_array($producto, $Fproductos)) {
+                        $fPosicion = array_search($producto, $Fproductos);
+                        $quantity[$posicion] -= $Fquantity[$fPosicion];
+                        $pprice[$posicion] = $Fprice[$fPosicion];
+                    }
+                }
+            }
+            // Recorre el arreglo y aplica la función para reemplazar valores no numéricos
+            $price = array_map(function($value) {
+                return is_numeric($value) ? $value : 0;
+            }, $pprice);
+            
+            //$comprasdeldia[0]->quantity = json_encode($quantity);
+        }
+        
+        $facturas = Facture::where('fecha', $day)->get();
+        
+            $pdf = PDF::loadView('download-pdf_marketinvoice', ['comprasdeldia' => $comprasdeldia,'presupuesto'=>$presupuesto,'carton'=>$carton,'facturas'=>$facturas,'vuelto'=>$vuelto,'quantity'=>$quantity,'price'=>$price]);
+            return $pdf->download("marketinvoice.pdf");
+
+    }
+       
+    
 }
