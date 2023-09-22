@@ -185,15 +185,7 @@
                                                         </td>
                                                     
                                                 </tr>
-                                                <tr>
-                                                    <td>Devolucion Gerencia</td>
-                                                    <td>
-                                                    <input type="hidden" id="mult13" value="1">
-                                                        <input name="x_sistema13" id="x_sistema13" style="margin-left: 25%;" value='{{$devgerencia}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                                    
-                                                </tr>
+                                                
                                                 <tr>
                                                     <td>Inicio banco</td>
                                                     <td>

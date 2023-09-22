@@ -261,10 +261,6 @@
                                                 Inicio Banco
                                             </a>
                                         </li>
-                                        <li> <a class="dropdown-item" href="/devgerency">
-                                                Devolución gerencia
-                                            </a>
-                                        </li>
                                         <li> <a class="dropdown-item" href="/requestBrink">
                                                 Solicitud Brinks
                                             </a>
