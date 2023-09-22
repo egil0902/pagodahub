@@ -190,7 +190,7 @@
                                                     <td>Inicio banco</td>
                                                     <td>
                                                     <input type="hidden" id="mult14" value="1">
-                                                        <input name="x_sistema14" id="x_sistema14" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
+                                                        <input name="x_sistema14" id="x_sistema13" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
                                                     
@@ -225,7 +225,7 @@
                                                     totalBrink += inputValue * mult;
                                                 } else {
                                                     // Verificar si el elemento con id 'x_sistema7' existe antes de usarlo
-                                                    if (index ==11|| index==13) {
+                                                    if (index ==11) {
                                                         resta -=inputValue * mult;
                                                     }else{
                                                         resta +=inputValue * mult;
