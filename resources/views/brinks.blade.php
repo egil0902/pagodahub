@@ -185,20 +185,12 @@
                                                         </td>
                                                     
                                                 </tr>
-                                                <tr>
-                                                    <td>Devolucion Gerencia</td>
-                                                    <td>
-                                                    <input type="hidden" id="mult13" value="1">
-                                                        <input name="x_sistema13" id="x_sistema13" style="margin-left: 25%;" value='{{$devgerencia}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
-                                                        </td>
-                                                    
-                                                </tr>
+                                                
                                                 <tr>
                                                     <td>Inicio banco</td>
                                                     <td>
                                                     <input type="hidden" id="mult14" value="1">
-                                                        <input name="x_sistema14" id="x_sistema14" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
+                                                        <input name="x_sistema14" id="x_sistema13" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
                                                     
@@ -216,7 +208,7 @@
                                                     <input type="hidden" name="TotalresultColumn" id="TotalresultColumnF" value="0">
                                                     <td>Total</td>
                                                     <td align="center">
-                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$billete_1 + $billete_5*5 + $billete_10*10 + $billete_20*20 + $rollos_01*0.01 + $rollos_05*0.05 + $rollos_10*0.1 + $rollos_25*0.25 + $rollos_50*0.5+$sencillo-$devgerencia-$gerencia+$total}}</span>
+                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$billete_1 + $billete_5*5 + $billete_10*10 + $billete_20*20 + $rollos_01*0.01 + $rollos_05*0.05 + $rollos_10*0.1 + $rollos_25*0.25 + $rollos_50*0.5+$sencillo-$gerencia+$total}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -233,7 +225,7 @@
                                                     totalBrink += inputValue * mult;
                                                 } else {
                                                     // Verificar si el elemento con id 'x_sistema7' existe antes de usarlo
-                                                    if (index ==11|| index==13) {
+                                                    if (index ==11) {
                                                         resta -=inputValue * mult;
                                                     }else{
                                                         resta +=inputValue * mult;
