@@ -287,6 +287,62 @@
                                     </ul>
                                 </li>
                             @endif
+
+                            @php
+                                $invoice = false;
+                                $tarjeta = false;
+                                $resumen = false;
+                                $payment = false;
+                            @endphp
+                            @foreach ($permisoA->PAGODAHUB_closecash as $user)
+
+                                @php
+                                    
+
+                                    if ($user->Name == 'invoice') {
+                                        $invoice = true;
+                                    }
+
+                                    if ($user->Name == 'tdc.invoice') {
+                                        $tarjeta = true;
+                                    }
+                                    if ($user->Name == 'summary.invoice') {
+                                        $resumen = true;
+                                    }
+                                    if ($user->Name == 'invoice.payment') {
+                                        $payment = true;
+                                    }
+                                @endphp                                
+                            @endforeach
+                            
+                                @if ($invoice)
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Facturas
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            @if($tarjeta)
+                                            <li>
+                                                <a class="dropdown-item" href="../tdc">Tarjetas de credito</a>
+                                            </li>
+                                            @endif
+                                            @if($payment)
+                                            <li>
+                                                <a class="dropdown-item" href="../invoice">Ingreso y pago</a>
+                                            </li>
+                                            @endif
+                                            @if($resumen)
+                                            <li>
+                                                <a class="dropdown-item" href="../marketinvoice">Resumen de pagos</a>
+                                            </li>
+                                            @endif
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                        </ul>
+                                    </li>
+                                @endif
                             @break
                         @endif
                     @endforeach
