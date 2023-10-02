@@ -133,6 +133,16 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::post('/requestGerency', [App\Http\Controllers\RequestGerencyController::class, 'store'])->name('requestGerency.store');    
     Route::get('/requestGerency_edit', [App\Http\Controllers\RequestGerencyController::class, 'edit'])->name('requestGerency.edit');
     Route::post('/requestGerency_edit', [App\Http\Controllers\RequestGerencyController::class, 'update'])->name('requestGerency.update');
+
+    //rutas facturas
+    Route::get('/tdc', [App\Http\Controllers\CardController::class, 'index'])->name('card');
+    Route::post('/tdc', [App\Http\Controllers\CardController::class, 'create'])->name('card.store');
+    
+    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice');
+    Route::post('/invoice', [App\Http\Controllers\InvoiceController::class, 'create'])->name('invoice.create');    
+    Route::get('/summary', [App\Http\Controllers\InvoiceController::class, 'list'])->name('invoice.show');
+    
+
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');

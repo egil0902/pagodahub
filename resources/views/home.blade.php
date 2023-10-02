@@ -534,6 +534,98 @@
             @endif
         @endforeach
 
+        {{-- Invoice --}}
+        @foreach ($permisos2->records as $user)
+            @if (isset($user->PAGODAHUB_closecash))
+                @foreach ($user->PAGODAHUB_closecash as $acceso)
+                    @if ($acceso->Name == 'invoice')
+                        <div class="card">
+                            <div class="card-header">
+                                <h1 class="card-title">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37"
+                                        fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                    </svg> Facturas
+                                </h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="row row-cols-1 row-cols-md-4 g-4">
+                                @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'tdc.invoice')
+                                            <div class="col">
+                                                <div class="card h-100 border border-5 border-dark-subtle">
+                                                    <form name="loanslist" id="loanslist" method="get"
+                                                        action="{{ route('invoice') }}">
+                                                        @csrf
+                                                        <center>
+                                                            <button type="submit" class="btn btn-outline">
+                                                                {{-- <h5 class="card-header">Compras</h5> --}}
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Tarjetas de credito
+                                                                    </h5>
+                                                                    <p class="card-text">---------------</p>
+                                                                </div>
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'summary.invoice')
+                                            <div class="col">
+                                                <div class="card h-100 border border-5 border-dark-subtle">
+                                                    <form name="market" id="market" method="get"
+                                                        action="{{ route('market') }}">
+                                                        @csrf
+                                                        <center>
+                                                            <button type="submit" class="btn btn-outline">
+                                                                {{-- <h5 class="card-header">Compras</h5> --}}
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Ingreso y pago</h5>
+                                                                    <p class="card-text">---------------</p>
+                                                                </div>
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'invoice.payment')
+                                            <div class="col">
+                                                <div class="card h-100 border border-5 border-dark-subtle">
+                                                    <form name="loanslist" id="loanslist" method="get"
+                                                        action="{{ route('invoice.show') }}">
+                                                        @csrf
+                                                        <center>
+                                                            <button type="submit" class="btn btn-outline">
+                                                                {{-- <h5 class="card-header">Compras</h5> --}}
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Resumen de pagos
+                                                                    </h5>
+                                                                    <p class="card-text">---------------</p>
+                                                                </div>
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    @endif
+                @endforeach
+            @endif
+        @endforeach
+
         <style>
             h5.card-header {
                 padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
