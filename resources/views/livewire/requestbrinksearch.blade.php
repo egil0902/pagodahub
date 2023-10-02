@@ -29,6 +29,7 @@
             <th>Rollos</th>
             <th>Total</th>
             <th>Observaciones</th>
+            <th>Fecha creacion</th>
             <th></th>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
                     </td>
                     <td>${{ $data->total }}   </td>
                     <td>{{ $data->observaciones }}   </td>
+                    <td>{{ date('d-m-Y', strtotime($data->created_at)) }}   </td>
                     <td>
                         <center>
                             {{--<form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
@@ -99,7 +101,7 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="6">
+                    <td colspan="7">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>

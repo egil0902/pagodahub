@@ -19,7 +19,7 @@
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
-                                id="date" name="date" placeholder="" value="<?php echo date("Y-m-d"); ?>" readOnly>
+                                id="date" name="date" placeholder="" value="<?php echo date("Y-m-d"); ?>" >
                                 <div class="text-danger" id="Ddate" style="display:none">
                                         Campo requerido
                                     </div>

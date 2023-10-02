@@ -233,16 +233,16 @@
                                     </li>
                                 @endif
                             @endforeach
+                            @php
+                                    $hasBank = false;
+                                    $hasBankGerency = false;
+                            @endphp
                             @foreach ($permisoA->PAGODAHUB_closecash as $user)
 
                                 @php
-                                    $hasBank = false;
-                                    $hasBankGerency = false;
-
                                     if ($user->Name == 'bank') {
                                         $hasBank = true;
                                     }
-
                                     if ($user->Name == 'bank.gerency') {
                                         $hasBankGerency = true;
                                     }
@@ -250,7 +250,7 @@
                                 
                             @endforeach
 
-                            @if ($hasBank || $hasBankGerency)
+                            @if ($hasBank==true || $hasBankGerency==true)
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -334,7 +334,7 @@
                                             @endif
                                             @if($resumen)
                                             <li>
-                                                <a class="dropdown-item" href="../marketinvoice">Resumen de pagos</a>
+                                                <a class="dropdown-item" href="../summary">Resumen de pagos</a>
                                             </li>
                                             @endif
                                             <li>

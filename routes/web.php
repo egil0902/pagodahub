@@ -140,7 +140,7 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice');
     Route::post('/invoice', [App\Http\Controllers\InvoiceController::class, 'create'])->name('invoice.create');    
-    Route::get('/summary', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.show');
+    Route::get('/summary', [App\Http\Controllers\InvoiceController::class, 'list'])->name('invoice.show');
     
 
 });
