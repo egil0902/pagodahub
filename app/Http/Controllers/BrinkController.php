@@ -67,19 +67,39 @@ class BrinkController extends Controller
         );
         
         $docstatus = 'CO';
-        $closecashlist = $APIController->getModel(
+        /*$closecashlist = $APIController->getModel(
             'RV_GH_CloseCash',
             '',
             "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate . "' and docstatus eq '" . $docstatus . "'",
-            'ba_name asc'
-        );
+            'ba_name asc',
+            100  // Tamaño alto de página (ajusta según lo permitido por la API)
+        );*/
         $sumaBeginningBalance = 0;
+        $contador=0;
+        $page = 1;
+        $pageSize = 150;
+        $totalRecords = 100;
 
-        foreach ($closecashlist->records as $record) {
-            // Verificar si el registro tiene la propiedad BeginningBalance y es numérica
-            if (isset($record->BeginningBalance) && is_numeric($record->BeginningBalance)) {
-                $sumaBeginningBalance += $record->BeginningBalance;
+        while ($totalRecords===100) {
+            // Realiza la solicitud con paginación
+            $closecashlist = $APIController->getModel(
+                'RV_GH_CloseCash',
+                '',
+                "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate . "' and docstatus eq '" . $docstatus . "'",
+                'ba_name asc',
+                $pageSize,
+                ($page - 1) * $pageSize
+            );
+
+            foreach ($closecashlist->records as $record) {
+                // Verificar si el registro tiene la propiedad BeginningBalance y es numérica
+                $contador++;
+                if (isset($record->BeginningBalance) && is_numeric($record->BeginningBalance)) {
+                    $sumaBeginningBalance += $record->BeginningBalance;
+                }
             }
+            $page++;
+            $totalRecords=$contador;
         }
         $list = closecash::whereBetween('DateTrx', [$request->startDate, $request->endDate])
                   ->where('AD_Org_ID', $request->AD_Org_ID)

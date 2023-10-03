@@ -60,7 +60,7 @@
                                         @endif
                                     @endforeach
                                     @foreach ($user->PAGODAHUB_closecash as $acceso)
-                                        @if ($acceso->Name == 'closecash')
+                                        @if ($acceso->Name == 'closecash.list')
                                             <div class="col">
                                                 <div class="card h-100 border border-5 border-dark-subtle">
                                                     <form name="closecash_list" id="closecash_list" method="get"
@@ -550,29 +550,7 @@
                                 </h1>
                             </div>
                             <div class="card-body">
-                                <div class="row row-cols-1 row-cols-md-4 g-4">
-                                @foreach ($user->PAGODAHUB_closecash as $acceso)
-                                        @if ($acceso->Name == 'tdc.invoice')
-                                            <div class="col">
-                                                <div class="card h-100 border border-5 border-dark-subtle">
-                                                    <form name="loanslist" id="loanslist" method="get"
-                                                        action="{{ route('invoice') }}">
-                                                        @csrf
-                                                        <center>
-                                                            <button type="submit" class="btn btn-outline">
-                                                                {{-- <h5 class="card-header">Compras</h5> --}}
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">Tarjetas de credito
-                                                                    </h5>
-                                                                    <p class="card-text">---------------</p>
-                                                                </div>
-                                                            </button>
-                                                        </center>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                <div class="row row-cols-1 row-cols-md-4 g-4">                                
                                     @foreach ($user->PAGODAHUB_closecash as $acceso)
                                         @if ($acceso->Name == 'summary.invoice')
                                             <div class="col">
@@ -616,7 +594,28 @@
                                             </div>
                                         @endif
                                     @endforeach
-                                    
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'tdc.invoice')
+                                            <div class="col">
+                                                <div class="card h-100 border border-5 border-dark-subtle">
+                                                    <form name="loanslist" id="loanslist" method="get"
+                                                        action="{{ route('invoice') }}">
+                                                        @csrf
+                                                        <center>
+                                                            <button type="submit" class="btn btn-outline">
+                                                                {{-- <h5 class="card-header">Compras</h5> --}}
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Tarjetas de credito
+                                                                    </h5>
+                                                                    <p class="card-text">---------------</p>
+                                                                </div>
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
