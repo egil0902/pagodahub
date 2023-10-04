@@ -39,8 +39,15 @@
             <th>
                 <select wire:model="tipo" class="form-select" aria-label="Default select example">
                     <option selected value="Sucursal">Sucursal</option>
-                    <option value="1000008">Mañanitas</option>
-                    <option value="1000009">La Doña</option>
+                    @if (isset($orgs))
+                        @if ($orgs)
+                            @foreach ($orgs as $org)
+                                <option
+                                    {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
+                                    value="{{ $org->id }}">{{ $org->Name }}</option>
+                            @endforeach
+                        @endif
+                    @endif
                 </select>
             </th>
             <th>Subtotal super</th>
