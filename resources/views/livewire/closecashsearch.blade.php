@@ -1,33 +1,3 @@
-{{-- <div class="row ">
-    <div class="col">
-        <input type="hidden" class="form-control" placeholder="Search" wire:model="searchTerm" disabled />
-    </div>
-</div> --}}
-{{-- <div class="row">
-                <div class="col">
-                    <select class="form-select" aria-label="Sucursal">
-                        <option selected>Dia</option>
-                        <option value="1">Mañanitas</option>
-                        <option value="2">La Doña</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Sucursal">
-                        <option selected>Mes</option>
-                        <option value="1">Mañanitas</option>
-                        <option value="2">La Doña</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <select class="form-select" aria-label="Sucursal">
-                        <option selected>Año</option>
-                        <option value="1">Mañanitas</option>
-                        <option value="2">La Doña</option>
-                    </select>
-                </div>
-                <br>
-            </div>
-            <br> --}}
 
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -38,13 +8,17 @@
             </th>
             <th>
                 <select wire:model="tipo" class="form-select" aria-label="Default select example">
-                    <option selected value="Sucursal">Sucursal</option>
-                    @if (isset($orgs))
-                        @if ($orgs)
-                            @foreach ($orgs as $org)
-                                <option
-                                    {{ isset($request->AD_Org_ID) ? ($request->AD_Org_ID == $org->id ? __('selected') : __('')) : __('') }}
-                                    value="{{ $org->id }}">{{ $org->Name }}</option>
+                    <option selected value="">Sucursal</option>
+                    @if (isset($orgsParent))
+                        @if ($orgsParent)
+                            @foreach ($orgsParent as $org)
+                                @if(isset($org->id))
+                                <option value="{{ $org->id }}">{{ $org->Name }}</option>
+                               
+                                @else
+                                <option value="{{ $org['id'] }}">{{ $org['Name'] }}</option>
+                                @endif
+
                             @endforeach
                         @endif
                     @endif

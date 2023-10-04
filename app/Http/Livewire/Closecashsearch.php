@@ -12,30 +12,35 @@ class Closecashsearch extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $searchTerm;
-    public $tipo = "Sucursal";
+    public $tipo = "";
     public $date = "";
     public function updatingSearch()
     {
         $this->resetPage();
     }
+    public $orgsParent; // Propiedad para almacenar el valor de 'tipo' desde el primer return
+
+    public function mount($orgs)
+    {
+        $this->orgsParent = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
-
-
-        if ($this->date != "") {
-            return view('livewire.closecashsearch', [
-                'closecash' => closecash::where('DateTrx', $this->date)->orderBy('DateTrx', 'desc')->paginate(25),
-            ]);
-        } else {
-            if ($this->tipo != "Sucursal") {
+        $closecash = closecash::when($this->tipo, function ($query) {
+            $query->where('AD_Org_ID', $this->tipo);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->date, function ($query) {
+            $query->where('DateTrx', $this->date);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->orderBy('DateTrx', 'desc')->paginate(25);; // Obtener todos los brinksend de la tabla
+        
                 return view('livewire.closecashsearch', [
-                    'closecash' => closecash::where('AD_Org_ID', $this->tipo)->orderBy('DateTrx', 'desc')->paginate(25),
+                    'closecash' => $closecash,
+                    'orgsParent' => session()->get('misDatos'),
                 ]);
-            } else {
-                return view('livewire.closecashsearch', [
-                    'closecash' => closecash::orderBy('DateTrx', 'desc')->paginate(25),
-                ]);
-            }
-        }
     }
 }
