@@ -9,7 +9,7 @@
         Listado de Cierres de Cajas
       </div>
       <div class="card-body">
-        @livewire('closecashsearch')
+        @livewire('closecashsearch', ['orgs' => $orgs])
       </div>
     </div>
         
