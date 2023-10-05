@@ -7,20 +7,32 @@
                 aria-describedby="basic-addon1">
             </th>
             <th>
-                <select wire:model="tipo" class="form-select" aria-label="Default select example">
-                    <option selected value="">Sucursal</option>
-                    @if (isset($orgsParent))
-                        @if ($orgsParent)
-                            @foreach ($orgsParent as $org)
-                                @if(isset($org->id))
-                                <option value="{{ $org->id }}">{{ $org->Name }}</option>
-                               
-                                @else
-                                <option value="{{ $org['id'] }}">{{ $org['Name'] }}</option>
-                                @endif
+                <select wire:model="tipo" class="form-select" aria-label="Default select example" @if(count($orgsParent)<2) disabled @endif>
+                    @if(count($orgsParent)>1)
+                        <option selected value="">Sucursal</option>
+                        @if (isset($orgsParent))
+                            @if ($orgsParent)
+                                @foreach ($orgsParent as $org)
+                                    @if(isset($org->id))
+                                    <option value="{{ $org->id }}">{{ $org->Name }}</option>
+                                
+                                    @else
+                                    <option value="{{ $org['id'] }}">{{ $org['Name'] }}</option>
+                                    @endif
 
-                            @endforeach
+                                @endforeach
+                            @endif
                         @endif
+                    @else
+                        @foreach ($orgsParent as $org)
+                            @if(isset($org->id))
+                            <option value="{{ $org->id }}" selected>{{ $org->Name }}</option>
+                        
+                            @else
+                            <option value="{{ $org['id'] }}" selected>{{ $org['Name'] }}</option>
+                            @endif
+
+                        @endforeach
                     @endif
                 </select>
             </th>
