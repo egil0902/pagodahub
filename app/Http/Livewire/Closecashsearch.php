@@ -26,6 +26,14 @@ class Closecashsearch extends Component
     }
     public function render()
     {
+        $org=session()->get('misDatos');
+        if(isset($org->records)){
+            $org=$org->records;
+        }
+        if(count($org)<2){
+                $this->tipo=$org[0]->id;
+            }
+    
         $closecash = closecash::when($this->tipo, function ($query) {
             $query->where('AD_Org_ID', $this->tipo);
         }, function ($query) {
