@@ -28,24 +28,53 @@ class BrinkController extends Controller
      */
     public function index()
     {   
-        $misDatos = session()->get('misDatos');
-        $orgs = $misDatos;
-        $APIController = new APIController();
-        ////////////
+        // Inicializa un array para almacenar los AD_Org_ID
+        $orgs = []; // Inicializa un array para almacenar los registros de AD_Org
         $name_user = auth()->user()->name;
         $email_user = auth()->user()->email;
+        $APIController = new APIController();
         $user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
 
-        foreach ($user->records  as $usuario) {
-            if(isset($permisoA->PAGODAHUB_closecash)){
-                foreach ($usuario->PAGODAHUB_closecash as $acceso) {
-                    if ($acceso->Name == 'closecash') {
-                        return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
-                        break;
+        foreach ($user->records as $record) {
+            $orgId = $record->AD_Org_ID->id;
+            $response = $APIController->getModel('RV_GH_Org', '', 'AD_Org_ID eq ' . $orgId);
+            
+            if(isset($response->records[0]->Parent_ID)){
+                if($response->records[0]->Parent_ID->id!==0){
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->Parent_ID->id);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }else{
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
                     }
                 }
-                return redirect()->route('home');
-                break;
+            }else{
+                    // Primera solicitud para AD_Org_ID = 1000009
+                    $response1 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000009');
+
+                    // Segunda solicitud para AD_Org_ID = 1000008
+                    $response2 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000008');
+
+                    // Combinar las respuestas en un único array
+                    $response->records = array_merge($response1->records, $response2->records);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs=$response->records;
+                        
+                    }
             }
         }
         return view('brinks', ['orgs' => $orgs, 'request' => '', 'permisos' => $user]);
@@ -77,20 +106,21 @@ class BrinkController extends Controller
         $sumaBeginningBalance = 0;
         $contador=0;
         $page = 1;
-        $pageSize = 150;
+        $pageSize = 100;
         $totalRecords = 100;
 
+        $startTime = microtime(true);
         while ($totalRecords===100) {
             // Realiza la solicitud con paginación
             $closecashlist = $APIController->getModel(
                 'RV_GH_CloseCash',
                 '',
-                "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate . "' and docstatus eq '" . $docstatus . "'",
+                "datetrx ge '" . $request->startDate . "' and datetrx le '" . $request->endDate ."' and parent_id eq " . $request->AD_Org_ID .  " and docstatus eq '" . $docstatus . "'",
                 'ba_name asc',
                 $pageSize,
                 ($page - 1) * $pageSize
             );
-
+            dump(count($closecashlist->records));
             foreach ($closecashlist->records as $record) {
                 // Verificar si el registro tiene la propiedad BeginningBalance y es numérica
                 $contador++;
@@ -99,7 +129,9 @@ class BrinkController extends Controller
                 }
             }
             $page++;
-            $totalRecords=$contador;
+            $totalRecords= count($closecashlist->records);
+            $endTime = microtime(true);  // Tiempo de finalización
+            $executionTime = $endTime - $startTime; 
         }
         $list = closecash::whereBetween('DateTrx', [$request->startDate, $request->endDate])
                   ->where('AD_Org_ID', $request->AD_Org_ID)
@@ -121,7 +153,7 @@ class BrinkController extends Controller
         $presupuesto=0;
         $sucursal="";
         if (isset($orgs)){
-            if ($orgs->{'records-size'}){
+            if (isset($orgs->{'records-size'})){
                 foreach ($orgs->records as $org){
                     if($org->id==$request->AD_Org_ID){ 
                         $sucursal=$org->Name;
