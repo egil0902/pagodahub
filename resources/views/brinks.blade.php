@@ -85,7 +85,7 @@
                             $rollos_10 = 0;
                             $rollos_25 = 0;
                             $rollos_50 = 0;
-                            $total = ($cajas-$gerencia);
+                            $total = (-$cajas-$gerencia);
                         @endphp
                         @foreach ($requestBrink as $data)
                             @php
