@@ -120,7 +120,6 @@ class BrinkController extends Controller
                 $pageSize,
                 ($page - 1) * $pageSize
             );
-            dump(count($closecashlist->records));
             foreach ($closecashlist->records as $record) {
                 // Verificar si el registro tiene la propiedad BeginningBalance y es numérica
                 $contador++;
