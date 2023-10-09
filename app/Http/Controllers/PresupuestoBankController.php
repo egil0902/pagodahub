@@ -9,7 +9,7 @@ class PresupuestoBankController extends Controller
 {
     public function index()
     {   
-        return view('pbank');
+        return view('pBank');
     }
     public function create(Request $request)
     {
