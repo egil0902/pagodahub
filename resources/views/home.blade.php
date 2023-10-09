@@ -556,7 +556,7 @@
                                             <div class="col">
                                                 <div class="card h-100 border border-5 border-dark-subtle">
                                                     <form name="market" id="market" method="get"
-                                                        action="{{ route('market') }}">
+                                                        action="{{ route('invoice') }}">
                                                         @csrf
                                                         <center>
                                                             <button type="submit" class="btn btn-outline">
@@ -599,7 +599,7 @@
                                             <div class="col">
                                                 <div class="card h-100 border border-5 border-dark-subtle">
                                                     <form name="loanslist" id="loanslist" method="get"
-                                                        action="{{ route('invoice') }}">
+                                                        action="{{ route('card') }}">
                                                         @csrf
                                                         <center>
                                                             <button type="submit" class="btn btn-outline">
