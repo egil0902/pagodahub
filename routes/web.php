@@ -137,6 +137,10 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     //rutas facturas
     Route::get('/tdc', [App\Http\Controllers\CardController::class, 'index'])->name('card');
     Route::post('/tdc', [App\Http\Controllers\CardController::class, 'create'])->name('card.store');
+
+    Route::get('/pbank', [App\Http\Controllers\PresupuestoBankController::class, 'index'])->name('pbank');
+    Route::post('/pbank', [App\Http\Controllers\PresupuestoBankController::class, 'create'])->name('pbank.create');
+
     
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice');
     Route::post('/invoice', [App\Http\Controllers\InvoiceController::class, 'create'])->name('invoice.create');    

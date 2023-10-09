@@ -342,6 +342,11 @@
                                                 <a class="dropdown-item" href="../tdc">Tarjetas de credito</a>
                                             </li>
                                             @endif
+                                            @if($tarjeta)
+                                            <li>
+                                                <a class="dropdown-item" href="../pbank">Presupuesto banco</a>
+                                            </li>
+                                            @endif
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>

@@ -616,6 +616,27 @@
                                             </div>
                                         @endif
                                     @endforeach
+                                    @foreach ($user->PAGODAHUB_closecash as $acceso)
+                                        @if ($acceso->Name == 'tdc.invoice')
+                                            <div class="col">
+                                                <div class="card h-100 border border-5 border-dark-subtle">
+                                                    <form name="loanslist" id="loanslist" method="get"
+                                                        action="{{ route('pbank') }}">
+                                                        @csrf
+                                                        <center>
+                                                            <button type="submit" class="btn btn-outline">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">Presupuesto banco
+                                                                    </h5>
+                                                                    <p class="card-text">---------------</p>
+                                                                </div>
+                                                            </button>
+                                                        </center>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

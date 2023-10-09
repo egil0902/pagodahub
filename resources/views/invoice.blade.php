@@ -5,6 +5,9 @@
 @if (session('mensaje'))
     <div class="alert alert-success">{{ session('mensaje') }}</div>
 @endif
+@if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 @section('content')
 <div class="p-2 m-0 border-0 bd-example">
     <div class="d-flex">
@@ -23,7 +26,7 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="responsable_ingreso">Responsable de Ingreso</label>
+                            <label for="responsable_ingreso">Responsable</label>
                             <input type="text" class="form-control" id="responsable_ingreso" name="responsable_ingreso" required>
                         </div>
 
@@ -33,25 +36,47 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="monto_total">Monto Total</label>
+                            <label for="monto_total">Monto</label>
                             <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="monto_impuesto">Monto de Impuesto</label>
-                            <input type="number" class="form-control" id="monto_impuesto" name="monto_impuesto" step="0.01" required>
+                            <label for="impuesto_select">Impuesto (%)</label>
+                            <select class="form-select" id="impuesto_select" name="impuesto_select">
+                                <option value="0">0%</option>
+                                <option value="7">7%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                            </select>
                         </div>
 
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_impuesto">Monto de Impuesto</label>
+                            <input type="number" class="form-control" id="monto_impuesto" name="monto_impuesto" step="0.01" disabled>
+                        </div>
+
+                        <script>
+                            // Obtener referencias a los elementos
+                            const montoTotalInput = document.getElementById('monto_total');
+                            const impuestoSelect = document.getElementById('impuesto_select');
+                            const montoImpuestoInput = document.getElementById('monto_impuesto');
+
+                            // Escuchar cambios en el select
+                            impuestoSelect.addEventListener('change', () => {
+                                const montoTotal = parseFloat(montoTotalInput.value) || 0;  // Obtener monto total
+                                const impuestoPorcentaje = parseFloat(impuestoSelect.value) || 0;  // Obtener impuesto seleccionado
+
+                                // Calcular el monto de impuesto
+                                const montoImpuesto = (montoTotal * (impuestoPorcentaje / 100)).toFixed(2);
+
+                                // Escribir el monto de impuesto en el campo correspondiente
+                                montoImpuestoInput.value = montoImpuesto;
+                            });
+                        </script>
                         <div class="col-md-6 mb-3">
                             <label for="fecha_pago">Fecha de Pago</label>
                             <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
                         </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="responsable_pago">Responsable de Pago</label>
-                            <input type="text" class="form-control" id="responsable_pago" name="responsable_pago" required>
-                        </div>
-
                         <div class="col-md-6 mb-3">
                             <label for="forma_pago">Forma de Pago</label>
                             <select class="form-control" id="forma_pago" name="forma_pago" required>
@@ -79,6 +104,7 @@
                         <div class="col-md-6 mb-3" id="bancoFields" class="form-group" style="display: none;">
                             <label for="banco_options">Opciones para Banco</label>
                             <select class="form-control" id="banco_options" name="banco_options">
+                                <option value="" disabled selected>Selecciona una forma de pago</option>
                                 <option value="efectivo">Efectivo</option>
                                 <option value="loteria">Lotería</option>
                                 <option value="cheque">Cheque</option>
@@ -87,7 +113,11 @@
                                 <label for="banco_banco">Banco</label>
                                 <input type="text" class="form-control" id="banco_banco" name="banco_banco">
                                 <label for="num_comprobante">Número de Cheque</label>
-                                <input type="text" class="form-control" id="num_comprobante" name="num_comprobante">
+                                <input type="text" class="form-control" id="num_comprobante"  name="num_comprobante">
+                            </div>
+                            <div id="efectivoDesc" class="form-group" style="display: none;">
+                                <label for="presupuest_banco">Valor</label>
+                                <input type="number" class="form-control" id="presupuest_banco" step="0.01" name="presupuest_banco">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3" id="tarjetaFields" class="form-group" style="display: none;">
@@ -145,7 +175,7 @@
                         
                         const tarjetaFields = document.getElementById('tarjetaFields');
                         const bancoDesc = document.getElementById('bancoDesc');
-                        
+                        const efectivoDesc= document.getElementById('efectivoDesc');
 
                         formaPagoSelect.addEventListener('change', (event) => {
                             creditoFields.style.display = event.target.value === 'credito' ? 'block' : 'none';
@@ -154,6 +184,7 @@
                         });
                         bancoSelect.addEventListener('change', (event) => {
                             bancoDesc.style.display = event.target.value === 'cheque' ? 'block' : 'none';
+                            efectivoDesc.style.display = event.target.value === 'efectivo' ? 'block' : 'none';
                         });
                     </script>
                     <hr class="mb-4">                    
