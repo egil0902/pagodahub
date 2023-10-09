@@ -37,6 +37,8 @@
                 </div>
             </th>            
             <th>Monto</th>
+            <th>Impuesto</th>
+            <th>Total</th>
             <th>fecha pago
                 <div class="input-group" style="width:100%">
                 
@@ -61,9 +63,14 @@
                 <tr>                    
                     <td>{{ date('d-m-Y', strtotime($data->fecha_ingreso)) }}</td>
                     <td>{{ $data->responsable_ingreso }}</td>
-                    <td>Monto:{{ $data->monto_total}} <br>
-                        Impuesto:{{ $data->monto_impuesto }} 
-                        <br>Total:{{ $data->monto_total+$data->monto_impuesto}}
+                    <td>
+                        {{ $data->monto_total}} 
+                    </td>
+                    <td>
+                        {{ $data->monto_impuesto }} 
+                    </td>
+                    <td>
+                        {{ $data->monto_total+$data->monto_impuesto}}
                     </td>
                     <td>{{ date('d-m-Y', strtotime($data->fecha_pago)) }}</td>
                     <td>{{ $data->forma_pago }}
@@ -107,7 +114,7 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="6">
+                    <td colspan="8">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>
