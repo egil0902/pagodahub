@@ -71,6 +71,10 @@
                             <br>
                             {{$data->tarjeta}}
                         @endif
+                        @if($data->forma_pago==="banco efectivo")
+                            <br>
+                            {{$data->presupuest_banco}}
+                        @endif
                            </td>
                     <td>
                         <center>                            
