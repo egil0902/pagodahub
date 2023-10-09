@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Card;
 use App\Models\presupuestoBank;
+use App\Exports\InvoiceExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InvoiceController extends Controller
 {
@@ -34,12 +36,28 @@ class InvoiceController extends Controller
         $brink->fecha_ingreso=$request->fecha_ingreso;
         $brink->fecha_pago=$request->fecha_pago;        
         $brink->proveedor=$request->proveedor;
-        $brink->monto_total=$request->monto_total;
+        
         $brink->monto_impuesto = number_format($request->monto_total * ($request->impuesto_select / 100), 2, '.', '');
         $brink->foto=$request->foto;//revisar
         $brink->responsable_ingreso=$request->responsable_ingreso;
         $brink->responsable_pago=$request->responsable_ingreso;
         $brink->forma_pago=$request->forma_pago;
+        if(isset($request->monto_total)){
+            $brink->monto_total=$request->monto_total;
+        }
+        if(isset($request->monto_7)){
+            $brink->monto_7=$request->monto_7;
+            $brink->monto_impuesto_7=$request->monto_7*0.07;
+        }
+        if(isset($request->monto_10)){
+            $brink->monto_10=$request->monto_10;
+            $brink->monto_impuesto_10=$request->monto_10*0.1;
+        }
+        if(isset($request->monto_15)){
+            $brink->monto_15=$request->monto_15;
+            $brink->monto_impuesto_15=$request->monto_15*0.15;
+        }
+        $brink->monto_impuesto=$brink->monto_7+$brink->monto_10+$brink->monto_15;
         if($request->forma_pago==='credito'){
             $brink->forma_pago= $request->forma_pago.' '.$request->credito_options;
             $brink->banco=$request->banco_credito;
@@ -62,4 +80,10 @@ class InvoiceController extends Controller
         $brink->save();
         return redirect()->back()->with('mensaje', 'Factura ha sido creada exitosamente');
     }
+    public function getExcel(Request $request) {
+        $lista = json_decode($request->input('lista'), true);
+
+        return Excel::download(new InvoiceExport($lista["data"]), 'facturas.xlsx');
+    }
+    
 }

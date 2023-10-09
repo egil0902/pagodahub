@@ -36,8 +36,15 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>            
-            <th>Monto</th>
-            <th>Impuesto</th>
+            <th>Monto<br> excento</th>
+            <th>Monto 7%</th>
+            <th>ITMS 7%</th>
+            <th>Monto 10%</th>
+            <th>ITMS 10%</th>
+            <th>Monto 15%</th>
+            <th>ITMS 15%</th>
+            
+            <th>Total <br>impuestos</th>
             <th>Total</th>
             <th>fecha pago
                 <div class="input-group" style="width:100%">
@@ -55,7 +62,7 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>Forma de pago</th>
+            <th>Forma <br>de pago</th>
             <th></th>
         </thead>
         <tbody>
@@ -67,10 +74,28 @@
                         {{ $data->monto_total}} 
                     </td>
                     <td>
+                        {{ $data->monto_7}} 
+                    </td>
+                    <td>
+                        {{ $data->monto_impuesto_7}} 
+                    </td>
+                    <td>
+                        {{ $data->monto_10}} 
+                    </td>
+                    <td>
+                        {{ $data->monto_impuesto_10}} 
+                    </td>
+                    <td>
+                        {{ $data->monto_15}} 
+                    </td>
+                    <td>
+                        {{ $data->monto_impuesto_15}} 
+                    </td>
+                    <td>
                         {{ $data->monto_impuesto }} 
                     </td>
                     <td>
-                        {{ $data->monto_total+$data->monto_impuesto}}
+                        {{ $data->monto_total+$data->monto_7+$data->monto_10+$data->monto_15+$data->monto_impuesto}}
                     </td>
                     <td>{{ date('d-m-Y', strtotime($data->fecha_pago)) }}</td>
                     <td>{{ $data->forma_pago }}
@@ -114,13 +139,20 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="8">
+                    <td colspan="14">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <form name="provider" id="provider" method="post" action="{{route( 'invoice.getExcel' )}}">
+        <div class="form-group w-auto">
+            <input type="hidden" name="lista" value="{{ json_encode($brinksend) }}">
+            @csrf
+            <button class="w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Importar</button>
+        </div>
+    </form>
 </div>
 <style>
     #miTablaPersonalizada th {

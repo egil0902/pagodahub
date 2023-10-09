@@ -36,43 +36,64 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="monto_total">Monto</label>
+                            <label for="monto_total">Monto Excento</label>
                             <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" required>
                         </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="impuesto_select">Impuesto (%)</label>
-                            <select class="form-select" id="impuesto_select" name="impuesto_select">
-                                <option value="0">0%</option>
-                                <option value="7">7%</option>
-                                <option value="10">10%</option>
-                                <option value="15">15%</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="monto_impuesto">Monto de Impuesto</label>
-                            <input type="number" class="form-control" id="monto_impuesto" name="monto_impuesto" step="0.01" disabled>
-                        </div>
-
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
-                            // Obtener referencias a los elementos
-                            const montoTotalInput = document.getElementById('monto_total');
-                            const impuestoSelect = document.getElementById('impuesto_select');
-                            const montoImpuestoInput = document.getElementById('monto_impuesto');
+                            $(document).ready(function() {
+                                // Función para calcular el ITBMS y actualizar los campos
+                                function calcularITBMS(monto, porcentaje, campoResultado) {
+                                    const montoITBMS = monto * porcentaje;
+                                    $(campoResultado).val(montoITBMS.toFixed(2));
+                                }
 
-                            // Escuchar cambios en el select
-                            impuestoSelect.addEventListener('change', () => {
-                                const montoTotal = parseFloat(montoTotalInput.value) || 0;  // Obtener monto total
-                                const impuestoPorcentaje = parseFloat(impuestoSelect.value) || 0;  // Obtener impuesto seleccionado
+                                // Escucha los cambios en los campos de monto y realiza los cálculos
+                                $('#monto_7').on('input', function() {
+                                    const monto = parseFloat($(this).val());
+                                    const porcentaje = 0.07;
+                                    calcularITBMS(monto, porcentaje, '#monto_impuesto_7');
+                                });
 
-                                // Calcular el monto de impuesto
-                                const montoImpuesto = (montoTotal * (impuestoPorcentaje / 100)).toFixed(2);
+                                $('#monto_10').on('input', function() {
+                                    const monto = parseFloat($(this).val());
+                                    const porcentaje = 0.10;
+                                    calcularITBMS(monto, porcentaje, '#monto_impuesto_10');
+                                });
 
-                                // Escribir el monto de impuesto en el campo correspondiente
-                                montoImpuestoInput.value = montoImpuesto;
+                                $('#monto_15').on('input', function() {
+                                    const monto = parseFloat($(this).val());
+                                    const porcentaje = 0.15;
+                                    calcularITBMS(monto, porcentaje, '#monto_impuesto_15');
+                                });
                             });
                         </script>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_7">Monto al que aplica ITBMS del 7%</label>
+                            <input type="number" class="form-control" id="monto_7" name="monto_7" step="0.01" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_impuesto_7">ITBMS7%</label>
+                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" step="0.01" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_10">Monto al que aplica ITBMS del 10%</label>
+                            <input type="number" class="form-control" id="monto_10" name="monto_10" step="0.01" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_impuesto_10">ITBMS10%</label>
+                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" step="0.01" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_15">Monto al que aplica ITBMS del 15%</label>
+                            <input type="number" class="form-control" id="monto_15" name="monto_15" step="0.01" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="monto_impuesto_15">ITBMS15%</label>
+                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" step="0.01" disabled>
+                        </div>
+
                         <div class="col-md-6 mb-3">
                             <label for="fecha_pago">Fecha de Pago</label>
                             <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
