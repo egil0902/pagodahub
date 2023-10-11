@@ -33,6 +33,7 @@
                     <td>{{ date('d-m-Y', strtotime($data->created_at)) }} </td>
                     <td>{{ $data->CreatedBy }} </td>
                     <td>
+                    {{$data->AD_Org_ID}}
                         @if ($data->AD_Org_ID == 1000000)
                             Grupo Panama Este, S.A.
                         @endif

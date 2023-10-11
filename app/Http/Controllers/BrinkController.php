@@ -10,6 +10,7 @@ use App\Models\RequestGerency;
 use App\Models\RequestBrink;
 use App\Models\StartBrink;
 use App\Models\DevolucionGerency;
+use App\Models\Payment;
 
 class BrinkController extends Controller
 {
@@ -87,6 +88,7 @@ class BrinkController extends Controller
 
         $sumatoriaMonto = RequestGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('monto');
         $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->get();
+        $payment = Payment::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('monto');
         
 
         $response = $APIController->getModel(
@@ -200,6 +202,7 @@ class BrinkController extends Controller
                                     'gerencia'=>$sumatoriaMonto,
                                     'requestBrink'=>$requestBrink,
                                     'cajas'=>$sumaBeginningBalance,
+                                    'payment'=>$payment,
                                     //'devgerencia'=>$devgerencia,
                                     'start'=>$start,
                                     'sencillo'=>$list
@@ -215,6 +218,7 @@ class BrinkController extends Controller
                                     'requestBrink'=>$requestBrink,
                                     'cajas'=>$sumaBeginningBalance,  
                                     //'devgerencia'=>$devgerencia,
+                                    'payment'=>$payment,
                                     'start'=>$start,                                  
                                     'sencillo'=>$list
                                 ]);
@@ -244,6 +248,7 @@ class BrinkController extends Controller
             return redirect()->back()->with('error', 'debe adjuntar imagen y escribir una observación');
         }
         $brink = new Brink;
+        $brink->payment =$request->payment;
         $brink->fecha_inicio=$request->fecha_dia;
         $brink->fecha_dia=date('Y-m-d');        
         $brink->fecha_cierre=$request->fecha_cierre;

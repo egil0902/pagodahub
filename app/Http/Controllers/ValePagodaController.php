@@ -37,7 +37,9 @@ class ValePagodaController extends Controller
     public function search(Request $request)
     {
         $APIController = new APIController();
-        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', '', '', '', '', '');
+        $filtro = "name eq 'vale'";
+        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', $filtro, '', '', '', '');
+        
         foreach ($permisos->records as $record) {
             $nombreventana = $record->Name;
             $nombreusario = $record->AD_User_ID->identifier;
