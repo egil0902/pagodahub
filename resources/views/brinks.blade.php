@@ -216,6 +216,14 @@
                                                         </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                    <td>Pago de Facturas</td>
+                                                    <td>
+                                                        <input name="payment" id="payment" style="margin-left: 25%;" value='{{$payment}}' onchange="calOne()" readonly
+                                                            type="number" class="text-center  form-control w-50" >
+                                                        </td>
+                                                    
+                                                </tr>
                                                 
                                                 <tr>
                                                     <td>Inicio banco</td>
@@ -239,7 +247,7 @@
                                                     <input type="hidden" name="TotalresultColumn" id="TotalresultColumnF" value="0">
                                                     <td>Total</td>
                                                     <td align="center">
-                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$billete_1 + $billete_5*5 + $billete_10*10 + $billete_20*20 + $rollos_01*0.01 + $rollos_05*0.05 + $rollos_10*0.1 + $rollos_25*0.25 + $rollos_50*0.5+$sencillo+$total}}</span>
+                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$billete_1 + $billete_5*5 + $billete_10*10 + $billete_20*20 + $rollos_01*0.01 + $rollos_05*0.05 + $rollos_10*0.1 + $rollos_25*0.25 + $rollos_50*0.5+$sencillo+$total-$payment}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>

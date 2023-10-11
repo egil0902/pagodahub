@@ -269,6 +269,10 @@
                                                 Solicitud Brinks
                                             </a>
                                         </li>
+                                        <li> <a class="dropdown-item" href="/payment">
+                                                Pago de facturas
+                                            </a>
+                                        </li>
                                         @if ($hasBankGerency)
                                         <li> <a class="dropdown-item" href="/requestGerency">
                                                 Solicitud Gerencia

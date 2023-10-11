@@ -8,17 +8,7 @@
     <table class="table table-bordered">
         
         <thead id="miTablaPersonalizada">
-            <th>
-                <div class="input-group" style="width:70%">
-                    <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg></span>
-                    <input type="text" class="form-control" placeholder="nombre sucursal" wire:model="sucursal"
-                        aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-            </th>
+            
             <th>
                 <div class="input-group" style="width:75%">
                     <span class="input-group-text" id="basic-addon2">
@@ -30,52 +20,22 @@
                                 d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                         </svg>
                     </span>
-                    <input type="date" class="form-control" placeholder="fecha_dia" wire:model="fecha_dia"
+                    <input type="date" class="form-control" placeholder="fecha" wire:model="fecha"
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>Fecha de <br>
-                inicio</th>
-            <th>Fecha de <br>
-            cierre</th>
-            
-            <th>Billetes</th>
-            <th>Rollos</th>
-            
-            <th>Inicio caja</th>
-            <th>Pagos <br> factura</th>
-            <th>Total</th>
-            {{--<th>Devolucion</th>--}}
+            <th>Monto</th>
             <th></th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
                 <tr>
-                    <td>{{ $data->sucursal }}</td>
-                    <td>{{ date('d-m-Y', strtotime($data->fecha_dia)) }} </td>
-                    <td>{{ $data->fecha_inicio }}</td>
-                    <td>{{ $data->fecha_cierre }}</td>
-                    <td>
-                        $1:{{ $data->billete_1 }} <br>
-                        $5:{{ $data->billete_5 }} <br>
-                        $10:{{ $data->billete_10 }} <br>
-                        $20:{{ $data->billete_20 }} 
-                    </td>
-                    <td>
-                        $0.01:{{ $data->rollos_01 }} <br>
-                        $0.05:{{ $data->rollos_05 }} <br>
-                        $0.10:{{ $data->rollos_10 }} <br>
-                        $0.25:{{ $data->rollos_25 }} <br>
-                        $0.50:{{ $data->rollos_50 }} 
-                    </td>
-                    
-                    <td>{{ $data->presupuesto }}   </td>
-                    
-                    <td>{{ $data->payment }}   </td>
-                    <td>{{ $data->total_caja }}   </td>
+                    <td>{{ date('d-m-Y', strtotime($data->fecha)) }} </td>
+                    <td>{{ $data->monto }}</td>
+                    <
                     <td>
                         <center>
-                            <form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
+                            {{--<form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
                                 @csrf
                                 @method('DELETE')
                                 <input class=" form-control" type="hidden" name="id"id="id" value="{{$data->id}}">
@@ -84,7 +44,7 @@
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
                                     </svg>
                                 </button>
-                            </form>
+                            </form>--}}
                             <button class="btn btn-primary" onclick="toggleImage({{ $data->id }})">Mostrar/Ocultar Imagen</button>
                         </center>
                         <script>
@@ -114,14 +74,14 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="10">
+                    <td colspan="3">
                         {{$data->observaciones}}
                     </td>
                 </tr>
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="10">
+                    <td colspan="3">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>

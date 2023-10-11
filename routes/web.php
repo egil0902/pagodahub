@@ -147,7 +147,9 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::post('/excel', [App\Http\Controllers\InvoiceController::class, 'getExcel'])->name('invoice.getExcel');    
     Route::get('/summary', [App\Http\Controllers\InvoiceController::class, 'list'])->name('invoice.show');
     
-
+    Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
+    Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'create'])->name('payment.create');
+    
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');
