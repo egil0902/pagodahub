@@ -34,8 +34,10 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>Fecha de inicio</th>
-            <th>Fecha de cierre</th>
+            <th>Fecha de <br>
+                inicio</th>
+            <th>Fecha de <br>
+            cierre</th>
             
             <th>Billetes</th>
             <th>Rollos</th>

@@ -5,6 +5,9 @@
 @if (session('mensaje'))
     <div class="alert alert-success">{{ session('mensaje') }}</div>
 @endif
+@if (session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
 @section('content')
 <div class="p-2 m-0 border-0 bd-example">
     <div class="d-flex">
@@ -100,8 +103,37 @@
                                 $rollos_50 +=$data->rollos_50;
                                 // Actualizar la variable $total con la suma de los elementos actuales
                             @endphp
-                        @endforeach                          
-                            <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
+                        @endforeach
+                        <script>
+                            function validarFormulario() {
+                                                // Obtener valores de los campos
+                                                alert('Validación ejecutada.'); 
+                                                const observaciones = document.getElementById('observaciones').value;
+                                                const fileCedula = document.getElementById('filePicker').value;
+
+                                                // Validar que los campos no estén vacíos
+                                                if (observaciones.trim() === '') {
+                                                    alert('Por favor, ingrese observaciones.');
+                                                    return false; // Evita enviar el formulario
+                                                }
+
+                                                if (fileCedula.trim() === '') {
+                                                    alert('Por favor, adjunte los reportes.');
+                                                    return false; // Evita enviar el formulario
+                                                }
+
+                                                // Validar que se haya seleccionado una imagen
+                                                const imgInput = document.getElementById('filePicker');
+                                                if (imgInput.files.length === 0) {
+                                                    alert('Por favor, seleccione una imagen.');
+                                                    return false; // Evita enviar el formulario
+                                                }
+
+                                                // Si todo está bien, permite enviar el formulario
+                                                return true;
+                                            }
+                        </script>
+                        <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
                                     @csrf
                                     <input type="hidden" name="fecha_dia" value="{{ $fecha_dia }}">
                                     
@@ -213,6 +245,7 @@
                                             </tbody>
                                         </table>
                                         <script>
+                                            
                                             function calOne() {
                                             // Obtener el valor ingresado en el input
                                             var totalBrink = 0;
@@ -246,19 +279,14 @@
                                             <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" required></textarea>
                                         </div>
                                         <div class="col-md">
-                                            <label for="formFileMultiple" class="form-label">Por favor adjunte los
-                                                reportes</label>
-                                            <input class=" subirimagen form-control" type="file" id="filePicker"
-                                                placeholder="Recibo" name="FileCedula" value="0" onchange="imgsize()"
-                                                onkeyup="imgsize()" accept=".png" required>
-                                            <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
-                                                cols="50" rows="15"></textarea>
+                                            <label for="formFileMultiple" class="form-label">Por favor adjunte los reportes</label>
+                                            <input class="subirimagen form-control" type="file" id="filePicker" placeholder="Recibo" name="FileCedula" value="0" accept=".png">
+                                            <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here" cols="50" rows="15"></textarea>
                                             <br>
-                                            <center><img id="img1" class="rounded" src="" border="1"
-                                                    style="width: 50%;">
+                                            <center>
+                                                <img id="img1" class="rounded" src="" border="1" style="width: 50%;">
                                             </center>
                                         </div>
-                                        <hr class="mb-4">
                                         
                                         <div class="col-12" style="display: flex">
                                             @if(!isset($brink))
@@ -274,16 +302,18 @@
                                                     <div class="col-4">                                                    
                                                 </div>
                                             @endif
-                                            {{--<div class="col-4">
-                                                <button class="w-100 btn btn-outline-secondary m-0" type="button" onclick="submitForm('{{ route('Brink.imprimir') }}')">Imprimir</button>
-                                            </div>--}}
                                         </div>
                                     </form>
 
                                     <script>
+                                        
+
                                         window.submitForm = function(action) {
                                             document.getElementById('save').action = action;
                                             document.getElementById('save').submit();
+                                            document.getElementById('save').onsubmit = function() {
+                                                return validarFormulario();
+                                            };
                                         };
                                         
                                         var handleFileSelect = function(evt) {

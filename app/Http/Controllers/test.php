@@ -18,6 +18,5 @@ class test extends Controller
     public function test()
     {
         $users = DB::table('users')->get();
-        dump($users);
     }
 }

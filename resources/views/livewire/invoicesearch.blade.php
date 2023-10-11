@@ -32,11 +32,20 @@
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg></span>
-                    <input type="text" class="form-control" placeholder="responsable ingreso" wire:model="responsable_ingreso"
+                    <input type="text" class="form-control" placeholder="responsable" wire:model="responsable_ingreso"
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>            
-            <th>Monto</th>
+            <th>Monto<br> exento</th>
+            <th>Monto 7%</th>
+            <th>ITBMS 7%</th>
+            <th>Monto 10%</th>
+            <th>ITBMS 10%</th>
+            <th>Monto 15%</th>
+            <th>ITBMS 15%</th>
+            <th>Total <br>Neto</th>
+            <th>Total <br>ITBMS</th>
+            <th>Total USD</th>
             <th>fecha pago
                 <div class="input-group" style="width:100%">
                 
@@ -53,18 +62,7 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>
-                <div class="input-group" style="width:100%">
-                    <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
-                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg></span>
-                    <input type="text" class="form-control" placeholder="responsable pago" wire:model="responsable_pago"
-                        aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-            </th>
-            <th>Forma de pago</th>
+            <th>Forma <br>de pago</th>
             <th></th>
         </thead>
         <tbody>
@@ -72,16 +70,26 @@
                 <tr>                    
                     <td>{{ date('d-m-Y', strtotime($data->fecha_ingreso)) }}</td>
                     <td>{{ $data->responsable_ingreso }}</td>
-                    <td>Total:{{ $data->monto_total}} <br>
-                        Impuesto:{{ $data->monto_impuesto }} 
-                    </td>
+                    <td>{{ number_format($data->monto_total, 2) }}</td>
+                    <td>{{ number_format($data->monto_7, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_7, 2) }}</td>
+                    <td>{{ number_format($data->monto_10, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_10, 2) }}</td>
+                    <td>{{ number_format($data->monto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15 + $data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15, 2) }}</td>
+
                     <td>{{ date('d-m-Y', strtotime($data->fecha_pago)) }}</td>
-                    <td>{{ $data->responsable_pago }}</td>
-                    
                     <td>{{ $data->forma_pago }}
                         @if($data->forma_pago==="tarjeta_credito")
                             <br>
                             {{$data->tarjeta}}
+                        @endif
+                        @if($data->forma_pago==="banco efectivo")
+                            <br>
+                            {{$data->presupuest_banco}}
                         @endif
                            </td>
                     <td>
@@ -115,13 +123,20 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="7">
+                    <td colspan="15">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <form name="provider" id="provider" method="post" action="{{route( 'invoice.getExcel' )}}">
+        <div class="form-group w-auto">
+            <input type="hidden" name="lista" value="{{ json_encode($brinksend) }}">
+            @csrf
+            <button class="w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Importar</button>
+        </div>
+    </form>
 </div>
 <style>
     #miTablaPersonalizada th {
