@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="monto_total">Monto Excento</label>
+                            <label for="monto_total">Monto Exento</label>
                             <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" required>
                         </div>
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -131,7 +131,7 @@
                                     for (let index = 1; index < 10; index++) {
                                         var inputValue = parseFloat(document.getElementById('x_sistema' + index).value);
                                         var mult = parseFloat(document.getElementById('mult' + index).value);
-                                        totalBrink += inputValue * mult;
+                                        totalBrink += inputValue;
                                         
                                     }
 

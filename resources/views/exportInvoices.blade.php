@@ -9,7 +9,7 @@
                 <th>
                     Responsable
                 </th>            
-                <th>Monto<br> excento</th>
+                <th>Monto<br> exento</th>
                 <th>Monto 7%</th>
                 <th>ITMS 7%</th>
                 <th>Monto 10%</th>

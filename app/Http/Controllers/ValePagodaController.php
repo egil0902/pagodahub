@@ -99,7 +99,9 @@ class ValePagodaController extends Controller
     public function store(Request $request)
     {
         $APIController = new APIController();
-        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', '', '', '', '', '');
+        // Definir el filtro para el campo 'Name' 
+        $filtro = "name eq 'vale'";
+        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', $filtro, '', '', '', '');
         foreach ($permisos->records as $record) {
             $nombreventana = $record->Name;
             $nombreusario = $record->AD_User_ID->identifier;
@@ -235,11 +237,22 @@ class ValePagodaController extends Controller
     public function list(Request $request)
     {
         $APIController = new APIController();
-        $permisos = $APIController->getModel('PAGODAHUB_closecash', 'Name,AD_User_ID', '', '', '', '', '');
+        $nombreFiltro = 'vale'; // Nombre a filtrar
+
+        // Definir los campos que quieres obtener
+        $campos = 'Name,AD_User_ID';
+
+        // Definir el filtro para el campo 'Name' 
+        $filtro = "name eq 'vale'";
+
+        // Realizar la petición con el filtro aplicado
+        $permisos = $APIController->getModel('PAGODAHUB_closecash', $campos, $filtro, '', '', '', '');
+
         foreach ($permisos->records as $record) {
             $nombreventana = $record->Name;
             $nombreusario = $record->AD_User_ID->identifier;
             $id_name = auth()->user()->name;
+            
             if ($record->Name == "vale" && $record->AD_User_ID->identifier == $id_name) {
                 $list = ValesPagoda::all();
                 return view('valepagodalist', ['list' => $list, 'request' => $request]);

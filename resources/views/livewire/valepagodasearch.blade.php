@@ -39,7 +39,7 @@
                         @if ($data->AD_Org_ID == 1000008)
                             Mañanitas
                         @endif
-                        @if ($data->AD_Org_ID == 1000009)
+                        @if ($data->AD_Org_ID == 1000009||$data->AD_Org_ID==1000001 )
                             La Doña
                         @endif
                     </td>
