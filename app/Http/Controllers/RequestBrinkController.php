@@ -35,10 +35,12 @@ class RequestBrinkController extends Controller
         return view('requestBrink')->with('mensaje', 'Brink ha sido guardado exitosamente');
     }
     public function edit(Request $request){
+        
         $brink= RequestBrink::where('id',$request->id)->first();
         return view(('requestBrinkEdit'),compact('brink'));
     }
     public function update(Request $request){
+        
         $brink= RequestBrink::where('id',$request->id)->first();
         $brink->fecha =$request->date;
         $brink->billete_1=$request->x_sistema1;
