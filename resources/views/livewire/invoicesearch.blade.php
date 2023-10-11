@@ -70,36 +70,17 @@
                 <tr>                    
                     <td>{{ date('d-m-Y', strtotime($data->fecha_ingreso)) }}</td>
                     <td>{{ $data->responsable_ingreso }}</td>
-                    <td>
-                        {{ $data->monto_total}} 
-                    </td>
-                    <td>
-                        {{ $data->monto_7}} 
-                    </td>
-                    <td>
-                        {{ $data->monto_impuesto_7}} 
-                    </td>
-                    <td>
-                        {{ $data->monto_10}} 
-                    </td>
-                    <td>
-                        {{ $data->monto_impuesto_10}} 
-                    </td>
-                    <td>
-                        {{ $data->monto_15}} 
-                    </td>
-                    <td>
-                        {{ $data->monto_impuesto_15}} 
-                    </td>
-                    <td>
-                    {{ $data->monto_total+$data->monto_7+$data->monto_10+$data->monto_15}}  
-                    </td>   
-                    <td>
-                        {{ $data->monto_impuesto_7+$data->monto_impuesto_10+$data->monto_impuesto_15 }} 
-                    </td>
-                    <td>
-                    {{ $data->monto_total+$data->monto_7+$data->monto_10+$data->monto_15+$data->monto_impuesto_7+$data->monto_impuesto_10+$data->monto_impuesto_15 }}  
-                    </td>
+                    <td>{{ number_format($data->monto_total, 2) }}</td>
+                    <td>{{ number_format($data->monto_7, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_7, 2) }}</td>
+                    <td>{{ number_format($data->monto_10, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_10, 2) }}</td>
+                    <td>{{ number_format($data->monto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15, 2) }}</td>
+                    <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15 + $data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15, 2) }}</td>
+
                     <td>{{ date('d-m-Y', strtotime($data->fecha_pago)) }}</td>
                     <td>{{ $data->forma_pago }}
                         @if($data->forma_pago==="tarjeta_credito")
