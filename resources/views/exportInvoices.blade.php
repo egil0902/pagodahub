@@ -11,14 +11,14 @@
                 </th>            
                 <th>Monto<br> exento</th>
                 <th>Monto 7%</th>
-                <th>ITMS 7%</th>
+                <th>ITBMS 7%</th>
                 <th>Monto 10%</th>
-                <th>ITMS 10%</th>
+                <th>ITBMS 10%</th>
                 <th>Monto 15%</th>
-                <th>ITMS 15%</th>
-                
-                <th>Total <br>impuestos</th>
-                <th>Total</th>
+                <th>ITBMS 15%</th>
+                <th>Total <br>Neto</th>
+                <th>Total <br>ITBMS</th>
+                <th>Total USD</th>
                 <th>fecha de pago
                     
                 </th>
@@ -52,16 +52,19 @@
                         {{ $data["monto_impuesto_15"]}} 
                     </td>
                     <td>
-                        {{ $data["monto_impuesto"]}} 
+                    {{ $data["monto_total"]+$data["monto_7"]+$data["monto_10"]+$data["monto_15"]}}  
+                    </td>   
+                    <td>
+                        {{ $data["monto_impuesto_7"]+$data["monto_impuesto_10"]+$data["monto_impuesto_15"] }} 
                     </td>
                     <td>
-                        {{ $data["monto_total"]+$data["monto_7"]+$data["monto_10"]+$data["monto_15"]+$data["monto_impuesto"]}}
+                    {{ $data["monto_total"]+$data["monto_7"]+$data["monto_10"]+$data["monto_15"]+$data["monto_impuesto_7"]+$data["monto_impuesto_10"]+$data["monto_impuesto_15"] }}  
                     </td>
                     <td>{{ date('d-m-Y', strtotime($data["fecha_pago"])) }}</td>
                     <td>{{ $data["forma_pago"] }}
                         @if($data["forma_pago"]==="tarjeta_credito")
                             <br>
-                            {{$data->tarjeta}}
+                            {{$data["tarjeta"]}}
                         @endif
                         @if($data["forma_pago"]==="banco efectivo")
                             <br>
