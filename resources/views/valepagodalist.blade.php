@@ -7,7 +7,7 @@
                 Lista de vales consumidos
             </div>
             <div class="card-body">
-                @livewire('valepagodasearch')
+                @livewire('valepagodasearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

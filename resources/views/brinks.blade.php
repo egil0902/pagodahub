@@ -187,7 +187,7 @@
                                                     <input type="hidden" name="TotalresultColumn" id="TotalresultColumnF" value="0">
                                                     <td>Total</td>
                                                     <td align="center">
-                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$gerencia+$start+$requestBrink+$sencillo-$cajas-$payment}}</span>
+                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$requestBrink+$sencillo-$cajas-$payment-$gerencia}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>

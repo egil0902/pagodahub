@@ -238,7 +238,11 @@ class ValePagodaController extends Controller
     }
     public function list(Request $request)
     {
+        $user = auth()->user();
         $APIController = new APIController();
+        $response = $APIController->getModel('AD_User', '', "Name eq '" . $user->name . "'", '', '', '', 'AD_User_OrgAccess');
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->AD_Org_ID->id);
+        $orgs =  $response;
         $nombreFiltro = 'vale'; // Nombre a filtrar
 
         // Definir los campos que quieres obtener
@@ -257,7 +261,7 @@ class ValePagodaController extends Controller
             
             if ($record->Name == "vale" && $record->AD_User_ID->identifier == $id_name) {
                 $list = ValesPagoda::all();
-                return view('valepagodalist', ['list' => $list, 'request' => $request]);
+                return view('valepagodalist', ['list' => $list, 'request' => $request,'orgs'=>$orgs]);
                 break;
             }
         }
