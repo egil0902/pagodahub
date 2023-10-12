@@ -134,7 +134,7 @@
                                                     <td>Brink</td>
                                                     <td>
                                                     <input type="hidden" id="mult10" value="1">
-                                                        <input name="x_sistema" id="x_sistema" style="margin-left: 25%;" value="{{$requestBrink}}" onchange="calOne()" readonly
+                                                        <input name="requestBrink" id="requestBrink" style="margin-left: 25%;" value="{{$requestBrink}}" onchange="calOne()" readonly
                                                             type="number" class="text-center form-control w-50">
                                                     </td>
                                                 </tr>
@@ -143,7 +143,7 @@
                                                     <td>Sencillo</td>
                                                     <td>
                                                     <input type="hidden" id="mult10" value="1">
-                                                        <input name="x_sistema10" id="x_sistema10" style="margin-left: 25%;" value="{{$sencillo}}" onchange="calOne()" readonly
+                                                        <input name="sencillo" id="sencillo" style="margin-left: 25%;" value="{{$sencillo}}" onchange="calOne()" readonly
                                                             type="number" class="text-center form-control w-50">
                                                     </td>
                                                 </tr>
@@ -151,7 +151,7 @@
                                                     <td>Dinero Gerencia</td>
                                                     <td>
                                                     <input type="hidden" id="mult11" value="1">
-                                                        <input name="x_sistema11" id="x_sistema11" style="margin-left: 25%;" value='{{$gerencia}}' onchange="calOne()" readonly
+                                                        <input name="gerencia" id="gerencia" style="margin-left: 25%;" value='{{$gerencia}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
                                                     
@@ -169,7 +169,7 @@
                                                     <td>Inicio banco</td>
                                                     <td>
                                                     <input type="hidden" id="mult14" value="1">
-                                                        <input name="x_sistema14" id="x_sistema13" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
+                                                        <input name="start" id="start" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" >
                                                         </td>
                                                     
@@ -177,14 +177,11 @@
                                                 <tr>
                                                     <td>Total caja</td>
                                                     <td><input type="hidden" id="mult12" value="1">
-                                                        <input name="x_sistema12" id="x_sistema12" style="margin-left: 25%;" value='{{$cajas}}' onchange="calOne()" readonly
+                                                        <input name="cajas" id="cajas" style="margin-left: 25%;" value='{{$cajas}}' onchange="calOne()" readonly
                                                             type="number" class="text-center  form-control w-50" ></td>
                                                     
                                                 </tr>
                                                 <tr>
-                                                    <input type="hidden" name="BrinkresultColumn" id="BrinkresultColumnF" value="0">
-                                                    <input type="hidden" name="QuantityresultColumn" id="QuantityresultColumnF" value="0">
-                                                    <input type="hidden" name="TotalresultColumn" id="TotalresultColumnF" value="0">
                                                     <td>Total</td>
                                                     <td align="center">
                                                         <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$requestBrink+$sencillo-$cajas-$payment-$gerencia}}</span>
@@ -192,36 +189,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <script>
-                                            
-                                            function calOne() {
-                                            // Obtener el valor ingresado en el input
-                                            var totalBrink = 0;
-                                            var resta=0;
-                                            for (let index = 1; index < 15; index++) {
-                                                var inputValue = parseFloat(document.getElementById('x_sistema' + index).value);
-                                                var mult = parseFloat(document.getElementById('mult' + index).value);
-                                                if (index < 11) {
-                                                    totalBrink += inputValue * mult;
-                                                } else {
-                                                    // Verificar si el elemento con id 'x_sistema7' existe antes de usarlo
-                                                    if (index ==11) {
-                                                        resta -=inputValue * mult;
-                                                    }else{
-                                                        resta +=inputValue * mult;
-                                                    }
-                                                }
-                                            }
-                                            totalBrink -=resta;
-                                            // Redondear totalBrink a 2 decimales
-                                            totalBrink = totalBrink.toFixed(2);
-
-                                            // Actualizar el total
-                                            document.getElementById('BrinkresultColumn').textContent = totalBrink;
-                                            document.getElementById('BrinkresultColumnF').value = totalBrink;
-                                        }
-
-                                        </script>
+                                        
                                         <div class="col-md">
                                             <h4>Observaciones:</h4>
                                             <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" required></textarea>
@@ -292,7 +260,7 @@
             </div>
         <div class="card">
             <div class="card-header">
-                Lista de envios a banco
+                Listado Banco supervisor
             </div>
             <div class="card-body">
                 @livewire('App\Http\Livewire\BrinkSearch')

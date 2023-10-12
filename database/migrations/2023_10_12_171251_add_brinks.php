@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('brinks', function (Blueprint $table) {
-            $table->double('payment')->default(0.0)->nullable();
+            $table->text('observaciones');
         });
     }
 
