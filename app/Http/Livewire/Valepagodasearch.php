@@ -17,20 +17,38 @@ class Valepagodasearch extends Component
     {
         $this->resetPage();
     }
+    public $orgsParent; // Propiedad para almacenar el valor de 'tipo' desde el primer return
+
+    public function mount($orgs)
+    {
+        $org=session()->put('misDatos',$orgs);
+        $this->orgsParent = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
-
-        if ($this->valenum != null) {
-            return view('livewire.valepagodasearch',[
-                //'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
-                'vales' => ValesPagoda::where('value', 'ilike', '%' . $this->valenum . '%')->orderBy('value', 'asc')->orderBy('id', 'asc')->paginate(25),
-            ]);
-        } else {
-            return view('livewire.valepagodasearch',[
-                //'vales' => ValesPagoda::where('value','=', $searchTerm)->paginate(10)
-                'vales' => ValesPagoda::orderBy('value', 'asc')->orderBy('id', 'asc')->paginate(25),
-            ]);
+        $org=session()->get('misDatos');
+        if(isset($org->records)){
+            $org=$org->records;
         }
+        if(count($org)<2){
+                $this->orgsParent=$org[0]->id;
+            }
+        $vales=ValesPagoda::when($this->valenum, function ($query) {
+            $query->where('value','ilike', '%' . $this->valenum);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->orgsParent, function ($query) {
+            $query->where('AD_Org_ID','ilike', '%' . $this->orgsParent);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->orderBy('id', 'desc')->paginate(25);
+        
+        return view('livewire.valepagodasearch', [
+            'vales' => $vales,
+            'orgsParent' => session()->get('misDatos'),
+        ]);
     }
 
 }

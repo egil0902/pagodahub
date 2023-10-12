@@ -74,7 +74,7 @@ class BrinkController extends Controller
                     if ($response && isset($response->records[0])) {
                         // Agrega el registro de AD_Org al array de resultados
                         $orgs=$response->records;
-                        
+                        session()->put('misDatos',$orgs);
                     }
             }
         }
@@ -248,28 +248,16 @@ class BrinkController extends Controller
             return redirect()->back()->with('error', 'debe adjuntar imagen y escribir una observación');
         }
         $brink = new Brink;
-        $brink->payment =$request->payment;
         $brink->fecha_inicio=$request->fecha_dia;
         $brink->fecha_dia=date('Y-m-d');        
-        $brink->fecha_cierre=$request->fecha_cierre;
-        $brink->billete_1=$request->x_sistema1;
-        $brink->billete_5=$request->x_sistema2;
-        $brink->billete_10=$request->x_sistema3;
-        $brink->billete_20=$request->x_sistema4;
-        //rollos hace referencia a los rollos de 0.50
-        $brink->rollos_50=$request->x_sistema9;
-        
-        $brink->rollos_10=$request->x_sistema7;
-        $brink->rollos_25=$request->x_sistema8;
-        $brink->rollos_01=$request->x_sistema5;
-        $brink->rollos_05=$request->x_sistema6;
-
-        $brink->sencillo=$request->x_sistema10;
-        $brink->dinero_gerencia=$request->x_sistema11;
-        $brink->total_caja=$request->x_sistema12;
-        $brink->devolucion=$request->x_sistema13;
-        $brink->presupuesto=$request->x_sistema14;
-        $brink->total_brink=$request->BrinkresultColumn;
+        $brink->fecha_cierre=$request->fecha_cierre;        
+        $brink->sencillo=$request->sencillo;        
+        $brink->dinero_gerencia=$request->gerencia;        
+        $brink->total_caja=$request->cajas;
+        $brink->banco=$request->start;
+        $brink->facturas=$request->payment;
+        $brink->brinks=$request->requestBrink;
+        $brink->total=$request->BrinkresultColumn;
 
         $brink->sucursal=$request->sucursal;        
         $brink->observaciones=$request->observaciones;        

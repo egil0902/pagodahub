@@ -46,7 +46,7 @@
             </div>
         <div class="card">
             <div class="card-header">
-                Lista de presupuestos
+                Lista de Inicio de bancos
             </div>
             <div class="card-body">
                 @livewire('App\Http\Livewire\StartBrinkSearch')
