@@ -87,7 +87,7 @@ class BrinkController extends Controller
         $orgs = $misDatos;
 
         $sumatoriaMonto = RequestGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('monto');
-        $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->get();
+        $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('total');
         $payment = Payment::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('monto');
         
 
