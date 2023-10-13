@@ -244,9 +244,6 @@ class BrinkController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->observaciones==""||$request->foto=="") {
-            return redirect()->back()->with('error', 'debe adjuntar imagen y escribir una observación');
-        }
         $brink = new Brink;
         $brink->fecha_inicio=$request->fecha_dia;
         $brink->fecha_dia=date('Y-m-d');        
