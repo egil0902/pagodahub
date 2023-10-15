@@ -174,6 +174,9 @@
                                             <input type="hidden" name="cedula_user" value="{{ $data->cedula }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
+                                            <input type="hidden" name="sucursal" value="{{ $sucursal }}"
+                                                type="text" class=" form-control text-left  w-100 " placeholder=""
+                                                required>
                                             <input type="hidden" name="nombre_user" value="{{ $data->nombre }}"
                                                 type="text" class=" form-control text-left  w-100 " placeholder=""
                                                 required>
@@ -358,7 +361,7 @@
                                     Estado de cuenta de prestamos
                                 </div>
                                 <div class="card-body">
-                                    @livewire('loanssearch')
+                                    @livewire('loanssearch', ['sucursal' => $sucursal])
                                 </div>
                             </div>
                         @endif

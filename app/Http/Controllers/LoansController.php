@@ -78,6 +78,14 @@ class LoansController extends Controller
             $payment_view = 0;
         }
         //devolvemos la vista loans y pasamos las variables como parametros
+        
+        if($orgs->records[0]->Name=="Inversiones Fortuna Panama, S.A."||$orgs->records[0]->Name=="La Doña"){
+            $sucursal="La Doña";
+        }elseif($orgs->records[0]->Name=="*"){
+            $sucursal="*";
+        }else{
+            $sucursal="Mañanitas";
+        }
         return view(
             'loans',
             [
@@ -89,7 +97,8 @@ class LoansController extends Controller
                 'payment_view' => $payment_view,
                 'orgs' => $orgs,
                 'cedula' => $request->cedula,
-                'nombre' => $request->nombre
+                'nombre' => $request->nombre,
+                'sucursal'=>$sucursal
             ]
         );
     }
@@ -123,6 +132,13 @@ class LoansController extends Controller
             $payment_view = 0;
         }
         //devolvemos la vista loans y pasamos las variables como parametros
+        if($orgs->records[0]->Name=="Inversiones Fortuna Panama, S.A."||$orgs->records[0]->Name=="La Doña"){
+            $sucursal="La Doña";
+        }elseif($orgs->records[0]->Name=="*"){
+            $sucursal="*";
+        }else{
+            $sucursal="Mañanitas";
+        }
         return view(
             'loansDebt',
             [
@@ -134,7 +150,8 @@ class LoansController extends Controller
                 'payment_view' => $payment_view,
                 'orgs' => $orgs,
                 'cedula' => $request->cedula,
-                'nombre' => $request->nombre
+                'nombre' => $request->nombre,
+                'sucursal'=>$sucursal
             ]
         );
     }
@@ -147,6 +164,9 @@ class LoansController extends Controller
 
     public function store_new(Request $request)
     {
+        if($request->sucursal=="*"){
+            $request->sucursal="Mañanitas";
+        }
         $todo = new loans;
         $todo->fechanuevoprestamo   = $request->fechanuevoprestamo;
         $todo->monto                = $request->monto;
@@ -158,6 +178,7 @@ class LoansController extends Controller
         $todo->cedula_user          = $request->cedula_user;
         $todo->nombre_user          = $request->nombre_user;
         $todo->loans_users_id       = $request->loans_users_id;
+        $todo->sucursal       = $request->sucursal;
         //dd($todo);
         $todo->save();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +209,8 @@ class LoansController extends Controller
                 'payment_view' => $payment_view,
                 'orgs' => $orgs,
                 'cedula' => $request->cedula_user,
-                'nombre' => $request->nombre_user
+                'nombre' => $request->nombre_user,
+                'sucursal'=>$request->sucursal
             ]
         );
     }
