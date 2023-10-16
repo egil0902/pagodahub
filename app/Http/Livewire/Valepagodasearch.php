@@ -31,8 +31,8 @@ class Valepagodasearch extends Component
             $org=$org->records;
         }
         if(count($org)<2){
-                $this->orgsParent=$org[0]->id;
-            }
+            $this->orgsParent=$org[0]->id;
+        }
         $vales=ValesPagoda::when($this->valenum, function ($query) {
             $query->where('value','ilike', '%' . $this->valenum);
         }, function ($query) {

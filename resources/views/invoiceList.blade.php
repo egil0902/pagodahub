@@ -16,7 +16,7 @@
                     Lista de recepción y pago
                 </div>
                 <div class="card-body">
-                    @livewire('App\Http\Livewire\InvoiceSearch')
+                    @livewire('App\Http\Livewire\InvoiceSearch', ['orgs' => $orgs])
                 </div>
             </div>
         </div>

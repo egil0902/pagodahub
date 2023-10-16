@@ -26,6 +26,20 @@
                             <label for="presupuesto">Presupuesto </label>
                             <input type="number" class="form-control" id="presupuesto" name="presupuesto"  step="0.01" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
+                        </div> 
                         <div class="form-group w-auto">
                             @csrf
                             <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Crear registro</button>
@@ -39,7 +53,7 @@
                 Lista de presupuestos
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\PresupuestoBankSearch')
+                @livewire('App\Http\Livewire\PresupuestoBankSearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

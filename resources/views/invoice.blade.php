@@ -21,6 +21,20 @@
                         @csrf
                         @method('POST')
                         <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="fecha_ingreso">Fecha de Ingreso</label>
                             <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="<?php echo date("Y-m-d"); ?>" required>
                         </div>

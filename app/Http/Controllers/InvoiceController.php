@@ -13,19 +13,135 @@ class InvoiceController extends Controller
 {
     public function index()
     {   
-        $tarjetas = Card::all();
-        return view('invoice',['tarjetas'=>$tarjetas]);
+        $APIController = new APIController();
+        ////////////
+        $name_user = auth()->user()->name;
+        $email_user = auth()->user()->email;
+        /*$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $user->records[0]->AD_Org_ID->id);
+        */$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
+        // Inicializa un array para almacenar los AD_Org_ID
+        $orgs = []; // Inicializa un array para almacenar los registros de AD_Org
+        
+        foreach ($user->records as $record) {
+            $orgId = $record->AD_Org_ID->id;
+            $response = $APIController->getModel('RV_GH_Org', '', 'AD_Org_ID eq ' . $orgId);
+            
+            if(isset($response->records[0]->Parent_ID)){
+                if($response->records[0]->Parent_ID->id!==0){
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->Parent_ID->id);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }else{
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }
+            }else{
+                    // Primera solicitud para AD_Org_ID = 1000009
+                    $response1 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000009');
+
+                    // Segunda solicitud para AD_Org_ID = 1000008
+                    $response2 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000008');
+
+                    // Combinar las respuestas en un único array
+                    $response->records = array_merge($response1->records, $response2->records);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs=$response->records;
+                        
+                    }
+            }
+        }
+        session()->put('misDatos', $orgs);
+        if(count($orgs)==1){
+            $tarjetas = Card::where('sucursal',$orgs[0]->Name)->get();
+            
+        }else{
+            $tarjetas = Card::all();
+        }
+        
+        return view('invoice',['tarjetas'=>$tarjetas,'orgs' => $orgs,  'permisos' => $user]);
     }
     public function list()
     {   
+        $APIController = new APIController();
+        ////////////
+        $name_user = auth()->user()->name;
+        $email_user = auth()->user()->email;
+        /*$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $user->records[0]->AD_Org_ID->id);
+        */$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
+        // Inicializa un array para almacenar los AD_Org_ID
+        $orgs = []; // Inicializa un array para almacenar los registros de AD_Org
+        
+        foreach ($user->records as $record) {
+            $orgId = $record->AD_Org_ID->id;
+            $response = $APIController->getModel('RV_GH_Org', '', 'AD_Org_ID eq ' . $orgId);
+            
+            if(isset($response->records[0]->Parent_ID)){
+                if($response->records[0]->Parent_ID->id!==0){
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->Parent_ID->id);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }else{
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }
+            }else{
+                    // Primera solicitud para AD_Org_ID = 1000009
+                    $response1 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000009');
+
+                    // Segunda solicitud para AD_Org_ID = 1000008
+                    $response2 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000008');
+
+                    // Combinar las respuestas en un único array
+                    $response->records = array_merge($response1->records, $response2->records);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs=$response->records;
+                        
+                    }
+            }
+        }
+        session()->put('misDatos', $orgs);
         $Invoice = Invoice::all();
-        return view('invoiceList');
+        return view('invoiceList',['orgs' => $orgs,  'permisos' => $user]);
     }
     public function create(Request $request)
     {
         if($request->forma_pago&&isset($request->presupuest_banco)){
-            $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->sum('monto');
-            $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
+            $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal',$request->AD_Org_ID)->sum('monto');
+            $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal',$request->AD_Org_ID)->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
             if(($invoice+$request->presupuest_banco)>$presupuesto){
                 return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
                 'ya que el monto puesto($'.$request->presupuest_banco.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
@@ -36,7 +152,7 @@ class InvoiceController extends Controller
         $brink->fecha_ingreso=$request->fecha_ingreso;
         $brink->fecha_pago=$request->fecha_pago;        
         $brink->proveedor=$request->proveedor;
-        
+        $brink->sucursal=$request->AD_Org_ID;
         $brink->monto_impuesto = number_format($request->monto_total * ($request->impuesto_select / 100), 2, '.', '');
         $brink->foto=$request->foto;//revisar
         $brink->responsable_ingreso=$request->responsable_ingreso;
