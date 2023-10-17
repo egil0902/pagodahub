@@ -25,6 +25,20 @@
                                     </div>
                         </div>
                         <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="Monto">Monto </label>
                             <input type="number" class="form-control" id="Monto" name="Monto" placeholder="" required >
                             <div class="text-danger" style="display:none" id="DMonto">
@@ -85,7 +99,7 @@
                 Lista de solicitudes de gerencia
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\RequestGerencySearch')
+                @livewire('App\Http\Livewire\RequestGerencySearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

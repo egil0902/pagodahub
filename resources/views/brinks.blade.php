@@ -71,6 +71,15 @@
                                 @endif
                             </select>
                         </div>
+                        <input type="hidden" id="orgNameHidden" name="orgNameHidden" value="">
+                        <script>
+                            document.getElementById('AD_Org_ID').addEventListener('change', function() {
+                                var selectedOption = this.options[this.selectedIndex];
+                                var orgName = selectedOption.textContent;
+                                document.getElementById('orgNameHidden').value = orgName;
+                            });
+                        </script>
+
                         <div class="form-group w-auto">
                             @csrf
                             <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Importar</button>
@@ -263,7 +272,7 @@
                 Listado Banco supervisor
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\BrinkSearch')
+                @livewire('App\Http\Livewire\BrinkSearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

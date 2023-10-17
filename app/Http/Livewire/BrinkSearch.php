@@ -19,8 +19,20 @@ class BrinkSearch extends Component
     {
         $this->resetPage();
     }
+    public function mount($orgs)
+    {
+        $org=session()->put('misDatos',$orgs);
+        $this->sucursal = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
+        $org=session()->get('misDatos');
+        if(isset($org->records)){
+            $org=$org->records;
+        }
+        if(count($org)<2){
+            $this->sucursal=$org[0]->Name;
+        }
 
         
         $brinksend = Brink::when($this->sucursal, function ($query) {
