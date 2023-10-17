@@ -54,7 +54,7 @@ class Loanssearchlist extends Component
             $query->where(function ($query) {
             });
         })->when($this->orgsParent, function ($query) {
-            $query->where('sucursal', $this->orgsParent);
+            $query->where('sucursal','ilike', "%$this->orgsParent%");
         }, function ($query) {
             $query->where(function ($query) {
             });
