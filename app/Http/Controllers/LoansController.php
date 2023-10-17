@@ -308,7 +308,8 @@ class LoansController extends Controller
             $nombreusario = $record->AD_User_ID->identifier;
             $id_name = auth()->user()->name;
             if ($record->Name == "loans" && $record->AD_User_ID->identifier == $id_name) {
-                return view('loanslist');
+                $orgs = $this->obtenerInformacion();
+                return view('loanslist', ['orgs' => $orgs]);
                 break;
             }
         }
