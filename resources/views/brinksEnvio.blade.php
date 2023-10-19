@@ -25,6 +25,20 @@
                                     </div>
                         </div> 
                         <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="Banco">Banco </label>
                             <input type="text" class="form-control " id="Banco" name="Banco" placeholder=""  required>
                             <div class="text-danger" style="display:none" id="DBanco">
@@ -91,7 +105,7 @@
                 Lista de envios a banco
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\BrinkSendSearch')
+                @livewire('App\Http\Livewire\BrinkSendSearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

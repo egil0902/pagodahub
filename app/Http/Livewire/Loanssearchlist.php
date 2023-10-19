@@ -21,9 +21,25 @@ class Loanssearchlist extends Component
     {
         $this->resetPage();
     }
-
+    public function mount($orgs)
+    {
+        $org=session()->put('misDatos',$orgs);
+        $this->orgsParent = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
+        $org=session()->get('misDatos');
+        if(isset($org->records)){
+            $org=$org->records;
+        }
+        if(count($org)<2){
+            $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
+        }
+        if("Inversiones Fortuna Panama, S.A."==$this->orgsParent){
+            $this->orgsParent="La doña";
+        }
         $loans = loans_statement_of_account::when($this->tipo, function ($query) {
             $query->where('loan_type', $this->tipo);
         }, function ($query) {
@@ -36,6 +52,11 @@ class Loanssearchlist extends Component
             });
         })->when($this->nombre, function ($query) {
             $query->where('nombre', 'ilike', "%$this->nombre%");
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->orgsParent, function ($query) {
+            $query->where('sucursal','ilike', "%$this->orgsParent%");
         }, function ($query) {
             $query->where(function ($query) {
             });

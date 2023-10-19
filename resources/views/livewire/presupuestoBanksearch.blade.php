@@ -25,6 +25,7 @@
                 </div>
             </th>
             <th>Presupuesto</th>
+            <th>Sucursal</th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -32,6 +33,7 @@
                     <td>{{ date('d-m-Y', strtotime($data->fecha)) }} </td>
                     
                     <td>{{ $data->monto }}   </td>
+                    <td>{{ $data->sucursal }}   </td>
                 </tr>
             @endforeach
         </tbody>

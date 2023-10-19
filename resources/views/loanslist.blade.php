@@ -9,7 +9,7 @@
         Listado de prestamos
       </div>
       <div class="card-body">
-        @livewire('loanssearchlist')
+        @livewire('loanssearchlist', ['orgs' => $orgs])
       </div>
     </div>
 

@@ -17,6 +17,14 @@ class Loanssearchdebt extends Component
     {
         $this->resetPage();
     }
+    public $sucursal;
+    public function mount($sucursal)
+    {
+        $this->sucursal = $sucursal; // Almacena el valor de 'tipo' desde el primer return
+        if($sucursal=="*"){
+            $this->sucursal="";
+        }
+    }
     public function render(Request $request)
     {
 
@@ -32,11 +40,11 @@ class Loanssearchdebt extends Component
         }
         if ($nombre == null) {
             return view('livewire.loanssearchdebt', [
-                'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->orderBy('datetrx', 'desc')->paginate(999),
+                'loans' => loans_statement_of_account::orwhere('cedula', '=', $cedula)->where('sucursal',$this->sucursal)->orderBy('datetrx', 'desc')->paginate(999),
             ]);
         } else {
             return view('livewire.loanssearchdebt', [
-                'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->orderBy('datetrx', 'desc')->paginate(999),
+                'loans' => loans_statement_of_account::orwhere('nombre', 'ilike', '%' . $nombre . '%')->where('sucursal',$this->sucursal)->orderBy('datetrx', 'desc')->paginate(999),
             ]);
         }
     }

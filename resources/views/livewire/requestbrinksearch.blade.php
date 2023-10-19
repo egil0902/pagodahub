@@ -30,6 +30,7 @@
             <th>Total</th>
             <th>Observaciones</th>
             <th>Fecha creacion</th>
+            <th>Sucursal</th>
             <th></th>
         </thead>
         <tbody>
@@ -52,6 +53,7 @@
                     <td>${{ $data->total }}   </td>
                     <td>{{ $data->observaciones }}   </td>
                     <td>{{ date('d-m-Y', strtotime($data->created_at)) }}   </td>
+                    <td>{{$data->sucursal}}</td>
                     <td>
                         <center>
                         

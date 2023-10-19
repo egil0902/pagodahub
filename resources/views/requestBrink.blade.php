@@ -21,8 +21,22 @@
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
                                 id="date" name="date" placeholder="" value="<?php echo date("Y-m-d"); ?>" >
                                 <div class="text-danger" id="Ddate" style="display:none">
-                                        Campo requerido
-                                    </div>
+                                    Campo requerido
+                                </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
                         </div>
 
                         <div align="center" style='width:90%!important; padding-left:10%'>
@@ -202,7 +216,7 @@
                 Lista de solicitudes a Brink
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\RequestBrinkSearch')
+                @livewire('App\Http\Livewire\RequestBrinkSearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

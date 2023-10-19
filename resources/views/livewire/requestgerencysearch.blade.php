@@ -25,6 +25,7 @@
             </th>
             <th>Monto </th>
             <th>Observaciones </th>
+            <th>Sucursales </th>
             <th></th>
         </thead>
         <tbody>
@@ -32,7 +33,8 @@
                 <tr>
                     <td>{{ date('d-m-Y', strtotime($data->fecha)) }} </td>
                     <td>{{ $data->monto }} </td>
-                    <th>{{$data->observaciones}} </th>
+                    <td>{{$data->observaciones}} </td>
+                    <td>{{$data->sucursal}} </td>
                     <td>
                         <center>
                             {{--<form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
@@ -82,7 +84,7 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="4">
+                    <td colspan="5">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>

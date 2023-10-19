@@ -16,6 +16,20 @@
                 <div class="card-body">
                     <!-- Formulario para envio-->
                     <form name="provider" id="provider" method="post" action="{{ route('payment.create') }}">
+                        <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
+                        </div>
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
@@ -28,8 +42,7 @@
                         <label for="formFileMultiple" class="form-label">Monto</label>
                             <input name="monto" id="monto"  value='0' 
                                                 type="number" class="text-center form-control w-50" >
-                                       
-</div>
+                        </div>
                         <div align="center" style='width:90%!important; padding-left:10%'>
                             
                             <h4>Observaciones:</h4>
@@ -88,7 +101,7 @@
                 Lista de pagos de factura
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\PaymentSearch')
+                @livewire('App\Http\Livewire\PaymentSearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

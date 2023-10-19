@@ -17,12 +17,33 @@ class BrinkSendSearch extends Component
     {
         $this->resetPage();
     }
+    public $orgsParent; // Propiedad para almacenar el valor de 'tipo' desde el primer return
+
+    public function mount($orgs)
+    {
+        $org=session()->put('misDatos',$orgs);
+        $this->orgsParent = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
+        $org=session()->get('misDatos');
+        if(isset($org->records)){
+            $org=$org->records;
+        }
+        if(count($org)<2){
+            $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
+        }
 
         
         $brinksend = BrinkSend::when($this->banco, function ($query) {
             $query->where('banco', 'ilike', "%$this->banco%");
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->orgsParent, function ($query) {
+            $query->where('sucursal', 'ilike', "%$this->orgsParent%" );
         }, function ($query) {
             $query->where(function ($query) {
             });
