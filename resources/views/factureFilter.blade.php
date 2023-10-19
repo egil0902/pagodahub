@@ -46,7 +46,7 @@
         </div>
     @endif
     <br>
-    @livewire('App\Http\Livewire\FactureFilter')
+    @livewire('App\Http\Livewire\FactureFilter', ['orgs' => $orgs])
 
     <style>
         table {

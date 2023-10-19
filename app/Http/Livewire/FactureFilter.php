@@ -19,9 +19,15 @@ class FactureFilter extends Component
     {
         $this->resetPage();
     }
+    public $orgsParent; // Propiedad para almacenar el valor de 'tipo' desde el primer return
+
+    public function mount($orgs)
+    {
+        $this->orgsParent = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
-
+        
         $facturas = Facture::where('pagada',false)->when($this->proveedor, function ($query) {
             $query->where('proveedor', 'ilike', "%$this->proveedor%");
         }, function ($query) {
@@ -37,9 +43,16 @@ class FactureFilter extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
+        })->when($this->orgsParent, function ($query) {
+            $query->where('sucursal', 'ilike', "%$this->orgsParent%");
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
         })->orderBy('fecha', 'desc')->paginate(25); // Obtener todos los facturas de la tabla
         return view('livewire.facture-filter', [
             'facturas' => $facturas,
+            'orgs' => $this->orgsParent,
+
         ]);
     }
 }

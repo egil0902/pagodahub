@@ -4,6 +4,8 @@
 
             @csrf
             <div class="form-group">
+                <input type="hidden" name="sucursal" id="sucursal" value="{{$orgs}}">
+                
                 <input type="hidden" name="facturas_ids" id="facturas_ids" value="">
                 <div>
                     <label for="pagoPresupuesto">Descontar del presupuesto del día?</label>
@@ -261,6 +263,7 @@
                     <th>Medio de pago</th>
                     <th>Abono</th>
                     <th>Valor Deuda</th>
+                    <th>Sucursal</th>
                     <th></th>
                     <th>
                         <input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll(this)">
@@ -300,6 +303,7 @@
                     <td>{{$factura->medio_de_pago?"Contado":"Crédito"}}</td>
                     <td>${{$factura->monto_abonado}}</td>
                     <td name="total{{$factura->id_compra}}" id="total{{$factura->id_compra}}">${{$factura->Total_compra- $factura->monto_abonado}}</td>
+                    <td>{{$factura->sucursal}}</td>
                     <td>
                     <form action="{{ route('factures.eliminar') }}" method="post" id="deleteForm">
                         @csrf

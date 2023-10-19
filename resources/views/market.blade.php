@@ -75,6 +75,20 @@
                                             <input class="form-control" type="date" name="date-day" id=""
                                                 required>
                                         </div>
+                                        <div class="col">
+                                            <label for="" class="form-label">Sucursal</label>
+                                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                                @if (isset($orgs))
+                                                    @if ($orgs)
+                                                        @foreach ($orgs as $org)
+                                                            @if($org->id!=0)
+                                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endif
+                                            </select>
+                                        </div>
                                          <button type="submit" class="btn btn-outline-success w-40">
                                             cargar informacion
                                         </button>
@@ -107,8 +121,10 @@
                                                 required>
                                         </div>
                                         <div class="col"><label for=""
-                                                class="form-label">{{-- Comprador --}}</label>
-                                            <input class="form-control" type="text" name="comprador" id=""
+                                                class="form-label">Sucursal</label>
+                                            <input class="form-control" type="text" name="sucursal" id="sucursal"
+                                                value="{{ $sucursal }}" readonly >
+                                                <input class="form-control" type="text" name="comprador" id=""
                                                 value="{{ Auth::user()->name }}" readonly style="display:none">
                                         </div>
                                         <div class="col"><label for="" class="form-label">Presupuesto del dia</label>
