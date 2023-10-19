@@ -34,6 +34,8 @@ class Loanssearchlist extends Component
         }
         if(count($org)<2){
             $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
         }
         if("Inversiones Fortuna Panama, S.A."==$this->orgsParent){
             $this->orgsParent="La doña";

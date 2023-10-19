@@ -31,6 +31,8 @@ class RequestGerencySearch extends Component
         }
         if(count($org)<2){
             $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
         }
         $brinksend = RequestGerency::when($this->fecha, function ($query) {
             $query->where('fecha', $this->fecha);

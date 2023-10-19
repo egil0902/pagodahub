@@ -31,6 +31,8 @@ class CardSearch extends Component
         }
         if(count($org)<2){
             $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
         }
         
         $brinksend = Card::when($this->numero, function ($query) {

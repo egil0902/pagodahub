@@ -33,6 +33,8 @@ class StartBrinkSearch extends Component
         }
         if(count($org)<2){
             $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
         }
         $brinksend = StartBrink::when($this->fecha, function ($query) {
             $query->where('fecha', $this->fecha);
