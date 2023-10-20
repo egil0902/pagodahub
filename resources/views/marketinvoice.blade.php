@@ -17,7 +17,22 @@
                 <div class="form-group w-50 "style="padding-left: 200px;">
 
                     @csrf
+                    <div class="col-md-6 mb-3">
+                        <p for="cars" class="card-text">Sucursal</p>
+                        <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                            @if (isset($orgs))
+                                @if ($orgs)
+                                    @foreach ($orgs as $org)
+                                        @if($org->id!=0)
+                                            <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            @endif
+                        </select>
+                    </div>
                     <div class="input-group mb-3">
+                        
                         <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
                             spellcheck="false" data-ms-editor="true" name="day">
                         <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
@@ -464,6 +479,7 @@
                 <form name="print" id="print" method="post" action="{{ route('market.print') }}">
                     @csrf
                     <input type="hidden" name="fecha_registro" value="{{ $data->shoppingday }}">
+                    <input type="hidden" name="AD_Org_ID" value="{{ $data->sucursal }}">
                     <button type="submit" class="btn btn-outline-success w-100">
                         Imprimir registro
                     </button>

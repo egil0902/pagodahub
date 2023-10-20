@@ -123,6 +123,7 @@
     <form method="POST" action="{{ route('resume-pdf') }}">
         @csrf
         <input type="hidden" name="day" value="{{ $fecha }}">
+        <input type="hidden" name="sucursal" value="{{ $sucursal }}">
         <button type="submit" class="btn btn-primary">Imprimir</button>
     </form>
 

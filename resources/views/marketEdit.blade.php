@@ -87,9 +87,9 @@
                                                 required>
                                         </div>
                                         <div class="col"><label for=""
-                                                class="form-label">{{-- Comprador --}}</label>
-                                            <input class="form-control" type="text" name="comprador" id=""
-                                                value="{{ Auth::user()->name }}" readonly style="display:none">
+                                                class="form-label">Sucursal</label>
+                                            <input class="form-control" type="text" name="sucursal" id=""
+                                                value="{{ $sucursal}}" readonly >
                                         </div>
                                         <div class="col"><label for="" class="form-label">Presupuesto</label>
                                             <input class="form-control" type="number" name="Presupuesto" id=""

@@ -23,6 +23,20 @@
                     <form name="provider" id="provider" method="post" action="{{ route('factures.credit') }}">
                         <div class="form-group w-auto">
                             @csrf
+                            <div class="col">
+                                <label for="" class="form-label">Sucursal</label>
+                                <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                    @if (isset($orgs))
+                                        @if ($orgs)
+                                            @foreach ($orgs as $org)
+                                                @if($org->id!=0)
+                                                    <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endif
+                                </select>
+                            </div>
                             <button class=" w-100 btn btn-outline-secondary m-0" type="submit" id="button-addon2">Mostrar facturas sin pagar</button>
                         </div>
                     </form>
@@ -31,27 +45,44 @@
         </div>
         
         <div class="container">
-            <form name="factures" id="factures" method="post" action="{{ route('factures.resume') }}">
-                    <div class="form-group ">
+        <div class="card">
+            <div class="card-header">Resumen del dia</div>
+                <div class="card-body pb-0">
+                    <form name="factures" id="factures" method="post" action="{{ route('factures.resume') }}">
 
-                        @csrf
-                        <div class="input-group mb-3">
-                            <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
-                                spellcheck="false" data-ms-editor="true" name="day" required>
-                            <button class="btn btn-outline-secondary" type="" id="button-addon2">Resumen del dia</button>
-                        </div>
+                            <div class="form-group ">
 
-                    </div>
-            </form>
-        </div>
-        <div class="container">
-        Presupuesto restante para el dia: {{$presupuesto}}
+                                @csrf
+                                <div class="col">
+                                    <label for="" class="form-label">Sucursal</label>
+                                    <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                        @if (isset($orgs))
+                                            @if ($orgs)
+                                                @foreach ($orgs as $org)
+                                                    @if($org->id!=0)
+                                                        <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" placeholder="" aria-label="" aria-describedby=""
+                                        spellcheck="false" data-ms-editor="true" name="day" required>
+                                    <button class="btn btn-outline-secondary" type="" id="button-addon2">Buscar</button>
+                                </div>
+
+                            </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </br>
     
     <div>
-        @livewire('App\Http\Livewire\FactureList')        
+        @livewire('App\Http\Livewire\FactureList', ['orgs' => $orgs])
     </div>
 </div>
 

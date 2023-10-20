@@ -56,6 +56,7 @@
                 </select>
             </th>
             <th>Fecha cancelacion</th>
+            <th>Sucursal</th>
             <th class="centered-th"><input wire:model="descripcion" class="form-control centered-th" type="text" placeholder="Observaciones" style="max-width: 250px;">
             </th>
         </tr>
@@ -73,6 +74,8 @@
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">${{($factura->medio_de_pago&&$factura->pagada)?0:($factura->Total_compra-$factura->monto_abonado)}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->pagada?"Si":"No"}}</td>
             <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->fecha_pago}}</td>
+            <td style="color: {{$factura->medio_de_pago == 1 ? 'green' : ($factura->medio_de_pago == 0 && $factura->pagada ? 'green' : ($factura->pagada == false && $factura->monto_abonado > 0 ? 'blue' : 'red'))}}">{{$factura->sucursal}}</td>
+            
             <!--<td>
                 <form action="{{ route('factures.borrar', $factura->id) }}" method="post">
                     @csrf

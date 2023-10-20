@@ -12,7 +12,61 @@ class FactureController extends Controller
 {
     public function index()
     {
-        $facturas = Facture::orderBy('fecha', 'desc')->get(); // Obtener todos los facturas de la tabla
+        $APIController = new APIController();
+        ////////////
+        $name_user = auth()->user()->name;
+        $email_user = auth()->user()->email;
+        /*$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $user->records[0]->AD_Org_ID->id);
+        */$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
+        // Inicializa un array para almacenar los AD_Org_ID
+        $orgs = []; // Inicializa un array para almacenar los registros de AD_Org
+        
+        foreach ($user->records as $record) {
+            $orgId = $record->AD_Org_ID->id;
+            $response = $APIController->getModel('RV_GH_Org', '', 'AD_Org_ID eq ' . $orgId);
+            
+            if(isset($response->records[0]->Parent_ID)){
+                if($response->records[0]->Parent_ID->id!==0){
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->Parent_ID->id);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }else{
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }
+            }else{
+                    // Primera solicitud para AD_Org_ID = 1000009
+                    $response1 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000009');
+
+                    // Segunda solicitud para AD_Org_ID = 1000008
+                    $response2 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000008');
+
+                    // Combinar las respuestas en un único array
+                    $response->records = array_merge($response1->records, $response2->records);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs=$response->records;
+                        
+                    }
+            }
+        }
+        session()->put('misDatos', $orgs);
         $day = date('Y-m-d'); // Obtener la fecha actual
         $presupuesto = "no asignado para el dia";
         $vuelto=0;
@@ -41,7 +95,7 @@ class FactureController extends Controller
                 $presupuesto-=$check->monto;
             }
         }
-        return view('facture', compact('facturas', 'presupuesto','vuelto')); // Pasar los facturas a la vista
+        return view('facture', compact('presupuesto','vuelto','orgs')); // Pasar los facturas a la vista
     }
 
 
@@ -111,13 +165,14 @@ class FactureController extends Controller
             $registro->file = $request->archivosimg[0];
         }
         $registro->total = $request->sumdifac;
+        $comprasdeldia = marketshopping::where('id', $request->id)->orderBy('created_at', 'asc')->get();
+        $registro->sucursal = $comprasdeldia[0]->sucursal;
         $registro->save(); // Guardar el nuevo registro en la base de datos   
         
         // Asignar los valores del formulario a las propiedades del modelo
         
         
         $presupuesto=0;
-        $comprasdeldia = marketshopping::where('shoppingday', $request->input('fecha_registro'))->orderBy('created_at', 'asc')->get();
         $carton =0;
         $vuelto=0;
         if ($comprasdeldia->count() > 0) {
@@ -141,8 +196,8 @@ class FactureController extends Controller
             }
             $comprasdeldia[0]->quantity = json_encode($quantity);
         }
-        
-        $facturas = Facture::where('fecha', $request->input('fecha_registro'))->get();
+        $sucursal=$comprasdeldia[0]->sucursal;
+        $facturas = Facture::where('fecha', $request->input('fecha_registro'))->where('sucursal', 'ilike', "%$sucursal%" )->get();
         
         if($facturas->count() > 0) {
             foreach ($facturas as $factura) {
@@ -159,13 +214,68 @@ class FactureController extends Controller
                 */
             }
         }
-        $cheques = Cheque::where('fecha',$request->input('fecha_registro'))->where('pago_presupuesto',true)->get();
+        $cheques = Cheque::where('fecha',$request->input('fecha_registro'))->where('sucursal', 'ilike', "%$sucursal%" )->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
                     $presupuesto-=$check->monto;
                 }
         }
-        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas','vuelto'));
+        $APIController = new APIController();
+        ////////////
+        $name_user = auth()->user()->name;
+        $email_user = auth()->user()->email;
+        /*$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+        
+        $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $user->records[0]->AD_Org_ID->id);
+        */$user = $APIController->getModel('AD_User', '', "Name eq '$name_user' and EMail eq '$email_user'", '', '', '', 'PAGODAHUB_closecash');
+
+        // Inicializa un array para almacenar los AD_Org_ID
+        $orgs = []; // Inicializa un array para almacenar los registros de AD_Org
+        
+        foreach ($user->records as $record) {
+            $orgId = $record->AD_Org_ID->id;
+            $response = $APIController->getModel('RV_GH_Org', '', 'AD_Org_ID eq ' . $orgId);
+            
+            if(isset($response->records[0]->Parent_ID)){
+                if($response->records[0]->Parent_ID->id!==0){
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $response->records[0]->Parent_ID->id);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }else{
+                    // Consulta el registro de AD_Org para el AD_Org_ID actual
+                    $response = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq ' . $orgId);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs[] = $response->records[0];
+                    }
+                }
+            }else{
+                    // Primera solicitud para AD_Org_ID = 1000009
+                    $response1 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000009');
+
+                    // Segunda solicitud para AD_Org_ID = 1000008
+                    $response2 = $APIController->getModel('AD_Org', '', 'AD_Org_ID eq 1000008');
+
+                    // Combinar las respuestas en un único array
+                    $response->records = array_merge($response1->records, $response2->records);
+                    //tabla rv_gh_org  campo AD_Org_ID
+                    // Verifica si la consulta fue exitosa
+                    if ($response && isset($response->records[0])) {
+                        // Agrega el registro de AD_Org al array de resultados
+                        $orgs=$response->records;
+                        
+                    }
+            }
+        }
+        session()->put('misDatos', $orgs);
+        return view('marketinvoice', compact('comprasdeldia','presupuesto','carton','facturas','vuelto','orgs'));
         //return redirect()->back()->with('success', 'Registro creado exitosamente'); // Redirigir a la vista principal con un mensaje de éxito
     }
 
@@ -211,14 +321,15 @@ class FactureController extends Controller
 
     public function getAllCredit(Request $request)
     {
+        $sucursal=$request->AD_Org_ID;
         //RECORDATORIO QUE TODOS LOS CREDITOS ESTAN EN LA DB CON VALOR 1
-        $facturas = Facture::where('pagada', false)->get();
+        $facturas = Facture::where('pagada', false)->where('sucursal', 'ilike', "%$sucursal%" )->get();
         $day = date('Y-m-d'); // Obtener la fecha actual
         $presupuesto = "no asignado para el dia";
-        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->whereNotNull('budget')->get();
+        $calculo = marketshopping::where('shoppingday', $day)->where('shoppingday', $day)->where('sucursal', 'ilike', "%$sucursal%" )->whereNotNull('budget')->get();
         if ($calculo->count()>0) {
             $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
-            $comprasdeldia = Facture::where('fecha', $day)->get();
+            $comprasdeldia = Facture::where('fecha', $day)->where('sucursal', 'ilike', "%$sucursal%" )->get();
             
             foreach ($comprasdeldia as $factura) {
                 if($factura->medio_de_pago){
@@ -230,7 +341,7 @@ class FactureController extends Controller
                 }
             }
         }
-        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->get();
+        $cheques = Cheque::where('fecha',$day)->where('pago_presupuesto',true)->where('sucursal', 'ilike', "%$sucursal%" )->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
                     if($presupuesto == "no asignado para el dia"){
@@ -240,7 +351,8 @@ class FactureController extends Controller
                 }
         }
         $providerName="";
-        return view('factureFilter', compact('facturas','presupuesto','providerName'))->with('refresh', true);
+        $orgs=$sucursal;
+        return view('factureFilter', compact('facturas','presupuesto','providerName','orgs'))->with('refresh', true);
     }
     public function borrar($id)
     {
@@ -256,7 +368,6 @@ class FactureController extends Controller
     {   
         // Buscar la factura por su ID y eliminarla directamente
         $facture = facture::where('id', $request->id)->first();
-        $market = marketshopping::where('id_compra', $facture ->id_compra)->delete();
         $facture->delete();
         
         if (!$facture) {
@@ -320,7 +431,7 @@ class FactureController extends Controller
         //revisa si se paga con el presupuesto
         if($request->pagoPresupuesto){
             $pagoPresupuesto=$request->pagoPresupuesto;  
-            $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
+            $calculo = marketshopping::where('shoppingday', $fechaPago)->where('sucursal',$request->sucursal)->get();
             $ispresupuesto=true;
         }else{
             $metodoPago=$request->metodoPago;
@@ -330,7 +441,7 @@ class FactureController extends Controller
             if($metodoPago==="Dia anterior"){
                 $codigo="000000";
                 $fechaPago=$request->fechaPago;
-                $calculo = marketshopping::where('shoppingday', $fechaPago)->get();
+                $calculo = marketshopping::where('shoppingday', $fechaPago)->where('sucursal',$request->sucursal)->get();
                 $ispresupuesto=true;
                 $fechaExpedicion=$fechaPago;
             }
@@ -345,7 +456,7 @@ class FactureController extends Controller
             if ($calculo->count()>0) {
                 $presupuesto=$calculo[0]->budget+$calculo[0]->carton;
                 //descuenta del presupuesto las facturas que toca cancelar
-                $comprasdeldia = Facture::where('fecha', $calculo[0]->shoppingday)->where('id_market', $calculo[0]->id)->get();            
+                $comprasdeldia = Facture::where('fecha', $calculo[0]->shoppingday)->where('id_market', $calculo[0]->id)->where('sucursal',$request->sucursal)->get();            
                 foreach ($comprasdeldia as $factura) {
                     if($factura->medio_de_pago){
                         $presupuesto-=$factura->total;
@@ -356,11 +467,12 @@ class FactureController extends Controller
                 }
             }else{
                 $providerName="";
-                $facturas=Facture::where('pagada', false)->get();
-                return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
+                $facturas=Facture::where('pagada', false)->where('sucursal',$request->sucursal)->get();
+                $orgs=$request->sucursal;
+                return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2','orgs'))->withErrors("No se puede proceder con el pago de la factura porque no existe un presupuesto para ese dia");
             }
 
-            $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->get();
+            $cheques = Cheque::where('fecha',$fechaPago)->where('pago_presupuesto',true)->where('sucursal',$request->sucursal)->get();
             if ($cheques->count()>0) {
                 foreach ($cheques as $check) {
                     if($presupuesto == "no asignado para el dia"){
@@ -381,7 +493,8 @@ class FactureController extends Controller
                 //la deuda no se puede pagar con el presupuesto
                 $providerName="";
                 $facturas=$resultados;
-                return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
+                $orgs=$request->sucursal;
+                return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2','orgs'))->withErrors("No se puede proceder con el pago de la factura porque el presupuesto es menor al monto a cancelar");
             }
         }
         $pagoPresupuesto=false;
@@ -392,7 +505,7 @@ class FactureController extends Controller
 
         if (count($idCompras)>0) {
             if($request->pagoParcial==true){
-                $factura = Facture::where('id_compra', $idCompras[0])->first();
+                $factura = Facture::where('id_compra', $idCompras[0])->where('sucursal',$request->sucursal)->first();
                 $monto=$request->montoParcial;
                 $deuda=$request->montoParcial;
                 if($factura){
@@ -410,7 +523,8 @@ class FactureController extends Controller
                     }
                     $factura->save();
                 }else{
-                    return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
+                    $orgs=$request->sucursal;
+                    return view('factureFilter', compact('facturas','presupuesto','providerName','permisos2','orgs'))->withErrors("No se puede proceder con el pago de la factura porque no existe la factura ".$idCompras[$i]);
                 }
                 $cheque = new Cheque();
                 $cheque->fecha = $fechaPago;
@@ -421,6 +535,7 @@ class FactureController extends Controller
                 $cheque->codigo=$codigo;
                 $cheque->banco=$banco;
                 $cheque->fechaExpedicion=$fechaExpedicion;
+                $cheque->sucursal=$request->sucursal;
                 $cheque->save();
                 
             }else{
@@ -455,6 +570,7 @@ class FactureController extends Controller
                     $cheque->codigo=$codigo;
                     $cheque->banco=$banco;
                     $cheque->fechaExpedicion=$fechaExpedicion;
+                    $cheque->sucursal=$request->sucursal;
                     $cheque->save();
                     
                 }
@@ -587,9 +703,10 @@ class FactureController extends Controller
     }
 
     public function resume(Request $request){
-        $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
+        $sucursal=$request->AD_Org_ID;
+        $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->where('sucursal', 'ilike', "%$sucursal%" )->get();
         $vueltoEntregado= 0;
-        $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
+        $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->where('sucursal', 'ilike', "%$sucursal%" )->get();
         $cantidadProductos=0;
         $tFactura=0;        
         $abonado=0;
@@ -613,7 +730,7 @@ class FactureController extends Controller
         }
         
         $pagosAnteriores=0;
-        $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->get();
+        $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->where('sucursal', 'ilike', "%$sucursal%" )->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
                 $pagosAnteriores+=$check->monto;
@@ -631,7 +748,7 @@ class FactureController extends Controller
         
         $tComprado=0;
         $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;
-        $cheques = Cheque::where('fecha',$request->day)->get();
+        $cheques = Cheque::where('fecha',$request->day)->where('sucursal', 'ilike', "%$sucursal%" )->get();
         return view('factureResume',compact('fecha',
         'cantidadProductos',
         'presupuesto',
@@ -646,13 +763,14 @@ class FactureController extends Controller
         'vuelto',
         'vueltoEntregado',
         'cheques',
-        'deuda'
+        'deuda',
+        'sucursal'
         ));
     }
     public function resumePdf(Request $request){
-        $calculo = marketshopping::where('shoppingday', $request->day)->orderBy('shoppingday', 'desc')->get();
+        $calculo = marketshopping::where('shoppingday', $request->day)->where('sucursal', 'ilike', "%$request->sucursal%" )->orderBy('shoppingday', 'desc')->get();
         $vueltoEntregado= 0;
-        $facturas = Facture::where('fecha', $request->day)->orderBy('fecha', 'desc')->get();
+        $facturas = Facture::where('fecha', $request->day)->where('sucursal', 'ilike', "%$request->sucursal%" )->orderBy('fecha', 'desc')->get();
         $cantidadProductos=0;
         $tFactura=0;        
         $abonado=0;
@@ -676,7 +794,7 @@ class FactureController extends Controller
         }
         
         $pagosAnteriores=0;
-        $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->get();
+        $cheques = Cheque::where('fecha',$request->day)->where('pago_presupuesto',true)->where('sucursal', 'ilike', "%$request->sucursal%" )->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
                 $pagosAnteriores+=$check->monto;
@@ -694,7 +812,7 @@ class FactureController extends Controller
         
         $tComprado=0;
         $vuelto=$presupuesto+$carton-$tEfectivo-$abonado-$pagosAnteriores;
-        $cheques = Cheque::where('fecha',$request->day)->get();
+        $cheques = Cheque::where('fecha',$request->day)->where('sucursal', 'ilike', "%$request->sucursal%" )->get();
         $pdf = PDF::loadView('download-pdf_resumen_del_dia', ['fecha'=>$request->day,
         'cantidadProductos'=>$cantidadProductos,
         'presupuesto'=>$presupuesto,

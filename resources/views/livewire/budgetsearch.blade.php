@@ -8,7 +8,7 @@
     <table class="table table-bordered">
         
         <thead id="miTablaPersonalizada">
-            
+            <th>Sucursal</th>
             <th>
                 <div class="input-group" style="width:75%">
                     <span class="input-group-text" id="basic-addon2">
@@ -52,6 +52,7 @@
         <tbody>
             @foreach ($brinksend as $data)
                 <tr>
+                    <td>{{$data->sucursal}}</td>
                     <td>{{ date('d-m-Y', strtotime($data->fecha)) }} </td>
                     
                     <td>{{ $data->responsable_entrega }}</td>

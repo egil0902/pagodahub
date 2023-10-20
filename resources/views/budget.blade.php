@@ -24,6 +24,20 @@
                                 
                         </div>
                         <div class="col-md-6 mb-3">
+                            <p for="cars" class="card-text">Sucursal</p>
+                            <select class="form-control" name="AD_Org_ID" id="AD_Org_ID">
+                                @if (isset($orgs))
+                                    @if ($orgs)
+                                        @foreach ($orgs as $org)
+                                            @if($org->id!=0)
+                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="recibe">Responsable que recibe </label>
                             <input type="text" class="form-control" id="recibe" name="recibe" required>
                         </div>
@@ -36,7 +50,7 @@
                             <input type="number" class="form-control" id="presupuesto" name="presupuesto"  step="0.01" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="numero">Número: </label>
+                            <label for="numero">Número de cheques: </label>
                             <input type="number" id="numero" name="numero" onkeyup="agregarCampos()">
                         </div>
                         <div id="container_cheques"></div>
@@ -94,7 +108,7 @@
                 Lista de presupuestos
             </div>
             <div class="card-body">
-                @livewire('App\Http\Livewire\BudgetSearch')
+                @livewire('App\Http\Livewire\BudgetSearch', ['orgs' => $orgs])
             </div>
         </div>
     </div>

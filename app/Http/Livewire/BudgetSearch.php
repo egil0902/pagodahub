@@ -18,10 +18,23 @@ class BudgetSearch extends Component
     {
         $this->resetPage();
     }
+    public function mount($orgs)
+    {
+        $org=session()->put('misDatos',$orgs);
+        $this->orgsParent = $orgs; // Almacena el valor de 'tipo' desde el primer return
+    }
     public function render()
     {
+        $org=session()->get('misDatos');
+        if(isset($org->records)){
+            $org=$org->records;
+        }
+        if(count($org)<2){
+            $this->orgsParent=$org[0]->Name;
+        }else{
+            $this->orgsParent="";
+        }
 
-        
         $brinksend = Budget::when($this->fecha, function ($query) {
             $query->where('fecha', $this->fecha);
         }, function ($query) {
@@ -34,6 +47,11 @@ class BudgetSearch extends Component
             });
         })->when($this->responsable_recibe, function ($query) {
             $query->where('responsable_recibe', 'ilike', "%$this->responsable_recibe%");
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->orgsParent, function ($query) {
+            $query->where('sucursal', 'ilike', "%$this->orgsParent%");
         }, function ($query) {
             $query->where(function ($query) {
             });
