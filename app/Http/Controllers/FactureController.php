@@ -173,7 +173,6 @@ class FactureController extends Controller
         
         
         $presupuesto=0;
-        
         $carton =0;
         $vuelto=0;
         if ($comprasdeldia->count() > 0) {
@@ -215,7 +214,7 @@ class FactureController extends Controller
                 */
             }
         }
-        $cheques = Cheque::where('fecha',$request->input('fecha_registro'))->where('pago_presupuesto',true)->get();
+        $cheques = Cheque::where('fecha',$request->input('fecha_registro'))->where('sucursal', 'ilike', "%$sucursal%" )->where('pago_presupuesto',true)->get();
         if ($cheques->count()>0) {
             foreach ($cheques as $check) {
                     $presupuesto-=$check->monto;
@@ -369,7 +368,6 @@ class FactureController extends Controller
     {   
         // Buscar la factura por su ID y eliminarla directamente
         $facture = facture::where('id', $request->id)->first();
-        $market = marketshopping::where('id_compra', $facture ->id_compra)->delete();
         $facture->delete();
         
         if (!$facture) {
