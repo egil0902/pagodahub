@@ -398,7 +398,8 @@ class MarketController extends Controller
     {   
         
         try{
-            $shop = MarketShopping::findOrFail($id);  
+            $shop = MarketShopping::findOrFail($id);
+            $sucursal= $shop->sucursal;
             $productos = $request->input('product');        
             $productos = array_values(array_filter($productos, function ($valor) {
                 return !is_null($valor) && $valor !== '';
@@ -476,7 +477,7 @@ class MarketController extends Controller
             $dia=$request->input('date-day');
             $presupuesto=$comprasdeldia[0]->budget ;
             $mensajeExito='¡La operación se realizó con éxito!';
-            return view('marketEdit', compact('comprasdeldia', 'opciones', 'opciones2','presupuesto','mensajeExito'));
+            return view('marketEdit', compact('comprasdeldia', 'opciones', 'opciones2','presupuesto','mensajeExito','sucursal'));
         
         } catch (Exception $e) {
             $opciones = units::all();
@@ -486,7 +487,8 @@ class MarketController extends Controller
             $comprasdeldia = marketshopping::where('shoppingday', $request->input('date-day'))->get();
             $dia=$request->input('date-day');
             $presupuesto=$comprasdeldia[0]->budget ;
-            return view('marketEdit', compact('comprasdeldia','opciones', 'presupuesto','opciones2'))->withErrors($e->getMessage());
+            $sucursal=$comprasdeldia[0]->sucursal ;
+            return view('marketEdit', compact('comprasdeldia','opciones', 'presupuesto','opciones2','sucursal'))->withErrors($e->getMessage());
         }
     }
 
