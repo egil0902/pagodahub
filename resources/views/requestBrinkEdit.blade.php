@@ -156,7 +156,7 @@
                             <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
                             <input class=" subirimagen form-control" type="file" id="filePicker"
                                 placeholder="foto" name="FileCedula" value="0" onchange="imgsize()"
-                                onkeyup="imgsize()" accept=".png" required>
+                                onkeyup="imgsize()" accept=".png" >
                             <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
                                 cols="50" rows="15"></textarea>
                             <br>
