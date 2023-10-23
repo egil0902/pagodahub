@@ -69,7 +69,9 @@ class InvoiceController extends Controller
         }
         session()->put('misDatos', $orgs);
         if(count($orgs)==1){
-            $tarjetas = Card::where('sucursal',$orgs[0]->Name)->get();
+            $sucursal=$orgs[0]->Name;
+
+            $tarjetas = Card::where('sucursal', 'ilike', "%$sucursal%" )->get();
             
         }else{
             $tarjetas = Card::all();
