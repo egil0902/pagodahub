@@ -86,9 +86,10 @@ class BrinkController extends Controller
         $APIController = new APIController();
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
-        $sumatoriaMonto = RequestGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal',$request->orgNameHidden)->sum('monto');
-        $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal',$request->orgNameHidden)->sum('total');
-        $payment = Payment::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal',$request->orgNameHidden)->sum('monto');
+        $sucursal=$request->orgNameHidden;
+        $sumatoriaMonto = RequestGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
+        $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('total');
+        $payment = Payment::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
         
 
         $response = $APIController->getModel(
@@ -176,11 +177,11 @@ class BrinkController extends Controller
             $exist = Brink::where(function ($query) use ($request, $sucursal) {
             $query->where('fecha_cierre', '>=', $request->startDate)
                   ->where('fecha_cierre', '<=', $request->endDate)
-                  ->where('sucursal', $sucursal)
+                  ->where('sucursal', 'ilike', "%$sucursal%" )
                   ->orWhere(function ($query) use ($request, $sucursal) {
                       $query->where('fecha_inicio', '>=', $request->startDate)
                             ->where('fecha_inicio', '<=', $request->endDate)
-                            ->where('sucursal', $sucursal);
+                            ->where('sucursal', 'ilike', "%$sucursal%" );
                   });
             })->first();
             if($exist){
@@ -188,7 +189,7 @@ class BrinkController extends Controller
             }
         }
         //$devgerencia=DevolucionGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('devolucion');
-        $start= StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->sum('presupuesto');
+        $start= StartBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('presupuesto');
 
 
         if($brink){

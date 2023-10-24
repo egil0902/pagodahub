@@ -144,7 +144,7 @@
                                                     <td>
                                                     <input type="hidden" id="mult10" value="1">
                                                         <input name="requestBrink" id="requestBrink" style="margin-left: 25%;" value="{{$requestBrink}}" onchange="calOne()" readonly
-                                                            type="number" class="text-center form-control w-50">
+                                                            type="number" class="text-center form-control w-50" step="0.01">
                                                     </td>
                                                 </tr>
                                                 
@@ -153,7 +153,7 @@
                                                     <td>
                                                     <input type="hidden" id="mult10" value="1">
                                                         <input name="sencillo" id="sencillo" style="margin-left: 25%;" value="{{$sencillo}}" onchange="calOne()" readonly
-                                                            type="number" class="text-center form-control w-50">
+                                                            type="number" class="text-center form-control w-50" step="0.01">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -161,7 +161,7 @@
                                                     <td>
                                                     <input type="hidden" id="mult11" value="1">
                                                         <input name="gerencia" id="gerencia" style="margin-left: 25%;" value='{{$gerencia}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
+                                                            type="number" class="text-center  form-control w-50" step="0.01">
                                                         </td>
                                                     
                                                 </tr>
@@ -169,7 +169,7 @@
                                                     <td>Pago de Facturas</td>
                                                     <td>
                                                         <input name="payment" id="payment" style="margin-left: 25%;" value='{{$payment}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
+                                                            type="number" class="text-center  form-control w-50" step="0.01">
                                                         </td>
                                                     
                                                 </tr>
@@ -179,7 +179,7 @@
                                                     <td>
                                                     <input type="hidden" id="mult14" value="1">
                                                         <input name="start" id="start" style="margin-left: 25%;" value='{{$start}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" >
+                                                            type="number" class="text-center  form-control w-50" step="0.01">
                                                         </td>
                                                     
                                                 </tr>
@@ -187,13 +187,13 @@
                                                     <td>Total caja</td>
                                                     <td><input type="hidden" id="mult12" value="1">
                                                         <input name="cajas" id="cajas" style="margin-left: 25%;" value='{{$cajas}}' onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" ></td>
+                                                            type="number" class="text-center  form-control w-50" step="0.01"></td>
                                                     
                                                 </tr>
                                                 <tr>
                                                     <td>Total</td>
                                                     <td align="center">
-                                                        <span name="BrinkresultColumn" id="BrinkresultColumn">{{$start+$requestBrink+$sencillo-$cajas-$payment-$gerencia}}</span>
+                                                        <span name="BrinkresultColumn" id="BrinkresultColumn" step="0.01">{{$start+$requestBrink+$sencillo-$cajas-$payment-$gerencia}}</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
