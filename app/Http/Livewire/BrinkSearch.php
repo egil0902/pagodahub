@@ -32,6 +32,8 @@ class BrinkSearch extends Component
         }
         if(count($org)<2){
             $this->sucursal=$org[0]->Name;
+        }else{
+            $this->sucursal="";
         }
 
         

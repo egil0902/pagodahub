@@ -14,6 +14,8 @@ class InvoiceSearch extends Component
     public $responsable_ingreso;
     public $responsable_pago;
     public $fecha_ingreso;
+    public $proveedor;
+    public $chequeador;
     public $fecha_pago;
     public function updatingSearch()
     {
@@ -43,8 +45,13 @@ class InvoiceSearch extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->when($this->responsable_pago, function ($query) {
-            $query->where('responsable_pago', 'ilike', "%$this->responsable_pago%");
+        })->when($this->proveedor, function ($query) {
+            $query->where('proveedor', 'ilike', "%$this->proveedor%");
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->chequeador, function ($query) {
+            $query->where('chequeador', 'ilike', "%$this->chequeador%");
         }, function ($query) {
             $query->where(function ($query) {
             });
