@@ -8,7 +8,7 @@
     <table class="table table-bordered">
         
         <thead id="miTablaPersonalizada">
-            <th>
+            <th style="max-width:150px">
             fecha ingreso
                 <div class="input-group" style="width:100%">
                 
@@ -25,7 +25,18 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>
+            <th style="max-width:150px">
+                <div class="input-group" style="width:100%">
+                    <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></span>
+                    <input type="text" class="form-control" placeholder="Chequeador" wire:model="chequeador"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </th>
+            <th style="max-width:150px">
                 <div class="input-group" style="width:100%">
                     <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -35,8 +46,19 @@
                     <input type="text" class="form-control" placeholder="responsable" wire:model="responsable_ingreso"
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-            </th>            
-            <th>Monto<br> exento</th>
+            </th>
+            <th style="max-width:150px">
+                <div class="input-group" style="width:100%">
+                    <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></span>
+                    <input type="text" class="form-control" placeholder="proveedor" wire:model="proveedor"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </th>
+            <th >Monto<br> exento</th>
             <th>Monto 7%</th>
             <th>ITBMS 7%</th>
             <th>Monto 10%</th>
@@ -46,7 +68,7 @@
             <th>Total <br>Neto</th>
             <th>Total <br>ITBMS</th>
             <th>Total USD</th>
-            <th>fecha pago
+            <th style="max-width:150px">fecha pago
                 <div class="input-group" style="width:100%">
                 
                     <span class="input-group-text" id="basic-addon2">
@@ -69,7 +91,9 @@
             @foreach ($brinksend as $data)
                 <tr>                    
                     <td>{{ date('d-m-Y', strtotime($data->fecha_ingreso)) }}</td>
+                    <td>{{ $data->chequeador }}</td>
                     <td>{{ $data->responsable_ingreso }}</td>
+                    <td>{{ $data->proveedor }}</td>
                     <td>{{ number_format($data->monto_total, 2) }}</td>
                     <td>{{ number_format($data->monto_7, 2) }}</td>
                     <td>{{ number_format($data->monto_impuesto_7, 2) }}</td>
@@ -123,7 +147,7 @@
                 <tr>
                     
                     <!-- Imagen que se mostrará/ocultará -->
-                    <td colspan="15">
+                    <td colspan="17">
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>
@@ -140,7 +164,7 @@
 </div>
 <style>
     #miTablaPersonalizada th {
-        width: 100px;
+        width: 150px;
         /* overflow: auto; */
         border: 1px solid;
     }

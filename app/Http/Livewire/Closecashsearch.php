@@ -31,8 +31,10 @@ class Closecashsearch extends Component
             $org=$org->records;
         }
         if(count($org)<2){
-                $this->tipo=$org[0]->id;
-            }
+            $this->tipo=$org[0]->id;
+        }else{
+            $this->tipo="";
+        }
     
         $closecash = closecash::when($this->tipo, function ($query) {
             $query->where('AD_Org_ID', $this->tipo);

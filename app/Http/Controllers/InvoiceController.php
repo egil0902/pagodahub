@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Card;
+use App\Models\Check;
+use App\Models\Provider;
+use App\Models\Responsable;
 use App\Models\presupuestoBank;
 use App\Exports\InvoiceExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -76,8 +79,13 @@ class InvoiceController extends Controller
         }else{
             $tarjetas = Card::all();
         }
+        $providers = Provider::all();
+        $responsables = Responsable::all();
+        $checkers = Check::all();
         
-        return view('invoice',['tarjetas'=>$tarjetas,'orgs' => $orgs,  'permisos' => $user]);
+        
+        
+        return view('invoice',['providers'=>$providers,'responsables'=>$responsables,'checkers'=>$checkers,'tarjetas'=>$tarjetas,'orgs' => $orgs,  'permisos' => $user]);
     }
     public function list()
     {   
@@ -149,7 +157,27 @@ class InvoiceController extends Controller
                 'ya que el monto puesto($'.$request->presupuest_banco.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
             }
         }
-
+        $chequeador = Check::where('name', $request->check)->first();
+        if (!$chequeador) {
+            //dump($nombre);
+            $chequeador = new Check;
+            $chequeador->name = $request->check;
+            $chequeador->save();
+        }
+        $responsable = Responsable::where('name', $request->responsable_ingreso)->first();
+        if (!$responsable) {
+            //dump($nombre);
+            $responsable = new Responsable;
+            $responsable->name = $request->responsable_ingreso;
+            $responsable->save();
+        }
+        $proveedor = Provider::where('name', $request->proveedor)->first();
+        if (!$proveedor) {
+            //dump($nombre);
+            $proveedor = new Provider;
+            $proveedor->name = $request->proveedor;
+            $proveedor->save();
+        }
         $brink = new Invoice;
         $brink->fecha_ingreso=$request->fecha_ingreso;
         $brink->fecha_pago=$request->fecha_pago;        
@@ -160,6 +188,8 @@ class InvoiceController extends Controller
         $brink->responsable_ingreso=$request->responsable_ingreso;
         $brink->responsable_pago=$request->responsable_ingreso;
         $brink->forma_pago=$request->forma_pago;
+        $brink->chequeador=$request->check;
+        
         if(isset($request->monto_total)){
             $brink->monto_total=$request->monto_total;
         }

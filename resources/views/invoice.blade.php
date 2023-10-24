@@ -38,15 +38,37 @@
                             <label for="fecha_ingreso">Fecha de Ingreso</label>
                             <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="<?php echo date("Y-m-d"); ?>" required>
                         </div>
-
                         <div class="col-md-6 mb-3">
+                            <label for="exampleDataList" class="form-label">Chequeador</label>
+                            <input class="form-control product" list="chequeador" name="check"
+                                placeholder="Escribe para buscar..." required>
+                            <datalist id="chequeador">
+                                @foreach ($checkers as $check)
+                                    <option value="{{ $check->name }}"></option>
+                                @endforeach
+                            </datalist>
+                        </div>
+                        <div class="col-md-6 mb-3">
+
                             <label for="responsable_ingreso">Responsable</label>
-                            <input type="text" class="form-control" id="responsable_ingreso" name="responsable_ingreso" required>
+                            <input class="form-control product" list="responsable_ingreso" name="responsable_ingreso"
+                                placeholder="Escribe para buscar..." required>
+                            <datalist id="responsable_ingreso">
+                                @foreach ($responsables as $check)
+                                    <option value="{{ $check->name }}"></option>
+                                @endforeach
+                            </datalist>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="proveedor">Proveedor</label>
-                            <input type="text" class="form-control" id="proveedor" name="proveedor" required>
+                            <input class="form-control proveedor" list="chequeador" name="proveedor"
+                                placeholder="Escribe para buscar..." required>
+                            <datalist id="proveedor">
+                                @foreach ($providers as $proveedor)
+                                    <option value="{{ $proveedor->name }}"></option>
+                                @endforeach
+                            </datalist>
                         </div>
 
                         <div class="col-md-6 mb-3">
