@@ -162,22 +162,37 @@
                         </div>
 
                         <div class="col-md-6 mb-3" id="bancoFields" class="form-group" style="display: none;">
-                            <label for="banco_options">Opciones para Banco</label>
-                            <select class="form-control" id="banco_options" name="banco_options">
-                                <option value="" disabled selected>Selecciona una forma de pago</option>
-                                <option value="efectivo">Efectivo</option>
-                                <option value="loteria">Lotería</option>
-                                <option value="cheque">Cheque</option>
-                            </select>
+                            <label>Opciones para Banco</label>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="banco_efectivo" name="banco_options[]" value="efectivo">
+                                <label class="form-check-label" for="banco_efectivo">Efectivo</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="banco_loteria" name="banco_options[]" value="loteria">
+                                <label class="form-check-label" for="banco_loteria">Lotería</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="banco_cheque" name="banco_options[]" value="cheque">
+                                <label class="form-check-label" for="banco_cheque">Cheque</label>
+                            </div>
                             <div id="bancoDesc" class="form-group" style="display: none;">
                                 <label for="banco_banco">Banco</label>
                                 <input type="text" class="form-control" id="banco_banco" name="banco_banco">
                                 <label for="num_comprobante">Número de Cheque</label>
                                 <input type="text" class="form-control" id="num_comprobante"  name="num_comprobante">
+                                <label for="cheque_banco">Valor cheque</label>
+                                <input type="number" class="form-control" id="cheque_banco" step="0.01" name="cheque_banco">
                             </div>
                             <div id="efectivoDesc" class="form-group" style="display: none;">
-                                <label for="presupuest_banco">Valor</label>
+                                <label for="presupuest_banco">Valor en efectivo</label>
                                 <input type="number" class="form-control" id="presupuest_banco" step="0.01" name="presupuest_banco">
+                            </div>
+                            <div id="loteriaDesc" class="form-group" style="display: none;">
+                                <label for="loteria_banco">Valor loteria</label>
+                                <input type="number" class="form-control" id="loteria_banco" step="0.01" name="loteria_banco">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3" id="tarjetaFields" class="form-group" style="display: none;">
@@ -220,6 +235,44 @@
                                 } else {
                                     alert('The File APIs are not fully supported in this browser.');
                                 }
+                            </script>
+                            <script>
+                                function showHideSections() {
+                                    var efectivoChecked = document.getElementById('banco_efectivo').checked;
+                                    var loteriaChecked = document.getElementById('banco_loteria').checked;
+                                    var chequeChecked = document.getElementById('banco_cheque').checked;
+
+                                    var efectivoDesc = document.getElementById('efectivoDesc');
+                                    var loteriaDesc = document.getElementById('loteriaDesc');
+                                    var bancoDesc = document.getElementById('bancoDesc');
+
+                                    if (efectivoChecked) {
+                                        efectivoDesc.style.display = 'block';
+                                    } else {
+                                        efectivoDesc.style.display = 'none';
+                                    }
+
+                                    if (loteriaChecked) {
+                                        loteriaDesc.style.display = 'block';
+                                    } else {
+                                        loteriaDesc.style.display = 'none';
+                                    }
+
+                                    if (chequeChecked) {
+                                        bancoDesc.style.display = 'block';
+                                    } else {
+                                        bancoDesc.style.display = 'none';
+                                    }
+                                }
+
+                                // Agrega un evento "change" a los checkboxes para llamar a showHideSections cuando cambien.
+                                var checkboxes = document.querySelectorAll('.form-check-input');
+                                checkboxes.forEach(function(checkbox) {
+                                    checkbox.addEventListener('change', showHideSections);
+                                });
+
+                                // Llama a showHideSections inicialmente para que las secciones se muestren u oculten según el estado inicial de los checkboxes.
+                                showHideSections();
                             </script>
                         </div>
                         <div class="col-md">
@@ -278,7 +331,6 @@
                     <script>
                         // JavaScript to show/hide fields based on forma_pago selection
                         const formaPagoSelect = document.getElementById('forma_pago');
-                        const bancoSelect = document.getElementById('banco_options');
                         const creditoFields = document.getElementById('creditoFields');
                         const bancoFields = document.getElementById('bancoFields');
                         
@@ -291,10 +343,7 @@
                             bancoFields.style.display = event.target.value === 'banco' ? 'block' : 'none';
                             tarjetaFields.style.display = event.target.value === 'tarjeta_credito' ? 'block' : 'none';
                         });
-                        bancoSelect.addEventListener('change', (event) => {
-                            bancoDesc.style.display = event.target.value === 'cheque' ? 'block' : 'none';
-                            efectivoDesc.style.display = event.target.value === 'efectivo' ? 'block' : 'none';
-                        });
+                        
                     </script>
                     <hr class="mb-4">                    
                 </div>
