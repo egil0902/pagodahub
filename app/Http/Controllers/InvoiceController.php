@@ -229,7 +229,9 @@ class InvoiceController extends Controller
         $brink->chequeador=$request->check;
         $brink->observaciones=$request->observaciones;
         
-        
+        if(isset($request->devolucion)){
+            $brink->devolucion=$request->devolucion;
+        }
         if(isset($request->monto_total)){
             $brink->monto_total=$request->monto_total;
         }
