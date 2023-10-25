@@ -43,8 +43,8 @@
             <th>sencillo</th>
             <th>Dinero de <br>gerencia</th>            
             <th>Pagos <br> factura</th>
-            <th>Banco</th>
-            <th>Inicio caja</th>
+            <th>Inicio de <br>banco</th>
+            <th>Total de <br>caja</th>
 
             <th>Total</th>
             <th></th>

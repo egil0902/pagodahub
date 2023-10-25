@@ -254,14 +254,33 @@ class InvoiceController extends Controller
             $brink->comprobante=$request->num_comprobante_credito;
         }
         if($request->forma_pago==='banco'){
-            $brink->forma_pago= $request->forma_pago.' '.$request->banco_options;
-            if($request->banco_options==='cheque'){                
-                $brink->banco=$request->banco_banco;
-                $brink->comprobante=$request->num_comprobante;
+            //$brink->forma_pago= $request->forma_pago.' '.$request->banco_options;
+            $brink->forma_pago = "";
+
+            $bcheque = "";
+            $befectivo = "";
+            $bloteria = "";
+            
+            foreach ($request->banco_options as $options) {
+                if ($options === 'cheque') {
+                    $brink->banco = $request->banco_banco;
+                    $brink->comprobante = $request->num_comprobante;
+                    $bcheque .= $request->forma_pago . ' ' . $options . ' $' . $request->cheque_banco . "\n";
+                }
+            
+                if ($options === 'efectivo') {
+                    $brink->presupuest_banco = $request->presupuest_banco;
+                    $befectivo .= $request->forma_pago . ' ' . $options . ' $' . $request->presupuest_banco . "\n";
+                }
+            
+                if ($options === 'loteria') {
+                    $bloteria .= $request->forma_pago . ' ' . $options . ' $' . $request->loteria_banco . "\n";
+                }
             }
-            if($request->banco_options==='efectivo'){
-                $brink->presupuest_banco=$request->presupuest_banco;
-            }
+            
+            $brink->forma_pago = $bcheque . $befectivo . $bloteria;
+            
+            
         }
         $brink->fecha_pago=$request->fecha_pago;
         if($request->forma_pago==='tarjeta_credito'){
