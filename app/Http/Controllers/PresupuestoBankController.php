@@ -70,6 +70,8 @@ class PresupuestoBankController extends Controller
         $brink = new presupuestoBank;
         $brink->fecha=$request->date;
         $brink->monto=$request->presupuesto;
+        $brink->monto_c=$request->presupuesto_c;
+        $brink->monto_l=$request->presupuesto_l;
         $brink->sucursal=$request->AD_Org_ID;  
         $brink->save();
         return redirect()->back()->with('mensaje', 'Presupuesto ha sido creado exitosamente');

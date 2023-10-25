@@ -23,8 +23,16 @@
                                 id="date" name="date" placeholder="" value="<?php echo date("Y-m-d"); ?>">                                
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="presupuesto">Presupuesto </label>
+                            <label for="presupuesto">Presupuesto Banco</label>
                             <input type="number" class="form-control" id="presupuesto" name="presupuesto"  step="0.01" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="presupuesto_l">Presupuesto loteria</label>
+                            <input type="number" class="form-control" id="presupuesto_l" name="presupuesto_l"  step="0.01" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="presupuesto_c">Presupuesto Cheques</label>
+                            <input type="number" class="form-control" id="presupuesto_c" name="presupuesto_c"  step="0.01" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <p for="cars" class="card-text">Sucursal</p>

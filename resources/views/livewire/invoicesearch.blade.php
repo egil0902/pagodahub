@@ -67,6 +67,7 @@
             <th>ITBMS 15%</th>
             <th>Total <br>Neto</th>
             <th>Total <br>ITBMS</th>
+            <th>Devolucion</th>            
             <th>Total USD</th>
             <th style="max-width:150px">fecha pago
                 <div class="input-group" style="width:100%">
@@ -85,7 +86,7 @@
                 </div>
             </th>
             <th>Forma <br>de pago</th>
-            <th></th>
+            <th style="max-width:150px"></th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -103,7 +104,8 @@
                     <td>{{ number_format($data->monto_impuesto_15, 2) }}</td>
                     <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15, 2) }}</td>
                     <td>{{ number_format($data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15, 2) }}</td>
-                    <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15 + $data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15, 2) }}</td>
+                    <td>{{ number_format($data->devolucion, 2) }}</td>
+                    <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15 + $data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15-$data->devolucion, 2) }}</td>
 
                     <td>{{ date('d-m-Y', strtotime($data->fecha_pago)) }}</td>
                     <td>{{ $data->forma_pago }}

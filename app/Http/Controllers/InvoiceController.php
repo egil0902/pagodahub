@@ -149,12 +149,50 @@ class InvoiceController extends Controller
     }
     public function create(Request $request)
     {
+        $sucursal=$request->AD_Org_ID;
+        $aPagar=0;
+        if(isset($request->monto_total)){
+            $aPagar+=$request->monto_total;
+        }
+        if(isset($request->monto_7)){
+            $aPagar+=$request->monto_7;
+            $aPagar+=$request->monto_7*0.07;
+        }
+        if(isset($request->monto_10)){
+            $aPagar+=$request->monto_10;
+            $aPagar+=$request->monto_10*0.1;
+        }
+        if(isset($request->monto_15)){
+            $aPagar+=$request->monto_15;
+            $aPagar+=$request->monto_15*0.15;
+        }if(isset($request->devolucion)){
+            $aPagar-=$request->devolucion;
+        }
         if($request->forma_pago&&isset($request->presupuest_banco)){
-            $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal',$request->AD_Org_ID)->sum('monto');
-            $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal',$request->AD_Org_ID)->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
+            $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
+            $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
             if(($invoice+$request->presupuest_banco)>$presupuesto){
                 return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
                 'ya que el monto puesto($'.$request->presupuest_banco.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
+            }
+        }if($request->forma_pago=="banco"){
+            if($request->banco_options=="cheque"){
+                $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_c');
+                $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
+                if($presupuesto<($aPagar+$invoice)){
+                    return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
+                'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
+            
+                }
+            }
+            if($request->banco_options=="loteria"){
+                $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_l');
+                $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
+                if($presupuesto<($aPagar+$invoice)){
+                    return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
+                'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
+            
+                }
             }
         }
         $chequeador = Check::where('name', $request->check)->first();
@@ -189,7 +227,11 @@ class InvoiceController extends Controller
         $brink->responsable_pago=$request->responsable_ingreso;
         $brink->forma_pago=$request->forma_pago;
         $brink->chequeador=$request->check;
+        $brink->observaciones=$request->observaciones;
         
+        if(isset($request->devolucion)){
+            $brink->devolucion=$request->devolucion;
+        }
         if(isset($request->monto_total)){
             $brink->monto_total=$request->monto_total;
         }

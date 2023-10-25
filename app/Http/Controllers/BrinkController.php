@@ -86,7 +86,11 @@ class BrinkController extends Controller
         $APIController = new APIController();
         $misDatos = session()->get('misDatos');
         $orgs = $misDatos;
-        $sucursal=$request->orgNameHidden;
+        foreach ($orgs as $org) {
+            if($org->id==$request->AD_Org_ID){
+                $sucursal=$org->Name;
+            }
+        }
         $sumatoriaMonto = RequestGerency::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
         $requestBrink = RequestBrink::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('total');
         $payment = Payment::whereBetween('fecha', [$request->startDate, $request->endDate])->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
