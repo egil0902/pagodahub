@@ -24,7 +24,9 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>Presupuesto</th>
+            <th>Presupuesto Banco</th>
+            <th>Presupuesto Loteria</th>
+            <th>Presupuesto Cheque</th>
             <th>Sucursal</th>
         </thead>
         <tbody>
@@ -33,6 +35,8 @@
                     <td>{{ date('d-m-Y', strtotime($data->fecha)) }} </td>
                     
                     <td>{{ $data->monto }}   </td>
+                    <td>{{ $data->monto_l }}   </td>
+                    <td>{{ $data->monto_c }}   </td>
                     <td>{{ $data->sucursal }}   </td>
                 </tr>
             @endforeach

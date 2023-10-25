@@ -129,7 +129,10 @@
                             <label for="monto_impuesto_15">ITBMS15%</label>
                             <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" step="0.01" disabled>
                         </div>
-
+                        <div class="col-md-6 mb-3">
+                            <label for="devolucion">Devolucion</label>
+                            <input type="number" class="form-control" id="devolucion" name="devolucion" step="0.01" required>
+                        </div>
                         <div class="col-md-6 mb-3">
                             <label for="fecha_pago">Fecha de Pago</label>
                             <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
@@ -219,9 +222,58 @@
                                 }
                             </script>
                         </div>
+                        <div class="col-md">
+                        <h4>Observaciones:</h4>
+                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
+                        </div>
                         <br>
-                        <button class="btn btn-primary" type="submit">Crear Registro</button>
+                        <button class="btn btn-primary" type="button" onclick="calcularMontos()">Crear Registro</button>
+
                     </form>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirmación de Pago</h5>                                    
+                                </div>
+                                <div class="modal-body">
+                                    Se va a pagar lo siguiente: <span id="totalAmount"></span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="confirmModal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" onclick="enviarFormulario()">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function calcularMontos() {
+                            // Obtener los valores de los montos e impuestos
+                            var monto7 = parseFloat($('#monto_7').val()) || 0;
+                            var monto10 = parseFloat($('#monto_10').val()) || 0;
+                            var monto15 = parseFloat($('#monto_15').val()) || 0;
+                            var impuesto7 = parseFloat($('#monto_impuesto_7').val()) || 0;
+                            var impuesto10 = parseFloat($('#monto_impuesto_10').val()) || 0;
+                            var impuesto15 = parseFloat($('#monto_impuesto_15').val()) || 0;
+                            var devolucion = parseFloat($('#devolucion').val()) || 0;
+
+                            // Calcular el total
+                            var total = monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+
+                            // Mostrar el mensaje de alerta
+                            // Mostrar el total en el modal
+                            $('#totalAmount').text('$' + total.toFixed(2));
+
+                            // Abrir el modal
+                            $('#confirmModal').modal('show');
+                        }
+                        function enviarFormulario() {
+                            // Aquí puedes realizar cualquier otra validación antes de enviar el formulario
+                            // Envía el formulario
+                            document.getElementById('provider').submit();
+                        }
+                    </script>
 
                     <script>
                         // JavaScript to show/hide fields based on forma_pago selection
