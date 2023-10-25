@@ -187,13 +187,15 @@
                                                     <td>Total caja</td>
                                                     <td><input type="hidden" id="mult12" value="1">
                                                         <input name="cajas" id="cajas" style="margin-left: 25%;" value="{{ number_format($cajas, 2, '.', '') }}" onchange="calOne()" readonly
-                                                            type="number" class="text-center  form-control w-50" step="0.01"></td>
+                                                            type="number" class="text-center  form-control w-50" step="0.01">
+                                                        </td>
                                                     
                                                 </tr>
                                                 <tr>
                                                     <td>Total</td>
-                                                    <td align="center">
-                                                        <span name="BrinkresultColumn" id="BrinkresultColumn" step="0.01">{{ number_format($start+$requestBrink+$sencillo-$cajas-$payment-$gerencia, 2, '.', '') }}</span>
+                                                    <td >
+                                                        <input name="BrinkresultColumn" id="BrinkresultColumn" style="margin-left: 25%;" value="{{ number_format($start+$requestBrink+$sencillo-$cajas-$payment-$gerencia, 2, '.', '') }}" onchange="calOne()" readonly
+                                                            type="number" class="text-center  form-control w-50" step="0.01">
                                                     </td>
                                                 </tr>
                                             </tbody>

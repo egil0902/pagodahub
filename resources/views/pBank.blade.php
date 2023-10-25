@@ -23,7 +23,7 @@
                                 id="date" name="date" placeholder="" value="<?php echo date("Y-m-d"); ?>">                                
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="presupuesto">Presupuesto Banco</label>
+                            <label for="presupuesto">Presupuesto Efectivo</label>
                             <input type="number" class="form-control" id="presupuesto" name="presupuesto"  step="0.01" required>
                         </div>
                         <div class="col-md-6 mb-3">

@@ -315,7 +315,7 @@ class BrinkController extends Controller
         $brink->facturas=$request->payment;
         $brink->brinks=$request->requestBrink;
         $brink->total=$request->BrinkresultColumn;
-
+        dd($request);
         $brink->sucursal=$request->sucursal;        
         $brink->observaciones=$request->observaciones;        
         $brink->foto=$request->foto;
