@@ -768,31 +768,6 @@ class CloseCashController extends Controller
         if ($organizacion == 1000009) {
             $nameorg = "La Doña";
         }
-        return $pdf->download("Cierre-" . $nameorg . "-" . $dia . ".pdf");
-    }
-
-    public function previewPdf(Request $request)
-    {
-        /*   $pdf= PDF::loadHTML('<h1>Test</h1>'); */
-        $APIController = new APIController();
-        $dia = session()->get('dia');
-        $organizacion = session()->get('organizacion');
-        $response = $APIController->getModel(
-            'RV_GH_CloseCash_Sum',
-            '',
-            'datetrx eq ' . $dia . ' and parent_id eq ' . $organizacion
-        );
-        //dd($response);
-        $list = closecash::where('DateTrx', $dia)->where('AD_Org_ID', $organizacion)->get();
-        //dd($list);
-        $docstatus = 'CO';
-        $closecashlist = $APIController->getModel(
-            'RV_GH_CloseCash',
-            '',
-            "datetrx eq '" . $dia . "' and parent_id eq " . $organizacion . " and  docstatus eq '" . $docstatus . "'",
-            'ba_name asc'
-        );
-        return view('preview-pdf', ['closecashsumlist' => $response, 'list' => $list, 'closecashlist' => $closecashlist]);
-        
-    }
+        return $pdf->stream("Cierre-" . $nameorg . "-" . $dia . ".pdf");
+    }    
 }

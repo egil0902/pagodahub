@@ -122,10 +122,10 @@
                                         </span>
                                         <br>
 
-                                        <a href="{{ route('preview-pdf') }}">
+                                        <a href="javascript:void(0);" onclick="openPdfInNewTab('{{ route('download-pdf') }}')">
                                             <button type="button" class="btn btn-outline-secondary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                    fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                    class="bi bi-printer-fill" viewBox="0 0 16 16">
                                                     <path
                                                         d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z">
                                                     </path>
@@ -136,6 +136,13 @@
                                                 Imprimir
                                             </button>
                                         </a>
+
+                                        <script>
+                                        function openPdfInNewTab(url) {
+                                            window.open(url, '_blank');
+                                        }
+                                        </script>
+
                                     @endforeach
                                 @endif
                                 @if ($list->isEmpty())
