@@ -150,9 +150,6 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
     Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'create'])->name('payment.create');
 
-    
-    Route::get('preview-pdf', [App\Http\Controllers\CloseCashController::class, 'previewPdf'])->name('preview-pdf');
-    
 });
 Route::get('/firma1', function () {
     return view('canvas/tablero3');

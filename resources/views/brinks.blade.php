@@ -116,7 +116,7 @@
                                             }
                         </script>
                         @if(isset($fecha_dia))
-                        <form name="save" id="save" method="post" action="{{ route('Brink.store') }}">
+                        <form name="save" id="save" method="post" action="{{ route('Brink.store') }}"  enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="fecha_dia" value="{{ $fecha_dia }}">
                                     
@@ -213,6 +213,8 @@
                                             <center>
                                                 <img id="img1" class="rounded" src="" border="1" style="width: 50%;">
                                             </center>
+                                            <label for="pdf">Selecciona un archivo PDF:</label><br>
+                                            <input type="file" name="pdf" id="pdf" accept=".pdf">
                                         </div>
                                         
                                         <div class="col-12" style="display: flex">

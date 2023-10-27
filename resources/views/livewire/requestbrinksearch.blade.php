@@ -56,7 +56,9 @@
                     <td>{{$data->sucursal}}</td>
                     <td>
                         <center>
-                        
+                            @if($data->pdf_data!="")
+                                <button class="btn btn-primary" onclick="togglePdf({{ $data->id }})">Mostrar/Ocultar PDF</button> 
+                            @endif
                             <form name="brinkSend_edit_{{ $data->id }}" id="brinkSend_edit_{{ $data->id }}" method="POST" action="{{ route('requestBrink.edit') }}">
                                 @csrf
                                 @method('GET')
@@ -91,6 +93,14 @@
                                     image.style.display = "none"; // Oculta la imagen
                                 }
                             }
+                            function togglePdf(id) {
+                                var image = document.getElementById("pdf_" + id);
+                                if (image.style.display === "none") {
+                                    image.style.display = "block"; // Muestra la pdf
+                                } else {
+                                    image.style.display = "none"; // Oculta la pdf
+                                }
+                            }
                         </script>
 
                     </td>
@@ -102,6 +112,17 @@
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>
+                @if($data->pdf_data!="")
+                            
+                <tr>
+                    
+                    <td colspan="7">
+                        <!-- Vista para mostrar el PDF -->
+                        <embed src="data:application/pdf;base64,{{ $data->pdf_data }}" style="width:50%; display: none;"id="pdf_{{ $data->id }}" height="600" type="application/pdf">
+
+                    </td>
+                </tr>
+                @endif
                 
             @endforeach
         </tbody>

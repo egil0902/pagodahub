@@ -17,7 +17,7 @@
                 <div class="card-header">Facturas</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
-                    <form name="provider" id="provider" method="post" action="{{ route('invoice.create') }}">
+                    <form name="provider" id="provider" method="post" action="{{ route('invoice.create') }}" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
                         <div class="col-md-6 mb-3">
@@ -210,10 +210,12 @@
                                 onkeyup="imgsize()" accept=".png" required>
                             <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
                                 cols="50" rows="15"></textarea>
-                            <br>
-                            <center><img id="img1" class="rounded" src="" border="1"
+                            <br><center><img id="img1" class="rounded" src="" border="1"
                                     style="width: 50%;">
                             </center>
+                            <label for="pdf">Selecciona un archivo PDF:</label><br>
+                            <input type="file" name="pdf" id="pdf" accept=".pdf">
+                            
                             <script>                                            
                                 var handleFileSelect = function(evt) {
                                     var files = evt.target.files;
@@ -274,6 +276,8 @@
                                 // Llama a showHideSections inicialmente para que las secciones se muestren u oculten según el estado inicial de los checkboxes.
                                 showHideSections();
                             </script>
+                            
+
                         </div>
                         <div class="col-md">
                         <h4>Observaciones:</h4>
