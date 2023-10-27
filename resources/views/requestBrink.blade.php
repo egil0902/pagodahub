@@ -15,7 +15,7 @@
                 <div class="card-header">Solicitud Brinks</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
-                    <form name="provider" id="provider" method="post" action="{{ route('requestBrink.store') }}">
+                    <form name="provider" id="provider" method="post" action="{{ route('requestBrink.store') }}"  enctype="multipart/form-data">
                         <div class=" col-md-6 mb-3">
                             <label for="date">Fecha </label>
                             <input type="date" class="form-control" date-format="mm/dd/yyyy"
@@ -166,16 +166,18 @@
 
                         <hr class="mb-4">
                         <div class="col-md">
-                            <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
+                            <label for="formFileMultiple" class="form-label">Adjuntar foto </label>
                             <input class=" subirimagen form-control" type="file" id="filePicker"
                                 placeholder="foto" name="FileCedula" value="0" onchange="imgsize()"
-                                onkeyup="imgsize()" accept=".png" required>
+                                onkeyup="imgsize()" accept=".png" >
                             <textarea style="display:none;" name="foto" id="base64textarea" placeholder="Base64 will appear here"
                                 cols="50" rows="15"></textarea>
                             <br>
                             <center><img id="img1" class="rounded" src="" border="1"
                                     style="width: 50%;">
                             </center>
+                            <label for="pdf">Selecciona un archivo PDF:</label><br>
+                            <input type="file" name="pdf" id="pdf" accept=".pdf">
                             <script>                                            
                                 var handleFileSelect = function(evt) {
                                     var files = evt.target.files;

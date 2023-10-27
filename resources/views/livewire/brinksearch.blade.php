@@ -70,16 +70,9 @@
 
                     <td>
                         <center>
-                            {{--<form name="brinkSend_destroy" id="brinkSend_destroy" method="POST" action="{{ route('BrinkSend.brinkdestroy') }}">
-                                @csrf
-                                @method('DELETE')
-                                <input class=" form-control" type="hidden" name="id"id="id" value="{{$data->id}}">
-                                <button type="submit" class="btn btn-outline-danger w-100" onclick="showConfirmationPopup(event)"  data-borrar="{{$data->id}}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
-                                    </svg>
-                                </button>
-                            </form>--}}
+                            @if($data->pdf_data!="")
+                                <button class="btn btn-primary" onclick="togglePdf({{ $data->id }})">Mostrar/Ocultar PDF</button> 
+                            @endif
                             <button class="btn btn-primary" onclick="toggleImage({{ $data->id }})">Mostrar/Ocultar Imagen</button>
                         </center>
                         <script>
@@ -103,6 +96,14 @@
                                     image.style.display = "none"; // Oculta la imagen
                                 }
                             }
+                            function togglePdf(id) {
+                                var image = document.getElementById("pdf_" + id);
+                                if (image.style.display === "none") {
+                                    image.style.display = "block"; // Muestra la pdf
+                                } else {
+                                    image.style.display = "none"; // Oculta la pdf
+                                }
+                            }
                         </script>
                     </td>
                 </tr>
@@ -120,6 +121,17 @@
                         <img src="data:image/jpeg;base64,{{$data->foto}}" alt="Imagen" id="imagen_{{ $data->id }}" style="width:50%; display: none;">
                     </td>
                 </tr>
+                @if($data->pdf_data!="")
+                            
+                <tr>
+                    
+                    <td colspan="12">
+                        <!-- Vista para mostrar el PDF -->
+                        <embed src="data:application/pdf;base64,{{ $data->pdf_data }}" style="width:50%; display: none;"id="pdf_{{ $data->id }}" height="600" type="application/pdf">
+
+                    </td>
+                </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

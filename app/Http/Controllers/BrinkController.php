@@ -315,10 +315,20 @@ class BrinkController extends Controller
         $brink->facturas=$request->payment;
         $brink->brinks=$request->requestBrink;
         $brink->total=$request->BrinkresultColumn;
-        $brink->sucursal=$request->sucursal;        
-        $brink->observaciones=$request->observaciones;        
+        $brink->sucursal=$request->sucursal;
+        if($request->observaciones==""||$request->observaciones==null){
+            $request->observaciones="sin observaciones";
+        }
+        $brink->observaciones=$request->observaciones;
         $brink->foto=$request->foto;
+        if($request->hasFile('pdf')){
+            $pdfFile = $request->file('pdf');
+            $pdfBase64 = base64_encode(file_get_contents($pdfFile->getRealPath()));
 
+            $brink->nameFile = $request->file('pdf')->getClientOriginalName();
+
+            $brink->pdf_data = $pdfBase64;
+        }
         $brink->save();
         return redirect()->back()->with('mensaje', 'Brink ha sido guardado exitosamente');
     }
@@ -393,6 +403,14 @@ class BrinkController extends Controller
         $brink->total_quantity=$request->QuantityresultColumn;
         $brink->total=$request->TotalresultColumn;
         $brink->sucursal=$request->sucursal;
+        if($request->hasFile('pdf')){
+            $pdfFile = $request->file('pdf');
+            $pdfBase64 = base64_encode(file_get_contents($pdfFile->getRealPath()));
+
+            $brink->nameFile = $request->file('pdf')->getClientOriginalName();
+
+            $brink->pdf_data = $pdfBase64;
+        }
         if($request->observaciones!==null){
             $brink->observaciones=$request->observaciones;
         }

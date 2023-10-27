@@ -85,7 +85,14 @@ class RequestBrinkController extends Controller
         $brink->observaciones=$request->observaciones;
         $brink->sucursal=$request->AD_Org_ID;
         $brink->foto=$request->foto;
-        
+        if($request->hasFile('pdf')){
+            $pdfFile = $request->file('pdf');
+            $pdfBase64 = base64_encode(file_get_contents($pdfFile->getRealPath()));
+
+            $brink->nameFile = $request->file('pdf')->getClientOriginalName();
+
+            $brink->pdf_data = $pdfBase64;
+        }
 
         $brink->save();
         return redirect()->back()->with('mensaje', 'Solicitud Brink ha sido guardado exitosamente');
@@ -112,6 +119,14 @@ class RequestBrinkController extends Controller
         $brink->total=$request->BrinkresultColumn;
         $brink->observaciones=$request->observaciones;
         $brink->foto=$request->foto;
+        if($request->hasFile('pdf')){
+            $pdfFile = $request->file('pdf');
+            $pdfBase64 = base64_encode(file_get_contents($pdfFile->getRealPath()));
+
+            $brink->nameFile = $request->file('pdf')->getClientOriginalName();
+
+            $brink->pdf_data = $pdfBase64;
+        }
         $brink->save();
         $APIController = new APIController();
         ////////////

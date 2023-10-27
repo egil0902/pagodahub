@@ -228,6 +228,15 @@ class InvoiceController extends Controller
         $brink->forma_pago=$request->forma_pago;
         $brink->chequeador=$request->check;
         $brink->observaciones=$request->observaciones;
+        if($request->hasFile('pdf')){
+            $pdfFile = $request->file('pdf');
+            $pdfBase64 = base64_encode(file_get_contents($pdfFile->getRealPath()));
+
+            $brink->nameFile = $request->file('pdf')->getClientOriginalName();
+
+            $brink->pdf_data = $pdfBase64;
+        }
+        
         
         if(isset($request->devolucion)){
             $brink->devolucion=$request->devolucion;
@@ -286,7 +295,12 @@ class InvoiceController extends Controller
         if($request->forma_pago==='tarjeta_credito'){
             $brink->tarjeta=$request->tarjeta;
         }
-        $brink->save();
+        try {
+            
+            $brink->save();
+        } catch (\Throwable $th) {
+            dd($th);
+        }
         return redirect()->back()->with('mensaje', 'Factura ha sido creada exitosamente');
     }
     public function getExcel(Request $request) {
