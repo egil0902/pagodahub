@@ -17,6 +17,12 @@
                 <div class="card-header">Facturas</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
+                    
+                    Presupuesto de banco para Mañanitas: Efectivo {{$pbankME}} loteria {{$pbankML}} cheque {{$pbankMC}}
+                    <br>
+                    Presupuesto de banco para La Doña: Efectivo {{$pbankDE}} loteria {{$pbankDL}} cheque {{$pbankDC}}
+                    
+                    <br>
                     <form name="provider" id="provider" method="post" action="{{ route('invoice.create') }}" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -184,15 +190,15 @@
                                 <label for="num_comprobante">Número de Cheque</label>
                                 <input type="text" class="form-control" id="num_comprobante"  name="num_comprobante">
                                 <label for="cheque_banco">Valor cheque</label>
-                                <input type="number" class="form-control" id="cheque_banco" step="0.01" name="cheque_banco">
+                                <input type="number" class="form-control" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
                             </div>
                             <div id="efectivoDesc" class="form-group" style="display: none;">
                                 <label for="presupuest_banco">Valor en efectivo</label>
-                                <input type="number" class="form-control" id="presupuest_banco" step="0.01" name="presupuest_banco">
+                                <input type="number" class="form-control" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
                             </div>
                             <div id="loteriaDesc" class="form-group" style="display: none;">
                                 <label for="loteria_banco">Valor loteria</label>
-                                <input type="number" class="form-control" id="loteria_banco" step="0.01" name="loteria_banco">
+                                <input type="number" class="form-control" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3" id="tarjetaFields" class="form-group" style="display: none;">
