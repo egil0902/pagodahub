@@ -17,12 +17,16 @@
                 <div class="card-header">Facturas</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
+                    @foreach($orgs as $org)
+                        @if($org->Name=="Mañanitas")
+                            Presupuesto de banco para Mañanitas: Efectivo {{$pbankME}} loteria {{$pbankML}} cheque {{$pbankMC}}
+                            <br>
+                        @elseif($org->Name=="La Doña")
+                            Presupuesto de banco para La Doña: Efectivo {{$pbankDE}} loteria {{$pbankDL}} cheque {{$pbankDC}}
+                            <br>
+                        @endif
+                    @endforeach
                     
-                    Presupuesto de banco para Mañanitas: Efectivo {{$pbankME}} loteria {{$pbankML}} cheque {{$pbankMC}}
-                    <br>
-                    Presupuesto de banco para La Doña: Efectivo {{$pbankDE}} loteria {{$pbankDL}} cheque {{$pbankDC}}
-                    
-                    <br>
                     <form name="provider" id="provider" method="post" action="{{ route('invoice.create') }}" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -313,6 +317,7 @@
                     <script>
                         function calcularMontos() {
                             // Obtener los valores de los montos e impuestos
+                            var monto = parseFloat($('#monto_total').val()) || 0;
                             var monto7 = parseFloat($('#monto_7').val()) || 0;
                             var monto10 = parseFloat($('#monto_10').val()) || 0;
                             var monto15 = parseFloat($('#monto_15').val()) || 0;
@@ -322,7 +327,7 @@
                             var devolucion = parseFloat($('#devolucion').val()) || 0;
 
                             // Calcular el total
-                            var total = monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+                            var total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal

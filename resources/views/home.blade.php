@@ -430,7 +430,7 @@
                                                                 {{--  <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Inicio Banco</h5>
-                                                                    <p class="card-text">registro del inicio del banco</p>
+                                                                    <p class="card-text">Registro del inicio del banco</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -582,7 +582,7 @@
                                                                 {{-- <h5 class="card-header">Compras</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Ingreso y pago</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text"> Permite ingresar y pagar las facturas de gastos</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -604,7 +604,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Resumen de pagos
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Visualiza  los pagos realizados a proveedores</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -626,7 +626,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Tarjetas de credito
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Crear tarjetas de crédito a usar en el pago de las facturas</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -647,7 +647,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Presupuesto banco
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Crea el presupuesto del día del banco, constituido por efectivo, cheques y lotería.</p>
                                                                 </div>
                                                             </button>
                                                         </center>
