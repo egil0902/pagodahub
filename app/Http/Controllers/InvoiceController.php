@@ -92,11 +92,11 @@ class InvoiceController extends Controller
         $invoices = Invoice::where('fecha_pago',date('Y-m-d'))->get();
         foreach ($invoices as $invoice) {
             if($invoice->sucursal =="La Doña"){
-                $pbankDE-=$invoice->presupuest_banco;
+                $pbankDE-=$invoice->p_e;
                 $pbankDL-=$invoice->p_l;
                 $pbankDC-=$invoice->p_c;
             }else{
-                $pbankME-=$invoice->presupuest_banco;
+                $pbankME-=$invoice->p_e;
                 $pbankML-=$invoice->p_l;
                 $pbankMC-=$invoice->p_c;
             }
@@ -172,10 +172,11 @@ class InvoiceController extends Controller
             $pbankME = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
             $pbankML = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_l');
             $pbankMC = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_c');
-            $invoices = Invoice::where('fecha_pago',$request->fecha_pago)->get();
+            $invoices = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->get();
             $aPagar=0;
+
             foreach ($invoices as $invoice) {                
-                    $pbankME-=$invoice->presupuest_banco;
+                    $pbankME-=$invoice->p_e;
                     $pbankML-=$invoice->p_l;
                     $pbankMC-=$invoice->p_c;
             }
@@ -279,23 +280,21 @@ class InvoiceController extends Controller
             $bcheque = "";
             $befectivo = "";
             $bloteria = "";
-            
             foreach ($request->banco_options as $options) {
                 if ($options === 'cheque') {
                     $brink->banco = $request->banco_banco;
                     $brink->comprobante = $request->num_comprobante;
-                    $brink->presupuest_banco=$request->cheque_banco;
+                    $brink->p_c=$request->cheque_banco;
                     $bcheque .= $request->forma_pago . ' ' . $options . ' $' . $request->cheque_banco . "\n";
                 }
             
                 if ($options === 'efectivo') {
-                    $brink->presupuest_banco = $request->presupuest_banco;
-                    $brink->p_c=$request->cheque_banco;
+                    $brink->p_e=$request->presupuest_banco;
                     $befectivo .= $request->forma_pago . ' ' . $options . ' $' . $request->presupuest_banco . "\n";
                 }
             
                 if ($options === 'loteria') {
-                    $brink->p_l=$request->cheque_banco;
+                    $brink->p_l=$request->loteria_banco;
                     $bloteria .= $request->forma_pago . ' ' . $options . ' $' . $request->loteria_banco . "\n";
                 }
             }
