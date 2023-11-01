@@ -17,6 +17,16 @@
                 <div class="card-header">Facturas</div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
+                    @foreach($orgs as $org)
+                        @if($org->Name=="Mañanitas")
+                            Presupuesto de banco para Mañanitas: Efectivo {{$pbankME}} loteria {{$pbankML}} cheque {{$pbankMC}}
+                            <br>
+                        @elseif($org->Name=="La Doña")
+                            Presupuesto de banco para La Doña: Efectivo {{$pbankDE}} loteria {{$pbankDL}} cheque {{$pbankDC}}
+                            <br>
+                        @endif
+                    @endforeach
+                    
                     <form name="provider" id="provider" method="post" action="{{ route('invoice.create') }}" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -184,15 +194,15 @@
                                 <label for="num_comprobante">Número de Cheque</label>
                                 <input type="text" class="form-control" id="num_comprobante"  name="num_comprobante">
                                 <label for="cheque_banco">Valor cheque</label>
-                                <input type="number" class="form-control" id="cheque_banco" step="0.01" name="cheque_banco">
+                                <input type="number" class="form-control" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
                             </div>
                             <div id="efectivoDesc" class="form-group" style="display: none;">
                                 <label for="presupuest_banco">Valor en efectivo</label>
-                                <input type="number" class="form-control" id="presupuest_banco" step="0.01" name="presupuest_banco">
+                                <input type="number" class="form-control" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
                             </div>
                             <div id="loteriaDesc" class="form-group" style="display: none;">
                                 <label for="loteria_banco">Valor loteria</label>
-                                <input type="number" class="form-control" id="loteria_banco" step="0.01" name="loteria_banco">
+                                <input type="number" class="form-control" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3" id="tarjetaFields" class="form-group" style="display: none;">
@@ -307,6 +317,7 @@
                     <script>
                         function calcularMontos() {
                             // Obtener los valores de los montos e impuestos
+                            var monto = parseFloat($('#monto_total').val()) || 0;
                             var monto7 = parseFloat($('#monto_7').val()) || 0;
                             var monto10 = parseFloat($('#monto_10').val()) || 0;
                             var monto15 = parseFloat($('#monto_15').val()) || 0;
@@ -316,7 +327,7 @@
                             var devolucion = parseFloat($('#devolucion').val()) || 0;
 
                             // Calcular el total
-                            var total = monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+                            var total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal

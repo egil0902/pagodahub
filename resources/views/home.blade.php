@@ -320,7 +320,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Creación de presupuesto
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Creación de presupuesto diario a ser usado en el mercado</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -341,7 +341,7 @@
                                                                 {{-- <h5 class="card-header">Compras</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Recepción de productos</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Recepción de los productos comprados en el mercado</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -362,7 +362,7 @@
                                                                 {{-- <h5 class="card-header">Compras</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Carga de facturas</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Carga de facturas de compra de mercado y cartón</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -384,7 +384,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Listado de facturas
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Permite visualizar las facturas y su método de pago</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -430,7 +430,7 @@
                                                                 {{--  <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Inicio Banco</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Registro del inicio del banco</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -451,7 +451,7 @@
                                                                 {{--  <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Pago de facturas</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Registro de facturas pagadas con el banco</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -473,7 +473,7 @@
                                                                 {{--  <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Solicitud Brink</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Registro de las cantidades de billetes y rollos solicitados a Brinks</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -494,7 +494,7 @@
                                                                 {{--  <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Solicitud gerencia</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Registro de montos solicitados o devueltos a Gerencia</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -513,10 +513,9 @@
                                                         @csrf
                                                         <center>
                                                             <button type="submit" class="btn btn-outline">
-                                                                {{-- <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Banco Supervisor</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Registro del  inicio del nuevo banco</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -534,10 +533,9 @@
                                                         @csrf
                                                         <center>
                                                             <button type="submit" class="btn btn-outline">
-                                                                {{--  <h5 class="card-header">Banco</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Envio bancos</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Registro de los envíos o depósitos realizados a los bancos.</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -584,7 +582,7 @@
                                                                 {{-- <h5 class="card-header">Compras</h5> --}}
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Ingreso y pago</h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text"> Permite ingresar y pagar las facturas de gastos</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -606,7 +604,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Resumen de pagos
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Visualiza  los pagos realizados a proveedores</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -628,7 +626,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Tarjetas de credito
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Crear tarjetas de crédito a usar en el pago de las facturas</p>
                                                                 </div>
                                                             </button>
                                                         </center>
@@ -649,7 +647,7 @@
                                                                 <div class="card-body">
                                                                     <h5 class="card-title">Presupuesto banco
                                                                     </h5>
-                                                                    <p class="card-text">---------------</p>
+                                                                    <p class="card-text">Crea el presupuesto del día del banco, constituido por efectivo, cheques y lotería.</p>
                                                                 </div>
                                                             </button>
                                                         </center>

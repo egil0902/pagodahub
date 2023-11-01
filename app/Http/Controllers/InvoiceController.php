@@ -83,9 +83,26 @@ class InvoiceController extends Controller
         $responsables = Responsable::all();
         $checkers = Check::all();
         
-        
-        
-        return view('invoice',['providers'=>$providers,'responsables'=>$responsables,'checkers'=>$checkers,'tarjetas'=>$tarjetas,'orgs' => $orgs,  'permisos' => $user]);
+        $pbankME = presupuestoBank::where('fecha',date('Y-m-d'))->where('sucursal', 'ilike', "%mañanitas%" )->sum('monto');
+        $pbankDE = presupuestoBank::where('fecha',date('Y-m-d'))->where('sucursal', 'ilike', "%La Doña%" )->sum('monto');
+        $pbankML = presupuestoBank::where('fecha',date('Y-m-d'))->where('sucursal', 'ilike', "%mañanitas%" )->sum('monto_l');
+        $pbankDL = presupuestoBank::where('fecha',date('Y-m-d'))->where('sucursal', 'ilike', "%La Doña%" )->sum('monto_l');
+        $pbankMC = presupuestoBank::where('fecha',date('Y-m-d'))->where('sucursal', 'ilike', "%mañanitas%" )->sum('monto_c');
+        $pbankDC = presupuestoBank::where('fecha',date('Y-m-d'))->where('sucursal', 'ilike', "%La Doña%" )->sum('monto_c');
+        $invoices = Invoice::where('fecha_pago',date('Y-m-d'))->get();
+        foreach ($invoices as $invoice) {
+            if($invoice->sucursal =="La Doña"){
+                $pbankDE-=$invoice->p_e;
+                $pbankDL-=$invoice->p_l;
+                $pbankDC-=$invoice->p_c;
+            }else{
+                $pbankME-=$invoice->p_e;
+                $pbankML-=$invoice->p_l;
+                $pbankMC-=$invoice->p_c;
+            }
+        }
+        return view('invoice',['providers'=>$providers,'responsables'=>$responsables,'checkers'=>$checkers,'tarjetas'=>$tarjetas,'orgs' => $orgs,  'permisos' => $user
+                ,'pbankME'=>$pbankME,'pbankDE'=>$pbankDE,'pbankML'=>$pbankML,'pbankDL'=>$pbankDL,'pbankMC'=>$pbankMC,'pbankDC'=>$pbankDC]);
     }
     public function list()
     {   
@@ -150,50 +167,44 @@ class InvoiceController extends Controller
     public function create(Request $request)
     {
         $sucursal=$request->AD_Org_ID;
-        $aPagar=0;
-        if(isset($request->monto_total)){
-            $aPagar+=$request->monto_total;
-        }
-        if(isset($request->monto_7)){
-            $aPagar+=$request->monto_7;
-            $aPagar+=$request->monto_7*0.07;
-        }
-        if(isset($request->monto_10)){
-            $aPagar+=$request->monto_10;
-            $aPagar+=$request->monto_10*0.1;
-        }
-        if(isset($request->monto_15)){
-            $aPagar+=$request->monto_15;
-            $aPagar+=$request->monto_15*0.15;
-        }if(isset($request->devolucion)){
-            $aPagar-=$request->devolucion;
-        }
-        if($request->forma_pago&&isset($request->presupuest_banco)){
-            $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
-            $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
-            if(($invoice+$request->presupuest_banco)>$presupuesto){
-                return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
-                'ya que el monto puesto($'.$request->presupuest_banco.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
+        
+        if($request->forma_pago=="banco"){
+            $pbankME = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
+            $pbankML = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_l');
+            $pbankMC = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_c');
+            $invoices = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->get();
+            $aPagar=0;
+
+            foreach ($invoices as $invoice) {                
+                    $pbankME-=$invoice->p_e;
+                    $pbankML-=$invoice->p_l;
+                    $pbankMC-=$invoice->p_c;
             }
-        }if($request->forma_pago=="banco"){
-            if($request->banco_options=="cheque"){
-                $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_c');
-                $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
-                if($presupuesto<($aPagar+$invoice)){
-                    return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
-                'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
-            
+            foreach ($request->banco_options as $options) {
+                if($options=="cheque"){
+                    $aPagar=$request->cheque_banco;
+                    if($pbankMC-$aPagar<0){
+                        return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
+                    'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($pbankMC).')');
+                
+                    }
+                }
+                if($options=="loteria"){
+                    $aPagar=$request->loteria_banco;
+                    if($pbankML-$aPagar<0){
+                        return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
+                    'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($pbankML).')');
+                    }
+                }
+                if($options=="efectivo"){
+                    $aPagar=$request->presupuest_banco;
+                    if($pbankME-$aPagar<0){
+                        return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
+                    'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($pbankME).')');
+                    }
                 }
             }
-            if($request->banco_options=="loteria"){
-                $presupuesto= presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_l');
-                $invoice = Invoice::where('fecha_pago',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->where('forma_pago',$request->forma_pago.' '.$request->credito_options)->sum('presupuest_banco');;
-                if($presupuesto<($aPagar+$invoice)){
-                    return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
-                'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($presupuesto-$invoice).')');
             
-                }
-            }
         }
         $chequeador = Check::where('name', $request->check)->first();
         if (!$chequeador) {
@@ -269,20 +280,21 @@ class InvoiceController extends Controller
             $bcheque = "";
             $befectivo = "";
             $bloteria = "";
-            
             foreach ($request->banco_options as $options) {
                 if ($options === 'cheque') {
                     $brink->banco = $request->banco_banco;
                     $brink->comprobante = $request->num_comprobante;
+                    $brink->p_c=$request->cheque_banco;
                     $bcheque .= $request->forma_pago . ' ' . $options . ' $' . $request->cheque_banco . "\n";
                 }
             
                 if ($options === 'efectivo') {
-                    $brink->presupuest_banco = $request->presupuest_banco;
+                    $brink->p_e=$request->presupuest_banco;
                     $befectivo .= $request->forma_pago . ' ' . $options . ' $' . $request->presupuest_banco . "\n";
                 }
             
                 if ($options === 'loteria') {
+                    $brink->p_l=$request->loteria_banco;
                     $bloteria .= $request->forma_pago . ' ' . $options . ' $' . $request->loteria_banco . "\n";
                 }
             }
