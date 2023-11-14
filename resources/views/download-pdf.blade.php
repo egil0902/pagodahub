@@ -25,22 +25,6 @@
     </title>
 </head>
 <style>
-    /* table {
-        font-family: arial, sans-serif;
-        font-size: 8px;
-        width: 100%;
-    }
-
-    td,
-    th {
-        border: 0px solid #dddddd;
-        padding: 1px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    } */
-
     table {
         font-family: arial, sans-serif;
         font-size: 12px;
@@ -84,7 +68,8 @@
     #tabla2 td {
         border: 1px solid #ddd;
     } */
-
+    @page { margin-left: 25px; margin-right:25px}
+    body { margin-left: 0px; margin-right:0px}
 
 
     tr:nth-child(even) {
@@ -94,6 +79,9 @@
     tr:hover td {
         background-color: #369681;
         color: white;
+    }
+    body{
+        left:-20px;
     }
 </style>
 
