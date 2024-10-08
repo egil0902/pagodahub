@@ -80,6 +80,11 @@
                                 @endforeach
                             </datalist>
                         </div>
+			<!-- Cambio por eduardo gil para agregar el monto total y que calcule lo demas segun eso --> 
+			<div class="col-md-6 mb-3">
+                            <label class="h3" for="total_factura">Total Factura</label>
+                            <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" required>
+                        </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="monto_total">Monto Exento</label>
@@ -93,6 +98,24 @@
                                     const montoITBMS = monto * porcentaje;
                                     $(campoResultado).val(montoITBMS.toFixed(2));
                                 }
+				 // Función para calcular la base imponible, el exento segun el total de la factura y el monto de itbms
+                                function fillITBMSBase(montoitbms, porcentaje, campoResultado) {
+                                    const baseimponible = montoitbms / porcentaje;
+                                    $(campoResultado).val(baseimponible.toFixed(2));
+                                }
+                                function fillExempt() {
+				    const monto7 = parseFloat($('#monto_7').val()) || 0;
+                                    const montoimpuesto7 = parseFloat($('#monto_impuesto_7').val()) || 0;
+	                            const monto10 = parseFloat($('#monto_10').val()) || 0;	
+                                    const montoimpuesto10 = parseFloat($('#monto_impuesto_10').val()) || 0;
+	                            const monto15 = parseFloat($('#monto_15').val()) || 0;
+                                    const montoimpuesto15 = parseFloat($('#monto_impuesto_15').val()) || 0;
+
+				    const total_factura = parseFloat($('#total_factura').val()) || 0;
+				    const exempt = total_factura - monto7-montoimpuesto7 - monto10-montoimpuesto10 - monto15-montoimpuesto15;
+				    $('#monto_total').val(exempt.toFixed(2));
+
+				}
 
                                 // Escucha los cambios en los campos de monto y realiza los cálculos
                                 $('#monto_7').on('input', function() {
@@ -112,6 +135,25 @@
                                     const porcentaje = 0.15;
                                     calcularITBMS(monto, porcentaje, '#monto_impuesto_15');
                                 });
+				$('#monto_impuesto_7').on('input', function() {
+                                    const monto = parseFloat($(this).val());
+                                    const porcentaje = 0.07;
+                                    fillITBMSBase(monto, porcentaje, '#monto_7');
+                                    fillExempt();
+                                });
+                                $('#monto_impuesto_10').on('input', function() {
+                                    const monto = parseFloat($(this).val());
+                                    const porcentaje = 0.10;
+                                    fillITBMSBase(monto, porcentaje, '#monto_10');
+                                    fillExempt();
+                                });
+                                $('#monto_impuesto_15').on('input', function() {
+                                    const monto = parseFloat($(this).val());
+                                    const porcentaje = 0.15;
+                                    fillITBMSBase(monto, porcentaje, '#monto_15');
+                                    fillExempt();
+                                });
+
                             });
                         </script>
 
@@ -121,7 +163,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_7">ITBMS7%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" step="0.01" disabled>
+                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_10">Monto al que aplica ITBMS del 10%</label>
@@ -129,7 +171,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_10">ITBMS10%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" step="0.01" disabled>
+                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_15">Monto al que aplica ITBMS del 15%</label>
@@ -137,7 +179,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_15">ITBMS15%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" step="0.01" disabled>
+                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="devolucion">Devolucion</label>
@@ -317,6 +359,7 @@
                     <script>
                         function calcularMontos() {
                             // Obtener los valores de los montos e impuestos
+			    var total_factura = parseFloat($('#total_factura').val()) || 0;
                             var monto = parseFloat($('#monto_total').val()) || 0;
                             var monto7 = parseFloat($('#monto_7').val()) || 0;
                             var monto10 = parseFloat($('#monto_10').val()) || 0;
@@ -327,7 +370,9 @@
                             var devolucion = parseFloat($('#devolucion').val()) || 0;
 
                             // Calcular el total
-                            var total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+			    var total=total_factura;
+			    if(total_fatcura==0)
+                            	total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal
