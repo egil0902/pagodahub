@@ -371,7 +371,7 @@
 
                             // Calcular el total
 			    var total=total_factura;
-			    if(total_fatcura==0)
+			    if(total_factura==0)
                             	total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
 
                             // Mostrar el mensaje de alerta
