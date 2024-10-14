@@ -22,6 +22,7 @@
             </th>
             
             <th>Descripción</th>
+            <th style="width:10% !important;">Acciones</th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -32,6 +33,14 @@
                     </td>
                     <td>
                         {{ $data->descripcion }} 
+                    </td>
+                    <td style="width:10% !important;">
+                        <a href="{{ route('card.edit', $data->id) }}" class="btn btn-warning btn-block my-1" style="width: 100% !important;">Editar</a>
+                        <form action="{{ route('card.delete', $data->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-block my-1" style="width: 100% !important;" onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarjeta?');">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
