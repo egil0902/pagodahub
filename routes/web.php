@@ -143,7 +143,12 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::post('/tdc/edit', [App\Http\Controllers\CardController::class, 'update'])->name('card.update');
 
     Route::get('/pbank', [App\Http\Controllers\PresupuestoBankController::class, 'index'])->name('pbank');
-    Route::post('/pbank', [App\Http\Controllers\PresupuestoBankController::class, 'create'])->name('pbank.create');
+    Route::post('/pbank', [App\Http\Controllers\PresupuestoBankController::class, 'store'])->name('pbank.store');
+    Route::delete('pbank/{id}', [App\Http\Controllers\PresupuestoBankController::class, 'destroy'])->name('pbank.delete');
+    Route::get('/pbank/create', [App\Http\Controllers\PresupuestoBankController::class, 'create'])->name('pbank.create');
+    Route::get('/pbank/edit/{id}', [App\Http\Controllers\PresupuestoBankController::class, 'edit'])->name('pbank.edit');
+    Route::post('/pbank/edit', [App\Http\Controllers\PresupuestoBankController::class, 'update'])->name('pbank.update');
+
     
     Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice');
     Route::post('/invoice', [App\Http\Controllers\InvoiceController::class, 'create'])->name('invoice.create');
