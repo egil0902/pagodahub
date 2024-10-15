@@ -189,71 +189,97 @@
                             <label for="fecha_pago">Fecha de Pago</label>
                             <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="forma_pago">Forma de Pago</label>
-                            <select class="form-control" id="forma_pago" name="forma_pago" required>
-                                <option value="" disabled selected>Selecciona una forma de pago</option>
-                                <option value="credito">Crédito</option>
-                                <option value="banco">Banco</option>
-                                <option value="caja">Caja</option>
-                                <option value="tarjeta_credito">Tarjeta de Crédito</option>
-                            </select>
+                        <div class="col-md-6 mb-3" id="container-forma-pago-fija">
+                            <div id="forma-pago-fija" class="forma-pago-fija" style="background-color: #0c0c0c14; padding: 10px; margin: 5px 0;">
+                                <div class="col-md-12 mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <label for="forma_pago">Forma de Pago</label>
+                                        <button type="button" class="btn btn-danger btn-block my-1 btn-eliminar-forma-pago d-none" style="width: 100px !important;">Eliminar</button>
+                                    </div>
+                                    <select class="form-control forma-pago" id="forma_pago" name="forma_pago" unique-id="fija" required>
+                                        <option value="" disabled selected>Selecciona una forma de pago</option>
+                                        <option value="credito">Crédito</option>
+                                        <option value="banco">Banco</option>
+                                        <option value="caja">Caja</option>
+                                        <option value="tarjeta_credito">Tarjeta de Crédito</option>
+                                    </select>
+                                </div>
+
+                                <!-- Fields for displaying based on forma_pago selection -->
+                                <div class="col-md-12 mb-3 credito-fields fields" id="creditoFields" class="form-group" style="display: none;">
+                                    <label for="credito_options">Opciones para Crédito</label>
+                                    <select class="form-control" id="credito_options" name="credito_options">
+                                        <option value="cheque">Cheque</option>
+                                        <option value="ach">ACH</option>
+                                    </select>
+                                    <label for="banco_credito">Banco</label>
+                                    <input type="text" class="form-control text" id="banco_credito" name="banco_credito">
+                                    <label for="num_comprobante_credito">Número de Comprobante</label>
+                                    <input type="text" class="form-control text" id="num_comprobante_credito" name="num_comprobante_credito">
+                                    <div id="valorCreditoDesc" class="form-group">
+                                        <label for="valor_credito">Valor en Crédito</label>
+                                        <input type="number" class="form-control number" id="valor_credito" value=0  step="0.01" name="valor_credito">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3 banco-fields fields" id="bancoFields" class="form-group" style="display: none;">
+                                    <label>Opciones para Banco</label>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="banco_efectivo" name="banco_options[]" value="efectivo">
+                                        <label class="form-check-label" for="banco_efectivo">Efectivo</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="banco_loteria" name="banco_options[]" value="loteria">
+                                        <label class="form-check-label" for="banco_loteria">Lotería</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="banco_cheque" name="banco_options[]" value="cheque">
+                                        <label class="form-check-label" for="banco_cheque">Cheque</label>
+                                    </div>
+                                    <div id="bancoDesc" class="form-group" style="display: none;">
+                                        <label for="banco_banco">Banco</label>
+                                        <input type="text" class="form-control text" id="banco_banco" name="banco_banco">
+                                        <label for="num_comprobante">Número de Cheque</label>
+                                        <input type="text" class="form-control text" id="num_comprobante"  name="num_comprobante">
+                                        <label for="cheque_banco">Valor cheque</label>
+                                        <input type="number" class="form-control number" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
+                                    </div>
+                                    <div id="efectivoDesc" class="form-group" style="display: none;">
+                                        <label for="presupuest_banco">Valor en efectivo</label>
+                                        <input type="number" class="form-control number" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
+                                    </div>
+                                    <div id="loteriaDesc" class="form-group" style="display: none;">
+                                        <label for="loteria_banco">Valor loteria</label>
+                                        <input type="number" class="form-control number" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3 tarjeta-fields fields" id="tarjetaFields" class="form-group" style="display: none;">
+                                    <label for="tarjeta">Tarjetas</label>
+                                    <select class="form-control" id="tarjeta" name="tarjeta">
+                                        @foreach($tarjetas as $tarjeta)
+                                            <option value="{{ $tarjeta->numero }}">{{ $tarjeta->numero }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div id="valorTarjetaDesc" class="form-group">
+                                        <label for="valor_tarjeta">Valor en Tarjeta</label>
+                                        <input type="number" class="form-control number" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3 caja-fields fields" id="cajaFields" class="form-group" style="display: none;">
+                                    <div id="valorCajaDesc" class="form-group">
+                                        <label for="valor_caja">Valor en Caja</label>
+                                        <input type="number" class="form-control number" id="valor_caja" value=0  step="0.01" name="valor_caja">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- Fields for displaying based on forma_pago selection -->
-                        <div class="col-md-6 mb-3" id="creditoFields" class="form-group" style="display: none;">
-                            <label for="credito_options">Opciones para Crédito</label>
-                            <select class="form-control" id="credito_options" name="credito_options">
-                                <option value="cheque">Cheque</option>
-                                <option value="ach">ACH</option>
-                            </select>
-                            <label for="banco_credito">Banco</label>
-                            <input type="text" class="form-control" id="banco_credito" name="banco_credito">
-                            <label for="num_comprobante_credito">Número de Comprobante</label>
-                            <input type="text" class="form-control" id="num_comprobante_credito" name="num_comprobante_credito">
+                        <div class="col-md-6 mb-3 d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary btn-block my-1 btn-agregar-forma-pago" >Agregar forma de pago</button>
                         </div>
-
-                        <div class="col-md-6 mb-3" id="bancoFields" class="form-group" style="display: none;">
-                            <label>Opciones para Banco</label>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="banco_efectivo" name="banco_options[]" value="efectivo">
-                                <label class="form-check-label" for="banco_efectivo">Efectivo</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="banco_loteria" name="banco_options[]" value="loteria">
-                                <label class="form-check-label" for="banco_loteria">Lotería</label>
-                            </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="banco_cheque" name="banco_options[]" value="cheque">
-                                <label class="form-check-label" for="banco_cheque">Cheque</label>
-                            </div>
-                            <div id="bancoDesc" class="form-group" style="display: none;">
-                                <label for="banco_banco">Banco</label>
-                                <input type="text" class="form-control" id="banco_banco" name="banco_banco">
-                                <label for="num_comprobante">Número de Cheque</label>
-                                <input type="text" class="form-control" id="num_comprobante"  name="num_comprobante">
-                                <label for="cheque_banco">Valor cheque</label>
-                                <input type="number" class="form-control" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
-                            </div>
-                            <div id="efectivoDesc" class="form-group" style="display: none;">
-                                <label for="presupuest_banco">Valor en efectivo</label>
-                                <input type="number" class="form-control" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
-                            </div>
-                            <div id="loteriaDesc" class="form-group" style="display: none;">
-                                <label for="loteria_banco">Valor loteria</label>
-                                <input type="number" class="form-control" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3" id="tarjetaFields" class="form-group" style="display: none;">
-                            <label for="tarjeta">Tarjetas</label>
-                            <select class="form-control" id="tarjeta" name="tarjeta">
-                                @foreach($tarjetas as $tarjeta)
-                                    <option value="{{ $tarjeta->numero }}">{{ $tarjeta->numero }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6 mb-3" id="container-forma-pago-multiple">  
                         </div>
                         <div class="col-md">
                             <label for="formFileMultiple" class="form-label">Adjuntar foto bolsa</label>
@@ -390,18 +416,80 @@
 
                     <script>
                         // JavaScript to show/hide fields based on forma_pago selection
-                        const formaPagoSelect = document.getElementById('forma_pago');
+                        /*const formaPagoSelect = document.getElementById('forma_pago');
                         const creditoFields = document.getElementById('creditoFields');
                         const bancoFields = document.getElementById('bancoFields');
+                        const cajaFields = document.getElementById('cajaFields');
                         
-                        const tarjetaFields = document.getElementById('tarjetaFields');
+                        const tarjetaFields = document.getElementById('tarjetaFields');*/
                         const bancoDesc = document.getElementById('bancoDesc');
                         const efectivoDesc= document.getElementById('efectivoDesc');
 
-                        formaPagoSelect.addEventListener('change', (event) => {
+                        /*formaPagoSelect.addEventListener('change', (event) => {
                             creditoFields.style.display = event.target.value === 'credito' ? 'block' : 'none';
                             bancoFields.style.display = event.target.value === 'banco' ? 'block' : 'none';
                             tarjetaFields.style.display = event.target.value === 'tarjeta_credito' ? 'block' : 'none';
+                            cajaFields.style.display = event.target.value === 'caja' ? 'block' : 'none';
+                        });*/
+
+                        $( document ).ready(function() {
+
+                            $(".forma-pago").on("change", function(e) {
+     
+                                const valueSelectedFormaPago = this.value;
+                                const unique_id = $(this).attr('unique-id');
+
+                                $("#forma-pago-" + unique_id).find(".fields").css("display", "none");
+
+                                switch(valueSelectedFormaPago) {
+                                    case 'credito':
+
+                                        $("#forma-pago-" + unique_id).find(".credito-fields").css("display", "block");
+
+                                    break;
+                                    case 'banco':
+
+                                        $("#forma-pago-" + unique_id).find(".banco-fields").css("display", "block");
+
+                                    break;
+                                    case 'tarjeta_credito':
+
+                                        $("#forma-pago-" + unique_id).find(".tarjeta-fields").css("display", "block");
+
+                                    break;
+                                    case 'caja':
+
+                                        $("#forma-pago-" + unique_id).find(".caja-fields").css("display", "block");
+
+                                    break;
+                                    default:
+                                        // code block
+                                }
+
+                            });
+
+                            $(".btn-eliminar-forma-pago").on("click", function() {
+     
+                                $("#forma-pago-" + $(this).attr('unique-id')).remove();
+
+                            });
+
+                            $(".btn-agregar-forma-pago").on("click", function() {
+
+                                const forma_pago = $("#forma-pago-fija").clone(true).appendTo("#container-forma-pago-multiple");
+                                const unique_id = Math.floor(Math.random() * 26) + Date.now();
+
+                                forma_pago.find(".btn-eliminar-forma-pago").removeClass("d-none").attr("unique-id",unique_id);
+                                forma_pago.attr("id","forma-pago-" + unique_id);
+                                forma_pago.addClass("forma-pago-multiple");
+                                forma_pago.find(".forma-pago").attr("unique-id", unique_id).val("").change();
+                                forma_pago.find(".fields").css("display", "none");
+                                forma_pago.find(".text").val("");
+                                forma_pago.find(".number").val(0);
+                                forma_pago.find("select option:eq(0)").attr("selected","selected");
+
+                            });
+
                         });
                         
                     </script>
