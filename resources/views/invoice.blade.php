@@ -436,10 +436,16 @@
 
                             $(".forma-pago").on("change", function(e) {
      
+                                const optionsSelected = $('.forma-pago option:selected');
                                 const valueSelectedFormaPago = this.value;
                                 const unique_id = $(this).attr('unique-id');
 
                                 $("#forma-pago-" + unique_id).find(".fields").css("display", "none");
+                                $('.forma-pago option').prop('disabled',false);
+
+                                optionsSelected.each(function(){
+                                    $('.forma-pago option[value="' + $(this).val() + '"]').prop('disabled',true);
+                                });
 
                                 switch(valueSelectedFormaPago) {
                                     case 'credito':
@@ -469,8 +475,15 @@
                             });
 
                             $(".btn-eliminar-forma-pago").on("click", function() {
-     
+
                                 $("#forma-pago-" + $(this).attr('unique-id')).remove();
+
+                                const optionsSelected = $('.forma-pago option:selected');
+                                $('.forma-pago option').prop('disabled',false);
+                                
+                                optionsSelected.each(function(){
+                                    $('.forma-pago option[value="' + $(this).val() + '"]').prop('disabled',true);
+                                });
 
                             });
 
