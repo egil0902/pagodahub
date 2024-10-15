@@ -189,6 +189,9 @@
                             <label for="fecha_pago">Fecha de Pago</label>
                             <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
                         </div>
+                        <div class="col-md-6 mb-1 d-flex justify-content-start">
+                            <button type="button" class="btn btn-primary btn-block my-1 btn-agregar-forma-pago" >Agregar forma de pago</button>
+                        </div>
                         <div class="col-md-6 mb-3" id="container-forma-pago-fija">
                             <div id="forma-pago-fija" class="forma-pago-fija" style="background-color: #0c0c0c14; padding: 10px; margin: 5px 0;">
                                 <div class="col-md-12 mb-3">
@@ -226,20 +229,20 @@
                                     <label>Opciones para Banco</label>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="banco_efectivo" name="banco_options[]" value="efectivo">
+                                        <input class="form-check-input" type="checkbox" id="banco_efectivo" desc-fields="efectivo" name="banco_options[]" value="efectivo" unique-id="fija">
                                         <label class="form-check-label" for="banco_efectivo">Efectivo</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="banco_loteria" name="banco_options[]" value="loteria">
+                                        <input class="form-check-input" type="checkbox" id="banco_loteria" desc-fields="loteria" name="banco_options[]" value="loteria" unique-id="fija">
                                         <label class="form-check-label" for="banco_loteria">Lotería</label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="banco_cheque" name="banco_options[]" value="cheque">
+                                        <input class="form-check-input" type="checkbox" id="banco_cheque" desc-fields="cheque" name="banco_options[]" value="cheque" unique-id="fija">
                                         <label class="form-check-label" for="banco_cheque">Cheque</label>
                                     </div>
-                                    <div id="bancoDesc" class="form-group" style="display: none;">
+                                    <div id="bancoDesc" class="form-group cheque-desc-fields desc-fields" style="display: none;">
                                         <label for="banco_banco">Banco</label>
                                         <input type="text" class="form-control text" id="banco_banco" name="banco_banco">
                                         <label for="num_comprobante">Número de Cheque</label>
@@ -247,11 +250,11 @@
                                         <label for="cheque_banco">Valor cheque</label>
                                         <input type="number" class="form-control number" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
                                     </div>
-                                    <div id="efectivoDesc" class="form-group" style="display: none;">
+                                    <div id="efectivoDesc" class="form-group efectivo-desc-fields desc-fields" style="display: none;">
                                         <label for="presupuest_banco">Valor en efectivo</label>
                                         <input type="number" class="form-control number" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
                                     </div>
-                                    <div id="loteriaDesc" class="form-group" style="display: none;">
+                                    <div id="loteriaDesc" class="form-group loteria-desc-fields desc-fields" style="display: none;">
                                         <label for="loteria_banco">Valor loteria</label>
                                         <input type="number" class="form-control number" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
                                     </div>
@@ -275,9 +278,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 mb-3 d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary btn-block my-1 btn-agregar-forma-pago" >Agregar forma de pago</button>
                         </div>
                         <div class="col-md-6 mb-3" id="container-forma-pago-multiple">  
                         </div>
@@ -346,13 +346,13 @@
                                 }
 
                                 // Agrega un evento "change" a los checkboxes para llamar a showHideSections cuando cambien.
-                                var checkboxes = document.querySelectorAll('.form-check-input');
+                                /*var checkboxes = document.querySelectorAll('.form-check-input');
                                 checkboxes.forEach(function(checkbox) {
                                     checkbox.addEventListener('change', showHideSections);
-                                });
+                                });*/
 
                                 // Llama a showHideSections inicialmente para que las secciones se muestren u oculten según el estado inicial de los checkboxes.
-                                showHideSections();
+                                //showHideSections();
                             </script>
                             
 
@@ -483,10 +483,26 @@
                                 forma_pago.attr("id","forma-pago-" + unique_id);
                                 forma_pago.addClass("forma-pago-multiple");
                                 forma_pago.find(".forma-pago").attr("unique-id", unique_id).val("").change();
+                                forma_pago.find(".form-check-input").attr("unique-id", unique_id);
+                                forma_pago.find(".form-check-input").prop("checked",false);
                                 forma_pago.find(".fields").css("display", "none");
+                                forma_pago.find(".desc-fields").css("display", "none");
                                 forma_pago.find(".text").val("");
                                 forma_pago.find(".number").val(0);
                                 forma_pago.find("select option:eq(0)").attr("selected","selected");
+
+                            });
+
+                            $(".form-check-input").on("change", function(e) {
+
+                                const checkboxChecked = $(this).attr('id');
+                                const unique_id = $(this).attr('unique-id');
+                                const descFields = $(this).attr('desc-fields');
+
+                                $("#forma-pago-" + unique_id).find("." + descFields + "-desc-fields").css("display", "none");
+
+                                if ($(this).is(':checked')) 
+                                    $("#forma-pago-" + unique_id).find("." + descFields + "-desc-fields").css("display", "block");
 
                             });
 
