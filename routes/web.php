@@ -150,10 +150,16 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     Route::post('/pbank/edit', [App\Http\Controllers\PresupuestoBankController::class, 'update'])->name('pbank.update');
 
     
-    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice');
-    Route::post('/invoice', [App\Http\Controllers\InvoiceController::class, 'create'])->name('invoice.create');
+    //Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice');
+    //Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'index_viejo'])->name('invoice');
+    Route::get('/invoice', [App\Http\Controllers\InvoiceController::class, 'create'])->name('invoice.create');
+    Route::post('/invoice', [App\Http\Controllers\InvoiceController::class, 'store'])->name('invoice.store');
+    Route::get('/invoice/edit/{id}', [App\Http\Controllers\InvoiceController::class, 'edit'])->name('invoice.edit');
     Route::post('/excel', [App\Http\Controllers\InvoiceController::class, 'getExcel'])->name('invoice.getExcel');    
-    Route::get('/summary', [App\Http\Controllers\InvoiceController::class, 'list'])->name('invoice.show');
+    Route::get('/summary11', [App\Http\Controllers\InvoiceController::class, 'list'])->name('invoice.show');
+    Route::get('/summary', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoice.index');
+    Route::delete('invoice/{id}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('invoice.delete');
+    Route::post('/invoice/edit', [App\Http\Controllers\InvoiceController::class, 'update'])->name('invoice.update');
     
     Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment');
     Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'create'])->name('payment.create');

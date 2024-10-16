@@ -14,7 +14,16 @@
         <!-- Formulario de búsqueda por proveedor -->
         <div class="container">
             <div class="card">
-                <div class="card-header">Facturas</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>Facturas</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ route('invoice.index') }}" class="btn btn-primary font-weight-bold">Listado</a>
+                            </div>
+                        </div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
                     @foreach($orgs as $org)
@@ -27,7 +36,8 @@
                         @endif
                     @endforeach
                     
-                    <form name="provider" id="provider" method="post" action="{{ route('invoice.store') }}" enctype="multipart/form-data">
+                    <form name="provider" id="provider" method="post" action="{{ route('invoice.update') }}" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{$invoice->id}}">
                         @csrf
                         @method('POST')
                         <div class="col-md-6 mb-3">
@@ -37,7 +47,7 @@
                                     @if ($orgs)
                                         @foreach ($orgs as $org)
                                             @if($org->id!=0)
-                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                                <option value="{{ $org->Name }}" {{ $org->Name == $invoice->sucursal ? 'selected' : '' }}>{{ $org->Name }}</option>
                                             @endif
                                         @endforeach
                                     @endif
@@ -46,12 +56,12 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="fecha_ingreso">Fecha de Ingreso</label>
-                            <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="<?php echo date("Y-m-d"); ?>" required>
+                            <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="{{$invoice->fecha_ingreso}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleDataList" class="form-label">Chequeador</label>
                             <input class="form-control product" list="chequeador" name="check"
-                                placeholder="Escribe para buscar..." required>
+                                placeholder="Escribe para buscar..." value="{{$invoice->chequeador}}" required>
                             <datalist id="chequeador">
                                 @foreach ($checkers as $check)
                                     <option value="{{ $check->name }}"></option>
@@ -62,7 +72,7 @@
 
                             <label for="responsable_ingreso">Responsable</label>
                             <input class="form-control product" list="responsable_ingreso" name="responsable_ingreso"
-                                placeholder="Escribe para buscar..." required>
+                                placeholder="Escribe para buscar..." value="{{$invoice->responsable_ingreso}}" required>
                             <datalist id="responsable_ingreso">
                                 @foreach ($responsables as $check)
                                     <option value="{{ $check->name }}"></option>
@@ -73,22 +83,22 @@
                         <div class="col-md-6 mb-3">
                             <label for="proveedor">Proveedor</label>
                             <input class="form-control proveedor" list="chequeador" name="proveedor"
-                                placeholder="Escribe para buscar..." required>
+                                placeholder="Escribe para buscar..." value="{{$invoice->proveedor}}" required>
                             <datalist id="proveedor">
                                 @foreach ($providers as $proveedor)
                                     <option value="{{ $proveedor->name }}"></option>
                                 @endforeach
                             </datalist>
                         </div>
-			<!-- Cambio por eduardo gil para agregar el monto total y que calcule lo demas segun eso --> 
-			<div class="col-md-6 mb-3">
+            <!-- Cambio por eduardo gil para agregar el monto total y que calcule lo demas segun eso --> 
+            <div class="col-md-6 mb-3">
                             <label class="h3" for="total_factura">Total Factura</label>
                             <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="monto_total">Monto Exento</label>
-                            <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" value="{{$invoice->monto_total}}" required>
                         </div>
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
@@ -98,24 +108,24 @@
                                     const montoITBMS = monto * porcentaje;
                                     $(campoResultado).val(montoITBMS.toFixed(2));
                                 }
-				 // Función para calcular la base imponible, el exento segun el total de la factura y el monto de itbms
+                 // Función para calcular la base imponible, el exento segun el total de la factura y el monto de itbms
                                 function fillITBMSBase(montoitbms, porcentaje, campoResultado) {
                                     const baseimponible = montoitbms / porcentaje;
                                     $(campoResultado).val(baseimponible.toFixed(2));
                                 }
                                 function fillExempt() {
-				    const monto7 = parseFloat($('#monto_7').val()) || 0;
+                    const monto7 = parseFloat($('#monto_7').val()) || 0;
                                     const montoimpuesto7 = parseFloat($('#monto_impuesto_7').val()) || 0;
-	                            const monto10 = parseFloat($('#monto_10').val()) || 0;	
+                                const monto10 = parseFloat($('#monto_10').val()) || 0;  
                                     const montoimpuesto10 = parseFloat($('#monto_impuesto_10').val()) || 0;
-	                            const monto15 = parseFloat($('#monto_15').val()) || 0;
+                                const monto15 = parseFloat($('#monto_15').val()) || 0;
                                     const montoimpuesto15 = parseFloat($('#monto_impuesto_15').val()) || 0;
 
-				    const total_factura = parseFloat($('#total_factura').val()) || 0;
-				    const exempt = total_factura - monto7-montoimpuesto7 - monto10-montoimpuesto10 - monto15-montoimpuesto15;
-				    $('#monto_total').val(exempt.toFixed(2));
+                    const total_factura = parseFloat($('#total_factura').val()) || 0;
+                    const exempt = total_factura - monto7-montoimpuesto7 - monto10-montoimpuesto10 - monto15-montoimpuesto15;
+                    $('#monto_total').val(exempt.toFixed(2));
 
-				}
+                }
 
                                 // Escucha los cambios en los campos de monto y realiza los cálculos
                                 $('#monto_7').on('input', function() {
@@ -135,7 +145,7 @@
                                     const porcentaje = 0.15;
                                     calcularITBMS(monto, porcentaje, '#monto_impuesto_15');
                                 });
-				$('#monto_impuesto_7').on('input', function() {
+                $('#monto_impuesto_7').on('input', function() {
                                     const monto = parseFloat($(this).val());
                                     const porcentaje = 0.07;
                                     fillITBMSBase(monto, porcentaje, '#monto_7');
@@ -159,35 +169,35 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="monto_7">Monto al que aplica ITBMS del 7%</label>
-                            <input type="number" class="form-control" id="monto_7" name="monto_7" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_7" name="monto_7" step="0.01" value="{{$invoice->monto_7}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_7">ITBMS7%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" step="0.01">
+                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" value="{{$invoice->monto_impuesto_7}}" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_10">Monto al que aplica ITBMS del 10%</label>
-                            <input type="number" class="form-control" id="monto_10" name="monto_10" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_10" name="monto_10" step="0.01" value="{{$invoice->monto_10}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_10">ITBMS10%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" step="0.01">
+                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" value="{{$invoice->monto_impuesto_10}}" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_15">Monto al que aplica ITBMS del 15%</label>
-                            <input type="number" class="form-control" id="monto_15" name="monto_15" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_15" name="monto_15" step="0.01" value="{{$invoice->monto_15}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_15">ITBMS15%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" step="0.01">
+                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" value="{{$invoice->monto_impuesto_15}}" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="devolucion">Devolucion</label>
-                            <input type="number" class="form-control" id="devolucion" name="devolucion" step="0.01" required>
+                            <input type="number" class="form-control" id="devolucion" name="devolucion" step="0.01" value="{{$invoice->devolucion}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="fecha_pago">Fecha de Pago</label>
-                            <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
+                            <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" value="{{$invoice->fecha_pago}}" required>
                         </div>
                         <div class="col-md-6 mb-1 d-flex justify-content-start">
                             <button type="button" class="btn btn-primary btn-block my-1 btn-agregar-forma-pago" >Agregar forma de pago</button>
@@ -359,10 +369,10 @@
                         </div>
                         <div class="col-md">
                         <h4>Observaciones:</h4>
-                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
+                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" >{{$invoice->observaciones}}</textarea>
                         </div>
                         <br>
-                        <button class="btn btn-primary" type="button" onclick="calcularMontos()">Crear Registro</button>
+                        <button class="btn btn-primary" type="button" onclick="calcularMontos()">Actualizar</button>
 
                     </form>
                     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -385,7 +395,7 @@
                     <script>
                         function calcularMontos() {
                             // Obtener los valores de los montos e impuestos
-			    var total_factura = parseFloat($('#total_factura').val()) || 0;
+                var total_factura = parseFloat($('#total_factura').val()) || 0;
                             var monto = parseFloat($('#monto_total').val()) || 0;
                             var monto7 = parseFloat($('#monto_7').val()) || 0;
                             var monto10 = parseFloat($('#monto_10').val()) || 0;
@@ -396,9 +406,9 @@
                             var devolucion = parseFloat($('#devolucion').val()) || 0;
 
                             // Calcular el total
-			    var total=total_factura;
-			    if(total_factura==0)
-                            	total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+                var total=total_factura;
+                if(total_factura==0)
+                                total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal
