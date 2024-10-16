@@ -85,7 +85,7 @@
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
             </th>
-            <th>
+            <th style="min-width:250px">
                 <div class="input-group" style="width:100%">
                     <span class="input-group-text" id="basic-addon3"><svg xmlns="http://www.w3.org/2000/svg"
                             width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -119,16 +119,57 @@
                     <td>{{ number_format($data->monto_total + $data->monto_7 + $data->monto_10 + $data->monto_15 + $data->monto_impuesto_7 + $data->monto_impuesto_10 + $data->monto_impuesto_15-$data->devolucion, 2) }}</td>
 
                     <td>{{ date('d-m-Y', strtotime($data->fecha_pago)) }}</td>
-                    <td>{{ $data->forma_pago }}
-                        @if($data->forma_pago==="tarjeta_credito")
-                            <br>
-                            {{$data->tarjeta}}
-                        @endif
-                        @if($data->forma_pago==="banco efectivo")
-                            <br>
-                            {{$data->presupuest_banco}}
-                        @endif
-                           </td>
+                    <td>
+                        @foreach (json_decode($data->forma_pago_multiple, true) as  $forma_pago)
+                        <div class="py-2">
+                            <strong>* {{ $forma_pago['descripcion_forma_pago'] }}</strong><br>
+                            @switch($forma_pago['forma_pago'])
+                                @case('caja')
+                                     <p class="mx-3">Monto: {{ number_format($forma_pago['valor'], 2) }}</p>
+                                    @break
+                                @case('tarjeta_credito')
+                                    <p class="mx-3 my-0">Tarjeta: {{ $forma_pago['tarjeta'] }}</p>
+                                    <p class="mx-3 my-0">Monto: {{ number_format($forma_pago['valor'], 2) }}</p>
+                                    @break
+                                @case('credito')
+                                    <p class="mx-3 my-0">Opción: {{ $forma_pago['credito_options'] }}</p>
+                                    <p class="mx-3 my-0">Banco: {{ $forma_pago['banco'] }}</p>
+                                    <p class="mx-3 my-0">Comprobante: {{ $forma_pago['comprobante'] }}</p>
+                                    <p class="mx-3 my-0">Monto: {{ number_format($forma_pago['valor'], 2) }}</p>
+                                    @break
+                                @case('banco')
+
+                                    @foreach ($forma_pago['banco_options'] as  $banco_option)
+
+                                        @switch($banco_option['option'])
+
+                                            @case('efectivo')
+                                                <p class="mx-3 my-0">Efectivo</p>
+                                                <p class="mx-3 my-0">Monto: {{ number_format($banco_option['valor'], 2) }}</p>
+                                                <br>
+                                                @break
+                                            @case('loteria')
+                                                <p class="mx-3 my-0">Loteria</p>
+                                                <p class="mx-3 my-0">Monto: {{ number_format($banco_option['valor'], 2) }}</p>
+                                                <br>
+                                                @break
+                                            @case('cheque')
+                                                <p class="mx-3 my-0">Cheque</p>
+                                                <p class="mx-3 my-0">Banco: {{ $banco_option['banco'] }}</p>
+                                                <p class="mx-3 my-0">Comprobante: {{ $banco_option['comprobante'] }}</p>
+                                                <p class="mx-3 my-0">Monto: {{ number_format($banco_option['valor'], 2) }}</p>
+                                                <br>
+                                                @break
+
+                                        @endswitch
+
+                                    @endforeach
+
+                                    @break
+                            @endswitch
+                        </div>
+                        @endforeach
+                    </td>
                     <td>
                         <center>
                             @if($data->pdf_data!="")
