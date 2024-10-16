@@ -93,7 +93,7 @@
             <!-- Cambio por eduardo gil para agregar el monto total y que calcule lo demas segun eso --> 
             <div class="col-md-6 mb-3">
                             <label class="h3" for="total_factura">Total Factura</label>
-                            <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" required>
+                            <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" value="{{$invoice->total_factura}}" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
