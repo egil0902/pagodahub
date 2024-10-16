@@ -393,6 +393,7 @@ class InvoiceController extends Controller
                 $brink->banco=$request->banco_credito[$index];
                 $brink->comprobante=$request->num_comprobante_credito[$index];
 
+                $obj->descripcion_forma_pago = 'Crédito';
                 $obj->credito_options = $request->credito_options[$index];
                 $obj->banco = $request->banco_credito[$index];
                 $obj->comprobante = $request->num_comprobante_credito[$index];
@@ -402,7 +403,7 @@ class InvoiceController extends Controller
             if($forma_pago==='banco'){
                 //$brink->forma_pago= $forma_pago.' '.$request->banco_options;
                 $brink->forma_pago = "";
-
+                $obj->descripcion_forma_pago = 'Banco';
                 $bcheque = "";
                 $befectivo = "";
                 $bloteria = "";
@@ -446,11 +447,13 @@ class InvoiceController extends Controller
             
             if($forma_pago==='tarjeta_credito'){
                 $brink->tarjeta=$request->tarjeta[$index];
+                $obj->descripcion_forma_pago = 'Tarjeta de crédito';
                 $obj->tarjeta = $request->tarjeta[$index];
                 $obj->valor = $request->valor_tarjeta[$index];
             }
 
             if($forma_pago==='caja'){
+                $obj->descripcion_forma_pago = 'Caja';
                 $obj->valor = $request->valor_caja[$index];
             }
 
