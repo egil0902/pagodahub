@@ -97,6 +97,7 @@
                 </div>
             </th>
             <th style="max-width:150px"></th>
+            <th style="max-width:150px">Acciones</th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -165,6 +166,14 @@
                                 }
                             }
                         </script>
+                    </td>
+                    <td style="width:10% !important;">
+                        <a href="{{ route('invoice.edit', $data->id) }}" class="btn btn-warning btn-block my-1" style="width: 100% !important;">Editar</a>
+                        <form action="{{ route('invoice.delete', $data->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-block my-1" style="width: 100% !important;" onclick="return confirm('¿Estás seguro de que deseas eliminar este registro?');">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
                 <tr>
