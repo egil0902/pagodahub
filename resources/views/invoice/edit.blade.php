@@ -477,7 +477,7 @@
                         }
                         function enviarFormulario() {
                             // Aquí puedes realizar cualquier otra validación antes de enviar el formulario
-                            $('.forma-pago option').prop('disabled',false);
+                            //$('.forma-pago option').prop('disabled',false);
                             // Envía el formulario
                             document.getElementById('provider').submit();
                         }
@@ -579,16 +579,16 @@
 
                             $(".forma-pago").on("change", function(e) {
      
-                                const optionsSelected = $('.forma-pago option:selected');
+                                //const optionsSelected = $('.forma-pago option:selected');
                                 const valueSelectedFormaPago = this.value;
                                 const unique_id = $(this).attr('unique-id');
 
                                 $("#forma-pago-" + unique_id).find(".fields").css("display", "none");
-                                $('.forma-pago option').prop('disabled',false);
+                                //$('.forma-pago option').prop('disabled',false);
 
-                                optionsSelected.each(function(){
+                                /*optionsSelected.each(function(){
                                     $('.forma-pago option[value="' + $(this).val() + '"]').prop('disabled',true);
-                                });
+                                });*/
 
                                 switch(valueSelectedFormaPago) {
                                     case 'credito':
@@ -621,12 +621,12 @@
 
                                 $("#forma-pago-" + $(this).attr('unique-id')).remove();
 
-                                const optionsSelected = $('.forma-pago option:selected');
+                                /*const optionsSelected = $('.forma-pago option:selected');
                                 $('.forma-pago option').prop('disabled',false);
                                 
                                 optionsSelected.each(function(){
                                     $('.forma-pago option[value="' + $(this).val() + '"]').prop('disabled',true);
-                                });
+                                });*/
 
                             });
 
