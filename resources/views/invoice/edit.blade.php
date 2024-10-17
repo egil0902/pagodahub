@@ -246,7 +246,7 @@
                                     <input type="text" class="form-control text" id="num_comprobante_credito" name="num_comprobante_credito">
                                     <div id="valorCreditoDesc" class="form-group">
                                         <label for="valor_credito">Valor en Crédito</label>
-                                        <input type="number" class="form-control number" id="valor_credito" value=0  step="0.01" name="valor_credito">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_credito" value=0  step="0.01" name="valor_credito">
                                     </div>
                                 </div>
 
@@ -273,15 +273,15 @@
                                         <label for="num_comprobante">Número de Cheque</label>
                                         <input type="text" class="form-control text" id="num_comprobante"  name="num_comprobante">
                                         <label for="cheque_banco">Valor cheque</label>
-                                        <input type="number" class="form-control number" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
                                     </div>
                                     <div id="efectivoDesc" class="form-group efectivo-desc-fields desc-fields" style="display: none;">
                                         <label for="presupuest_banco">Valor en efectivo</label>
-                                        <input type="number" class="form-control number" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
                                     </div>
                                     <div id="loteriaDesc" class="form-group loteria-desc-fields desc-fields" style="display: none;">
                                         <label for="loteria_banco">Valor loteria</label>
-                                        <input type="number" class="form-control number" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3 tarjeta-fields fields" id="tarjetaFields" class="form-group" style="display: none;">
@@ -293,13 +293,13 @@
                                     </select>
                                     <div id="valorTarjetaDesc" class="form-group">
                                         <label for="valor_tarjeta">Valor en Tarjeta</label>
-                                        <input type="number" class="form-control number" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3 caja-fields fields" id="cajaFields" class="form-group" style="display: none;">
                                     <div id="valorCajaDesc" class="form-group">
                                         <label for="valor_caja">Valor en Caja</label>
-                                        <input type="number" class="form-control number" id="valor_caja" value=0  step="0.01" name="valor_caja">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_caja" value=0  step="0.01" name="valor_caja">
                                     </div>
                                 </div>
                             </div>
@@ -400,18 +400,44 @@
                                     Se va a pagar lo siguiente: <span id="totalAmount"></span>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="confirmModal">Cancelar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="confirmModal" onclick="closeModal()">Cancelar</button>
                                     <button type="button" class="btn btn-primary" onclick="enviarFormulario()">Aceptar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="modal fade" id="notificacionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>                                    
+                                </div>
+                                <div class="modal-body" id="texto-notificacion">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="notificacionModal" onclick="closeModal()">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <script>
+
+                        function closeModal() {
+                            $('.modal').modal('hide');
+                        }
+
                         function calcularMontos() {
 
-                            if(!validateForm())
+                            if(!validateForm()){
+                                $('#texto-notificacion').text('Faltan campos por ingresar');
+                                $('#notificacionModal').modal('show');
                                 return;
+                            }
+
+                            const fieldFormaPago = $('.monto-forma-pago');
+                            var montoFormaPago = 0;
 
                             // Obtener los valores de los montos e impuestos
                             var total_factura = parseFloat($('#total_factura').val()) || 0;
@@ -428,6 +454,16 @@
                             var total=total_factura;
                             if(total_factura==0)
                                 total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+
+                            fieldFormaPago.each(function(){
+                                montoFormaPago += (parseFloat($(this).val()) || 0);
+                            });
+
+                            if( montoFormaPago != total_factura ){
+                                $('#texto-notificacion').text('El monto de la factura no corresponde a los montos ingresados en las formas de pago');
+                                $('#notificacionModal').modal('show');
+                                return;
+                            }
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal
