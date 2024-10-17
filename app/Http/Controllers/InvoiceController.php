@@ -349,7 +349,7 @@ class InvoiceController extends Controller
             $obj = new \stdClass();
             $obj->forma_pago = $forma_pago;
 
-            /*if($forma_pago=="banco"){
+            if($forma_pago=="banco"){
                 $pbankME = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
                 $pbankML = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_l');
                 $pbankMC = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto_c');
@@ -386,7 +386,7 @@ class InvoiceController extends Controller
                     }
                 }
                 
-            }*/
+            }
 
             if($forma_pago==='credito'){
                 $brink->forma_pago= $forma_pago.' '.$request->credito_options[$index];
@@ -463,21 +463,21 @@ class InvoiceController extends Controller
         }
 
         $chequeador = Check::where('name', $request->check)->first();
-        if (!$chequeador) {
+        if (!$chequeador && !empty($request->check)) {
             //dump($nombre);
             $chequeador = new Check;
             $chequeador->name = $request->check;
             $chequeador->save();
         }
         $responsable = Responsable::where('name', $request->responsable_ingreso)->first();
-        if (!$responsable) {
+        if (!$responsable && !empty($request->responsable_ingreso)) {
             //dump($nombre);
             $responsable = new Responsable;
             $responsable->name = $request->responsable_ingreso;
             $responsable->save();
         }
         $proveedor = Provider::where('name', $request->proveedor)->first();
-        if (!$proveedor) {
+        if (!$proveedor && !empty($request->proveedor)) {
             //dump($nombre);
             $proveedor = new Provider;
             $proveedor->name = $request->proveedor;
@@ -492,8 +492,14 @@ class InvoiceController extends Controller
 
             $brink->pdf_data = $pdfBase64;
         }
-        
-        
+    
+        if(empty($request->forma_pago[0])){
+            $brink->forma_pago_multiple="[]";
+        }
+        else{
+            $brink->forma_pago_multiple=$forma_pago_multiple->toJson();
+        }
+             
         if(isset($request->devolucion)){
             $brink->devolucion=$request->devolucion;
         }
@@ -514,8 +520,7 @@ class InvoiceController extends Controller
         }
         $brink->monto_impuesto=$brink->monto_7+$brink->monto_10+$brink->monto_15;
         $brink->fecha_pago=$request->fecha_pago;
-        $brink->forma_pago_multiple=$forma_pago_multiple->toJson();
-        
+
         try {
             
             $brink->save();
@@ -729,21 +734,21 @@ class InvoiceController extends Controller
         }*/
 
         $chequeador = Check::where('name', $request->check)->first();
-        if (!$chequeador) {
+        if (!$chequeador && !empty($request->check)) {
             //dump($nombre);
             $chequeador = new Check;
             $chequeador->name = $request->check;
             $chequeador->save();
         }
         $responsable = Responsable::where('name', $request->responsable_ingreso)->first();
-        if (!$responsable) {
+        if (!$responsable && !empty($request->responsable_ingreso)) {
             //dump($nombre);
             $responsable = new Responsable;
             $responsable->name = $request->responsable_ingreso;
             $responsable->save();
         }
         $proveedor = Provider::where('name', $request->proveedor)->first();
-        if (!$proveedor) {
+        if (!$proveedor && !empty($request->proveedor)) {
             //dump($nombre);
             $proveedor = new Provider;
             $proveedor->name = $request->proveedor;
