@@ -57,11 +57,17 @@
                         <div class="col-md-6 mb-3">
                             <label for="fecha_ingreso">Fecha de Ingreso</label>
                             <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="{{$invoice->fecha_ingreso}}" required>
+                            <div class="text-danger" style="display:none" id="DFechaIngreso">
+                                Campo obligatorio.
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleDataList" class="form-label">Chequeador</label>
-                            <input class="form-control product" list="chequeador" name="check"
+                            <input class="form-control product" list="chequeador" id="field_chequeador" name="check"
                                 placeholder="Escribe para buscar..." value="{{$invoice->chequeador}}" required>
+                            <div class="text-danger" style="display:none" id="DChequeador">
+                                Campo obligatorio.
+                            </div>
                             <datalist id="chequeador">
                                 @foreach ($checkers as $check)
                                     <option value="{{ $check->name }}"></option>
@@ -71,8 +77,11 @@
                         <div class="col-md-6 mb-3">
 
                             <label for="responsable_ingreso">Responsable</label>
-                            <input class="form-control product" list="responsable_ingreso" name="responsable_ingreso"
+                            <input class="form-control product" list="responsable_ingreso" id="field_responsable_ingreso" name="responsable_ingreso"
                                 placeholder="Escribe para buscar..." value="{{$invoice->responsable_ingreso}}" required>
+                            <div class="text-danger" style="display:none" id="DResponsableIngreso">
+                                Campo obligatorio.
+                            </div>
                             <datalist id="responsable_ingreso">
                                 @foreach ($responsables as $check)
                                     <option value="{{ $check->name }}"></option>
@@ -82,8 +91,11 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="proveedor">Proveedor</label>
-                            <input class="form-control proveedor" list="chequeador" name="proveedor"
+                            <input class="form-control proveedor" list="chequeador" id="field_proveedor" name="proveedor"
                                 placeholder="Escribe para buscar..." value="{{$invoice->proveedor}}" required>
+                            <div class="text-danger" style="display:none" id="DProveedor">
+                                Campo obligatorio.
+                            </div>
                             <datalist id="proveedor">
                                 @foreach ($providers as $proveedor)
                                     <option value="{{ $proveedor->name }}"></option>
@@ -94,6 +106,9 @@
             <div class="col-md-6 mb-3">
                             <label class="h3" for="total_factura">Total Factura</label>
                             <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" value="{{$invoice->total_factura}}" required>
+                            <div class="text-danger" style="display:none" id="DTotalFactura">
+                                Campo obligatorio.
+                            </div>
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -394,8 +409,12 @@
 
                     <script>
                         function calcularMontos() {
+
+                            if(!validateForm())
+                                return;
+
                             // Obtener los valores de los montos e impuestos
-                var total_factura = parseFloat($('#total_factura').val()) || 0;
+                            var total_factura = parseFloat($('#total_factura').val()) || 0;
                             var monto = parseFloat($('#monto_total').val()) || 0;
                             var monto7 = parseFloat($('#monto_7').val()) || 0;
                             var monto10 = parseFloat($('#monto_10').val()) || 0;
@@ -406,8 +425,8 @@
                             var devolucion = parseFloat($('#devolucion').val()) || 0;
 
                             // Calcular el total
-                var total=total_factura;
-                if(total_factura==0)
+                            var total=total_factura;
+                            if(total_factura==0)
                                 total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
 
                             // Mostrar el mensaje de alerta
@@ -442,6 +461,80 @@
                             tarjetaFields.style.display = event.target.value === 'tarjeta_credito' ? 'block' : 'none';
                             cajaFields.style.display = event.target.value === 'caja' ? 'block' : 'none';
                         });*/
+
+                        function onSubmit(token) {
+                            if(validateForm()){
+                                document.getElementById("provider").submit();
+                            }
+                        }
+
+                        function validateForm() {
+
+                            // Obtener los valores de los campos del formulario 
+                            try {
+
+                                var failForm = false;
+                                var fecha_pago = document.getElementById('fecha_pago').value; 
+                                var fecha_ingreso = document.getElementById('fecha_ingreso').value; 
+                                var responsable_ingreso = document.getElementById('field_responsable_ingreso').value;
+                                var chequeador = document.getElementById('field_chequeador').value;   
+                                var proveedor = document.getElementById('field_proveedor').value;  
+                                var total_factura = document.getElementById('total_factura').value;   
+
+                                if ((total_factura === "" || total_factura === null)) {
+                                    document.getElementById('DTotalFactura').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DTotalFactura').style.display = "none";
+                                }
+
+                                if ((fecha_ingreso === "" || fecha_ingreso === null)) {
+                                    document.getElementById('DFechaIngreso').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DFechaIngreso').style.display = "none";
+                                }                                     
+                               
+                                if ((fecha_pago === "" || fecha_pago === null)) {
+                                    document.getElementById('DFechaPago').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DFechaPago').style.display = "none";
+                                }
+
+                                if ((responsable_ingreso === "" || responsable_ingreso === null)) {
+                                    document.getElementById('DResponsableIngreso').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DResponsableIngreso').style.display = "none";
+                                }
+
+                                if ((chequeador === "" || chequeador === null)) {
+                                    document.getElementById('DChequeador').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DChequeador').style.display = "none";
+                                }
+
+                                /*if ((proveedor === "" || proveedor === null)) {
+                                    document.getElementById('DProveedor').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DProveedor').style.display = "none";
+                                }*/
+                              
+                                if (failForm) {
+                                    return false; // No se envía el formulario
+                                } else {
+                                    return true; // Se envía el formulario
+                                }
+
+                            } catch (error) {
+                                console.error(error);
+                                return false;
+                            }
+
+                        }
 
                         $( document ).ready(function() {
 
