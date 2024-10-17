@@ -213,6 +213,9 @@
                         <div class="col-md-6 mb-3">
                             <label for="fecha_pago">Fecha de Pago</label>
                             <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" value="{{$invoice->fecha_pago}}" required>
+                            <div class="text-danger" style="display:none" id="DFechaPago">
+                                Campo obligatorio.
+                            </div>
                         </div>
                         <div class="col-md-6 mb-1 d-flex justify-content-start">
                             <button type="button" class="btn btn-primary btn-block my-1 btn-agregar-forma-pago" >Agregar forma de pago</button>
@@ -236,17 +239,17 @@
                                 <!-- Fields for displaying based on forma_pago selection -->
                                 <div class="col-md-12 mb-3 credito-fields fields" id="creditoFields" class="form-group" style="display: none;">
                                     <label for="credito_options">Opciones para Crédito</label>
-                                    <select class="form-control" id="credito_options" name="credito_options">
+                                    <select class="form-control" id="credito_options" name="credito_options[]">
                                         <option value="cheque">Cheque</option>
                                         <option value="ach">ACH</option>
                                     </select>
                                     <label for="banco_credito">Banco</label>
-                                    <input type="text" class="form-control text" id="banco_credito" name="banco_credito">
+                                    <input type="text" class="form-control text" id="banco_credito" name="banco_credito[]">
                                     <label for="num_comprobante_credito">Número de Comprobante</label>
-                                    <input type="text" class="form-control text" id="num_comprobante_credito" name="num_comprobante_credito">
+                                    <input type="text" class="form-control text" id="num_comprobante_credito" name="num_comprobante_credito[]">
                                     <div id="valorCreditoDesc" class="form-group">
                                         <label for="valor_credito">Valor en Crédito</label>
-                                        <input type="number" class="form-control number monto-forma-pago" id="valor_credito" value=0  step="0.01" name="valor_credito">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_credito" value=0  step="0.01" name="valor_credito[]">
                                     </div>
                                 </div>
 
@@ -269,37 +272,37 @@
                                     </div>
                                     <div id="bancoDesc" class="form-group cheque-desc-fields desc-fields" style="display: none;">
                                         <label for="banco_banco">Banco</label>
-                                        <input type="text" class="form-control text" id="banco_banco" name="banco_banco">
+                                        <input type="text" class="form-control text" id="banco_banco" name="banco_banco[]">
                                         <label for="num_comprobante">Número de Cheque</label>
-                                        <input type="text" class="form-control text" id="num_comprobante"  name="num_comprobante">
+                                        <input type="text" class="form-control text" id="num_comprobante"  name="num_comprobante[]">
                                         <label for="cheque_banco">Valor cheque</label>
-                                        <input type="number" class="form-control number monto-forma-pago" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="cheque_banco" value=0 step="0.01" name="cheque_banco[]">
                                     </div>
                                     <div id="efectivoDesc" class="form-group efectivo-desc-fields desc-fields" style="display: none;">
                                         <label for="presupuest_banco">Valor en efectivo</label>
-                                        <input type="number" class="form-control number monto-forma-pago" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco[]">
                                     </div>
                                     <div id="loteriaDesc" class="form-group loteria-desc-fields desc-fields" style="display: none;">
                                         <label for="loteria_banco">Valor loteria</label>
-                                        <input type="number" class="form-control number monto-forma-pago" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="loteria_banco" value=0  step="0.01" name="loteria_banco[]">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3 tarjeta-fields fields" id="tarjetaFields" class="form-group" style="display: none;">
                                     <label for="tarjeta">Tarjetas</label>
-                                    <select class="form-control" id="tarjeta" name="tarjeta">
+                                    <select class="form-control" id="tarjeta" name="tarjeta[]">
                                         @foreach($tarjetas as $tarjeta)
                                             <option value="{{ $tarjeta->numero }}">{{ $tarjeta->numero }}</option>
                                         @endforeach
                                     </select>
                                     <div id="valorTarjetaDesc" class="form-group">
                                         <label for="valor_tarjeta">Valor en Tarjeta</label>
-                                        <input type="number" class="form-control number monto-forma-pago" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta[]">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3 caja-fields fields" id="cajaFields" class="form-group" style="display: none;">
                                     <div id="valorCajaDesc" class="form-group">
                                         <label for="valor_caja">Valor en Caja</label>
-                                        <input type="number" class="form-control number monto-forma-pago" id="valor_caja" value=0  step="0.01" name="valor_caja">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_caja" value=0  step="0.01" name="valor_caja[]">
                                     </div>
                                 </div>
                             </div>

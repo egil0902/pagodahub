@@ -632,6 +632,9 @@ class InvoiceController extends Controller
      */
     public function update(Request $request)
     {
+        
+        $forma_pago_multiple = collect();
+
         $sucursal=$request->AD_Org_ID;
        
         $brink = Invoice::find($request->id);
@@ -641,7 +644,7 @@ class InvoiceController extends Controller
         $brink->sucursal=$request->AD_Org_ID;
         $brink->monto_impuesto = number_format($request->monto_total * ($request->impuesto_select / 100), 2, '.', '');
         $brink->total_factura=$request->total_factura;
-        //$brink->foto=$request->foto;//revisar
+        $brink->foto=$request->foto;//revisar
         $brink->responsable_ingreso=$request->responsable_ingreso;
         $brink->responsable_pago=$request->responsable_ingreso;
         $brink->forma_pago="";
@@ -649,7 +652,12 @@ class InvoiceController extends Controller
         $brink->chequeador=$request->check;
         $brink->observaciones=$request->observaciones;
 
-        /*foreach ($request->forma_pago as $forma_pago) {
+        $index = 0;
+
+        foreach ($request->forma_pago as $forma_pago) {
+
+            $obj = new \stdClass();
+            $obj->forma_pago = $forma_pago;
 
             if($forma_pago=="banco"){
                 $pbankME = presupuestoBank::where('fecha',$request->fecha_pago)->where('sucursal', 'ilike', "%$sucursal%" )->sum('monto');
@@ -665,7 +673,7 @@ class InvoiceController extends Controller
                 }
                 foreach ($request->banco_options as $options) {
                     if($options=="cheque"){
-                        $aPagar=$request->cheque_banco;
+                        $aPagar=$request->cheque_banco[$index];
                         if($pbankMC-$aPagar<0){
                             return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
                         'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($pbankMC).')');
@@ -673,14 +681,14 @@ class InvoiceController extends Controller
                         }
                     }
                     if($options=="loteria"){
-                        $aPagar=$request->loteria_banco;
+                        $aPagar=$request->loteria_banco[$index];
                         if($pbankML-$aPagar<0){
                             return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
                         'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($pbankML).')');
                         }
                     }
                     if($options=="efectivo"){
-                        $aPagar=$request->presupuest_banco;
+                        $aPagar=$request->presupuest_banco[$index];
                         if($pbankME-$aPagar<0){
                             return redirect()->back()->with('error', 'no se puede descontar valor del banco para el dia '.$request->fecha_pago.
                         'ya que el monto puesto($'.$aPagar.') es superior a lo que queda en caja ($'.($pbankME).')');
@@ -691,35 +699,55 @@ class InvoiceController extends Controller
             }
 
             if($forma_pago==='credito'){
-                $brink->forma_pago= $forma_pago.' '.$request->credito_options;
-                $brink->banco=$request->banco_credito;
-                $brink->comprobante=$request->num_comprobante_credito;
+                $brink->forma_pago= $forma_pago.' '.$request->credito_options[$index];
+                $brink->banco=$request->banco_credito[$index];
+                $brink->comprobante=$request->num_comprobante_credito[$index];
+
+                $obj->descripcion_forma_pago = 'Crédito';
+                $obj->credito_options = $request->credito_options[$index];
+                $obj->banco = $request->banco_credito[$index];
+                $obj->comprobante = $request->num_comprobante_credito[$index];
+                $obj->valor = $request->valor_credito[$index];
             }
             
             if($forma_pago==='banco'){
                 //$brink->forma_pago= $forma_pago.' '.$request->banco_options;
                 $brink->forma_pago = "";
-
+                $obj->descripcion_forma_pago = 'Banco';
                 $bcheque = "";
                 $befectivo = "";
                 $bloteria = "";
                 foreach ($request->banco_options as $options) {
+
+                    $obj_banco_options = new \stdClass();
+                    $obj_banco_options->option = $options;
+
                     if ($options === 'cheque') {
-                        $brink->banco = $request->banco_banco;
-                        $brink->comprobante = $request->num_comprobante;
-                        $brink->p_c=$request->cheque_banco;
-                        $bcheque .= $forma_pago . ' ' . $options . ' $' . $request->cheque_banco . "\n";
+                        $brink->banco = $request->banco_banco[$index];
+                        $brink->comprobante = $request->num_comprobante[$index];
+                        $brink->p_c=$request->cheque_banco[$index];
+                        $bcheque .= $forma_pago . ' ' . $options . ' $' . $request->cheque_banco[$index] . "\n";
+
+                        $obj_banco_options->banco = $request->banco_banco[$index];
+                        $obj_banco_options->comprobante = $request->num_comprobante[$index];
+                        $obj_banco_options->valor = $request->cheque_banco[$index];
                     }
                 
                     if ($options === 'efectivo') {
-                        $brink->p_e=$request->presupuest_banco;
-                        $befectivo .= $forma_pago . ' ' . $options . ' $' . $request->presupuest_banco . "\n";
+                        $brink->p_e=$request->presupuest_banco[$index];
+                        $befectivo .= $forma_pago . ' ' . $options . ' $' . $request->presupuest_banco[$index] . "\n";
+
+                        $obj_banco_options->valor = $request->presupuest_banco[$index];
                     }
                 
                     if ($options === 'loteria') {
-                        $brink->p_l=$request->loteria_banco;
-                        $bloteria .= $forma_pago . ' ' . $options . ' $' . $request->loteria_banco . "\n";
+                        $brink->p_l=$request->loteria_banco[$index];
+                        $bloteria .= $forma_pago . ' ' . $options . ' $' . $request->loteria_banco[$index] . "\n";
+
+                        $obj_banco_options->valor = $request->loteria_banco[$index];
                     }
+
+                    $obj->banco_options[] = $obj_banco_options;
                 }
                 
                 $brink->forma_pago = $bcheque . $befectivo . $bloteria;
@@ -728,10 +756,21 @@ class InvoiceController extends Controller
             }
             
             if($forma_pago==='tarjeta_credito'){
-                $brink->tarjeta=$request->tarjeta;
+                $brink->tarjeta=$request->tarjeta[$index];
+                $obj->descripcion_forma_pago = 'Tarjeta de crédito';
+                $obj->tarjeta = $request->tarjeta[$index];
+                $obj->valor = $request->valor_tarjeta[$index];
             }
 
-        }*/
+            if($forma_pago==='caja'){
+                $obj->descripcion_forma_pago = 'Caja';
+                $obj->valor = $request->valor_caja[$index];
+            }
+
+            $forma_pago_multiple->push($obj);
+            $index++;
+
+        }
 
         $chequeador = Check::where('name', $request->check)->first();
         if (!$chequeador && !empty($request->check)) {
@@ -755,16 +794,22 @@ class InvoiceController extends Controller
             $proveedor->save();
         }
         
-        /*if($request->hasFile('pdf')){
+        if($request->hasFile('pdf')){
             $pdfFile = $request->file('pdf');
             $pdfBase64 = base64_encode(file_get_contents($pdfFile->getRealPath()));
 
             $brink->nameFile = $request->file('pdf')->getClientOriginalName();
 
             $brink->pdf_data = $pdfBase64;
-        }*/
-        
-        
+        }
+    
+        if(empty($request->forma_pago[0])){
+            $brink->forma_pago_multiple="[]";
+        }
+        else{
+            $brink->forma_pago_multiple=$forma_pago_multiple->toJson();
+        }
+             
         if(isset($request->devolucion)){
             $brink->devolucion=$request->devolucion;
         }
