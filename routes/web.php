@@ -87,8 +87,17 @@ Route::middleware(['auth', 'user.data'])->group(function () {
     //Route::post('/facture', [App\Http\Controllers\FactureController::class, 'pagar'])->name('factures.pagar');
 
     //rutas de creacion de presupuesto
+    //Route::get('/budget', [App\Http\Controllers\BudgetController::class, 'index'])->name('budget');
+    //Route::post('/budget', [App\Http\Controllers\BudgetController::class, 'create'])->name('budget.create');
     Route::get('/budget', [App\Http\Controllers\BudgetController::class, 'index'])->name('budget');
-    Route::post('/budget', [App\Http\Controllers\BudgetController::class, 'create'])->name('budget.create');
+    Route::post('/budget', [App\Http\Controllers\BudgetController::class, 'store'])->name('budget.store');
+    Route::delete('budget/{id}', [App\Http\Controllers\BudgetController::class, 'destroy'])->name('budget.delete');
+    Route::get('/budget/create', [App\Http\Controllers\BudgetController::class, 'create'])->name('budget.create');
+    
+    Route::get('/budget/edit/{id}', [App\Http\Controllers\BudgetController::class, 'edit'])->name('budget.edit');
+    Route::post('/budget/edit', [App\Http\Controllers\BudgetController::class, 'update'])->name('budget.update');
+    //Route::get('/tdc/edit/{id}', [App\Http\Controllers\CardController::class, 'edit'])->name('card.edit');
+    //Route::post('/tdc/edit', [App\Http\Controllers\CardController::class, 'update'])->name('card.update');
     
 
     // Ruta para mostrar la página del mercado (método GET)
