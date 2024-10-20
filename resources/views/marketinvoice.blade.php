@@ -537,6 +537,14 @@
                                         </select>
                                         </h4>
                                     </div>
+
+                                    <div class="col">
+                                        <h4>Carton: 
+                                            <input class="w-100 form-control" type="text" name="carton"
+                                            id="carton" value="{{$dataf->carton}}" required onchange="">
+                                        </h4>
+                                        
+                                    </div>
                                     
                                 </div>
                                 <br>
