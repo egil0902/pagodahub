@@ -664,6 +664,7 @@ class FactureController extends Controller
         $registro->vuelto=$request->pfinal;
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
+        $registro->carton=$request->carton;
 
 
         // Actualizar el registro relacionado en la tabla marketshopping
@@ -674,7 +675,11 @@ class FactureController extends Controller
         */
         $registro->save(); // Guardar los cambios en la base de datos
 
-        
+        // Actualizar el registro relacionado en la tabla marketshopping
+        $updateMarket = marketshopping::where('id', $registro->id_market)->first();
+        $updateMarket->carton = Facture::where('id_market', $registro->id_market)->sum('carton');
+        $updateMarket->save();
+
         $facturas = Facture::all(); // Obtener todos los facturas de la tabla
         $day = date('Y-m-d'); // Obtener la fecha actual
         $presupuesto = "no asignado para el dia";

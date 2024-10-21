@@ -48,6 +48,7 @@
             </th>
             <th>Presupuesto</th>
             <th>Cheques</th>
+            <th style="width:10% !important;">Acciones</th>
         </thead>
         <tbody>
             @foreach ($brinksend as $data)
@@ -74,6 +75,14 @@
                                 {{ $cheque }} <br>
                             @endforeach
                         @endif   
+                    </td>
+                    <td style="width:10% !important;">
+                        <a href="{{ route('budget.edit', $data->id) }}" class="btn btn-warning btn-block my-1" style="width: 100% !important;">Editar</a>
+                        <form action="{{ route('budget.delete', $data->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-block my-1" style="width: 100% !important;" onclick="return confirm('¿Estás seguro de que deseas eliminar esta tarjeta?');">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

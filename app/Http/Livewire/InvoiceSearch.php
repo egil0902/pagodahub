@@ -77,7 +77,7 @@ class InvoiceSearch extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->orderBy('fecha_ingreso', 'desc')->paginate(25);; // Obtener todos los brinksend de la tabla
+        })->orderBy('fecha_ingreso', 'desc')->paginate(25); // Obtener todos los brinksend de la tabla
         return view('livewire.invoicesearch', [
             'brinksend' => $brinksend,
         ]);
