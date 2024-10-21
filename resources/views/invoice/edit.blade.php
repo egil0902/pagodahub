@@ -14,7 +14,16 @@
         <!-- Formulario de búsqueda por proveedor -->
         <div class="container">
             <div class="card">
-                <div class="card-header">Facturas</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4>Facturas</h4>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ route('invoice.index') }}" class="btn btn-primary font-weight-bold">Listado</a>
+                            </div>
+                        </div>
                 <div class="card-body">
                     <!-- Formulario para envio-->
                     @foreach($orgs as $org)
@@ -27,7 +36,8 @@
                         @endif
                     @endforeach
                     
-                    <form name="provider" id="provider" method="post" action="{{ route('invoice.store') }}" enctype="multipart/form-data">
+                    <form name="provider" id="provider" method="post" action="{{ route('invoice.update') }}" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{$invoice->id}}">
                         @csrf
                         @method('POST')
                         <div class="col-md-6 mb-3">
@@ -37,7 +47,7 @@
                                     @if ($orgs)
                                         @foreach ($orgs as $org)
                                             @if($org->id!=0)
-                                                <option value="{{ $org->Name }}">{{ $org->Name }}</option>
+                                                <option value="{{ $org->Name }}" {{ $org->Name == $invoice->sucursal ? 'selected' : '' }}>{{ $org->Name }}</option>
                                             @endif
                                         @endforeach
                                     @endif
@@ -46,12 +56,18 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="fecha_ingreso">Fecha de Ingreso</label>
-                            <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="<?php echo date("Y-m-d"); ?>" required>
+                            <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" placeholder="" value="{{$invoice->fecha_ingreso}}" required>
+                            <div class="text-danger" style="display:none" id="DFechaIngreso">
+                                Campo obligatorio.
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="exampleDataList" class="form-label">Chequeador</label>
-                            <input class="form-control product" list="chequeador" name="check"
-                                placeholder="Escribe para buscar..." required>
+                            <input class="form-control product" list="chequeador" id="field_chequeador" name="check"
+                                placeholder="Escribe para buscar..." value="{{$invoice->chequeador}}" required>
+                            <div class="text-danger" style="display:none" id="DChequeador">
+                                Campo obligatorio.
+                            </div>
                             <datalist id="chequeador">
                                 @foreach ($checkers as $check)
                                     <option value="{{ $check->name }}"></option>
@@ -61,8 +77,11 @@
                         <div class="col-md-6 mb-3">
 
                             <label for="responsable_ingreso">Responsable</label>
-                            <input class="form-control product" list="responsable_ingreso" name="responsable_ingreso"
-                                placeholder="Escribe para buscar..." required>
+                            <input class="form-control product" list="responsable_ingreso" id="field_responsable_ingreso" name="responsable_ingreso"
+                                placeholder="Escribe para buscar..." value="{{$invoice->responsable_ingreso}}" required>
+                            <div class="text-danger" style="display:none" id="DResponsableIngreso">
+                                Campo obligatorio.
+                            </div>
                             <datalist id="responsable_ingreso">
                                 @foreach ($responsables as $check)
                                     <option value="{{ $check->name }}"></option>
@@ -72,23 +91,29 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="proveedor">Proveedor</label>
-                            <input class="form-control proveedor" list="chequeador" name="proveedor"
-                                placeholder="Escribe para buscar..." required>
+                            <input class="form-control proveedor" list="chequeador" id="field_proveedor" name="proveedor"
+                                placeholder="Escribe para buscar..." value="{{$invoice->proveedor}}" required>
+                            <div class="text-danger" style="display:none" id="DProveedor">
+                                Campo obligatorio.
+                            </div>
                             <datalist id="proveedor">
                                 @foreach ($providers as $proveedor)
                                     <option value="{{ $proveedor->name }}"></option>
                                 @endforeach
                             </datalist>
                         </div>
-			<!-- Cambio por eduardo gil para agregar el monto total y que calcule lo demas segun eso --> 
-			<div class="col-md-6 mb-3">
+            <!-- Cambio por eduardo gil para agregar el monto total y que calcule lo demas segun eso --> 
+            <div class="col-md-6 mb-3">
                             <label class="h3" for="total_factura">Total Factura</label>
-                            <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" required>
+                            <input type="number" class="form-control h3" id="total_factura" name="total_factura" step="0.01" value="{{$invoice->total_factura}}" required>
+                            <div class="text-danger" style="display:none" id="DTotalFactura">
+                                Campo obligatorio.
+                            </div>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="monto_total">Monto Exento</label>
-                            <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_total" name="monto_total" step="0.01" value="{{$invoice->monto_total}}" required>
                         </div>
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         <script>
@@ -98,24 +123,24 @@
                                     const montoITBMS = monto * porcentaje;
                                     $(campoResultado).val(montoITBMS.toFixed(2));
                                 }
-				 // Función para calcular la base imponible, el exento segun el total de la factura y el monto de itbms
+                 // Función para calcular la base imponible, el exento segun el total de la factura y el monto de itbms
                                 function fillITBMSBase(montoitbms, porcentaje, campoResultado) {
                                     const baseimponible = montoitbms / porcentaje;
                                     $(campoResultado).val(baseimponible.toFixed(2));
                                 }
                                 function fillExempt() {
-				    const monto7 = parseFloat($('#monto_7').val()) || 0;
+                    const monto7 = parseFloat($('#monto_7').val()) || 0;
                                     const montoimpuesto7 = parseFloat($('#monto_impuesto_7').val()) || 0;
-	                            const monto10 = parseFloat($('#monto_10').val()) || 0;	
+                                const monto10 = parseFloat($('#monto_10').val()) || 0;  
                                     const montoimpuesto10 = parseFloat($('#monto_impuesto_10').val()) || 0;
-	                            const monto15 = parseFloat($('#monto_15').val()) || 0;
+                                const monto15 = parseFloat($('#monto_15').val()) || 0;
                                     const montoimpuesto15 = parseFloat($('#monto_impuesto_15').val()) || 0;
 
-				    const total_factura = parseFloat($('#total_factura').val()) || 0;
-				    const exempt = total_factura - monto7-montoimpuesto7 - monto10-montoimpuesto10 - monto15-montoimpuesto15;
-				    $('#monto_total').val(exempt.toFixed(2));
+                    const total_factura = parseFloat($('#total_factura').val()) || 0;
+                    const exempt = total_factura - monto7-montoimpuesto7 - monto10-montoimpuesto10 - monto15-montoimpuesto15;
+                    $('#monto_total').val(exempt.toFixed(2));
 
-				}
+                }
 
                                 // Escucha los cambios en los campos de monto y realiza los cálculos
                                 $('#monto_7').on('input', function() {
@@ -135,7 +160,7 @@
                                     const porcentaje = 0.15;
                                     calcularITBMS(monto, porcentaje, '#monto_impuesto_15');
                                 });
-				$('#monto_impuesto_7').on('input', function() {
+                $('#monto_impuesto_7').on('input', function() {
                                     const monto = parseFloat($(this).val());
                                     const porcentaje = 0.07;
                                     fillITBMSBase(monto, porcentaje, '#monto_7');
@@ -159,35 +184,38 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="monto_7">Monto al que aplica ITBMS del 7%</label>
-                            <input type="number" class="form-control" id="monto_7" name="monto_7" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_7" name="monto_7" step="0.01" value="{{$invoice->monto_7}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_7">ITBMS7%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" step="0.01">
+                            <input type="number" class="form-control" id="monto_impuesto_7" name="monto_impuesto_7" value="{{$invoice->monto_impuesto_7}}" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_10">Monto al que aplica ITBMS del 10%</label>
-                            <input type="number" class="form-control" id="monto_10" name="monto_10" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_10" name="monto_10" step="0.01" value="{{$invoice->monto_10}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_10">ITBMS10%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" step="0.01">
+                            <input type="number" class="form-control" id="monto_impuesto_10" name="monto_impuesto_10" value="{{$invoice->monto_impuesto_10}}" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_15">Monto al que aplica ITBMS del 15%</label>
-                            <input type="number" class="form-control" id="monto_15" name="monto_15" step="0.01" required>
+                            <input type="number" class="form-control" id="monto_15" name="monto_15" step="0.01" value="{{$invoice->monto_15}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="monto_impuesto_15">ITBMS15%</label>
-                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" step="0.01">
+                            <input type="number" class="form-control" id="monto_impuesto_15" name="monto_impuesto_15" value="{{$invoice->monto_impuesto_15}}" step="0.01">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="devolucion">Devolucion</label>
-                            <input type="number" class="form-control" id="devolucion" name="devolucion" step="0.01" required>
+                            <input type="number" class="form-control" id="devolucion" name="devolucion" step="0.01" value="{{$invoice->devolucion}}" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="fecha_pago">Fecha de Pago</label>
-                            <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" required>
+                            <input type="date" class="form-control" id="fecha_pago" name="fecha_pago" placeholder="" value="{{$invoice->fecha_pago}}" required>
+                            <div class="text-danger" style="display:none" id="DFechaPago">
+                                Campo obligatorio.
+                            </div>
                         </div>
                         <div class="col-md-6 mb-1 d-flex justify-content-start">
                             <button type="button" class="btn btn-primary btn-block my-1 btn-agregar-forma-pago" >Agregar forma de pago</button>
@@ -211,17 +239,17 @@
                                 <!-- Fields for displaying based on forma_pago selection -->
                                 <div class="col-md-12 mb-3 credito-fields fields" id="creditoFields" class="form-group" style="display: none;">
                                     <label for="credito_options">Opciones para Crédito</label>
-                                    <select class="form-control" id="credito_options" name="credito_options">
+                                    <select class="form-control" id="credito_options" name="credito_options[]">
                                         <option value="cheque">Cheque</option>
                                         <option value="ach">ACH</option>
                                     </select>
                                     <label for="banco_credito">Banco</label>
-                                    <input type="text" class="form-control text" id="banco_credito" name="banco_credito">
+                                    <input type="text" class="form-control text" id="banco_credito" name="banco_credito[]">
                                     <label for="num_comprobante_credito">Número de Comprobante</label>
-                                    <input type="text" class="form-control text" id="num_comprobante_credito" name="num_comprobante_credito">
+                                    <input type="text" class="form-control text" id="num_comprobante_credito" name="num_comprobante_credito[]">
                                     <div id="valorCreditoDesc" class="form-group">
                                         <label for="valor_credito">Valor en Crédito</label>
-                                        <input type="number" class="form-control number" id="valor_credito" value=0  step="0.01" name="valor_credito">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_credito" value=0  step="0.01" name="valor_credito[]">
                                     </div>
                                 </div>
 
@@ -244,37 +272,37 @@
                                     </div>
                                     <div id="bancoDesc" class="form-group cheque-desc-fields desc-fields" style="display: none;">
                                         <label for="banco_banco">Banco</label>
-                                        <input type="text" class="form-control text" id="banco_banco" name="banco_banco">
+                                        <input type="text" class="form-control text" id="banco_banco" name="banco_banco[]">
                                         <label for="num_comprobante">Número de Cheque</label>
-                                        <input type="text" class="form-control text" id="num_comprobante"  name="num_comprobante">
+                                        <input type="text" class="form-control text" id="num_comprobante"  name="num_comprobante[]">
                                         <label for="cheque_banco">Valor cheque</label>
-                                        <input type="number" class="form-control number" id="cheque_banco" value=0 step="0.01" name="cheque_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="cheque_banco" value=0 step="0.01" name="cheque_banco[]">
                                     </div>
                                     <div id="efectivoDesc" class="form-group efectivo-desc-fields desc-fields" style="display: none;">
                                         <label for="presupuest_banco">Valor en efectivo</label>
-                                        <input type="number" class="form-control number" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="presupuest_banco" value=0  step="0.01" name="presupuest_banco[]">
                                     </div>
                                     <div id="loteriaDesc" class="form-group loteria-desc-fields desc-fields" style="display: none;">
                                         <label for="loteria_banco">Valor loteria</label>
-                                        <input type="number" class="form-control number" id="loteria_banco" value=0  step="0.01" name="loteria_banco">
+                                        <input type="number" class="form-control number monto-forma-pago" id="loteria_banco" value=0  step="0.01" name="loteria_banco[]">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3 tarjeta-fields fields" id="tarjetaFields" class="form-group" style="display: none;">
                                     <label for="tarjeta">Tarjetas</label>
-                                    <select class="form-control" id="tarjeta" name="tarjeta">
+                                    <select class="form-control" id="tarjeta" name="tarjeta[]">
                                         @foreach($tarjetas as $tarjeta)
                                             <option value="{{ $tarjeta->numero }}">{{ $tarjeta->numero }}</option>
                                         @endforeach
                                     </select>
                                     <div id="valorTarjetaDesc" class="form-group">
                                         <label for="valor_tarjeta">Valor en Tarjeta</label>
-                                        <input type="number" class="form-control number" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_tarjeta" value=0  step="0.01" name="valor_tarjeta[]">
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3 caja-fields fields" id="cajaFields" class="form-group" style="display: none;">
                                     <div id="valorCajaDesc" class="form-group">
                                         <label for="valor_caja">Valor en Caja</label>
-                                        <input type="number" class="form-control number" id="valor_caja" value=0  step="0.01" name="valor_caja">
+                                        <input type="number" class="form-control number monto-forma-pago" id="valor_caja" value=0  step="0.01" name="valor_caja[]">
                                     </div>
                                 </div>
                             </div>
@@ -359,10 +387,10 @@
                         </div>
                         <div class="col-md">
                         <h4>Observaciones:</h4>
-                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" ></textarea>
+                                                <textarea style="width:100%;" class="long-textarea" id="observaciones" name="observaciones" >{{$invoice->observaciones}}</textarea>
                         </div>
                         <br>
-                        <button class="btn btn-primary" type="button" onclick="calcularMontos()">Crear Registro</button>
+                        <button class="btn btn-primary" type="button" onclick="calcularMontos()">Actualizar</button>
 
                     </form>
                     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -375,17 +403,47 @@
                                     Se va a pagar lo siguiente: <span id="totalAmount"></span>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="confirmModal">Cancelar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="confirmModal" onclick="closeModal()">Cancelar</button>
                                     <button type="button" class="btn btn-primary" onclick="enviarFormulario()">Aceptar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="modal fade" id="notificacionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Notificación</h5>                                    
+                                </div>
+                                <div class="modal-body" id="texto-notificacion">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="notificacionModal" onclick="closeModal()">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <script>
+
+                        function closeModal() {
+                            $('.modal').modal('hide');
+                        }
+
                         function calcularMontos() {
+
+                            if(!validateForm()){
+                                $('#texto-notificacion').text('Faltan campos por ingresar');
+                                $('#notificacionModal').modal('show');
+                                return;
+                            }
+
+                            const fieldFormaPago = $('.monto-forma-pago');
+                            var montoFormaPago = 0;
+
                             // Obtener los valores de los montos e impuestos
-			    var total_factura = parseFloat($('#total_factura').val()) || 0;
+                            var total_factura = parseFloat($('#total_factura').val()) || 0;
                             var monto = parseFloat($('#monto_total').val()) || 0;
                             var monto7 = parseFloat($('#monto_7').val()) || 0;
                             var monto10 = parseFloat($('#monto_10').val()) || 0;
@@ -396,9 +454,19 @@
                             var devolucion = parseFloat($('#devolucion').val()) || 0;
 
                             // Calcular el total
-			    var total=total_factura;
-			    if(total_factura==0)
-                            	total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+                            var total=total_factura;
+                            if(total_factura==0)
+                                total = monto + monto7 + monto10 + monto15 + impuesto7 + impuesto10 + impuesto15 - devolucion;
+
+                            fieldFormaPago.each(function(){
+                                montoFormaPago += (parseFloat($(this).val()) || 0);
+                            });
+
+                            if( montoFormaPago != total_factura ){
+                                $('#texto-notificacion').text('El monto de la factura no corresponde a los montos ingresados en las formas de pago');
+                                $('#notificacionModal').modal('show');
+                                return;
+                            }
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal
@@ -409,7 +477,7 @@
                         }
                         function enviarFormulario() {
                             // Aquí puedes realizar cualquier otra validación antes de enviar el formulario
-                            $('.forma-pago option').prop('disabled',false);
+                            //$('.forma-pago option').prop('disabled',false);
                             // Envía el formulario
                             document.getElementById('provider').submit();
                         }
@@ -433,20 +501,94 @@
                             cajaFields.style.display = event.target.value === 'caja' ? 'block' : 'none';
                         });*/
 
+                        function onSubmit(token) {
+                            if(validateForm()){
+                                document.getElementById("provider").submit();
+                            }
+                        }
+
+                        function validateForm() {
+
+                            // Obtener los valores de los campos del formulario 
+                            try {
+
+                                var failForm = false;
+                                var fecha_pago = document.getElementById('fecha_pago').value; 
+                                var fecha_ingreso = document.getElementById('fecha_ingreso').value; 
+                                var responsable_ingreso = document.getElementById('field_responsable_ingreso').value;
+                                var chequeador = document.getElementById('field_chequeador').value;   
+                                var proveedor = document.getElementById('field_proveedor').value;  
+                                var total_factura = document.getElementById('total_factura').value;   
+
+                                if ((total_factura === "" || total_factura === null)) {
+                                    document.getElementById('DTotalFactura').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DTotalFactura').style.display = "none";
+                                }
+
+                                if ((fecha_ingreso === "" || fecha_ingreso === null)) {
+                                    document.getElementById('DFechaIngreso').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DFechaIngreso').style.display = "none";
+                                }                                     
+                               
+                                if ((fecha_pago === "" || fecha_pago === null)) {
+                                    document.getElementById('DFechaPago').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DFechaPago').style.display = "none";
+                                }
+
+                                if ((responsable_ingreso === "" || responsable_ingreso === null)) {
+                                    document.getElementById('DResponsableIngreso').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DResponsableIngreso').style.display = "none";
+                                }
+
+                                if ((chequeador === "" || chequeador === null)) {
+                                    document.getElementById('DChequeador').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DChequeador').style.display = "none";
+                                }
+
+                                /*if ((proveedor === "" || proveedor === null)) {
+                                    document.getElementById('DProveedor').style.display = "block";
+                                    failForm = true;
+                                } else {
+                                    document.getElementById('DProveedor').style.display = "none";
+                                }*/
+                              
+                                if (failForm) {
+                                    return false; // No se envía el formulario
+                                } else {
+                                    return true; // Se envía el formulario
+                                }
+
+                            } catch (error) {
+                                console.error(error);
+                                return false;
+                            }
+
+                        }
+
                         $( document ).ready(function() {
 
                             $(".forma-pago").on("change", function(e) {
      
-                                const optionsSelected = $('.forma-pago option:selected');
+                                //const optionsSelected = $('.forma-pago option:selected');
                                 const valueSelectedFormaPago = this.value;
                                 const unique_id = $(this).attr('unique-id');
 
                                 $("#forma-pago-" + unique_id).find(".fields").css("display", "none");
-                                $('.forma-pago option').prop('disabled',false);
+                                //$('.forma-pago option').prop('disabled',false);
 
-                                optionsSelected.each(function(){
+                                /*optionsSelected.each(function(){
                                     $('.forma-pago option[value="' + $(this).val() + '"]').prop('disabled',true);
-                                });
+                                });*/
 
                                 switch(valueSelectedFormaPago) {
                                     case 'credito':
@@ -479,12 +621,12 @@
 
                                 $("#forma-pago-" + $(this).attr('unique-id')).remove();
 
-                                const optionsSelected = $('.forma-pago option:selected');
+                                /*const optionsSelected = $('.forma-pago option:selected');
                                 $('.forma-pago option').prop('disabled',false);
                                 
                                 optionsSelected.each(function(){
                                     $('.forma-pago option[value="' + $(this).val() + '"]').prop('disabled',true);
-                                });
+                                });*/
 
                             });
 

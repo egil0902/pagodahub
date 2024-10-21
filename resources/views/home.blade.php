@@ -575,7 +575,7 @@
                                             <div class="col">
                                                 <div class="card h-100 border border-5 border-dark-subtle">
                                                     <form name="market" id="market" method="get"
-                                                        action="{{ route('invoice') }}">
+                                                        action="{{ route('invoice.index') }}">
                                                         @csrf
                                                         <center>
                                                             <button type="submit" class="btn btn-outline">
