@@ -13,12 +13,14 @@ class InvoiceSearch extends Component
 
     public $responsable_ingreso;
     public $responsable_pago;
-    public $fecha_ingreso;
+    public $fecha_ingreso_inicio;
+    public $fecha_ingreso_fin;
     public $proveedor;
     public $forma;
     
     public $chequeador;
-    public $fecha_pago;
+    public $fecha_pago_inicio;
+    public $fecha_pago_fin;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -62,13 +64,23 @@ class InvoiceSearch extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->when($this->fecha_ingreso, function ($query) {
-            $query->where('fecha_ingreso', $this->fecha_ingreso);
+        })->when($this->fecha_ingreso_inicio, function ($query) {
+            $query->where('fecha_ingreso', '>=', $this->fecha_ingreso_inicio);
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->when($this->fecha_pago, function ($query) {
-            $query->where('fecha_pago', $this->fecha_pago);
+        })->when($this->fecha_ingreso_fin, function ($query) {
+            $query->where('fecha_ingreso', '<=', $this->fecha_ingreso_fin);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->fecha_pago_inicio, function ($query) {
+            $query->where('fecha_pago', '>=', $this->fecha_pago_inicio);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->fecha_pago_fin, function ($query) {
+            $query->where('fecha_pago', '<=', $this->fecha_pago_fin);
         }, function ($query) {
             $query->where(function ($query) {
             });
