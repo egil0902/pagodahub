@@ -11,7 +11,8 @@ class PresupuestoBankSearch extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $fecha;
+    public $fecha_inicio;
+    public $fecha_fin;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -36,8 +37,13 @@ class PresupuestoBankSearch extends Component
         }
 
         
-        $brinksend = presupuestoBank::when($this->fecha, function ($query) {
-            $query->where('fecha', $this->fecha);
+        $brinksend = presupuestoBank::when($this->fecha_inicio, function ($query) {
+            $query->where('fecha', '>=', $this->fecha_inicio);
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->fecha_fin, function ($query) {
+            $query->where('fecha', '<=', $this->fecha_fin);
         }, function ($query) {
             $query->where(function ($query) {
             });
@@ -46,10 +52,10 @@ class PresupuestoBankSearch extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->orderBy('fecha', 'desc')->paginate(25);; // Obtener todos los brinksend de la tabla
-        return view('livewire.presupuestoBanksearch', [
-            'brinksend' => $brinksend,
-        ]);
+        })->orderBy('fecha', 'desc')->paginate(20); // Obtener todos los brinksend de la tabla
+
+        return view('livewire.presupuestoBanksearch', compact('brinksend'));
+
     }
 
 }
