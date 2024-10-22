@@ -51,6 +51,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="mt-4 float-end">
+        {{ $brinksend->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 <style>
     #miTablaPersonalizada th {

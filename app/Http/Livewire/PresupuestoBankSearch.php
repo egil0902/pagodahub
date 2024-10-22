@@ -46,10 +46,10 @@ class PresupuestoBankSearch extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->orderBy('fecha', 'desc')->paginate(25);; // Obtener todos los brinksend de la tabla
-        return view('livewire.presupuestoBanksearch', [
-            'brinksend' => $brinksend,
-        ]);
+        })->orderBy('fecha', 'desc')->paginate(20); // Obtener todos los brinksend de la tabla
+
+        return view('livewire.presupuestoBanksearch', compact('brinksend'));
+
     }
 
 }

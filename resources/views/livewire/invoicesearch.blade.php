@@ -238,6 +238,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="mt-4 mb-4 float-end">
+        {{ $brinksend->links('pagination::bootstrap-4') }}
+    </div>
     <form name="provider" id="provider" method="post" action="{{route( 'invoice.getExcel' )}}">
         <div class="form-group w-auto">
             <input type="hidden" name="lista" value="{{ json_encode($brinksend) }}">

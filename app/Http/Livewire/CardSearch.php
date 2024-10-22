@@ -45,10 +45,9 @@ class CardSearch extends Component
         }, function ($query) {
             $query->where(function ($query) {
             });
-        })->paginate(25);; // Obtener todos los brinksend de la tabla
-        return view('livewire.cardsearch', [
-            'brinksend' => $brinksend,
-        ]);
+        })->paginate(20); // Obtener todos los brinksend de la tabla
+
+        return view('livewire.cardsearch', compact('brinksend'));
     }
 
 }
