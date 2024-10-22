@@ -10,8 +10,9 @@ class CardSearch extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-
+    /* Wire models */
     public $numero;
+    public $descripcion;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -36,12 +37,17 @@ class CardSearch extends Component
         }
         
         $brinksend = Card::when($this->numero, function ($query) {
-            $query->where('numero', $this->numero);
+            $query->where('numero', 'like', "%$this->numero%" );
+        }, function ($query) {
+            $query->where(function ($query) {
+            });
+        })->when($this->descripcion, function ($query) {
+            $query->where('descripcion', 'like', "%$this->descripcion%" );
         }, function ($query) {
             $query->where(function ($query) {
             });
         })->when($this->orgsParent, function ($query) {
-            $query->where('sucursal', 'ilike', "%$this->orgsParent%" );
+            $query->where('sucursal', 'like', "%$this->orgsParent%" );
         }, function ($query) {
             $query->where(function ($query) {
             });
