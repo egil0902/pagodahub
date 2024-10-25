@@ -101,7 +101,7 @@ class FactureController extends Controller
 
     public function store(Request $request)
     {   
-        
+  
         // Buscar si existe un registro con el mismo número de factura
         $existingFacture = Facture::where('id_compra', $request->NFactura)->first();
         if ($existingFacture) {
@@ -142,7 +142,8 @@ class FactureController extends Controller
         $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
             $registro->pagada=true;
-            $registro->fecha_pago=$request->fecha_registro;
+            //$registro->fecha_pago=$request->fecha_registro;
+            $registro->fecha_pago=$request->fecha_pago;
         }
         if (isset($request->cart)||isset($request->vuelto_p) ) {
             $compradeldia = marketshopping::where('id', $request->id)->first();

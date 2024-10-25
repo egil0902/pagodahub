@@ -135,6 +135,11 @@
                                 </select>
                                 </h4>
                             </div>
+                            <div class="col">
+                                <h4>Fecha de Pago: 
+                                    <input type="date" class="form-control" placeholder="" name="fecha_pago" value="<?php echo date("Y-m-d"); ?>">
+                                </h4>
+                            </div>
                         </div>
                         <br>
                         <center>                    
