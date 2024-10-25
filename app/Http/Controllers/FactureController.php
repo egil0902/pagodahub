@@ -138,6 +138,7 @@ class FactureController extends Controller
         $registro->descripcion=$request->observaciones;
         $registro->vuelto=$request->pfinal;
         $registro->pagada=false;
+        $registro->carton=$request->cart;
         $registro->fecha_pago="Sin pagar";
         if($request->metodo==="true"){
             $registro->pagada=true;
