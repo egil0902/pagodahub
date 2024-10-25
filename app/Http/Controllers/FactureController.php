@@ -667,6 +667,7 @@ class FactureController extends Controller
         $registro->Factured_quantity =json_encode($request->differenceFactura);
         $registro->price =json_encode($request->price);
         $registro->carton=$request->carton;
+        $registro->fecha_pago=$request->fecha_pago;
 
 
         // Actualizar el registro relacionado en la tabla marketshopping
