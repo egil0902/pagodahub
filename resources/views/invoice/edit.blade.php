@@ -470,7 +470,7 @@
 
                             // Mostrar el mensaje de alerta
                             // Mostrar el total en el modal
-                            $('#totalAmount').text('$' + total.toFixed(2));
+                            $('#totalAmount').text('$' + total_factura.toFixed(2));
 
                             // Abrir el modal
                             $('#confirmModal').modal('show');
