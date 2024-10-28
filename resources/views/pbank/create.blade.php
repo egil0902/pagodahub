@@ -85,9 +85,9 @@
     function enviarFormulario() {
         // Aquí puedes realizar cualquier otra validación antes de enviar el formulario
 
-        $('#confirmModal').modal('hide');
+        /*$('#confirmModal').modal('hide');
         $('.container-form').addClass('d-none');
-        $('.container-loader').removeClass('d-none');
+        $('.container-loader').removeClass('d-none');*/
 
         // Envía el formulario
         document.getElementById('provider').submit();
