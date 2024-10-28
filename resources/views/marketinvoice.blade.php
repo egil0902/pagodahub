@@ -135,6 +135,11 @@
                                 </select>
                                 </h4>
                             </div>
+                            <div class="col">
+                                <h4>Fecha de Pago: 
+                                    <input type="date" class="form-control" placeholder="" name="fecha_pago" value="<?php echo date("Y-m-d"); ?>">
+                                </h4>
+                            </div>
                         </div>
                         <br>
                         <center>                    
@@ -544,6 +549,12 @@
                                             id="carton" value="{{$dataf->carton}}" required onchange="">
                                         </h4>
                                         
+                                    </div>
+
+                                    <div class="col">
+                                        <h4>Fecha de Pago: 
+                                            <input type="date" class="form-control" placeholder="" name="fecha_pago" value="{{$dataf->fecha_pago}}">
+                                        </h4>
                                     </div>
                                     
                                 </div>
