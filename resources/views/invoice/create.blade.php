@@ -9,7 +9,14 @@
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
 @section('content')
-<div class="p-2 m-0 border-0 bd-example">
+<div class="justify-content-center d-none container-loader" style="align-content: center; min-height: 100vh;">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 4rem; height: 4rem;" role="status">
+        </div>
+    </div>
+    <strong class="d-flex justify-content-center mt-3" style="font-size: 1.5rem;">Procesando la información, por favor espere...</strong>
+</div>
+<div class="p-2 m-0 border-0 bd-example container-form">
     <div class="d-flex">
         <!-- Formulario de búsqueda por proveedor -->
         <div class="container">
@@ -483,6 +490,10 @@
                         function enviarFormulario() {
                             // Aquí puedes realizar cualquier otra validación antes de enviar el formulario
                             //$('.forma-pago option').prop('disabled',false);
+
+                            $('#confirmModal').modal('hide');
+                            $('.container-form').addClass('d-none');
+                            $('.container-loader').removeClass('d-none');
 
                             // Envía el formulario
                             document.getElementById('provider').submit();
